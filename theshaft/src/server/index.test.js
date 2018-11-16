@@ -10,6 +10,7 @@ describe("test the getUsername endpoint", () => {
             expect(response.statusCode).toBe(200);
         });
     });
+    
     test('getUsername returns correct username', () => {
         expect.assertions(1);
         return request(app).get('/api/getUsername').then((response) => {
