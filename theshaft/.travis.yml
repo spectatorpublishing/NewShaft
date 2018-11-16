@@ -5,8 +5,8 @@ node_js:
 
 script:
   - npm run build
+  - npm run test
 
 branches:
   only:
-  - gh-pages
-  - /.*/
+  - develop
