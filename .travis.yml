@@ -3,10 +3,14 @@ language: node_js
 node_js:
   - 8
 
+before_script: 
+  - cd theshaft
+  - npm install
+
 script:
   - npm run build
+  - npm run test
 
 branches:
   only:
-  - gh-pages
-  - /.*/
+  - develop
