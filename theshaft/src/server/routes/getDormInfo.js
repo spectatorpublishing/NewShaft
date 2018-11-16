@@ -1,15 +1,15 @@
-//qu'est que c'est squel lmao???
+//qu'est que c'est le squel lmao???
 var express = require('express');
 var router = express.Router();
 var mysql = require('mysql');
 
-function SELECTdorm(con, dormName, callback) {
-	var tableName = 'TEST' //for now...
+function getDormInfo(con, dormName, tableName, callback) {
 	con.connect(function(err) {
 	  if (err) throw err;
 	  console.log("Connected!");
 
-	  var sqlStatement = `SELECT ${dormName} FROM ${tableName}`
+	  var sqlStatement = `SELECT * FROM \`${tableName}\` WHERE dorm = "${dormName}"`
+
 	  con.query(sqlStatement, function(err, res) {
 					  	if (err) throw err;
 					  	console.log(res);
@@ -18,7 +18,7 @@ function SELECTdorm(con, dormName, callback) {
 	})
 }
 
-router.post('/', function(req, res) {
+router.post('/', function(req, res, next) {
 	
 	var con = mysql.createConnection({
 	  host: "85.10.205.173",
@@ -27,10 +27,14 @@ router.post('/', function(req, res) {
 	  database: "theshaft"
 	});
 
-	var dorm = req.body.dormName
-
-	SELECTdorm(con, dorm, (dormInfo) => {
+	var dormName = req.body.dormName
+	var tableName = 'Test' //should we be getting this be from the request?
+	console.log("requesting",dormName,"from",tableName)
+	
+	getDormInfo(con, dormName, tableName, (dormInfo) => {
 		res.json(dormInfo)
 	})
 
 })
+
+module.exports = router;
