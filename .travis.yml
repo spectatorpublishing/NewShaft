@@ -5,7 +5,7 @@ node_js:
 
 before_script: 
   - cd theshaft
-  - npm install 
+  - npm install
 
 script:
   - npm run build
