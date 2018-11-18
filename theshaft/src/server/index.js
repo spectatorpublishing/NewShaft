@@ -3,7 +3,6 @@ const app = express();
 const os = require('os');
 const bodyParser = require('body-parser')
 
-
 var getDormInfo = require('./routes/getDormInfo');
 var deleteDormInfo = require('./routes/deleteDormInfo');
 
@@ -15,4 +14,8 @@ app.use('/api/getDormInfo', (req, res) => getDormInfo(req, res) )
 app.use('/api/deleteDormInfo', (req, res) => deleteDormInfo(req, res) )
 app.listen(8080, () => console.log('Listening on port 8080!'));
 
-module.exports = app
+var server = app.listen(8080, () => {
+	console.log('Listening on port 8080!')
+});
+
+module.exports = server;
