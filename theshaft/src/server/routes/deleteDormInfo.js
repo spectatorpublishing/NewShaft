@@ -1,9 +1,9 @@
-//qu'est que c'est le squel lmao???
+
 var express = require('express');
 var router = express.Router();
 var mysql = require('mysql');
 
-function getDormInfo(con, request, callback) {
+function deleteDormInfo(con, request, callback) {
 	con.connect(function(err) {
 	  if (err) throw err;
 	  console.log("Connected!");
@@ -20,7 +20,7 @@ function getDormInfo(con, request, callback) {
 		}
 		Let's also assume that the table is always given.
 	   */
-	  var sqlStatement = `SELECT * FROM \`${request.table}\` `
+	  var sqlStatement = `DELETE FROM \`${request.table}\` `
 	  delete request.table
 	  var firstKey = true
 
@@ -51,9 +51,9 @@ router.post('/', function(req, res, next) {
 	  database: "theshaft"
 	});
 
-	console.log("requesting selection of",req.body)
+	console.log("requesting deletion of",req.body)
 	
-	getDormInfo(con, req.body, (dormInfo) => {
+	deleteDormInfo(con, req.body, (dormInfo) => {
 		res.json(dormInfo)
 	})
 
