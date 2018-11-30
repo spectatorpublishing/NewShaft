@@ -4,6 +4,8 @@
 
 Created using simple-react-full-stack.
 
+Use yarn start to run. npm _script name_ is buggy and unreliable.
+
 ## Documentation
 
 ### Folder Structure
