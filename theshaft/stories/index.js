@@ -1,6 +1,7 @@
 import React from 'react';
 import { storiesOf } from '@storybook/react';
 import { Button } from '@storybook/react/demo';
+import SearchBar from '../src/client/SearchBar.js';
 
 storiesOf('Button', module)
   .add('with text', () => <Button>Hello Button</Button>)
@@ -11,3 +12,7 @@ storiesOf('Button', module)
       </span>
     </Button>
   ));
+
+storiesOf('SearchBar', module)
+  .add('with text', () => <SearchBar/>)
+  
