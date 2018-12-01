@@ -1,7 +1,7 @@
 import React from 'react';
 import { storiesOf } from '@storybook/react';
 import { Button } from '@storybook/react/demo';
-import SearchBar from '../src/client/SearchBar.js';
+import SearchBar from '../src/client/components/SearchBar.js';
 
 storiesOf('Button', module)
   .add('with text', () => <Button>Hello Button</Button>)
