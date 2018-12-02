@@ -8,6 +8,21 @@ Use "yarn dev" to run. npm _script name_ is buggy and unreliable.
 
 ## Documentation
 
+### Database Schema (theshaft)
+#### dorm_static_info
+Field | Type
+ --- | ---
+DORM | VARCHAR(40)
+ADDRESS | VARCHAR(60)
+DESCRIPTION | TEXT
+COLLEGE | ENUM("BARNARD", "COLUMBIA")
+THUMBNAIL_IMAGE | VARCHAR(255)
+SUITE | SET('3','4','5','6','7','8')
+WALKTHROUGH | BOOLEAN
+SINGLE_ | BOOLEAN
+DOUBLE_ | BOOLEAN
+TRIPLE_ | BOOLEAN
+
 ### Folder Structure
 
 All the source code will be inside **src** directory. Inside src, there is client and server directory. All the frontend code (react, css, js and any other assets) will be in client directory. Backend Node.js/Express code will be in the server directory.
