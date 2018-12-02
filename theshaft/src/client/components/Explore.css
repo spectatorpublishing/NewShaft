@@ -5,3 +5,28 @@
 	display: inline-block;
 	cursor: pointer;
 }
+
+div.pics {
+	margin:3em;
+	display: inline-block;
+}
+
+img {
+	padding: 5px;
+}
+
+img.blinky {
+
+}
+
+img.pinky {
+
+}
+
+img.inky {
+
+}
+
+img.clyde {
+
+}

@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import './Explore.css';
 
 export default class Photos extends Component {
 
@@ -12,8 +13,11 @@ export default class Photos extends Component {
 
 	render() {
 		return (
-			<div>
-				<img src={this.state.image} />
+			<div class="pics">
+				<img class="blinky" src={this.state.image} />
+				<img class="pinky" src={this.state.image} />
+				<img class="inky" src={this.state.image} />
+				<img class="clyde" src={this.state.image} />
 			</div>
 		)
 	}
