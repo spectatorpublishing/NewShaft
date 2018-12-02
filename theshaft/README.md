@@ -10,18 +10,18 @@ Use "yarn dev" to run. npm _script name_ is buggy and unreliable.
 
 ### Database Schema (theshaft)
 #### dorm_static_info
-Field | Type
+Field | Type | Constraints
  --- | ---
-DORM | VARCHAR(40)
-ADDRESS | VARCHAR(60)
-DESCRIPTION | TEXT
-COLLEGE | ENUM("BARNARD", "COLUMBIA")
-THUMBNAIL_IMAGE | VARCHAR(255)
-SUITE | SET('3','4','5','6','7','8')
-WALKTHROUGH | BOOLEAN
-SINGLE_ | BOOLEAN
-DOUBLE_ | BOOLEAN
-TRIPLE_ | BOOLEAN
+DORM | VARCHAR(40) | NOT NULL
+ADDRESS | VARCHAR(60) | NOT NULL
+DESCRIPTION | TEXT | NOT NULL
+COLLEGE | ENUM("BARNARD", "COLUMBIA") | NOT NULL
+THUMBNAIL_IMAGE | VARCHAR(255) | NOT NULL
+SUITE | SET('3','4','5','6','7','8') | NOT NULL
+WALKTHROUGH | BOOLEAN | NOT NULL
+SINGLE_ | BOOLEAN | NOT NULL
+DOUBLE_ | BOOLEAN | NOT NULL
+TRIPLE_ | BOOLEAN | NOT NULL
 
 ### Folder Structure
 
