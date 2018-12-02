@@ -1,4 +1,4 @@
-//lmao
+// lmao
 const express = require('express');
 const app = express();
 const os = require('os');
