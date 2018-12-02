@@ -8,21 +8,17 @@ function deleteDormInfo(con, request, callback) {
 	  if (err) throw err;
 	  console.log("Connected!");
 
-	  /**
-	  	Trying to make the code as vague as possible because no database mockup
-		Let's say for now that the request's body is the following:
+	  /* Code vague such as to apply to any table.
 		{
-			"table": "Test",
-			"dorm": "John Jay",
-			"ac": "1",
-			"number_of_rooms": "3",
-			"toilet_person_ratio": "1"
+			"table": "dorm_static_info",
+			"DORM": "110",
+			"ADDRESS": "601 W 110th Street"
 		}
-		Let's also assume that the table is always given.
-	   */
+		*/
+
 	  var sqlStatement = `DELETE FROM \`${request.table}\` `
 	  delete request.table
-	  var firstKey = true
+	  var firstKey = true;
 
 	  for (key in request)  {
 	  	if(firstKey) {
@@ -32,13 +28,19 @@ function deleteDormInfo(con, request, callback) {
 	  	else
 	  		sqlStatement += ` AND ${key}="${request[key]}"`
 	  }
-	  console.log(sqlStatement)
+
+	  if (!sqlStatement.includes("WHERE")) {
+	  	console.log("Cannot use this endpoint to delete table");
+	  	callback({"Status": "Failure"});
+	  	return ;
+	  }
+	  console.log(sqlStatement);
 
 	  con.query(sqlStatement, function(err, res) {
-					  	if (err) throw err;
-					  	console.log(res);
-					  	callback(res)
-					  });
+		if (err) throw err;
+		console.log(res);
+		callback({"Status": "Success"})
+		});
 	})
 }
 
