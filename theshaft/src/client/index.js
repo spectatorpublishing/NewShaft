@@ -2,7 +2,7 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import { Route, Link, BrowserRouter as Router } from 'react-router-dom';
 import Explore from './containers/Explore';
-import Test from './containers/Test';
+import Dorm from './containers/Dorm';
 
 const routing = (
   <Router>
@@ -12,7 +12,6 @@ const routing = (
         <li><Link to="/test">Test</Link></li>
       </ul>
       <Route exact path="/" component={Explore} />
-      <Route path="/test" component={Test} />
     </div>
   </Router>
 );
