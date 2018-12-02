@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import './Explore.css';
+import './DormButton.css';
 
 export default class DormButton extends Component {
 

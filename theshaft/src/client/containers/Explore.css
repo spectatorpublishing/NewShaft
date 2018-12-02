@@ -1,0 +1,22 @@
+.header {
+	margin: 0 auto;
+	width: 100%;
+	text-align: center;
+}
+
+.SchoolButton {
+	font-size: 20pt;
+	text-align: center;
+	border: 1px solid #9B9B9B;
+	color: #9B9B9B;
+	display: inline-block;
+	height: 50px;
+	margin: 20px;
+	padding: 5px;
+	cursor: pointer;
+}
+
+.DormButtons {
+	margin: 0 auto;
+	width: 100%;
+}
