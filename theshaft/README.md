@@ -11,7 +11,7 @@ Use "yarn dev" to run. npm _script name_ is buggy and unreliable.
 ### Database Schema (theshaft)
 #### dorm_static_info
 Field | Type | Constraints
- --- | ---
+ --- | --- | ---
 DORM | VARCHAR(40) | NOT NULL
 ADDRESS | VARCHAR(60) | NOT NULL
 DESCRIPTION | TEXT | NOT NULL
