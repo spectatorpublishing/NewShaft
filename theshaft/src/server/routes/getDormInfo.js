@@ -5,41 +5,38 @@ var mysql = require('mysql');
 
 function getDormInfo(con, request, callback) {
 	con.connect(function(err) {
-	  if (err) throw err;
-	  console.log("Connected!");
+		if (err) throw err;
+		console.log("Connected!");
 
-	  /**
-	  	Trying to make the code as vague as possible because no database mockup
-		Let's say for now that the request's body is the following:
+		/* Code vague such as to apply to any table.
 		{
-			"table": "Test",
-			"dorm": "John Jay",
-			"ac": "1",
-			"number_of_rooms": "3",
-			"toilet_person_ratio": "1"
+			"table": "dorm_static_info",
+			"DORM": "110",
+			"ADDRESS": "601 W 110th Street"
 		}
-		Let's also assume that the table is always given.
-	   */
-	  var sqlStatement = `SELECT * FROM \`${request.table}\` `
-	  delete request.table
-	  var firstKey = true
+		*/
 
-	  for (key in request)  {
-	  	if(firstKey) {
-			firstKey = false
-	  		sqlStatement += `WHERE ${key}="${request[key]}"`
-	  	}
-	  	else
-	  		sqlStatement += ` AND ${key}="${request[key]}"`
-	  }
-	  console.log(sqlStatement)
+		var sqlStatement = `SELECT * FROM \`${request.table}\` `
+		delete request.table;
+		var firstKey = true
 
-	  con.query(sqlStatement, function(err, res) {
-					  	if (err) throw err;
-					  	console.log(res);
-					  	callback(res)
-					  });
-	})
+		for (key in request)  {
+			if(firstKey) {
+				firstKey = false
+				sqlStatement += `WHERE ${key}="${request[key]}"`
+			} else {
+				sqlStatement += ` AND ${key}="${request[key]}"`
+			}
+		}
+
+		con.query(sqlStatement, function(err, res) {
+			if (err) throw err;
+			console.log(res);
+			callback(res)
+		});
+
+		con.end(); // DO NOT REMOVE!
+	});
 }
 
 router.post('/', function(req, res, next) {

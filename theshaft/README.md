@@ -23,6 +23,14 @@ SINGLE_ | BOOLEAN | NOT NULL
 DOUBLE_ | BOOLEAN | NOT NULL
 TRIPLE_ | BOOLEAN | NOT NULL
 
+### Endpoints
+Type | url | params | returns
+ --- | --- | --- | ---
+POST | /api/getDormInfo | ``` {"table": <table>, <key>:<value>, ...} ``` | ```"SELECT * FROM <table> WHERE <key>=<value> AND ..."```
+POST | /api/deleteDormInfo _1_ | ``` {"table": <table>, <key>:<value>, ...} ``` | ```{"Status": "Success"/"Failure"}```
+
+_1_: will NOT allow deletion of all entries in <table>. You must specify at least one key to query on.
+
 ### Folder Structure
 
 All the source code will be inside **src** directory. Inside src, there is client and server directory. All the frontend code (react, css, js and any other assets) will be in client directory. Backend Node.js/Express code will be in the server directory.
