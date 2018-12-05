@@ -1,5 +1,179 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
+exports[`DormButton renders correctly 1`] = `
+<div
+  class="DormButton"
+  onClick={[Function]}
+>
+  <h3>
+     
+    ADI House
+     
+  </h3>
+  <h3>
+     
+    21 Savage St.
+     
+  </h3>
+  <h3>
+     
+    12 minutes
+     
+  </h3>
+  <h3>
+     
+    It's lit
+     
+  </h3>
+  <br />
+  <h2>
+     CLICK TO VIEW FLOOR PLAN 
+  </h2>
+</div>
+`;
+
+exports[`Explore renders correctly 1`] = `
+<div>
+  <div
+    class="header"
+  >
+    <h1>
+      Explore The Shaft
+    </h1>
+    <div
+      class="SchoolButton"
+    >
+      Barnard
+    </div>
+    <div
+      class="SchoolButton"
+    >
+      Columbia
+    </div>
+  </div>
+  <div
+    class="DormButtons"
+  >
+    <div
+      class="DormButton"
+      onClick={[Function]}
+    >
+      <h3>
+         
+        ADI House
+         
+      </h3>
+      <h3>
+         
+        21
+         
+      </h3>
+      <h3>
+         
+        7 minutes
+         
+      </h3>
+      <h3>
+         
+        the best dorm
+         
+      </h3>
+      <br />
+      <h2>
+         CLICK TO VIEW FLOOR PLAN 
+      </h2>
+    </div>
+    <div
+      class="DormButton"
+      onClick={[Function]}
+    >
+      <h3>
+         
+        ADI House
+         
+      </h3>
+      <h3>
+         
+        21
+         
+      </h3>
+      <h3>
+         
+        7 minutes
+         
+      </h3>
+      <h3>
+         
+        the best dorm
+         
+      </h3>
+      <br />
+      <h2>
+         CLICK TO VIEW FLOOR PLAN 
+      </h2>
+    </div>
+    <div
+      class="DormButton"
+      onClick={[Function]}
+    >
+      <h3>
+         
+        ADI House
+         
+      </h3>
+      <h3>
+         
+        21
+         
+      </h3>
+      <h3>
+         
+        7 minutes
+         
+      </h3>
+      <h3>
+         
+        the best dorm
+         
+      </h3>
+      <br />
+      <h2>
+         CLICK TO VIEW FLOOR PLAN 
+      </h2>
+    </div>
+    <div
+      class="DormButton"
+      onClick={[Function]}
+    >
+      <h3>
+         
+        ADI House
+         
+      </h3>
+      <h3>
+         
+        21
+         
+      </h3>
+      <h3>
+         
+        7 minutes
+         
+      </h3>
+      <h3>
+         
+        the best dorm
+         
+      </h3>
+      <br />
+      <h2>
+         CLICK TO VIEW FLOOR PLAN 
+      </h2>
+    </div>
+  </div>
+</div>
+`;
+
 exports[`Photos renders correctly 1`] = `
 <div>
   <img
