@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import searchButton from "../assets/searchButton.png";
-import styles from "./searchbar.css";
+import styles from "../css/searchbar.css";
 
 export default class SearchBar extends Component {
 	render(){
