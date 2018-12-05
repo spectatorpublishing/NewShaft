@@ -8,6 +8,29 @@ Use "yarn dev" to run. npm _script name_ is buggy and unreliable.
 
 ## Documentation
 
+### Database Schema (theshaft)
+#### dorm_static_info
+Field | Type | Constraints
+ --- | --- | ---
+DORM | VARCHAR(40) | NOT NULL
+ADDRESS | VARCHAR(60) | NOT NULL
+DESCRIPTION | TEXT | NOT NULL
+COLLEGE | ENUM("BARNARD", "COLUMBIA") | NOT NULL
+THUMBNAIL_IMAGE | VARCHAR(255) | NOT NULL
+SUITE | SET('3','4','5','6','7','8') | NOT NULL
+WALKTHROUGH | BOOLEAN | NOT NULL
+SINGLE_ | BOOLEAN | NOT NULL
+DOUBLE_ | BOOLEAN | NOT NULL
+TRIPLE_ | BOOLEAN | NOT NULL
+
+### Endpoints
+Type | url | params | returns
+ --- | --- | --- | ---
+POST | /api/getDormInfo | ``` {"table": <table>, <key>:<value>, ...} ``` | ```"SELECT * FROM <table> WHERE <key>=<value> AND ..."```
+POST | /api/deleteDormInfo _1_ | ``` {"table": <table>, <key>:<value>, ...} ``` | ```{"Status": "Success"/"Failure"}```
+
+_1_: will NOT allow deletion of all entries in <table>. You must specify at least one key to query on.
+
 ### Folder Structure
 
 All the source code will be inside **src** directory. Inside src, there is client and server directory. All the frontend code (react, css, js and any other assets) will be in client directory. Backend Node.js/Express code will be in the server directory.
