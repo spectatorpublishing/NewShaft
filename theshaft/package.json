@@ -12,6 +12,12 @@
     "test": "jest",
     "storybook": "start-storybook -p 9001 -c .storybook"
   },
+  "jest": { 
+    "moduleNameMapper": { 
+        "\\.(jpg|jpeg|png|gif|eot|otf|webp|svg|ttf|woff|woff2|mp4|webm|wav|mp3|m4a|aac|oga)$": "<rootDir>/assetsTransformer.js", 
+        "\\.(css|less)$": "<rootDir>/assetsTransformer.js" 
+    } 
+  },
   "author": "Sandeep Raveesh",
   "license": "ISC",
   "dependencies": {

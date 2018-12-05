@@ -1,0 +1,27 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Photos renders correctly 1`] = `
+<div>
+  <img
+    src="http://www.facebook.com"
+  />
+</div>
+`;
+
+exports[`SearchBar renders correctly 1`] = `
+<div>
+  <input
+    className="searchbar textEntry"
+    type="text"
+  />
+  <input
+    className="searchbar submitButton"
+    src={
+      Object {
+        "process": [Function],
+      }
+    }
+    type="image"
+  />
+</div>
+`;
