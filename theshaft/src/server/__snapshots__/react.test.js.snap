@@ -1,11 +1,16 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`Photos renders correctly 1`] = `
-<div>
-  <img
-    src="http://www.facebook.com"
-  />
-</div>
+<div class="picsHigh">
+        <img class="blinky" src={this.state.imageOne} />
+        <div class="picsMid">
+          <img class="pinky" src={this.state.imageTwo} />
+          <div class="picsLow">
+            <img class="inky" src={this.state.imageThree} />
+            <img class="clyde" src={this.state.imageFour} />
+          </div>
+        </div>
+      </div>
 `;
 
 exports[`SearchBar renders correctly 1`] = `
