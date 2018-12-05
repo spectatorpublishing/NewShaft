@@ -13,7 +13,7 @@ function grabFloorplans(end){
     })
     .then((image) => {
       image.forEach((elem) => {
-        var file = fs.createWriteStream("../src/client/assets/floor_plans/" + elem['attribs'][['title']]+".jpg");
+        var file = fs.createWriteStream("../src/client/assets/floor_plans/" + elem['attribs'][['title']]+".jpg", {flags: "w"});
         var request = https.get(elem['attribs']['href'], function(response) {
           response.pipe(file);
         });
