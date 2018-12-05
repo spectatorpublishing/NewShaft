@@ -1,10 +1,27 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`Photos renders correctly 1`] = `
-<div>
+<div class="picsHigh" >
   <img
-    src="http://www.facebook.com"
+    class="blinky"
+    src="https://memegenerator.net/img/images/17438601/dat-sad-fat-cat.jpg"
   />
+  <div class="picsMid" >
+    <img
+      class="pinky"
+      src="https://i.imgflip.com/26a82h.jpg"
+    />
+    <div class="picsLow" >
+      <img
+        class="inky"
+        src="https://i.imgflip.com/1eg7jb.jpg"
+      />
+      <img
+        class="clyde"
+        src="https://i.imgflip.com/1yt82g.jpg"
+      />
+    </div>
+  </div>
 </div>
 `;
 

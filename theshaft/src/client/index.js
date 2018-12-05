@@ -1,18 +1,11 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import { Route, Link, BrowserRouter as Router } from 'react-router-dom';
-import Explore from './containers/Explore';
-import Dorm from './containers/Dorm';
+import { Switch, Route, Link, BrowserRouter as Router } from 'react-router-dom';
+import App from './App'
 
 const routing = (
   <Router>
-    <div>
-      <ul>
-        <li><Link to="/">Explore</Link></li>
-        <li><Link to="/test">Test</Link></li>
-      </ul>
-      <Route exact path="/" component={Explore} />
-    </div>
+    <App />
   </Router>
 );
 

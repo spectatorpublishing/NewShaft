@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+
 import '../css/DormButton.css';
 
 export default class DormButton extends Component {
@@ -14,13 +15,9 @@ export default class DormButton extends Component {
 		}
 	}
 
-	onClick(e) {
-		console.log(e) //should redirect to separate page for floor plans
-	}
-
 	render() {
 		return (
-			<div class="DormButton" onClick={() => this.onClick(this.state.name)}>
+			<div className="DormButton" onClick={() => this.onClick(this.state.name)}>
 				<h3> {this.state.name} </h3>
 				<h3> {this.state.address} </h3>
 				<h3> {this.state.sundial_distance} </h3>

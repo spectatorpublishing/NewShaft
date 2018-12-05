@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import './Explore.css';
 
 export default class Photos extends Component {
 
@@ -6,14 +7,24 @@ export default class Photos extends Component {
 		super(props);
 
 		this.state = {
-			image: this.props.image
+			imageOne: this.props.imageOne,
+			imageTwo: this.props.imageTwo,
+			imageThree: this.props.imageThree,
+			imageFour: this.props.imageFour
 		}
 	}
 
 	render() {
 		return (
-			<div>
-				<img src={this.state.image} />
+			<div class="picsHigh">
+				<img class="blinky" src={this.state.imageOne} />
+				<div class="picsMid">
+					<img class="pinky" src={this.state.imageTwo} />
+					<div class="picsLow">
+						<img class="inky" src={this.state.imageThree} />
+						<img class="clyde" src={this.state.imageFour} />
+					</div>
+				</div>
 			</div>
 		)
 	}
