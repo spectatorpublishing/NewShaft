@@ -1,0 +1,8 @@
+.DormButton {
+	text-align: left;
+	border: 5px solid #9B9B9B;
+	color: #9B9B9B;
+    display: inline-block;
+	cursor: pointer;
+    margin: 10px;
+}

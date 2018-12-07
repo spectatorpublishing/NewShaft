@@ -2,8 +2,9 @@ import React, { Component } from 'react';
 import { Route, Link, BrowserRouter as Router } from 'react-router-dom';
 
 import DormButton from '../components/DormButton';
+import '../css/Explore.css';
 import Dorm from './Dorm.js';
-import './Explore.css';
+
 
 export default class Explore extends Component {
 
