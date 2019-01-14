@@ -4,7 +4,20 @@
 
 Created using simple-react-full-stack.
 
-Use "yarn dev" to run. npm _script name_ is buggy and unreliable.
+## Dev Setup
+
+Make sure you are in theshaft directory:
+
+`cd theshaft`
+
+Before running the application make sure that that dependencies are up to date:
+
+`yarn install`
+
+To run the application make sure to cd into the shaft directory and run
+
+`yarn dev`
+
 
 ## Documentation
 
