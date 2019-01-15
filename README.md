@@ -18,6 +18,9 @@ To run the application make sure to cd into the shaft directory and run
 
 `yarn dev`
 
+To run storybook run the following
+
+`yarn storybook`
 
 ## Documentation
 

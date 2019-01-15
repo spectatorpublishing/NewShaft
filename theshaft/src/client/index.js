@@ -1,7 +1,7 @@
-import React from 'react';
-import ReactDOM from 'react-dom';
-import { Switch, Route, Link, BrowserRouter as Router } from 'react-router-dom';
-import App from './App'
+import React from "react";
+import ReactDOM from "react-dom";
+import { Switch, Route, Link, BrowserRouter as Router } from "react-router-dom";
+import App from "./App";
 
 const routing = (
   <Router>
@@ -9,4 +9,4 @@ const routing = (
   </Router>
 );
 
-ReactDOM.render(routing, document.getElementById('root'));
+ReactDOM.render(routing, document.getElementById("root"));
