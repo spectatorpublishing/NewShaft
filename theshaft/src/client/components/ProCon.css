@@ -1,0 +1,13 @@
+#proList {
+    float: left;
+    width: 50%;
+}
+
+#conList {
+    float: right;
+    width: 50%;
+}
+
+.header {
+    margin: none;
+}
