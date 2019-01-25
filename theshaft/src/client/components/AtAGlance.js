@@ -6,7 +6,13 @@ let Table = styled.div`
   justify-content: space-between;
   width: 250px;
   border: 2px solid palevioletred;
+  
 `
+let Span = styled.div`
+  color: grey; 
+  
+`
+
 
 
 export default class AtAGlance extends Component {
@@ -18,10 +24,10 @@ export default class AtAGlance extends Component {
     return (
       <div className="AtAGlance">
           <h2> At a glance </h2>
-          <Table> <span color="green">Location</span> {this.props.location} </Table>
-          <Table> <span>Room Type</span> {this.props.roomtype} </Table>
-          <Table> <span>Class Make-Up</span> {this.props.classmakeup} </Table>
-          <Table> <span># of Floors</span> {this.props.numfloors} </Table>
+          <Table> <Span>Location</Span> {this.props.location} </Table>
+          <Table> <Span>Room Type</Span> {this.props.roomtype} </Table>
+          <Table> <Span>Class Make-Up</Span> {this.props.classmakeup} </Table>
+          <Table> <Span># of Floors</Span> {this.props.numfloors} </Table>
           <br/>
       </div>
     );
