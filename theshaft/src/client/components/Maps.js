@@ -19,12 +19,17 @@ export default class Maps extends Component {
         latitude: 40.7128,
         longitude: -74.006,
         zoom: 15
-      }
+      },
+      coordinates: {
+        latitudes: this.props.latitudes,
+        longitudes : this.props.longitudes
+      }      
     };
   }
 
   render() {
     const view = this.state.viewport;
+    
     return (
       <div>
         <ReactMapGL
