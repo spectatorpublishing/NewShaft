@@ -4,6 +4,7 @@ import SearchBar from '../client/components/SearchBar.js';
 import DormButton from '../client/components/DormButton.js';
 import Explore from '../client/containers/Explore.js';
 import renderer from 'react-test-renderer';
+import { Route, Link, BrowserRouter as Router } from 'react-router-dom';
 
 it('Photos renders correctly', () => {
   const tree = renderer

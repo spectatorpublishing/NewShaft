@@ -5,6 +5,8 @@ import SearchBar from '../src/client/components/SearchBar.js';
 import Photos from '../src/client/components/Photos.js';
 import DormButton from '../src/client/components/DormButton.js';
 import Explore from '../src/client/containers/Explore.js';
+import Reviews from '../src/client/components/Reviews.js';
+import Review from '../src/client/components/Review.js';
 
 storiesOf('Button', module)
   .add('with text', () => <Button>Hello Button</Button>)
@@ -30,5 +32,9 @@ storiesOf('DormButton', module)
 storiesOf('Explore', module)
   .add('explore', () => <Explore/>);
 
+storiesOf('Reviews', module)
+  .add('reviews', () => <Reviews/>);
 
+storiesOf('Review', module)
+  .add('review', () => <Review/>);
 

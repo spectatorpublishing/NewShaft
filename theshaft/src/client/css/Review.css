@@ -1,0 +1,22 @@
+#parent {
+	display: flex;
+	flex-direction: column;
+	height: 100%;
+}
+
+#stars {
+
+}
+
+#review {
+
+}
+
+#reviewInfo {
+
+}
+
+.row {
+	display: flex;
+	flex-direction: row;
+}
