@@ -5,6 +5,7 @@ import SearchBar from '../src/client/components/SearchBar.js';
 import Photos from '../src/client/components/Photos.js';
 import DormButton from '../src/client/components/DormButton.js';
 import Explore from '../src/client/containers/Explore.js';
+import AtAGlance from '../src/client/components/AtAGlance.js'
 
 storiesOf('Button', module)
   .add('with text', () => <Button>Hello Button</Button>)
@@ -30,5 +31,5 @@ storiesOf('DormButton', module)
 storiesOf('Explore', module)
   .add('explore', () => <Explore/>);
 
-
-
+storiesOf('AtAGlance', module)
+    .add('at a glance', () => <AtAGlance location="545 W. 114th St." roomtype="Suite-style doubles" classmakeup="First-Years" numfloors="13"/>);
