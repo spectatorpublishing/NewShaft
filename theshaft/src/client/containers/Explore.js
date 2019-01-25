@@ -4,6 +4,7 @@ import { Route, Link, BrowserRouter as Router } from 'react-router-dom';
 import DormButton from '../components/DormButton';
 import '../css/Explore.css';
 import Dorm from './Dorm.js';
+import Updater from '../components/Updater';
 
 
 export default class Explore extends Component {
@@ -22,6 +23,7 @@ export default class Explore extends Component {
           <Link to="/ruggles"><DormButton name="Ruggles Hall" address="21" sundial_distance="7 minutes" description="the best dorm"/></Link>
           <Link to="/carman"><DormButton name="Carman Hall" address="21" sundial_distance="7 minutes" description="the best dorm"/></Link>
         </div>
+        <Updater interval="15" />
       </div>
       );
     }
