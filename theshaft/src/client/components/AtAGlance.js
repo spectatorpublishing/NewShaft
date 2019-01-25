@@ -5,9 +5,17 @@ let Table = styled.div`
   display: flex;
   justify-content: space-between;
   width: 250px;
-  border: 2px solid palevioletred;
+  border-bottom: 2px solid palevioletred;
 `
 
+let Title = styled.h2`
+  font-family: Impact, fantasy;
+`
+
+let Content = styled.span`
+  font-family: "Comic Sans MS", cursive, sans-serif;
+  color: #5a5a5a;
+`
 
 export default class AtAGlance extends Component {
   constructor(props) {
@@ -17,11 +25,11 @@ export default class AtAGlance extends Component {
   render() {
     return (
       <div className="AtAGlance">
-          <h2> At a glance </h2>
-          <Table> <span color="green">Location</span> {this.props.location} </Table>
-          <Table> <span>Room Type</span> {this.props.roomtype} </Table>
-          <Table> <span>Class Make-Up</span> {this.props.classmakeup} </Table>
-          <Table> <span># of Floors</span> {this.props.numfloors} </Table>
+          <Title> At a glance </Title>
+          <Table> <span>Location</span> <Content>{this.props.location}</Content> </Table>
+          <Table> <span>Room Type</span> <Content>{this.props.roomtype}</Content> </Table>
+          <Table> <span>Class Make-Up</span> <Content>{this.props.classmakeup}</Content> </Table>
+          <Table> <span># of Floors</span> <Content>{this.props.numfloors}</Content> </Table>
           <br/>
       </div>
     );
