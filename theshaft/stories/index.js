@@ -29,7 +29,7 @@ storiesOf('DormButton', module)
   .add('dorm button', () => <DormButton name="ADI House" address="21 Savage St." sundial_distance="12 minutes" description="It's lit"/>);
 
 storiesOf('Explore', module)
-  .add('explore', () => <Explore/>);
+ .add('explore', () => <Explore/>);
 
 storiesOf('AtAGlance', module)
     .add('at a glance', () => <AtAGlance location="545 W. 114th St." roomtype="Suite-style doubles" classmakeup="First-Years" numfloors="13"/>);

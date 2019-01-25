@@ -7,6 +7,9 @@ let Table = styled.div`
   width: 250px;
   border-bottom: 2px solid palevioletred;
 `
+let Span = styled.div`
+  color: grey;  
+`
 
 let Title = styled.h2`
   font-family: Impact, fantasy;
@@ -26,10 +29,10 @@ export default class AtAGlance extends Component {
     return (
       <div className="AtAGlance">
           <Title> At a glance </Title>
-          <Table> <span>Location</span> <Content>{this.props.location}</Content> </Table>
-          <Table> <span>Room Type</span> <Content>{this.props.roomtype}</Content> </Table>
-          <Table> <span>Class Make-Up</span> <Content>{this.props.classmakeup}</Content> </Table>
-          <Table> <span># of Floors</span> <Content>{this.props.numfloors}</Content> </Table>
+          <Table> <Span>Location</Span> <Content>{this.props.location}</Content> </Table>
+          <Table> <Span>Room Type</Span> <Content>{this.props.roomtype}</Content> </Table>
+          <Table> <Span>Class Make-Up</Span> <Content>{this.props.classmakeup}</Content> </Table>
+          <Table> <Span># of Floors</Span> <Content>{this.props.numfloors}</Content> </Table>
           <br/>
       </div>
     );
