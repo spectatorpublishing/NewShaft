@@ -5,6 +5,7 @@ import SearchBar from '../src/client/components/SearchBar.js';
 import Photos from '../src/client/components/Photos.js';
 import DormButton from '../src/client/components/DormButton.js';
 import Explore from '../src/client/containers/Explore.js';
+import RelatedDorms from '../src/client/components/RelatedDorms.js';
 
 storiesOf('Button', module)
   .add('with text', () => <Button>Hello Button</Button>)
@@ -29,6 +30,9 @@ storiesOf('DormButton', module)
 
 storiesOf('Explore', module)
   .add('explore', () => <Explore/>);
+
+storiesOf('RelatedDorms', module)
+    .add('related dorms', () => <RelatedDorms name="SIC" image="https://memegenerator.net/img/images/17438601/dat-sad-fat-cat.jpg"/>)
 
 
 
