@@ -19,4 +19,6 @@
 .row {
 	display: flex;
 	flex-direction: row;
+	height: 100%;
+	justify-content: space-around;
 }
