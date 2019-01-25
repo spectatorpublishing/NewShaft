@@ -3,9 +3,11 @@ import styled from 'styled-components';
 
 let Table = styled.div`
   display: flex;
-  align-content: space-between;
-  max-width: 300px;
+  justify-content: space-between;
+  width: 250px;
+  border: 2px solid palevioletred;
 `
+
 
 export default class AtAGlance extends Component {
   constructor(props) {
@@ -16,10 +18,10 @@ export default class AtAGlance extends Component {
     return (
       <div className="AtAGlance">
           <h2> At a glance </h2>
-          <Table> Location {this.props.location} </Table>
-          <Table> Room Type {this.props.roomtype} </Table>
-          <Table> Class Make-Up {this.props.classmakeup} </Table>
-          <Table> # of Floors {this.props.numfloors} </Table>
+          <Table> <span color="green">Location</span> {this.props.location} </Table>
+          <Table> <span>Room Type</span> {this.props.roomtype} </Table>
+          <Table> <span>Class Make-Up</span> {this.props.classmakeup} </Table>
+          <Table> <span># of Floors</span> {this.props.numfloors} </Table>
           <br/>
       </div>
     );
