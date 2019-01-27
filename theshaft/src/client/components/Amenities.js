@@ -27,8 +27,7 @@ export default class Amenities extends Component {
       the inner string array is a key-value pair
       in the format of [amenityType, amenityLabel]. 
       See example in storybook. */
-      amenities: this.props.amenities,
-      expanded: false
+      amenities: this.props.amenities
     };
 
     this.showAllAmenities = this.showAllAmenities.bind(this);
