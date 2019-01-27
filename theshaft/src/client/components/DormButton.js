@@ -8,6 +8,7 @@ export default class DormButton extends Component {
 
     this.state = {
       name: this.props.name,
+      image: this.props.image,
       address: this.props.address,
       sundial_distance: this.props.sundial_distance,
       description: this.props.description
@@ -17,12 +18,14 @@ export default class DormButton extends Component {
   render() {
     return (
       <div className="DormButton" onClick={() => this.onClick(this.state.name)}>
-        <h3> {this.state.name} </h3>
-        <h3> {this.state.address} </h3>
-        <h3> {this.state.sundial_distance} </h3>
-        <h3> {this.state.description} </h3>
+        <div className="image"><img src={this.state.image} /></div>
+        <div className="details">
+            <h3> {this.state.name} </h3>
+            <h3> {this.state.address} </h3>
+            <h3> {this.state.sundial_distance} </h3>
+            <h3> {this.state.description} </h3>
+        </div>
         <br />
-        <h2> CLICK TO VIEW FLOOR PLAN </h2>
       </div>
     );
   }

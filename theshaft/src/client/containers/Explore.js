@@ -7,7 +7,6 @@ import Dorm from './Dorm.js';
 
 
 export default class Explore extends Component {
-
     render() {
       return (
       <div>
@@ -17,7 +16,7 @@ export default class Explore extends Component {
           <div className="SchoolButton">Columbia</div>
         </div>
         <div className="DormButtons">
-          <Link to="/adi"><DormButton name="ADI House" address="21" sundial_distance="7 minutes" description="the best dorm"/></Link>
+          <Link to="/adi"><DormButton name="ADI House" image="https://housing.columbia.edu/files/housing/Carman.jpg" address="21" sundial_distance="7 minutes" description="the best dorm"/></Link>
           <Link to="/mcbain"><DormButton name="McBain Hall" address="21" sundial_distance="7 minutes" description="the best dorm"/></Link>
           <Link to="/ruggles"><DormButton name="Ruggles Hall" address="21" sundial_distance="7 minutes" description="the best dorm"/></Link>
           <Link to="/carman"><DormButton name="Carman Hall" address="21" sundial_distance="7 minutes" description="the best dorm"/></Link>
@@ -25,4 +24,4 @@ export default class Explore extends Component {
       </div>
       );
     }
-  }
+}

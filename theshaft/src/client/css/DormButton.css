@@ -1,8 +1,13 @@
-.DormButton {
-	text-align: left;
-	border: 5px solid #9B9B9B;
-	color: #9B9B9B;
-    display: inline-block;
+div.DormButton {
+	display: flex;
+	flex-direction: row;
+	border: 5px solid black;
+	color: black;
 	cursor: pointer;
     margin: 10px;
+}
+
+img {
+	width: 250px;
+	height: auto;
 }
