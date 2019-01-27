@@ -1,5 +1,4 @@
 import React, { Component } from "react";
-import icon from "../assets/marker.svg"; // to-do: import all actual icons
 import "../css/Expander.css";
 
 export default class Expander extends Component {
