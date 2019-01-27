@@ -13,22 +13,23 @@ export default class ProCon extends Component {
     
       render() {
         return (
-          <div id="proConBox">
-            <div id="proList">
-              <h3 class="header">Pros</h3>
+          <section>
+            <div class="listBox">
+              <h1 class="header">Pros</h1>
                 <ul>
                   {this.state.pros.map(pro => (
                     <li>{pro}</li>))}
                 </ul>
             </div>
-            <div id="conList">
-              <h3 class="header">Cons</h3>
+            <div class="divider"></div>
+            <div class="listBox">
+              <h1 class="header">Cons</h1>
                 <ul>
                   {this.state.cons.map(con => (
                     <li>{con}</li>))}
                 </ul>
             </div>
-          </div>
+          </section>
         );
       }
 }
