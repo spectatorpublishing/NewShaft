@@ -5,6 +5,7 @@ import SearchBar from '../src/client/components/SearchBar.js';
 import Photos from '../src/client/components/Photos.js';
 import DormButton from '../src/client/components/DormButton.js';
 import Explore from '../src/client/containers/Explore.js';
+import Amenities from '../src/client/components/Amenities.js';
 import AtAGlance from '../src/client/components/AtAGlance.js'
 
 storiesOf('Button', module)
@@ -29,7 +30,21 @@ storiesOf('DormButton', module)
   .add('dorm button', () => <DormButton name="ADI House" address="21 Savage St." sundial_distance="12 minutes" description="It's lit"/>);
 
 storiesOf('Explore', module)
- .add('explore', () => <Explore/>);
+  .add('explore', () => <Explore/>);
+
+let sampleAmenities = [
+  ["bathroom", "Semi-private"],
+  ["laundry", "Laundry - in basement"],
+  ["kitchen", "Kitchen - in basement"],
+  ["airConditioning", "Air conditioning"],
+  ["lounge", "Floor lounge"],
+  ["fitness", "Fitness room"],
+  ["lounge", "Sky lounge"],
+  ["lounge", "Basement lounge"]
+];
+
+storiesOf('Amenities', module)
+  .add('amenities', () => <Amenities amenities={sampleAmenities} />);
 
 storiesOf('AtAGlance', module)
-    .add('at a glance', () => <AtAGlance location="545 W. 114th St." roomtype="Suite-style doubles" classmakeup="First-Years" numfloors="13"/>);
+  .add('at a glance', () => <AtAGlance location="545 W. 114th St." roomtype="Suite-style doubles" classmakeup="First-Years" numfloors="13"/>);
