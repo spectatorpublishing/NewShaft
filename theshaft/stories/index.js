@@ -5,7 +5,10 @@ import SearchBar from '../src/client/components/SearchBar.js';
 import Photos from '../src/client/components/Photos.js';
 import DormButton from '../src/client/components/DormButton.js';
 import Explore from '../src/client/containers/Explore.js';
-import RelatedDorms from '../src/client/components/RelatedDorms.js';
+import Amenities from '../src/client/components/Amenities.js';
+import AtAGlance from '../src/client/components/AtAGlance.js';
+import RelatedDorms from '../src/client/components/RelatedDorms';
+//import RelatedDormsList from '../src/client/components/RelatedDormsList'
 
 storiesOf('Button', module)
   .add('with text', () => <Button>Hello Button</Button>)
@@ -31,8 +34,31 @@ storiesOf('DormButton', module)
 storiesOf('Explore', module)
   .add('explore', () => <Explore/>);
 
+let sampleAmenities = [
+  ["bathroom", "Semi-private"],
+  ["laundry", "Laundry - in basement"],
+  ["kitchen", "Kitchen - in basement"],
+  ["airConditioning", "Air conditioning"],
+  ["lounge", "Floor lounge"],
+  ["fitness", "Fitness room"],
+  ["lounge", "Sky lounge"],
+  ["lounge", "Basement lounge"]
+];
+
+storiesOf('Amenities', module)
+  .add('amenities', () => <Amenities amenities={sampleAmenities} />);
+
+storiesOf('AtAGlance', module)
+  .add('at a glance', () => <AtAGlance location="545 W. 114th St." roomtype="Suite-style doubles" classmakeup="First-Years" numfloors="13"/>);
+
+
+// Related Dorms Content
+let sampleRelatedDorms = [
+  ["Carman", "https://memegenerator.net/img/images/17438601/dat-sad-fat-cat.jpg"],
+  ["Furnald", "https://memegenerator.net/img/images/17438601/dat-sad-fat-cat.jpg"],
+  ["John Jay", "https://memegenerator.net/img/images/17438601/dat-sad-fat-cat.jpg"],
+  ["John Jay", "https://memegenerator.net/img/images/17438601/dat-sad-fat-cat.jpg"]
+]
+
 storiesOf('RelatedDorms', module)
-    .add('related dorms', () => <RelatedDorms name="SIC" image="https://memegenerator.net/img/images/17438601/dat-sad-fat-cat.jpg"/>)
-
-
-
+  .add('related dorms', () => <RelatedDorms relatedDorms={sampleRelatedDorms}/>)

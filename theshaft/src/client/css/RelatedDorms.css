@@ -1,0 +1,48 @@
+/*  CSS for Related Dorms.
+    Modifies elements within showRelatedDorms() funciton
+    as well as within the return() function of the
+    RelatedDorms.js component. 
+
+    A number of the elements are currently set with 
+    strict px; this may need to change.
+     */
+
+
+:root {
+    --mw: 500px;
+}
+
+/* consider removing border */
+.relatedDormsList {
+    border: 1px black solid;
+    border-radius: 10px; 
+    max-width: var(--mw);
+    max-height: 500px;
+    height: 300px;
+    
+    
+}
+
+/* might need px modification  */
+.relatedDormsTitle {
+    margin: 20px 0 0 5px;
+}
+
+/* uses css flex justification */
+.relatedDormsHorizontalView{
+    display: flex;
+    justify-content: flex-start
+    
+}
+
+/* locked at specific px */
+.relatedDormImage {
+    height: 100px;
+    width: 100px;
+}
+
+/* might need px modification */
+.relatedDormName {
+    margin: 0px 0 0 5px;
+}
+
