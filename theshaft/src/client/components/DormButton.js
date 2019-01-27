@@ -7,23 +7,23 @@ export default class DormButton extends Component {
     super(props);
 
     this.state = {
+      school: this.props.school,
       name: this.props.name,
       image: this.props.image,
-      address: this.props.address,
-      sundial_distance: this.props.sundial_distance,
+      amenities: this.props.amenities,
       description: this.props.description
     };
   }
 
   render() {
     return (
-      <div className="DormButton" onClick={() => this.onClick(this.state.name)}>
-        <div className="image"><img src={this.state.image} /></div>
+      <div className="DormButton">
+        <img className="dormimage" src={this.state.image} />
         <div className="details">
-            <h3> {this.state.name} </h3>
-            <h3> {this.state.address} </h3>
-            <h3> {this.state.sundial_distance} </h3>
-            <h3> {this.state.description} </h3>
+            <p className="school"> { this.state.school } </p>
+            <h4 className="dormname"> {this.state.name} </h4>
+            <p> {this.state.amenities} </p>
+            <p> {this.state.description} </p>
         </div>
         <br />
       </div>

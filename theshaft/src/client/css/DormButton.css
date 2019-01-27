@@ -1,13 +1,23 @@
 div.DormButton {
 	display: flex;
 	flex-direction: row;
-	border: 5px solid black;
+	border: 2px solid #9B9B9B;
 	color: black;
 	cursor: pointer;
-    margin: 10px;
+	padding: 5px;
+	margin-bottom: 2px;
 }
 
-img {
-	width: 250px;
-	height: auto;
+img.dormimage {
+	height: 125px;
+	width: auto;
+}
+
+p.school {
+	margin-bottom: 1px;
+	font-size: 0.9em;
+}
+
+h4.dormname {
+	margin-top: 2px;
 }
