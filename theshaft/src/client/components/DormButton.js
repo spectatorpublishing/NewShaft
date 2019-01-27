@@ -3,7 +3,7 @@ import styled from 'styled-components';
 
 import "../css/DormButton.css";
 
-let DormButton = styled.div`
+let Button = styled.div`
   text-align: left;
   border: 5px solid #9B9B9B;
   color: #9B9B9B;
@@ -26,14 +26,14 @@ export default class DormButton extends Component {
 
   render() {
     return (
-      <div className="DormButton" onClick={() => this.onClick(this.state.name)}>
+      <Button onClick={() => this.onClick(this.state.name)}>
         <h3> {this.state.name} </h3>
         <h3> {this.state.address} </h3>
         <h3> {this.state.sundial_distance} </h3>
         <h3> {this.state.description} </h3>
         <br />
         <h2> CLICK TO VIEW FLOOR PLAN </h2>
-      </div>
+      </Button>
     );
   }
 }
