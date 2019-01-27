@@ -11,7 +11,9 @@ import FloorPlan from '../src/client/components/FloorPlan.js';
 import sampleFloor from '../src/client/assets/floor_plans/47 Claremont 1.jpg';
 import Expander from '../src/client/components/Expander.js';
 import Amenities from '../src/client/components/Amenities.js';
-import AtAGlance from '../src/client/components/AtAGlance.js'
+import AtAGlance from '../src/client/components/AtAGlance.js';
+import RelatedDorms from '../src/client/components/RelatedDorms';
+//import RelatedDormsList from '../src/client/components/RelatedDormsList'
 
 storiesOf('Button', module)
   .add('with text', () => <Button>Hello Button</Button>)
@@ -67,3 +69,15 @@ storiesOf('Amenities', module)
 
 storiesOf('AtAGlance', module)
   .add('at a glance', () => <AtAGlance location="545 W. 114th St." roomtype="Suite-style doubles" classmakeup="First-Years" numfloors="13"/>);
+
+
+// Related Dorms Content
+let sampleRelatedDorms = [
+  ["Carman", "https://memegenerator.net/img/images/17438601/dat-sad-fat-cat.jpg"],
+  ["Furnald", "https://memegenerator.net/img/images/17438601/dat-sad-fat-cat.jpg"],
+  ["John Jay", "https://memegenerator.net/img/images/17438601/dat-sad-fat-cat.jpg"],
+  ["John Jay", "https://memegenerator.net/img/images/17438601/dat-sad-fat-cat.jpg"]
+]
+
+storiesOf('RelatedDorms', module)
+  .add('related dorms', () => <RelatedDorms relatedDorms={sampleRelatedDorms}/>)
