@@ -5,6 +5,7 @@ import SearchBar from '../src/client/components/SearchBar.js';
 import Photos from '../src/client/components/Photos.js';
 import DormButton from '../src/client/components/DormButton.js';
 import Explore from '../src/client/containers/Explore.js';
+import Expander from '../src/client/components/Expander.js';
 import Amenities from '../src/client/components/Amenities.js';
 
 storiesOf('Button', module)
@@ -30,6 +31,9 @@ storiesOf('DormButton', module)
 
 storiesOf('Explore', module)
   .add('explore', () => <Explore/>);
+
+storiesOf('Expander', module)
+  .add('expander', () => <Expander showAll="Here's all of the text shown. It should be longer than the preview." showSome="Here's a preview shown."><h1>Some Static Heading</h1></Expander>);
 
 let sampleAmenities = [
   ["bathroom", "Semi-private"],
