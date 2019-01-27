@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import "../css/Reviews.css";
+import Review from "./Review.js";
 
 export default class Reviews extends Component {
   constructor(props) {
@@ -17,8 +18,7 @@ export default class Reviews extends Component {
             <div>Stars</div>
           </div>
           <div>
-            <div>Review 1</div>
-            <div>Review 2</div>
+            <Review thumbsUp="1" thumbsDown="3"/>
           </div>
         </div>
         <div id="readMore">

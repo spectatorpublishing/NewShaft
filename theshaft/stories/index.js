@@ -21,7 +21,7 @@ storiesOf('Button', module)
 
 storiesOf('SearchBar', module)
   .add('with text', () => <SearchBar/>);
-  
+
 storiesOf('Photos', module)
   .add('pikachu', () => <Photos imageOne="https://memegenerator.net/img/images/17438601/dat-sad-fat-cat.jpg" imageTwo="https://i.imgflip.com/26a82h.jpg" imageThree="https://i.imgflip.com/1eg7jb.jpg" imageFour="https://i.imgflip.com/1yt82g.jpg"/>);
 
@@ -36,5 +36,5 @@ storiesOf('Reviews', module)
   .add('reviews', () => <Reviews/>);
 
 storiesOf('Review', module)
-  .add('review', () => <Review/>);
+  .add('review', () => <Review thumbsUp="2" thumbsDown="1" />);
 

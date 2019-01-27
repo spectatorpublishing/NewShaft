@@ -1,19 +1,27 @@
-#parent {
+.parent {
 	display: flex;
 	flex-direction: column;
 	height: 100%;
 }
 
-#stars {
+.checked {
+    color: orange;
+}
+
+.stars {
 
 }
 
-#review {
-
+.review {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
 }
 
-#reviewInfo {
-
+.reviewerInfo {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
 }
 
 .row {
