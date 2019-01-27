@@ -4,6 +4,7 @@ import Photos from "../components/Photos";
 import Maps from "../components/Maps";
 
 export default class Dorm extends React.PureComponent {
+
   render() {
     return (
       <div>
