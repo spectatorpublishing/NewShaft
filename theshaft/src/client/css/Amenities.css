@@ -1,0 +1,40 @@
+.amenities {
+    border: 1px black solid;
+    border-radius: 10px;
+    max-width: 400px;
+}
+
+.amenitiesTitle {
+    margin: 30px 0 0 30px;
+}
+
+.amenitiesList {
+    display: flex;
+    flex-wrap: wrap;
+    padding: 20px;
+}
+
+.amenity {
+    display: flex;
+    flex-direction: row;
+    width: 180px;
+}
+
+.amenityIcon {
+    height: 20px;
+}
+
+.toggleSize {
+    border-bottom-left-radius: 10px;
+    border-bottom-right-radius: 10px;
+    display: flex;
+    font-weight: bold;
+    justify-content: center;
+    padding: 5px 20px;
+    width: 100%;
+}
+
+.toggleSize:hover,
+.toggleSize:focus {
+    background-color: #ddd;
+}

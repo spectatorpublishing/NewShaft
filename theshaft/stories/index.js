@@ -5,6 +5,7 @@ import SearchBar from '../src/client/components/SearchBar.js';
 import Photos from '../src/client/components/Photos.js';
 import DormButton from '../src/client/components/DormButton.js';
 import Explore from '../src/client/containers/Explore.js';
+import Amenities from '../src/client/components/Amenities.js';
 
 storiesOf('Button', module)
   .add('with text', () => <Button>Hello Button</Button>)
@@ -29,6 +30,20 @@ storiesOf('DormButton', module)
 
 storiesOf('Explore', module)
   .add('explore', () => <Explore/>);
+
+let sampleAmenities = [
+  ["bathroom", "Semi-private"],
+  ["laundry", "Laundry - in basement"],
+  ["kitchen", "Kitchen - in basement"],
+  ["airConditioning", "Air conditioning"],
+  ["lounge", "Floor lounge"],
+  ["fitness", "Fitness room"],
+  ["lounge", "Sky lounge"],
+  ["lounge", "Basement lounge"]
+];
+
+storiesOf('Amenities', module)
+  .add('amenities', () => <Amenities amenities={sampleAmenities} />);
 
 
 
