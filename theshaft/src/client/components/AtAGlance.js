@@ -7,6 +7,7 @@ let Table = styled.div`
   width: 250px;
   border-bottom: 2px solid palevioletred;
 `
+
 let Span = styled.div`
   color: grey;  
 `
