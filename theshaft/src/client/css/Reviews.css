@@ -1,0 +1,19 @@
+#parent {
+	display: flex;
+	flex-direction: column;
+	height: 100%;
+}
+
+#reviewQuickView {
+	display: flex;
+	flex-direction: row;
+	justify-content: space-around;
+	height: 100%;
+}
+
+#readMore {
+	display: flex;
+	flex-direction: row;
+	justify-content: center;
+	height: 100%;
+}
