@@ -13,6 +13,8 @@ import Expander from '../src/client/components/Expander.js';
 import Amenities from '../src/client/components/Amenities.js';
 import AtAGlance from '../src/client/components/AtAGlance.js';
 import RelatedDorms from '../src/client/components/RelatedDorms';
+import ExploreSidebar from '../src/client/components/ExploreSidebar';
+import { MemoryRouter } from 'react-router';
 //import RelatedDormsList from '../src/client/components/RelatedDormsList'
 
 storiesOf('Button', module)
@@ -37,6 +39,9 @@ storiesOf('DormButton', module)
   .add('dorm button', () => <DormButton name="ADI House" address="21 Savage St." sundial_distance="12 minutes" description="It's lit"/>);
 
 storiesOf('Explore', module)
+.addDecorator(story => (
+  <MemoryRouter initialEntries={['/']}>{story()}</MemoryRouter>
+))
   .add('explore', () => <Explore/>);
 
 
@@ -80,4 +85,10 @@ let sampleRelatedDorms = [
 ]
 
 storiesOf('RelatedDorms', module)
-  .add('related dorms', () => <RelatedDorms relatedDorms={sampleRelatedDorms}/>)
+  .add('related dorms', () => <RelatedDorms relatedDorms={sampleRelatedDorms}/>);
+
+storiesOf('ExploreSidebar', module)
+  .addDecorator(story => (
+    <MemoryRouter initialEntries={['/']}>{story()}</MemoryRouter>
+  ))
+  .add('explore sidebar', () => <ExploreSidebar/>);
