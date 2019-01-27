@@ -1,4 +1,5 @@
 import React, { Component } from "react";
+import Expander from './Expander.js';
 import icon from "../assets/marker.svg"; // to-do: import all actual icons
 import "../css/Amenities.css";
 
@@ -47,15 +48,9 @@ export default class Amenities extends Component {
 
   render() {
     return (
-      <div className="amenities">
+      <Expander showAll={this.showAllAmenities()} showSome={this.showSomeAmenities()}>
         <h2 className="amenitiesTitle"> Amenities </h2>
-        <div className="amenitiesList">
-          {this.state.expanded ? this.showAllAmenities() : this.showSomeAmenities()}
-        </div>
-        <button className="toggleSize" onClick={this.toggleSize}>
-          Show {this.state.expanded ? "Less" : "All"}  
-        </button>
-      </div>
+      </Expander>
     );
   }
 }
