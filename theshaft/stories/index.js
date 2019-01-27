@@ -5,6 +5,8 @@ import SearchBar from '../src/client/components/SearchBar.js';
 import Photos from '../src/client/components/Photos.js';
 import DormButton from '../src/client/components/DormButton.js';
 import Explore from '../src/client/containers/Explore.js';
+import FloorPlan from '../src/client/components/FloorPlan.js';
+import sampleFloor from '../src/client/assets/floor_plans/47 Claremont 1.jpg';
 import Expander from '../src/client/components/Expander.js';
 import Amenities from '../src/client/components/Amenities.js';
 import AtAGlance from '../src/client/components/AtAGlance.js'
@@ -32,6 +34,9 @@ storiesOf('DormButton', module)
 
 storiesOf('Explore', module)
   .add('explore', () => <Explore/>);
+
+storiesOf('floor plans', module)
+  .add('keikaku means plan', () => <FloorPlan floorOffset={1} planArray={[sampleFloor,"https://housing.columbia.edu/files/housing/Wien%208_2018.jpg","https://housing.columbia.edu/files/housing/600%209_2016_0.jpg","https://housing.columbia.edu/files/housing/Woodbridge%204_2018.jpg", "https://i.kym-cdn.com/entries/icons/original/000/026/642/kot1.jpg"]}/>);
 
 storiesOf('Expander', module)
   .add('expander', () => <Expander showAll="Here's all of the text shown. It should be longer than the preview." showSome="Here's a preview shown."><h1>Some Static Heading</h1></Expander>);

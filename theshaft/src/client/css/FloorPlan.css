@@ -1,0 +1,25 @@
+div.FloorPlanBox { 
+	height: 1000px;
+	width: 500px;
+	display: flex;
+	flex-direction: row;
+}
+
+div.FloorList {
+	display: flex;
+	flex-direction: column;
+	width: 20%;
+	height: 100%;
+	border: 3px solid #9B9B9B;
+	text-align: center;
+}
+
+div.PlanDisplay {
+	width: 80%;
+	height: 100%
+}
+
+img.CurrentPlan {
+	max-height: 100%;
+	max-width: 100%;
+}

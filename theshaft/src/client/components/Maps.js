@@ -3,7 +3,7 @@ import ReactMapGL, { Marker } from "react-map-gl";
 import { fromJS } from "immutable";
 import "mapbox-gl/src/css/mapbox-gl.css";
 import mark from "../assets/marker.svg";
-import "./Maps.css";
+import "../css/Maps.css";
 
 console.log("Entry");
 console.log(process.env)
