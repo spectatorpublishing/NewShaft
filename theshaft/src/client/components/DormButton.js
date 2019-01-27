@@ -1,6 +1,16 @@
 import React, { Component } from "react";
+import styled from 'styled-components';
 
 import "../css/DormButton.css";
+
+let DormButton = styled.div`
+  text-align: left;
+  border: 5px solid #9B9B9B;
+  color: #9B9B9B;
+  display: inline-block;
+  cursor: pointer;
+  margin: 10px;
+`
 
 export default class DormButton extends Component {
   constructor(props) {
