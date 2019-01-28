@@ -3,50 +3,73 @@ import styled from 'styled-components';
 
 let Imagecontainer = styled.div`
   display: flex;
+  align-items: center;
   flex-direction: row;
+  flex-wrap: nowrap;
+  width: 100%;
   height: 40vh;
-  width: 100%;
-  overflow: hidden;
-  align-items: center;
-`
-
-let PicsBig = styled.div`
-  display: flex;
-  flex-direction: column;
-  width: 66%;
-  height: 100%;
-  overflow: hidden;
-  align-items: center;
-`
-
-let PicsMid = styled.div`
-  display: flex;
-  flex-direction: column;
-  height: 100%;
-  width: 33%;
   overflow: hidden;
 `
 
-let PicsLow = styled.div`
+let PicOne = styled.div`
   display: flex;
   flex-direction: row;
+  align-items: center;
+  flex-wrap: nowrap;
+  width: 66%;
+  overflow: hidden;
+  justify-content: center;
+  margin-right: 5px;
+`
+
+let PicTwo = styled.div`
+  display: flex;
+  width: 100%;
+  height: 20vh;
+  overflow: hidden;
+  justify-content: center;
+  align-items: center;
+  margin-bottom: 5px;
+`
+
+let PicThree = styled.div`
+  display: flex;
+  flex: 1;
+  overflow: hidden;
+  justify-content: center;
+  align-items: center;
+  height: 100%;
+  margin-right: 5px;
+`
+
+let PicFour = styled.div`
+  display: flex;
+  flex: 1;
+  overflow: hidden;
+  justify-content: center;
+  align-items: center;
+  height: 100%;
+  margin-left: 5px;
+`
+
+let Column = styled.div`
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  flex-wrap: nowrap;
+  width: 33%;
+  height: 40vh;
+  margin-left: 5px;
+`
+
+let Row = styled.div`
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  flex-wrap: nowrap;
   width: 100%;
   height: 50%;
-  overflow: hidden;
-`
-
-let Pinky = styled.img`
-  height: 50%;
-`
-
-let Inky = styled.img`
-  height: 100%;
-  width: 50%;
-`
-
-let Clyde = styled.img`
-  height: 100%;
-  width: 50%;
+  margin-top: 5px;
 `
 
 
@@ -65,16 +88,22 @@ export default class Photos extends Component {
   render() {
     return (
       <Imagecontainer>
-        <PicsBig>
+        <PicOne>
           <img src={this.state.imageOne} />
-        </PicsBig>
-        <PicsMid>
-          <Pinky src={this.state.imageTwo} />
-          <PicsLow>
-            <Inky src={this.state.imageThree} />
-            <Clyde src={this.state.imageFour} />
-          </PicsLow>
-        </PicsMid> 
+        </PicOne>
+        <Column>
+          <PicTwo>
+            <img src={this.state.imageTwo} />
+          </PicTwo>
+          <Row>
+            <PicThree>
+              <img src={this.state.imageThree} />
+            </PicThree>
+            <PicFour>
+              <img src={this.state.imageFour} />
+            </PicFour>
+          </Row>
+        </Column>
       </Imagecontainer>
     );
   }
