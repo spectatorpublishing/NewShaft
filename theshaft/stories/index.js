@@ -12,6 +12,8 @@ import sampleFloor from '../src/client/assets/floor_plans/47 Claremont 1.jpg';
 import Expander from '../src/client/components/Expander.js';
 import Amenities from '../src/client/components/Amenities.js';
 import AtAGlance from '../src/client/components/AtAGlance.js'
+import NavBar from '../src/client/components/NavBar.js'
+import { MemoryRouter } from 'react-router';
 
 storiesOf('Button', module)
   .add('with text', () => <Button>Hello Button</Button>)
@@ -67,3 +69,24 @@ storiesOf('Amenities', module)
 
 storiesOf('AtAGlance', module)
   .add('at a glance', () => <AtAGlance location="545 W. 114th St." roomtype="Suite-style doubles" classmakeup="First-Years" numfloors="13"/>);
+
+
+let sampleMenuItems = [
+  ["Menu 1", "link1"],
+  ["Menu 2", "link2"],
+  ["Menu 3", "link3"]
+];
+
+storiesOf('NavBar', module)
+  .addDecorator(story => (
+      <MemoryRouter initialEntries={['/']}>
+        <div>
+          {story()}
+          <p>filler</p><p>filler</p><p>filler</p><p>filler</p><p>filler</p><p>filler</p><p>filler</p><p>filler</p>
+          <p>filler</p><p>filler</p><p>filler</p><p>filler</p><p>filler</p><p>filler</p><p>filler</p><p>filler</p>
+          <p>filler</p><p>filler</p><p>filler</p><p>filler</p><p>filler</p><p>filler</p><p>filler</p><p>filler</p>
+        </div>
+      </MemoryRouter>
+  ))
+  .add('navbar', () => <NavBar name="The Shaft" menuItems={sampleMenuItems} />)
+  .add('fixed navbar', () => <NavBar name="The Shaft" menuItems={sampleMenuItems} fixed />);
