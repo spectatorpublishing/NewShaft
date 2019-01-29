@@ -2,10 +2,13 @@ import React, { Component } from "react";
 import { Link } from "react-router-dom";
 import Photos from "../components/Photos";
 import Maps from "../components/Maps";
+import ProCon from "../components/ProCon";
 
 export default class Dorm extends React.PureComponent {
 
   render() {
+    const testPros = ["pro1", "pro2", "pro3"];
+    const testCons = ["con1", "con2", "con3"];
     return (
       <div>
         <Photos
@@ -15,7 +18,8 @@ export default class Dorm extends React.PureComponent {
           imageFour="https://i.imgflip.com/1yt82g.jpg"
         />
         <h1>{this.props.match.params.dorm}</h1>
-        <Maps />
+        <Maps/>
+        <ProCon pros={testPros} cons={testCons}></ProCon>
         <Link to="/">Back</Link>
       </div>
     );

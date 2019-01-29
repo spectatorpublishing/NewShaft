@@ -11,9 +11,12 @@ import FloorPlan from '../src/client/components/FloorPlan.js';
 import sampleFloor from '../src/client/assets/floor_plans/47 Claremont 1.jpg';
 import Expander from '../src/client/components/Expander.js';
 import Amenities from '../src/client/components/Amenities.js';
-import AtAGlance from '../src/client/components/AtAGlance.js'
-import NavBar from '../src/client/components/NavBar.js'
+import AtAGlance from '../src/client/components/AtAGlance.js';
+import RelatedDorms from '../src/client/components/RelatedDorms';
+import ExploreSidebar from '../src/client/components/ExploreSidebar';
 import { MemoryRouter } from 'react-router';
+//import RelatedDormsList from '../src/client/components/RelatedDormsList'
+import NavBar from '../src/client/components/NavBar.js'
 
 storiesOf('Button', module)
   .add('with text', () => <Button>Hello Button</Button>)
@@ -37,6 +40,9 @@ storiesOf('DormButton', module)
   .add('dorm button', () => <DormButton name="ADI House" address="21 Savage St." sundial_distance="12 minutes" description="It's lit"/>);
 
 storiesOf('Explore', module)
+.addDecorator(story => (
+  <MemoryRouter initialEntries={['/']}>{story()}</MemoryRouter>
+))
   .add('explore', () => <Explore/>);
 
 
@@ -69,6 +75,24 @@ storiesOf('Amenities', module)
 
 storiesOf('AtAGlance', module)
   .add('at a glance', () => <AtAGlance location="545 W. 114th St." roomtype="Suite-style doubles" classmakeup="First-Years" numfloors="13"/>);
+
+// Related Dorms Content
+let sampleRelatedDorms = [
+  ["Carman", "https://memegenerator.net/img/images/17438601/dat-sad-fat-cat.jpg"],
+  ["Furnald", "https://memegenerator.net/img/images/17438601/dat-sad-fat-cat.jpg"],
+  ["John Jay", "https://memegenerator.net/img/images/17438601/dat-sad-fat-cat.jpg"],
+  ["John Jay", "https://memegenerator.net/img/images/17438601/dat-sad-fat-cat.jpg"]
+];
+
+storiesOf('RelatedDorms', module)
+  .add('related dorms', () => <RelatedDorms relatedDorms={sampleRelatedDorms}/>);
+
+
+storiesOf('ExploreSidebar', module)
+  .addDecorator(story => (
+    <MemoryRouter initialEntries={['/']}>{story()}</MemoryRouter>
+  ))
+  .add('explore sidebar', () => <ExploreSidebar/>);
 
 
 let sampleMenuItems = [
