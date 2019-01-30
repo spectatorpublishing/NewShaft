@@ -42,7 +42,7 @@ storiesOf('Reviews', module)
   .add('reviews', () => <Reviews/>);
 
 storiesOf('Review', module)
-  .add('review', () => <Review thumbsUp="2" thumbsDown="1" />);
+  .add('review', () => <Review stars="3" review="I hate this place" thumbsUp="100" thumbsDown="1" />);
 
 storiesOf('FloorPlan', module)
   .add('keikaku means plan', () => <FloorPlan floorOffset={1} planArray={[sampleFloor,"https://housing.columbia.edu/files/housing/Wien%208_2018.jpg","https://housing.columbia.edu/files/housing/600%209_2016_0.jpg","https://housing.columbia.edu/files/housing/Woodbridge%204_2018.jpg", "https://i.kym-cdn.com/entries/icons/original/000/026/642/kot1.jpg"]}/>);

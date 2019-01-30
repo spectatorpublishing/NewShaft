@@ -26,7 +26,7 @@ export default class Review extends Component {
       <div class="parent">
         <div class="row">
           <div id="stars">
-            {this.createStars(3)}
+            {this.createStars(this.props.stars)}
           </div>
           <div>
             User would recommend
@@ -34,7 +34,7 @@ export default class Review extends Component {
         </div>
         <div class="row">
           <div class="review">
-            review
+            {this.props.review}
           </div>
           <div class="thumbs">
             <div>
