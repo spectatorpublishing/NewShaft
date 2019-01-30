@@ -18,7 +18,7 @@ export default class Dorm extends React.PureComponent {
           imageFour="https://i.imgflip.com/1yt82g.jpg"
         />
         <h1>{this.props.match.params.dorm}</h1>
-        <Maps/>
+        <Maps latitudes={[40.7128, 40.7129, 40.7128]} longitudes={[-74.006, -74.007, -74.008]} popupInfo={["carman", "mcbain", "JJ"]}/>
         <ProCon pros={testPros} cons={testCons}></ProCon>
         <Link to="/">Back</Link>
       </div>

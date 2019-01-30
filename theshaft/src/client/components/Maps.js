@@ -3,7 +3,7 @@ import ReactMapGL, { Marker, Popup} from "react-map-gl";
 import { fromJS } from "immutable";
 import "mapbox-gl/src/css/mapbox-gl.css";
 import mark from "../assets/marker.svg";
-import "./Maps.css";
+import "./../css/Maps.css";
 
 console.log("Entry");
 console.log(process.env)
@@ -30,6 +30,7 @@ export default class Maps extends Component {
         popupIndex: popupIndex
       }
     };
+    this.renderPopup = this.renderPopup.bind(this);
   }
 
   renderPopup(){
@@ -37,7 +38,7 @@ export default class Maps extends Component {
     var popups = this.state.popup.popupIndex.map((e, i) => {
       if(e){
         return (
-          <Popup tipSize={10}
+          <Popup tipSize={5}
             anchor="bottom-right"
             longitude={this.state.coordinates.longitudes[i]}
             latitude={this.state.coordinates.latitudes[i]}
@@ -45,7 +46,7 @@ export default class Maps extends Component {
               var popupIndex = this.state.popup.popupIndex;
               popupIndex[i] = false;
               console.log("Closed! popups: " + popupIndex)
-              this.setState({popup: {popupInfo: this.state.popup.popupInfo, popupIndex: popupIndex}})}
+              this.setState({popup: {popupInfo: this.state.popup.popupInfo, popupIndex: popupIndex}}), () => {this.renderPopup()}}
             }
             closeOnClick={true}>
             <p>{this.state.popup.popupInfo[i]}</p>
@@ -53,7 +54,6 @@ export default class Maps extends Component {
         );
       }
     });
-
     return popups;
   }
 
@@ -62,25 +62,22 @@ export default class Maps extends Component {
     
     var markers = this.state.coordinates.latitudes.map((lat, i) => {
       var long = this.state.coordinates.longitudes[i];
-      var handlePopupClick = function () {
-        var popupIndex = this.state.popup.popupIndex;
-        popupIndex[i] = true;
-        console.log("Clicked! popups: " + popupIndex)
-        this.setState({popup: {popupInfo: this.state.popup.popupInfo, popupIndex: popupIndex}});
-      }
-      var marker =  <Marker
-                      latitude={lat}
-                      longitude={long}
-                      offsetLeft={-20}
-                      offsetTop={10}
-                    >
-                      <div>{"Marker" + i}</div>
-                      <div onClick={() => {handlePopupClick()}}>
-                        <img src={mark} className="marker_style" alt="fireSpot"/>
-                      </div>
-                    </Marker>
-      // handlePopupClick = handlePopupClick.bind(marker)
-      return marker;
+      return (<Marker
+                latitude={lat}
+                longitude={long}
+                offsetLeft={-20}
+                offsetTop={10}
+              >
+                <div>{"Marker" + i}</div>
+                <div onClick={() => {
+                  var popupIndex = this.state.popup.popupIndex.slice();
+                  popupIndex[i] = true;
+                  console.log("Clicked! popups: " + popupIndex)
+                  this.setState({popup: {popupInfo: this.state.popup.popupInfo, popupIndex: popupIndex}}, () => {this.renderPopup()});
+                }}>
+                  <img src={mark} className="marker_style" alt="fireSpot"/>
+                </div>
+              </Marker>);
     });
     
     return (
