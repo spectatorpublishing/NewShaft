@@ -32,8 +32,9 @@ export default class DormButton extends Component {
         <div className="details">
             <p className="school"> { this.state.school } </p>
             <h4 className="dormname"> {this.state.name} </h4>
-            <p> {this.state.amenities} </p>
-            <p> {this.state.description} </p>
+            <p className="amenities"> {this.state.amenities} </p>
+            <p className="description"> {this.state.description} </p>
+            <span className="see-more">see more ></span>
         </div>
         <br />
       </div>
