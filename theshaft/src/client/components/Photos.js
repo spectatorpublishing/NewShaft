@@ -8,7 +8,7 @@ let Imagecontainer = styled.div`
   flex-wrap: nowrap;
   width: 100%;
   height: 40vh;
-  overflow: hidden;
+  margin-bottom: 5vh;
 `
 
 let PicOne = styled.div`
@@ -16,7 +16,8 @@ let PicOne = styled.div`
   flex-direction: row;
   align-items: center;
   flex-wrap: nowrap;
-  width: 66%;
+  width: 60vw;
+  height: 40vh;
   overflow: hidden;
   justify-content: center;
   margin-right: 5px;
@@ -24,11 +25,13 @@ let PicOne = styled.div`
 
 let PicTwo = styled.div`
   display: flex;
-  width: 100%;
-  height: 20vh;
+  flex: 1;
   overflow: hidden;
   justify-content: center;
   align-items: center;
+  width: 20vw;
+  height: 19.5vh;
+  margin-right: 5px;
   margin-bottom: 5px;
 `
 
@@ -38,8 +41,10 @@ let PicThree = styled.div`
   overflow: hidden;
   justify-content: center;
   align-items: center;
-  height: 100%;
-  margin-right: 5px;
+  width: 20vw;
+  height: 19.5vh;
+  margin-left: 5px;
+  margin-bottom: 5px;
 `
 
 let PicFour = styled.div`
@@ -48,8 +53,23 @@ let PicFour = styled.div`
   overflow: hidden;
   justify-content: center;
   align-items: center;
-  height: 100%;
+  width: 20vw;
+  height: 19.5vh;
+  margin-right: 5px;
+  margin-top: 5px;
+`
+
+let PicFive = styled.div`
+  display: flex;
+  flex: 1;
+  overflow: hidden;
+  justify-content: center;
+  align-items: center;
+  width: 20vw;
+  height: 19.5vh;
   margin-left: 5px;
+  margin-top: 5px;
+
 `
 
 let Column = styled.div`
@@ -57,7 +77,7 @@ let Column = styled.div`
   flex-direction: column;
   align-items: center;
   flex-wrap: nowrap;
-  width: 33%;
+  width: 39vw;
   height: 40vh;
   margin-left: 5px;
 `
@@ -69,7 +89,6 @@ let Row = styled.div`
   flex-wrap: nowrap;
   width: 100%;
   height: 50%;
-  margin-top: 5px;
 `
 
 
@@ -81,7 +100,8 @@ export default class Photos extends Component {
       imageOne: this.props.imageOne,
       imageTwo: this.props.imageTwo,
       imageThree: this.props.imageThree,
-      imageFour: this.props.imageFour
+      imageFour: this.props.imageFour,
+      imageFive: this.props.imageFive
     };
   }
 
@@ -92,16 +112,21 @@ export default class Photos extends Component {
           <img src={this.state.imageOne} />
         </PicOne>
         <Column>
-          <PicTwo>
-            <img src={this.state.imageTwo} />
-          </PicTwo>
           <Row>
+            <PicTwo>
+              <img src={this.state.imageTwo} />
+            </PicTwo>
             <PicThree>
               <img src={this.state.imageThree} />
             </PicThree>
+          </Row>
+          <Row>
             <PicFour>
               <img src={this.state.imageFour} />
             </PicFour>
+            <PicFive>
+              <img src={this.state.imageFive} />
+            </PicFive>
           </Row>
         </Column>
       </Imagecontainer>
