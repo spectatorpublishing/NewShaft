@@ -1,7 +1,21 @@
 import React, { Component } from "react";
+import styled from 'styled-components';
 import Expander from './Expander.js';
 import icon from "../assets/marker.svg"; // to-do: import all actual icons
-import "../css/Amenities.css";
+
+let AmenitiesTitle = styled.h2`
+    margin-left: 30px;
+`
+
+let Amenity = styled.div`
+    display: flex;
+    flex-direction: row;
+    width: 180px;
+`
+
+let AmenityIcon = styled.img`
+    height: 20px;
+`
 
 export default class Amenities extends Component {
   constructor(props) {
@@ -13,8 +27,7 @@ export default class Amenities extends Component {
       the inner string array is a key-value pair
       in the format of [amenityType, amenityLabel]. 
       See example in storybook. */
-      amenities: this.props.amenities,
-      expanded: false
+      amenities: this.props.amenities
     };
 
     this.showAllAmenities = this.showAllAmenities.bind(this);
@@ -25,20 +38,20 @@ export default class Amenities extends Component {
   showAllAmenities() {
     let index = 0
     return this.state.amenities.map((amenity) => {
-      return <div className="amenity" key={index++}>
-        <img src={icon} className="amenityIcon" alt={amenity[0]}/>
-        <div className="amenityLabel"> {amenity[1]} </div>
-      </div>
+      return <Amenity key={index++}>
+        <AmenityIcon src={icon} alt={amenity[0]}/>
+        <div> {amenity[1]} </div>
+      </Amenity>
       });
   }
 
   showSomeAmenities() {
     let index = 0
     return this.state.amenities.slice(0, 6).map((amenity) => {
-      return <div className="amenity" key={index++}>
-        <img src={icon} className="amenityIcon" alt={amenity[0]}/>
-        <div className="amenityLabel"> {amenity[1]} </div>
-      </div>
+      return <Amenity key={index++}>
+        <AmenityIcon src={icon} alt={amenity[0]}/>
+        <div> {amenity[1]} </div>
+      </Amenity>
       });
   }
 
@@ -49,7 +62,7 @@ export default class Amenities extends Component {
   render() {
     return (
       <Expander showAll={this.showAllAmenities()} showSome={this.showSomeAmenities()}>
-        <h2 className="amenitiesTitle"> Amenities </h2>
+        <AmenitiesTitle> Amenities </AmenitiesTitle>
       </Expander>
     );
   }
