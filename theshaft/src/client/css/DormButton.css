@@ -42,7 +42,5 @@ span.see-more {
     cursor: pointer;
     color: #5187ec;
     text-decoration: underline;
-	position:absolute;
-	right:0px;
-	bottom:0px;
+	text-align: right;
 }
