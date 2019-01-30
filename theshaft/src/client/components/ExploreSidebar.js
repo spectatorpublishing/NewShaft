@@ -18,7 +18,7 @@ export default class ExploreSidebar extends Component {
                 <div className="filters">
                     <h2>The Shaft</h2>
                 </div>
-                <hr class="sidebar-divider"/>
+                <hr className="sidebar-divider"/>
                 <div className="dorms">
                     {dormsList}
                 </div>
