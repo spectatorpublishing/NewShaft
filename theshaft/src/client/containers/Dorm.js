@@ -1,3 +1,4 @@
+import styled from "styled-components";
 import React, { Component } from "react";
 import { Link } from "react-router-dom";
 import Photos from "../components/Photos";
@@ -5,7 +6,6 @@ import Amenities from "../components/Amenities";
 import AtAGlance from "../components/AtAGlance";
 import Maps from "../components/Maps";
 import ProCon from "../components/ProCon";
-import styled from 'styled-components';
 
 
 let Header = styled.div`
@@ -67,10 +67,11 @@ export default class Dorm extends React.PureComponent {
       ["lounge", "Sky lounge"],
       ["lounge", "Basement lounge"]
     ];
+
     const testPros = ["pro1", "pro2", "pro3"];
     const testCons = ["con1", "con2", "con3"];
     return (
-      <div>
+      <PhotoContainer>
         <Photos
           imageOne="https://arc-anglerfish-arc2-prod-spectator.s3.amazonaws.com/public/52FBXLYM2RGO3FJGK3SPD2KUEE.png"
           imageTwo="https://arc-anglerfish-arc2-prod-spectator.s3.amazonaws.com/public/52FBXLYM2RGO3FJGK3SPD2KUEE.png"
@@ -81,18 +82,18 @@ export default class Dorm extends React.PureComponent {
         <Header>{this.props.match.params.dorm}</Header>
         <Blurb>This is a blurb for the dorm summary. This is just a test. Blah bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla.  <br/> Hi <br/> Bye</Blurb>
         <Body>
-        <ColOne/>
-        <ColTwo>
-          <Amenities amenities={sampleAmenities}/>
-          <Maps/>
-          <ProCon pros={testPros} cons={testCons}></ProCon>
-          <Link to="/">Back</Link>
-        </ColTwo>
-        <ColThree>
-          <AtAGlance location="545 W. 114th St." roomtype="Suite-style doubles" classmakeup="First-Years" numfloors="13"/>
-        </ColThree>
+          <ColOne/>
+          <ColTwo>
+            <Amenities amenities={sampleAmenities}/>
+            <Maps/>
+            <ProCon pros={testPros} cons={testCons}></ProCon>
+            <Link to="/">Back</Link>
+          </ColTwo>
+          <ColThree>
+            <AtAGlance location="545 W. 114th St." roomtype="Suite-style doubles" classmakeup="First-Years" numfloors="13"/>
+          </ColThree>
         </Body>
-      </div>
+      </PhotoContainer>
     );
   }
 }

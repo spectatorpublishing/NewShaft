@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import styled from 'styled-components';
+import styled from "styled-components";
 
 let Imagecontainer = styled.div`
   display: flex;
@@ -7,80 +7,60 @@ let Imagecontainer = styled.div`
   flex-direction: row;
   flex-wrap: nowrap;
   width: 100%;
-  height: 40vh;
-  margin-bottom: 10vh;
-`
+  height: 60vh;
+  overflow: hidden;
+`;
 
 let PicOne = styled.div`
-  display: flex;
+  display: inline-block;
   flex-direction: row;
   align-items: center;
   flex-wrap: nowrap;
-  width: 60vw;
-  height: 40vh;
+  width: 50%;
   overflow: hidden;
   justify-content: center;
-  margin-right: 5px;
-`
+  margin-right: 0px;
+`;
 
 let PicTwo = styled.div`
-  display: flex;
-  flex: 1;
+  display: inline-block;
+  width: 100%;
+  height: 30vh;
   overflow: hidden;
   justify-content: center;
   align-items: center;
-  width: 20vw;
-  height: 19.5vh;
-  margin-right: 5px;
-  margin-bottom: 5px;
-`
+  margin-bottom: 0px;
+`;
 
 let PicThree = styled.div`
-  display: flex;
+  display: inline-block;
   flex: 1;
   overflow: hidden;
   justify-content: center;
   align-items: center;
-  width: 20vw;
-  height: 19.5vh;
-  margin-left: 5px;
-  margin-bottom: 5px;
-`
+  height: 100%;
+  margin-right: 0px;
+`;
 
 let PicFour = styled.div`
-  display: flex;
+  display: inline-block;
   flex: 1;
   overflow: hidden;
   justify-content: center;
   align-items: center;
-  width: 20vw;
-  height: 19.5vh;
-  margin-right: 5px;
-  margin-top: 5px;
-`
-
-let PicFive = styled.div`
-  display: flex;
-  flex: 1;
-  overflow: hidden;
-  justify-content: center;
-  align-items: center;
-  width: 20vw;
-  height: 19.5vh;
-  margin-left: 5px;
-  margin-top: 5px;
-
-`
+  height: 100%;
+  margin-left: 0px;
+`;
 
 let Column = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
   flex-wrap: nowrap;
-  width: 39vw;
-  height: 40vh;
-  margin-left: 5px;
-`
+  width: 50%;
+  height: 60vh;
+  margin-left: 0px;
+`;
 
 let Row = styled.div`
   display: flex;
@@ -89,8 +69,16 @@ let Row = styled.div`
   flex-wrap: nowrap;
   width: 100%;
   height: 50%;
-`
+  margin-top: 0px;
+`;
 
+let Img = styled.img`
+  
+  width:100%;
+  border-width: 1px;
+  border-style: solid;
+  
+`;
 
 export default class Photos extends Component {
   constructor(props) {
@@ -109,7 +97,7 @@ export default class Photos extends Component {
     return (
       <Imagecontainer>
         <PicOne>
-          <img src={this.state.imageOne} />
+          <Img src={this.state.imageOne} />
         </PicOne>
         <Column>
           <Row>
@@ -117,12 +105,20 @@ export default class Photos extends Component {
               <img src={this.state.imageTwo} />
             </PicTwo>
             <PicThree>
-              <img src={this.state.imageThree} />
+              <Img src={this.state.imageThree} />
+            </PicThree>
+            <PicFour>
+              <Img src={this.state.imageFour} />
+            </PicFour>
+          </Row>
+          <Row>
+            <PicThree>
+              <Img src={this.state.imageThree} />
             </PicThree>
           </Row>
           <Row>
             <PicFour>
-              <img src={this.state.imageFour} />
+              <Img src={this.state.imageFour} />
             </PicFour>
             <PicFive>
               <img src={this.state.imageFive} />
