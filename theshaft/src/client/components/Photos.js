@@ -8,7 +8,7 @@ let Imagecontainer = styled.div`
   flex-wrap: nowrap;
   width: 100%;
   height: 40vh;
-  margin-bottom: 5vh;
+  margin-bottom: 10vh;
 `
 
 let PicOne = styled.div`

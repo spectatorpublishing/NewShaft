@@ -2,9 +2,9 @@ import React, { Component } from "react";
 import styled from 'styled-components';
 
 let ExpanderBox = styled.div`
-    border: 1px black solid;
+    border: 1px grey solid;
     border-radius: 10px;
-    max-width: 400px;
+    width: 28vw;
 `
 
 let ExpanderContent = styled.div`
@@ -17,13 +17,14 @@ let ExpanderList = styled.div`
 `
 
 let ToggleSize = styled.div`
+    color: grey;
     border-bottom-left-radius: 10px;
     border-bottom-right-radius: 10px;
-    border-top: 1px black solid;
+    border-top: 1px grey solid;
     display: flex;
     font-weight: bold;
     justify-content: center;
-    padding: 5px 20px;
+    padding: 0.5vw 4vw;
 
     :hover {
       background-color: #ddd;
