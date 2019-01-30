@@ -31,6 +31,7 @@
     "mysql": "^2.16.0",
     "npm": "^6.4.1",
     "react": "^16.5.2",
+    "react-adsense": "0.0.6",
     "react-dom": "^16.5.2",
     "react-map-gl": "^4.0.7",
     "react-router-dom": "^4.3.1",

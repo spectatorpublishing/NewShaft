@@ -17,8 +17,8 @@ export default class Ads extends Component {
     return (
       <div className="Ads">
           <AdSense.Google
-              client='ca-pub-7292810486004926'
-              slot='7806394673'
+              client='ca-pub-1234567891234567'
+              slot='1234567890'
               />
           <br/>
       </div>
