@@ -12,13 +12,11 @@ export default class ExploreSidebar extends Component {
     }
 
     render() {
-        var dormsList = this.state.dorms.map(dorm => (<Link to={"/" + dorm.id} style={{ textDecoration: 'none' }}><DormButton school={dorm.school} name={dorm.name} image={dorm.image} description={dorm.description} amenities={dorm.amenities}/></Link>));
+        var dormsList = this.state.dorms.map((dorm, index) => (<Link key={index} to={"/" + dorm.id} style={{ textDecoration: 'none' }}><DormButton key={index} school={dorm.school} name={dorm.name} image={dorm.image} description={dorm.description} amenities={dorm.amenities}/></Link>));
         return (
             <div>
                 <div className="filters">
-                    <p>Filter by school:</p>
-                    <div className="SchoolButton">Barnard</div>
-                    <div className="SchoolButton">Columbia</div>
+                    <h2>The Shaft</h2>
                 </div>
                 <hr class="sidebar-divider"/>
                 <div className="dorms">

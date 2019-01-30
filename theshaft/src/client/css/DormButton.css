@@ -9,8 +9,8 @@ div.DormButton {
 img.dormimage {
 	padding: 0px;
 	border: 1px solid #777777;
-	height: 200px;
-	width: auto;
+	max-height: 10vw;
+	width: 100%;
 	margin-right: 10px;
 	margin-bottom: 10px;
 }
@@ -35,4 +35,14 @@ p.amenities {
 
 p.description {
 	font-size: 13px;
+}
+
+span.see-more {
+	font-size: .8em;
+    cursor: pointer;
+    color: #5187ec;
+    text-decoration: underline;
+	position:absolute;
+	right:0px;
+	bottom:0px;
 }

@@ -34,6 +34,7 @@ export default class DormButton extends Component {
             <h4 className="dormname"> {this.state.name} </h4>
             <p className="amenities"> {this.state.amenities} </p>
             <p className="description"> {this.state.description} </p>
+            <span class="see-more">see more ></span>
         </div>
         <br />
       </div>
