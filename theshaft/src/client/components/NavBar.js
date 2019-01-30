@@ -14,13 +14,13 @@ let NavContainer = styled.div `
     left: 0;
     position: fixed;
     top: 0;
+    z-index: 2;
   `}
 `
 
 let LogoContainer = styled.div`
-  display: flex;
-  flex-grow: 1;
   margin-left: 10%;
+  width: 40%;
 `
 
 let Logo = styled.img`
@@ -31,9 +31,9 @@ let Logo = styled.img`
 let MenuContainer = styled.div`
   align-items: center;
   display: flex;
-  flex-grow: 2;
   justify-content: center;
   margin-right: 10%;
+  width: 40%;
 `
 
 let MenuBox = styled.div`
@@ -60,14 +60,9 @@ let MenuLink = styled(Link)`
     }
 `
 
-let NavBuffer = styled.div `
-  display: none;
+let NavBuffer = styled.div`
   height: 60px;
   width: 100%;
-
-  ${({ fixed }) => fixed && `
-    display: block;
-  `}
 `
 
 export default class NavBar extends Component {
@@ -94,7 +89,7 @@ export default class NavBar extends Component {
         <NavContainer fixed={this.props.fixed}>
           <LogoContainer>
             <Link to="/">
-              <Logo src={icon} alt={this.props.name}/>
+              <Logo src={icon} alt="The Shaft"/>
             </Link>
           </LogoContainer>
           <MenuContainer>
@@ -103,8 +98,7 @@ export default class NavBar extends Component {
             </MenuBox>
           </MenuContainer>
         </NavContainer>
-        <NavBuffer fixed={this.props.fixed}>
-        </NavBuffer>
+        {this.props.fixed && <NavBuffer></NavBuffer>}
       </div>
     );
   }

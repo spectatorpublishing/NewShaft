@@ -112,5 +112,5 @@ storiesOf('NavBar', module)
         </div>
       </MemoryRouter>
   ))
-  .add('navbar', () => <NavBar name="The Shaft" menuItems={sampleMenuItems} />)
-  .add('fixed navbar', () => <NavBar name="The Shaft" menuItems={sampleMenuItems} fixed />);
+  .add('navbar', () => <NavBar menuItems={sampleMenuItems} />)
+  .add('fixed navbar', () => <NavBar menuItems={sampleMenuItems} fixed />);
