@@ -20,6 +20,7 @@ let PicOne = styled.div`
   width: 50%;
   overflow: hidden;
   justify-content: center;
+  margin-bottom: -5px;
   
 `;
 
@@ -70,6 +71,7 @@ let Row = styled.div`
   flex-wrap: nowrap;
   width: 100%;
   max-height: 50%;
+  margin-bottom: -5px;
   
 `;
 
@@ -123,7 +125,7 @@ export default class Photos extends Component {
 
   render() {
     const { width } = this.state;
-    const isMobile = width <= 1000;
+    const isMobile = width <= 700;
     if (isMobile) {
       return (
         <PicMobile>
