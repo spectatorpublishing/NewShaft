@@ -1,0 +1,27 @@
+.nonclickedFilter {
+	background:none;
+	border:none;
+	margin:0;
+	padding-left:1em;
+	font-size:15pt;
+}
+
+.clickedFilter {
+	background:none;
+	border:none;
+	margin:0;
+	padding-left:1em;
+	font-weight:bold;
+	font-size:15pt;
+}
+
+.leadText {
+	padding-top:2px;
+	color: rgb(176, 214, 132);
+	font-size: 15pt;
+}
+
+.filterComponent {
+	display: flex;
+	flex-direction: row;
+}
