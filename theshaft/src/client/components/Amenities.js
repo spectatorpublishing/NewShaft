@@ -16,13 +16,17 @@ let Amenity = styled.div`
     color: grey;
     display: flex;
     flex-direction: row;
-    width: 180px;
+    width: 300px;
+    font-size: 20px;
+    margin-top: 15px;
 `
 
 let AmenityIcon = styled.img`
     opacity: 0.5;
     height: 20px;
 `
+
+
 
 export default class Amenities extends Component {
   constructor(props) {
@@ -68,9 +72,9 @@ export default class Amenities extends Component {
 
   render() {
     return (
-      <Expander showAll={this.showAllAmenities()} showSome={this.showSomeAmenities()}>
-        <AmenitiesTitle> Amenities </AmenitiesTitle>
-      </Expander>
+        <Expander showAll={this.showAllAmenities()} showSome={this.showSomeAmenities()}>
+          <AmenitiesTitle> Amenities </AmenitiesTitle>
+        </Expander>
     );
   }
 }

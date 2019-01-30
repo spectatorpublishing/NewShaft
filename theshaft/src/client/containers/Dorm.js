@@ -37,9 +37,9 @@ let Blurb = styled.div`
   font-weight: 300;
   position: absolute;
   z-index: 1;
-  top: 40vh;
+  top: 43vh;
   margin-left: 15vw;
-  padding: 0.8vw;
+  padding: 1.8vw;
   border-radius: 1.5vw;
   width: 70vw;
 `
@@ -58,7 +58,8 @@ let ColOne = styled.div`
 let ColTwo = styled.div`
   display: flex;
   flex-direction: column;
-  width: 33%;
+  width: 50%;
+  margin-top: 50px;
 `
 
 let ColThree = styled.div`
@@ -68,13 +69,7 @@ let ColThree = styled.div`
 
 let DormContainer = styled.div`
 `
-let CenterContainer = styled.div`
-  display: flex;
-  align-items: center;
-  flex-direction: row;
-  flex-wrap: nowrap;
-  
-`
+
 
 export default class Dorm extends React.PureComponent {
   render() {
