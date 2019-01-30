@@ -7,6 +7,7 @@ import '../css/Explore.css';
 import map from '../assets/map.png';
 
 export default class Explore extends Component {
+
     render() {
         return (
         <div className="explore">
