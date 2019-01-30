@@ -18,10 +18,8 @@ let sampleAmenities = [
   ["lounge", "Basement lounge"]
 ];
 
-<<<<<<< HEAD
 const testPros = ["pro1", "pro2", "pro3"];
 const testCons = ["con1", "con2", "con3"];
-=======
 let Header = styled.div`
   color: #ffffff;
   font-size: 4vw;
@@ -67,7 +65,6 @@ let ColThree = styled.div`
   display: flex;
   width: 33%;
 `
->>>>>>> 05137d998caa29e098026721d5720073c58085da
 
 let DormContainer = styled.div`
 `
@@ -81,37 +78,9 @@ let CenterContainer = styled.div`
 
 export default class Dorm extends React.PureComponent {
   render() {
-<<<<<<< HEAD
-=======
-    var sampleAmenities = [
-      ["bathroom", "Semi-private"],
-      ["laundry", "Laundry - in basement"],
-      ["kitchen", "Kitchen - in basement"],
-      ["airConditioning", "Air conditioning"],
-      ["lounge", "Floor lounge"],
-      ["fitness", "Fitness room"],
-      ["lounge", "Sky lounge"],
-      ["lounge", "Basement lounge"]
-    ];
-
-    const testPros = ["pro1", "pro2", "pro3"];
-    const testCons = ["con1", "con2", "con3"];
->>>>>>> 05137d998caa29e098026721d5720073c58085da
     return (
       <DormContainer>
         <Photos
-<<<<<<< HEAD
-          imageOne="https://memegenerator.net/img/images/17438601/dat-sad-fat-cat.jpg"
-          imageTwo="https://i.imgflip.com/26a82h.jpg"
-          imageThree="https://i.imgflip.com/1eg7jb.jpg"
-          imageFour="https://i.imgflip.com/1yt82g.jpg"
-        />
-        <Amenities amenities={sampleAmenities} />
-        <Maps />
-        <ProCon pros={testPros} cons={testCons} />
-        <Link to="/">Back</Link>
-      </DormContainer>
-=======
           imageOne="https://arc-anglerfish-arc2-prod-spectator.s3.amazonaws.com/public/52FBXLYM2RGO3FJGK3SPD2KUEE.png"
           imageTwo="https://arc-anglerfish-arc2-prod-spectator.s3.amazonaws.com/public/52FBXLYM2RGO3FJGK3SPD2KUEE.png"
           imageThree="https://arc-anglerfish-arc2-prod-spectator.s3.amazonaws.com/public/52FBXLYM2RGO3FJGK3SPD2KUEE.png"
@@ -132,8 +101,7 @@ export default class Dorm extends React.PureComponent {
             <AtAGlance location="545 W. 114th St." roomtype="Suite-style doubles" classmakeup="First-Years" numfloors="13"/>
           </ColThree>
         </Body>
-      </PhotoContainer>
->>>>>>> 05137d998caa29e098026721d5720073c58085da
+      </DormContainer>
     );
   }
 }
