@@ -88,7 +88,8 @@ export default class Photos extends Component {
       imageOne: this.props.imageOne,
       imageTwo: this.props.imageTwo,
       imageThree: this.props.imageThree,
-      imageFour: this.props.imageFour
+      imageFour: this.props.imageFour,
+      imageFive: this.props.imageFive
     };
   }
 
@@ -100,6 +101,9 @@ export default class Photos extends Component {
         </PicOne>
         <Column>
           <Row>
+            <PicTwo>
+              <img src={this.state.imageTwo} />
+            </PicTwo>
             <PicThree>
               <Img src={this.state.imageThree} />
             </PicThree>
@@ -111,9 +115,14 @@ export default class Photos extends Component {
             <PicThree>
               <Img src={this.state.imageThree} />
             </PicThree>
+          </Row>
+          <Row>
             <PicFour>
               <Img src={this.state.imageFour} />
             </PicFour>
+            <PicFive>
+              <img src={this.state.imageFive} />
+            </PicFive>
           </Row>
         </Column>
       </Imagecontainer>

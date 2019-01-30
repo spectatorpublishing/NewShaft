@@ -1,5 +1,36 @@
 import React, { Component } from 'react';
-import "./ProCon.css";
+import styled from 'styled-components';
+
+let Section = styled.div`
+    display: flex;
+    flex-direction: row;
+    flex: 1;
+    border: 1px grey solid;
+    border-radius: 10px;
+    padding: 1vw;
+    width: 28vw;
+`
+
+let ListBox = styled.div`
+    color: grey;
+    flex: 0 1 auto;
+`
+
+let Divider = styled.div`
+    width: 1px;
+    margin-left: 9vw;
+    margin-right: 0.7vw;
+    background-color: grey;
+`
+
+let Head = styled.div`
+    color: grey;
+    font-size: 2vw;
+    font-weight: bolder;
+    margin-top: -0.3vw;
+    margin-left: 0.6vw;
+`
+
 
 export default class ProCon extends Component {
     constructor(props) {
@@ -13,23 +44,23 @@ export default class ProCon extends Component {
     
       render() {
         return (
-          <section>
-            <div class="listBox">
-              <h1 class="header">Pros</h1>
+          <Section>
+            <ListBox>
+              <Head>Pros</Head>
                 <ul>
                   {this.state.pros.map(pro => (
                     <li>{pro}</li>))}
                 </ul>
-            </div>
-            <div class="divider"></div>
-            <div class="listBox">
-              <h1 class="header">Cons</h1>
+            </ListBox>
+            <Divider/>
+            <ListBox>
+              <Head>Cons</Head>
                 <ul>
                   {this.state.cons.map(con => (
                     <li>{con}</li>))}
                 </ul>
-            </div>
-          </section>
+            </ListBox>
+          </Section>
         );
       }
 }

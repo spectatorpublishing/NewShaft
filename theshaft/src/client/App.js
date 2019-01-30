@@ -10,13 +10,24 @@ let menuItems = [
   ["Spectrum", "/"]
 ];
 
+import { createGlobalStyle } from "styled-components";
+
+const GlobalStyles = createGlobalStyle`
+  body {
+    @import url('https://fonts.googleapis.com/css?family=Raleway');
+    font-family: 'Raleway', sans-serif;
+  }
+`
+
+
 const App = () => (
     <main>
+    	<GlobalStyles />
       <NavBar menuItems={menuItems} />
-      <Switch>
-        <Route exact path="/" component={Explore} />
-        <Route path="/:dorm" component={Dorm} />
-      </Switch>
+	      <Switch>
+	        <Route exact path="/" component={Explore} />
+	        <Route path="/:dorm" component={Dorm} />
+	      </Switch>
     </main>
 )
 
