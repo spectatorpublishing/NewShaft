@@ -4,11 +4,12 @@ import { Button } from '@storybook/react/demo';
 import SearchBar from '../src/client/components/SearchBar.js';
 import Photos from '../src/client/components/Photos.js';
 import DormButton from '../src/client/components/DormButton.js';
-import Explore from '../src/client/containers/Explore.js';
+//import Explore from '../src/client/containers/Explore.js';
 import FloorPlan from '../src/client/components/FloorPlan.js';
 import sampleFloor from '../src/client/assets/floor_plans/47 Claremont 1.jpg';
 import Amenities from '../src/client/components/Amenities.js';
 import AtAGlance from '../src/client/components/AtAGlance.js'
+import Ads from '../src/client/components/Ads.js'
 
 storiesOf('Button', module)
   .add('with text', () => <Button>Hello Button</Button>)
@@ -31,8 +32,8 @@ storiesOf('Photos', module)
 storiesOf('DormButton', module)
   .add('dorm button', () => <DormButton name="ADI House" address="21 Savage St." sundial_distance="12 minutes" description="It's lit"/>);
 
-storiesOf('Explore', module)
-  .add('explore', () => <Explore/>);
+/*storiesOf('Explore', module)
+  .add('explore', () => <Explore/>);*/
 
 storiesOf('floor plans', module)
   .add('keikaku means plan', () => <FloorPlan floorOffset={1} planArray={[sampleFloor,"https://housing.columbia.edu/files/housing/Wien%208_2018.jpg","https://housing.columbia.edu/files/housing/600%209_2016_0.jpg","https://housing.columbia.edu/files/housing/Woodbridge%204_2018.jpg", "https://i.kym-cdn.com/entries/icons/original/000/026/642/kot1.jpg"]}/>);
@@ -53,3 +54,6 @@ storiesOf('Amenities', module)
 
 storiesOf('AtAGlance', module)
   .add('at a glance', () => <AtAGlance location="545 W. 114th St." roomtype="Suite-style doubles" classmakeup="First-Years" numfloors="13"/>);
+
+storiesOf('Ads', module)
+  .add('ads', () => <Ads />);
