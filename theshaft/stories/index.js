@@ -11,7 +11,8 @@ import FloorPlan from '../src/client/components/FloorPlan.js';
 import sampleFloor from '../src/client/assets/floor_plans/47 Claremont 1.jpg';
 import Expander from '../src/client/components/Expander.js';
 import Amenities from '../src/client/components/Amenities.js';
-import AtAGlance from '../src/client/components/AtAGlance.js'
+import AtAGlance from '../src/client/components/AtAGlance.js';
+import FullReview from '../src/client/components/FullReview.js';
 
 storiesOf('Button', module)
   .add('with text', () => <Button>Hello Button</Button>)
@@ -37,7 +38,6 @@ storiesOf('DormButton', module)
 storiesOf('Explore', module)
   .add('explore', () => <Explore/>);
 
-
 storiesOf('Reviews', module)
   .add('reviews', () => <Reviews/>);
 
@@ -49,6 +49,9 @@ storiesOf('FloorPlan', module)
 
 storiesOf('Expander', module)
   .add('expander', () => <Expander showAll="Here's all of the text shown. It should be longer than the preview." showSome="Here's a preview shown."><h1>Some Static Heading</h1></Expander>);
+
+storiesOf('FullReview', module)
+  .add('fullreview', () => <FullReview />);
 
 storiesOf('test', module)
   .add('test', () => <Expander showAll={<Reviews/>} showSome="Here's a preview shown."><h1>Some Static Heading</h1></Expander>);
