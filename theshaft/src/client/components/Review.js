@@ -25,14 +25,14 @@ export default class Review extends Component {
     return (
       <div class="parent">
         <div class="row">
-          <div id="stars">
+          <div class="stars">
             {this.createStars(this.props.stars)}
           </div>
           <div>
             User would recommend
           </div>
         </div>
-        <div class="row">
+        <div class="fullReview">
           <div class="review">
             {this.props.review}
           </div>
