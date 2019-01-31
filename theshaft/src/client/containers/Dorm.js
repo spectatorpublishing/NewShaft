@@ -26,7 +26,7 @@ let Header = styled.div`
   font-weight: 1000;
   position: absolute;
   z-index: 1;
-  top: 30vh;
+  top: 45vh;
   margin-left: 15vw;
 `
 
@@ -37,7 +37,7 @@ let Blurb = styled.div`
   font-weight: 300;
   position: absolute;
   z-index: 1;
-  top: 43vh;
+  top: 55vh;
   margin-left: 15vw;
   padding: 1.8vw;
   border-radius: 1.5vw;
