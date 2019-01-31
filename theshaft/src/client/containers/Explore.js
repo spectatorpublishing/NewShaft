@@ -1,8 +1,10 @@
-import React, { Component } from "react";
-import { Route, Link, BrowserRouter as Router } from "react-router-dom";
-
+import React, { Component } from 'react';
+import { Route, Link, BrowserRouter as Router } from 'react-router-dom';
+import DormButton from '../components/DormButton';
+import '../css/Explore.css';
+import Dorm from './Dorm.js';
+import Updater from '../components/Updater';
 import ExploreSidebar from "../components/ExploreSidebar";
-import Dorm from "./Dorm.js";
 import "../css/Explore.css";
 import map from "../assets/map.png";
 
@@ -60,7 +62,7 @@ export default class Explore extends Component {
         <div className="sidebar">
           <ExploreSidebar dorms={dorms} />
         </div>
-        
+        <Updater interval="15" />
       </div>
     );
   }

@@ -1,7 +1,15 @@
-//qu'est que c'est le squel lmao???
 var express = require('express');
 var router = express.Router();
 var mysql = require('mysql');
+
+/**
+ * How to test:
+ * Using Postman, send POST request to 
+ * localhost:8080/api/getDormInfo/
+ * In params, make sure you set key=value 
+ * to table=theshaft.dorm_static_info
+ */
+
 
 function getDormInfo(con, request, callback) {
 	con.connect(function(err) {
@@ -31,7 +39,6 @@ function getDormInfo(con, request, callback) {
 
 		con.query(sqlStatement, function(err, res) {
 			if (err) throw err;
-			console.log(res);
 			callback(res)
 		});
 
@@ -52,6 +59,7 @@ router.post('/', function(req, res, next) {
 	
 	getDormInfo(con, req.body, (dormInfo) => {
 		res.json(dormInfo)
+		console.log(JSON.stringify(res))
 	})
 
 })
