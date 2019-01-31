@@ -3,7 +3,9 @@ import { Link } from "react-router-dom";
 import styled from 'styled-components';
 
 let FloorPlanBox = styled.div` 
-	height: 1000px;
+	border: 1px black solid;
+    border-radius: 10px;
+	height: 700px;
 	width: 500px;
 	display: flex;
 	flex-direction: row;
@@ -13,9 +15,26 @@ let FloorList = styled.div`
 	display: flex;
 	flex-direction: column;
 	width: 20%;
-	height: 100%;
-	border: 3px solid #9B9B9B;
+	height: 60%;
+	padding: 1em;
+	// border: 3px solid #9B9B9B;
+	// border-radius: 10px;
 	text-align: center;
+`
+
+let FloorButton = styled.button`
+	background-color: #FFFFFF;
+	border: none;
+	color: #76aaf2;
+	// font-family: raley;
+	font-size: 1em;
+	// margin: 1em;
+	// padding: 0px;
+	background: none;
+	// border: none;
+	// padding: 0.25em 1em;
+	// border: 2px solid palevioletred;
+	// border-radius: 3px;
 `
 
 let PlanDisplay = styled.div`
@@ -64,9 +83,9 @@ export default class FloorPlan extends React.PureComponent {
 					<FloorList>
 						{ 
 						  	this.props.planArray.map((floor, i) =>
-								(<button key = {i} onClick = {() => this.selectFloor(i)}> 
-									Floor {i + this.state.floorOffset} 
-							 	</button>)
+								(<FloorButton key = {i} onClick = {() => this.selectFloor(i)}> 
+								Floor {i + this.state.floorOffset}
+							 	</FloorButton>)
 							)
 						}
 					</FloorList>

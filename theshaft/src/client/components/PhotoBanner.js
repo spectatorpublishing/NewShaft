@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import styled, { css } from "styled-components";
+import styled from "styled-components";
 
 let PhotosContainer = styled.div`
   display: flex;
