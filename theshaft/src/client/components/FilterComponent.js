@@ -1,6 +1,24 @@
 import React, { Component } from "react";
 import FilterButton from "./FilterButton.js"
-import "../css/filter.css";
+import styled from 'styled-components';
+
+let Filter = styled.div`
+	display: flex;
+	flex-direction: row;
+	
+	@media (max-width: 650px) {
+		display: flex;
+		flex-direction: column;
+		justify-content: center;
+	}
+`
+
+let Text = styled.li`
+	padding-top: 2px;
+	color: rgb(176, 214, 132);
+	font-size: 15pt;
+	white-space: nowrap;
+`
 
 export default class FilterComponent extends React.PureComponent {
 
@@ -15,36 +33,36 @@ export default class FilterComponent extends React.PureComponent {
 	render() {
 		if(this.state.type === "school") {
 			return(
-				<div className="filterComponent">
-					<li className="leadText"> filter by {this.state.type}: </li>
+				<Filter>
+					<Text> filter by {this.state.type}: </Text>
 					<FilterButton name="columbia"/>
 					<FilterButton name="barnard"/>
-			    </div>
+			    </Filter>
 			)
 		}
 		else if(this.state.type === "room type") {
 			return(
-				<div className="filterComponent">
-					<li className="leadText"> filter by {this.state.type}: </li>
+				<Filter>
+					<Text> filter by {this.state.type}: </Text>
 					<FilterButton name="single"/>
 					<FilterButton name="double"/>
 					<FilterButton name="# person room"/>
-			    </div>
+			    </Filter>
 			)
 		}
 		else if(this.state.type === "year") {
 			return(
-				<div className="filterComponent">
-					<li className="leadText"> filter by {this.state.type}: </li>
+				<Filter>
+					<Text> filter by {this.state.type}: </Text>
 					<FilterButton name="freshperson"/>
 					<FilterButton name="sophomore"/>
 					<FilterButton name="junior"/>
 					<FilterButton name="senior"/>
-			    </div>
+			    </Filter>
 			)
 		}
 		else {
-			return( <li> whoops:DDDDDDDDDDDD</li>)
+			return( <li> oopsie :DDDDDDDDDDDD</li>)
 		}
 	}
 }

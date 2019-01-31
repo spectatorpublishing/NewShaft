@@ -1,5 +1,17 @@
 import React, { Component } from "react";
-import "../css/filter.css";
+import styled from 'styled-components';
+
+let Button = styled.button`
+	background: none;
+	border: none;
+	margin: 0;
+	padding-left: 1em;
+	font-size: 15pt;
+
+	${({ clicked }) => clicked && `
+    	font-weight: bold;
+  	`}
+`
 
 export default class FilterButton extends React.PureComponent {
 	constructor(props) {
@@ -19,10 +31,9 @@ export default class FilterButton extends React.PureComponent {
 	}
 
 	render() {
-		let btn_class = this.state.clicked ? "clickedFilter" : "nonclickedFilter";
 		return (
 			<div>
-				<button key="barnard" className={btn_class} onClick={()=>this.onClick()}>{this.state.name}</button>
+				<Button clicked={this.state.clicked} onClick={()=>this.onClick()}>{this.state.name}</Button>
 			</div>
 		)
 	}
