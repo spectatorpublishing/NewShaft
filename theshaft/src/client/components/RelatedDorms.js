@@ -5,6 +5,9 @@
     This component displays the related dorms of a given
     dorm page. The names and image sources for this component
     are to be passed into the component as an array.
+
+    NOTE that the divs of this component are styled by
+    RelatdDorms.css
 */
 
 import React, { Component } from "react";
@@ -33,8 +36,8 @@ export default class RelatedDorms extends Component {
         from the [0] index and image source is passed from [0] of
         the property. 
 
-        NOTE that these classNames of these elements are modified by
-        RelatdDorms.css
+        !!! ALERT !!!
+        The title of the dorm needs to be pulled from a Title Component.
         */
     showRelatedDorms() {
         let index = 0
@@ -49,7 +52,8 @@ export default class RelatedDorms extends Component {
     render() {
         return (
             <div className="relatedDormsList">
-                <h2 className="relatedDormsTitle"> Related Dorms </h2>
+                {/* ===> The title component's text prop needs to be passed in here! <=== */}
+                <h2 className="relatedDormsTitle"> If you're interested in {this.state.relatedDorms[0][0]} </h2>
                 <div className="relatedDormsHorizontalView">
                     {this.showRelatedDorms()}
                 </div>

@@ -81,6 +81,8 @@ let sampleRelatedDorms = [
   ["Carman", "https://memegenerator.net/img/images/17438601/dat-sad-fat-cat.jpg"],
   ["Furnald", "https://memegenerator.net/img/images/17438601/dat-sad-fat-cat.jpg"],
   ["John Jay", "https://memegenerator.net/img/images/17438601/dat-sad-fat-cat.jpg"],
+  ["John Jay", "https://memegenerator.net/img/images/17438601/dat-sad-fat-cat.jpg"],
+  ["John Jay", "https://memegenerator.net/img/images/17438601/dat-sad-fat-cat.jpg"],
   ["John Jay", "https://memegenerator.net/img/images/17438601/dat-sad-fat-cat.jpg"]
 ];
 
