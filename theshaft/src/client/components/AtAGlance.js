@@ -13,11 +13,9 @@ let Span = styled.div`
 `
 
 let Title = styled.h2`
-  font-family: Impact, fantasy;
 `
 
 let Content = styled.span`
-  font-family: "Comic Sans MS", cursive, sans-serif;
   color: #5a5a5a;
 `
 

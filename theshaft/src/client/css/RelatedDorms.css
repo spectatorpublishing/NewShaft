@@ -1,0 +1,50 @@
+/*  CSS for Related Dorms.
+    Modifies elements within showRelatedDorms() funciton
+    as well as within the return() function of the
+    RelatedDorms.js component. 
+
+    A number of the elements are currently set with 
+    strict px; this may need to change.
+     */
+
+
+
+
+/* consider removing border */
+.relatedDormsList {
+    /* border: 1px black solid;
+    border-radius: 1px;  */
+    max-width: 500px;
+    max-height: 500px;
+    height: 300px;
+    
+    
+}
+
+/* might need px modification  */
+.relatedDormsTitle {
+    margin: 20px 0 0 5px;
+}
+
+/*  Display flex allows the CSS
+    to wrap the content when the number
+    of related dorms gets large enough,
+    specifically `flex-wrap` set to `wrap`. */
+.relatedDormsHorizontalView{
+    display: flex;
+    justify-content: flex-start;
+    flex-wrap: wrap
+    
+}
+
+/* locked at specific px */
+.relatedDormImage {
+    height: 100px;
+    width: 100px;
+}
+
+/* might need px modification */
+.relatedDormName {
+    margin: 0px 0 0 5px;
+}
+

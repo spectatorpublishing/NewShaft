@@ -43,7 +43,7 @@ CONS	| TEXT	  | NOT NULL
 LATITUDE  | FLOAT(10,6) |
 LONGITUDE | FLOAT(10,6)	|
 LOTTERY_NUMS	| VARCHAR(20) |
-CLASS_MAKEUP	| VARCHAR(50) |
+CLASS_MAKEUP	| SET("first-years","sophomores","juniors","seniors") |
 
 ### Endpoints
 Type | url | params | returns
