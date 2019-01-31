@@ -2,7 +2,7 @@ import React, { Component } from "react";
 import "../css/Reviews.css";
 import Review from "./Review.js";
 
-export default class Reviews extends Component {
+export default class QuickReview extends Component {
   constructor(props) {
     super(props);
 
