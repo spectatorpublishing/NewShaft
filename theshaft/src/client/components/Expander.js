@@ -2,13 +2,14 @@ import React, { Component } from "react";
 import styled from 'styled-components';
 
 let ExpanderBox = styled.div`
-    border: 1px black solid;
+    border: 0px grey solid;
     border-radius: 10px;
-    max-width: 400px;
+    width:50vw;
 `
 
 let ExpanderContent = styled.div`
     padding: 20px;
+    
 `
 
 let ExpanderList = styled.div`
@@ -17,13 +18,14 @@ let ExpanderList = styled.div`
 `
 
 let ToggleSize = styled.div`
-    border-bottom-left-radius: 10px;
-    border-bottom-right-radius: 10px;
-    border-top: 1px black solid;
+    color: grey;
+    border-radius: 2px;
+   
+    border-top: 0px grey solid;
     display: flex;
     font-weight: bold;
     justify-content: center;
-    padding: 5px 20px;
+    padding: 0.5vw 4vw;
 
     :hover {
       background-color: #ddd;

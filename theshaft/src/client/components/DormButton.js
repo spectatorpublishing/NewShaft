@@ -1,6 +1,16 @@
 import React, { Component } from "react";
+import styled from 'styled-components';
 
 import "../css/DormButton.css";
+
+let Button = styled.div`
+  text-align: left;
+  border: 5px solid #9B9B9B;
+  color: #9B9B9B;
+  display: inline-block;
+  cursor: pointer;
+  margin: 10px;
+`
 
 export default class DormButton extends Component {
   constructor(props) {
@@ -22,8 +32,9 @@ export default class DormButton extends Component {
         <div className="details">
             <p className="school"> { this.state.school } </p>
             <h4 className="dormname"> {this.state.name} </h4>
-            <p> {this.state.amenities} </p>
-            <p> {this.state.description} </p>
+            <p className="amenities"> {this.state.amenities} </p>
+            <p className="description"> {this.state.description} </p>
+            <span className="see-more">see more ></span>
         </div>
         <br />
       </div>

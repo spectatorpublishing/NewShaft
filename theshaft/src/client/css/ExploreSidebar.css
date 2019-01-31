@@ -21,3 +21,8 @@
 	overflow: scroll;
 	height: 100%;
 }
+
+hr.sidebar-divider {
+ 	border: 1px solid #509e80;
+	border-radius: 5px;
+}

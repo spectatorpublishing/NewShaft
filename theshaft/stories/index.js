@@ -9,6 +9,14 @@ import FloorPlan from '../src/client/components/FloorPlan.js';
 import sampleFloor from '../src/client/assets/floor_plans/47 Claremont 1.jpg';
 import FilterButton from '../src/client/components/FilterButton.js';
 import FilterComponent from '../src/client/components/FilterComponent.js';
+import Expander from '../src/client/components/Expander.js';
+import Amenities from '../src/client/components/Amenities.js';
+import AtAGlance from '../src/client/components/AtAGlance.js';
+import RelatedDorms from '../src/client/components/RelatedDorms';
+import ExploreSidebar from '../src/client/components/ExploreSidebar';
+import { MemoryRouter } from 'react-router';
+//import RelatedDormsList from '../src/client/components/RelatedDormsList'
+import NavBar from '../src/client/components/NavBar.js'
 
 storiesOf('Button', module)
   .add('with text', () => <Button>Hello Button</Button>)
@@ -41,3 +49,63 @@ storiesOf('Filter', module)
   .add('filter', () => <FilterButton name="barnard"/>);
 storiesOf('Filter', module)
   .add('filter_full', () => <FilterComponent type="school"/>);
+
+storiesOf('Expander', module)
+  .add('expander', () => <Expander showAll="Here's all of the text shown. It should be longer than the preview." showSome="Here's a preview shown."><h1>Some Static Heading</h1></Expander>);
+
+
+let sampleAmenities = [
+  ["bathroom", "Semi-private"],
+  ["laundry", "Laundry - in basement"],
+  ["kitchen", "Kitchen - in basement"],
+  ["airConditioning", "Air conditioning"],
+  ["lounge", "Floor lounge"],
+  ["fitness", "Fitness room"],
+  ["lounge", "Sky lounge"],
+  ["lounge", "Basement lounge"]
+];
+
+storiesOf('Amenities', module)
+  .add('amenities', () => <Amenities amenities={sampleAmenities} />);
+
+storiesOf('AtAGlance', module)
+  .add('at a glance', () => <AtAGlance location="545 W. 114th St." roomtype="Suite-style doubles" classmakeup="First-Years" numfloors="13"/>);
+
+// Related Dorms Content
+let sampleRelatedDorms = [
+  ["Carman", "https://memegenerator.net/img/images/17438601/dat-sad-fat-cat.jpg"],
+  ["Furnald", "https://memegenerator.net/img/images/17438601/dat-sad-fat-cat.jpg"],
+  ["John Jay", "https://memegenerator.net/img/images/17438601/dat-sad-fat-cat.jpg"],
+  ["John Jay", "https://memegenerator.net/img/images/17438601/dat-sad-fat-cat.jpg"]
+];
+
+storiesOf('RelatedDorms', module)
+  .add('related dorms', () => <RelatedDorms relatedDorms={sampleRelatedDorms}/>);
+
+
+storiesOf('ExploreSidebar', module)
+  .addDecorator(story => (
+    <MemoryRouter initialEntries={['/']}>{story()}</MemoryRouter>
+  ))
+  .add('explore sidebar', () => <ExploreSidebar/>);
+
+
+let sampleMenuItems = [
+  ["Menu 1", "link1"],
+  ["Menu 2", "link2"],
+  ["Menu 3", "link3"]
+];
+
+storiesOf('NavBar', module)
+  .addDecorator(story => (
+      <MemoryRouter initialEntries={['/']}>
+        <div>
+          {story()}
+          <p>filler</p><p>filler</p><p>filler</p><p>filler</p><p>filler</p><p>filler</p><p>filler</p><p>filler</p>
+          <p>filler</p><p>filler</p><p>filler</p><p>filler</p><p>filler</p><p>filler</p><p>filler</p><p>filler</p>
+          <p>filler</p><p>filler</p><p>filler</p><p>filler</p><p>filler</p><p>filler</p><p>filler</p><p>filler</p>
+        </div>
+      </MemoryRouter>
+  ))
+  .add('navbar', () => <NavBar menuItems={sampleMenuItems} />)
+  .add('fixed navbar', () => <NavBar menuItems={sampleMenuItems} fixed />);
