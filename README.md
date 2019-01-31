@@ -43,15 +43,12 @@ CONS	| TEXT	  | NOT NULL
 LATITUDE  | FLOAT(10,6) |
 LONGITUDE | FLOAT(10,6)	|
 LOTTERY_NUMS	| VARCHAR(20) |
-CLASS_MAKEUP	| VARCHAR(50) |
+CLASS_MAKEUP	| SET("first-years","sophomores","juniors","seniors") |
 
 ### Endpoints
 Type | url | params | returns
  --- | --- | --- | ---
 POST | /api/getDormInfo | ``` {"table": <table>, <key>:<value>, ...} ``` | ```"SELECT * FROM <table> WHERE <key>=<value> AND ..."```
-POST | /api/deleteDormInfo _1_ | ``` {"table": <table>, <key>:<value>, ...} ``` | ```{"Status": "Success"/"Failure"}```
-
-_1_: will NOT allow deletion of all entries in <table>. You must specify at least one key to query on.
 
 ### Folder Structure
 
