@@ -2,7 +2,7 @@ import React from 'react';
 import { storiesOf } from '@storybook/react';
 import { Button } from '@storybook/react/demo';
 import SearchBar from '../src/client/components/SearchBar.js';
-import Photos from '../src/client/components/Photos.js';
+import PhotoBanner from '../src/client/components/PhotoBanner.js';
 import DormButton from '../src/client/components/DormButton.js';
 import Explore from '../src/client/containers/Explore.js';
 import Reviews from '../src/client/components/Reviews.js';
@@ -32,8 +32,16 @@ storiesOf('Button', module)
 storiesOf('SearchBar', module)
   .add('with text', () => <SearchBar/>);
 
-storiesOf('Photos', module)
-  .add('pikachu', () => <Photos imageOne="https://memegenerator.net/img/images/17438601/dat-sad-fat-cat.jpg" imageTwo="https://i.imgflip.com/26a82h.jpg" imageThree="https://i.imgflip.com/1eg7jb.jpg" imageFour="https://i.imgflip.com/1yt82g.jpg"/>);
+storiesOf('PhotoBanner', module)
+  .add('for dorm pages', () => 
+        <PhotoBanner
+          imageOne="https://arc-anglerfish-arc2-prod-spectator.s3.amazonaws.com/public/52FBXLYM2RGO3FJGK3SPD2KUEE.png"
+          imageTwo="https://memegenerator.net/img/images/17438601/dat-sad-fat-cat.jpg"
+          imageThree="https://i.imgflip.com/1yt82g.jpg"
+          imageFour="https://i.imgflip.com/26a82h.jpg"
+          imageFive="https://i.imgflip.com/1eg7jb.jpg"
+        />
+      );
 
 
 storiesOf('DormButton', module)
@@ -41,8 +49,8 @@ storiesOf('DormButton', module)
 
 storiesOf('Explore', module)
 .addDecorator(story => (
-  <MemoryRouter initialEntries={['/']}>{story()}</MemoryRouter>
-))
+    <MemoryRouter initialEntries={['/']}>{story()}</MemoryRouter>
+  ))
   .add('explore', () => <Explore/>);
 
 
@@ -103,14 +111,14 @@ let sampleMenuItems = [
 
 storiesOf('NavBar', module)
   .addDecorator(story => (
-      <MemoryRouter initialEntries={['/']}>
-        <div>
-          {story()}
-          <p>filler</p><p>filler</p><p>filler</p><p>filler</p><p>filler</p><p>filler</p><p>filler</p><p>filler</p>
-          <p>filler</p><p>filler</p><p>filler</p><p>filler</p><p>filler</p><p>filler</p><p>filler</p><p>filler</p>
-          <p>filler</p><p>filler</p><p>filler</p><p>filler</p><p>filler</p><p>filler</p><p>filler</p><p>filler</p>
-        </div>
-      </MemoryRouter>
+    <MemoryRouter initialEntries={['/']}>
+      <div>
+        {story()}
+        <p>filler</p><p>filler</p><p>filler</p><p>filler</p><p>filler</p><p>filler</p><p>filler</p><p>filler</p>
+        <p>filler</p><p>filler</p><p>filler</p><p>filler</p><p>filler</p><p>filler</p><p>filler</p><p>filler</p>
+        <p>filler</p><p>filler</p><p>filler</p><p>filler</p><p>filler</p><p>filler</p><p>filler</p><p>filler</p>
+      </div>
+    </MemoryRouter>
   ))
   .add('navbar', () => <NavBar menuItems={sampleMenuItems} />)
   .add('fixed navbar', () => <NavBar menuItems={sampleMenuItems} fixed />);
