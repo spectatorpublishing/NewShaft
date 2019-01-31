@@ -4,24 +4,35 @@ div.explore {
     padding: 0 auto;
 }
 
-div.sidebar div.map {
-    padding: 0 auto;
-}
-
 div.sidebar {
-    width: 30%;
+    width: 90%;
     padding-left: 1em;
-    min-height: 100%;
-    z-index: 1;
-    overflow: hidden;
 }
 
 div.map {
-    position: fixed;
-    padding-left: 1em;
-    float: right;
-    width: 67%;
-    right: 0;
-    top: 0;
-    z-index:1;
+    width: 0%;
+}
+
+@media only screen and (min-width: 768px) {
+
+    div.sidebar div.map {
+        padding: 0 auto;
+    }
+
+    div.sidebar {
+        width: 30%;
+        min-height: 100%;
+        z-index: 1;
+        overflow: hidden;
+    }
+
+    div.map {
+        position: fixed;
+        padding-left: 1em;
+        float: right;
+        width: 67%;
+        right: 0;
+        top: 0;
+        z-index:1;
+    }
 }
