@@ -20,7 +20,6 @@ let PicOne = styled.div`
   width: 50%;
   overflow: hidden;
   justify-content: center;
-  margin-bottom: -5px;
   
 `;
 

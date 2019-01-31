@@ -5,7 +5,6 @@ import '../css/Explore.css';
 import Dorm from './Dorm.js';
 import Updater from '../components/Updater';
 import ExploreSidebar from "../components/ExploreSidebar";
-import Dorm from "./Dorm.js";
 import "../css/Explore.css";
 import map from "../assets/map.png";
 
