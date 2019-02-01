@@ -16,8 +16,8 @@ let Amenity = styled.div`
     color: grey;
     display: flex;
     flex-direction: row;
-    width: 300px;
-    font-size: 20px;
+    width: 18vw;
+    font-size: 1.2vw;
     margin-top: 15px;
 `
 

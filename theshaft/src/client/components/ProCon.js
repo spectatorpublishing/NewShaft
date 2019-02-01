@@ -6,9 +6,9 @@ let Section = styled.div`
     flex-direction: row;
     flex: 1;
     border: 1px grey solid;
-    border-radius: 10px;
-    padding: 1vw;
-    width: 28vw;
+    border-radius: 1.5vw;
+    padding: 1.5vw;
+    width: 37vw;
 `
 
 let ListBox = styled.div`
@@ -18,7 +18,7 @@ let ListBox = styled.div`
 
 let Divider = styled.div`
     width: 1px;
-    margin-left: 9vw;
+    margin-left: 14vw;
     margin-right: 0.7vw;
     background-color: grey;
 `

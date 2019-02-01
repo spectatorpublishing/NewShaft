@@ -2,13 +2,13 @@ import React, { Component } from "react";
 import styled from 'styled-components';
 
 let ExpanderBox = styled.div`
-    border: 0px grey solid;
-    border-radius: 10px;
-    width:50vw;
+    border: 1px grey solid;
+    border-radius: 1.5vw;
+    width:40vw;
 `
 
 let ExpanderContent = styled.div`
-    padding: 20px;
+    padding: 1.5vw;
     
 `
 
@@ -21,7 +21,7 @@ let ToggleSize = styled.div`
     color: grey;
     border-radius: 2px;
    
-    border-top: 0px grey solid;
+    border-top: 1px grey solid;
     display: flex;
     font-weight: bold;
     justify-content: center;

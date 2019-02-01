@@ -2,13 +2,29 @@ import React, { Component } from "react";
 import { Link } from "react-router-dom";
 import styled from 'styled-components';
 
+let FloorTitle = styled.div` 
+	color: grey;
+	font-weight: bolder;
+	font-size: 2vw;
+	margin-top: 3vw;
+    margin-bottom: 1vw;
+`
+
+let FloorHeader = styled.div` 
+	color: grey;
+	font-weight: bolder;
+	font-size: 1.8vw;
+    margin-bottom: 1vw;
+`
+
 let FloorPlanBox = styled.div` 
-	border: 1px black solid;
-    border-radius: 10px;
-	height: 700px;
-	width: 500px;
+	border: 1px grey solid;
+    border-radius: 1.5vw;
+	height: 50vw;
+	width: 40vw;
 	display: flex;
 	flex-direction: row;
+	padding: 1vw;
 `
 
 let FloorList = styled.div`
@@ -20,6 +36,8 @@ let FloorList = styled.div`
 	// border: 3px solid #9B9B9B;
 	// border-radius: 10px;
 	text-align: center;
+	overflow: scroll;
+    margin-top: 3vw;
 `
 
 let FloorButton = styled.button`
@@ -74,10 +92,10 @@ export default class FloorPlan extends React.PureComponent {
 
 		return (
 			<div>
-				<h1> Floor Plans </h1>
+				<FloorTitle> Floor Plans </FloorTitle>
 				<FloorPlanBox>
 					<PlanDisplay>
-						<h1> Floor {this.state.currentFloor} </h1>
+						<FloorHeader> Floor {this.state.currentFloor} </FloorHeader>
 						<CurrentPlan src={this.state.currentPlan} />
 					</PlanDisplay>
 					<FloorList>
