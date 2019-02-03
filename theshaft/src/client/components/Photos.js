@@ -106,6 +106,8 @@ export default class Photos extends Component {
       imageFour: this.props.imageFour,
       width: window.innerWidth
     };
+
+    this.handleWindowSizeChange = this.handleWindowSizeChange.bind(this);
   }
 
   componentWillMount() {
@@ -118,13 +120,12 @@ export default class Photos extends Component {
     window.removeEventListener("resize", this.handleWindowSizeChange);
   }
 
-  handleWindowSizeChange = () => {
+  handleWindowSizeChange() {
     this.setState({ width: window.innerWidth });
-  };
+  }
 
   render() {
-    const { width } = this.state;
-    const isMobile = width <= 700;
+    const isMobile = this.state.width <= 700;
     if (isMobile) {
       return (
         <PicMobile>

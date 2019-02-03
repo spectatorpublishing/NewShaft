@@ -36,7 +36,7 @@ let MenuContainer = styled.div`
   width: 40%;
 `
 
-let MenuBox = styled.div`
+let MenuRow = styled.div`
   border-bottom: grey 1px solid;
   display: flex;
   flex-direction: row;
@@ -65,25 +65,146 @@ let NavBuffer = styled.div`
   width: 100%;
 `
 
+let MenuColumn = styled.div`
+  align-items: center;
+  background-color: black;
+  display: flex;
+  flex-direction: column;
+  height: 0;
+  overflow: hidden;
+  position: absolute;
+  top: 60px;
+  transition: height .2s ease-out;
+  width: 100vw;
+`
+
+let MenuItem = styled.div`
+  ${({ mobile }) => mobile && `
+    padding: 5% 10%;
+  `}
+`
+
+let MenuBtn = styled.input`
+  display: none;
+
+  &:checked ~ ${MenuColumn} {
+    height: 100vh;
+  }
+`
+
+let MenuIcon = styled.label`
+  cursor: pointer;
+  margin-left: auto;
+  padding: 28px 10%;
+  user-select: none;
+`
+
+let NavIcon = styled.span`
+  background: white;
+  display: block;
+  height: 2px;
+  position: relative;
+  transition: background .2s ease-out;
+  width: 24px;
+
+  :before,
+  :after {
+    background: white;
+    content: '';
+    display: block;
+    height: 100%;
+    position: absolute;
+    transition: all .2s ease-out;
+    width: 100%;
+  }
+
+  :before {
+    top: 8px;
+  }
+
+  :after {
+    top: -8px;
+  }
+
+  ${MenuBtn}:checked ~ ${MenuIcon} & {
+    background: transparent;
+
+    &::before {
+      transform: rotate(-45deg);
+    }
+
+    &::after {
+      transform: rotate(45deg);
+    }
+  }
+
+  ${MenuBtn}:checked ~ ${MenuIcon}:not(.steps) & {
+    :before,
+    :after {
+      top: 0;
+    }
+  }
+`
+
 export default class NavBar extends Component {
   constructor(props) {
     super(props);
 
+    this.state = {
+      width: window.innerWidth
+    }
+
+    this.handleWindowSizeChange = this.handleWindowSizeChange.bind(this);
     this.getMenuItems = this.getMenuItems.bind(this);
   }
 
-  getMenuItems() {
+  componentWillMount() {
+    window.addEventListener("resize", this.handleWindowSizeChange);
+  }
+
+  // make sure to remove the listener
+  // when the component is not mounted anymore
+  componentWillUnmount() {
+    window.removeEventListener("resize", this.handleWindowSizeChange);
+  }
+
+  handleWindowSizeChange() {
+    this.setState({ width: window.innerWidth });
+  }
+
+  getMenuItems(isMobile) {
     let index = 0
     return this.props.menuItems.map((item) => {
-      return <div key={index++}>
+      return <MenuItem key={index++} mobile={isMobile}>
         <MenuLink to={item[1]}>
           {item[0]}
         </MenuLink>
-      </div>
+      </MenuItem>
       });
   }
 
   render() {
+    const isMobile = this.state.width <= 700;
+    const desktopMenu = (
+      <React.Fragment>
+        <MenuContainer>
+          <MenuRow>
+            {this.getMenuItems(isMobile)}
+          </MenuRow>
+        </MenuContainer>
+      </React.Fragment>
+    );
+    const mobileMenu = (
+      <React.Fragment>
+        <MenuBtn type="checkbox" id="menu-btn"/>
+        <MenuIcon htmlFor="menu-btn">
+          <NavIcon></NavIcon>
+        </MenuIcon>
+        <MenuColumn>
+          {this.getMenuItems(isMobile)}
+        </MenuColumn>
+      </React.Fragment>
+    );
     return (
       <div>
         <NavContainer fixed={this.props.fixed}>
@@ -92,11 +213,7 @@ export default class NavBar extends Component {
               <Logo src={icon} alt="The Shaft"/>
             </Link>
           </LogoContainer>
-          <MenuContainer>
-            <MenuBox>
-              {this.getMenuItems()}
-            </MenuBox>
-          </MenuContainer>
+          {isMobile ? mobileMenu : desktopMenu}
         </NavContainer>
         {this.props.fixed && <NavBuffer></NavBuffer>}
       </div>
