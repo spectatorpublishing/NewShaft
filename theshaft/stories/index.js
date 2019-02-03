@@ -17,6 +17,7 @@ import ExploreSidebar from '../src/client/components/ExploreSidebar';
 import { MemoryRouter } from 'react-router';
 //import RelatedDormsList from '../src/client/components/RelatedDormsList'
 import NavBar from '../src/client/components/NavBar.js'
+import FloorPlanSVG from '../src/client/components/FloorPlanSVG.js'
 
 storiesOf('Button', module)
   .add('with text', () => <Button>Hello Button</Button>)
@@ -116,3 +117,6 @@ storiesOf('NavBar', module)
   ))
   .add('navbar', () => <NavBar menuItems={sampleMenuItems} />)
   .add('fixed navbar', () => <NavBar menuItems={sampleMenuItems} fixed />);
+
+storiesOf('FloorPlanSVG', module)
+  .add('Symposium 1 floorplan', () => <FloorPlanSVG />);
