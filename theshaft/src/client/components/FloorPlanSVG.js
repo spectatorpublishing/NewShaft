@@ -19,6 +19,28 @@ let FloorPlanContainer = styled.div`
 export default class FloorPlanSVG extends Component {
   constructor(props) {
     super(props);
+
+    this.handleRectClick = this.handleRectClick.bind(this);
+  }
+
+  componentDidMount() {
+    let rectsArray = document.querySelectorAll("rect");
+    rectsArray.forEach((rect) => {
+      rect.addEventListener("click", this.handleRectClick);
+    });
+  }
+
+  // make sure to remove the listener
+  // when the component is not mounted anymore
+  componentWillUnmount() {
+    let rectsArray = document.querySelectorAll("rect");
+    rectsArray.forEach((rect) => {
+      rect.removeEventListener("click", this.handleRectClick);
+    });
+  }
+
+  handleRectClick(e) {
+    console.log(e.target.parentElement.dataset.name);
   }
 
   render() {
