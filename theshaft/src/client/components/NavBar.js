@@ -158,7 +158,7 @@ export default class NavBar extends Component {
     this.getMenuItems = this.getMenuItems.bind(this);
   }
 
-  componentWillMount() {
+  componentDidMount() {
     window.addEventListener("resize", this.handleWindowSizeChange);
   }
 
