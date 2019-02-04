@@ -76,6 +76,7 @@ let MenuColumn = styled.div`
   top: 60px;
   transition: height .2s ease-out;
   width: 100vw;
+  z-index: 1;
 `
 
 let MenuItem = styled.div`
