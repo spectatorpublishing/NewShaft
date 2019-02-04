@@ -1,10 +1,7 @@
 import React, { Component } from "react";
 import styled from 'styled-components';
-import { ReactComponent as TestSVG } from "../assets/test_floorplan.svg";
 
-let FloorPlanContainer = styled.div`
-  height: 100vh;
-
+let FloorPlanWrapper = styled.div`
   & rect {
     fill: none;
     pointer-events: all;
@@ -45,9 +42,9 @@ export default class FloorPlanSVG extends Component {
 
   render() {
     return (
-        <FloorPlanContainer>
-          <TestSVG />
-        </FloorPlanContainer>
+        <FloorPlanWrapper>
+          {this.props.children}
+        </FloorPlanWrapper>
     );
   }
 }

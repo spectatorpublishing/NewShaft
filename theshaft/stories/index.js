@@ -18,6 +18,7 @@ import { MemoryRouter } from 'react-router';
 //import RelatedDormsList from '../src/client/components/RelatedDormsList'
 import NavBar from '../src/client/components/NavBar.js'
 import FloorPlanSVG from '../src/client/components/FloorPlanSVG.js'
+import { ReactComponent as SymposiumSVG } from "../src/client/assets/test_floorplan.svg";
 
 storiesOf('Button', module)
   .add('with text', () => <Button>Hello Button</Button>)
@@ -124,4 +125,4 @@ storiesOf('NavBar', module)
   .add('fixed navbar', () => <NavBar menuItems={sampleMenuItems} fixed />);
 
 storiesOf('FloorPlanSVG', module)
-  .add('Symposium 1 floorplan', () => <FloorPlanSVG />);
+  .add('Symposium 1 floorplan', () => <FloorPlanSVG><SymposiumSVG /></FloorPlanSVG>);
