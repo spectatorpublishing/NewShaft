@@ -1,7 +1,7 @@
 import styled from "styled-components";
 import React, { Component } from "react";
 import { Link } from "react-router-dom";
-import Photos from "../components/Photos";
+import PhotoBanner from "../components/PhotoBanner";
 import Amenities from "../components/Amenities";
 import AtAGlance from "../components/AtAGlance";
 import Maps from "../components/Maps";
@@ -91,12 +91,12 @@ export default class Dorm extends React.PureComponent {
   render() {
     return (
       <DormContainer>
-        <Photos
+        <PhotoBanner
           imageOne="https://arc-anglerfish-arc2-prod-spectator.s3.amazonaws.com/public/52FBXLYM2RGO3FJGK3SPD2KUEE.png"
-          imageTwo="https://arc-anglerfish-arc2-prod-spectator.s3.amazonaws.com/public/52FBXLYM2RGO3FJGK3SPD2KUEE.png"
-          imageThree="https://arc-anglerfish-arc2-prod-spectator.s3.amazonaws.com/public/52FBXLYM2RGO3FJGK3SPD2KUEE.png"
-          imageFour="https://arc-anglerfish-arc2-prod-spectator.s3.amazonaws.com/public/52FBXLYM2RGO3FJGK3SPD2KUEE.png"
-          imageFive="https://arc-anglerfish-arc2-prod-spectator.s3.amazonaws.com/public/52FBXLYM2RGO3FJGK3SPD2KUEE.png"
+          imageTwo="https://memegenerator.net/img/images/17438601/dat-sad-fat-cat.jpg"
+          imageThree="https://i.imgflip.com/1yt82g.jpg"
+          imageFour="https://i.imgflip.com/26a82h.jpg"
+          imageFive="https://i.imgflip.com/1eg7jb.jpg"
         />
         <Header>{this.props.match.params.dorm}</Header>
         <Blurb>This is a blurb for the dorm summary. This is just a test. Blah bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla.  <br/> Hi <br/> Bye</Blurb>
