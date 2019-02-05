@@ -38,23 +38,22 @@ const testPros = ["pro1", "pro2", "pro3"];
 const testCons = ["con1", "con2", "con3"];
 let Header = styled.div`
   color: #ffffff;
-  font-size: 4vw;
-  font-weight: 1000;
-  position: absolute;
-  z-index: 1;
-  top: 45vh;
+  font-size: 3rem;
+  font-weight: bolder;
+  position: relative;
+  top: -140px;
   margin-left: 15vw;
 `
 
 let Blurb = styled.div`
   background-color: #44A7FF;
   color: white;
-  font-size: 1.2vw;
+  font-size: 0.8rem;
   font-weight: 300;
-  position: absolute;
-  z-index: 1;
-  top: 55vh;
+  position: relative;
+  top: -140px;
   margin-left: 15vw;
+  margin-bottom: -130px;
   padding: 1.8vw;
   border-radius: 1.5vw;
   width: 70vw;
@@ -93,10 +92,10 @@ export default class Dorm extends React.PureComponent {
       <DormContainer>
         <PhotoBanner
           imageOne="https://arc-anglerfish-arc2-prod-spectator.s3.amazonaws.com/public/52FBXLYM2RGO3FJGK3SPD2KUEE.png"
-          imageTwo="https://memegenerator.net/img/images/17438601/dat-sad-fat-cat.jpg"
-          imageThree="https://i.imgflip.com/1yt82g.jpg"
-          imageFour="https://i.imgflip.com/26a82h.jpg"
-          imageFive="https://i.imgflip.com/1eg7jb.jpg"
+          imageTwo="https://arc-anglerfish-arc2-prod-spectator.s3.amazonaws.com/public/52FBXLYM2RGO3FJGK3SPD2KUEE.png"
+          imageThree="https://arc-anglerfish-arc2-prod-spectator.s3.amazonaws.com/public/52FBXLYM2RGO3FJGK3SPD2KUEE.png"
+          imageFour="https://arc-anglerfish-arc2-prod-spectator.s3.amazonaws.com/public/52FBXLYM2RGO3FJGK3SPD2KUEE.png"
+          imageFive="https://arc-anglerfish-arc2-prod-spectator.s3.amazonaws.com/public/52FBXLYM2RGO3FJGK3SPD2KUEE.png"
         />
         <Header>{this.props.match.params.dorm}</Header>
         <Blurb>This is a blurb for the dorm summary. This is just a test. Blah bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla.  <br/> Hi <br/> Bye</Blurb>
@@ -104,7 +103,6 @@ export default class Dorm extends React.PureComponent {
           <ColOne/>
           <ColTwo>
             <Amenities amenities={sampleAmenities}/>
-            <Maps/>
             <ProCon pros={testPros} cons={testCons}></ProCon>
             <FloorPlan floorOffset={1} planArray={["https://housing.columbia.edu/files/housing/Wien%208_2018.jpg", "https://housing.columbia.edu/files/housing/Wien%208_2018.jpg","https://housing.columbia.edu/files/housing/600%209_2016_0.jpg","https://housing.columbia.edu/files/housing/Woodbridge%204_2018.jpg", "https://i.kym-cdn.com/entries/icons/original/000/026/642/kot1.jpg"]}/>
             <Reviews/>
