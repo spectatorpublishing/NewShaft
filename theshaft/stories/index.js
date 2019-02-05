@@ -5,6 +5,7 @@ import SearchBar from '../src/client/components/SearchBar.js';
 import PhotoBanner from '../src/client/components/PhotoBanner.js';
 import DormButton from '../src/client/components/DormButton.js';
 import Explore from '../src/client/containers/Explore.js';
+import ProCon from '../src/client/components/ProCon.js';
 import FloorPlan from '../src/client/components/FloorPlan.js';
 import sampleFloor from '../src/client/assets/floor_plans/47 Claremont 1.jpg';
 import FilterButton from '../src/client/components/FilterButton.js';
@@ -52,7 +53,12 @@ storiesOf('Explore', module)
   ))
   .add('explore', () => <Explore/>);
 
-storiesOf('floor plans', module)
+let testPros = ["pro1", "pro2", "pro3"];
+let testCons = ["con1", "con2", "con3"];
+storiesOf('ProCon', module)
+  .add('pros and cons', () => <ProCon pros={testPros} cons={testCons}></ProCon>);
+
+storiesOf('FloorPlan', module)
   .add('keikaku means plan', () => <FloorPlan floorOffset={1} planArray={[sampleFloor,"https://housing.columbia.edu/files/housing/Wien%208_2018.jpg","https://housing.columbia.edu/files/housing/600%209_2016_0.jpg","https://housing.columbia.edu/files/housing/Woodbridge%204_2018.jpg", "https://i.kym-cdn.com/entries/icons/original/000/026/642/kot1.jpg"]}/>);
 
 storiesOf('Filter', module)

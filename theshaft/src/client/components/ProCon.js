@@ -4,31 +4,27 @@ import styled from 'styled-components';
 let Section = styled.div`
     display: flex;
     flex-direction: row;
-    flex: 1;
     border: 1px grey solid;
     border-radius: 10px;
-    padding: 1vw;
-    width: 28vw;
+    padding: 2vw;
 `
 
 let ListBox = styled.div`
     color: grey;
-    flex: 0 1 auto;
+    flex: 1;
 `
 
 let Divider = styled.div`
     width: 1px;
-    margin-left: 9vw;
-    margin-right: 0.7vw;
+    margin-right: 2vw;
     background-color: grey;
 `
 
 let Head = styled.div`
     color: grey;
-    font-size: 2vw;
+    font-size: 1.5rem;
     font-weight: bolder;
-    margin-top: -0.3vw;
-    margin-left: 0.6vw;
+    margin: .5rem 0 -0.5rem 1.2rem;
 `
 
 
