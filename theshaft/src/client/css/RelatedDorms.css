@@ -8,16 +8,13 @@
      */
 
 
-:root {
-    --mw: 500px;
-}
+
 
 /* consider removing border */
 .relatedDormsList {
-    border: 1px black solid;
-    border-radius: 10px; 
-    max-width: var(--mw);
-    max-height: 500px;
+    /* border: 1px black solid;
+    border-radius: 1px;  */
+    min-width: 250px;
     height: 300px;
     
     
@@ -28,17 +25,23 @@
     margin: 20px 0 0 5px;
 }
 
-/* uses css flex justification */
+/*  Display flex allows the CSS
+    to wrap the content when the number
+    of related dorms gets large enough,
+    specifically `flex-wrap` set to `wrap`. */
 .relatedDormsHorizontalView{
     display: flex;
-    justify-content: flex-start
+    justify-content: flex-start;
+    flex-wrap: wrap
     
 }
 
 /* locked at specific px */
 .relatedDormImage {
-    height: 100px;
-    width: 100px;
+    max-height: 150px;
+    max-width: 150px;
+    margin-right: 0.7vh;
+    margin-left : 0.7vh;
 }
 
 /* might need px modification */

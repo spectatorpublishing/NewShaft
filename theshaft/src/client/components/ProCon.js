@@ -8,7 +8,7 @@ let Section = styled.div`
     border: 1px grey solid;
     border-radius: 10px;
     padding: 1vw;
-    width: 28vw;
+    min-width: 250px;
 `
 
 let ListBox = styled.div`
@@ -18,8 +18,8 @@ let ListBox = styled.div`
 
 let Divider = styled.div`
     width: 1px;
-    margin-left: 9vw;
-    margin-right: 0.7vw;
+    margin-left: 14.5vw;
+    margin-right: 1vw;
     background-color: grey;
 `
 

@@ -3,8 +3,10 @@ import { Link } from "react-router-dom";
 import styled from 'styled-components';
 
 let FloorPlanBox = styled.div` 
-	height: 1000px;
-	width: 500px;
+	border: 1px black solid;
+    border-radius: 10px;
+	height: 950px;
+	min-width: 250px;
 	display: flex;
 	flex-direction: row;
 `
@@ -13,19 +15,50 @@ let FloorList = styled.div`
 	display: flex;
 	flex-direction: column;
 	width: 20%;
-	height: 100%;
-	border: 3px solid #9B9B9B;
+	height: 60%;
+	padding: 1em;
+	// border: 3px solid #9B9B9B;
+	// border-radius: 10px;
 	text-align: center;
 `
 
+let FloorButton = styled.button`
+	background-color: #FFFFFF;
+	border: none;
+	color: #76aaf2;
+	// font-family: raley;
+	font-size: 1em;
+	// margin: 1em;
+	// padding: 0px;
+	background: none;
+	// border: none;
+	// padding: 0.25em 1em;
+	// border: 2px solid palevioletred;
+	// border-radius: 3px;
+`
+
 let PlanDisplay = styled.div`
-	width: 80%;
-	height: 100%
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	max-width: 90%;
+	max-height: 90%
+	align-self: flex-end;
 `
 
 let CurrentPlan = styled.img`
+	
+	
 	max-height: 100%;
 	max-width: 100%;
+
+`
+
+let FloorTitle = styled.h1`
+	width: 30%;
+	padding-left: 10px;
+
+	align-self: flex-start;
 `
 
 export default class FloorPlan extends React.PureComponent {
@@ -57,16 +90,16 @@ export default class FloorPlan extends React.PureComponent {
 			<div>
 				<h1> Floor Plans </h1>
 				<FloorPlanBox>
+				<FloorTitle> Floor {this.state.currentFloor} </FloorTitle>
 					<PlanDisplay>
-						<h1> Floor {this.state.currentFloor} </h1>
 						<CurrentPlan src={this.state.currentPlan} />
 					</PlanDisplay>
 					<FloorList>
 						{ 
 						  	this.props.planArray.map((floor, i) =>
-								(<button key = {i} onClick = {() => this.selectFloor(i)}> 
-									Floor {i + this.state.floorOffset} 
-							 	</button>)
+								(<FloorButton key = {i} onClick = {() => this.selectFloor(i)}> 
+								Floor {i + this.state.floorOffset}
+							 	</FloorButton>)
 							)
 						}
 					</FloorList>
