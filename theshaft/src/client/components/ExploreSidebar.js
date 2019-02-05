@@ -5,26 +5,24 @@ import DormButton from '../components/DormButton';
 import '../css/ExploreSidebar.css';
 
 export default class ExploreSidebar extends Component {
+
+    constructor(props) {
+        super(props);
+        this.state = {dorms: props.dorms};
+    }
+
     render() {
-      return (
-      <div>
-        <div className="filters">
-          <div className="SchoolButton">Barnard</div>
-          <div className="SchoolButton">Columbia</div>
-        </div>
-        <div className="dorms">
-          <Link to="/carman" style={{ textDecoration: 'none' }}><DormButton school="Columbia" name="Carman Hall" image="https://housing.columbia.edu/files/housing/Carman.jpg" description="Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla nulla nulla, condimentum a mattis in, faucibus id sapien. Sed rhoncus."/></Link>
-          <Link to="/mcbain" style={{ textDecoration: 'none' }}><DormButton school="Columbia"name="McBain Hall" image="https://housing.columbia.edu/files/housing/McBain.jpg" description="Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla nulla nulla, condimentum a mattis in, faucibus id sapien. Sed rhoncus."/></Link>
-          <Link to="/ruggles" style={{ textDecoration: 'none' }}><DormButton school="Barnard" name="Sulzberger Tower" image="https://housing.columbia.edu/files/housing/Ruggles.jpg" description="Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla nulla nulla, condimentum a mattis in, faucibus id sapien. Sed rhoncus."/></Link>
-          <Link to="/ruggles" style={{ textDecoration: 'none' }}><DormButton school="Barnard" name="Sulzberger Tower" image="https://housing.columbia.edu/files/housing/Ruggles.jpg" description="Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla nulla nulla, condimentum a mattis in, faucibus id sapien. Sed rhoncus."/></Link>
-          <Link to="/ruggles" style={{ textDecoration: 'none' }}><DormButton school="Barnard" name="Sulzberger Tower" image="https://housing.columbia.edu/files/housing/Ruggles.jpg" description="Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla nulla nulla, condimentum a mattis in, faucibus id sapien. Sed rhoncus."/></Link>
-          <Link to="/ruggles" style={{ textDecoration: 'none' }}><DormButton school="Barnard" name="Sulzberger Tower" image="https://housing.columbia.edu/files/housing/Ruggles.jpg" description="Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla nulla nulla, condimentum a mattis in, faucibus id sapien. Sed rhoncus."/></Link>
-          <Link to="/ruggles" style={{ textDecoration: 'none' }}><DormButton school="Barnard" name="Sulzberger Tower" image="https://housing.columbia.edu/files/housing/Ruggles.jpg" description="Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla nulla nulla, condimentum a mattis in, faucibus id sapien. Sed rhoncus."/></Link>
-          <Link to="/ruggles" style={{ textDecoration: 'none' }}><DormButton school="Barnard" name="Sulzberger Tower" image="https://housing.columbia.edu/files/housing/Ruggles.jpg" description="Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla nulla nulla, condimentum a mattis in, faucibus id sapien. Sed rhoncus."/></Link>
-          <Link to="/ruggles" style={{ textDecoration: 'none' }}><DormButton school="Barnard" name="Sulzberger Tower" image="https://housing.columbia.edu/files/housing/Ruggles.jpg" description="Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla nulla nulla, condimentum a mattis in, faucibus id sapien. Sed rhoncus."/></Link>
-          <Link to="/ruggles" style={{ textDecoration: 'none' }}><DormButton school="Barnard" name="Sulzberger Tower" image="https://housing.columbia.edu/files/housing/Ruggles.jpg" description="Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla nulla nulla, condimentum a mattis in, faucibus id sapien. Sed rhoncus."/></Link>
-        </div>
-      </div>
-      );
+        var dormsList = this.state.dorms.map((dorm, index) => (<Link key={index} to={"/" + dorm.id} style={{ textDecoration: 'none' }}><DormButton key={index} school={dorm.school} name={dorm.name} image={dorm.image} description={dorm.description} amenities={dorm.amenities}/></Link>));
+        return (
+            <div>
+                <div className="filters">
+                    <h2>The Shaft</h2>
+                </div>
+                <hr className="sidebar-divider"/>
+                <div className="dorms">
+                    {dormsList}
+                </div>
+            </div>
+        );
     }
 }

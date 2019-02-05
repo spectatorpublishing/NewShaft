@@ -1,5 +1,6 @@
 import React, { Component } from "react";
-import styled from 'styled-components';
+import styled from "styled-components";
+import { Z_BLOCK } from "zlib";
 
 let Imagecontainer = styled.div`
   display: flex;
@@ -7,60 +8,61 @@ let Imagecontainer = styled.div`
   flex-direction: row;
   flex-wrap: nowrap;
   width: 100%;
-  height: 40vh;
+  max-height: 60vh;
   overflow: hidden;
-`
+`;
 
 let PicOne = styled.div`
-  display: flex;
+  display: inline-block;
   flex-direction: row;
   align-items: center;
   flex-wrap: nowrap;
-  width: 66%;
+  width: 50%;
   overflow: hidden;
   justify-content: center;
-  margin-right: 5px;
-`
+  margin-bottom: -5px;
+  
+`;
 
 let PicTwo = styled.div`
-  display: flex;
+  display: inline-block;
   width: 100%;
-  height: 20vh;
+  height: 30vh;
   overflow: hidden;
   justify-content: center;
   align-items: center;
-  margin-bottom: 5px;
-`
+  
+`;
 
 let PicThree = styled.div`
-  display: flex;
+  display: inline-block;
   flex: 1;
   overflow: hidden;
   justify-content: center;
   align-items: center;
-  height: 100%;
-  margin-right: 5px;
-`
+  max-height: 100%;
+  
+`;
 
 let PicFour = styled.div`
-  display: flex;
+  display: inline-block;
   flex: 1;
   overflow: hidden;
   justify-content: center;
   align-items: center;
-  height: 100%;
-  margin-left: 5px;
-`
+  max-height: 100%;
+ 
+`;
 
 let Column = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
   flex-wrap: nowrap;
-  width: 33%;
-  height: 40vh;
-  margin-left: 5px;
-`
+  width: 50%;
+  max-height: 60vh;
+  
+`;
 
 let Row = styled.div`
   display: flex;
@@ -68,10 +70,31 @@ let Row = styled.div`
   align-items: center;
   flex-wrap: nowrap;
   width: 100%;
-  height: 50%;
-  margin-top: 5px;
+  max-height: 50%;
+  margin-bottom: -5px;
+  
+`;
+
+let Img = styled.img`
+  width: 100%;
+  border-width: 2px;
+
+  border-style: solid;
+`;
+
+let PicMobile = styled.div`
+  display: inline-block;
+  width: 100%
+  flex-wrap: nowrap;
+  max-height: 30vh;
+  overflow: hidden;
 `
 
+let ImgMobile = styled.img`
+background-position: center center;
+  background-repeat: no-repeat;
+
+`
 
 export default class Photos extends Component {
   constructor(props) {
@@ -81,30 +104,60 @@ export default class Photos extends Component {
       imageOne: this.props.imageOne,
       imageTwo: this.props.imageTwo,
       imageThree: this.props.imageThree,
-      imageFour: this.props.imageFour
+      imageFour: this.props.imageFour,
+      width: window.innerWidth
     };
   }
 
+  componentWillMount() {
+    window.addEventListener("resize", this.handleWindowSizeChange);
+  }
+
+  // make sure to remove the listener
+  // when the component is not mounted anymore
+  componentWillUnmount() {
+    window.removeEventListener("resize", this.handleWindowSizeChange);
+  }
+
+  handleWindowSizeChange = () => {
+    this.setState({ width: window.innerWidth });
+  };
+
   render() {
-    return (
-      <Imagecontainer>
-        <PicOne>
-          <img src={this.state.imageOne} />
-        </PicOne>
-        <Column>
-          <PicTwo>
-            <img src={this.state.imageTwo} />
-          </PicTwo>
-          <Row>
-            <PicThree>
-              <img src={this.state.imageThree} />
-            </PicThree>
-            <PicFour>
-              <img src={this.state.imageFour} />
-            </PicFour>
-          </Row>
-        </Column>
-      </Imagecontainer>
-    );
+    const { width } = this.state;
+    const isMobile = width <= 700;
+    if (isMobile) {
+      return (
+        <PicMobile>
+          <ImgMobile src={this.state.imageOne} />
+        </PicMobile>
+      );
+    } else {
+      return (
+        <Imagecontainer>
+          <PicOne>
+            <Img src={this.state.imageOne} />
+          </PicOne>
+          <Column>
+            <Row>
+              <PicThree>
+                <Img src={this.state.imageThree} />
+              </PicThree>
+              <PicFour>
+                <Img src={this.state.imageFour} />
+              </PicFour>
+            </Row>
+            <Row>
+              <PicThree>
+                <Img src={this.state.imageThree} />
+              </PicThree>
+              <PicFour>
+                <Img src={this.state.imageFour} />
+              </PicFour>
+            </Row>
+          </Column>
+        </Imagecontainer>
+      );
+    }
   }
 }

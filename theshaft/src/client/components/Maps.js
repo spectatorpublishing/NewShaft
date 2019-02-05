@@ -9,6 +9,42 @@ console.log("Entry");
 console.log(process.env)
 console.log(process.env.MAPBOX);
 
+class MapItem extends Component {
+  constructor(props) {
+    super(props)
+    this.state = {
+      popUp:"flex",
+    }
+  }
+
+  render(){
+    const {lat, long, popupInfo} = this.props
+    return <div>
+      <Marker
+        latitude={lat}
+        longitude={long}
+        offsetLeft={-20}
+        offsetTop={10}
+      >
+        <div>{"Marker"}</div>
+        <div onClick={this.setState({popUp:"flex"})}>
+        <img src={mark} className="marker_style" alt="fireSpot"/>
+        </div>                
+      </Marker>
+      <div style={{display:this.state.popUp}}>
+        <Popup tipSize={5}
+          anchor="bottom-right"
+          longitude={long}
+          latitude={lat}
+          onClose={this.setState({popUp:"none"})}
+          closeOnClick={true}>
+          <p>{popupInfo}</p>
+        </Popup>
+      </div>
+  </div>
+  }
+}
+
 export default class Maps extends Component {
   constructor(props) {
     super(props);
@@ -30,55 +66,42 @@ export default class Maps extends Component {
         popupIndex: popupIndex
       }
     };
-    this.renderPopup = this.renderPopup.bind(this);
+    // this.renderPopup = this.renderPopup.bind(this);
   }
 
-  renderPopup(){
-    console.log("Rendering! popups: " + this.state.popup.popupIndex);
-    var popups = this.state.popup.popupIndex.map((e, i) => {
-      if(e){
-        return (
-          <Popup tipSize={5}
-            anchor="bottom-right"
-            longitude={this.state.coordinates.longitudes[i]}
-            latitude={this.state.coordinates.latitudes[i]}
-            onClose={() => {
-              var popupIndex = this.state.popup.popupIndex;
-              popupIndex[i] = false;
-              console.log("Closed! popups: " + popupIndex)
-              this.setState({popup: {popupInfo: this.state.popup.popupInfo, popupIndex: popupIndex}}), () => {this.renderPopup()}}
-            }
-            closeOnClick={true}>
-            <p>{this.state.popup.popupInfo[i]}</p>
-          </Popup>
-        );
-      }
-    });
-    return popups;
-  }
+  // renderPopup(){
+  //   console.log("Rendering! popups: " + this.state.popup.popupIndex);
+  //   var popups = this.state.popup.popupIndex.map((e, i) => {
+  //     if(e){
+  //       return (
+  //         <Popup tipSize={5}
+  //           anchor="bottom-right"
+  //           longitude={this.state.coordinates.longitudes[i]}
+  //           latitude={this.state.coordinates.latitudes[i]}
+  //           onClose={() => {
+  //             var popupIndex = this.state.popup.popupIndex;
+  //             popupIndex[i] = false;
+  //             console.log("Closed! popups: " + popupIndex)
+  //             this.setState({popup: {popupInfo: this.state.popup.popupInfo, popupIndex: popupIndex}}), () => {this.renderPopup()}}
+  //           }
+  //           closeOnClick={true}>
+  //           <p>{this.state.popup.popupInfo[i]}</p>
+  //         </Popup>
+  //       );
+  //     }
+  //   });
+  //   return popups;
+  // }
 
   render() {
     const view = this.state.viewport;
-    
-    var markers = this.state.coordinates.latitudes.map((lat, i) => {
+    let markers = [];
+    for (let i = 0; i < this.state.coordinates.latitudes.length; i++){ 
+      var lat = this.state.coordinates.latitudes[i]
       var long = this.state.coordinates.longitudes[i];
-      return (<Marker
-                latitude={lat}
-                longitude={long}
-                offsetLeft={-20}
-                offsetTop={10}
-              >
-                <div>{"Marker" + i}</div>
-                <div onClick={() => {
-                  var popupIndex = this.state.popup.popupIndex.slice();
-                  popupIndex[i] = true;
-                  console.log("Clicked! popups: " + popupIndex)
-                  this.setState({popup: {popupInfo: this.state.popup.popupInfo, popupIndex: popupIndex}}, () => {this.renderPopup()});
-                }}>
-                  <img src={mark} className="marker_style" alt="fireSpot"/>
-                </div>
-              </Marker>);
-    });
+      const popupInfo = this.state.popup.popupInfo[i]
+      markers.push(<MapItem lat={lat} long={long} popupInfo={popupInfo}/>);
+    }
     
     return (
       <div>
@@ -94,7 +117,7 @@ export default class Maps extends Component {
           onViewportChange={viewport => this.setState({ viewport })}
         >
         {markers}
-        {this.renderPopup()}
+        {/* {this.renderPopup()} */}
         </ReactMapGL>
       </div>
     );

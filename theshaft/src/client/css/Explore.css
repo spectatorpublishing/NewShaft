@@ -9,17 +9,16 @@ div.sidebar div.map {
 }
 
 div.sidebar {
-    width: 33%;
+    width: 30%;
+    padding-left: 1em;
     min-height: 100%;
-    left: 0;
-    right: 0;
-    top: 0;
     z-index: 1;
     overflow: hidden;
 }
 
 div.map {
     position: fixed;
+    padding-left: 1em;
     float: right;
     width: 67%;
     right: 0;

@@ -1,23 +1,46 @@
 div.DormButton {
 	display: flex;
 	flex-direction: row;
-	border: 2px solid #9B9B9B;
 	color: black;
 	cursor: pointer;
-	padding: 5px;
 	margin-bottom: 2px;
 }
 
 img.dormimage {
-	height: 125px;
-	width: auto;
+	padding: 0px;
+	border: 1px solid #777777;
+	max-height: 10vw;
+	width: 100%;
+	margin-right: 10px;
+	margin-bottom: 10px;
 }
 
 p.school {
+	color: #71a8e0;
+	margin-top: 5px;
 	margin-bottom: 1px;
 	font-size: 0.9em;
 }
 
 h4.dormname {
-	margin-top: 2px;
+	color: #6f6f6f;
+	margin-top: .1em;
+	margin-bottom: .25em;
+}
+
+p.amenities {
+	color: #6f6f6f;
+	margin: 0px;
+}
+
+p.description {
+	font-size: 13px;
+}
+
+span.see-more {
+	font-size: .8em;
+    cursor: pointer;
+    color: #5187ec;
+    text-decoration: underline;
+	text-align: right;
 }
