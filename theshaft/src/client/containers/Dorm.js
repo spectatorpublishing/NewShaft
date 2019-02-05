@@ -85,6 +85,10 @@ let ColThree = styled.div`
 let DormContainer = styled.div`
 `
 
+let AtAGlanceContainer = styled.div`
+  margin-left: 50px;
+`
+
 
 export default class Dorm extends React.PureComponent {
   render() {
@@ -103,14 +107,15 @@ export default class Dorm extends React.PureComponent {
           <ColOne/>
           <ColTwo>
             <Amenities amenities={sampleAmenities}/>
-            <Maps latitudes={[40.7128, 40.7129, 40.7128]} longitudes={[-74.006, -74.007, -74.008]} popupInfo={["carman", "mcbain", "JJ"]}/>
             <ProCon pros={testPros} cons={testCons}></ProCon>
             <FloorPlan floorOffset={1} planArray={["https://housing.columbia.edu/files/housing/Wien%208_2018.jpg", "https://housing.columbia.edu/files/housing/Wien%208_2018.jpg","https://housing.columbia.edu/files/housing/600%209_2016_0.jpg","https://housing.columbia.edu/files/housing/Woodbridge%204_2018.jpg", "https://i.kym-cdn.com/entries/icons/original/000/026/642/kot1.jpg"]}/>
             <Reviews/>
             <RelatedDorms relatedDorms={sampleRelatedDorms}/>
           </ColTwo>
           <ColThree>
-            <AtAGlance location="545 W. 114th St." roomtype="Suite-style doubles" classmakeup="First-Years" numfloors="13"/>
+            <AtAGlanceContainer>
+              <AtAGlance location="545 W. 114th St." roomtype="Suite-style doubles" classmakeup="First-Years" numfloors="13"/>
+            </AtAGlanceContainer>
           </ColThree>
         </Body>
       </DormContainer>
