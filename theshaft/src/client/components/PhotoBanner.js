@@ -3,7 +3,7 @@ import styled from "styled-components";
 
 let PhotosContainer = styled.div`
   display: flex;
-  height: 250px;
+  height: 40vh;
 `
 
 let MainPic = styled.div`

@@ -38,10 +38,10 @@ const testPros = ["pro1", "pro2", "pro3"];
 const testCons = ["con1", "con2", "con3"];
 let Header = styled.div`
   color: #ffffff;
-  font-size: 2rem;
+  font-size: 3rem;
   font-weight: bolder;
   position: relative;
-  top: -80px;
+  top: -100px;
   margin-left: 15vw;
 `
 
@@ -51,8 +51,9 @@ let Blurb = styled.div`
   font-size: 0.8rem;
   font-weight: 300;
   position: relative;
-  top: -80px;
+  top: -100px;
   margin-left: 15vw;
+  margin-bottom: -100px;
   padding: 1.8vw;
   border-radius: 1.5vw;
   width: 70vw;
