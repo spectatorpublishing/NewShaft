@@ -1,0 +1,20 @@
+section {
+    display: flex;
+    flex-direction: row;
+    flex: 1;
+}
+
+.listBox {
+    flex: 0 1 auto;
+}
+
+.divider {
+    width: 2px;
+    margin: 10px 15px;
+    background: gray;
+}
+
+.header {
+    margin-top: none;
+    margin-bottom: none;
+}

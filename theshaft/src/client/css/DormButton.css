@@ -1,8 +1,65 @@
-.DormButton {
-	text-align: left;
-	border: 5px solid #9B9B9B;
-	color: #9B9B9B;
-    display: inline-block;
+div.DormButton {
+	display: flex;
+	flex-direction: column;
+	color: black;
 	cursor: pointer;
-    margin: 10px;
+	margin-bottom: 2px;
+}
+
+img.dormimage {
+	padding: 0px;
+	border: 1px solid #777777;
+	max-height: 100vw;
+	width: 100%;
+	margin-right: 10px;
+	margin-bottom: 10px;
+}
+
+p.school {
+	color: #71a8e0;
+	margin-top: 5px;
+	margin-bottom: 1px;
+	font-size: 0.9em;
+}
+
+h4.dormname {
+	color: #6f6f6f;
+	margin-top: .1em;
+	margin-bottom: .25em;
+}
+
+p.amenities {
+	color: #6f6f6f;
+	margin: 0px;
+}
+
+p.description {
+	font-size: 13px;
+}
+
+span.see-more {
+	font-size: .8em;
+	cursor: pointer;
+	color: #5187ec;
+	text-decoration: underline;
+	text-align: right;
+}
+
+@media only screen and (min-width: 768px) {
+	div.DormButton {
+		display: flex;
+		flex-direction: row;
+		color: black;
+		cursor: pointer;
+		margin-bottom: 2px;
+	}
+
+	img.dormimage {
+		padding: 0px;
+		border: 1px solid #777777;
+		max-height: 10vw;
+		width: 100%;
+		margin-right: 10px;
+		margin-bottom: 10px;
+	}
 }

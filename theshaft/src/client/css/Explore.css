@@ -1,22 +1,38 @@
-.header {
-	margin: 0 auto;
-	width: 100%;
-	text-align: center;
+div.explore {
+    width: 100%;
+    height: 100%;
+    padding: 0 auto;
 }
 
-.SchoolButton {
-	font-size: 20pt;
-	text-align: center;
-	border: 1px solid #9B9B9B;
-	color: #9B9B9B;
-	display: inline-block;
-	height: 50px;
-	margin: 20px;
-	padding: 5px;
-	cursor: pointer;
+div.sidebar {
+    width: 90%;
+    padding-left: 1em;
 }
 
-.DormButtons {
-	margin: 0 auto;
-	width: 100%;
+div.map {
+    width: 0%;
+}
+
+@media only screen and (min-width: 768px) {
+
+    div.sidebar div.map {
+        padding: 0 auto;
+    }
+
+    div.sidebar {
+        width: 30%;
+        min-height: 100%;
+        z-index: 1;
+        overflow: hidden;
+    }
+
+    div.map {
+        position: fixed;
+        padding-left: 1em;
+        float: right;
+        width: 67%;
+        right: 0;
+        top: 0;
+        z-index:1;
+    }
 }
