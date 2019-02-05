@@ -2,7 +2,7 @@ import React, { Component } from "react";
 import "../css/Reviews.css";
 import Review from "./Review.js";
 
-export default class Reviews extends Component {
+export default class QuickReview extends Component {
   constructor(props) {
     super(props);
 
@@ -20,9 +20,6 @@ export default class Reviews extends Component {
           <div>
             <Review thumbsUp="1" thumbsDown="3"/>
           </div>
-        </div>
-        <div id="readMore">
-          Read All
         </div>
       </div>
     );
