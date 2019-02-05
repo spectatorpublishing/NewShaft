@@ -5,7 +5,7 @@ let ExpanderBox = styled.div`
     border: 1px darkgray solid;
     border-radius: 10px;
     min-width: 250px;
-    margin-bottom: 20px;
+    
 `
 
 let ExpanderContent = styled.div`
