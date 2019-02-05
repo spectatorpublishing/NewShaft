@@ -6,10 +6,11 @@ let PhotosContainer = styled.div`
   height: 40vh;
 `
 
+
 let MainPic = styled.div`
   border-right: white solid 4px;
   display: flex;
-  width: 50%;
+  min-width: 50%;
 `
 
 let Img = styled.img`
@@ -32,18 +33,20 @@ let SidePics = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
-  width: 50%;
+  min-width: 50%;
 `
 
 let TopRow = styled.div`
   display: flex;
-  height: 50%;
+  min-height: 50%;
+  min-width:100%
 `
 
 let BottomRow = styled.div`
   border-top: solid white 4px;
   display: flex;
-  height: 50%;
+  min-height: 50%;
+  min-width: 100%;
 `
 
 let PicMobile = styled.div`
@@ -110,6 +113,7 @@ export default class PhotoBanner extends Component {
               </RightPic>
             </BottomRow>
           </SidePics>
+          
         </PhotosContainer>
       );
     }

@@ -5,8 +5,8 @@ import styled from 'styled-components';
 let FloorPlanBox = styled.div` 
 	border: 1px black solid;
     border-radius: 10px;
-	height: 700px;
-	width: 500px;
+	height: 950px;
+	min-width: 250px;
 	display: flex;
 	flex-direction: row;
 `
@@ -38,13 +38,26 @@ let FloorButton = styled.button`
 `
 
 let PlanDisplay = styled.div`
-	width: 80%;
-	height: 100%
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	max-width: 90%;
+	max-height: 90%
+	align-self: flex-end;
 `
 
 let CurrentPlan = styled.img`
+	
+	
 	max-height: 100%;
 	max-width: 100%;
+
+`
+
+let FloorTitle = styled.h1`
+	width: 30%;
+
+	align-self: flex-start;
 `
 
 export default class FloorPlan extends React.PureComponent {
@@ -76,8 +89,8 @@ export default class FloorPlan extends React.PureComponent {
 			<div>
 				<h1> Floor Plans </h1>
 				<FloorPlanBox>
+				<FloorTitle> Floor {this.state.currentFloor} </FloorTitle>
 					<PlanDisplay>
-						<h1> Floor {this.state.currentFloor} </h1>
 						<CurrentPlan src={this.state.currentPlan} />
 					</PlanDisplay>
 					<FloorList>
