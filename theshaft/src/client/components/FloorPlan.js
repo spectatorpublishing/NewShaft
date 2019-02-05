@@ -56,6 +56,7 @@ let CurrentPlan = styled.img`
 
 let FloorTitle = styled.h1`
 	width: 30%;
+	padding-left: 10px;
 
 	align-self: flex-start;
 `
