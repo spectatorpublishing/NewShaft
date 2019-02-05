@@ -5,6 +5,8 @@ import SearchBar from '../src/client/components/SearchBar.js';
 import PhotoBanner from '../src/client/components/PhotoBanner.js';
 import DormButton from '../src/client/components/DormButton.js';
 import Explore from '../src/client/containers/Explore.js';
+import QuickReview from '../src/client/components/QuickReview.js';
+import Review from '../src/client/components/Review.js';
 import FloorPlan from '../src/client/components/FloorPlan.js';
 import sampleFloor from '../src/client/assets/floor_plans/47 Claremont 1.jpg';
 import FilterButton from '../src/client/components/FilterButton.js';
@@ -12,6 +14,8 @@ import FilterComponent from '../src/client/components/FilterComponent.js';
 import Expander from '../src/client/components/Expander.js';
 import Amenities from '../src/client/components/Amenities.js';
 import AtAGlance from '../src/client/components/AtAGlance.js';
+import FullReview from '../src/client/components/FullReview.js';
+import ReviewList from '../src/client/components/ReviewList.js';
 import RelatedDorms from '../src/client/components/RelatedDorms';
 import ExploreSidebar from '../src/client/components/ExploreSidebar';
 import { MemoryRouter } from 'react-router';
@@ -54,6 +58,15 @@ storiesOf('Explore', module)
   ))
   .add('explore', () => <Explore/>);
 
+storiesOf('QuickReview', module)
+  .add('reviews', () => <QuickReview />);
+
+storiesOf('Review', module)
+  .add('review', () => <Review stars="3" review="I hate this place" thumbsUp="100" thumbsDown="1" />);
+
+storiesOf('ReviewList', module)
+  .add('ReviewList', () => <ReviewList />);
+
 storiesOf('floor plans', module)
   .add('keikaku means plan', () => <FloorPlan floorOffset={1} planArray={[sampleFloor,"https://housing.columbia.edu/files/housing/Wien%208_2018.jpg","https://housing.columbia.edu/files/housing/600%209_2016_0.jpg","https://housing.columbia.edu/files/housing/Woodbridge%204_2018.jpg", "https://i.kym-cdn.com/entries/icons/original/000/026/642/kot1.jpg"]}/>);
 
@@ -65,6 +78,11 @@ storiesOf('Filter', module)
 storiesOf('Expander', module)
   .add('expander', () => <Expander showAll="Here's all of the text shown. It should be longer than the preview." showSome="Here's a preview shown."><h1>Some Static Heading</h1></Expander>);
 
+storiesOf('FullReview', module)
+  .add('fullreview', () => <FullReview />);
+
+storiesOf('test', module)
+  .add('test', () => <Expander showAll={<Reviews/>} showSome="Here's a preview shown."><h1>Some Static Heading</h1></Expander>);
 
 let sampleAmenities = [
   ["bathroom", "Semi-private"],
