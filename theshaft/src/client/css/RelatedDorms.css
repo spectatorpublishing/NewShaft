@@ -14,8 +14,7 @@
 .relatedDormsList {
     /* border: 1px black solid;
     border-radius: 1px;  */
-    max-width: 500px;
-    max-height: 500px;
+    min-width: 250px;
     height: 300px;
     
     
@@ -39,8 +38,10 @@
 
 /* locked at specific px */
 .relatedDormImage {
-    height: 100px;
-    width: 100px;
+    max-height: 150px;
+    max-width: 150px;
+    margin-right: 0.7vh;
+    margin-left : 0.7vh;
 }
 
 /* might need px modification */
