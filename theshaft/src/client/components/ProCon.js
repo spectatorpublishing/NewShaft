@@ -39,13 +39,14 @@ export default class ProCon extends Component {
       }
     
       render() {
+        let k = 0;
         return (
           <Section>
             <ListBox>
               <Head>Pros</Head>
                 <ul>
                   {this.state.pros.map(pro => (
-                    <li>{pro}</li>))}
+                    <li key={k++}>{pro}</li>))}
                 </ul>
             </ListBox>
             <Divider/>
@@ -53,7 +54,7 @@ export default class ProCon extends Component {
               <Head>Cons</Head>
                 <ul>
                   {this.state.cons.map(con => (
-                    <li>{con}</li>))}
+                    <li key={k++}>{con}</li>))}
                 </ul>
             </ListBox>
           </Section>

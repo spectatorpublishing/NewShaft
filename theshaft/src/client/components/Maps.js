@@ -119,11 +119,12 @@ export default class Maps extends Component {
   render() {
     const view = this.state.viewport;
     let markers = [];
+    let k = 0;
     for (let i = 0; i < this.state.coordinates.latitudes.length; i++){ 
       var lat = this.state.coordinates.latitudes[i]
       var long = this.state.coordinates.longitudes[i];
       const popupInfo = this.state.popup.popupInfo[i]
-      markers.push(<MapItem lat={lat} long={long} popupInfo={popupInfo}/>);
+      markers.push(<MapItem key={k++} lat={lat} long={long} popupInfo={popupInfo}/>);
     }
     
     return (
