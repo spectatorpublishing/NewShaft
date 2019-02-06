@@ -62,11 +62,7 @@ let Header = styled.div`
 `
 
 let Blurb = styled.div`
-<<<<<<< HEAD
-  background-color: #63a6ef;
-=======
   background-color: #44a7ff;
->>>>>>> 0dda88735561f7e5703e02168810ea8affef6eda
   color: white;
   font-size: 1rem;
   font-weight: 300;
@@ -74,12 +70,7 @@ let Blurb = styled.div`
   top: -100px;
   margin: 0 15% -100px 15%;
   padding: 1.8vw;
-<<<<<<< HEAD
-  border-radius: 2vw;
-  width: 70vw;
-=======
   border-radius: 1.5vw;
->>>>>>> 0dda88735561f7e5703e02168810ea8affef6eda
 `
 
 let Body = styled.div`
