@@ -87,11 +87,7 @@ export default class FloorPlan extends React.PureComponent {
 				<FloorTitle> Floor Plans </FloorTitle>
 				<FloorPlanBox>
 					<PlanDisplay>
-<<<<<<< HEAD
-						<FloorHeader> Floor {this.state.currentFloor} </FloorHeader>
-=======
 						<FloorNumber> Floor {this.state.currentFloor} </FloorNumber>
->>>>>>> 0dda88735561f7e5703e02168810ea8affef6eda
 						<CurrentPlan src={this.state.currentPlan} />
 					</PlanDisplay>
 					<FloorList>
