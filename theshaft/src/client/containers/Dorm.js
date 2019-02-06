@@ -7,7 +7,7 @@ import AtAGlance from "../components/AtAGlance";
 import Maps from "../components/Maps";
 import ProCon from "../components/ProCon";
 import FloorPlan from "../components/FloorPlan";
-import Reviews from "../components/Reviews";
+import Review from "../components/Review";
 import RelatedDorms from "../components/RelatedDorms";
 
 
