@@ -10,8 +10,9 @@ console.log(process.env)
 console.log(process.env.MAPBOX);
 
 let MarkerIcon = styled.img`
-  height: 10%;
-  width : 10%;
+  transform: translate(-50%, -100%);
+  height: 25px;
+  width : 25px;
 `
 
 class MapItem extends Component {
@@ -19,7 +20,7 @@ class MapItem extends Component {
     super(props)
 
     this.state = {
-      popUp: "flex",
+      popUp: "none",
     }
 
     this.setPopUp = this.setPopUp.bind(this);
@@ -40,10 +41,7 @@ class MapItem extends Component {
       <Marker
         latitude={lat}
         longitude={long}
-        offsetLeft={-20}
-        offsetTop={10}
       >
-        <div>{"Marker"}</div>
         <div onClick={this.setPopUp}>
         <MarkerIcon src={mark} alt="fireSpot"/>
         </div>                
@@ -66,7 +64,7 @@ export default class Maps extends Component {
   constructor(props) {
     super(props);
 
-    var popupIndex = this.props.popupInfo.map(() => {return false})
+    const popupIndex = this.props.popupInfo.map(() => {return false})
 
     this.state = {
       viewport: {
@@ -118,12 +116,13 @@ export default class Maps extends Component {
 
   render() {
     const view = this.state.viewport;
-    let markers = [];
+    const markers = [];
     let k = 0;
     for (let i = 0; i < this.state.coordinates.latitudes.length; i++){ 
-      var lat = this.state.coordinates.latitudes[i]
-      var long = this.state.coordinates.longitudes[i];
-      const popupInfo = this.state.popup.popupInfo[i]
+      const lat = this.state.coordinates.latitudes[i]
+      const long = this.state.coordinates.longitudes[i];
+      const popupInfo = this.state.popup.popupInfo[i];
+      console.log(popupInfo)
       markers.push(<MapItem key={k++} lat={lat} long={long} popupInfo={popupInfo}/>);
     }
     
