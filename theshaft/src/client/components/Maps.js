@@ -1,20 +1,37 @@
+import styled from "styled-components";
 import React, { Component } from "react";
 import ReactMapGL, { Marker, Popup} from "react-map-gl";
 import { fromJS } from "immutable";
 import "mapbox-gl/src/css/mapbox-gl.css";
 import mark from "../assets/marker.svg";
-import "./../css/Maps.css";
 
 console.log("Entry");
 console.log(process.env)
 console.log(process.env.MAPBOX);
 
+let MarkerIcon = styled.img`
+  height: 10%;
+  width : 10%;
+`
+
 class MapItem extends Component {
   constructor(props) {
     super(props)
+
     this.state = {
-      popUp:"flex",
+      popUp: "flex",
     }
+
+    this.setPopUp = this.setPopUp.bind(this);
+    this.clearPopUp = this.clearPopUp.bind(this);
+  }
+
+  setPopUp() {
+    this.setState({popUp: "flex"});
+  }
+
+  clearPopUp() {
+    this.setState({popUp: "none"});
   }
 
   render(){
@@ -27,8 +44,8 @@ class MapItem extends Component {
         offsetTop={10}
       >
         <div>{"Marker"}</div>
-        <div onClick={this.setState({popUp:"flex"})}>
-        <img src={mark} className="marker_style" alt="fireSpot"/>
+        <div onClick={this.setPopUp}>
+        <MarkerIcon src={mark} alt="fireSpot"/>
         </div>                
       </Marker>
       <div style={{display:this.state.popUp}}>
@@ -36,7 +53,7 @@ class MapItem extends Component {
           anchor="bottom-right"
           longitude={long}
           latitude={lat}
-          onClose={this.setState({popUp:"none"})}
+          onClose={this.clearPopUp}
           closeOnClick={true}>
           <p>{popupInfo}</p>
         </Popup>
@@ -48,11 +65,11 @@ class MapItem extends Component {
 export default class Maps extends Component {
   constructor(props) {
     super(props);
+
     var popupIndex = this.props.popupInfo.map(() => {return false})
+
     this.state = {
       viewport: {
-        width: 400,
-        height: 400,
         latitude: 40.7128,
         longitude: -74.006,
         zoom: 15
@@ -67,6 +84,12 @@ export default class Maps extends Component {
       }
     };
     // this.renderPopup = this.renderPopup.bind(this);
+    
+    this.handleViewportChange = this.handleViewportChange.bind(this);
+  }
+
+  handleViewportChange(vp) {
+    this.setState({ viewport: vp });
   }
 
   // renderPopup(){
@@ -111,10 +134,10 @@ export default class Maps extends Component {
           mapStyle={"mapbox://styles/mapbox/basic-v9"}
           latitude={view.latitude}
           longitude={view.longitude}
-          width={view.width}
-          height={view.height}
+          width={"100%"}
+          height={"400px"}
           zoom={view.zoom}
-          onViewportChange={viewport => this.setState({ viewport })}
+          onViewportChange={this.handleViewportChange}
         >
         {markers}
         {/* {this.renderPopup()} */}

@@ -38,13 +38,8 @@ let Header = styled.div`
   font-size: 3rem;
   font-weight: bolder;
   position: relative;
-<<<<<<< HEAD
   top: -100px;
   margin: 0 15%;
-=======
-  top: -140px;
-  margin-left: 15vw;
->>>>>>> origin/develop
 `
 
 let Blurb = styled.div`
