@@ -1,5 +1,43 @@
 import React, { Component } from "react";
-import "../css/Expander.css";
+import styled from 'styled-components';
+
+let ExpanderBox = styled.div`
+    border: 1px darkgray solid;
+    border-radius: 10px;
+    min-width: 250px;
+    margin-bottom: 20px;
+`
+
+let ExpanderContent = styled.div`
+    padding: 1em;
+`
+
+let ExpanderList = styled.div`
+    display: flex;
+    flex-wrap: wrap;
+`
+
+let ToggleSize = styled.button`
+    color: blue;
+    border: none;
+    border-bottom-left-radius: 10px;
+    border-bottom-right-radius: 10px;
+    border-top: 1px darkgray solid;
+    display: flex;
+    font-size: 1em;
+    font-weight: bold;
+    justify-content: center;
+    padding: 0.3em;
+    width: 100%;
+
+    :hover {
+      background-color: whitesmoke;
+    }
+
+    :active {
+      background-color: lightgray;
+    }
+`
 
 export default class Expander extends Component {
   constructor(props) {
@@ -17,17 +55,17 @@ export default class Expander extends Component {
 
   render() {
     return (
-      <div className="expander">
-        <div className="expanderContent">
+      <ExpanderBox>
+        <ExpanderContent>
           {this.props.children}
-          <div className="expanderList">
+          <ExpanderList>
             {this.state.expanded ? this.props.showAll : this.props.showSome}
-          </div>
-        </div>
-        <button className="toggleSize" onClick={this.toggleSize}>
+          </ExpanderList>
+        </ExpanderContent>
+        <ToggleSize onClick={this.toggleSize}>
           Show {this.state.expanded ? "Less" : "All"}  
-        </button>
-      </div>
+        </ToggleSize>
+      </ExpanderBox>
     );
   }
 }

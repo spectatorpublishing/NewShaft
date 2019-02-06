@@ -21,9 +21,6 @@ export default class QuickReview extends Component {
             <Review thumbsUp="1" thumbsDown="3"/>
           </div>
         </div>
-        <div id="readMore">
-          Read All
-        </div>
       </div>
     );
   }

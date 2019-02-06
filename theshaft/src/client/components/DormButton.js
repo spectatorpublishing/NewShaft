@@ -1,28 +1,42 @@
 import React, { Component } from "react";
+import styled from 'styled-components';
 
 import "../css/DormButton.css";
+
+let Button = styled.div`
+  text-align: left;
+  border: 5px solid #9B9B9B;
+  color: #9B9B9B;
+  display: inline-block;
+  cursor: pointer;
+  margin: 10px;
+`
 
 export default class DormButton extends Component {
   constructor(props) {
     super(props);
 
     this.state = {
+      school: this.props.school,
       name: this.props.name,
-      address: this.props.address,
-      sundial_distance: this.props.sundial_distance,
+      image: this.props.image,
+      amenities: this.props.amenities,
       description: this.props.description
     };
   }
 
   render() {
     return (
-      <div className="DormButton" onClick={() => this.onClick(this.state.name)}>
-        <h3> {this.state.name} </h3>
-        <h3> {this.state.address} </h3>
-        <h3> {this.state.sundial_distance} </h3>
-        <h3> {this.state.description} </h3>
+      <div className="DormButton">
+        <img className="dormimage" src={this.state.image} />
+        <div className="details">
+            <p className="school"> { this.state.school } </p>
+            <h4 className="dormname"> {this.state.name} </h4>
+            <p className="amenities"> {this.state.amenities} </p>
+            <p className="description"> {this.state.description} </p>
+            <span className="see-more">see more ></span>
+        </div>
         <br />
-        <h2> CLICK TO VIEW FLOOR PLAN </h2>
       </div>
     );
   }
