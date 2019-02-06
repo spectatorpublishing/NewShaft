@@ -43,17 +43,20 @@ class MapItem extends Component {
         longitude={long}
       >
         <div onClick={this.setPopUp}>
-        <MarkerIcon src={mark} alt="fireSpot"/>
+        <MarkerIcon class='marker-icon' src={mark} alt="fireSpot"/>
         </div>                
       </Marker>
       <div style={{display:this.state.popUp}}>
-        <Popup tipSize={5}
-          anchor="bottom-right"
+        <Popup class='popup' tipSize={5}
+          anchor="bottom-left"
+          offsetTop={-23}
+          offsetLeft={7}
+          dynamicPosition={true}
           longitude={long}
           latitude={lat}
           onClose={this.clearPopUp}
           closeOnClick={true}>
-          <p>{popupInfo}</p>
+          <p style={{margin:'0'}}>{popupInfo}</p>
         </Popup>
       </div>
   </div>
