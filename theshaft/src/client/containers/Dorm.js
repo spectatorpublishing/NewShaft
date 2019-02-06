@@ -8,6 +8,7 @@ import Maps from "../components/Maps";
 import ProCon from "../components/ProCon";
 import FloorPlan from "../components/FloorPlan";
 import QuickReview from "../components/QuickReview";
+import FullReview from "../components/FullReview";
 import RelatedDorms from "../components/RelatedDorms";
 
 let sampleAmenities = [
@@ -22,12 +23,30 @@ let sampleAmenities = [
 ];
 
 let sampleRelatedDorms = [
-  ["Carman", "https://memegenerator.net/img/images/17438601/dat-sad-fat-cat.jpg"],
-  ["Furnald", "https://memegenerator.net/img/images/17438601/dat-sad-fat-cat.jpg"],
-  ["John Jay", "https://memegenerator.net/img/images/17438601/dat-sad-fat-cat.jpg"],
-  ["John Jay", "https://memegenerator.net/img/images/17438601/dat-sad-fat-cat.jpg"],
-  ["John Jay", "https://memegenerator.net/img/images/17438601/dat-sad-fat-cat.jpg"],
-  ["John Jay", "https://memegenerator.net/img/images/17438601/dat-sad-fat-cat.jpg"]
+  [
+    "Carman",
+    "https://memegenerator.net/img/images/17438601/dat-sad-fat-cat.jpg"
+  ],
+  [
+    "Furnald",
+    "https://memegenerator.net/img/images/17438601/dat-sad-fat-cat.jpg"
+  ],
+  [
+    "John Jay",
+    "https://memegenerator.net/img/images/17438601/dat-sad-fat-cat.jpg"
+  ],
+  [
+    "John Jay",
+    "https://memegenerator.net/img/images/17438601/dat-sad-fat-cat.jpg"
+  ],
+  [
+    "John Jay",
+    "https://memegenerator.net/img/images/17438601/dat-sad-fat-cat.jpg"
+  ],
+  [
+    "John Jay",
+    "https://memegenerator.net/img/images/17438601/dat-sad-fat-cat.jpg"
+  ]
 ];
 
 let testPros = ["pro1", "pro2", "pro3"];
@@ -43,7 +62,7 @@ let Header = styled.div`
 `
 
 let Blurb = styled.div`
-  background-color: #44A7FF;
+  background-color: #44a7ff;
   color: white;
   font-size: 1rem;
   font-weight: 300;
@@ -117,7 +136,12 @@ export default class Dorm extends React.PureComponent {
           imageFive="https://arc-anglerfish-arc2-prod-spectator.s3.amazonaws.com/public/52FBXLYM2RGO3FJGK3SPD2KUEE.png"
         />
         <Header>{this.props.match.params.dorm}</Header>
-        <Blurb>This is a blurb for the dorm summary. This is just a test. Blah bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla.  <br/> Hi <br/> Bye</Blurb>
+        <Blurb>
+          This is a blurb for the dorm summary. This is just a test. Blah bla
+          bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla.{" "}
+          <br /> Hi <br /> Bye
+        </Blurb>
+
         <Body>
           {!isMobile && (
           <ColOne />
@@ -135,7 +159,12 @@ export default class Dorm extends React.PureComponent {
 
           {!isMobile && (
           <ColThree>
-            <AtAGlance location="545 W. 114th St." roomtype="Suite-style doubles" classmakeup="First-Years" numfloors="13"/>
+            <AtAGlance
+              location="545 W. 114th St."
+              roomtype="Suite-style doubles"
+              classmakeup="First-Years"
+              numfloors="13"
+            />
           </ColThree>
           )}
         </Body>
