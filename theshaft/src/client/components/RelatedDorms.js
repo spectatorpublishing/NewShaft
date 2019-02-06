@@ -23,7 +23,7 @@ export default class RelatedDorms extends Component {
         this.state = {
             /*  Props format for this.props.relatedDorms 
                 should be array of strings with the following:
-                ["Dorm Name", "Image Source"]. 
+                ["Dorm Name", "Image Source", "Dorm Link"]. 
                 See example in storybook. */
             relatedDorms: this.props.relatedDorms
         };
@@ -43,10 +43,10 @@ export default class RelatedDorms extends Component {
     showRelatedDorms() {
         let index = 0
         return this.state.relatedDorms.map((relatedDorms) => {
-          return <div className="relatedDorm" key={index++}>
+          return <a href={relatedDorms[2]} className="relatedDorm" key={index++}>
             <img src={relatedDorms[1]} className="relatedDormImage" alt={relatedDorms[0]}/>
             <div className="relatedDormName"> {relatedDorms[0]} </div>
-          </div>
+          </a>
           });
       }
 
