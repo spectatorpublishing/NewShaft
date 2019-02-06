@@ -9,15 +9,15 @@ let AmenitiesTitle = styled.h2`
     margin-left: 0.6vw;
     color: grey;
     font-weight: 5000;
-    font-size: 2vw;
+    font-size: 1.7em;
 `
 
 let Amenity = styled.div`
     color: grey;
     display: flex;
     flex-direction: row;
-    width: 18vw;
-    font-size: 1.2vw;
+    width: 50%;
+    font-size: 1em;
     margin-top: 15px;
 `
 
@@ -25,8 +25,6 @@ let AmenityIcon = styled.img`
     opacity: 0.5;
     height: 20px;
 `
-
-
 
 export default class Amenities extends Component {
   constructor(props) {
@@ -43,7 +41,6 @@ export default class Amenities extends Component {
 
     this.showAllAmenities = this.showAllAmenities.bind(this);
     this.showSomeAmenities = this.showSomeAmenities.bind(this);
-    this.toggleSize = this.toggleSize.bind(this);
   }
 
   showAllAmenities() {
@@ -64,10 +61,6 @@ export default class Amenities extends Component {
         <div> {amenity[1]} </div>
       </Amenity>
       });
-  }
-
-  toggleSize(e) {
-    this.setState({expanded: !this.state.expanded});
   }
 
   render() {

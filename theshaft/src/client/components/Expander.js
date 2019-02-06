@@ -2,14 +2,12 @@ import React, { Component } from "react";
 import styled from 'styled-components';
 
 let ExpanderBox = styled.div`
-    border: 1px grey solid;
-    border-radius: 1.5vw;
-    width:40vw;
+    border: 1px darkgray solid;
+    border-radius: 10px;
 `
 
 let ExpanderContent = styled.div`
-    padding: 1.5vw;
-    
+    padding: 1em;
 `
 
 let ExpanderList = styled.div`
@@ -17,22 +15,25 @@ let ExpanderList = styled.div`
     flex-wrap: wrap;
 `
 
-let ToggleSize = styled.div`
-    color: grey;
-    border-radius: 2px;
-   
-    border-top: 1px grey solid;
+let ToggleSize = styled.button`
+    color: blue;
+    border: none;
+    border-bottom-left-radius: 10px;
+    border-bottom-right-radius: 10px;
+    border-top: 1px darkgray solid;
     display: flex;
+    font-size: 1em;
     font-weight: bold;
     justify-content: center;
-    padding: 0.5vw 4vw;
+    padding: 0.3em;
+    width: 100%;
 
     :hover {
-      background-color: #ddd;
+      background-color: whitesmoke;
     }
 
-    :focus {
-      background-color: #ddd;
+    :active {
+      background-color: lightgray;
     }
 `
 

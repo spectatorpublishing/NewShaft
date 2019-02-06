@@ -4,31 +4,27 @@ import styled from 'styled-components';
 let Section = styled.div`
     display: flex;
     flex-direction: row;
-    flex: 1;
     border: 1px grey solid;
-    border-radius: 1.5vw;
-    padding: 1.5vw;
-    width: 37vw;
+    border-radius: 10px;
+    padding: 2vw;
 `
 
 let ListBox = styled.div`
     color: grey;
-    flex: 0 1 auto;
+    flex: 1;
 `
 
 let Divider = styled.div`
     width: 1px;
-    margin-left: 14vw;
-    margin-right: 0.7vw;
+    margin-right: 2vw;
     background-color: grey;
 `
 
 let Head = styled.div`
     color: grey;
-    font-size: 2vw;
+    font-size: 1.5rem;
     font-weight: bolder;
-    margin-top: -0.3vw;
-    margin-left: 0.6vw;
+    margin: .5rem 0 -0.5rem 1.2rem;
 `
 
 
@@ -43,13 +39,14 @@ export default class ProCon extends Component {
       }
     
       render() {
+        let k = 0;
         return (
           <Section>
             <ListBox>
               <Head>Pros</Head>
                 <ul>
                   {this.state.pros.map(pro => (
-                    <li>{pro}</li>))}
+                    <li key={k++}>{pro}</li>))}
                 </ul>
             </ListBox>
             <Divider/>
@@ -57,7 +54,7 @@ export default class ProCon extends Component {
               <Head>Cons</Head>
                 <ul>
                   {this.state.cons.map(con => (
-                    <li>{con}</li>))}
+                    <li key={k++}>{con}</li>))}
                 </ul>
             </ListBox>
           </Section>

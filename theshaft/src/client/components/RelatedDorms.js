@@ -14,38 +14,6 @@ import styled from "styled-components";
 //var element = document.relatedDormsList.style;
 //element.setPropety('--mw', '800px');
 
-let RelatedDormsList = styled.div`
-    /* border: 1px black solid;
-    border-radius: 1px;  */
-    width: 100%
-    max-height: 40vw;
-    height: 30vw;
-`
-
-let RelatedDormsTitle = styled.div`
-    color: grey;
-    font-weight: bolder;
-    font-size: 2vw;
-    margin: 4vw 0vw 1vw 0.5vw;
-`
-
-let RelatedDormsHorizontalView = styled.div`
-    display: flex;
-    justify-content: flex-start;
-    flex-wrap: wrap
-`
-
-let RelatedDormImage = styled.img`
-    height: 6.5vw;
-    width: 6.5vw;
-    margin: 0.3vw 0.3vw 0.3vw 0.3vw;
-`
-
-let RelatedDormName = styled.div`
-    margin: 0px 0 0 1.3vw;
-    color: grey;
-`
-
 
 export default class RelatedDorms extends Component {
     constructor(props) {
