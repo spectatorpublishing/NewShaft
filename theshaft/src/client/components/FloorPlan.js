@@ -5,8 +5,6 @@ import styled from 'styled-components';
 let FloorPlanBox = styled.div` 
 	border: 1px black solid;
     border-radius: 10px;
-	height: 950px;
-	min-width: 250px;
 	display: flex;
 	flex-direction: row;
 `
@@ -14,51 +12,33 @@ let FloorPlanBox = styled.div`
 let FloorList = styled.div`
 	display: flex;
 	flex-direction: column;
+	padding: 1.7rem 1rem 1rem 0;
 	width: 20%;
-	height: 60%;
-	padding: 1em;
-	// border: 3px solid #9B9B9B;
-	// border-radius: 10px;
-	text-align: center;
+`
+
+let FloorNumber = styled.h1`
+	margin-left: 1.5rem;
 `
 
 let FloorButton = styled.button`
 	background-color: #FFFFFF;
 	border: none;
 	color: #76aaf2;
-	// font-family: raley;
-	font-size: 1em;
-	// margin: 1em;
-	// padding: 0px;
+	font-size: 1rem;
 	background: none;
-	// border: none;
-	// padding: 0.25em 1em;
-	// border: 2px solid palevioletred;
-	// border-radius: 3px;
 `
 
 let PlanDisplay = styled.div`
 	display: flex;
-	align-items: center;
-	justify-content: center;
-	max-width: 90%;
-	max-height: 90%
-	align-self: flex-end;
+	flex-direction: column;
+	width: 80%;
+	height: 100%
 `
 
 let CurrentPlan = styled.img`
-	
-	
 	max-height: 100%;
 	max-width: 100%;
-
-`
-
-let FloorTitle = styled.h1`
-	width: 30%;
-	padding-left: 10px;
-
-	align-self: flex-start;
+	border-bottom-left-radius: 8px;
 `
 
 export default class FloorPlan extends React.PureComponent {
@@ -90,8 +70,8 @@ export default class FloorPlan extends React.PureComponent {
 			<div>
 				<h1> Floor Plans </h1>
 				<FloorPlanBox>
-				<FloorTitle> Floor {this.state.currentFloor} </FloorTitle>
 					<PlanDisplay>
+						<FloorNumber> Floor {this.state.currentFloor} </FloorNumber>
 						<CurrentPlan src={this.state.currentPlan} />
 					</PlanDisplay>
 					<FloorList>

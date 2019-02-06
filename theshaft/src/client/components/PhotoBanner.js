@@ -70,8 +70,6 @@ export default class PhotoBanner extends Component {
     window.addEventListener("resize", this.handleWindowSizeChange);
   }
 
-  // make sure to remove the listener
-  // when the component is not mounted anymore
   componentWillUnmount() {
     window.removeEventListener("resize", this.handleWindowSizeChange);
   }

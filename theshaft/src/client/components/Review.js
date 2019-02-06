@@ -11,32 +11,33 @@ export default class Review extends Component {
   createStars(score) {
     let wrapper = [];
     let stars = [];
+    let k = 0
     for(let i = 0; i < score; i++) {
-      stars.push(<span>&#x2605;</span>);
+      stars.push(<span key={k++}>&#x2605;</span>);
     }
     for(let j = 0; j < 5 - score; j++) {
-      stars.push(<span>&#x2606;</span>);
+      stars.push(<span key={k++}>&#x2606;</span>);
     }
-    wrapper.push(<div>{stars}</div>);
+    wrapper.push(<div key={k++}>{stars}</div>);
     return wrapper;
   }
 
   render() {
     return (
-      <div class="parent">
-        <div class="row">
-          <div class="stars">
+      <div className="parent">
+        <div className="row">
+          <div className="stars">
             {this.createStars(this.props.stars)}
           </div>
           <div>
             User would recommend
           </div>
         </div>
-        <div class="fullReview">
-          <div class="review">
+        <div className="fullReview">
+          <div className="review">
             {this.props.review}
           </div>
-          <div class="thumbs">
+          <div className="thumbs">
             <div>
               	<span>&#x1F44D;</span>
                 <span>{this.props.thumbsUp}</span>
@@ -47,7 +48,7 @@ export default class Review extends Component {
             </div>
           </div>
         </div>
-        <div class="reviewerInfo">
+        <div className="reviewerInfo">
           reviewerInfo
         </div>
       </div>

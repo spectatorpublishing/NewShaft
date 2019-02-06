@@ -7,6 +7,7 @@ import AtAGlance from "../components/AtAGlance";
 import Maps from "../components/Maps";
 import ProCon from "../components/ProCon";
 import FloorPlan from "../components/FloorPlan";
+import QuickReview from "../components/QuickReview";
 import FullReview from "../components/FullReview";
 import RelatedDorms from "../components/RelatedDorms";
 
@@ -48,68 +49,85 @@ let sampleRelatedDorms = [
   ]
 ];
 
-const testPros = ["pro1", "pro2", "pro3"];
-const testCons = ["con1", "con2", "con3"];
+let testPros = ["pro1", "pro2", "pro3"];
+let testCons = ["con1", "con2", "con3"];
+
 let Header = styled.div`
   color: #ffffff;
   font-size: 3rem;
   font-weight: bolder;
   position: relative;
-  top: -140px;
-  margin-left: 15vw;
-`;
+  top: -100px;
+  margin: 0 15%;
+`
 
 let Blurb = styled.div`
   background-color: #44a7ff;
   color: white;
-  font-size: 0.8rem;
+  font-size: 1rem;
   font-weight: 300;
   position: relative;
-  top: -140px;
-  margin-left: 15vw;
-  margin-bottom: -130px;
+  top: -100px;
+  margin: 0 15% -100px 15%;
   padding: 1.8vw;
   border-radius: 1.5vw;
-  width: 70vw;
-`;
+`
 
 let Body = styled.div`
   display: flex;
   flex-direction: row;
-`;
+  align-items: flex-start;
+  padding: 2rem 10vw 6rem 10vw;
+`
 
 let ColOne = styled.div`
   display: flex;
-  width: 33%;
-`;
+  width: 15%;
+`
 
 let ColTwo = styled.div`
   display: flex;
   flex-direction: column;
-  width: 50%;
-  margin-top: 50px;
-`;
+  width: ${(mobile) => mobile ? `100%`: `50%`};
+`
 
 let ColThree = styled.div`
   display: flex;
-  flex-direction: column;
-  width: 33%;
-`;
-
-let DormContainer = styled.div``;
-
-let AtAGlanceContainer = styled.div`
-  margin-left: 50px;
-`;
-
-let Block = styled.div`
-  margin-bottom: 25px;
-`;
+  width: 35%;
+  margin-left: 5vw;
+`
 
 export default class Dorm extends React.PureComponent {
+  constructor(props) {
+    super(props);
+
+    this.state = {
+      amenities: sampleAmenities,
+      relatedDorms: sampleRelatedDorms,
+      pros: testPros,
+      cons: testCons,
+      width: window.innerWidth
+    }
+
+    this.handleWindowSizeChange = this.handleWindowSizeChange.bind(this);
+  }
+
+  componentDidMount() {
+    window.addEventListener("resize", this.handleWindowSizeChange);
+  }
+
+  componentWillUnmount() {
+    window.removeEventListener("resize", this.handleWindowSizeChange);
+  }
+
+  handleWindowSizeChange() {
+    this.setState({ width: window.innerWidth });
+  }
+
   render() {
+    const isMobile = this.state.width <= 700;
     return (
-      <DormContainer>
+      <div>
         <PhotoBanner
           imageOne="https://arc-anglerfish-arc2-prod-spectator.s3.amazonaws.com/public/52FBXLYM2RGO3FJGK3SPD2KUEE.png"
           imageTwo="https://arc-anglerfish-arc2-prod-spectator.s3.amazonaws.com/public/52FBXLYM2RGO3FJGK3SPD2KUEE.png"
@@ -125,45 +143,32 @@ export default class Dorm extends React.PureComponent {
         </Blurb>
 
         <Body>
+          {!isMobile && (
           <ColOne />
-          <ColTwo>
-            <Block>
-              <Amenities amenities={sampleAmenities} />
-            </Block>
-            <Block>
-              <ProCon pros={testPros} cons={testCons} />
-            </Block>
-            <Block>
-              <FloorPlan
-                floorOffset={1}
-                planArray={[
-                  "https://housing.columbia.edu/files/housing/Wien%208_2018.jpg",
-                  "https://housing.columbia.edu/files/housing/Wien%208_2018.jpg",
-                  "https://housing.columbia.edu/files/housing/600%209_2016_0.jpg",
-                  "https://housing.columbia.edu/files/housing/Woodbridge%204_2018.jpg",
-                  "https://i.kym-cdn.com/entries/icons/original/000/026/642/kot1.jpg"
-                ]}
-              />
-            </Block>
-            <Block>
-              <FullReview />
-            </Block>
-            <Block>
-              <RelatedDorms relatedDorms={sampleRelatedDorms} />
-            </Block>
+          )}
+
+          <ColTwo mobile={isMobile}>
+            {isMobile && <AtAGlance location="545 W. 114th St." roomtype="Suite-style doubles" classmakeup="First-Years" numfloors="13"/>}
+            <Amenities amenities={this.state.amenities}/>
+            <Maps latitudes={[40.7128, 40.7129, 40.7128]} longitudes={[-74.006, -74.007, -74.008]} popupInfo={["carman", "mcbain", "JJ"]}/>
+            <ProCon pros={this.state.pros} cons={this.state.cons}></ProCon>
+            <FloorPlan floorOffset={1} planArray={["https://housing.columbia.edu/files/housing/Wien%208_2018.jpg", "https://housing.columbia.edu/files/housing/Wien%208_2018.jpg","https://housing.columbia.edu/files/housing/600%209_2016_0.jpg","https://housing.columbia.edu/files/housing/Woodbridge%204_2018.jpg", "https://i.kym-cdn.com/entries/icons/original/000/026/642/kot1.jpg"]}/>
+            <QuickReview/>
+            <RelatedDorms relatedDorms={this.state.relatedDorms}/>
           </ColTwo>
+
+          {!isMobile && (
           <ColThree>
-            <AtAGlanceContainer>
-              <AtAGlance
-                location="545 W. 114th St."
-                roomtype="Suite-style doubles"
-                classmakeup="First-Years"
-                numfloors="13"
-              />
-            </AtAGlanceContainer>
+            <AtAGlance
+              location="545 W. 114th St."
+              roomtype="Suite-style doubles"
+              classmakeup="First-Years"
+              numfloors="13"
+            />
           </ColThree>
+          )}
         </Body>
-      </DormContainer>
+      </div>
     );
   }
 }
