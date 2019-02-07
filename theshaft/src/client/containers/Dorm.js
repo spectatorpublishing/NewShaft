@@ -53,12 +53,17 @@ let testPros = ["pro1", "pro2", "pro3"];
 let testCons = ["con1", "con2", "con3"];
 
 let Header = styled.div`
-  color: #ffffff;
-  font-size: 3rem;
-  font-weight: bolder;
+  display: flex;
   position: relative;
   top: -100px;
   margin: 0 15%;
+  pointer-events: none;
+`
+let DormName = styled.div`
+  color: #ffffff;
+  font-size: 3rem;
+  font-weight: bolder;
+  pointer-events: initial;
 `
 
 let Blurb = styled.div`
@@ -135,7 +140,9 @@ export default class Dorm extends React.PureComponent {
           imageFour="https://arc-anglerfish-arc2-prod-spectator.s3.amazonaws.com/public/52FBXLYM2RGO3FJGK3SPD2KUEE.png"
           imageFive="https://arc-anglerfish-arc2-prod-spectator.s3.amazonaws.com/public/52FBXLYM2RGO3FJGK3SPD2KUEE.png"
         />
-        <Header>{this.props.match.params.dorm}</Header>
+        <Header>
+          <DormName>{this.props.match.params.dorm}</DormName>
+        </Header>
         <Blurb>
           This is a blurb for the dorm summary. This is just a test. Blah bla
           bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla.{" "}
