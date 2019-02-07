@@ -10,6 +10,7 @@ var fakedata = [
         "single": true,
         "double": true,
         "triple": true,
+        "make_up": ["first-years","sophomores","juniors","seniors"],
         "pros": "",
         "cons": ""
     },
@@ -25,6 +26,7 @@ var fakedata = [
         "single": true,
         "double": true,
         "triple": false,
+        "make_up": ["sophomores","juniors","seniors"],
         "pros": "",
         "cons": ""
     },
@@ -40,6 +42,7 @@ var fakedata = [
         "single": true,
         "double": true,
         "triple": true,
+        "make_up": ["sophomores"],
         "pros": "",
         "cons": ""
     }
@@ -61,7 +64,10 @@ function filterDormInfo(data,request, callback){
 
     result = result.filter(function (el) {
         console.log(!_.isEqual(_.difference(request.suite, el.suite),(request.suite))) //debug
-        return (!_.isEqual(_.difference(request.suite, el.suite),(request.suite))||request.suite.length===0) && 
+        // If request make_up is empty, defaults to all
+        // Same thing with suite
+        return (!_.isEqual(_.difference(request.make_up, el.make_up),(request.make_up))||request.make_up.length===0) && 
+        (!_.isEqual(_.difference(request.suite, el.suite),(request.suite))||request.suite.length===0) &&
         ((!request.single || el.single == request.single) &&
         (!request.double || el.double == request.double) &&
         (!request.triple || el.triple == request.triple));
