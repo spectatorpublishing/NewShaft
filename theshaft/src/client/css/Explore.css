@@ -2,14 +2,17 @@ div.explore {
     width: 100%;
     height: 100%;
     padding: 0 auto;
+    overflow: hidden;
 }
 
 div.sidebar {
     width: 90%;
     padding-left: 1em;
+    overflow-y: scroll;
 }
 
 div.map {
+    display: none;
     width: 0%;
 }
 
@@ -23,10 +26,10 @@ div.map {
         width: 30%;
         min-height: 100%;
         z-index: 1;
-        overflow: hidden;
     }
 
     div.map {
+        display: inline;
         position: fixed;
         padding-left: 1em;
         float: right;

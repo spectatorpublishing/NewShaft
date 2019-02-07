@@ -34,6 +34,7 @@ p.amenities {
 }
 
 p.description {
+	display: none;
 	font-size: 13px;
 }
 
@@ -61,5 +62,9 @@ span.see-more {
 		width: 100%;
 		margin-right: 10px;
 		margin-bottom: 10px;
+	}
+
+	p.description {
+		display: inline;
 	}
 }
