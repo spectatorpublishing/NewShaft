@@ -3,6 +3,8 @@ import { Link } from "react-router-dom";
 import Photos from "../components/Photos";
 import Maps from "../components/Maps";
 import ProCon from "../components/ProCon";
+import SocialIcon from 'react-social-icons';
+
 
 export default class Dorm extends React.PureComponent {
 

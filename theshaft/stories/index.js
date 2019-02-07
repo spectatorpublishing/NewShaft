@@ -11,8 +11,10 @@ import FloorPlan from '../src/client/components/FloorPlan.js';
 import sampleFloor from '../src/client/assets/floor_plans/47 Claremont 1.jpg';
 import Expander from '../src/client/components/Expander.js';
 import Amenities from '../src/client/components/Amenities.js';
-import AtAGlance from '../src/client/components/AtAGlance.js'
-import AdComponent from '../src/client/components/AdComp.js'
+import AtAGlance from '../src/client/components/AtAGlance.js';
+import AdComponent from '../src/client/components/AdComp.js';
+import SocialMedia from '../src/client/components/SocialMedia.js';
+//import SocialIcon from 'react-social-icons';
 
 storiesOf('Button', module)
   .add('with text', () => <Button>Hello Button</Button>)
@@ -74,3 +76,6 @@ storiesOf('AtAGlance', module)
 
 storiesOf('Ads', module)
   .add('ads', () => <AdComponent/>);
+
+storiesOf('SocialMedia', module)
+  .add('socials', () => <SocialMedia/>);
