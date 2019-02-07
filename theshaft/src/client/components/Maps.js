@@ -43,11 +43,11 @@ class MapItem extends Component {
         longitude={long}
       >
         <div onClick={this.setPopUp}>
-        <MarkerIcon class='marker-icon' src={mark} alt="fireSpot"/>
+        <MarkerIcon src={mark} alt="fireSpot"/>
         </div>                
       </Marker>
       <div style={{display:this.state.popUp}}>
-        <Popup class='popup' tipSize={5}
+        <Popup tipSize={5}
           anchor="bottom-left"
           offsetTop={-23}
           offsetLeft={7}
@@ -83,39 +83,13 @@ export default class Maps extends Component {
         popupInfo: this.props.popupInfo,
         popupIndex: popupIndex
       }
-    };
-    // this.renderPopup = this.renderPopup.bind(this);
-    
+    };    
     this.handleViewportChange = this.handleViewportChange.bind(this);
   }
 
   handleViewportChange(vp) {
     this.setState({ viewport: vp });
   }
-
-  // renderPopup(){
-  //   console.log("Rendering! popups: " + this.state.popup.popupIndex);
-  //   var popups = this.state.popup.popupIndex.map((e, i) => {
-  //     if(e){
-  //       return (
-  //         <Popup tipSize={5}
-  //           anchor="bottom-right"
-  //           longitude={this.state.coordinates.longitudes[i]}
-  //           latitude={this.state.coordinates.latitudes[i]}
-  //           onClose={() => {
-  //             var popupIndex = this.state.popup.popupIndex;
-  //             popupIndex[i] = false;
-  //             console.log("Closed! popups: " + popupIndex)
-  //             this.setState({popup: {popupInfo: this.state.popup.popupInfo, popupIndex: popupIndex}}), () => {this.renderPopup()}}
-  //           }
-  //           closeOnClick={true}>
-  //           <p>{this.state.popup.popupInfo[i]}</p>
-  //         </Popup>
-  //       );
-  //     }
-  //   });
-  //   return popups;
-  // }
 
   render() {
     const view = this.state.viewport;
@@ -125,15 +99,14 @@ export default class Maps extends Component {
       const lat = this.state.coordinates.latitudes[i]
       const long = this.state.coordinates.longitudes[i];
       const popupInfo = this.state.popup.popupInfo[i];
-      console.log(popupInfo)
       markers.push(<MapItem key={k++} lat={lat} long={long} popupInfo={popupInfo}/>);
     }
     
     return (
       <div>
         <ReactMapGL
-          // mapboxApiAccessToken={process.env.MAPBOX}
-          mapboxApiAccessToken={"pk.eyJ1IjoiYXJzYWxhYW4iLCJhIjoiY2pxeDViZW41MDlmejQ4bnduMnE2aGhyNCJ9.0-y9yPqzqlWLd-yhUe5tcg"}
+          mapboxApiAccessToken={process.env.MAPBOX}
+          // mapboxApiAccessToken={"pk.eyJ1IjoiYXJzYWxhYW4iLCJhIjoiY2pxeDViZW41MDlmejQ4bnduMnE2aGhyNCJ9.0-y9yPqzqlWLd-yhUe5tcg"}
           mapStyle={"mapbox://styles/mapbox/basic-v9"}
           latitude={view.latitude}
           longitude={view.longitude}
@@ -143,7 +116,6 @@ export default class Maps extends Component {
           onViewportChange={this.handleViewportChange}
         >
         {markers}
-        {/* {this.renderPopup()} */}
         </ReactMapGL>
       </div>
     );

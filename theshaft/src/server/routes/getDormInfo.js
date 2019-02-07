@@ -46,10 +46,6 @@ function getDormInfo(con, request, callback) {
 	});
 }
 
-router.get('/', function(req, res) {
-	console.log("get received");
-})
-
 router.post('/', function(req, res, next) {
 	console.log("request received");
 	var con = mysql.createConnection({

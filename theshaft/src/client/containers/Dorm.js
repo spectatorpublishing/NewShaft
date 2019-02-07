@@ -14,7 +14,7 @@ import RelatedDorms from "../components/RelatedDorms";
 var fakedata = [
   {
       "dorm": "110",
-      "adress":"601 W 110th St",
+      "address":"601 W 110th St",
       "description": "Off-campus but not really",
       "college": "barnard",
       "thumbnail_image": "N/A",
@@ -23,13 +23,13 @@ var fakedata = [
       "single": true,
       "double": true,
       "triple": true,
-      "pros": "",
-      "cons": ""
+      "pros": ["pro1", "pro2", "pro3"],
+      "cons": ["con1", "con2", "con3"]
   },
 
   {
       "dorm": "SIC",
-      "adress":"619 W 113th St",
+      "address":"619 W 113th St",
       "description": "Comedy House",
       "college": "columbia",
       "thumbnail_image": "N/A",
@@ -38,13 +38,13 @@ var fakedata = [
       "single": true,
       "double": true,
       "triple": false,
-      "pros": "",
-      "cons": ""
+      "pros": ["pro1", "pro2", "pro3"],
+      "cons": ["con1", "con2", "con3"]
   },
 
   {
       "dorm": "McBain",
-      "adress":"McBain Fake Address",
+      "address":"McBain Fake Address",
       "description": "On Campus",
       "college": "columbia",
       "thumbnail_image": "N/A",
@@ -53,9 +53,24 @@ var fakedata = [
       "single": true,
       "double": true,
       "triple": true,
-      "pros": "",
-      "cons": ""
-  }
+      "pros": ["pro1", "pro2", "pro3"],
+      "cons": ["con1", "con2", "con3"]
+  },
+
+  {
+    "dorm": "Carman",
+    "address":"Carman Fake Address",
+    "description": "On Campus",
+    "college": "columbia",
+    "thumbnail_image": "N/A",
+    "suite": ["4","3"],
+    "walkthrough": false,
+    "single": true,
+    "double": true,
+    "triple": false,
+    "pros": ["pro1", "pro2", "pro3"],
+    "cons": ["con1", "con2", "con3"]
+}
 
 ]
 
@@ -153,26 +168,27 @@ let ColThree = styled.div`
 export default class Dorm extends React.PureComponent {
   constructor(props) {
     super(props);
-
-    this.state = {
-      dormInfo: {
-        dorm: sampleDorm,
-        address: sampleAddress,
-        description: sampleDescription,
-        college: sampleCollege,
-        thumbnail: sampleThumbail,
-        suite: sampleSuite,
-        walkthrough: sampleWalkthrough,
-        single: sampleSingle,
-        double: sampleDouble,
-        triple: sampleTriple,        
-        pros: testPros,
-        cons: testCons,
-        amenities: sampleAmenities,
-        relatedDorms: sampleRelatedDorms,
-      },      
-      width: window.innerWidth
-    }
+    fakedata.forEach((info) => {
+      if(info['dorm'] === this.props.match.params.dorm)
+        this.state = {
+          dormInfo: {
+            address: info['address'],
+            description: info['description'],
+            college: info['college'],
+            thumbnail_image: info['thumbnail_image'],
+            suite: info['suite'],
+            walkthrough: info['walkthrough'],
+            single: info['single'],
+            double: info['double'],
+            triple: info['triple'],        
+            pros: info['pros'], 
+            cons: info['cons'], 
+            amenities: sampleAmenities,
+            relatedDorms: sampleRelatedDorms,
+          },      
+          width: window.innerWidth
+        }
+      });   
 
     this.handleWindowSizeChange = this.handleWindowSizeChange.bind(this);
   }
@@ -181,9 +197,10 @@ export default class Dorm extends React.PureComponent {
 
   componentDidMount() {
     window.addEventListener("resize", this.handleWindowSizeChange);
-    fetch('/api/getDormInfo')
-      .then(res => res.json())
-      .then(dormInfo => this.setState({dormInfo: dormInfo}));
+    // fetch('/api/getDormInfo?table=theshaft.dorm_static_info?DORM=110')
+    //   .then(res => {res.json(); console.log(res);})
+    //   .then(dormInfo => this.setState({dormInfo: dormInfo}));
+      
   }
 
   componentWillUnmount() {
@@ -205,7 +222,7 @@ export default class Dorm extends React.PureComponent {
           imageFour="https://arc-anglerfish-arc2-prod-spectator.s3.amazonaws.com/public/52FBXLYM2RGO3FJGK3SPD2KUEE.png"
           imageFive="https://arc-anglerfish-arc2-prod-spectator.s3.amazonaws.com/public/52FBXLYM2RGO3FJGK3SPD2KUEE.png"
         />
-        <Header>{this.state.dormInfo.dorm}</Header>
+        <Header><DormName>{this.props.match.params.dorm}</DormName></Header>
         <Blurb>{this.state.dormInfo.description}</Blurb>
 
         <Body>
@@ -214,7 +231,7 @@ export default class Dorm extends React.PureComponent {
           )}
 
           <ColTwo mobile={isMobile}>
-            {isMobile && <AtAGlance location="545 W. 114th St." roomtype="Suite-style doubles" classmakeup="First-Years" numfloors="13"/>}
+            {isMobile && <AtAGlance location={this.state.dormInfo.address} roomtype="Suite-style doubles" classmakeup="First-Years" numfloors="13"/>}
             <Amenities amenities={this.state.dormInfo.amenities}/>
             <Maps latitudes={[40.7128, 40.7129, 40.7128]} longitudes={[-74.006, -74.007, -74.008]} popupInfo={["Carman", "McBain", "John Jay"]}/>
             <ProCon pros={this.state.dormInfo.pros} cons={this.state.dormInfo.cons}></ProCon>
@@ -226,7 +243,7 @@ export default class Dorm extends React.PureComponent {
           {!isMobile && (
           <ColThree>
             <AtAGlance
-              location="545 W. 114th St."
+              location={this.state.dormInfo.address}
               roomtype="Suite-style doubles"
               classmakeup="First-Years"
               numfloors="13"
