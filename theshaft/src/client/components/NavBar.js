@@ -8,7 +8,7 @@ let NavContainer = styled.div `
   display: flex;
   flex-direction: row;
   height: 60px;
-  width: 100%;
+  width: 100vw;
 
   ${({ fixed }) => fixed && `
     left: 0;
@@ -76,6 +76,7 @@ let MenuColumn = styled.div`
   top: 60px;
   transition: height .2s ease-out;
   width: 100vw;
+  z-index: 1;
 `
 
 let MenuItem = styled.div`
@@ -162,8 +163,6 @@ export default class NavBar extends Component {
     window.addEventListener("resize", this.handleWindowSizeChange);
   }
 
-  // make sure to remove the listener
-  // when the component is not mounted anymore
   componentWillUnmount() {
     window.removeEventListener("resize", this.handleWindowSizeChange);
   }

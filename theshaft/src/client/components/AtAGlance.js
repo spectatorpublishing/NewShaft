@@ -4,8 +4,9 @@ import styled from 'styled-components';
 let Table = styled.div`
   display: flex;
   justify-content: space-between;
-  width: 250px;
-  border-bottom: 2px solid palevioletred;
+  border-bottom: 2px solid lightgray;
+  padding-bottom: 0.5rem;
+  margin-bottom: 0.5rem;
 `
 
 let Span = styled.div`

@@ -23,7 +23,7 @@ const GlobalStyles = createGlobalStyle`
 const App = () => (
     <main>
     	<GlobalStyles />
-      <NavBar menuItems={menuItems} />
+      <NavBar menuItems={menuItems} fixed />
 	      <Switch>
 	        <Route exact path="/" component={Explore} />
 	        <Route path="/:dorm" component={Dorm} />
