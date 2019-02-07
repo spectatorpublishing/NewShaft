@@ -101,12 +101,17 @@ let testPros = ["pro1", "pro2", "pro3"];
 let testCons = ["con1", "con2", "con3"];
 
 let Header = styled.div`
-  color: #ffffff;
-  font-size: 3rem;
-  font-weight: bolder;
+  display: flex;
   position: relative;
   top: -100px;
   margin: 0 15%;
+  pointer-events: none;
+`
+let DormName = styled.div`
+  color: #ffffff;
+  font-size: 3rem;
+  font-weight: bolder;
+  pointer-events: initial;
 `
 
 let Blurb = styled.div`
