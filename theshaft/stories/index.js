@@ -1,6 +1,7 @@
 import React from 'react';
 import { storiesOf } from '@storybook/react';
 import { Button } from '@storybook/react/demo';
+import ThemeGuide from '../src/client/components/ThemeGuide.js';
 import SearchBar from '../src/client/components/SearchBar.js';
 import PhotoBanner from '../src/client/components/PhotoBanner.js';
 import DormButton from '../src/client/components/DormButton.js';
@@ -25,6 +26,10 @@ import NavBar from '../src/client/components/NavBar.js'
 import Maps from '../src/client/components/Maps.js'
 import FloorPlanSVG from '../src/client/components/FloorPlanSVG.js'
 import { ReactComponent as SymposiumSVG } from "../src/client/assets/test_floorplan.svg";
+
+
+storiesOf('Theme', module)
+  .add('Fonts and Colors', () => <ThemeGuide/>);
 
 storiesOf('Button', module)
   .add('with text', () => <Button>Hello Button</Button>)
