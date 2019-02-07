@@ -46,8 +46,12 @@ function getDormInfo(con, request, callback) {
 	});
 }
 
+router.get('/', function(req, res) {
+	console.log("get received");
+})
+
 router.post('/', function(req, res, next) {
-	
+	console.log("request received");
 	var con = mysql.createConnection({
 	  host: "85.10.205.173",
 	  user: "spectech",
@@ -60,6 +64,7 @@ router.post('/', function(req, res, next) {
 	getDormInfo(con, req.body, (dormInfo) => {
 		res.json(dormInfo)
 		console.log(JSON.stringify(res))
+		// res.send(JSON.stringify(res))
 	})
 
 })

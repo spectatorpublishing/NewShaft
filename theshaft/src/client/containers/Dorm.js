@@ -11,6 +11,54 @@ import QuickReview from "../components/QuickReview";
 import FullReview from "../components/FullReview";
 import RelatedDorms from "../components/RelatedDorms";
 
+var fakedata = [
+  {
+      "dorm": "110",
+      "adress":"601 W 110th St",
+      "description": "Off-campus but not really",
+      "college": "barnard",
+      "thumbnail_image": "N/A",
+      "suite": ["6"],
+      "walkthrough": false,
+      "single": true,
+      "double": true,
+      "triple": true,
+      "pros": "",
+      "cons": ""
+  },
+
+  {
+      "dorm": "SIC",
+      "adress":"619 W 113th St",
+      "description": "Comedy House",
+      "college": "columbia",
+      "thumbnail_image": "N/A",
+      "suite": ["5"],
+      "walkthrough": false,
+      "single": true,
+      "double": true,
+      "triple": false,
+      "pros": "",
+      "cons": ""
+  },
+
+  {
+      "dorm": "McBain",
+      "adress":"McBain Fake Address",
+      "description": "On Campus",
+      "college": "columbia",
+      "thumbnail_image": "N/A",
+      "suite": ["4","3"],
+      "walkthrough": false,
+      "single": true,
+      "double": true,
+      "triple": true,
+      "pros": "",
+      "cons": ""
+  }
+
+]
+
 let sampleAmenities = [
   ["bathroom", "Semi-private"],
   ["laundry", "Laundry - in basement"],
@@ -102,18 +150,35 @@ export default class Dorm extends React.PureComponent {
     super(props);
 
     this.state = {
-      amenities: sampleAmenities,
-      relatedDorms: sampleRelatedDorms,
-      pros: testPros,
-      cons: testCons,
+      dormInfo: {
+        dorm: sampleDorm,
+        address: sampleAddress,
+        description: sampleDescription,
+        college: sampleCollege,
+        thumbnail: sampleThumbail,
+        suite: sampleSuite,
+        walkthrough: sampleWalkthrough,
+        single: sampleSingle,
+        double: sampleDouble,
+        triple: sampleTriple,        
+        pros: testPros,
+        cons: testCons,
+        amenities: sampleAmenities,
+        relatedDorms: sampleRelatedDorms,
+      },      
       width: window.innerWidth
     }
 
     this.handleWindowSizeChange = this.handleWindowSizeChange.bind(this);
   }
 
+
+
   componentDidMount() {
     window.addEventListener("resize", this.handleWindowSizeChange);
+    fetch('/api/getDormInfo')
+      .then(res => res.json())
+      .then(dormInfo => this.setState({dormInfo: dormInfo}));
   }
 
   componentWillUnmount() {
@@ -135,12 +200,8 @@ export default class Dorm extends React.PureComponent {
           imageFour="https://arc-anglerfish-arc2-prod-spectator.s3.amazonaws.com/public/52FBXLYM2RGO3FJGK3SPD2KUEE.png"
           imageFive="https://arc-anglerfish-arc2-prod-spectator.s3.amazonaws.com/public/52FBXLYM2RGO3FJGK3SPD2KUEE.png"
         />
-        <Header>{this.props.match.params.dorm}</Header>
-        <Blurb>
-          This is a blurb for the dorm summary. This is just a test. Blah bla
-          bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla.{" "}
-          <br /> Hi <br /> Bye
-        </Blurb>
+        <Header>{this.state.dormInfo.dorm}</Header>
+        <Blurb>{this.state.dormInfo.description}</Blurb>
 
         <Body>
           {!isMobile && (
@@ -149,12 +210,12 @@ export default class Dorm extends React.PureComponent {
 
           <ColTwo mobile={isMobile}>
             {isMobile && <AtAGlance location="545 W. 114th St." roomtype="Suite-style doubles" classmakeup="First-Years" numfloors="13"/>}
-            <Amenities amenities={this.state.amenities}/>
+            <Amenities amenities={this.state.dormInfo.amenities}/>
             <Maps latitudes={[40.7128, 40.7129, 40.7128]} longitudes={[-74.006, -74.007, -74.008]} popupInfo={["Carman", "McBain", "John Jay"]}/>
-            <ProCon pros={this.state.pros} cons={this.state.cons}></ProCon>
+            <ProCon pros={this.state.dormInfo.pros} cons={this.state.dormInfo.cons}></ProCon>
             <FloorPlan floorOffset={1} planArray={["https://housing.columbia.edu/files/housing/Wien%208_2018.jpg", "https://housing.columbia.edu/files/housing/Wien%208_2018.jpg","https://housing.columbia.edu/files/housing/600%209_2016_0.jpg","https://housing.columbia.edu/files/housing/Woodbridge%204_2018.jpg", "https://i.kym-cdn.com/entries/icons/original/000/026/642/kot1.jpg"]}/>
             <QuickReview/>
-            <RelatedDorms relatedDorms={this.state.relatedDorms}/>
+            <RelatedDorms relatedDorms={this.state.dormInfo.relatedDorms}/>
           </ColTwo>
 
           {!isMobile && (
