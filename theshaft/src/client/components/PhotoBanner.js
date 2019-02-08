@@ -6,27 +6,40 @@ let PhotosContainer = styled.div`
   height: 40vh;
 `
 
-
 let MainPic = styled.div`
   border-right: white solid 4px;
   display: flex;
   min-width: 50%;
+  overflow: hidden;
 `
 
 let Img = styled.img`
   object-fit: cover;
   width: 100%;
+  
+  transition: all 0.3s;
+  -moz-transition: all 0.3s;
+  -webkit-transition: all 0.3s;
+
+  :hover {
+    transform: scale(1.1);
+    -moz-transform: scale(1.1);
+    -webkit-transform: scale(1.1);
+
+  }
 `
 
 let LeftPic = styled.div`
   display: flex;
   width: 50%;
+  overflow: hidden;
 `
 
 let RightPic = styled.div`
   display: flex;
   border-left: solid white 4px;
   width: 50%;
+  overflow: hidden;
 `
 
 let SidePics = styled.div`

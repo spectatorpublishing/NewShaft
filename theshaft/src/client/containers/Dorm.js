@@ -7,8 +7,7 @@ import AtAGlance from "../components/AtAGlance";
 import Maps from "../components/Maps";
 import ProCon from "../components/ProCon";
 import FloorPlan from "../components/FloorPlan";
-import QuickReview from "../components/QuickReview";
-import FullReview from "../components/FullReview";
+import Review from "../components/Review";
 import RelatedDorms from "../components/RelatedDorms";
 
 let sampleAmenities = [
@@ -53,12 +52,17 @@ let testPros = ["pro1", "pro2", "pro3"];
 let testCons = ["con1", "con2", "con3"];
 
 let Header = styled.div`
-  color: #ffffff;
-  font-size: 3rem;
-  font-weight: bolder;
+  display: flex;
   position: relative;
   top: -100px;
   margin: 0 15%;
+  pointer-events: none;
+`
+let DormName = styled.div`
+  color: #ffffff;
+  font-size: 3rem;
+  font-weight: bolder;
+  pointer-events: initial;
 `
 
 let Blurb = styled.div`
@@ -135,7 +139,9 @@ export default class Dorm extends React.PureComponent {
           imageFour="https://arc-anglerfish-arc2-prod-spectator.s3.amazonaws.com/public/52FBXLYM2RGO3FJGK3SPD2KUEE.png"
           imageFive="https://arc-anglerfish-arc2-prod-spectator.s3.amazonaws.com/public/52FBXLYM2RGO3FJGK3SPD2KUEE.png"
         />
-        <Header>{this.props.match.params.dorm}</Header>
+        <Header>
+          <DormName>{this.props.match.params.dorm}</DormName>
+        </Header>
         <Blurb>
           This is a blurb for the dorm summary. This is just a test. Blah bla
           bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla.{" "}
@@ -153,7 +159,7 @@ export default class Dorm extends React.PureComponent {
             <Maps latitudes={[40.7128, 40.7129, 40.7128]} longitudes={[-74.006, -74.007, -74.008]} popupInfo={["carman", "mcbain", "JJ"]}/>
             <ProCon pros={this.state.pros} cons={this.state.cons}></ProCon>
             <FloorPlan floorOffset={1} planArray={["https://housing.columbia.edu/files/housing/Wien%208_2018.jpg", "https://housing.columbia.edu/files/housing/Wien%208_2018.jpg","https://housing.columbia.edu/files/housing/600%209_2016_0.jpg","https://housing.columbia.edu/files/housing/Woodbridge%204_2018.jpg", "https://i.kym-cdn.com/entries/icons/original/000/026/642/kot1.jpg"]}/>
-            <QuickReview/>
+            <Review/>
             <RelatedDorms relatedDorms={this.state.relatedDorms}/>
           </ColTwo>
 

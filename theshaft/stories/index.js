@@ -25,6 +25,10 @@ import NavBar from '../src/client/components/NavBar.js'
 import Maps from '../src/client/components/Maps.js'
 import FloorPlanSVG from '../src/client/components/FloorPlanSVG.js'
 import { ReactComponent as SymposiumSVG } from "../src/client/assets/test_floorplan.svg";
+import ReviewSlider from "../src/client/components/ReviewSlider.js";
+
+storiesOf('ReviewSlider', module)
+  .add('test', () => <ReviewSlider />);
 
 storiesOf('Button', module)
   .add('with text', () => <Button>Hello Button</Button>)
@@ -40,7 +44,7 @@ storiesOf('SearchBar', module)
   .add('with text', () => <SearchBar/>);
 
 storiesOf('PhotoBanner', module)
-  .add('for dorm pages', () => 
+  .add('for dorm pages', () =>
         <PhotoBanner
           imageOne="https://arc-anglerfish-arc2-prod-spectator.s3.amazonaws.com/public/52FBXLYM2RGO3FJGK3SPD2KUEE.png"
           imageTwo="https://memegenerator.net/img/images/17438601/dat-sad-fat-cat.jpg"
