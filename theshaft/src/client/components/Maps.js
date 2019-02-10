@@ -69,8 +69,6 @@ export default class Maps extends Component {
   constructor(props) {
     super(props);
 
-    const popupIndex = this.props.popupInfo.map(() => {return false})
-
     this.state = {
       viewport: {
         latitude: 40.7128,

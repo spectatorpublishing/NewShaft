@@ -22,8 +22,9 @@ var fakedata = [
       "single": true,
       "double": true,
       "triple": true,
-      "pros": ["pro1", "pro2", "pro3"],
-      "cons": ["con1", "con2", "con3"]
+      "make_up": ["first-years","sophomores","juniors","seniors"],
+      "pros": "",
+      "cons": ""
   },
 
   {
@@ -37,8 +38,9 @@ var fakedata = [
       "single": true,
       "double": true,
       "triple": false,
-      "pros": ["pro1", "pro2", "pro3"],
-      "cons": ["con1", "con2", "con3"]
+      "make_up": ["sophomores","juniors","seniors"],
+      "pros": "",
+      "cons": ""
   },
 
   {
@@ -47,30 +49,15 @@ var fakedata = [
       "description": "On Campus",
       "college": "columbia",
       "thumbnail_image": "N/A",
-      "suite": [],
+      "suite": ["4","3"],
       "walkthrough": false,
       "single": true,
       "double": true,
-      "triple": false,
-      "pros": ["pro1", "pro2", "pro3"],
-      "cons": ["con1", "con2", "con3"]
-  },
-
-  {
-    "dorm": "Carman",
-    "address":"Carman Fake Address",
-    "description": "On Campus",
-    "college": "columbia",
-    "thumbnail_image": "N/A",
-    "suite": ["4","3"],
-    "walkthrough": false,
-    "single": true,
-    "double": true,
-    "triple": false,
-    "pros": ["pro1", "pro2", "pro3"],
-    "cons": ["con1", "con2", "con3"]
-}
-
+      "triple": true,
+      "make_up": ["sophomores"],
+      "pros": "",
+      "cons": ""
+  }
 ]
 
 let sampleAmenities = [
@@ -200,7 +187,8 @@ export default class Dorm extends React.PureComponent {
             walkthrough: info['walkthrough'],
             single: info['single'],
             double: info['double'],
-            triple: info['triple'],        
+            triple: info['triple'],  
+            make_up: info['make_up'],      
             pros: info['pros'], 
             cons: info['cons'], 
             amenities: sampleAmenities,
@@ -213,8 +201,6 @@ export default class Dorm extends React.PureComponent {
 
     this.handleWindowSizeChange = this.handleWindowSizeChange.bind(this);
   }
-
-
 
   componentDidMount() {
     window.addEventListener("resize", this.handleWindowSizeChange);
@@ -301,7 +287,7 @@ export default class Dorm extends React.PureComponent {
           )}
 
           <ColTwo mobile={isMobile}>
-            {isMobile && <AtAGlance location={this.state.dormInfo.address} roomtype={roomtype} classmakeup="First-Years" numfloors="13"/>}
+            {isMobile && <AtAGlance location={this.state.dormInfo.address} roomtype={roomtype} classmakeup={this.state.dormInfo.make_up} numfloors="13"/>}
             <Amenities amenities={this.state.dormInfo.amenities}/>
             <Maps latitudes={[40.7128, 40.7129, 40.7128]} longitudes={[-74.006, -74.007, -74.008]} popupInfo={["Carman", "McBain", "John Jay"]} popupId={["Carman", "McBain", "JohnJay"]}/>
             <ProCon pros={this.state.dormInfo.pros} cons={this.state.dormInfo.cons}></ProCon>
@@ -315,7 +301,7 @@ export default class Dorm extends React.PureComponent {
             <AtAGlance
               location={this.state.dormInfo.address}
               roomtype={roomtype}
-              classmakeup="First-Years"
+              classmakeup={this.state.dormInfo.make_up}
               numfloors="13"
             />
           </ColThree>

@@ -1,7 +1,7 @@
 var fakedata = [
     {
         "dorm": "110",
-        "adress":"601 W 110th St",
+        "address":"601 W 110th St",
         "description": "Off-campus but not really",
         "college": "barnard",
         "thumbnail_image": "N/A",
@@ -17,7 +17,7 @@ var fakedata = [
 
     {
         "dorm": "SIC",
-        "adress":"619 W 113th St",
+        "address":"619 W 113th St",
         "description": "Comedy House",
         "college": "columbia",
         "thumbnail_image": "N/A",
@@ -33,7 +33,7 @@ var fakedata = [
 
     {
         "dorm": "McBain",
-        "adress":"McBain Fake Address",
+        "address":"McBain Fake Address",
         "description": "On Campus",
         "college": "columbia",
         "thumbnail_image": "N/A",
@@ -63,7 +63,7 @@ function filterDormInfo(data,request, callback){
     });
 
     result = result.filter(function (el) {
-        console.log(!_.isEqual(_.difference(request.suite, el.suite),(request.suite))) //debug
+        // console.log(!_.isEqual(_.difference(request.suite, el.suite),(request.suite))) //debug
         // If request make_up is empty, defaults to all
         // Same thing with suite
         return (!_.isEqual(_.difference(request.make_up, el.make_up),(request.make_up))||request.make_up.length===0) && 
@@ -74,17 +74,18 @@ function filterDormInfo(data,request, callback){
 
     })
 
-    console.log(result)
     callback(result)
 }
 
 router.post('/', function(req, res, next) {
 	
 
-	console.log("filtering selection of",req.body)
+	// console.log("filtering selection of",req.body)
 	
 	filterDormInfo(fakedata, req.body, (dormInfo) => {
-		res.json(dormInfo)
+        console.log(dormInfo)
+        // JSON.stringify(dormInfo[0])
+		res.json(dormInfo[0])
     });
     
 
