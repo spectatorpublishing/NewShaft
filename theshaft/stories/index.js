@@ -17,6 +17,7 @@ import ExploreSidebar from '../src/client/components/ExploreSidebar';
 import { MemoryRouter } from 'react-router';
 //import RelatedDormsList from '../src/client/components/RelatedDormsList'
 import NavBar from '../src/client/components/NavBar.js'
+import FullScreen from '../src/client/components/FullScreen.js';
 
 storiesOf('Button', module)
   .add('with text', () => <Button>Hello Button</Button>)
@@ -121,3 +122,6 @@ storiesOf('NavBar', module)
   ))
   .add('navbar', () => <NavBar menuItems={sampleMenuItems} />)
   .add('fixed navbar', () => <NavBar menuItems={sampleMenuItems} fixed />);
+
+  storiesOf('FullScreen', module)
+  .add('full screen', () => <FullScreen/>);
