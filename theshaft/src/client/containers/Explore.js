@@ -18,7 +18,7 @@ import Maps from "../components/Maps";
 //   /* flex-direction: row; */
 // }
 
-let Explore = styled.div`
+let ExploreContainer = styled.div`
   width: 100%;
   height: 100%;
   padding: 0 auto;
@@ -158,7 +158,7 @@ export default class Explore extends Component {
 
     return (
 
-      <Explore>
+      <ExploreContainer>
         <ColOne>
           <SideBar>
             <ExploreSidebar dorms={dorms} />
@@ -171,7 +171,7 @@ export default class Explore extends Component {
         </div> */}
         </ColTwo>
         <Updater interval="15" />
-      </Explore>
+      </ExploreContainer>
     );
   }
 }
