@@ -5,7 +5,10 @@ export default class Review extends Component {
   constructor(props) {
     super(props);
 
-    this.state = { };
+    this.state = {
+      thumbsDown: this.props.thumbsDown,
+      thumbsUp: this.props.thumbsUp
+    };
   }
 
   createStars(score) {
@@ -39,12 +42,16 @@ export default class Review extends Component {
           </div>
           <div className="thumbs">
             <div>
-              	<span>&#x1F44D;</span>
-                <span>{this.props.thumbsUp}</span>
+                <button>
+                    <span>&#x1F44D;</span>
+                    <span>{this.props.thumbsUp}</span>
+                </button>
             </div>
             <div>
-                &#x1F44E;
-                <span>{this.props.thumbsDown}</span>
+                <button>
+                    &#x1F44E;
+                    <span>{this.props.thumbsDown}</span>
+                </button>
             </div>
           </div>
         </div>

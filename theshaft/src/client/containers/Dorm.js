@@ -7,8 +7,7 @@ import AtAGlance from "../components/AtAGlance";
 import Maps from "../components/Maps";
 import ProCon from "../components/ProCon";
 import FloorPlan from "../components/FloorPlan";
-import QuickReview from "../components/QuickReview";
-import FullReview from "../components/FullReview";
+import Review from "../components/Review";
 import RelatedDorms from "../components/RelatedDorms";
 
 var fakedata = [
@@ -48,11 +47,11 @@ var fakedata = [
       "description": "On Campus",
       "college": "columbia",
       "thumbnail_image": "N/A",
-      "suite": ["4","3"],
+      "suite": [],
       "walkthrough": false,
       "single": true,
       "double": true,
-      "triple": true,
+      "triple": false,
       "pros": ["pro1", "pro2", "pro3"],
       "cons": ["con1", "con2", "con3"]
   },
@@ -197,7 +196,7 @@ export default class Dorm extends React.PureComponent {
 
   componentDidMount() {
     window.addEventListener("resize", this.handleWindowSizeChange);
-    // fetch('/api/getDormInfo?table=theshaft.dorm_static_info?DORM=110')
+    // fetch('/api/getDormInfo?table=theshaft.dorm_static_info?DORM=' + this.props.match.params.dorm)
     //   .then(res => {res.json(); console.log(res);})
     //   .then(dormInfo => this.setState({dormInfo: dormInfo}));
       
@@ -213,6 +212,28 @@ export default class Dorm extends React.PureComponent {
 
   render() {
     const isMobile = this.state.width <= 700;
+    let roomtype = ""; 
+    if(this.state.dormInfo.suite.length != 0){
+      roomtype += "Suite-style";
+      if(this.state.dormInfo.single && this.state.dormInfo.double)
+        roomtype += " singles and doubles";
+      else if(this.state.dormInfo.single)
+          roomtype += " singles";
+      else if(this.state.dormInfo.double)
+        roomtype += " doubles";
+    }
+    else if(this.state.dormInfo.walkthrough)
+        roomtype += "Doubles and walkthrough doubles"
+    else{
+      if(this.state.dormInfo.single && this.state.dormInfo.double)
+        roomtype += "Singles and doubles"
+      else if(this.state.dormInfo.single)
+        roomtype += "Singles"
+      else if(this.state.dormInfo.double)
+        roomtype += "Doubles"
+    }
+    if(this.state.dormInfo.triple)
+      roomtype += " and triples";
     return (
       <div>
         <PhotoBanner
@@ -231,12 +252,12 @@ export default class Dorm extends React.PureComponent {
           )}
 
           <ColTwo mobile={isMobile}>
-            {isMobile && <AtAGlance location={this.state.dormInfo.address} roomtype="Suite-style doubles" classmakeup="First-Years" numfloors="13"/>}
+            {isMobile && <AtAGlance location={this.state.dormInfo.address} roomtype={roomtype} classmakeup="First-Years" numfloors="13"/>}
             <Amenities amenities={this.state.dormInfo.amenities}/>
             <Maps latitudes={[40.7128, 40.7129, 40.7128]} longitudes={[-74.006, -74.007, -74.008]} popupInfo={["Carman", "McBain", "John Jay"]}/>
             <ProCon pros={this.state.dormInfo.pros} cons={this.state.dormInfo.cons}></ProCon>
             <FloorPlan floorOffset={1} planArray={["https://housing.columbia.edu/files/housing/Wien%208_2018.jpg", "https://housing.columbia.edu/files/housing/Wien%208_2018.jpg","https://housing.columbia.edu/files/housing/600%209_2016_0.jpg","https://housing.columbia.edu/files/housing/Woodbridge%204_2018.jpg", "https://i.kym-cdn.com/entries/icons/original/000/026/642/kot1.jpg"]}/>
-            <QuickReview/>
+            {/* <QuickReview/> */}
             <RelatedDorms relatedDorms={this.state.dormInfo.relatedDorms}/>
           </ColTwo>
 
@@ -244,7 +265,7 @@ export default class Dorm extends React.PureComponent {
           <ColThree>
             <AtAGlance
               location={this.state.dormInfo.address}
-              roomtype="Suite-style doubles"
+              roomtype={roomtype}
               classmakeup="First-Years"
               numfloors="13"
             />

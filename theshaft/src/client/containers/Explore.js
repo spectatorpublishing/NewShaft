@@ -62,6 +62,9 @@ export default class Explore extends Component {
         <div className="sidebar">
           <ExploreSidebar dorms={dorms} />
         </div>
+        <div className="map">
+            <img src={map} />
+        </div>
         <Updater interval="15" />
       </div>
     );
