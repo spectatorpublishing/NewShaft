@@ -84,31 +84,52 @@ let sampleAmenities = [
   ["lounge", "Basement lounge"]
 ];
 
-let sampleRelatedDorms = [
-  [
-    "Carman",
-    "https://memegenerator.net/img/images/17438601/dat-sad-fat-cat.jpg"
-  ],
-  [
-    "Furnald",
-    "https://memegenerator.net/img/images/17438601/dat-sad-fat-cat.jpg"
-  ],
-  [
-    "John Jay",
-    "https://memegenerator.net/img/images/17438601/dat-sad-fat-cat.jpg"
-  ],
-  [
-    "John Jay",
-    "https://memegenerator.net/img/images/17438601/dat-sad-fat-cat.jpg"
-  ],
-  [
-    "John Jay",
-    "https://memegenerator.net/img/images/17438601/dat-sad-fat-cat.jpg"
-  ],
-  [
-    "John Jay",
-    "https://memegenerator.net/img/images/17438601/dat-sad-fat-cat.jpg"
-  ]
+let relatedDorms = [
+  {
+    id: "McBain",
+    school: "Columbia",
+    name: "McBain Hall",
+    image: "https://housing.columbia.edu/files/housing/McBain.jpg",
+    description:
+      "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla nulla nulla, condimentum a mattis in, faucibus id sapien. Sed rhoncus.",
+    amenities: "No AC"
+  },
+  {
+    id: "Carman",
+    school: "Columbia",
+    name: "Carman Hall",
+    image: "https://housing.columbia.edu/files/housing/Carman.jpg",
+    description:
+      "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla nulla nulla, condimentum a mattis in, faucibus id sapien. Sed rhoncus.",
+    amenities: "No AC"
+  },
+  {
+    id: "Sulzberger",
+    school: "Barnard",
+    name: "Sulzberger Tower",
+    image: "https://housing.columbia.edu/files/housing/McBain.jpg",
+    description:
+      "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla nulla nulla, condimentum a mattis in, faucibus id sapien. Sed rhoncus.",
+    amenities: "No AC"
+  },
+  {
+    id: "mcbain",
+    school: "Columbia",
+    name: "McBain Hall",
+    image: "https://housing.columbia.edu/files/housing/McBain.jpg",
+    description:
+      "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla nulla nulla, condimentum a mattis in, faucibus id sapien. Sed rhoncus.",
+    amenities: "No AC"
+  },
+  {
+    id: "mcbain",
+    school: "Columbia",
+    name: "McBain Hall",
+    image: "https://housing.columbia.edu/files/housing/McBain.jpg",
+    description:
+      "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla nulla nulla, condimentum a mattis in, faucibus id sapien. Sed rhoncus.",
+    amenities: "No AC"
+  }
 ];
 
 let testPros = ["pro1", "pro2", "pro3"];
@@ -183,7 +204,8 @@ export default class Dorm extends React.PureComponent {
             pros: info['pros'], 
             cons: info['cons'], 
             amenities: sampleAmenities,
-            relatedDorms: sampleRelatedDorms,
+            //relatedDorms!!!!
+            relatedDorms: relatedDorms,
           },      
           width: window.innerWidth
         }
@@ -199,12 +221,39 @@ export default class Dorm extends React.PureComponent {
     // fetch('/api/getDormInfo?table=theshaft.dorm_static_info?DORM=' + this.props.match.params.dorm)
     //   .then(res => {res.json(); console.log(res);})
     //   .then(dormInfo => this.setState({dormInfo: dormInfo}));
+
+    fakedata.forEach((info) => {
+      if(info['dorm'] === this.props.match.params.dorm)
+        this.state = {
+          dormInfo: {
+            address: info['address'],
+            description: info['description'],
+            college: info['college'],
+            thumbnail_image: info['thumbnail_image'],
+            suite: info['suite'],
+            walkthrough: info['walkthrough'],
+            single: info['single'],
+            double: info['double'],
+            triple: info['triple'],        
+            pros: info['pros'], 
+            cons: info['cons'], 
+            amenities: sampleAmenities,
+            //relatedDorms!!!!
+            relatedDorms: relatedDorms,
+          },      
+          width: window.innerWidth
+        }
+      });   
       
   }
 
   componentWillUnmount() {
     window.removeEventListener("resize", this.handleWindowSizeChange);
   }
+
+//   componentWillReceiveProps(nextProps){
+//     //call your api and update state with new props
+//  }
 
   handleWindowSizeChange() {
     this.setState({ width: window.innerWidth });
@@ -254,11 +303,11 @@ export default class Dorm extends React.PureComponent {
           <ColTwo mobile={isMobile}>
             {isMobile && <AtAGlance location={this.state.dormInfo.address} roomtype={roomtype} classmakeup="First-Years" numfloors="13"/>}
             <Amenities amenities={this.state.dormInfo.amenities}/>
-            <Maps latitudes={[40.7128, 40.7129, 40.7128]} longitudes={[-74.006, -74.007, -74.008]} popupInfo={["Carman", "McBain", "John Jay"]}/>
+            <Maps latitudes={[40.7128, 40.7129, 40.7128]} longitudes={[-74.006, -74.007, -74.008]} popupInfo={["Carman", "McBain", "John Jay"]} popupId={["Carman", "McBain", "JohnJay"]}/>
             <ProCon pros={this.state.dormInfo.pros} cons={this.state.dormInfo.cons}></ProCon>
             <FloorPlan floorOffset={1} planArray={["https://housing.columbia.edu/files/housing/Wien%208_2018.jpg", "https://housing.columbia.edu/files/housing/Wien%208_2018.jpg","https://housing.columbia.edu/files/housing/600%209_2016_0.jpg","https://housing.columbia.edu/files/housing/Woodbridge%204_2018.jpg", "https://i.kym-cdn.com/entries/icons/original/000/026/642/kot1.jpg"]}/>
-            {/* <QuickReview/> */}
-            <RelatedDorms relatedDorms={this.state.dormInfo.relatedDorms}/>
+            <Review/>
+            <RelatedDorms name={this.props.match.params.dorm} relatedDorms={relatedDorms}/>
           </ColTwo>
 
           {!isMobile && (
