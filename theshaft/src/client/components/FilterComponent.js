@@ -31,29 +31,14 @@ export default class FilterComponent extends React.PureComponent {
 	}
 
 	render() {
-		if(this.state.type === "school") {
 			return(
 				<Filter>
 					<Text> filter by {this.state.type}: </Text>
 					<FilterButton name="columbia"/>
 					<FilterButton name="barnard"/>
-			    </Filter>
-			)
-		}
-		else if(this.state.type === "room type") {
-			return(
-				<Filter>
-					<Text> filter by {this.state.type}: </Text>
 					<FilterButton name="single"/>
 					<FilterButton name="double"/>
 					<FilterButton name="# person room"/>
-			    </Filter>
-			)
-		}
-		else if(this.state.type === "year") {
-			return(
-				<Filter>
-					<Text> filter by {this.state.type}: </Text>
 					<FilterButton name="freshperson"/>
 					<FilterButton name="sophomore"/>
 					<FilterButton name="junior"/>
@@ -61,8 +46,5 @@ export default class FilterComponent extends React.PureComponent {
 			    </Filter>
 			)
 		}
-		else {
-			return( <li> oopsie :DDDDDDDDDDDD</li>)
-		}
+		
 	}
-}
