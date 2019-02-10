@@ -22,6 +22,7 @@ import ExploreSidebar from '../src/client/components/ExploreSidebar';
 import { MemoryRouter } from 'react-router';
 //import RelatedDormsList from '../src/client/components/RelatedDormsList'
 import NavBar from '../src/client/components/NavBar.js'
+import FullScreen from '../src/client/components/FullScreen.js';
 import Maps from '../src/client/components/Maps.js'
 import FloorPlanSVG from '../src/client/components/FloorPlanSVG.js'
 import { ReactComponent as SymposiumSVG } from "../src/client/assets/test_floorplan.svg";
@@ -43,16 +44,16 @@ storiesOf('Button', module)
 storiesOf('SearchBar', module)
   .add('with text', () => <SearchBar/>);
 
+
+  let bannerImages = ["https://arc-anglerfish-arc2-prod-spectator.s3.amazonaws.com/public/52FBXLYM2RGO3FJGK3SPD2KUEE.png", 
+  "https://memegenerator.net/img/images/17438601/dat-sad-fat-cat.jpg", 
+  "https://i.imgflip.com/1yt82g.jpg", 
+  "https://i.imgflip.com/26a82h.jpg", 
+  "https://i.imgflip.com/1eg7jb.jpg"];
+
 storiesOf('PhotoBanner', module)
   .add('for dorm pages', () =>
-        <PhotoBanner
-          imageOne="https://arc-anglerfish-arc2-prod-spectator.s3.amazonaws.com/public/52FBXLYM2RGO3FJGK3SPD2KUEE.png"
-          imageTwo="https://memegenerator.net/img/images/17438601/dat-sad-fat-cat.jpg"
-          imageThree="https://i.imgflip.com/1yt82g.jpg"
-          imageFour="https://i.imgflip.com/26a82h.jpg"
-          imageFive="https://i.imgflip.com/1eg7jb.jpg"
-        />
-      );
+        <PhotoBanner bannerImages = {bannerImages}></PhotoBanner>);
 
 storiesOf('DormButton', module)
   .add('dorm button', () => <DormButton name="ADI House" address="21 Savage St." sundial_distance="12 minutes" description="It's lit"/>);
@@ -199,6 +200,8 @@ storiesOf('NavBar', module)
   .add('navbar', () => <NavBar menuItems={sampleMenuItems} />)
   .add('fixed navbar', () => <NavBar menuItems={sampleMenuItems} fixed />);
 
+  storiesOf('FullScreen', module)
+  .add('full screen', () => <FullScreen/>);
 storiesOf('Maps', module)
   .add('map', () => <Maps latitudes={[40.7128, 40.7129, 40.7128]} longitudes={[-74.006, -74.007, -74.008]} popupInfo={["carman", "mcbain", "JJ"]}/>);
 
