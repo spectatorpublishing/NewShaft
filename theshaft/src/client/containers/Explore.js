@@ -75,6 +75,11 @@ let ColTwo = styled.div`
 export default class Explore extends Component {
   constructor(props){
     super(props);
+    
+  }
+
+
+  /*componentDidMount(){
     fetch('/api/filterDorm', {
       method: 'POST',
       headers: {
@@ -104,56 +109,57 @@ export default class Explore extends Component {
           })
         });
       });
-  }
+
+  } */
   
   render() {
-    // var dorms = [
-    //   {
-    //     id: "McBain",
-    //     school: "Columbia",
-    //     name: "McBain Hall",
-    //     image: "https://housing.columbia.edu/files/housing/McBain.jpg",
-    //     description:
-    //       "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla nulla nulla, condimentum a mattis in, faucibus id sapien. Sed rhoncus.",
-    //     amenities: "No AC"
-    //   },
-    //   {
-    //     id: "Carman",
-    //     school: "Columbia",
-    //     name: "Carman Hall",
-    //     image: "https://housing.columbia.edu/files/housing/Carman.jpg",
-    //     description:
-    //       "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla nulla nulla, condimentum a mattis in, faucibus id sapien. Sed rhoncus.",
-    //     amenities: "No AC"
-    //   },
-    //   {
-    //     id: "Sulzberger",
-    //     school: "Barnard",
-    //     name: "Sulzberger Tower",
-    //     image: "https://housing.columbia.edu/files/housing/McBain.jpg",
-    //     description:
-    //       "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla nulla nulla, condimentum a mattis in, faucibus id sapien. Sed rhoncus.",
-    //     amenities: "No AC"
-    //   },
-    //   {
-    //     id: "mcbain",
-    //     school: "Columbia",
-    //     name: "McBain Hall",
-    //     image: "https://housing.columbia.edu/files/housing/McBain.jpg",
-    //     description:
-    //       "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla nulla nulla, condimentum a mattis in, faucibus id sapien. Sed rhoncus.",
-    //     amenities: "No AC"
-    //   },
-    //   {
-    //     id: "mcbain",
-    //     school: "Columbia",
-    //     name: "McBain Hall",
-    //     image: "https://housing.columbia.edu/files/housing/McBain.jpg",
-    //     description:
-    //       "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla nulla nulla, condimentum a mattis in, faucibus id sapien. Sed rhoncus.",
-    //     amenities: "No AC"
-    //   }
-    // ];
+    var dorms = [
+      {
+        id: "McBain",
+        school: "Columbia",
+        name: "McBain Hall",
+        image: "https://housing.columbia.edu/files/housing/McBain.jpg",
+        description:
+          "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla nulla nulla, condimentum a mattis in, faucibus id sapien. Sed rhoncus.",
+        amenities: "No AC"
+      },
+      {
+        id: "Carman",
+        school: "Columbia",
+        name: "Carman Hall",
+        image: "https://housing.columbia.edu/files/housing/Carman.jpg",
+        description:
+          "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla nulla nulla, condimentum a mattis in, faucibus id sapien. Sed rhoncus.",
+        amenities: "No AC"
+      },
+      {
+        id: "Sulzberger",
+        school: "Barnard",
+        name: "Sulzberger Tower",
+        image: "https://housing.columbia.edu/files/housing/McBain.jpg",
+        description:
+          "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla nulla nulla, condimentum a mattis in, faucibus id sapien. Sed rhoncus.",
+        amenities: "No AC"
+      },
+      {
+        id: "mcbain",
+        school: "Columbia",
+        name: "McBain Hall",
+        image: "https://housing.columbia.edu/files/housing/McBain.jpg",
+        description:
+          "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla nulla nulla, condimentum a mattis in, faucibus id sapien. Sed rhoncus.",
+        amenities: "No AC"
+      },
+      {
+        id: "mcbain",
+        school: "Columbia",
+        name: "McBain Hall",
+        image: "https://housing.columbia.edu/files/housing/McBain.jpg",
+        description:
+          "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla nulla nulla, condimentum a mattis in, faucibus id sapien. Sed rhoncus.",
+        amenities: "No AC"
+      }
+    ];
 
 
     return (

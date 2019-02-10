@@ -23,7 +23,7 @@ var fakedata = [
       "double": true,
       "triple": true,
       "make_up": ["first-years","sophomores","juniors","seniors"],
-      "pros": "",
+      "pros": ["pro1", "pro2", "pro3"],
       "cons": ""
   },
 
@@ -39,8 +39,8 @@ var fakedata = [
       "double": true,
       "triple": false,
       "make_up": ["sophomores","juniors","seniors"],
-      "pros": "",
-      "cons": ""
+      "pros": ["pro1", "pro2", "pro3"],
+      "cons": ["con1", "con2", "con3"]
   },
 
   {
@@ -55,8 +55,8 @@ var fakedata = [
       "double": true,
       "triple": true,
       "make_up": ["sophomores"],
-      "pros": "",
-      "cons": ""
+      "pros": ["pro1", "pro2", "pro3"],
+      "cons": ["con1", "con2", "con3"]
   }
 ]
 
@@ -119,8 +119,7 @@ let relatedDorms = [
   }
 ];
 
-let testPros = ["pro1", "pro2", "pro3"];
-let testCons = ["con1", "con2", "con3"];
+
 
 let Header = styled.div`
   display: flex;
