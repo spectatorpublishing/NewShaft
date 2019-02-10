@@ -15,6 +15,7 @@ import "../css/RelatedDorms.css";
 //var element = document.relatedDormsList.style;
 //element.setPropety('--mw', '800px');
 
+
 export default class RelatedDorms extends Component {
     constructor(props) {
         super(props);

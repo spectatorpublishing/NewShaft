@@ -3,47 +3,63 @@ import styled from "styled-components";
 
 let PhotosContainer = styled.div`
   display: flex;
-  height: 250px;
+  height: 40vh;
 `
 
 let MainPic = styled.div`
   border-right: white solid 4px;
   display: flex;
-  width: 50%;
+  min-width: 50%;
+  overflow: hidden;
 `
 
 let Img = styled.img`
   object-fit: cover;
   width: 100%;
+  
+  transition: all 0.3s;
+  -moz-transition: all 0.3s;
+  -webkit-transition: all 0.3s;
+
+  :hover {
+    transform: scale(1.1);
+    -moz-transform: scale(1.1);
+    -webkit-transform: scale(1.1);
+
+  }
 `
 
 let LeftPic = styled.div`
   display: flex;
   width: 50%;
+  overflow: hidden;
 `
 
 let RightPic = styled.div`
   display: flex;
   border-left: solid white 4px;
   width: 50%;
+  overflow: hidden;
 `
 
 let SidePics = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
-  width: 50%;
+  min-width: 50%;
 `
 
 let TopRow = styled.div`
   display: flex;
-  height: 50%;
+  min-height: 50%;
+  min-width:100%
 `
 
 let BottomRow = styled.div`
   border-top: solid white 4px;
   display: flex;
-  height: 50%;
+  min-height: 50%;
+  min-width: 100%;
 `
 
 let PicMobile = styled.div`
@@ -67,8 +83,6 @@ export default class PhotoBanner extends Component {
     window.addEventListener("resize", this.handleWindowSizeChange);
   }
 
-  // make sure to remove the listener
-  // when the component is not mounted anymore
   componentWillUnmount() {
     window.removeEventListener("resize", this.handleWindowSizeChange);
   }
@@ -110,6 +124,7 @@ export default class PhotoBanner extends Component {
               </RightPic>
             </BottomRow>
           </SidePics>
+          
         </PhotosContainer>
       );
     }
