@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import Lightbox from 'react-image-lightbox';
 import 'react-image-lightbox/style.css'; 
+import styled from 'styled-components';
  
 const images = [
   '//placekitten.com/1500/500',
@@ -9,6 +10,16 @@ const images = [
   '//placekitten.com/1500/1500',
 ];
  
+let Button = styled.button`
+    background: none;
+    border: none;
+    padding: 5px;
+    font-weight: bold;
+
+    ${({ clicked }) => clicked && `
+        background: black;
+  	`}
+`
 export default class LightboxExample extends Component {
   constructor(props) {
     super(props);
@@ -24,9 +35,15 @@ export default class LightboxExample extends Component {
  
     return (
       <div>
-        <button type="button" onClick={() => this.setState({ isOpen: true })}>
+        <Button type="button" onClick={() => this.setState({ isOpen: true, photoIndex:0 })}>
           Open Lightbox
-        </button>
+        </Button>
+        <Button type="button" onClick={() => this.setState({ isOpen: true, photoIndex:1 })}>
+          Open Lightbox 2
+        </Button>
+        <Button type="button" onClick={() => this.setState({ isOpen: true, photoIndex:2 })}>
+          <img src="http://assets.ce.columbia.edu/i/ce/intl/intl-fp@2x.jpg" width="200px"/>
+        </Button>
  
         {isOpen && (
           <Lightbox
