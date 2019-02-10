@@ -7,9 +7,71 @@ import AtAGlance from "../components/AtAGlance";
 import Maps from "../components/Maps";
 import ProCon from "../components/ProCon";
 import FloorPlan from "../components/FloorPlan";
-import QuickReview from "../components/QuickReview";
-import FullReview from "../components/FullReview";
+import Review from "../components/Review";
 import RelatedDorms from "../components/RelatedDorms";
+
+var fakedata = [
+  {
+      "dorm": "110",
+      "address":"601 W 110th St",
+      "description": "Off-campus but not really",
+      "college": "barnard",
+      "thumbnail_image": "N/A",
+      "suite": ["6"],
+      "walkthrough": false,
+      "single": true,
+      "double": true,
+      "triple": true,
+      "pros": ["pro1", "pro2", "pro3"],
+      "cons": ["con1", "con2", "con3"]
+  },
+
+  {
+      "dorm": "SIC",
+      "address":"619 W 113th St",
+      "description": "Comedy House",
+      "college": "columbia",
+      "thumbnail_image": "N/A",
+      "suite": ["5"],
+      "walkthrough": false,
+      "single": true,
+      "double": true,
+      "triple": false,
+      "pros": ["pro1", "pro2", "pro3"],
+      "cons": ["con1", "con2", "con3"]
+  },
+
+  {
+      "dorm": "McBain",
+      "address":"McBain Fake Address",
+      "description": "On Campus",
+      "college": "columbia",
+      "thumbnail_image": "N/A",
+      "suite": [],
+      "walkthrough": false,
+      "single": true,
+      "double": true,
+      "triple": false,
+      "pros": ["pro1", "pro2", "pro3"],
+      "cons": ["con1", "con2", "con3"]
+  },
+
+  {
+    "dorm": "Carman",
+    "address":"Carman Fake Address",
+    "description": "On Campus",
+    "college": "columbia",
+    "thumbnail_image": "N/A",
+    "suite": ["4","3"],
+    "walkthrough": false,
+    "single": true,
+    "double": true,
+    "triple": false,
+    "pros": ["pro1", "pro2", "pro3"],
+    "cons": ["con1", "con2", "con3"]
+}
+
+]
 
 let sampleAmenities = [
   ["bathroom", "Semi-private"],
@@ -53,12 +115,17 @@ let testPros = ["pro1", "pro2", "pro3"];
 let testCons = ["con1", "con2", "con3"];
 
 let Header = styled.div`
-  color: #ffffff;
-  font-size: 3rem;
-  font-weight: bolder;
+  display: flex;
   position: relative;
   top: -100px;
   margin: 0 15%;
+  pointer-events: none;
+`
+let DormName = styled.div`
+  color: #ffffff;
+  font-size: 3rem;
+  font-weight: bolder;
+  pointer-events: initial;
 `
 
 let Blurb = styled.div`
@@ -100,20 +167,39 @@ let ColThree = styled.div`
 export default class Dorm extends React.PureComponent {
   constructor(props) {
     super(props);
-
-    this.state = {
-      amenities: sampleAmenities,
-      relatedDorms: sampleRelatedDorms,
-      pros: testPros,
-      cons: testCons,
-      width: window.innerWidth
-    }
+    fakedata.forEach((info) => {
+      if(info['dorm'] === this.props.match.params.dorm)
+        this.state = {
+          dormInfo: {
+            address: info['address'],
+            description: info['description'],
+            college: info['college'],
+            thumbnail_image: info['thumbnail_image'],
+            suite: info['suite'],
+            walkthrough: info['walkthrough'],
+            single: info['single'],
+            double: info['double'],
+            triple: info['triple'],        
+            pros: info['pros'], 
+            cons: info['cons'], 
+            amenities: sampleAmenities,
+            relatedDorms: sampleRelatedDorms,
+          },      
+          width: window.innerWidth
+        }
+      });   
 
     this.handleWindowSizeChange = this.handleWindowSizeChange.bind(this);
   }
 
+
+
   componentDidMount() {
     window.addEventListener("resize", this.handleWindowSizeChange);
+    // fetch('/api/getDormInfo?table=theshaft.dorm_static_info?DORM=' + this.props.match.params.dorm)
+    //   .then(res => {res.json(); console.log(res);})
+    //   .then(dormInfo => this.setState({dormInfo: dormInfo}));
+      
   }
 
   componentWillUnmount() {
@@ -126,6 +212,28 @@ export default class Dorm extends React.PureComponent {
 
   render() {
     const isMobile = this.state.width <= 700;
+    let roomtype = ""; 
+    if(this.state.dormInfo.suite.length != 0){
+      roomtype += "Suite-style";
+      if(this.state.dormInfo.single && this.state.dormInfo.double)
+        roomtype += " singles and doubles";
+      else if(this.state.dormInfo.single)
+          roomtype += " singles";
+      else if(this.state.dormInfo.double)
+        roomtype += " doubles";
+    }
+    else if(this.state.dormInfo.walkthrough)
+        roomtype += "Doubles and walkthrough doubles"
+    else{
+      if(this.state.dormInfo.single && this.state.dormInfo.double)
+        roomtype += "Singles and doubles"
+      else if(this.state.dormInfo.single)
+        roomtype += "Singles"
+      else if(this.state.dormInfo.double)
+        roomtype += "Doubles"
+    }
+    if(this.state.dormInfo.triple)
+      roomtype += " and triples";
     return (
       <div>
         <PhotoBanner
@@ -135,12 +243,8 @@ export default class Dorm extends React.PureComponent {
           imageFour="https://arc-anglerfish-arc2-prod-spectator.s3.amazonaws.com/public/52FBXLYM2RGO3FJGK3SPD2KUEE.png"
           imageFive="https://arc-anglerfish-arc2-prod-spectator.s3.amazonaws.com/public/52FBXLYM2RGO3FJGK3SPD2KUEE.png"
         />
-        <Header>{this.props.match.params.dorm}</Header>
-        <Blurb>
-          This is a blurb for the dorm summary. This is just a test. Blah bla
-          bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla bla.{" "}
-          <br /> Hi <br /> Bye
-        </Blurb>
+        <Header><DormName>{this.props.match.params.dorm}</DormName></Header>
+        <Blurb>{this.state.dormInfo.description}</Blurb>
 
         <Body>
           {!isMobile && (
@@ -148,20 +252,20 @@ export default class Dorm extends React.PureComponent {
           )}
 
           <ColTwo mobile={isMobile}>
-            {isMobile && <AtAGlance location="545 W. 114th St." roomtype="Suite-style doubles" classmakeup="First-Years" numfloors="13"/>}
-            <Amenities amenities={this.state.amenities}/>
-            <Maps latitudes={[40.7128, 40.7129, 40.7128]} longitudes={[-74.006, -74.007, -74.008]} popupInfo={["carman", "mcbain", "JJ"]}/>
-            <ProCon pros={this.state.pros} cons={this.state.cons}></ProCon>
+            {isMobile && <AtAGlance location={this.state.dormInfo.address} roomtype={roomtype} classmakeup="First-Years" numfloors="13"/>}
+            <Amenities amenities={this.state.dormInfo.amenities}/>
+            <Maps latitudes={[40.7128, 40.7129, 40.7128]} longitudes={[-74.006, -74.007, -74.008]} popupInfo={["Carman", "McBain", "John Jay"]}/>
+            <ProCon pros={this.state.dormInfo.pros} cons={this.state.dormInfo.cons}></ProCon>
             <FloorPlan floorOffset={1} planArray={["https://housing.columbia.edu/files/housing/Wien%208_2018.jpg", "https://housing.columbia.edu/files/housing/Wien%208_2018.jpg","https://housing.columbia.edu/files/housing/600%209_2016_0.jpg","https://housing.columbia.edu/files/housing/Woodbridge%204_2018.jpg", "https://i.kym-cdn.com/entries/icons/original/000/026/642/kot1.jpg"]}/>
-            <QuickReview/>
-            <RelatedDorms relatedDorms={this.state.relatedDorms}/>
+            {/* <QuickReview/> */}
+            <RelatedDorms relatedDorms={this.state.dormInfo.relatedDorms}/>
           </ColTwo>
 
           {!isMobile && (
           <ColThree>
             <AtAGlance
-              location="545 W. 114th St."
-              roomtype="Suite-style doubles"
+              location={this.state.dormInfo.address}
+              roomtype={roomtype}
               classmakeup="First-Years"
               numfloors="13"
             />
