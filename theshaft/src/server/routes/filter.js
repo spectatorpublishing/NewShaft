@@ -1,94 +1,92 @@
-var fakedata = [
-    {
-        "dorm": "110",
-        "address":"601 W 110th St",
-        "description": "Off-campus but not really",
-        "college": "barnard",
-        "thumbnail_image": "N/A",
-        "suite": ["6"],
-        "walkthrough": false,
-        "single": true,
-        "double": true,
-        "triple": true,
-        "make_up": ["first-years","sophomores","juniors","seniors"],
-        "pros": "",
-        "cons": ""
-    },
+var fakedata = {
+  Test: {
+    dorm: "110",
+    address: "601 W 110th St",
+    description: "Off-campus but not really",
+    college: "barnard",
+    thumbnail_image: "N/A",
+    suite: ["6"],
+    walkthrough: false,
+    single: true,
+    double: true,
+    triple: true,
+    make_up: ["first-years", "sophomores", "juniors", "seniors"],
+    pros: ["pro1", "pro2", "pro3"],
+    cons: ""
+  },
 
-    {
-        "dorm": "SIC",
-        "address":"619 W 113th St",
-        "description": "Comedy House",
-        "college": "columbia",
-        "thumbnail_image": "N/A",
-        "suite": ["5"],
-        "walkthrough": false,
-        "single": true,
-        "double": true,
-        "triple": false,
-        "make_up": ["sophomores","juniors","seniors"],
-        "pros": "",
-        "cons": ""
-    },
+  Carman: {
+    dorm: "Carman",
+    address: "619 W 113th St",
+    description: "Comedy House",
+    college: "columbia",
+    thumbnail_image: "N/A",
+    suite: ["5"],
+    walkthrough: false,
+    single: true,
+    double: true,
+    triple: false,
+    make_up: ["sophomores", "juniors", "seniors"],
+    pros: ["pro1", "pro2", "pro3"],
+    cons: ["con1", "con2", "con3"]
+  },
 
-    {
-        "dorm": "McBain",
-        "address":"McBain Fake Address",
-        "description": "On Campus",
-        "college": "columbia",
-        "thumbnail_image": "N/A",
-        "suite": ["4","3"],
-        "walkthrough": false,
-        "single": true,
-        "double": true,
-        "triple": true,
-        "make_up": ["sophomores"],
-        "pros": "",
-        "cons": ""
-    }
+  Mcbain: {
+    dorm: "McBain",
+    address: "McBain Fake Address",
+    description: "On Campus",
+    college: "columbia",
+    thumbnail_image: "N/A",
+    suite: ["4", "3"],
+    walkthrough: false,
+    single: true,
+    double: true,
+    triple: true,
+    make_up: ["sophomores"],
+    pros: ["pro1", "pro2", "pro3"],
+    cons: ["con1", "con2", "con3"]
+  }
+};
 
-]
-
-var express = require('express');
+var express = require("express");
 var router = express.Router();
-var mysql = require('mysql');
-var _ = require('underscore')
+var mysql = require("mysql");
+var _ = require("underscore");
 
-function filterDormInfo(data,request, callback){
-    var result = data.filter(function (el) {
-        if(request.college!=-1){
-            return el.college==request.college;
-        }
-        return typeof el.college == 'string' 
-    });
+function filterDormInfo(data, request, callback) {
+  var result = data.filter(function(el) {
+    if (request.college != -1) {
+      return el.college == request.college;
+    }
+    return typeof el.college == "string";
+  });
 
-    result = result.filter(function (el) {
-        // console.log(!_.isEqual(_.difference(request.suite, el.suite),(request.suite))) //debug
-        // If request make_up is empty, defaults to all
-        // Same thing with suite
-        return (!_.isEqual(_.difference(request.make_up, el.make_up),(request.make_up))||request.make_up.length===0) && 
-        (!_.isEqual(_.difference(request.suite, el.suite),(request.suite))||request.suite.length===0) &&
-        ((!request.single || el.single == request.single) &&
+  result = result.filter(function(el) {
+    // console.log(!_.isEqual(_.difference(request.suite, el.suite),(request.suite))) //debug
+    // If request make_up is empty, defaults to all
+    // Same thing with suite
+    return (
+      (!_.isEqual(_.difference(request.make_up, el.make_up), request.make_up) ||
+        request.make_up.length === 0) &&
+      (!_.isEqual(_.difference(request.suite, el.suite), request.suite) ||
+        request.suite.length === 0) &&
+      ((!request.single || el.single == request.single) &&
         (!request.double || el.double == request.double) &&
-        (!request.triple || el.triple == request.triple));
+        (!request.triple || el.triple == request.triple))
+    );
+  });
 
-    })
-
-    callback(result)
+  callback(result);
 }
 
-router.post('/', function(req, res, next) {
-	
+router.post("/", function(req, res, next) {
+  // console.log("filtering selection of",req.body)
 
-	// console.log("filtering selection of",req.body)
-	
-	filterDormInfo(fakedata, req.body, (dormInfo) => {
-        console.log(dormInfo)
-        // JSON.stringify(dormInfo[0])
-		res.json(dormInfo[0])
-    });
-    
-
-})
+  filterDormInfo(fakedata, req.body, dormInfo => {
+    console.log(dormInfo);
+    // JSON.stringify(dormInfo[0])
+    res.json(dormInfo[0]);
+  });
+});
 
 module.exports = router;
