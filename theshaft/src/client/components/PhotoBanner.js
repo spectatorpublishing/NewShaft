@@ -7,6 +7,7 @@ import styled from "styled-components";
 let PhotosContainer = styled.div`
   height: 40vh;
   display: flex;
+  width: 100%;
 `
 
 let MainPic = styled.div`
@@ -18,9 +19,10 @@ let MainPic = styled.div`
 `
 
 let Img = styled.img`
-  object-fit: cover;
   width: 100%;
-  
+  margin-top:-25%;
+  object-fit: cover;
+  object-position: center; 
   transition: all 0.3s;
   -moz-transition: all 0.3s;
   -webkit-transition: all 0.3s;
@@ -116,22 +118,22 @@ export default class PhotoBanner extends Component {
       return (
         <PhotosContainer>
           <Button type="button" onClick={() => this.setState({ isOpen: true, photoIndex:0 })}>
-            <Img src={this.props.bannerImages[0]} />
+            <Img src={images[0]} />
         </Button>
         {isOpen && (
           <Lightbox
-            mainSrc={bannerImages[photoIndex]}
-            nextSrc={bannerImages[(photoIndex + 1) % bannerImages.length]}
-            prevSrc={bannerImages[(photoIndex + bannerImages.length - 1) % bannerImages.length]}
+            mainSrc={images[photoIndex]}
+            nextSrc={images[(photoIndex + 1) % images.length]}
+            prevSrc={images[(photoIndex + images.length - 1) % images.length]}
             onCloseRequest={() => this.setState({ isOpen: false })}
             onMovePrevRequest={() =>
               this.setState({
-                photoIndex: (photoIndex + bannerImages.length - 1) % bannerImages.length,
+                photoIndex: (photoIndex + images.length - 1) % images.length,
               })
             }
             onMoveNextRequest={() =>
               this.setState({
-                photoIndex: (photoIndex + 1) % bannerImages.length,
+                photoIndex: (photoIndex + 1) % images.length,
               })
             }
           />
@@ -143,7 +145,7 @@ export default class PhotoBanner extends Component {
         <PhotosContainer>
           <MainPic>
             <Button type="button" onClick={() => this.setState({ isOpen: true, photoIndex:0 })}>
-              <Img src={this.props.bannerImages[0]}/>
+              <Img src={images[0]}/>
             </Button>
           </MainPic>
         

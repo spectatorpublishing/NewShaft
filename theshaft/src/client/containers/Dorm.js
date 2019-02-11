@@ -7,8 +7,8 @@ import AtAGlance from "../components/AtAGlance";
 import Maps from "../components/Maps";
 import ProCon from "../components/ProCon";
 import FloorPlan from "../components/FloorPlan";
-import Review from "../components/Review";
 import RelatedDorms from "../components/RelatedDorms";
+import Review from "../components/Review";
 
 var fakedata = [
   {
@@ -171,6 +171,12 @@ let ColThree = styled.div`
   margin-left: 5vw;
 `
 
+const bannerImages = ["https://blog.ocm.com/wp-content/uploads/2017/08/Kiss-Pleat_Gray_Main_Alt_Exp.jpg",
+"https://arc-anglerfish-arc2-prod-spectator.s3.amazonaws.com/public/52FBXLYM2RGO3FJGK3SPD2KUEE.png",
+"https://arc-anglerfish-arc2-prod-spectator.s3.amazonaws.com/public/52FBXLYM2RGO3FJGK3SPD2KUEE.png",
+"https://arc-anglerfish-arc2-prod-spectator.s3.amazonaws.com/public/52FBXLYM2RGO3FJGK3SPD2KUEE.png",
+"https://arc-anglerfish-arc2-prod-spectator.s3.amazonaws.com/public/52FBXLYM2RGO3FJGK3SPD2KUEE.png",]
+
 export default class Dorm extends React.PureComponent {
   constructor(props) {
     super(props);
@@ -191,7 +197,6 @@ export default class Dorm extends React.PureComponent {
             pros: info['pros'], 
             cons: info['cons'], 
             amenities: sampleAmenities,
-            //relatedDorms!!!!
             relatedDorms: relatedDorms,
           },      
           width: window.innerWidth
@@ -270,13 +275,7 @@ export default class Dorm extends React.PureComponent {
       roomtype += " and triples";
     return (
       <div>
-        <PhotoBanner
-          imageOne="https://arc-anglerfish-arc2-prod-spectator.s3.amazonaws.com/public/52FBXLYM2RGO3FJGK3SPD2KUEE.png"
-          imageTwo="https://arc-anglerfish-arc2-prod-spectator.s3.amazonaws.com/public/52FBXLYM2RGO3FJGK3SPD2KUEE.png"
-          imageThree="https://arc-anglerfish-arc2-prod-spectator.s3.amazonaws.com/public/52FBXLYM2RGO3FJGK3SPD2KUEE.png"
-          imageFour="https://arc-anglerfish-arc2-prod-spectator.s3.amazonaws.com/public/52FBXLYM2RGO3FJGK3SPD2KUEE.png"
-          imageFive="https://arc-anglerfish-arc2-prod-spectator.s3.amazonaws.com/public/52FBXLYM2RGO3FJGK3SPD2KUEE.png"
-        />
+        <PhotoBanner bannerImages = {bannerImages}/>
         <Header><DormName>{this.props.match.params.dorm}</DormName></Header>
         <Blurb>{this.state.dormInfo.description}</Blurb>
 
