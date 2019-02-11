@@ -7,10 +7,6 @@ import mark from "../assets/marker.svg";
 import { Route, Link, BrowserRouter as Router } from 'react-router-dom';
 
 
-console.log("Entry");
-console.log(process.env)
-console.log(process.env.MAPBOX);
-
 let MarkerIcon = styled.img`
   transform: translate(-50%, -100%);
   height: 25px;
@@ -109,7 +105,6 @@ export default class Maps extends Component {
       <div>
         <ReactMapGL
           mapboxApiAccessToken={process.env.MAPBOX}
-          // mapboxApiAccessToken={"pk.eyJ1IjoiYXJzYWxhYW4iLCJhIjoiY2pxeDViZW41MDlmejQ4bnduMnE2aGhyNCJ9.0-y9yPqzqlWLd-yhUe5tcg"}
           mapStyle={"mapbox://styles/mapbox/basic-v9"}
           latitude={view.latitude}
           longitude={view.longitude}
