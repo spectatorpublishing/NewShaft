@@ -43,7 +43,7 @@ var fakedata = {
     cons: ["con1", "con2", "con3"]
   },
 
-  "Mcbain": {
+  "McBain": {
     dorm: "McBain",
     address: "McBain Fake Address",
     description: "On Campus",
