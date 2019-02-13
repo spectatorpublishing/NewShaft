@@ -54,12 +54,22 @@ var mysql = require("mysql");
 var _ = require("underscore");
 
 function filterDormInfo(data, request, callback) {
-  var result = data.filter(function(el) {
-    if (request.college != -1) {
-      return el.college == request.college;
-    }
-    return typeof el.college == "string";
-  });
+  console.log(request)
+  console.log(_.values(data))
+  if(request.college!=-1){
+    result = _.values(data[request.college])
+  }
+  else {
+    result = _.values(data)
+  }
+
+  console.log(result)
+  // var result = result.filter(function(el) {
+  //   if (request.college != -1) {
+  //     return el.college == request.college;
+  //   }
+  //   return typeof el.college == "string";
+  // });
 
   result = result.filter(function(el) {
     // console.log(!_.isEqual(_.difference(request.suite, el.suite),(request.suite))) //debug
@@ -76,6 +86,7 @@ function filterDormInfo(data, request, callback) {
     );
   });
 
+  console.log(result)
   callback(result);
 }
 
@@ -85,7 +96,7 @@ router.post("/", function(req, res, next) {
   filterDormInfo(fakedata, req.body, dormInfo => {
     console.log(dormInfo);
     // JSON.stringify(dormInfo[0])
-    res.json(dormInfo[0]);
+    res.json(dormInfo);
   });
 });
 
