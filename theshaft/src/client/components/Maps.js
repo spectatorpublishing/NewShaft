@@ -80,7 +80,10 @@ export default class Maps extends Component {
         popupInfo: this.props.popupInfo,
         popupId: this.props.popupId,
         popupIndex: popupIndex
-      }
+      },
+      //width and height are passed in from outside
+      height: this.props.height,
+      width: this.props.width
     };    
     this.handleViewportChange = this.handleViewportChange.bind(this);
   }
@@ -108,8 +111,9 @@ export default class Maps extends Component {
           mapStyle={"mapbox://styles/mapbox/basic-v9"}
           latitude={view.latitude}
           longitude={view.longitude}
-          width={"100%"}
-          height={"400px"}
+          //width and height are passed in from outside
+          width={this.props.width}
+          height={this.props.height}
           zoom={view.zoom}
           onViewportChange={this.handleViewportChange}
         >
