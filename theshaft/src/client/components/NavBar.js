@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import icon from "../assets/react.png";
-import { Link } from 'react-router-dom';
+import { Link, NavLink } from 'react-router-dom';
 import styled from 'styled-components';
 
 let NavContainer = styled.div `
@@ -37,15 +37,14 @@ let MenuContainer = styled.div`
 `
 
 let MenuRow = styled.div`
-  border-bottom: grey 1px solid;
+  border-bottom: solid 1px white;
   display: flex;
   flex-direction: row;
   flex-grow: 1;
   justify-content: space-between;
-  padding: 2px 0 6px
 `
 
-let MenuLink = styled(Link)`
+let MenuLink = styled(NavLink)`
   color: white;
   font-weight: bold;
   text-decoration: none;
@@ -80,7 +79,11 @@ let MenuColumn = styled.div`
 `
 
 let MenuItem = styled.div`
+  border-bottom: solid 2px white;
+  padding-bottom: 0.5rem;
+
   ${({ mobile }) => mobile && `
+    border: none;
     padding: 5% 10%;
   `}
 `
@@ -175,7 +178,7 @@ export default class NavBar extends Component {
     let index = 0
     return this.props.menuItems.map((item) => {
       return <MenuItem key={index++} mobile={isMobile}>
-        <MenuLink to={item[1]}>
+        <MenuLink to={item[1]} activeClassName="navLinkActive">
           {item[0]}
         </MenuLink>
       </MenuItem>
