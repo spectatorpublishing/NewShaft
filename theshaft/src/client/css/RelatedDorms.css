@@ -8,16 +8,45 @@
      */
 
 
+@media only screen and (max-width: 640px){
+    .relatedDormImage {
+        display: none;
+    }
 
+    .relatedDormName {
+        width: 80vw;
+        height: 3rem;
+        border: solid gray 1px;
+        border-radius: 10px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        box-shadow: rgba(0,0,0,0.2) 2px 2px 5px;
+        margin: 0.5rem 0;
+    }
+}
 
-/* consider removing border */
+@media only screen and (min-width: 641px){
+    /* locked at specific px */
+    .relatedDormImage {
+        max-height: 150px;
+        max-width: 150px;
+        margin-right: 0.7vh;
+        margin-left : 0.7vh;
+    }
+
+    /* might need px modification */
+    .relatedDormName {
+        margin: 0px 0 0 5px;
+    }
+
+}
+
 .relatedDormsList {
     /* border: 1px black solid;
     border-radius: 1px;  */
     min-width: 250px;
     height: 300px;
-    
-    
 }
 
 /* might need px modification  */
@@ -35,17 +64,3 @@
     flex-wrap: wrap
     
 }
-
-/* locked at specific px */
-.relatedDormImage {
-    max-height: 150px;
-    max-width: 150px;
-    margin-right: 0.7vh;
-    margin-left : 0.7vh;
-}
-
-/* might need px modification */
-.relatedDormName {
-    margin: 0px 0 0 5px;
-}
-
