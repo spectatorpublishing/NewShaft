@@ -80,11 +80,11 @@ function filterDormInfo(data, request, callback) {
 }
 
 router.post("/", function(req, res, next) {
-  // console.log("filtering selection of",req.body)
+  console.log("filtering selection of",req.body)
 
   filterDormInfo(fakedata, req.body, dormInfo => {
     console.log(dormInfo);
-    // JSON.stringify(dormInfo[0])
+    JSON.stringify(dormInfo[0])
     res.json(dormInfo[0]);
   });
 });
