@@ -1,6 +1,9 @@
 import React, { Component } from "react";
 import { Link } from "react-router-dom";
 import styled from 'styled-components';
+import 'react-image-lightbox/style.css'; 
+import Lightbox from 'react-image-lightbox';
+
 
 let FloorPlanBox = styled.div` 
 	border: 1px black solid;
@@ -75,6 +78,16 @@ let CurrentPlan = styled.img`
 	max-width: 100%;
 	border-bottom-left-radius: 8px;
 `
+let Button = styled.button`
+    background: none;
+    border: none;
+    padding: 5px;
+    font-weight: bold;
+
+    ${({ clicked }) => clicked && `
+		background: black;
+  	`}
+`
 
 export default class FloorPlan extends React.PureComponent {
 
@@ -85,7 +98,9 @@ export default class FloorPlan extends React.PureComponent {
 			floorOffset: this.props.floorOffset + 1,	//offset of starting floor from ground level. eg wien has rooms starting on floor 2, not floor 1, so the offset is 1. the + 1 is because arrays starting at 0 doesn't mesh with floors starting at 1. 
 			currentFloor: this.props.floorOffset + 1,
 			currentPlan: this.props.planArray[0],
-			width: window.innerWidth
+			width: window.innerWidth,
+			isOpen: false,
+			photoIndex: 0
 		}
 		this.handleWindowSizeChange = this.handleWindowSizeChange.bind(this);
 		this.selectFloor = this.selectFloor.bind(this);
@@ -152,6 +167,8 @@ export default class FloorPlan extends React.PureComponent {
 
 	render(){
 		const { width } = this.state;
+		let isOpen = this.state.isOpen;
+		let photoIndex = this.state.photoIndex;
     	const isMobile = width <= 700;
 		if(isMobile) {
 			return (
@@ -178,7 +195,31 @@ export default class FloorPlan extends React.PureComponent {
 					<FloorPlanBox>
 						<PlanDisplay>
 							<FloorNumber> Floor {this.state.currentFloor} </FloorNumber>
-							<CurrentPlan src={this.state.currentPlan} />
+							<Button type="button" onClick = {() => this.setState({isOpen: true, photoIndex: this.state.currentFloor - this.state.floorOffset})}>
+							<CurrentPlan src={this.state.currentPlan}/>
+							{isOpen && ( 
+          					<Lightbox
+           						mainSrc={this.props.planArray[photoIndex]}
+            					nextSrc={this.props.planArray[(photoIndex + 1) % this.props.planArray.length]} 
+            					prevSrc={this.props.planArray[(photoIndex + this.props.planArray.length - 1) % this.props.planArray.length]}
+								onCloseRequest={() => this.setState({ isOpen: false })}
+								onMovePrevRequest={() =>
+								 	this.setState({
+                				 		photoIndex: (photoIndex + this.props.planArray.length - 1) % this.props.planArray.length,
+								   })
+								 }
+								onMoveNextRequest={() => {
+									this.setState({
+										//photoIndex: 0
+										photoIndex: (photoIndex + 1) % this.props.planArray.length,
+										// this.state.currentFloor - this.state.floorOffset
+									});
+									console.log(this.state.photoIndex);
+								}
+							}
+         					 />
+							)} 
+						</Button>
 						</PlanDisplay>
 						<FloorList>
 							{ 
