@@ -28,6 +28,12 @@ import FloorPlanSVG from '../src/client/components/FloorPlanSVG.js'
 import { ReactComponent as SymposiumSVG } from "../src/client/assets/test_floorplan.svg";
 import ReviewSlider from "../src/client/components/ReviewSlider.js";
 
+import FAQTimeline from "../src/client/components/FAQTimeline.js";
+
+//FAQ Timeline
+storiesOf('ReviewSlider', module)
+  .add('FAQ Timeline', () => <FAQTimeline/>)
+
 storiesOf('ReviewSlider', module)
   .add('test', () => <ReviewSlider />);
 
