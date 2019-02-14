@@ -14,10 +14,10 @@ let Button = styled.button`
 `
 var payload = {
 	"college": -1,
-	"single": true,
+	"single": false,
 	"double": false,
 	"triple": false,
-	"suite": ["4","6"],
+	"suite": [],
 	"make_up":[]
 }
 var url  = "http://localhost:8080/api/filterDorm"
@@ -36,7 +36,33 @@ export default class FilterButton extends React.PureComponent {
 
 	onClick() {
 		console.log(this.props.name+"button clicked")
-		
+		var bool = this.state.clicked;
+		if(!bool){
+			if(this.name === 'columbia' || this.name === 'barnard'){
+				if(payload.college !=-1){
+					payload.college = -1
+				}
+				else{
+					payload.college = this.name
+				}
+
+			}
+		}
+		else{
+			if(payload.college === this.name){
+				payload.college = -1
+			}
+			else {
+				if(this.name ==='barnard'){
+					payload.college = 'columbia'
+				}
+				else{
+					payload.college = "barnard"
+				}
+			}
+		}
+		console.log(payload)
+
 		fetch(url, {
 			method: 'POST', // or 'PUT'
 			body: JSON.stringify(payload), //
@@ -46,7 +72,7 @@ export default class FilterButton extends React.PureComponent {
 		  }).then(res => res.json())
 		  .then(response => console.log('Success:', JSON.stringify(response)))
 		  .catch(error => console.error('Error:', error));
-		var bool = this.state.clicked;
+
 		this.setState({clicked: !bool})
 		
 	}

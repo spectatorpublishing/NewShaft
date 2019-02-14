@@ -6,14 +6,18 @@ import DormButton from '../components/DormButton';
 import '../css/ExploreSidebar.css';
 
 export default class ExploreSidebar extends Component {
-
     constructor(props) {
         super(props);
-        this.state = {dorms: props.dorms};
+        this.state = {dorms: this.props.dorms};
+    }
+
+    componentDidUpdate(prevProps){
+        if(prevProps != this.props)
+            this.setState({dorms: this.props.dorms});        
     }
 
     render() {
-        var dormsList = this.state.dorms.map((dorm, index) => (<Link key={index} to={"/" + dorm.id} style={{ textDecoration: 'none' }}><DormButton key={index} school={dorm.school} name={dorm.name} image={dorm.image} description={dorm.description} amenities={dorm.amenities}/></Link>));
+        var dormsList = this.state.dorms.map((dorm, index) => (<Link key={index} to={"/" + dorm.dorm} style={{ textDecoration: 'none' }}><DormButton key={index} school={dorm.college} name={dorm.dorm + ' Hall'} image={dorm.thumbnail_image} description={dorm.description} amenities={dorm.amenities}/></Link>));
         return (
             <div>
                 

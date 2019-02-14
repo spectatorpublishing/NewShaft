@@ -4,7 +4,7 @@ var fakedata = {
     address: "601 W 110th St",
     description: "Off-campus but not really",
     college: "barnard",
-    thumbnail_image: "N/A",
+    thumbnail_image: "https://housing.columbia.edu/files/housing/McBain.jpg",
     suite: ["6"],
     walkthrough: false,
     single: true,
@@ -20,7 +20,7 @@ var fakedata = {
     address: "619 W 113th St",
     description: "Comedy House",
     college: "columbia",
-    thumbnail_image: "N/A",
+    thumbnail_image: "https://housing.columbia.edu/files/housing/Carman.jpg",
     suite: ["5"],
     walkthrough: false,
     single: true,
@@ -36,7 +36,7 @@ var fakedata = {
     address: "McBain Fake Address",
     description: "On Campus",
     college: "columbia",
-    thumbnail_image: "N/A",
+    thumbnail_image: "https://housing.columbia.edu/files/housing/McBain.jpg",
     suite: ["4", "3"],
     walkthrough: false,
     single: true,
@@ -54,8 +54,8 @@ var mysql = require("mysql");
 var _ = require("underscore");
 
 function filterDormInfo(data, request, callback) {
-  console.log(request)
-  console.log(_.values(data))
+  // console.log(request)
+  // console.log(_.values(data))
   if(request.college!=-1){
     result = _.values(data[request.college])
   }
