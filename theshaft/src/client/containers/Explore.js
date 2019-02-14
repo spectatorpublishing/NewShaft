@@ -67,24 +67,30 @@ let ColTwo = styled.div`
 export default class Explore extends Component {
   constructor(props){
     super(props);
-    fetch('/api/filterDorm', {
+    this.state = {dorms: []}
+  }
+
+
+  componentDidMount(){
+    fetch('http://localhost:8080/api/filterDorm', {
       method: 'POST',
-      // headers: {
-      //   'X-Powered-By': 'Express',
-      //   'Content-Type': 'application/json; charset=utf-8'
-      // },
-      body: {
+      headers: {
+        // 'X-Powered-By': 'Express',
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify({
         "college": -1,
         "single": true,
         "double": true,
         "triple": true,
         "suite": [],
         "make_up":[]
-      }
-    }).then((res) => {console.log("\nRESPONSE: "); console.log(res);})
-      .then((dorms) => {
+      })
+    }).then(res => res.json())
+      .then(dorms => {
+        console.log(JSON.stringify(dorms))
         this.setState({
-          dorms: dorms.map((dorm) => {
+          dorm: dorms.map((dorm) => {
             return {
               id: dorm['dorm'],
               school: dorm['college'],
@@ -92,16 +98,10 @@ export default class Explore extends Component {
               image: dorm['thumbnail_image'],
               description: dorm['description'],
               amenities: dorm['amenities']
-            };
+            }
           })
         });
       });
-  }
-
-
-  componentDidMount(){
-    
-
   }
   
   render() {

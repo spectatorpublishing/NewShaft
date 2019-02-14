@@ -40,10 +40,8 @@ export default class FilterButton extends React.PureComponent {
 		fetch(url, {
 			method: 'POST', // or 'PUT'
 			body: JSON.stringify(payload), //
-			mode : "no-cors", 
 			headers:{
 			  'Content-Type': 'application/json',
-			  
 			}
 		  }).then(res => res.json())
 		  .then(response => console.log('Success:', JSON.stringify(response)))

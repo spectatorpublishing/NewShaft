@@ -63,7 +63,7 @@ function filterDormInfo(data, request, callback) {
     result = _.values(data)
   }
 
-  console.log(result)
+  // console.log(result)
   // var result = result.filter(function(el) {
   //   if (request.college != -1) {
   //     return el.college == request.college;
@@ -86,16 +86,14 @@ function filterDormInfo(data, request, callback) {
     );
   });
 
-  console.log(result)
+  // console.log(result)
   callback(result);
 }
 
 router.post("/", function(req, res, next) {
-  console.log("filtering selection of",req.body)
+  // console.log("filtering selection of",req.body)
 
   filterDormInfo(fakedata, req.body, dormInfo => {
-    console.log(dormInfo);
-    // JSON.stringify(dormInfo[0])
     res.json(dormInfo);
   });
 });
