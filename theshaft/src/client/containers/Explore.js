@@ -60,19 +60,19 @@ let ColTwo = styled.div`
   //z-index:1;
   // display: flex;
   flex-direction: column;
-  width: ${(mobile) => mobile ? `67%`: `50%`};
+  width: ${(mobile) => mobile ? '67%': '50%'};
   //width: 50%;
-`
-
+  `
+  
 export default class Explore extends Component {
   constructor(props){
     super(props);
     fetch('/api/filterDorm', {
       method: 'POST',
-      headers: {
-        'X-Powered-By': 'Express',
-        'Content-Type': 'application/json; charset=utf-8'
-      },
+      // headers: {
+      //   'X-Powered-By': 'Express',
+      //   'Content-Type': 'application/json; charset=utf-8'
+      // },
       body: {
         "college": -1,
         "single": true,

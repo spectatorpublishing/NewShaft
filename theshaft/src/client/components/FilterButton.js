@@ -12,6 +12,15 @@ let Button = styled.button`
     	font-weight: bold;
   	`}
 `
+var payload = {
+	"college": -1,
+	"single": true,
+	"double": false,
+	"triple": false,
+	"suite": ["4","6"],
+	"make_up":[]
+}
+var url  = "http://localhost:8080/api/filterDorm"
 
 export default class FilterButton extends React.PureComponent {
 	constructor(props) {
@@ -26,6 +35,19 @@ export default class FilterButton extends React.PureComponent {
 	}
 
 	onClick() {
+		console.log(this.props.name+"button clicked")
+		
+		fetch(url, {
+			method: 'POST', // or 'PUT'
+			body: JSON.stringify(payload), //
+			mode : "no-cors", 
+			headers:{
+			  'Content-Type': 'application/json',
+			  
+			}
+		  }).then(res => res.json())
+		  .then(response => console.log('Success:', JSON.stringify(response)))
+		  .catch(error => console.error('Error:', error));
 		var bool = this.state.clicked;
 		this.setState({clicked: !bool})
 		
