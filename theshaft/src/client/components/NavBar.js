@@ -20,7 +20,7 @@ let NavContainer = styled.div `
 
 let LogoContainer = styled.div`
   margin-left: 10%;
-  width: 40%;
+  width: 20%;
 `
 
 let Logo = styled.img`
@@ -33,7 +33,7 @@ let MenuContainer = styled.div`
   display: flex;
   justify-content: center;
   margin-right: 10%;
-  width: 40%;
+  width: 60%;
 `
 
 let MenuRow = styled.div`
@@ -45,8 +45,10 @@ let MenuRow = styled.div`
 `
 
 let MenuLink = styled(NavLink)`
+  border-bottom: none;
   color: white;
   font-weight: bold;
+  padding-bottom: 0.5rem;
   text-decoration: none;
   text-transform: uppercase;
 
@@ -57,6 +59,16 @@ let MenuLink = styled(NavLink)`
     :focus {
       color: #ddd;
     }
+
+    &.navLinkActive {
+      border-bottom: solid 2px white;
+    }
+
+  ${({ mobile }) => mobile && `
+    border: none;
+    padding: 10px 0;
+    margin: 20px 0;
+  `}
 `
 
 let NavBuffer = styled.div`
@@ -79,13 +91,6 @@ let MenuColumn = styled.div`
 `
 
 let MenuItem = styled.div`
-  border-bottom: solid 2px white;
-  padding-bottom: 0.5rem;
-
-  ${({ mobile }) => mobile && `
-    border: none;
-    padding: 5% 10%;
-  `}
 `
 
 let MenuBtn = styled.input`
@@ -155,10 +160,13 @@ export default class NavBar extends Component {
     super(props);
 
     this.state = {
+      checkedForMobile: false,
       width: window.innerWidth
     }
 
     this.handleWindowSizeChange = this.handleWindowSizeChange.bind(this);
+    this.handleCheckboxChange = this.handleCheckboxChange.bind(this);
+    this.forceClose = this.forceClose.bind(this);
     this.getMenuItems = this.getMenuItems.bind(this);
   }
 
@@ -174,15 +182,31 @@ export default class NavBar extends Component {
     this.setState({ width: window.innerWidth });
   }
 
+  handleCheckboxChange(e) {
+    this.setState({ checkedForMobile: e.target.checked });
+  }
+
+  forceClose() {
+    this.setState({ checkedForMobile: false });
+  }
+
   getMenuItems(isMobile) {
     let index = 0
     return this.props.menuItems.map((item) => {
-      return <MenuItem key={index++} mobile={isMobile}>
-        <MenuLink to={item[1]} activeClassName="navLinkActive">
-          {item[0]}
-        </MenuLink>
-      </MenuItem>
-      });
+      return <MenuLink
+        key={index++}
+        styled={{isMobile}}
+        mobile={isMobile ? 1 : 0} // work around for react-router link not playing nice with non-standard attributes
+        as={item["external"] ? "a" : undefined}
+        href={item["external"] ? item["link"] : undefined}
+        target={item["external"] ? "_blank" : undefined}
+        to={item["external"] ? undefined : item["link"]}
+        activeClassName={item["external"] ? undefined : "navLinkActive"}
+        onClick={this.forceClose}
+      >
+        {item["name"]}
+      </MenuLink>
+    });
   }
 
   render() {
@@ -198,7 +222,12 @@ export default class NavBar extends Component {
     );
     const mobileMenu = (
       <React.Fragment>
-        <MenuBtn type="checkbox" id="menu-btn"/>
+        <MenuBtn 
+          type="checkbox" 
+          id="menu-btn" 
+          checked={this.state.checkedForMobile}
+          onChange={this.handleCheckboxChange}
+        />
         <MenuIcon htmlFor="menu-btn">
           <NavIcon></NavIcon>
         </MenuIcon>
