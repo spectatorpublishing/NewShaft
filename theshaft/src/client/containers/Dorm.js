@@ -270,6 +270,8 @@ export default class Dorm extends React.PureComponent {
               longitudes={[-74.006, -74.007, -74.008]}
               popupInfo={["Carman", "McBain", "John Jay"]}
               popupId={["Carman", "McBain", "JohnJay"]}
+              width={"100%"}
+              height={"300px"}
             />
             <ProCon
               pros={this.state.dormInfo.pros}
