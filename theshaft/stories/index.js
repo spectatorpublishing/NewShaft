@@ -120,14 +120,63 @@ storiesOf('AtAGlance', module)
   .add('at a glance', () => <AtAGlance location="545 W. 114th St." roomtype="Suite-style doubles" classmakeup="First-Years" numfloors="13"/>);
 
 // Related Dorms Content
+// let sampleRelatedDorms = [
+//   ["Carman", "https://memegenerator.net/img/images/17438601/dat-sad-fat-cat.jpg", "link!"],
+//   ["Furnald", "https://memegenerator.net/img/images/17438601/dat-sad-fat-cat.jpg", "link!"],
+//   ["John Jay", "https://memegenerator.net/img/images/17438601/dat-sad-fat-cat.jpg", "link!"],
+//   ["John Jay", "https://memegenerator.net/img/images/17438601/dat-sad-fat-cat.jpg", "link!"],
+//   ["John Jay", "https://memegenerator.net/img/images/17438601/dat-sad-fat-cat.jpg", "link!"],
+//   ["John Jay", "https://memegenerator.net/img/images/17438601/dat-sad-fat-cat.jpg", "link!"]
+// ];
+
 let sampleRelatedDorms = [
-  ["Carman", "https://memegenerator.net/img/images/17438601/dat-sad-fat-cat.jpg"],
-  ["Furnald", "https://memegenerator.net/img/images/17438601/dat-sad-fat-cat.jpg"],
-  ["John Jay", "https://memegenerator.net/img/images/17438601/dat-sad-fat-cat.jpg"],
-  ["John Jay", "https://memegenerator.net/img/images/17438601/dat-sad-fat-cat.jpg"],
-  ["John Jay", "https://memegenerator.net/img/images/17438601/dat-sad-fat-cat.jpg"],
-  ["John Jay", "https://memegenerator.net/img/images/17438601/dat-sad-fat-cat.jpg"]
+  {
+    id: "McBain",
+    school: "Columbia",
+    name: "McBain Hall",
+    image: "https://housing.columbia.edu/files/housing/McBain.jpg",
+    description:
+      "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla nulla nulla, condimentum a mattis in, faucibus id sapien. Sed rhoncus.",
+    amenities: "No AC"
+  },
+  {
+    id: "Carman",
+    school: "Columbia",
+    name: "Carman Hall",
+    image: "https://housing.columbia.edu/files/housing/Carman.jpg",
+    description:
+      "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla nulla nulla, condimentum a mattis in, faucibus id sapien. Sed rhoncus.",
+    amenities: "No AC"
+  },
+  {
+    id: "Sulzberger",
+    school: "Barnard",
+    name: "Sulzberger Tower",
+    image: "https://housing.columbia.edu/files/housing/McBain.jpg",
+    description:
+      "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla nulla nulla, condimentum a mattis in, faucibus id sapien. Sed rhoncus.",
+    amenities: "No AC"
+  },
+  {
+    id: "mcbain",
+    school: "Columbia",
+    name: "McBain Hall",
+    image: "https://housing.columbia.edu/files/housing/McBain.jpg",
+    description:
+      "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla nulla nulla, condimentum a mattis in, faucibus id sapien. Sed rhoncus.",
+    amenities: "No AC"
+  },
+  {
+    id: "mcbain",
+    school: "Columbia",
+    name: "McBain Hall",
+    image: "https://housing.columbia.edu/files/housing/McBain.jpg",
+    description:
+      "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla nulla nulla, condimentum a mattis in, faucibus id sapien. Sed rhoncus.",
+    amenities: "No AC"
+  }
 ];
+
 
 storiesOf('RelatedDorms', module)
   .add('related dorms', () => <RelatedDorms relatedDorms={sampleRelatedDorms}/>);
