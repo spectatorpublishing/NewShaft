@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import icon from "../assets/react.png";
+import spec from "../assets/searchButton.png";
 import { Link, NavLink } from 'react-router-dom';
 import styled from 'styled-components';
 
@@ -32,8 +33,8 @@ let MenuContainer = styled.div`
   align-items: center;
   display: flex;
   justify-content: center;
-  margin-right: 10%;
-  width: 60%;
+  margin-right: 5%;
+  width: 65%;
 `
 
 let MenuRow = styled.div`
@@ -217,6 +218,11 @@ export default class NavBar extends Component {
           <MenuRow>
             {this.getMenuItems(isMobile)}
           </MenuRow>
+          <LogoContainer>
+            <a href="https://www.columbiaspectator.com/" target="_blank">
+              <Logo src={spec} alt="Columbia Daily Spectator"/>
+            </a>
+          </LogoContainer>
         </MenuContainer>
       </React.Fragment>
     );
@@ -233,6 +239,17 @@ export default class NavBar extends Component {
         </MenuIcon>
         <MenuColumn>
           {this.getMenuItems(isMobile)}
+          <MenuLink
+            key={this.props.menuItems.length}
+            styled={{isMobile}}
+            mobile={isMobile ? 1 : 0} // work around for react-router link not playing nice with non-standard attributes
+            as="a"
+            href="https://www.columbiaspectator.com/"
+            target="_blank"
+            onClick={this.forceClose}
+          >
+            <Logo src={spec} alt="Columbia Daily Spectator"/>
+          </MenuLink>
         </MenuColumn>
       </React.Fragment>
     );
