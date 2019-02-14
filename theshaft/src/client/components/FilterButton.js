@@ -28,6 +28,7 @@ export default class FilterButton extends React.PureComponent {
 	onClick() {
 		var bool = this.state.clicked;
 		this.setState({clicked: !bool})
+		
 	}
 
 	render() {

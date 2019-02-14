@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { Route, Link, BrowserRouter as Router } from 'react-router-dom';
+import Filter from './FilterComponent.js'
 
 import DormButton from '../components/DormButton';
 import '../css/ExploreSidebar.css';
@@ -26,8 +27,10 @@ export default class ExploreSidebar extends Component {
         ));
         return (
             <div>
+                
                 <div className="filters">
                     <h2>The Shaft</h2>
+                    <Filter/>
                 </div>
                 <hr className="sidebar-divider"/>
                 <div className="dorms">

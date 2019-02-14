@@ -4,10 +4,8 @@ import ReactMapGL, { Marker, Popup} from "react-map-gl";
 import { fromJS } from "immutable";
 import "mapbox-gl/src/css/mapbox-gl.css";
 import mark from "../assets/marker.svg";
+import { Route, Link, BrowserRouter as Router } from 'react-router-dom';
 
-console.log("Entry");
-console.log(process.env)
-console.log(process.env.MAPBOX);
 
 let MarkerIcon = styled.img`
   transform: translate(-50%, -100%);
@@ -36,7 +34,7 @@ class MapItem extends Component {
   }
 
   render(){
-    const {lat, long, popupInfo} = this.props
+    const {lat, long, popupInfo, popupId} = this.props
     return <div>
       <Marker
         latitude={lat}
@@ -56,7 +54,7 @@ class MapItem extends Component {
           latitude={lat}
           onClose={this.clearPopUp}
           closeOnClick={true}>
-          <p style={{margin:'0'}}>{popupInfo}</p>
+          <Link to={"/" + popupId} style={{margin:'0'}}>{popupInfo}</Link>
         </Popup>
       </div>
   </div>
@@ -66,7 +64,6 @@ class MapItem extends Component {
 export default class Maps extends Component {
   constructor(props) {
     super(props);
-
     const popupIndex = this.props.popupInfo.map(() => {return false})
 
     this.state = {
@@ -81,8 +78,12 @@ export default class Maps extends Component {
       },
       popup: {
         popupInfo: this.props.popupInfo,
+        popupId: this.props.popupId,
         popupIndex: popupIndex
-      }
+      },
+      //width and height are passed in from outside
+      height: this.props.height,
+      width: this.props.width
     };    
     this.handleViewportChange = this.handleViewportChange.bind(this);
   }
@@ -99,19 +100,20 @@ export default class Maps extends Component {
       const lat = this.state.coordinates.latitudes[i]
       const long = this.state.coordinates.longitudes[i];
       const popupInfo = this.state.popup.popupInfo[i];
-      markers.push(<MapItem key={k++} lat={lat} long={long} popupInfo={popupInfo}/>);
+      const popupId = this.state.popup.popupId[i];
+      markers.push(<MapItem key={k++} lat={lat} long={long} popupInfo={popupInfo} popupId={popupId}/>);
     }
     
     return (
       <div>
         <ReactMapGL
           mapboxApiAccessToken={process.env.MAPBOX}
-          // mapboxApiAccessToken={"pk.eyJ1IjoiYXJzYWxhYW4iLCJhIjoiY2pxeDViZW41MDlmejQ4bnduMnE2aGhyNCJ9.0-y9yPqzqlWLd-yhUe5tcg"}
           mapStyle={"mapbox://styles/mapbox/basic-v9"}
           latitude={view.latitude}
           longitude={view.longitude}
-          width={"100%"}
-          height={"400px"}
+          //width and height are passed in from outside
+          width={this.props.width}
+          height={this.props.height}
           zoom={view.zoom}
           onViewportChange={this.handleViewportChange}
         >
