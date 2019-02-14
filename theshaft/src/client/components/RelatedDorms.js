@@ -7,9 +7,8 @@
 */
 
 import React, { Component } from "react";
-import styled from "styled-components";
-//var element = document.relatedDormsList.style;
-//element.setPropety('--mw', '800px');
+import "../css/RelatedDorms.css";
+import { Route, Link, BrowserRouter as Router } from 'react-router-dom';
 
 let RelatedDormsList = styled.div`
     /* border: 1px black solid;
@@ -51,13 +50,14 @@ export default class RelatedDorms extends Component {
         this.state = {
             /*  Props format for this.props.relatedDorms 
                 should be array of strings with the following:
-                ["Dorm Name", "Image Source"]. 
+                ["Dorm Name", "Image Source", "Dorm Link"]. 
                 See example in storybook. */
+            name: this.props.name,
             relatedDorms: this.props.relatedDorms
         };
 
         // Binds the showRelatedDorms() function to this constructor.
-        this.showRelatedDorms = this.showRelatedDorms.bind(this);
+        // this.showRelatedDorms = this.showRelatedDorms.bind(this);
     }
 
     /*  Displays related dorm information via the relatedDorms 
@@ -67,25 +67,32 @@ export default class RelatedDorms extends Component {
         !!! ALERT !!!
         The title of the dorm needs to be pulled from a Title Component.
         */
-    showRelatedDorms() {
-        let index = 0
-        return this.state.relatedDorms.map((relatedDorms) => {
-          return <div className="relatedDorm" key={index++}>
-            <RelatedDormImage src={relatedDorms[1]} alt={relatedDorms[0]}/>
-            <RelatedDormName> {relatedDorms[0]} </RelatedDormName>
-          </div>
-          });
-      }
+
+    // showRelatedDorms(dorms) {
+    //     let index = 0
+    //     console.log(`DORMS DORMS: ${dorms}`);
+    //     return dorms.map((relatedDorms) => {
+    //       return <Router>
+    //         <Link to={"/" + relatedDorms.id} style={{ textDecoration: 'none' }} className="relatedDorm" key={index++}>
+    //             <img src={relatedDorms.image} className="relatedDormImage" alt={relatedDorms.name}/>
+    //             <div className="relatedDormName"> {relatedDorms.name} </div>
+    //         </Link>
+    //       </Router>
+    //       });
+    //   }
 
     render() {
+        var relatedDormsList = this.state.relatedDorms.map((dorm, index) => (<Link key={index} to={"/" + dorm.id} style={{ textDecoration: 'none' }}><img src={dorm.image} className="relatedDormImage" alt={dorm.name}/><div className="relatedDormName"> {dorm.name} </div></Link>));
         return (
             <RelatedDormsList>
                 {/* ===> The title component's text prop needs to be passed in here! <=== */}
-                <RelatedDormsTitle> If you're interested in {this.state.relatedDorms[0][0]} </RelatedDormsTitle>
-                <RelatedDormsHorizontalView>
-                    {this.showRelatedDorms()}
-                </RelatedDormsHorizontalView>
-            </RelatedDormsList>
+
+                <h2 className="relatedDormsTitle"> If you're interested in {this.state.name} </h2>
+                <div className="relatedDormsHorizontalView">
+                    {relatedDormsList}
+                    {/* {this.showRelatedDorms(dorms)} */}
+                </div>
+            </div>
         );
     }
 }
