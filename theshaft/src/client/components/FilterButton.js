@@ -37,23 +37,26 @@ export default class FilterButton extends React.PureComponent {
 	onClick() {
 		console.log(this.props.name+"button clicked")
 		var bool = this.state.clicked;
+		console.log(payload.college)
 		if(!bool){
-			if(this.name === 'columbia' || this.name === 'barnard'){
-				if(payload.college !=-1){
+			console.log("button was false now clicked")
+			if(this.props.name === "columbia" || this.props.name === "barnard"){
+				console.log("columbia or barnard button clicked")
+				if(payload.college !== this.props.name && payload.college !==-1){
 					payload.college = -1
 				}
-				else{
-					payload.college = this.name
+				else if (payload.college ===-1){
+					payload.college = this.props.name
 				}
 
 			}
 		}
 		else{
-			if(payload.college === this.name){
+			if(payload.college === this.props.name){
 				payload.college = -1
 			}
 			else {
-				if(this.name ==='barnard'){
+				if(this.props.name ==='barnard' && payload.college ===-1){
 					payload.college = 'columbia'
 				}
 				else{
@@ -61,7 +64,7 @@ export default class FilterButton extends React.PureComponent {
 				}
 			}
 		}
-		console.log(payload)
+		console.log("payload", payload)
 
 		fetch(url, {
 			method: 'POST', // or 'PUT'

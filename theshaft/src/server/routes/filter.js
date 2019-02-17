@@ -54,22 +54,17 @@ var mysql = require("mysql");
 var _ = require("underscore");
 
 function filterDormInfo(data, request, callback) {
-  console.log(request)
-  console.log(_.values(data))
-  if(request.college!=-1){
-    result = _.values(data[request.college])
-  }
-  else {
-    result = _.values(data)
-  }
+  console.log("request received", request)
+  //console.log(_.values(data))
+  result = _.values(data)
 
-  console.log(result)
-  // var result = result.filter(function(el) {
-  //   if (request.college != -1) {
-  //     return el.college == request.college;
-  //   }
-  //   return typeof el.college == "string";
-  // });
+
+  var result = result.filter(function(el) {
+    if (request.college != -1) {
+      return el.college == request.college;
+    }
+    return typeof el.college == "string";
+  });
 
   result = result.filter(function(el) {
     // console.log(!_.isEqual(_.difference(request.suite, el.suite),(request.suite))) //debug
@@ -86,7 +81,6 @@ function filterDormInfo(data, request, callback) {
     );
   });
 
-  console.log(result)
   callback(result);
 }
 
@@ -94,7 +88,7 @@ router.post("/", function(req, res, next) {
   // console.log("filtering selection of",req.body)
 
   filterDormInfo(fakedata, req.body, dormInfo => {
-    console.log(dormInfo);
+    console.log("server side dorminfo", dormInfo);
     // JSON.stringify(dormInfo[0])
     res.json(dormInfo);
   });
