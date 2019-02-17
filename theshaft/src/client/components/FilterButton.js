@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import styled from 'styled-components';
+import { request } from "http";
 
 let Button = styled.button`
 	background: none;
@@ -50,12 +51,15 @@ export default class FilterButton extends React.PureComponent {
 				}
 
 			}
+			else if (this.props.name == "single" || this.props.name == "double" || this.props.name == "triple"){
+				payload[this.props.name] = true
+			}
 		}
 		else{
 			if(payload.college === this.props.name){
 				payload.college = -1
 			}
-			else {
+			else if( this.props.name == "columbia" || this.props.name=="barnard"){
 				if(this.props.name ==='barnard' && payload.college ===-1){
 					payload.college = 'columbia'
 				}
@@ -63,7 +67,12 @@ export default class FilterButton extends React.PureComponent {
 					payload.college = "barnard"
 				}
 			}
+			else if (this.props.name == "single" || this.props.name == "double" || this.props.name == "triple"){
+				payload[this.props.name] = false
+			}
 		}
+
+
 		console.log("payload", payload)
 
 		fetch(url, {
