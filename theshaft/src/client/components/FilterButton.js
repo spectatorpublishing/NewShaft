@@ -19,73 +19,19 @@ export default class FilterButton extends React.PureComponent {
 	    super(props);
 
 	    this.state = {
+				handleClick: this.props.handleClick,
 	    	name: this.props.name,
-				clicked: false,
-				payload: {
-					"college": -1,
-					"single": false,
-					"double": false,
-					"triple": false,
-					"suite": [],
-					"make_up":[]
-				}
+				clicked: false
 	    };
 
 	    this.onClick = this.onClick.bind(this);
 	}
-
-	componentDidMount(){
-		fetch(url, {
-			method: 'POST', // or 'PUT'
-			body: JSON.stringify(this.state.payload), //
-			headers:{
-			  'Content-Type': 'application/json',
-			}
-		  }).then(res => res.json())
-		  .then(response => {
-				console.log('Success:', JSON.stringify(response))
-			})
-		  .catch(error => console.error('Error:', error));
-	}
-
+	
 	onClick() {
-		let statePayload = this.state.payload;
+		this.state.handleClick(this.state.clicked, this.state.name);		
+
 		console.log(this.props.name + " button clicked")
-		let isClicked = this.state.clicked;
-		if(!isClicked){
-			if(this.state.name === 'columbia' || this.state.name === 'barnard'){
-				if(this.state.payload.college !=-1){
-					statePayload.college = -1;
-					this.setState({payload: statePayload});
-				}
-				else{
-					statePayload.college = this.state.name;
-					this.setState({payload: statePayload});
-				}
-
-			}
-			
-		}
-		else{
-			if(this.state.payload.college === this.state.name){
-				statePayload.college = -1;
-				this.setState({payload: statePayload});
-			}
-			else {
-				if(this.state.name ==='barnard'){
-					statePayload.college = 'columbia';
-					this.setState({payload: statePayload});
-				}
-				else{
-					statePayload.college = 'barnard';
-					this.setState({payload: statePayload});
-				}
-			}
-		}
-		console.log(this.state.payload)
-
-		this.setState({clicked: !isClicked})
-		
+		this.setState({clicked: !this.state.clicked})		
 	}
 
 	render() {

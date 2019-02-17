@@ -6,6 +6,7 @@ import '../css/Explore.css';
 import Dorm from './Dorm.js';
 import Updater from '../components/Updater';
 import ExploreSidebar from "../components/ExploreSidebar";
+import Filter from '../components/FilterComponent.js'
 import "../css/Explore.css";
 import map from "../assets/map.png";
 import Maps from "../components/Maps";
@@ -67,28 +68,49 @@ let ColTwo = styled.div`
 export default class Explore extends Component {
   constructor(props){
     super(props);
-    this.state = {dorms: []}
-  }
-
-
-  componentDidMount(){
-    fetch('/api/filterDorm', {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json'
-      },
-      body: JSON.stringify({
-        "college": "columbia",
+    this.state = {
+      payload: {
+        "college": -1,
         "single": true,
         "double": true,
         "triple": true,
         "suite": [],
         "make_up":[]
-      })
-    }).then(res => res.json())
-      .then(response => {
-        this.setState({dorms: response});
-      });
+      }
+    }
+  }
+
+  updatePayload(isClicked, name){
+    let statePayload = this.state.payload;
+		if(!isClicked){
+			if(name === 'columbia' || name === 'barnard'){
+				if(this.state.payload.college !=-1){
+					statePayload.college = -1;
+					this.setState({payload: statePayload});
+				}
+				else{
+					statePayload.college = name;
+					this.setState({payload: statePayload});
+				}
+			}
+		}
+		else{
+			if(this.state.payload.college === name){
+				statePayload.college = -1;
+				this.setState({payload: statePayload});
+			}
+			else {
+				if(name ==='barnard'){
+					statePayload.college = 'columbia';
+					this.setState({payload: statePayload});
+				}
+				else{
+					statePayload.college = 'barnard';
+					this.setState({payload: statePayload});
+				}
+			}
+		}
+		console.log(this.state.payload)
   }
   
   render() {
@@ -96,7 +118,11 @@ export default class Explore extends Component {
       <ExploreContainer>
         <ColOne>
           <SideBar>
-            <ExploreSidebar dorms={this.state.dorms} />
+            <div className="filters">
+              <h2>The Shaft</h2>
+              <Filter handleChange={this.updatePayload.bind(this)}/>
+            </div>
+            <ExploreSidebar payload={this.state.payload} />
           </SideBar>
         </ColOne>
         <ColTwo>

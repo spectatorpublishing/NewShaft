@@ -26,23 +26,24 @@ export default class FilterComponent extends React.PureComponent {
 	    super(props);
 
 	    this.state = {
-	    	type: this.props.type
+			type: this.props.type,
+			handleChange: this.props.handleChange
 	    };
 	}
 
 	render() {
 			return(
 				<Filter>
-					<Text> filter by {this.state.type}: </Text>
-					<FilterButton name="columbia"/>
-					<FilterButton name="barnard"/>
-					<FilterButton name="single"/>
-					<FilterButton name="double"/>
-					<FilterButton name="# person room"/>
-					<FilterButton name="freshperson"/>
-					<FilterButton name="sophomore"/>
-					<FilterButton name="junior"/>
-					<FilterButton name="senior"/>
+					<Text> Filter by {this.state.type}: </Text>
+					<FilterButton handleClick={this.state.handleChange} name="columbia"/>
+					<FilterButton handleClick={this.state.handleChange} name="barnard"/>
+					<FilterButton handleClick={this.state.handleChange} name="single"/>
+					<FilterButton handleClick={this.state.handleChange} name="double"/>
+					<FilterButton handleClick={this.state.handleChange} name="# person room"/>
+					<FilterButton handleClick={this.state.handleChange} name="freshperson"/>
+					<FilterButton handleClick={this.state.handleChange} name="sophomore"/>
+					<FilterButton handleClick={this.state.handleChange} name="junior"/>
+					<FilterButton handleClick={this.state.handleChange} name="senior"/>
 			    </Filter>
 			)
 		}
