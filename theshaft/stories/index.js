@@ -23,6 +23,7 @@ import ExploreSidebar from '../src/client/components/ExploreSidebar';
 import { MemoryRouter } from 'react-router';
 //import RelatedDormsList from '../src/client/components/RelatedDormsList'
 import NavBar from '../src/client/components/NavBar.js'
+import FullScreen from '../src/client/components/FullScreen.js';
 import Maps from '../src/client/components/Maps.js'
 import FloorPlanSVG from '../src/client/components/FloorPlanSVG.js'
 import { ReactComponent as SymposiumSVG } from "../src/client/assets/test_floorplan.svg";
@@ -48,16 +49,16 @@ storiesOf('Button', module)
 storiesOf('SearchBar', module)
   .add('with text', () => <SearchBar/>);
 
+
+  let bannerImages = ["https://arc-anglerfish-arc2-prod-spectator.s3.amazonaws.com/public/52FBXLYM2RGO3FJGK3SPD2KUEE.png", 
+  "https://memegenerator.net/img/images/17438601/dat-sad-fat-cat.jpg", 
+  "https://i.imgflip.com/1yt82g.jpg", 
+  "https://i.imgflip.com/26a82h.jpg", 
+  "https://i.imgflip.com/1eg7jb.jpg"];
+
 storiesOf('PhotoBanner', module)
   .add('for dorm pages', () =>
-        <PhotoBanner
-          imageOne="https://arc-anglerfish-arc2-prod-spectator.s3.amazonaws.com/public/52FBXLYM2RGO3FJGK3SPD2KUEE.png"
-          imageTwo="https://memegenerator.net/img/images/17438601/dat-sad-fat-cat.jpg"
-          imageThree="https://i.imgflip.com/1yt82g.jpg"
-          imageFour="https://i.imgflip.com/26a82h.jpg"
-          imageFive="https://i.imgflip.com/1eg7jb.jpg"
-        />
-      );
+        <PhotoBanner bannerImages = {bannerImages}></PhotoBanner>);
 
 storiesOf('DormButton', module)
   .add('dorm button', () => <DormButton name="ADI House" address="21 Savage St." sundial_distance="12 minutes" description="It's lit"/>);
@@ -117,14 +118,63 @@ storiesOf('AtAGlance', module)
   .add('at a glance', () => <AtAGlance location="545 W. 114th St." roomtype="Suite-style doubles" classmakeup="First-Years" numfloors="13"/>);
 
 // Related Dorms Content
+// let sampleRelatedDorms = [
+//   ["Carman", "https://memegenerator.net/img/images/17438601/dat-sad-fat-cat.jpg", "link!"],
+//   ["Furnald", "https://memegenerator.net/img/images/17438601/dat-sad-fat-cat.jpg", "link!"],
+//   ["John Jay", "https://memegenerator.net/img/images/17438601/dat-sad-fat-cat.jpg", "link!"],
+//   ["John Jay", "https://memegenerator.net/img/images/17438601/dat-sad-fat-cat.jpg", "link!"],
+//   ["John Jay", "https://memegenerator.net/img/images/17438601/dat-sad-fat-cat.jpg", "link!"],
+//   ["John Jay", "https://memegenerator.net/img/images/17438601/dat-sad-fat-cat.jpg", "link!"]
+// ];
+
 let sampleRelatedDorms = [
-  ["Carman", "https://memegenerator.net/img/images/17438601/dat-sad-fat-cat.jpg"],
-  ["Furnald", "https://memegenerator.net/img/images/17438601/dat-sad-fat-cat.jpg"],
-  ["John Jay", "https://memegenerator.net/img/images/17438601/dat-sad-fat-cat.jpg"],
-  ["John Jay", "https://memegenerator.net/img/images/17438601/dat-sad-fat-cat.jpg"],
-  ["John Jay", "https://memegenerator.net/img/images/17438601/dat-sad-fat-cat.jpg"],
-  ["John Jay", "https://memegenerator.net/img/images/17438601/dat-sad-fat-cat.jpg"]
+  {
+    id: "McBain",
+    school: "Columbia",
+    name: "McBain Hall",
+    image: "https://housing.columbia.edu/files/housing/McBain.jpg",
+    description:
+      "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla nulla nulla, condimentum a mattis in, faucibus id sapien. Sed rhoncus.",
+    amenities: "No AC"
+  },
+  {
+    id: "Carman",
+    school: "Columbia",
+    name: "Carman Hall",
+    image: "https://housing.columbia.edu/files/housing/Carman.jpg",
+    description:
+      "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla nulla nulla, condimentum a mattis in, faucibus id sapien. Sed rhoncus.",
+    amenities: "No AC"
+  },
+  {
+    id: "Sulzberger",
+    school: "Barnard",
+    name: "Sulzberger Tower",
+    image: "https://housing.columbia.edu/files/housing/McBain.jpg",
+    description:
+      "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla nulla nulla, condimentum a mattis in, faucibus id sapien. Sed rhoncus.",
+    amenities: "No AC"
+  },
+  {
+    id: "mcbain",
+    school: "Columbia",
+    name: "McBain Hall",
+    image: "https://housing.columbia.edu/files/housing/McBain.jpg",
+    description:
+      "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla nulla nulla, condimentum a mattis in, faucibus id sapien. Sed rhoncus.",
+    amenities: "No AC"
+  },
+  {
+    id: "mcbain",
+    school: "Columbia",
+    name: "McBain Hall",
+    image: "https://housing.columbia.edu/files/housing/McBain.jpg",
+    description:
+      "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla nulla nulla, condimentum a mattis in, faucibus id sapien. Sed rhoncus.",
+    amenities: "No AC"
+  }
 ];
+
 
 storiesOf('RelatedDorms', module)
   .add('related dorms', () => <RelatedDorms relatedDorms={sampleRelatedDorms}/>);
@@ -155,6 +205,8 @@ storiesOf('NavBar', module)
   .add('navbar', () => <NavBar menuItems={sampleMenuItems} />)
   .add('fixed navbar', () => <NavBar menuItems={sampleMenuItems} fixed />);
 
+  storiesOf('FullScreen', module)
+  .add('full screen', () => <FullScreen/>);
 storiesOf('Maps', module)
   .add('map', () => <Maps latitudes={[40.7128, 40.7129, 40.7128]} longitudes={[-74.006, -74.007, -74.008]} popupInfo={["carman", "mcbain", "JJ"]}/>);
 

@@ -1,22 +1,28 @@
 import React, { Component } from "react";
+import Lightbox from 'react-image-lightbox';
+import 'react-image-lightbox/style.css'; 
 import styled from "styled-components";
 
+
 let PhotosContainer = styled.div`
-  display: flex;
   height: 40vh;
+  display: flex;
+  width: 100%;
 `
 
 let MainPic = styled.div`
   border-right: white solid 4px;
-  display: flex;
-  min-width: 50%;
+  min-width: 100%;
+  display:flex;
+  width: 100%;
   overflow: hidden;
 `
 
 let Img = styled.img`
-  object-fit: cover;
   width: 100%;
-  
+  margin-top:-25%;
+  object-fit: cover;
+  object-position: center; 
   transition: all 0.3s;
   -moz-transition: all 0.3s;
   -webkit-transition: all 0.3s;
@@ -69,13 +75,26 @@ let PicMobile = styled.div`
   max-height: 30vh;
   overflow: hidden;
 `
+let Button = styled.button`
+    background: none;
+    border: none;
+    padding: 5px;
+    font-weight: bold;
+
+    ${({ clicked }) => clicked && `
+        background: black;
+  	`}
+`
 
 export default class PhotoBanner extends Component {
   constructor(props) {
     super(props);
 
     this.state = {
-      width: window.innerWidth
+      width: window.innerWidth,
+      photoIndex: 0,
+      isOpen: false,
+      images: this.props.bannerImages,
     };
   }
 
@@ -92,39 +111,92 @@ export default class PhotoBanner extends Component {
   };
 
   render() {
-    const { width } = this.state;
+    const { width, photoIndex, isOpen, images } = this.state;
     const isMobile = width <= 700;
+
     if (isMobile) {
       return (
         <PhotosContainer>
-          <Img src={this.props.imageOne} />
+          <Button type="button" onClick={() => this.setState({ isOpen: true, photoIndex:0 })}>
+            <Img src={images[0]} />
+        </Button>
+        {isOpen && (
+          <Lightbox
+            mainSrc={images[photoIndex]}
+            nextSrc={images[(photoIndex + 1) % images.length]}
+            prevSrc={images[(photoIndex + images.length - 1) % images.length]}
+            onCloseRequest={() => this.setState({ isOpen: false })}
+            onMovePrevRequest={() =>
+              this.setState({
+                photoIndex: (photoIndex + images.length - 1) % images.length,
+              })
+            }
+            onMoveNextRequest={() =>
+              this.setState({
+                photoIndex: (photoIndex + 1) % images.length,
+              })
+            }
+          />
+        )}
         </PhotosContainer>
       );
     } else {
       return (
         <PhotosContainer>
           <MainPic>
-            <Img src={this.props.imageOne} />
+            <Button type="button" onClick={() => this.setState({ isOpen: true, photoIndex:0 })}>
+              <Img src={images[0]}/>
+            </Button>
           </MainPic>
-          <SidePics>
+        
+         {/*<SidePics>
             <TopRow>
               <LeftPic>
-                <Img src={this.props.imageTwo} />
+                <Button type="button" onClick={() => this.setState({ isOpen: true, photoIndex:1 })}>
+                  <Img src={this.props.bannerImages[1]} />
+                </Button>
               </LeftPic>
+
               <RightPic>
-                <Img src={this.props.imageThree} />
+                <Button type="button" onClick={() => this.setState({ isOpen: true, photoIndex:2 })}>
+                  <Img src={this.props.bannerImages[2]} />
+                </Button>
               </RightPic>
             </TopRow>
+
             <BottomRow>
               <LeftPic>
-                <Img src={this.props.imageFour} />
+                <Button type="button" onClick={() => this.setState({ isOpen: true, photoIndex:3 })}>
+                  <Img src={this.props.bannerImages[3]} />
+                </Button>
               </LeftPic>
+
               <RightPic>
-                <Img src={this.props.imageFive} />
+                <Button type="button" onClick={() => this.setState({ isOpen: true, photoIndex:4 })}>
+                  <Img src={this.props.bannerImages[4]} />
+                </Button>
               </RightPic>
             </BottomRow>
-          </SidePics>
-          
+          </SidePics>   
+         */}       
+          {isOpen && (
+          <Lightbox
+            mainSrc={this.props.bannerImages[photoIndex]}
+            nextSrc={this.props.bannerImages[(photoIndex + 1) % this.props.bannerImages.length]}
+            prevSrc={this.props.bannerImages[(photoIndex + this.props.bannerImages.length - 1) % this.props.bannerImages.length]}
+            onCloseRequest={() => this.setState({ isOpen: false })}
+            onMovePrevRequest={() =>
+              this.setState({
+                photoIndex: (photoIndex + this.props.bannerImages.length - 1) % this.props.bannerImages.length,
+              })
+            }
+            onMoveNextRequest={() =>
+              this.setState({
+                photoIndex: (photoIndex + 1) % this.props.bannerImages.length,
+              })
+            }
+          />
+        )}
         </PhotosContainer>
       );
     }
