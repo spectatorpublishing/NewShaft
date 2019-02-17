@@ -203,16 +203,18 @@ export default class FloorPlan extends React.PureComponent {
             					nextSrc={this.props.planArray[(photoIndex + 1) % this.props.planArray.length]} 
             					prevSrc={this.props.planArray[(photoIndex + this.props.planArray.length - 1) % this.props.planArray.length]}
 								onCloseRequest={() => this.setState({ isOpen: false })}
-								onMovePrevRequest={() =>
+								onMovePrevRequest={() => {
 								 	this.setState({
-                				 		photoIndex: (photoIndex + this.props.planArray.length - 1) % this.props.planArray.length,
+										 //photoIndex: (photoIndex + this.props.planArray.length - 1) % this.props.planArray.length,
+										 //photoIndex: 2,
+										 //currentPlan: this.compo
 								   })
+								   console.log(this.state.photoIndex);
 								 }
+								}
 								onMoveNextRequest={() => {
 									this.setState({
-										//photoIndex: 0
-										photoIndex: (photoIndex + 1) % this.props.planArray.length,
-										// this.state.currentFloor - this.state.floorOffset
+									 	photoIndex: (this.state.currentFloor - this.state.floorOffset + 1) % this.props.planArray.length,
 									});
 									console.log(this.state.photoIndex);
 								}
