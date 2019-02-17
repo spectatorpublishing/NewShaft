@@ -12,7 +12,6 @@ let Button = styled.button`
     	font-weight: bold;
   	`}
 `
-var url  = "http://localhost:8080/api/filterDorm"
 
 export default class FilterButton extends React.PureComponent {
 	constructor(props) {

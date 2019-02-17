@@ -9,12 +9,13 @@ export default class ExploreSidebar extends Component {
         super(props);
         this.state = {
             payload: this.props.payload,
-            dorms: []
+            dorms: [],
+            dormButtons: []
         };
     }
 
     fetchDorms(){
-        console.log("PAYLOAD: " + JSON.stringify(this.state.payload))
+        // console.log("PAYLOAD: " + JSON.stringify(this.state.payload))
         fetch('/api/filterDorm', {
             method: 'POST',
             headers: {
@@ -22,10 +23,10 @@ export default class ExploreSidebar extends Component {
             },
             body: JSON.stringify(this.state.payload)
         }).then(res => res.json())
-            .then(response => {
-                console.log("RESPONSE: " + JSON.stringify(response))
-                this.setState({dorms: response});
-            });
+        .then(response => {
+            // console.log("RESPONSE: " + JSON.stringify(response))
+            this.setState({dorms: response})
+        });      
     }
 
     componentDidMount(){
@@ -34,18 +35,27 @@ export default class ExploreSidebar extends Component {
 
     componentDidUpdate(prevProps){
         if(prevProps != this.props){
-            this.setState({payload: this.props.payload}); 
-            this.fetchDorms();  
+            console.log("props updated")
+            this.setState({payload: this.props.payload}, () => this.fetchDorms()); 
         }      
     }
 
     render() {
-        var dormsList = this.state.dorms.map((dorm, index) => (<Link key={index} to={"/" + dorm.dorm} style={{ textDecoration: 'none' }}><DormButton key={index} school={dorm.college} name={dorm.dorm + ' Hall'} image={dorm.thumbnail_image} description={dorm.description} amenities={dorm.amenities}/></Link>));
+        console.log(JSON.stringify(this.state.dorms));
         return (
             <div>
                 <hr className="sidebar-divider"/>
                 <div className="dorms">
-                    {dormsList}
+                    {this.state.dorms.map((dorm, index) => 
+                        <Link key={index} to={"/" + dorm.dorm} style={{textDecoration: 'none'}}>
+                            <DormButton key={index}
+                                school={dorm.college}
+                                name={dorm.dorm + ' Hall'}
+                                image={dorm.thumbnail_image}
+                                description={dorm.description}
+                                amenities={dorm.amenities}/>
+                        </Link>
+                    )}
                 </div>
             </div>
         );

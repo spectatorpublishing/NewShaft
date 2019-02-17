@@ -71,9 +71,9 @@ export default class Explore extends Component {
     this.state = {
       payload: {
         "college": -1,
-        "single": true,
-        "double": true,
-        "triple": true,
+        "single": false,
+        "double": false,
+        "triple": false,
         "suite": [],
         "make_up":[]
       }
@@ -122,7 +122,7 @@ export default class Explore extends Component {
               <h2>The Shaft</h2>
               <Filter handleChange={this.updatePayload.bind(this)}/>
             </div>
-            <ExploreSidebar payload={this.state.payload} />
+            <ExploreSidebar payload={this.state.payload}/>
           </SideBar>
         </ColOne>
         <ColTwo>
