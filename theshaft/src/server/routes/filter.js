@@ -56,8 +56,10 @@ var _ = require("underscore");
 function filterDormInfo(data, request, callback) {
   // console.log(request)
   // console.log(_.values(data))
-  if(request.college!=-1){
-    result = _.values(data[request.college])
+  if(request.college != -1){
+    result = _.values(data).filter((dorm) => {
+      return (dorm.college === request.college)
+    })
   }
   else {
     result = _.values(data)

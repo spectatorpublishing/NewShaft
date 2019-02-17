@@ -78,7 +78,7 @@ export default class Explore extends Component {
         'Content-Type': 'application/json'
       },
       body: JSON.stringify({
-        "college": -1,
+        "college": "columbia",
         "single": true,
         "double": true,
         "triple": true,
