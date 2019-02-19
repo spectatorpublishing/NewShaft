@@ -58,7 +58,7 @@ export default class ExploreSidebar extends Component {
                 <hr className="sidebar-divider"/>
                 <div className="dorms">
                     {this.state.dorms.map((dorm, index) => 
-                        <Link key={index} to={"/" + dorm.dorm} style={{textDecoration: 'none'}}>
+                        <Link key={index} to={"/explore/" + dorm.dorm} style={{textDecoration: 'none'}}>
                             <DormButton key={index}
                                 school={dorm.college}
                                 name={dorm.dorm + ' Hall'}
