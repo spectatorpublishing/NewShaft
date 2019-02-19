@@ -41,7 +41,18 @@ export default class ExploreSidebar extends Component {
     }
 
     render() {
-        console.log(JSON.stringify(this.state.dorms));
+        var dormsList = this.state.dorms.map((dorm, index) => (
+            <Link key={index} to={"/explore/" + dorm.id} style={{ textDecoration: 'none' }}>
+                <DormButton 
+                    key={index}
+                    school={dorm.school}
+                    name={dorm.name}
+                    image={dorm.image}
+                    description={dorm.description}
+                    amenities={dorm.amenities}
+                />
+            </Link>
+        ));
         return (
             <div>
                 <hr className="sidebar-divider"/>
