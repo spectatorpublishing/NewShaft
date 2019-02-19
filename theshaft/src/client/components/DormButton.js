@@ -25,17 +25,6 @@ export default class DormButton extends Component {
     };
   }
 
-  componentDidUpdate(oldProps){
-    if(oldProps != this.props)
-      this.setState({
-        school: this.props.school,
-        name: this.props.name,
-        image: this.props.image,
-        amenities: this.props.amenities,
-        description: this.props.description
-      });
-  }
-
   render() {
     return (
       <div className="DormButton">
