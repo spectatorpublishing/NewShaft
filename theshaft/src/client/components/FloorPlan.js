@@ -2,27 +2,11 @@ import React, { Component } from "react";
 import { Link } from "react-router-dom";
 import styled from 'styled-components';
 
-let FloorTitle = styled.div` 
-	color: grey;
-	font-weight: bolder;
-	font-size: 2vw;
-	margin-top: 3vw;
-    margin-bottom: 1vw;
-`
-
-let FloorHeader = styled.div` 
-	color: grey;
-	font-weight: bolder;
-	font-size: 1.8vw;
-    margin-bottom: 1vw;
-`
-
 let FloorPlanBox = styled.div` 
 	border: 1px black solid;
     border-radius: 10px;
 	display: flex;
 	flex-direction: row;
-	padding: 1vw;
 `
 
 let FloorList = styled.div`
