@@ -2,11 +2,12 @@ import React, { Component } from 'react';
 import styled from "styled-components";
 import { Route, Link, BrowserRouter as Router } from 'react-router-dom';
 import DormButton from '../components/DormButton';
-//import '../css/Explore.css';
+import '../css/Explore.css';
 import Dorm from './Dorm.js';
 import Updater from '../components/Updater';
 import ExploreSidebar from "../components/ExploreSidebar";
-//import "../css/Explore.css";
+import Filter from '../components/FilterComponent.js'
+import "../css/Explore.css";
 import map from "../assets/map.png";
 import Maps from "../components/Maps";
 
@@ -60,106 +61,68 @@ let ColTwo = styled.div`
   //z-index:1;
   // display: flex;
   flex-direction: column;
-  width: ${(mobile) => mobile ? `67%`: `50%`};
+  width: ${(mobile) => mobile ? '67%': '50%'};
   //width: 50%;
-`
-
+  `
+  
 export default class Explore extends Component {
   constructor(props){
     super(props);
-    
-  }
-
-
-  /*componentDidMount(){
-    fetch('/api/filterDorm', {
-      method: 'POST',
-      headers: {
-        'X-Powered-By': 'Express',
-        'Content-Type': 'application/json; charset=utf-8'
-      },
-      body: {
+    this.state = {
+      payload: {
         "college": -1,
-        "single": true,
-        "double": true,
-        "triple": true,
+        "single": false,
+        "double": false,
+        "triple": false,
         "suite": [],
         "make_up":[]
       }
-    }).then((res) => {console.log("\nRESPONSE: "); console.log(JSON.stringify(res));})
-      .then((dorms) => {
-        this.setState({
-          dorms: dorms.map((dorm) => {
-            return {
-              id: dorm['dorm'],
-              school: dorm['college'],
-              name: dorm['dorm'] + 'Hall',
-              image: dorm['thumbnail_image'],
-              description: dorm['description'],
-              amenities: dorm['amenities']
-            };
-          })
-        });
-      });
+    }
+  }
 
-  } */
+  updatePayload(isClicked, name){
+    let statePayload = this.state.payload;
+		if(!isClicked){
+			if(name === 'columbia' || name === 'barnard'){
+				if(this.state.payload.college !=-1){
+					statePayload.college = -1;
+					this.setState({payload: statePayload});
+				}
+				else{
+					statePayload.college = name;
+					this.setState({payload: statePayload});
+				}
+			}
+		}
+		else{
+			if(this.state.payload.college === name){
+				statePayload.college = -1;
+				this.setState({payload: statePayload});
+			}
+			else {
+				if(name ==='barnard'){
+					statePayload.college = 'columbia';
+					this.setState({payload: statePayload});
+				}
+				else{
+					statePayload.college = 'barnard';
+					this.setState({payload: statePayload});
+				}
+			}
+		}
+		console.log(this.state.payload)
+  }
   
   render() {
-    var dorms = [
-      {
-        id: "McBain",
-        school: "Columbia",
-        name: "McBain Hall",
-        image: "https://housing.columbia.edu/files/housing/McBain.jpg",
-        description:
-          "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla nulla nulla, condimentum a mattis in, faucibus id sapien. Sed rhoncus.",
-        amenities: "No AC"
-      },
-      {
-        id: "Carman",
-        school: "Columbia",
-        name: "Carman Hall",
-        image: "https://housing.columbia.edu/files/housing/Carman.jpg",
-        description:
-          "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla nulla nulla, condimentum a mattis in, faucibus id sapien. Sed rhoncus.",
-        amenities: "No AC"
-      },
-      {
-        id: "Sulzberger",
-        school: "Barnard",
-        name: "Sulzberger Tower",
-        image: "https://housing.columbia.edu/files/housing/McBain.jpg",
-        description:
-          "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla nulla nulla, condimentum a mattis in, faucibus id sapien. Sed rhoncus.",
-        amenities: "No AC"
-      },
-      {
-        id: "mcbain",
-        school: "Columbia",
-        name: "McBain Hall",
-        image: "https://housing.columbia.edu/files/housing/McBain.jpg",
-        description:
-          "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla nulla nulla, condimentum a mattis in, faucibus id sapien. Sed rhoncus.",
-        amenities: "No AC"
-      },
-      {
-        id: "mcbain",
-        school: "Columbia",
-        name: "McBain Hall",
-        image: "https://housing.columbia.edu/files/housing/McBain.jpg",
-        description:
-          "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla nulla nulla, condimentum a mattis in, faucibus id sapien. Sed rhoncus.",
-        amenities: "No AC"
-      }
-    ];
-
-
     return (
-
       <ExploreContainer>
         <ColOne>
           <SideBar>
-            <ExploreSidebar dorms={dorms} />
+            <div className="filters">
+              <h2>The Shaft</h2>
+              <Filter handleChange={this.updatePayload.bind(this)}/>
+            </div>
+            <ExploreSidebar payload={this.state.payload}/>
           </SideBar>
         </ColOne>
         <ColTwo>

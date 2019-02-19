@@ -18,17 +18,19 @@ export default class FilterButton extends React.PureComponent {
 	    super(props);
 
 	    this.state = {
+				handleClick: this.props.handleClick,
 	    	name: this.props.name,
-	    	clicked: false
+				clicked: false
 	    };
 
 	    this.onClick = this.onClick.bind(this);
 	}
-
+	
 	onClick() {
-		var bool = this.state.clicked;
-		this.setState({clicked: !bool})
-		
+		this.state.handleClick(this.state.clicked, this.state.name);		
+
+		console.log(this.props.name + " button clicked")
+		this.setState({clicked: !this.state.clicked})		
 	}
 
 	render() {
