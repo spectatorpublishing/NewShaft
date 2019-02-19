@@ -181,26 +181,9 @@ storiesOf('ExploreSidebar', module)
   .add('explore sidebar', () => <ExploreSidebar/>);
 
 let sampleMenuItems = [
-  {
-    "name": "Explore",
-    "link": "/explore",
-    "external": false
-  },
-  {
-    "name": "Whiteboard",
-    "link": "/whiteboard",
-    "external": false
-  },
-  {
-    "name": "FAQ",
-    "link": "/faq",
-    "external": false
-  },
-  {
-    "name": "Spectrum",
-    "link": "https://www.columbiaspectator.com/spectrum/",
-    "external": true
-  }
+  ["Menu 1", "link1"],
+  ["Menu 2", "link2"],
+  ["Menu 3", "link3"]
 ];
 
 storiesOf('NavBar', module)
