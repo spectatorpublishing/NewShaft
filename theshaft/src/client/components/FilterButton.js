@@ -13,28 +13,20 @@ let Button = styled.button`
     	font-weight: bold;
   	`}
 `
-var payload = {
-	"college": -1,
-	"single": false,
-	"double": false,
-	"triple": false,
-	"suite": [],
-	"make_up":[]
-}
-var url  = "http://localhost:8080/api/filterDorm"
 
 export default class FilterButton extends React.PureComponent {
 	constructor(props) {
 	    super(props);
 
 	    this.state = {
+				handleClick: this.props.handleClick,
 	    	name: this.props.name,
-	    	clicked: false
+				clicked: false
 	    };
 
 	    this.onClick = this.onClick.bind(this);
 	}
-
+	
 	onClick() {
 		console.log(this.props.name+"button clicked")
 		var bool = this.state.clicked;
@@ -86,8 +78,9 @@ export default class FilterButton extends React.PureComponent {
 		  .then(response => console.log('Success:', JSON.stringify(response)))
 		  .catch(error => console.error('Error:', error));
 
-		this.setState({clicked: !bool})
-		
+
+		console.log(this.props.name + " button clicked")
+		this.setState({clicked: !this.state.clicked})		
 	}
 
 	render() {

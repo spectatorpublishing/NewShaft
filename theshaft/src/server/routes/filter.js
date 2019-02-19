@@ -1,26 +1,10 @@
 var fakedata = {
-  Test: {
-    dorm: "110",
-    address: "601 W 110th St",
-    description: "Off-campus but not really",
-    college: "barnard",
-    thumbnail_image: "N/A",
-    suite: ["6"],
-    walkthrough: false,
-    single: true,
-    double: true,
-    triple: true,
-    make_up: ["first-years", "sophomores", "juniors", "seniors"],
-    pros: ["pro1", "pro2", "pro3"],
-    cons: ""
-  },
-
   Carman: {
     dorm: "Carman",
     address: "619 W 113th St",
     description: "Comedy House",
     college: "columbia",
-    thumbnail_image: "N/A",
+    thumbnail_image: "https://housing.columbia.edu/files/housing/Carman.jpg",
     suite: ["5"],
     walkthrough: false,
     single: true,
@@ -36,7 +20,7 @@ var fakedata = {
     address: "McBain Fake Address",
     description: "On Campus",
     college: "columbia",
-    thumbnail_image: "N/A",
+    thumbnail_image: "https://housing.columbia.edu/files/housing/McBain.jpg",
     suite: ["4", "3"],
     walkthrough: false,
     single: true,
@@ -45,6 +29,21 @@ var fakedata = {
     make_up: ["sophomores"],
     pros: ["pro1", "pro2", "pro3"],
     cons: ["con1", "con2", "con3"]
+  },
+  Test: {
+    dorm: "110",
+    address: "601 W 110th St",
+    description: "Off-campus but not really",
+    college: "barnard",
+    thumbnail_image: "https://housing.columbia.edu/files/housing/McBain.jpg",
+    suite: ["6"],
+    walkthrough: false,
+    single: true,
+    double: true,
+    triple: true,
+    make_up: ["first-years", "sophomores", "juniors", "seniors"],
+    pros: ["pro1", "pro2", "pro3"],
+    cons: ""
   }
 };
 

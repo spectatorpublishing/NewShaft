@@ -3,9 +3,8 @@ const express = require('express');
 const app = express();
 const os = require('os');
 const bodyParser = require('body-parser')
-var cors = require('cors')
-app.use(cors()) // for avoiding CORS Error during localhost testing
-
+var cors = require('cors');
+app.use(cors())
 
 var fakeRequest = {
 	"dorm": "barnard"
