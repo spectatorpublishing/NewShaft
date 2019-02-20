@@ -5,20 +5,24 @@ fs.readdir(path, handleJSONs);
 
 function handleJSONs(err, files)
 {
-    var fileReadOptions = { 'encoding':'utf-8' };
-    for (i = 0; i < files.length; i++)
-    {
-        filePath = path + '/' + files[i];
-        fs.readFile(filePath, fileReadOptions, handleOneJSON);
-    }
-}
-
-function handleOneJSON(err, data)
-{
-    var jsonObject = JSON.parse(data);
-    var allKeys = Object.keys(jsonObject);
-    for (i = 0; i < allKeys.length; i++)
-    {
-        console.log(allKeys[i]);
+    for (var i = 0; i < files.length; i++)
+    {    
+        console.log(files.length);
+        console.log(i);
+        console.log(files[i]);
+        var filePath = path + '/' + files[i];
+        var data = fs.readFileSync(filePath, 'utf8');
+        var finalObject = {};
+        var jsonObject = JSON.parse(data);
+        var allKeys = Object.keys(jsonObject);
+        for (var j = 0; j < allKeys.length; j++)
+        {
+            var key = allKeys[j];
+            var newKey = key.trim();
+            var value = jsonObject[key];
+            var newValue = value.replace(/\s+/g,' ');
+            finalObject[newKey] = newValue;
+        }
+        fs.writeFileSync(filePath, JSON.stringify(finalObject));
     }
 }
