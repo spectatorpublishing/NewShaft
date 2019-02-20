@@ -1,7 +1,7 @@
 import React from 'react';
 import { storiesOf } from '@storybook/react';
 import { Button } from '@storybook/react/demo';
-import ThemeGuide from '../src/client/components/ThemeGuide.js';
+import StyleGuide from '../src/client/containers/StyleGuide.js';
 import SearchBar from '../src/client/components/SearchBar.js';
 import PhotoBanner from '../src/client/components/PhotoBanner.js';
 import DormButton from '../src/client/components/DormButton.js';
@@ -29,12 +29,11 @@ import FloorPlanSVG from '../src/client/components/FloorPlanSVG.js'
 import { ReactComponent as SymposiumSVG } from "../src/client/assets/test_floorplan.svg";
 import ReviewSlider from "../src/client/components/ReviewSlider.js";
 
+storiesOf('Style Guide', module)
+  .add('Fonts and Colors', () => <StyleGuide/>);
+
 storiesOf('ReviewSlider', module)
   .add('test', () => <ReviewSlider />);
-
-
-storiesOf('Theme', module)
-  .add('Fonts and Colors', () => <ThemeGuide/>);
 
 storiesOf('Button', module)
   .add('with text', () => <Button>Hello Button</Button>)

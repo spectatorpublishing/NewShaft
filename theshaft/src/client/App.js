@@ -3,6 +3,8 @@ import { Switch, Route } from 'react-router-dom'
 import Explore from './containers/Explore';
 import Dorm from './containers/Dorm';
 import NavBar from './components/NavBar.js';
+import { ThemeProvider } from "styled-components";
+import { GlobalStyles, theme } from "./util/GlobalStyles"
 
 let menuItems = [
   ["Explore", "/"],
@@ -10,25 +12,17 @@ let menuItems = [
   ["Spectrum", "/"]
 ];
 
-import { createGlobalStyle } from "styled-components";
-
-const GlobalStyles = createGlobalStyle`
-  body {
-    @import url('https://fonts.googleapis.com/css?family=Raleway:400,700,800');
-    font-family: 'Raleway', sans-serif;
-  }
-`
-
-
 const App = () => (
+  <ThemeProvider theme={theme}>
     <main>
-    	<GlobalStyles />
+      <GlobalStyles />
       <NavBar menuItems={menuItems} fixed />
-	      <Switch>
-	        <Route exact path="/" component={Explore} />
-	        <Route path="/:dorm" component={Dorm} />
-	      </Switch>
+      <Switch>
+        <Route exact path="/" component={Explore} />
+        <Route path="/:dorm" component={Dorm} />
+      </Switch>
     </main>
+  </ThemeProvider>
 )
 
 export default App
