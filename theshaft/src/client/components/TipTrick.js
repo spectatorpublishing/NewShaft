@@ -1,13 +1,6 @@
 import React, { Component } from "react";
 import styled from 'styled-components';
 
-let Table = styled.div`
-  display: flex;
-  justify-content: space-between;
-  width: 250px;
-  border-bottom: 2px solid palevioletred;
-`
-
 let Span = styled.div`
   color: grey;  
 `
@@ -16,6 +9,7 @@ let Title = styled.h2`
 `
 
 let Content = styled.span`
+  width: 300px;
   color: #5a5a5a; 
 `
 export default class TipTrick extends Component {
@@ -27,7 +21,7 @@ export default class TipTrick extends Component {
     return (
       <div className="TipTrick">
           <Title> Tip </Title>
-          <Table> <Content>{this.props.tip}</Content> </Table>
+          <Content>{this.props.tip}</Content>
           <br/>
       </div>
     );
