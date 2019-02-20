@@ -18,7 +18,7 @@ class MapItem extends Component {
     super(props)
 
     this.state = {
-      popUp: "none",
+      popUp: "flex",
     }
 
     this.setPopUp = this.setPopUp.bind(this);
@@ -54,7 +54,7 @@ class MapItem extends Component {
           latitude={lat}
           onClose={this.clearPopUp}
           closeOnClick={true}>
-          <Link to={"/" + popupId} style={{margin:'0'}}>{popupInfo}</Link>
+          <Link to={"/explore/" + popupId} style={{margin:'0'}}>{popupInfo}</Link>
         </Popup>
       </div>
   </div>
