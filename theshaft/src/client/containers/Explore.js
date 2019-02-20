@@ -76,8 +76,13 @@ export default class Explore extends Component {
         "triple": false,
         "suite": [],
         "make_up":[]
-      }
+      },
+      dorms: []
     }
+  }
+
+  componentDidMount(){
+    this.fetchDorms();
   }
 
   updatePayload(isClicked, name){
@@ -114,8 +119,23 @@ export default class Explore extends Component {
 				payload[name] = false
 			}
     }
-    this.setState({payload: payload})
+    this.setState({payload: payload}, () => this.fetchDorms())
 		console.log(this.state.payload)
+  }
+
+  fetchDorms(){
+    // console.log("PAYLOAD: " + JSON.stringify(this.state.payload))
+    fetch('/api/filterDorm', {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(this.state.payload)
+    }).then(res => res.json())
+    .then(response => {
+        // console.log("RESPONSE: " + JSON.stringify(response))
+        this.setState({dorms: response})
+    });      
   }
   
   render() {
@@ -127,16 +147,16 @@ export default class Explore extends Component {
               <h2>The Shaft</h2>
               <Filter handleChange={this.updatePayload.bind(this)}/>
             </div>
-            <ExploreSidebar payload={this.state.payload}/>
+            <ExploreSidebar dorms={this.state.dorms}/>
           </SideBar>
         </ColOne>
         <ColTwo>
           <MapView>
-            <Maps 
-              latitudes={[40.7128, 40.7129, 40.7128]} 
-              longitudes={[-74.006, -74.007, -74.008]} 
-              popupInfo={["Carman", "McBain", "John Jay"]} 
-              popupId={["Carman", "McBain", "JohnJay"]}
+            <Maps
+              latitudes={this.state.dorms.map((dorm) => dorm.latitude)} 
+              longitudes={this.state.dorms.map((dorm) => dorm.longitude)} 
+              popupInfo={this.state.dorms.map((dorm) => dorm.dorm)} 
+              popupId={this.state.dorms.map((dorm) => dorm.id)}
               width={"100%"}
               height={"900px"}
               />

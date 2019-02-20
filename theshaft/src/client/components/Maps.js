@@ -19,10 +19,25 @@ class MapItem extends Component {
 
     this.state = {
       popUp: "flex",
+      lat: this.props.lat,
+      long: this.props.long,
+      popupInfo: this.props.popupInfo,
+      popupId: this.props.popupId
     }
 
     this.setPopUp = this.setPopUp.bind(this);
     this.clearPopUp = this.clearPopUp.bind(this);
+  }
+
+  componentDidUpdate(oldProps){
+    if(oldProps != this.props){
+      this.setState({
+        lat: this.props.lat,
+        long: this.props.long,
+        popupInfo: this.props.popupInfo,
+        popupId: this.props.popupId
+      })
+    }
   }
 
   setPopUp() {
@@ -34,11 +49,10 @@ class MapItem extends Component {
   }
 
   render(){
-    const {lat, long, popupInfo, popupId} = this.props
     return <div>
       <Marker
-        latitude={lat}
-        longitude={long}
+        latitude={this.state.lat}
+        longitude={this.state.long}
       >
         <div onClick={this.setPopUp}>
         <MarkerIcon src={mark} alt="fireSpot"/>
@@ -50,11 +64,11 @@ class MapItem extends Component {
           offsetTop={-23}
           offsetLeft={7}
           dynamicPosition={true}
-          longitude={long}
-          latitude={lat}
+          longitude={this.state.long}
+          latitude={this.state.lat}
           onClose={this.clearPopUp}
           closeOnClick={true}>
-          <Link to={"/explore/" + popupId} style={{margin:'0'}}>{popupInfo}</Link>
+          <Link to={"/explore/" + this.state.popupId} style={{margin:'0'}}>{this.state.popupInfo}</Link>
         </Popup>
       </div>
   </div>
@@ -86,6 +100,22 @@ export default class Maps extends Component {
       width: this.props.width
     };    
     this.handleViewportChange = this.handleViewportChange.bind(this);
+  }
+
+  componentDidUpdate(oldProps){
+    if(oldProps != this.props){
+      this.setState({
+        coordinates: {
+          latitudes: this.props.latitudes,
+          longitudes: this.props.longitudes
+        },
+        popup: {
+          popupInfo: this.props.popupInfo,
+          popupId: this.props.popupId,
+          popupIndex: this.props.popupInfo.map(() => {return false})
+        }
+      })
+    }
   }
 
   handleViewportChange(vp) {
