@@ -14,6 +14,7 @@ import Amenities from '../src/client/components/Amenities.js';
 import AtAGlance from '../src/client/components/AtAGlance.js';
 import RelatedDorms from '../src/client/components/RelatedDorms';
 import ExploreSidebar from '../src/client/components/ExploreSidebar';
+import TipTrick from '../src/client/components/TipTrick';
 import { MemoryRouter } from 'react-router';
 //import RelatedDormsList from '../src/client/components/RelatedDormsList'
 import NavBar from '../src/client/components/NavBar.js'
@@ -28,20 +29,19 @@ storiesOf('Button', module)
     </Button>
   ));
 
-
 storiesOf('SearchBar', module)
   .add('with text', () => <SearchBar/>);
 
+let photos = [
+  ["https://arc-anglerfish-arc2-prod-spectator.s3.amazonaws.com/public/52FBXLYM2RGO3FJGK3SPD2KUEE.png"],
+  ["https://memegenerator.net/img/images/17438601/dat-sad-fat-cat.jpg"],
+  ["https://i.imgflip.com/1yt82g.jpg"],
+  ["https://i.imgflip.com/26a82h.jpg"],
+  ["https://i.imgflip.com/1eg7jb.jpg"]
+];
+
 storiesOf('PhotoBanner', module)
-  .add('for dorm pages', () => 
-        <PhotoBanner
-          imageOne="https://arc-anglerfish-arc2-prod-spectator.s3.amazonaws.com/public/52FBXLYM2RGO3FJGK3SPD2KUEE.png"
-          imageTwo="https://memegenerator.net/img/images/17438601/dat-sad-fat-cat.jpg"
-          imageThree="https://i.imgflip.com/1yt82g.jpg"
-          imageFour="https://i.imgflip.com/26a82h.jpg"
-          imageFive="https://i.imgflip.com/1eg7jb.jpg"
-        />
-      );
+  .add('for dorm pages', () => <PhotoBanner photos={photos} />);
 
 storiesOf('DormButton', module)
   .add('dorm button', () => <DormButton name="ADI House" address="21 Savage St." sundial_distance="12 minutes" description="It's lit"/>);
@@ -80,6 +80,9 @@ storiesOf('Amenities', module)
 
 storiesOf('AtAGlance', module)
   .add('at a glance', () => <AtAGlance location="545 W. 114th St." roomtype="Suite-style doubles" classmakeup="First-Years" numfloors="13"/>);
+
+storiesOf('TipTrick', module)
+  .add('tip/trick', () => <TipTrick tip="TIP/TRICK HERE"/>);
 
 // Related Dorms Content
 let sampleRelatedDorms = [

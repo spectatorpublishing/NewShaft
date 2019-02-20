@@ -78,6 +78,15 @@ export default class PhotoBanner extends Component {
   };
 
   render() {
+    let index = 0
+    return this.state.photos.map((photos) => {
+      return <div className="relatedDorm" key={index++}>
+        <img src={relatedDorms[0]} className="relatedDormImage" alt={asdf}/>
+        </div>
+      });
+    } //create if statements - if index = 0... Main picture
+/*
+  render() {
     const { width } = this.state;
     const isMobile = width <= 700;
     if (isMobile) {
@@ -113,5 +122,6 @@ export default class PhotoBanner extends Component {
         </PhotosContainer>
       );
     }
-  }
+  }*/
 }
+
