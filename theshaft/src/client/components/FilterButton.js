@@ -7,7 +7,7 @@ let Button = styled.button`
 	border: none;
 	margin: 0;
 	padding-left: 1em;
-	font-size: 15pt;
+	font-size: 9pt;
 
 	${({ clicked }) => clicked && `
     	font-weight: bold;
