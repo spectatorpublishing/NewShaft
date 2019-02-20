@@ -15,7 +15,7 @@ export default class ExploreSidebar extends Component {
     }
 
     fetchDorms(){
-        // console.log("PAYLOAD: " + JSON.stringify(this.state.payload))
+        console.log("PAYLOAD: " + JSON.stringify(this.state.payload))
         fetch('/api/filterDorm', {
             method: 'POST',
             headers: {
@@ -24,7 +24,7 @@ export default class ExploreSidebar extends Component {
             body: JSON.stringify(this.state.payload)
         }).then(res => res.json())
         .then(response => {
-            // console.log("RESPONSE: " + JSON.stringify(response))
+            console.log("RESPONSE: " + JSON.stringify(response))
             this.setState({dorms: response})
         });      
     }
@@ -41,18 +41,6 @@ export default class ExploreSidebar extends Component {
     }
 
     render() {
-        var dormsList = this.state.dorms.map((dorm, index) => (
-            <Link key={index} to={"/explore/" + dorm.id} style={{ textDecoration: 'none' }}>
-                <DormButton 
-                    key={index}
-                    school={dorm.school}
-                    name={dorm.name}
-                    image={dorm.image}
-                    description={dorm.description}
-                    amenities={dorm.amenities}
-                />
-            </Link>
-        ));
         return (
             <div>
                 <hr className="sidebar-divider"/>

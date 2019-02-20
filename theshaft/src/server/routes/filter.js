@@ -39,8 +39,8 @@ var fakedata = {
     suite: ["6"],
     walkthrough: false,
     single: true,
-    double: true,
-    triple: true,
+    double: false,
+    triple: false,
     make_up: ["first-years", "sophomores", "juniors", "seniors"],
     pros: ["pro1", "pro2", "pro3"],
     cons: ""

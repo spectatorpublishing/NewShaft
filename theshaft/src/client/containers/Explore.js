@@ -81,35 +81,40 @@ export default class Explore extends Component {
   }
 
   updatePayload(isClicked, name){
-    let statePayload = this.state.payload;
+    let payload = this.state.payload;
 		if(!isClicked){
-			if(name === 'columbia' || name === 'barnard'){
-				if(this.state.payload.college !=-1){
-					statePayload.college = -1;
-					this.setState({payload: statePayload});
+			console.log("button was false now clicked")
+			if(name === "columbia" || name === "barnard"){
+				console.log("columbia or barnard button clicked")
+				if(payload.college !== name && payload.college !==-1){
+					payload.college = -1
 				}
-				else{
-					statePayload.college = name;
-					this.setState({payload: statePayload});
+				else if (payload.college ===-1){
+					payload.college = name
 				}
+
+			}
+			else if (name == "single" || name == "double" || name == "triple"){
+				payload[name] = true
 			}
 		}
 		else{
-			if(this.state.payload.college === name){
-				statePayload.college = -1;
-				this.setState({payload: statePayload});
+			if(payload.college === name){
+				payload.college = -1
 			}
-			else {
-				if(name ==='barnard'){
-					statePayload.college = 'columbia';
-					this.setState({payload: statePayload});
+			else if( name == "columbia" || name=="barnard"){
+				if(name ==='barnard' && payload.college ===-1){
+					payload.college = 'columbia'
 				}
 				else{
-					statePayload.college = 'barnard';
-					this.setState({payload: statePayload});
+					payload.college = "barnard"
 				}
 			}
-		}
+			else if (name == "single" || name == "double" || name == "triple"){
+				payload[name] = false
+			}
+    }
+    this.setState({payload: payload})
 		console.log(this.state.payload)
   }
   
