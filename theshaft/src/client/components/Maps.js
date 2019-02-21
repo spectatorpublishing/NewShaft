@@ -22,7 +22,6 @@ class MapItem extends Component {
       lat: this.props.lat,
       long: this.props.long,
       popupInfo: this.props.popupInfo,
-      popupId: this.props.popupId
     }
 
     this.setPopUp = this.setPopUp.bind(this);
@@ -35,7 +34,6 @@ class MapItem extends Component {
         lat: this.props.lat,
         long: this.props.long,
         popupInfo: this.props.popupInfo,
-        popupId: this.props.popupId
       })
     }
   }
@@ -68,7 +66,7 @@ class MapItem extends Component {
           latitude={this.state.lat}
           onClose={this.clearPopUp}
           closeOnClick={true}>
-          <Link to={"/explore/" + this.state.popupId} style={{margin:'0'}}>{this.state.popupInfo}</Link>
+          <Link to={"/explore/" + this.state.popupInfo.replace(/\s+/g, '')} style={{margin:'0'}}>{this.state.popupInfo}</Link>
         </Popup>
       </div>
   </div>
@@ -92,7 +90,6 @@ export default class Maps extends Component {
       },
       popup: {
         popupInfo: this.props.popupInfo,
-        popupId: this.props.popupId,
         popupIndex: popupIndex
       },
       //width and height are passed in from outside
@@ -111,7 +108,6 @@ export default class Maps extends Component {
         },
         popup: {
           popupInfo: this.props.popupInfo,
-          popupId: this.props.popupId,
           popupIndex: this.props.popupInfo.map(() => {return false})
         }
       })
@@ -130,8 +126,7 @@ export default class Maps extends Component {
       const lat = this.state.coordinates.latitudes[i]
       const long = this.state.coordinates.longitudes[i];
       const popupInfo = this.state.popup.popupInfo[i];
-      const popupId = this.state.popup.popupId[i];
-      markers.push(<MapItem key={k++} lat={lat} long={long} popupInfo={popupInfo} popupId={popupId}/>);
+      markers.push(<MapItem key={k++} lat={lat} long={long} popupInfo={popupInfo}/>);
     }
     
     return (
