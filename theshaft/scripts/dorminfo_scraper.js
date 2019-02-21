@@ -31,8 +31,9 @@ var pullDormInfo= function(url){
 				console.log("error");
 			})
 		.then((mats) => {
-			a = mats[0];
-			test = mats[1];
+			var a = mats[0];
+			var test = mats[1];
+			console.log(test);
 			var file = fs.createWriteStream("../db/DormJSONS/" + test + '_data'+".json");
 			file.on('open', function(fd) {
 				file.write(JSON.stringify(a),function(err){file.end();});
@@ -51,7 +52,6 @@ var dormSweep =function(url){
     console.log(dorm_list)
   }).then((dorm_list) => 	{
   		dorm_list.forEach(function(element){
-  			console.log(element['attribs']['href']);
 				pullDormInfo('https://housing.columbia.edu'+element['attribs']['href']);
   	})
   })
