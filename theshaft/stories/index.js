@@ -5,6 +5,7 @@ import SearchBar from '../src/client/components/SearchBar.js';
 import PhotoBanner from '../src/client/components/PhotoBanner.js';
 import DormButton from '../src/client/components/DormButton.js';
 import Explore from '../src/client/containers/Explore.js';
+<<<<<<< Updated upstream
 import ProCon from '../src/client/components/ProCon.js';
 import QuickReview from '../src/client/components/QuickReview.js';
 import Review from '../src/client/components/Review.js';
@@ -30,6 +31,13 @@ import ReviewSlider from "../src/client/components/ReviewSlider.js";
 
 storiesOf('ReviewSlider', module)
   .add('test', () => <ReviewSlider />);
+=======
+import FAQTimeline from "../src/client/components/FAQTimeline.js";
+
+//FAQ Timeline
+storiesOf('ReviewSlider', module)
+  .add('FAQ Timeline', () => <FAQTimeline/>)
+>>>>>>> Stashed changes
 
 storiesOf('Button', module)
   .add('with text', () => <Button>Hello Button</Button>)
