@@ -1,5 +1,6 @@
 import React, { Component } from "react";
-import FilterButton from "./FilterButton.js"
+import FilterButton from "./FilterButton.js";
+import FilterCategory from "./FilterCategory.js";
 import styled from 'styled-components';
 
 let Filter = styled.div`
@@ -26,23 +27,52 @@ export default class FilterComponent extends React.PureComponent {
 	    super(props);
 
 	    this.state = {
-	    	type: this.props.type
+			type: this.props.type,
+			handleChange: this.props.handleChange
 	    };
 	}
 
 	render() {
+			const schoolFilters = [
+				"columbia",
+				"barnard"
+			]
+
+			const roomTypeFilters = [
+				"single",
+				"double",
+				"# person suite"
+			]
+
+			const yearFilters = [
+				"first year",
+				"sophomore",
+				"junior",
+				"senior"
+			]
+
+			const amenitiesFilters = [
+				"Food",
+				"Toilet",
+				"interior decoration by RamondLiCSS"
+			]
 			return(
 				<Filter>
-					<Text> filter by {this.state.type}: </Text>
-					<FilterButton name="columbia"/>
-					<FilterButton name="barnard"/>
-					<FilterButton name="single"/>
-					<FilterButton name="double"/>
-					<FilterButton name="# person room"/>
-					<FilterButton name="freshperson"/>
-					<FilterButton name="sophomore"/>
-					<FilterButton name="junior"/>
-					<FilterButton name="senior"/>
+					<FilterCategory handleChange={this.state.handleChange} headerTitle="Filter by school" filters={schoolFilters}></FilterCategory>
+					<FilterCategory handleChange={this.state.handleChange} headerTitle="Filter by room type" filters={roomTypeFilters}></FilterCategory>
+					<FilterCategory handleChange={this.state.handleChange} headerTitle="Filter by year" filters={yearFilters}></FilterCategory>
+					<FilterCategory handleChange={this.state.handleChange} headerTitle="Filter by amenities" filters={amenitiesFilters}></FilterCategory>
+					{/* <Text> Filter by school: </Text> */}
+					{/* <Text> Filter by {this.state.type}: </Text> */}
+					{/* <FilterButton handleClick={this.state.handleChange} name="columbia"/>
+					<FilterButton handleClick={this.state.handleChange} name="barnard"/> */}
+					{/* <FilterButton handleClick={this.state.handleChange} name="single"/>
+					<FilterButton handleClick={this.state.handleChange} name="double"/>
+					<FilterButton handleClick={this.state.handleChange} name="# person room"/>
+					<FilterButton handleClick={this.state.handleChange} name="freshperson"/>
+					<FilterButton handleClick={this.state.handleChange} name="sophomore"/>
+					<FilterButton handleClick={this.state.handleChange} name="junior"/>
+					<FilterButton handleClick={this.state.handleChange} name="senior"/> */}
 			    </Filter>
 			)
 		}
