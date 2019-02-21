@@ -8,51 +8,18 @@ export default class ExploreSidebar extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            payload: this.props.payload,
-            dorms: [],
-            dormButtons: []
+            dorms: this.props.dorms
         };
-    }
-
-    fetchDorms(){
-        // console.log("PAYLOAD: " + JSON.stringify(this.state.payload))
-        fetch('/api/filterDorm', {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json'
-            },
-            body: JSON.stringify(this.state.payload)
-        }).then(res => res.json())
-        .then(response => {
-            // console.log("RESPONSE: " + JSON.stringify(response))
-            this.setState({dorms: response})
-        });      
-    }
-
-    componentDidMount(){
-        this.fetchDorms();
     }
 
     componentDidUpdate(prevProps){
         if(prevProps != this.props){
             console.log("props updated")
-            this.setState({payload: this.props.payload}, () => this.fetchDorms()); 
+            this.setState({dorms: this.props.dorms}); 
         }      
     }
 
     render() {
-        var dormsList = this.state.dorms.map((dorm, index) => (
-            <Link key={index} to={"/explore/" + dorm.id} style={{ textDecoration: 'none' }}>
-                <DormButton 
-                    key={index}
-                    school={dorm.school}
-                    name={dorm.name}
-                    image={dorm.image}
-                    description={dorm.description}
-                    amenities={dorm.amenities}
-                />
-            </Link>
-        ));
         return (
             <div>
                 <hr className="sidebar-divider"/>
