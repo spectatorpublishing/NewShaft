@@ -1,3 +1,6 @@
-DORM,ADDRESS,DESCRIPTION,COLLEGE,THUMBNAIL_IMAGE,SUITE,WALKTHROUGH,SINGLE_,DOUBLE_,TRIPLE_,PROS,CONS
-"110","601 W 110th St","Off-campus but not really","BARNARD","N/A",("6"),FALSE,TRUE,TRUE,TRUE,"",""
-"SIC","619 W 113th St", "Comedy house","COLUMBIA","N/A",("5"),FALSE,TRUE,TRUE,FALSE,"",""
+DORM,ADDRESS,DESCRIPTION,COLLEGE,THUMBNAIL_IMAGE,SUITE,WALKTHROUGH,SINGLE_,DOUBLE_,TRIPLE_,PROS,CONS, LATITUDE, LONGITUDE, LOTTERY_NUMS, CLASS_MAKEUP
+"110","601 W 110th St","Off-campus but not really","BARNARD","N/A",("6"),FALSE,TRUE,TRUE,TRUE,"cool dudes","not cool dudes", 40.8075, 73.9626, "1000", ("sophomores, "juniors")
+"SIC","619 W 113th St", "Special interest communities","COLUMBIA","N/A",("5"),FALSE,TRUE,TRUE,FALSE,"big rooms","far", 40.0034, 73.4238, "2000", ("sophomores", "juniors", "seniors")
+"Claremont", "47 Claremont Avenue" "Cool bean space", "COLUMBIA", "N/A", ("4", "5", "6"), FALSE, TRUE, TRUE, FALSE, "suites with singles", "where is it", 41.3294, 69.2309, 200, ("sophomores", "juniors")
+"Broadway", "556 W 114th St" "Cool bean space 2", "COLUMBIA", "N/A", ("4", "6"), FALSE, TRUE, TRUE, FALSE, "wooooo", "booooo", 41.3294, 69.2309, 200, ("sophomores", "juniors", "seniors")
+"Carlton Arms", "362 Riverside Dr" "the far one", "COLUMBIA", "N/A", ("4", "6", "7", "8"), TRUE, TRUE, TRUE, FALSE, "big", "far", 41.3294, 69.2309, 200, ("sophomores", "juniors", "seniors")
