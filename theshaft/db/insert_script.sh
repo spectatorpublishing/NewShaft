@@ -24,4 +24,6 @@ while read LINE; do
 done < $FILE
 
 # actually insert to sql!
-mysql -u spectech -p -h 85.10.205.173 --database="theshaft" --execute "${sql_query}"
+ssh root@104.248.7.174 "docker exec shaft_db mysql -uroot --password=bug1877ButItsLongerNow_lmaoxD"
+#echo -e -n "SELECT * FROM dorm_statoc_info;"
+
