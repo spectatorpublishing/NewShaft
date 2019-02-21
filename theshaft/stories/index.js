@@ -5,39 +5,11 @@ import SearchBar from '../src/client/components/SearchBar.js';
 import PhotoBanner from '../src/client/components/PhotoBanner.js';
 import DormButton from '../src/client/components/DormButton.js';
 import Explore from '../src/client/containers/Explore.js';
-<<<<<<< Updated upstream
-import ProCon from '../src/client/components/ProCon.js';
-import QuickReview from '../src/client/components/QuickReview.js';
-import Review from '../src/client/components/Review.js';
-import FloorPlan from '../src/client/components/FloorPlan.js';
-import sampleFloor from '../src/client/assets/floor_plans/47 Claremont 1.jpg';
-import FilterButton from '../src/client/components/FilterButton.js';
-import FilterComponent from '../src/client/components/FilterComponent.js';
-import Expander from '../src/client/components/Expander.js';
-import Amenities from '../src/client/components/Amenities.js';
-import AtAGlance from '../src/client/components/AtAGlance.js';
-import FullReview from '../src/client/components/FullReview.js';
-import ReviewList from '../src/client/components/ReviewList.js';
-import RelatedDorms from '../src/client/components/RelatedDorms';
-import ExploreSidebar from '../src/client/components/ExploreSidebar';
-import { MemoryRouter } from 'react-router';
-//import RelatedDormsList from '../src/client/components/RelatedDormsList'
-import NavBar from '../src/client/components/NavBar.js'
-import FullScreen from '../src/client/components/FullScreen.js';
-import Maps from '../src/client/components/Maps.js'
-import FloorPlanSVG from '../src/client/components/FloorPlanSVG.js'
-import { ReactComponent as SymposiumSVG } from "../src/client/assets/test_floorplan.svg";
-import ReviewSlider from "../src/client/components/ReviewSlider.js";
-
-storiesOf('ReviewSlider', module)
-  .add('test', () => <ReviewSlider />);
-=======
 import FAQTimeline from "../src/client/components/FAQTimeline.js";
 
 //FAQ Timeline
 storiesOf('ReviewSlider', module)
   .add('FAQ Timeline', () => <FAQTimeline/>)
->>>>>>> Stashed changes
 
 storiesOf('Button', module)
   .add('with text', () => <Button>Hello Button</Button>)
