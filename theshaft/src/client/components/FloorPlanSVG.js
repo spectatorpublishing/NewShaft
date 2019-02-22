@@ -38,7 +38,6 @@ export default class FloorPlanSVG extends Component {
 
   handleRectClick(e) {
     console.log(e.target.parentElement.dataset.name);
-    console.log(e.clientX + " " + e.clientY);
   }
 
   render() {
