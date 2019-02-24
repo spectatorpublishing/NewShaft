@@ -4,7 +4,6 @@ import { Route, Link, BrowserRouter as Router } from 'react-router-dom';
 import styled from 'styled-components'
 
 import DormButton from '../components/DormButton';
-import '../css/ExploreSidebar.css';
 
 const Header = styled.div`
 	margin: 0 auto;
