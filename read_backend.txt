@@ -47,7 +47,7 @@ Install kubectl:
 
 Get config file:
     It's on the shaft github projects page, on the card about kubernetes config.
-    Create the directory ~/.kube, put the config file there (keep name as 'config')
+    Create the directory ~/.kube, put the config file there (rename from config.txt to just config)
 
 Now you can run kubectl <command> to interact with kubernetes.
 A good test command is 'kubectl get nodes'
