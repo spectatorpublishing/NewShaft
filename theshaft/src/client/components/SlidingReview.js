@@ -4,37 +4,12 @@ import 'slick-carousel/slick/slick.css';
 import 'slick-carousel/slick/slick-theme.css';
 import Review from "./Review.js"
 
-var reviews1 = [
-    {
-        stars: 4,
-        text: "nice"
-    }, 
-    {
-        stars: 4,
-        text: "nice"
-    },
-    {
-        stars: 4,
-        text: "nice"
-    },
-    {
-        stars: 4,
-        text: "nice"
-    },
-    {
-        stars: 4,
-        text: "nice"
-    }
-]
-
-
-
 export default class SlidingReview extends Component {
     constructor(props){
         super(props);
 
         this.state = {
-            page: 1
+            page: 1,
         }
     }
 
@@ -50,16 +25,16 @@ export default class SlidingReview extends Component {
         <div>
             <Slider {...settings}>
                 <div style={""}>
-                    {reviews1.map((review) => <Review style={"flexDirection: column"} stars={review.stars} review={review.text} />)}                
+                    {this.props.reviews.map((review) => <Review style={"flexDirection: column"} stars={review.stars} review={review.text} />)}                
                 </div>
                 <div>
-                    {reviews1.map((review) => <Review style={"flexDirection: column"} stars={review.stars} review={review.text} />)}                
+                    {this.props.reviews.map((review) => <Review style={"flexDirection: column"} stars={review.stars} review={review.text} />)}                
                 </div>
                 <div>
-                    {reviews1.map((review) => <Review style={"flexDirection: column"} stars={review.stars} review={review.text} />)}                
+                    {this.props.reviews.map((review) => <Review style={"flexDirection: column"} stars={review.stars} review={review.text} />)}                
                 </div>
                 <div>
-                    {reviews1.map((review) => <Review style={"flexDirection: column"} stars={review.stars} review={review.text} />)}                
+                    {this.props.reviews.map((review) => <Review style={"flexDirection: column"} stars={review.stars} review={review.text} />)}                
                 </div>
             </Slider>
         </div>

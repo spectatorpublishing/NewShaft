@@ -8,7 +8,7 @@ import Maps from "../components/Maps";
 import ProCon from "../components/ProCon";
 import FloorPlan from "../components/FloorPlan";
 import RelatedDorms from "../components/RelatedDorms";
-import SlidingReview from "../components/SlidingReview";
+import ReviewsBox from "../components/ReviewsBox";
 
 
 var fakedata = {
@@ -71,6 +71,33 @@ let sampleAmenities = [
   ["lounge", "Sky lounge"],
   ["lounge", "Basement lounge"]
 ];
+
+var stars="4.5" 
+var recommend="28%" 
+var ranking="#7" 
+
+var reviews = [
+  {
+      stars: 4,
+      text: "nice"
+  }, 
+  {
+      stars: 4,
+      text: "nice"
+  },
+  {
+      stars: 4,
+      text: "nice"
+  },
+  {
+      stars: 4,
+      text: "nice"
+  },
+  {
+      stars: 4,
+      text: "nice"
+  }
+]
 
 let relatedDorms = [
   {
@@ -288,7 +315,12 @@ export default class Dorm extends React.PureComponent {
                 "https://i.kym-cdn.com/entries/icons/original/000/026/642/kot1.jpg"
               ]}
             />
-            <SlidingReview />
+            <ReviewsBox style={"display: inline-block"} 
+              stars={stars}
+              recommend={recommend}
+              ranking={ranking}
+              reviews={reviews}>
+            </ReviewsBox>            
             <RelatedDorms
               name={this.props.match.params.dorm}
               relatedDorms={relatedDorms}
