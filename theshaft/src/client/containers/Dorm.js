@@ -288,7 +288,7 @@ export default class Dorm extends React.PureComponent {
                 "https://i.kym-cdn.com/entries/icons/original/000/026/642/kot1.jpg"
               ]}
             />
-            {/* <SlidingReview /> */}
+            <SlidingReview />
             <RelatedDorms
               name={this.props.match.params.dorm}
               relatedDorms={relatedDorms}
