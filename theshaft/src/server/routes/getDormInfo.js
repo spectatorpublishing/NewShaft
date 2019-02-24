@@ -24,7 +24,7 @@ function getDormInfo(con, request, callback) {
 		}
 		*/
 
-		var sqlStatement = `SELECT * FROM \`${request.table}\` `
+		var sqlStatement = `SELECT * FROM ${request.table} `
 		delete request.table;
 		var firstKey = true
 
@@ -36,7 +36,8 @@ function getDormInfo(con, request, callback) {
 				sqlStatement += ` AND ${key}="${request[key]}"`
 			}
 		}
-
+		sqlStatement+=`;`
+		
 		con.query(sqlStatement, function(err, res) {
 			if (err) throw err;
 			callback(res)
@@ -58,9 +59,9 @@ router.post('/', function(req, res, next) {
 	console.log("requesting selection of",req.body)
 	
 	getDormInfo(con, req.body, (dormInfo) => {
+		console.log(dormInfo)
 		res.json(dormInfo)
-		console.log(JSON.stringify(res))
-		// res.send(JSON.stringify(res))
+		// lmao wtf why => res.send(JSON.stringify(res))
 	})
 
 })
