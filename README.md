@@ -72,11 +72,11 @@ Field | Type | Constraints
  --- | --- | ---
 DORM | VARCHAR(40) | NOT NULL
 ADDRESS | VARCHAR(40)| NOT NULL
-NUM_STARS | INT | 
-REVIEW_TXT | TEXT | 
-ROOM_NUM | CHAR(50)| 
-YEAR| SET("first-years","sophomores","juniors","seniors") | 
-DATE | DATE |
+NUM_STARS | INT | NOT NULL
+REVIEW_TXT | TEXT | NOT NULL
+ROOM_NUM | CHAR(50)| NOT NULL
+YEAR| SET("first-years","sophomores","juniors","seniors") | NOT NULL
+DATE | DATE | NOT NULL
 THUMBS_UP  | INT | 
 THUMBS_UP  |INT |
 
