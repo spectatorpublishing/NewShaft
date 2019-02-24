@@ -27,6 +27,7 @@ import Maps from '../src/client/components/Maps.js'
 import FloorPlanSVG from '../src/client/components/FloorPlanSVG.js'
 import { ReactComponent as SymposiumSVG } from "../src/client/assets/test_floorplan.svg";
 import ReviewSlider from "../src/client/components/ReviewSlider.js";
+import TipTrick from "../src/client/components/TipTrick.js";
 
 storiesOf('ReviewSlider', module)
   .add('test', () => <ReviewSlider />);
@@ -225,3 +226,5 @@ storiesOf('Maps', module)
 storiesOf('FloorPlanSVG', module)
   .add('Symposium 1 floorplan', () => <FloorPlanSVG><SymposiumSVG /></FloorPlanSVG>);
 
+storiesOf('TipTrick', module)
+  .add('tip/trick', () => <TipTrick tip="TIP/TRICK HERE"/>);
