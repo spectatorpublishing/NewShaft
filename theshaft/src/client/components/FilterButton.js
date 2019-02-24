@@ -1,12 +1,13 @@
 import React, { Component } from "react";
 import styled from 'styled-components';
+import { request } from "http";
 
 let Button = styled.button`
 	background: none;
 	border: none;
 	margin: 0;
 	padding-left: 1em;
-	font-size: 15pt;
+	font-size: 9pt;
 
 	${({ clicked }) => clicked && `
     	font-weight: bold;
@@ -18,17 +19,19 @@ export default class FilterButton extends React.PureComponent {
 	    super(props);
 
 	    this.state = {
+				handleClick: this.props.handleClick,
 	    	name: this.props.name,
-	    	clicked: false
+				clicked: false
 	    };
 
 	    this.onClick = this.onClick.bind(this);
 	}
-
+	
 	onClick() {
-		var bool = this.state.clicked;
-		this.setState({clicked: !bool})
+		this.state.handleClick(this.state.clicked, this.props.name)
 		
+		console.log(this.props.name+"button clicked")		
+		this.setState({clicked: !this.state.clicked})		
 	}
 
 	render() {

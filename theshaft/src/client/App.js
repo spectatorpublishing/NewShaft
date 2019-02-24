@@ -1,34 +1,46 @@
 import React from 'react'
-import { Switch, Route } from 'react-router-dom'
+import { Switch, Redirect, Route } from 'react-router-dom'
 import Explore from './containers/Explore';
 import Dorm from './containers/Dorm';
 import NavBar from './components/NavBar.js';
+import { ThemeProvider } from "styled-components";
+import { GlobalStyles, theme } from "./util/GlobalStyles"
 
-let menuItems = [
-  ["Explore", "/"],
-  ["Whiteboard", "/"],
-  ["Spectrum", "/"]
+const menuItems = [
+  {
+    "name": "Explore",
+    "link": "/explore",
+    "external": false
+  },
+  {
+    "name": "Whiteboard",
+    "link": "/whiteboard",
+    "external": false
+  },
+  {
+    "name": "FAQ",
+    "link": "/faq",
+    "external": false
+  },
+  {
+    "name": "Spectrum",
+    "link": "https://www.columbiaspectator.com/spectrum/",
+    "external": true
+  }
 ];
 
-import { createGlobalStyle } from "styled-components";
-
-const GlobalStyles = createGlobalStyle`
-  body {
-    @import url('https://fonts.googleapis.com/css?family=Raleway');
-    font-family: 'Raleway', sans-serif;
-  }
-`
-
-
 const App = () => (
+  <ThemeProvider theme={theme}>
     <main>
-    	<GlobalStyles />
+      <GlobalStyles />
       <NavBar menuItems={menuItems} fixed />
-	      <Switch>
-	        <Route exact path="/" component={Explore} />
-	        <Route path="/:dorm" component={Dorm} />
-	      </Switch>
+      <Switch>
+        <Route exact path="/" render={() => (<Redirect from='/' to='/explore'/>)}/>
+        <Route exact path="/explore" component={Explore} />
+        <Route path="/explore/:dorm" component={Dorm} />
+      </Switch>
     </main>
+  </ThemeProvider>
 )
 
 export default App

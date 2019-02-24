@@ -2,11 +2,12 @@ import React, { Component } from 'react';
 import styled from "styled-components";
 import { Route, Link, BrowserRouter as Router } from 'react-router-dom';
 import DormButton from '../components/DormButton';
-//import '../css/Explore.css';
+import '../css/Explore.css';
 import Dorm from './Dorm.js';
 import Updater from '../components/Updater';
 import ExploreSidebar from "../components/ExploreSidebar";
-//import "../css/Explore.css";
+import Filter from '../components/FilterComponent.js'
+import "../css/Explore.css";
 import map from "../assets/map.png";
 import Maps from "../components/Maps";
 
@@ -60,115 +61,101 @@ let ColTwo = styled.div`
   //z-index:1;
   // display: flex;
   flex-direction: column;
-  width: ${(mobile) => mobile ? `67%`: `50%`};
+  width: ${(mobile) => mobile ? '67%': '50%'};
   //width: 50%;
-`
-
+  `
+  
 export default class Explore extends Component {
   constructor(props){
     super(props);
-    
-  }
-
-
-  /*componentDidMount(){
-    fetch('/api/filterDorm', {
-      method: 'POST',
-      headers: {
-        'X-Powered-By': 'Express',
-        'Content-Type': 'application/json; charset=utf-8'
-      },
-      body: {
+    this.state = {
+      payload: {
         "college": -1,
-        "single": true,
-        "double": true,
-        "triple": true,
+        "single": false,
+        "double": false,
+        "triple": false,
         "suite": [],
         "make_up":[]
-      }
-    }).then((res) => {console.log("\nRESPONSE: "); console.log(JSON.stringify(res));})
-      .then((dorms) => {
-        this.setState({
-          dorms: dorms.map((dorm) => {
-            return {
-              id: dorm['dorm'],
-              school: dorm['college'],
-              name: dorm['dorm'] + 'Hall',
-              image: dorm['thumbnail_image'],
-              description: dorm['description'],
-              amenities: dorm['amenities']
-            };
-          })
-        });
-      });
+      },
+      dorms: []
+    }
+  }
 
-  } */
+  componentDidMount(){
+    this.fetchDorms();
+  }
+
+  updatePayload(isClicked, name){
+    let payload = this.state.payload;
+		if(!isClicked){
+			console.log("button was false now clicked")
+			if(name === "columbia" || name === "barnard"){
+				console.log("columbia or barnard button clicked")
+				if(payload.college !== name && payload.college !==-1){
+					payload.college = -1
+				}
+				else if (payload.college ===-1){
+					payload.college = name
+				}
+
+			}
+			else if (name == "single" || name == "double" || name == "triple"){
+				payload[name] = true
+			}
+		}
+		else{
+			if(payload.college === name){
+				payload.college = -1
+			}
+			else if( name == "columbia" || name=="barnard"){
+				if(name ==='barnard' && payload.college ===-1){
+					payload.college = 'columbia'
+				}
+				else{
+					payload.college = "barnard"
+				}
+			}
+			else if (name == "single" || name == "double" || name == "triple"){
+				payload[name] = false
+			}
+    }
+    this.setState({payload: payload}, () => this.fetchDorms())
+		console.log(this.state.payload)
+  }
+
+  fetchDorms(){
+    // console.log("PAYLOAD: " + JSON.stringify(this.state.payload))
+    fetch('/api/filterDorm', {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(this.state.payload)
+    }).then(res => res.json())
+    .then(response => {
+        // console.log("RESPONSE: " + JSON.stringify(response))
+        this.setState({dorms: response})
+    });      
+  }
   
   render() {
-    var dorms = [
-      {
-        id: "McBain",
-        school: "Columbia",
-        name: "McBain Hall",
-        image: "https://housing.columbia.edu/files/housing/McBain.jpg",
-        description:
-          "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla nulla nulla, condimentum a mattis in, faucibus id sapien. Sed rhoncus.",
-        amenities: "No AC"
-      },
-      {
-        id: "Carman",
-        school: "Columbia",
-        name: "Carman Hall",
-        image: "https://housing.columbia.edu/files/housing/Carman.jpg",
-        description:
-          "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla nulla nulla, condimentum a mattis in, faucibus id sapien. Sed rhoncus.",
-        amenities: "No AC"
-      },
-      {
-        id: "Sulzberger",
-        school: "Barnard",
-        name: "Sulzberger Tower",
-        image: "https://housing.columbia.edu/files/housing/McBain.jpg",
-        description:
-          "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla nulla nulla, condimentum a mattis in, faucibus id sapien. Sed rhoncus.",
-        amenities: "No AC"
-      },
-      {
-        id: "mcbain",
-        school: "Columbia",
-        name: "McBain Hall",
-        image: "https://housing.columbia.edu/files/housing/McBain.jpg",
-        description:
-          "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla nulla nulla, condimentum a mattis in, faucibus id sapien. Sed rhoncus.",
-        amenities: "No AC"
-      },
-      {
-        id: "mcbain",
-        school: "Columbia",
-        name: "McBain Hall",
-        image: "https://housing.columbia.edu/files/housing/McBain.jpg",
-        description:
-          "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla nulla nulla, condimentum a mattis in, faucibus id sapien. Sed rhoncus.",
-        amenities: "No AC"
-      }
-    ];
-
-
     return (
-
       <ExploreContainer>
         <ColOne>
           <SideBar>
-            <ExploreSidebar dorms={dorms} />
+            <div className="filters">
+              <h2>The Shaft</h2>
+              <Filter handleChange={this.updatePayload.bind(this)}/>
+            </div>
+            <ExploreSidebar dorms={this.state.dorms}/>
           </SideBar>
         </ColOne>
         <ColTwo>
           <MapView>
-            <Maps 
-              latitudes={[40.7128, 40.7129, 40.7128]} 
-              longitudes={[-74.006, -74.007, -74.008]} 
-              popupInfo={["Carman", "McBain", "John Jay"]} 
-              popupId={["Carman", "McBain", "JohnJay"]}
+            <Maps
+              latitudes={this.state.dorms.map((dorm) => dorm.latitude)} 
+              longitudes={this.state.dorms.map((dorm) => dorm.longitude)} 
+              popupInfo={this.state.dorms.map((dorm) => dorm.dorm)} 
               width={"100%"}
               height={"900px"}
               />
