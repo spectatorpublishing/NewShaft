@@ -49,6 +49,24 @@ LONGITUDE | FLOAT(10,6)	|
 LOTTERY_NUMS	| VARCHAR(20) |
 CLASS_MAKEUP	| SET("first-years","sophomores","juniors","seniors") |
 
+#### amenities
+Field | Type | Constraints
+ --- | --- | ---
+DORM | VARCHAR(40) | NOT NULL
+ADDRESS | VARCHAR(40)| NOT NULL
+PRIVATE BATHROOM | BOOLEAN | 
+LAUNDRY | BOOLEAN | 
+CARPET | BOOLEAN | 
+FLOOR KITCHEN | BOOLEAN | 
+PRIVATE KITCHEN  | BOOLEAN |
+LOUNGE  | BOOLEAN | 
+FITNESS ROOM  |BOOLEAN |
+BIKE STORAGE | BOOLEAN |
+COMPUTER LAB  | BOOLEAN |
+PRINT STATION  | BOOLEAN |
+AC | BOOLEAN |
+MUSIC PRACTICE ROOMS | BOOLEAN
+
 ### Endpoints
 Type | url | params | returns
  --- | --- | --- | ---
