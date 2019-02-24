@@ -1,23 +1,46 @@
-import React, { Component } from 'react';
-import './app.css';
-import ReactImage from './react.png';
+import React from 'react'
+import { Switch, Redirect, Route } from 'react-router-dom'
+import Explore from './containers/Explore';
+import Dorm from './containers/Dorm';
+import NavBar from './components/NavBar.js';
+import { ThemeProvider } from "styled-components";
+import { GlobalStyles, theme } from "./util/GlobalStyles"
 
-export default class App extends Component {
-  state = { username: null };
-
-  componentDidMount() {
-    fetch('/api/getUsername')
-      .then(res => res.json())
-      .then(user => this.setState({ username: user.username }));
+const menuItems = [
+  {
+    "name": "Explore",
+    "link": "/explore",
+    "external": false
+  },
+  {
+    "name": "Whiteboard",
+    "link": "/whiteboard",
+    "external": false
+  },
+  {
+    "name": "FAQ",
+    "link": "/faq",
+    "external": false
+  },
+  {
+    "name": "Spectrum",
+    "link": "https://www.columbiaspectator.com/spectrum/",
+    "external": true
   }
+];
 
-  render() {
-    const { username } = this.state;
-    return (
-      <div>
-        {username ? <h1>{`Hello ${username}`}</h1> : <h1>Loading.. please wait!</h1>}
-        <img src={ReactImage} alt="react" />
-      </div>
-    );
-  }
-}
+const App = () => (
+  <ThemeProvider theme={theme}>
+    <main>
+      <GlobalStyles />
+      <NavBar menuItems={menuItems} fixed />
+      <Switch>
+        <Route exact path="/" render={() => (<Redirect from='/' to='/explore'/>)}/>
+        <Route exact path="/explore" component={Explore} />
+        <Route path="/explore/:dorm" component={Dorm} />
+      </Switch>
+    </main>
+  </ThemeProvider>
+)
+
+export default App

@@ -1,5 +1,12 @@
-import React from 'react';
-import ReactDOM from 'react-dom';
-import App from './App';
+import React from "react";
+import ReactDOM from "react-dom";
+import { Switch, Route, Link, BrowserRouter as Router } from "react-router-dom";
+import App from "./App";
 
-ReactDOM.render(<App />, document.getElementById('root'));
+const routing = (
+  <Router>
+    <App />
+  </Router>
+);
+
+ReactDOM.render(routing, document.getElementById("root"));
