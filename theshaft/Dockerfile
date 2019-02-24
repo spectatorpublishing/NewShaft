@@ -15,4 +15,4 @@ COPY . .
 EXPOSE 8080
 
 #Run npm run server
-CMD ["npm",  "run", ""]
+CMD ["npm",  "start"]
