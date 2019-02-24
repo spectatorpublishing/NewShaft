@@ -233,5 +233,5 @@ storiesOf('Maps', module)
 storiesOf('FloorPlanSVG', module)
   .add('Symposium 1 floorplan', () => <FloorPlanSVG><SymposiumSVG /></FloorPlanSVG>);
 
-  storiesOf('Timeline', module)
-  .add('Timeline', () => <Timeline />);
+ // storiesOf('Timeline', module)
+ // .add('Timeline', () => <Timeline />);

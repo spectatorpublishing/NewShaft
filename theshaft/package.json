@@ -24,6 +24,7 @@
     "@storybook/addon-info": "^4.1.12",
     "babel-polyfill": "^6.26.0",
     "bootstrap": "^4.2.1",
+    "carousel": "0.0.3",
     "cheerio": "^1.0.0-rc.2",
     "cors": "^2.8.5",
     "dotenv-webpack": "^1.6.0",
@@ -77,7 +78,7 @@
     "style-loader": "^0.23.0",
     "superagent": "^4.0.0-beta.5",
     "supertest": "^3.3.0",
-    "url-loader": "^1.0.1",
+    "url-loader": "^1.1.2",
     "webpack": "^4.5.0",
     "webpack-cli": "^3.0.8",
     "webpack-dev-server": "^3.1.3"
