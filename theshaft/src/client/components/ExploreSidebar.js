@@ -1,8 +1,42 @@
 import React, { Component } from 'react';
 import { Route, Link, BrowserRouter as Router } from 'react-router-dom';
 
+import styled from 'styled-components'
+
 import DormButton from '../components/DormButton';
 import '../css/ExploreSidebar.css';
+
+const Header = styled.div`
+	margin: 0 auto;
+	width: 100%;
+	text-align: center;
+`
+
+const SchoolButton = styled.div`
+	display: inline-block;
+	font-size: 15pt;
+	text-align: center;
+	border: 1px solid #9B9B9B;
+	color: #9B9B9B;
+	height: 20px;
+	margin: 20px 10px;
+	padding: 2px;
+	cursor: pointer;
+`
+
+const Dorms = styled.div`
+	margin: 0 auto;
+	overflow: scroll;
+	height: 100%;
+`
+
+const SidebarDivider = styled.div`
+    & hr{
+        border: 1px solid #509e80;
+        border-radius: 5px;
+    }
+`
+
 
 export default class ExploreSidebar extends Component {
     constructor(props) {
@@ -22,8 +56,8 @@ export default class ExploreSidebar extends Component {
     render() {
         return (
             <div>
-                <hr className="sidebar-divider"/>
-                <div className="dorms">
+                <SidebarDivider><hr></hr></SidebarDivider>
+                <Dorms>
                     {this.state.dorms.map((dorm, index) => 
                         <Link key={index} to={"/explore/" + dorm.dorm.replace(/\s+/g, '')} style={{textDecoration: 'none'}}>
                             <DormButton key={index}
@@ -34,7 +68,7 @@ export default class ExploreSidebar extends Component {
                                 amenities={dorm.amenities}/>
                         </Link>
                     )}
-                </div>
+                </Dorms>
             </div>
         );
     }
