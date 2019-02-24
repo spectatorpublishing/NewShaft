@@ -2,22 +2,52 @@ import React, { Component } from "react";
 import FilterButton from "./FilterButton.js"
 import styled from 'styled-components';
 
+import {theme} from '../util/GlobalStyles'
+
+let DDHeader = styled.div`
+`
+
+let DDHeaderTitle = styled.div`
+    text-shadow: ${props => props.shadow ? "1px 1px 1px rgba(0,0,0,0.4)" : "none"};
+    cursor: pointer;
+    user-select: none;
+    color: ${theme.columbiaBlue};
+`
+
 let ListElement = styled.li`
-	// padding-top: 1px;
-	// color: rgb(176, 214, 132);
-	// font-size: 9pt;
-    // // white-space: nowrap;
-    list-style-type:none;
-    //margin: -10px;
-    left: 10px;
-    padding: 2px;
-    background: white;
-    // height: 100px;
+    display: inline-block;
+    border-radius: 10px;
+    border: 1px solid lightgray;
+    padding: 5px;
+    margin: 10px;
+    @media (min-width: 650px) {
+        display: block;
+        list-style-type:none;
+        left: 10px;
+        padding: 2px;
+        background: white;
+        width: 100%;
+    }
 `
 
 let FilterList = styled.ul`
     position: absolute;
-    margin: -10px;
+    margin: 10px;
+    padding: 0;
+    left: 0;
+    width: 100%;
+    overflow: hidden;
+    background: white;
+    
+    @media (min-width: 650px) {
+        position: absolute;
+        margin: 5px 0 0 0;
+        padding: 0;
+        width: 15%;
+        border-radius: 10px;
+        border: 1px solid gray;
+        overflow: hidden;
+    }
 `
 
 
@@ -60,13 +90,9 @@ export default class FilterComponent extends React.PureComponent {
         return(
             <div className="dd-wrapper">
 
-                <div className="dd-header" onClick={() => this.toggleList()}>
-                    <div className="dd-header-title">{this.props.headerTitle}</div>
-                    {listOpen
-                        ? <h3>∧</h3>
-                        : <h3>∨</h3>
-                    }
-                </div>
+                <DDHeader onClick={() => this.toggleList()}>
+                    <DDHeaderTitle shadow={this.state.listOpen}>{this.props.headerTitle}</DDHeaderTitle>
+                </DDHeader>
 
                 {listOpen && <FilterList>
                     {filters.map((item, index) => (

@@ -2,16 +2,23 @@ import React, { Component } from "react";
 import FilterButton from "./FilterButton.js";
 import FilterCategory from "./FilterCategory.js";
 import styled from 'styled-components';
+import {theme} from '../util/GlobalStyles'
 
 let Filter = styled.div`
 	display: flex;
 	flex-direction: row;
+	justify-content: space-between;
 	
-	@media (max-width: 650px) {
-		display: flex;
-		flex-direction: column;
-		justify-content: center;
-	}
+	// @media (max-width: 650px) {
+	// 	display: flex;
+	// 	flex-direction: column;
+	// 	justify-content: center;
+	// }
+`
+
+let FilterLabel = styled.div`
+    color: ${theme.columbiaBlue};
+    font-weight: bold;
 `
 
 let Text = styled.li`
@@ -58,10 +65,11 @@ export default class FilterComponent extends React.PureComponent {
 			]
 			return(
 				<Filter>
-					<FilterCategory handleChange={this.state.handleChange} headerTitle="Filter by school" filters={schoolFilters}></FilterCategory>
-					<FilterCategory handleChange={this.state.handleChange} headerTitle="Filter by room type" filters={roomTypeFilters}></FilterCategory>
-					<FilterCategory handleChange={this.state.handleChange} headerTitle="Filter by year" filters={yearFilters}></FilterCategory>
-					<FilterCategory handleChange={this.state.handleChange} headerTitle="Filter by amenities" filters={amenitiesFilters}></FilterCategory>
+					<FilterLabel>Filters</FilterLabel>
+					<FilterCategory handleChange={this.state.handleChange} headerTitle="School" filters={schoolFilters}></FilterCategory>
+					<FilterCategory handleChange={this.state.handleChange} headerTitle="Year" filters={yearFilters}></FilterCategory>
+					<FilterCategory handleChange={this.state.handleChange} headerTitle="Room Type" filters={roomTypeFilters}></FilterCategory>
+					<FilterCategory handleChange={this.state.handleChange} headerTitle="Amenities" filters={amenitiesFilters}></FilterCategory>
 					{/* <Text> Filter by school: </Text> */}
 					{/* <Text> Filter by {this.state.type}: </Text> */}
 					{/* <FilterButton handleClick={this.state.handleChange} name="columbia"/>
