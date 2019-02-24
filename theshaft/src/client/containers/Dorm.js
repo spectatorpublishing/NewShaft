@@ -78,24 +78,32 @@ var ranking="#7"
 
 var reviews = [
   {
-      stars: 4,
-      text: "nice"
-  }, 
-  {
-      stars: 4,
-      text: "nice"
+    stars: 4,
+    text: "It's on Frat Row, so it’s super loud. It’s also right outside the lounge, which gets pretty loud.",
+    room: "Room 203A",
+    year: "Freshman",
+    timestamp: "12 days ago"
   },
   {
-      stars: 4,
-      text: "nice"
+    stars: 4,
+    text: "nice",
+    room: "Room 203A",
+    year: "Freshman",
+    timestamp: "12 days ago"
   },
   {
-      stars: 4,
-      text: "nice"
+    stars: 4,
+    text: "nice",
+    room: "Room 203A",
+    year: "Freshman",
+    timestamp: "12 days ago"
   },
   {
-      stars: 4,
-      text: "nice"
+    stars: 4,
+    text: "nice",
+    room: "Room 203A",
+    year: "Freshman",
+    timestamp: "12 days ago"
   }
 ]
 
@@ -247,7 +255,7 @@ export default class Dorm extends React.PureComponent {
   }
 
   //   componentWillReceiveProps(nextProps){
-  //     //call your api and update state with new props
+  //     //call your api and uptimestamp state with new props
   //  }
 
   handleWindowSizeChange() {
@@ -315,12 +323,14 @@ export default class Dorm extends React.PureComponent {
                 "https://i.kym-cdn.com/entries/icons/original/000/026/642/kot1.jpg"
               ]}
             />
+
             <ReviewsBox style={"display: inline-block"} 
               stars={stars}
               recommend={recommend}
               ranking={ranking}
               reviews={reviews}>
-            </ReviewsBox>            
+            </ReviewsBox>  
+
             <RelatedDorms
               name={this.props.match.params.dorm}
               relatedDorms={relatedDorms}

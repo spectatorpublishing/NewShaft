@@ -5,35 +5,31 @@ import SlidingReview from "./SlidingReview";
 
 
 let Border = styled.div`
-    display: flex;
-    flex-direction: row;
     border: 1px grey solid;
     border-radius: 10px;
     padding: 2vw;
 `
 
 let Reviews = styled.h3`
-    margin-top: -0.3vw;
-    margin-bottom: 1vw;
-    margin-left: 0.6vw;
+    margin-top: 2vh;
+    margin-bottom: 2vh;
+    margin-left: 2vw;
+    padding-left: 0.5vw;
     color: grey;
-    font-weight: 5000;
-    font-size: 1.7em;
-`
-
-let Stats = styled.div`
-    margin-top: 2vw;
-    margin-bottom: 1vw;
-    margin-left: 0vw;
-    float: left;
+    font-weight: bold;
+    font-size: 1.7em;    
 `
 
 let StatBox = styled.div`
-    margin-top: 20px;
-    margin-bottom: 1vw;
+    margin-top: 2vh;
+    margin-bottom: 1vh;
+    margin-left: 2vw;
+    float: left;
 `
 
 let SlidingBox = styled.div`
+    margin-top: 3vh;
+    margin-left: 2vw;
     float: left;
     width: 50%;
 `
@@ -48,13 +44,11 @@ export default class ReviewsBox extends Component {
         return(
             <Border>
                 <Reviews>Reviews</Reviews>
-                <Stats>
-                    <StatBox>
-                        <ReviewStat boldText={this.props.stars} subText="average stars"/>
-                        <ReviewStat boldText={this.props.recommend} subText="recommend"/>
-                        <ReviewStat boldText={this.props.ranking} subText="best ranking"/>
-                    </StatBox>
-                </Stats>
+                <StatBox>
+                    <ReviewStat boldText={this.props.stars} subText="average stars"/>
+                    <ReviewStat boldText={this.props.recommend} subText="recommend"/>
+                    <ReviewStat boldText={this.props.ranking} subText="best ranking"/>
+                </StatBox>
                 <SlidingBox>
                     <SlidingReview reviews={this.props.reviews}/>
                 </SlidingBox>

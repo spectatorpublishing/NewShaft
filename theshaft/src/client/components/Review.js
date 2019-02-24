@@ -32,9 +32,6 @@ export default class Review extends Component {
           <div className="stars">
             {this.createStars(this.props.stars)}
           </div>
-          {/* <div>
-            User would recommend
-          </div> */}
         </div>
         <div className="fullReview">
           <div className="review">
@@ -56,7 +53,7 @@ export default class Review extends Component {
           </div>
         </div>
         <div className="reviewerInfo">
-          reviewerInfo
+          {this.props.room + "•" + this.props.year + "•" + this.props.timestamp}
         </div>
       </div>
     );

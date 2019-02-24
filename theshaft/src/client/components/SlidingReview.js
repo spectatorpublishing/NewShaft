@@ -3,6 +3,29 @@ import Slider from "react-slick";
 import 'slick-carousel/slick/slick.css';
 import 'slick-carousel/slick/slick-theme.css';
 import Review from "./Review.js"
+import '../css/ReviewButton.css'
+
+function NextArrow(props) {
+    const { className, style, onClick } = props;
+    return (
+      <div
+        className={className}
+        style={{ ...style}}
+        onClick={onClick}
+      />
+    );
+  }
+  
+  function PrevArrow(props) {
+    const { className, style, onClick } = props;
+    return (
+      <div
+        className={className}
+        style={{ ...style}}
+        onClick={onClick}
+      />
+    );
+  }
 
 export default class SlidingReview extends Component {
     constructor(props){
@@ -19,7 +42,10 @@ export default class SlidingReview extends Component {
             infinite: true,
             speed: 500,
             slidesToShow: 1,
-            slidesToScroll: 1
+            slidesToScroll: 1,
+            arrows: false
+            // nextArrow: <NextArrow />,
+            // prevArrow: <PrevArrow />
         };
         return (
         <div>
