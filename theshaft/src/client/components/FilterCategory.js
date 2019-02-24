@@ -19,7 +19,7 @@ let ListElement = styled.li`
     border-radius: 10px;
     border: 1px solid lightgray;
     padding: 5px;
-    margin: 10px;
+    margin: 5px 10px;
     @media (min-width: 650px) {
         display: block;
         list-style-type:none;
@@ -33,7 +33,7 @@ let ListElement = styled.li`
 let FilterList = styled.ul`
     position: absolute;
     margin: 10px;
-    padding: 0;
+    padding: 5px 0;
     left: 0;
     width: 100%;
     overflow: hidden;
