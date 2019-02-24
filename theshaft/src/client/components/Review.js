@@ -32,9 +32,9 @@ export default class Review extends Component {
           <div className="stars">
             {this.createStars(this.props.stars)}
           </div>
-          <div>
+          {/* <div>
             User would recommend
-          </div>
+          </div> */}
         </div>
         <div className="fullReview">
           <div className="review">

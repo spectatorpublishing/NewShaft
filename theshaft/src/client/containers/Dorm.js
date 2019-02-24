@@ -8,7 +8,8 @@ import Maps from "../components/Maps";
 import ProCon from "../components/ProCon";
 import FloorPlan from "../components/FloorPlan";
 import RelatedDorms from "../components/RelatedDorms";
-import Review from "../components/Review";
+import SlidingReview from "../components/SlidingReview";
+
 
 var fakedata = {
   "110": {
@@ -287,7 +288,7 @@ export default class Dorm extends React.PureComponent {
                 "https://i.kym-cdn.com/entries/icons/original/000/026/642/kot1.jpg"
               ]}
             />
-            <Review />
+            <SlidingReview />
             <RelatedDorms
               name={this.props.match.params.dorm}
               relatedDorms={relatedDorms}

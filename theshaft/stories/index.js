@@ -26,11 +26,16 @@ import FullScreen from '../src/client/components/FullScreen.js';
 import Maps from '../src/client/components/Maps.js'
 import FloorPlanSVG from '../src/client/components/FloorPlanSVG.js'
 import { ReactComponent as SymposiumSVG } from "../src/client/assets/test_floorplan.svg";
+<<<<<<< HEAD
 import ReviewSlider from "../src/client/components/ReviewSlider.js";
 //import Timeline from "../src/client/components/Timeline.js";
+=======
+// import ReviewSlider from "../src/client/components/ReviewSlider.js";
+import SlidingReview from "../src/client/components/SlidingReview.js";
+>>>>>>> a99de469113159efed2b4010431af3b415df63b3
 
-storiesOf('ReviewSlider', module)
-  .add('test', () => <ReviewSlider />);
+// storiesOf('ReviewSlider', module)
+//   .add('test', () => <ReviewSlider />);
 
 storiesOf('Button', module)
   .add('with text', () => <Button>Hello Button</Button>)
@@ -129,6 +134,9 @@ storiesOf('AtAGlance', module)
 //   ["John Jay", "https://memegenerator.net/img/images/17438601/dat-sad-fat-cat.jpg", "link!"],
 //   ["John Jay", "https://memegenerator.net/img/images/17438601/dat-sad-fat-cat.jpg", "link!"]
 // ];
+
+storiesOf('SlidingReview', module)
+  .add('sliding review', () => <SlidingReview />);
 
 let sampleRelatedDorms = [
   {
