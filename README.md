@@ -67,6 +67,19 @@ PRINT STATION  | BOOLEAN |
 AC | BOOLEAN |
 MUSIC PRACTICE ROOMS | BOOLEAN
 
+#### review
+Field | Type | Constraints
+ --- | --- | ---
+DORM | VARCHAR(40) | NOT NULL
+ADDRESS | VARCHAR(40)| NOT NULL
+NUM_STARS | INT | 
+REVIEW_TXT | TEXT | 
+ROOM_NUM | CHAR(50)| 
+YEAR| SET("first-years","sophomores","juniors","seniors") | 
+DATE | DATE |
+THUMBS_UP  | INT | 
+THUMBS_UP  |INT |
+
 ### Endpoints
 Type | url | params | returns
  --- | --- | --- | ---
