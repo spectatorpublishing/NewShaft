@@ -21,6 +21,7 @@
   "author": "Sandeep Raveesh",
   "license": "ISC",
   "dependencies": {
+    "@storybook/addon-info": "^4.1.12",
     "babel-polyfill": "^6.26.0",
     "bootstrap": "^4.2.1",
     "cheerio": "^1.0.0-rc.2",

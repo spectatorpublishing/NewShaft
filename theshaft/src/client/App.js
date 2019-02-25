@@ -3,7 +3,8 @@ import { Switch, Redirect, Route } from 'react-router-dom'
 import Explore from './containers/Explore';
 import Dorm from './containers/Dorm';
 import NavBar from './components/NavBar.js';
-import { createGlobalStyle } from "styled-components";
+import { ThemeProvider } from "styled-components";
+import { GlobalStyles, theme } from "./util/GlobalStyles"
 
 const menuItems = [
   {
@@ -28,23 +29,18 @@ const menuItems = [
   }
 ];
 
-const GlobalStyles = createGlobalStyle`
-  body {
-    @import url('https://fonts.googleapis.com/css?family=Raleway');
-    font-family: 'Raleway', sans-serif;
-  }
-`
-
 const App = () => (
+  <ThemeProvider theme={theme}>
     <main>
-    	<GlobalStyles />
+      <GlobalStyles />
       <NavBar menuItems={menuItems} fixed />
-	      <Switch>
-          <Route exact path="/" render={() => (<Redirect from='/' to='/explore'/>)}/>
-	        <Route exact path="/explore" component={Explore} />
-	        <Route path="/explore/:dorm" component={Dorm} />
-	      </Switch>
+      <Switch>
+        <Route exact path="/" render={() => (<Redirect from='/' to='/explore'/>)}/>
+        <Route exact path="/explore" component={Explore} />
+        <Route path="/explore/:dorm" component={Dorm} />
+      </Switch>
     </main>
+  </ThemeProvider>
 )
 
 export default App

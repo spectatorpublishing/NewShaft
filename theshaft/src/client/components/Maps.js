@@ -19,10 +19,23 @@ class MapItem extends Component {
 
     this.state = {
       popUp: "flex",
+      lat: this.props.lat,
+      long: this.props.long,
+      popupInfo: this.props.popupInfo,
     }
 
     this.setPopUp = this.setPopUp.bind(this);
     this.clearPopUp = this.clearPopUp.bind(this);
+  }
+
+  componentDidUpdate(oldProps){
+    if(oldProps != this.props){
+      this.setState({
+        lat: this.props.lat,
+        long: this.props.long,
+        popupInfo: this.props.popupInfo,
+      })
+    }
   }
 
   setPopUp() {
@@ -34,11 +47,10 @@ class MapItem extends Component {
   }
 
   render(){
-    const {lat, long, popupInfo, popupId} = this.props
     return <div>
       <Marker
-        latitude={lat}
-        longitude={long}
+        latitude={this.state.lat}
+        longitude={this.state.long}
       >
         <div onClick={this.setPopUp}>
         <MarkerIcon src={mark} alt="fireSpot"/>
@@ -50,11 +62,11 @@ class MapItem extends Component {
           offsetTop={-23}
           offsetLeft={7}
           dynamicPosition={true}
-          longitude={long}
-          latitude={lat}
+          longitude={this.state.long}
+          latitude={this.state.lat}
           onClose={this.clearPopUp}
           closeOnClick={true}>
-          <Link to={"/explore/" + popupId} style={{margin:'0'}}>{popupInfo}</Link>
+          <Link to={"/explore/" + this.state.popupInfo.replace(/\s+/g, '')} style={{margin:'0'}}>{this.state.popupInfo}</Link>
         </Popup>
       </div>
   </div>
@@ -78,7 +90,6 @@ export default class Maps extends Component {
       },
       popup: {
         popupInfo: this.props.popupInfo,
-        popupId: this.props.popupId,
         popupIndex: popupIndex
       },
       //width and height are passed in from outside
@@ -86,6 +97,21 @@ export default class Maps extends Component {
       width: this.props.width
     };    
     this.handleViewportChange = this.handleViewportChange.bind(this);
+  }
+
+  componentDidUpdate(oldProps){
+    if(oldProps != this.props){
+      this.setState({
+        coordinates: {
+          latitudes: this.props.latitudes,
+          longitudes: this.props.longitudes
+        },
+        popup: {
+          popupInfo: this.props.popupInfo,
+          popupIndex: this.props.popupInfo.map(() => {return false})
+        }
+      })
+    }
   }
 
   handleViewportChange(vp) {
@@ -100,8 +126,7 @@ export default class Maps extends Component {
       const lat = this.state.coordinates.latitudes[i]
       const long = this.state.coordinates.longitudes[i];
       const popupInfo = this.state.popup.popupInfo[i];
-      const popupId = this.state.popup.popupId[i];
-      markers.push(<MapItem key={k++} lat={lat} long={long} popupInfo={popupInfo} popupId={popupId}/>);
+      markers.push(<MapItem key={k++} lat={lat} long={long} popupInfo={popupInfo}/>);
     }
     
     return (
