@@ -2,12 +2,10 @@ import React, { Component } from 'react';
 import styled from "styled-components";
 import { Route, Link, BrowserRouter as Router } from 'react-router-dom';
 import DormButton from '../components/DormButton';
-import '../css/Explore.css';
 import Dorm from './Dorm.js';
 import Updater from '../components/Updater';
 import ExploreSidebar from "../components/ExploreSidebar";
 import Filter from '../components/FilterComponent.js'
-import "../css/Explore.css";
 import map from "../assets/map.png";
 import Maps from "../components/Maps";
 
@@ -24,7 +22,7 @@ let SideBar = styled.div`
   padding-left: 1em;
   overflow-y: scroll; 
   @media only screen and (min-width: 768px) {
-    width: 30%;
+    width: 55%;
     min-height: 100%;
     z-index: 1;
   }
@@ -38,7 +36,7 @@ width: 0%;
   position: fixed;
   padding-left: 1em;
   float: right;
-  width: 67%;
+  width: 40%;
   right: 0;
   top: 0;
   z-index:1;
@@ -59,7 +57,6 @@ let ColTwo = styled.div`
   right: 0;
   top: 0;
   flex-direction: column;
-  width: ${({ mobile }) => mobile ? '67%': '50%'};
   `
   
 export default class Explore extends Component {

@@ -26,7 +26,10 @@ const SchoolButton = styled.div`
 const Dorms = styled.div`
 	margin: 0 auto;
 	overflow: scroll;
-	height: 100%;
+    height: 100%;
+    display: grid;
+    grid-column-gap: 50px;
+    grid-template-columns: auto auto;
 `
 
 const SidebarDivider = styled.div`
