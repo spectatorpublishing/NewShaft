@@ -12,10 +12,9 @@ function updateJSONs(err, files)
         var filePath = path + '/' + files[i];
         var data = fs.readFileSync(filePath, 'utf8');
         var jsonObject = JSON.parse(data);
-        console.log(jsonObject)
         jsonArray.push(jsonObject)
     }
-
+    Inject(jsonArray,filePath);
 }
 
 
@@ -37,7 +36,7 @@ function Inject(arr,filePath){
             curr_json["Latitude"]=json_potentional[1];
             curr_json["Longitude"]=json_potentional[2];
             console.log(curr_json)
-            fs.writeFileSync(filePath,curr_json);
+            
             
         }
     });
