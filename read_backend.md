@@ -67,13 +67,13 @@ To build the docker image for newshaft do the following:
 
 ```
 cd theshaft/
-docker build newshaft -t newshaft:latest .
+docker build -t newshaft:latest .
 ```
 
 To run the docker container locally run:
 
 ```
-docker run -p 8080:8080 newshaft:latest
+docker run --rm -p 8080:8080 newshaft:latest
 ```
 
 In order for the docker container to run in kubernetes we have to use a cloud platform called dockerhub.
