@@ -14,29 +14,36 @@ function updateJSONs(err, files)
         var jsonObject = JSON.parse(data);
         jsonArray.push(jsonObject)
     }
-    Inject(jsonArray,filePath);
+    Inject(jsonArray,filePath,files);
 }
 
 
 var content;
 // Second - get latitude longitude
 
-function Inject(jsonArray,filePath){
+function Inject(jsonArray,filePath,files){
     fs.readFile('./latlong.txt',"utf8", function read(err, data) {
         if (err) {
             throw err;
         }
         content = data;
         var arr = content.split('\n')
-        
+        var newJsonArray=[]
         for( i =0;i<arr.length-1;i++)
         {
             json_potentional = arr[i].split(',');
             curr_json=jsonArray[i];
             curr_json["Latitude"]=json_potentional[1];
             curr_json["Longitude"]=json_potentional[2];
-            console.log(curr_json)
+            newJsonArray.push(curr_json);
+            newJsonArray.reverse();
         }
-        
-    });
+
+        for (var i = 0; i < files.length; i++)
+        {    
+            var filePath = path + '/' + files[i];
+            fs.writeFileSync(filePath, JSON.stringify(newJsonArray[i]));
+        }
+
+        });
 }
