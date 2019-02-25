@@ -58,11 +58,8 @@ let ColTwo = styled.div`
   height: 100%;
   right: 0;
   top: 0;
-  //z-index:1;
-  // display: flex;
   flex-direction: column;
-  width: ${(mobile) => mobile ? '67%': '50%'};
-  //width: 50%;
+  width: ${({ mobile }) => mobile ? '67%': '50%'};
   `
   
 export default class Explore extends Component {
