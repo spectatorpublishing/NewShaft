@@ -4,6 +4,7 @@ export const GlobalStyles = createGlobalStyle`
     body {
     @import url('https://fonts.googleapis.com/css?family=Raleway:400,700,800');
     font-family: 'Raleway', sans-serif;
+    color: ${props => props.theme.darkGray};
     }
     h1 {
     font-size: 3rem;
