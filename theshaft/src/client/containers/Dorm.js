@@ -244,6 +244,30 @@ export default class Dorm extends React.PureComponent {
     window.removeEventListener('scroll', this.handleScroll);
   }
 
+  componentWillReceiveProps(newProps){
+    console.log("Rerender to another dorm "+newProps.match.params.dorm);
+    let info = fakedata[newProps.match.params.dorm];
+    this.setState ({
+      dormInfo: {
+        address: info["address"],
+        description: info["description"],
+        college: info["college"],
+        thumbnail_image: info["thumbnail_image"],
+        suite: info["suite"],
+        walkthrough: info["walkthrough"],
+        single: info["single"],
+        double: info["double"],
+        triple: info["triple"],
+        make_up: info["make_up"],
+        pros: info["pros"],
+        cons: info["cons"],
+        amenities: sampleAmenities,
+        relatedDorms: relatedDorms
+      }
+    })
+    window.scrollTo(0, 0)
+  }
+
   //   componentWillReceiveProps(nextProps){
   //     //call your api and update state with new props
   //  }
