@@ -8,6 +8,8 @@ import Maps from "../components/Maps";
 import ProCon from "../components/ProCon";
 import FloorPlan from "../components/FloorPlan";
 import RelatedDorms from "../components/RelatedDorms";
+import ReviewsBox from "../components/ReviewsBox";
+
 import Review from "../components/Review";
 import Scroller from "../components/Scroller";
 
@@ -71,6 +73,41 @@ let sampleAmenities = [
   ["lounge", "Sky lounge"],
   ["lounge", "Basement lounge"]
 ];
+
+var stars="4.5" 
+var recommend="28%" 
+var ranking="#7" 
+
+var reviews = [
+  {
+    stars: 4,
+    text: "It's on Frat Row, so it’s super loud. It’s also right outside the lounge, which gets pretty loud.",
+    room: "Room 203A",
+    year: "Freshman",
+    timestamp: "12 days ago"
+  },
+  {
+    stars: 4,
+    text: "nice",
+    room: "Room 203A",
+    year: "Freshman",
+    timestamp: "12 days ago"
+  },
+  {
+    stars: 4,
+    text: "nice",
+    room: "Room 203A",
+    year: "Freshman",
+    timestamp: "12 days ago"
+  },
+  {
+    stars: 4,
+    text: "nice",
+    room: "Room 203A",
+    year: "Freshman",
+    timestamp: "12 days ago"
+  }
+]
 
 let relatedDorms = [
   {
@@ -266,7 +303,7 @@ export default class Dorm extends React.PureComponent {
   }
 
   //   componentWillReceiveProps(nextProps){
-  //     //call your api and update state with new props
+  //     //call your api and uptimestamp state with new props
   //  }
 
   handleWindowSizeChange() {
@@ -394,7 +431,12 @@ export default class Dorm extends React.PureComponent {
               />
             </ScrollerTarget>
             <ScrollerTarget ref={this.reviewsRef}>
-              <Review/>
+              <ReviewsBox
+                stars={stars}
+                recommend={recommend}
+                ranking={ranking}
+                reviews={reviews}>
+              </ReviewsBox>
             </ScrollerTarget>
             <ScrollerTarget ref={this.suggestionsRef}>
               <RelatedDorms
