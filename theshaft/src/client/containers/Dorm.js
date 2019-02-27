@@ -9,7 +9,10 @@ import ProCon from "../components/ProCon";
 import FloorPlan from "../components/FloorPlan";
 import RelatedDorms from "../components/RelatedDorms";
 import ReviewsBox from "../components/ReviewsBox";
+<<<<<<< Updated upstream
 
+=======
+>>>>>>> Stashed changes
 import Scroller from "../components/Scroller";
 
 
@@ -261,8 +264,10 @@ export default class Dorm extends React.PureComponent {
   }
 
   handleScroll(e) {
-    // Add 20px to give a little bit of padding on top between the navbar and the menu
-    this.isFixed(e.target.scrollingElement.scrollTop + 20);
+    if (this.state.width > 700) {
+      // Add 20px to give a little bit of padding on top between the navbar and the menu
+      this.isFixed(e.target.scrollingElement.scrollTop + 20);
+    }
   }
 
   isFixed(scrollPosition) {

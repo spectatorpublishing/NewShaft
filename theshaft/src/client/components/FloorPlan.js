@@ -6,7 +6,7 @@ import Lightbox from 'react-image-lightbox';
 
 
 let FloorPlanBox = styled.div` 
-	border: 1px black solid;
+	border: 1px ${props => props.theme.black} solid;
     border-radius: 10px;
 	display: flex;
 	flex-direction: row;
@@ -19,14 +19,14 @@ let FloorList = styled.div`
 	width: 20%;
 `
 
-let FloorNumber = styled.h1`
-	margin-left: 1.5rem;
+let FloorNumber = styled.h2`
+	margin: 1.5rem;
 `
 
 let FloorButton = styled.button`
-	background-color: #FFFFFF;
+	background-color: ${props => props.theme.white};
 	border: none;
-	color: #76aaf2;
+	color: ${props => props.theme.columbiaBlue};
 	font-size: 1.5rem;
 	background: none;
 `
@@ -46,7 +46,7 @@ let FloorPlanTopMobile = styled.div`
 `
 
 let FloorPlanBoxMobile = styled.div` 
-	border: 1px black solid;
+	border: 1px ${props => props.theme.black} solid;
     border-radius: 10px;
 	display: flex;
 	flex-direction: column;
@@ -62,7 +62,7 @@ let PlanDisplayMobile = styled.div`
 	width: 100%;
 `
 
-let FloorNumberMobile = styled.h1`
+let FloorNumberMobile = styled.h2`
 	margin: 0;
 `
 
@@ -80,13 +80,14 @@ let CurrentPlan = styled.img`
 `
 let Button = styled.button`
     background: none;
-    border: none;
-    padding: 5px;
-    font-weight: bold;
+	border: none;
+	display: flex;
+    padding: 0;
+    // font-weight: bold;
 
-    ${({ clicked }) => clicked && `
-		background: black;
-  	`}
+    // ${({ clicked }) => clicked && `
+	// 	background: black;
+  	// `}
 `
 
 export default class FloorPlan extends React.PureComponent {
@@ -173,7 +174,7 @@ export default class FloorPlan extends React.PureComponent {
 		if(isMobile) {
 			return (
 				<div>
-					<h1> Floor Plans </h1>
+					<h2> Floor Plans </h2>
 					<FloorPlanBoxMobile>
 						<PlanDisplayMobile>
 							<FloorPlanTopMobile>
@@ -191,7 +192,7 @@ export default class FloorPlan extends React.PureComponent {
 		} else { 
 			return (
 				<div>
-					<h1> Floor Plans </h1>
+					<h2> Floor Plans </h2>
 					<FloorPlanBox>
 						<PlanDisplay>
 							<FloorNumber> Floor {this.state.currentFloor} </FloorNumber>
