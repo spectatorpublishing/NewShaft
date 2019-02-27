@@ -37,7 +37,7 @@ export default class Review extends Component {
           <div className="review">
             {this.props.review}
           </div>
-          <div className="thumbs">
+          {/* <div className="thumbs">
             <div>
                 <button>
                     <span>&#x1F44D;</span>
@@ -50,7 +50,7 @@ export default class Review extends Component {
                     <span>{this.props.thumbsDown}</span>
                 </button>
             </div>
-          </div>
+          </div> */}
         </div>
         <div className="reviewerInfo">
           {this.props.room + "•" + this.props.year + "•" + this.props.timestamp}

@@ -410,7 +410,7 @@ export default class Dorm extends React.PureComponent {
               />
             </ScrollerTarget>
             <ScrollerTarget ref={this.reviewsRef}>
-              <ReviewsBox style={"display: inline-block"} 
+              <ReviewsBox
                 stars={stars}
                 recommend={recommend}
                 ranking={ranking}
