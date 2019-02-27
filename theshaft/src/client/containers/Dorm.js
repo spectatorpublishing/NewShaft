@@ -126,18 +126,15 @@ let Header = styled.div`
   margin: 0 15%;
   pointer-events: none;
 `;
-let DormName = styled.div`
-  color: #ffffff;
-  font-size: 3rem;
-  font-weight: bolder;
+let DormName = styled.h1`
+  color: ${props => props.theme.white};
+  text-shadow: ${props => props.theme.textShadow};
   pointer-events: initial;
 `;
 
 let Blurb = styled.div`
-  background-color: #44a7ff;
+  background-color: ${props => props.theme.columbiaBlue};
   color: white;
-  font-size: 1rem;
-  font-weight: 300;
   position: relative;
   top: -100px;
   margin: 0 15% -100px 15%;
@@ -250,7 +247,7 @@ export default class Dorm extends React.PureComponent {
         <Header>
           <DormName>{this.props.match.params.dorm}</DormName>
         </Header>
-        <Blurb>{this.state.dormInfo.description}</Blurb>
+        <Blurb><p>{this.state.dormInfo.description}</p></Blurb>
 
         <Body>
           {!isMobile && <ColOne />}
