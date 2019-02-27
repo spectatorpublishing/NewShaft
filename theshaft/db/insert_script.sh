@@ -24,4 +24,4 @@ while read LINE; do
 done < $FILE
 
 # actually insert to sql!
-mysql -u spectech -p -h 85.10.205.173 --database="theshaft" --execute "${sql_query}"
+mysql -u root -p -h 157.230.66.55 --database="dorms" --execute "${sql_query}"

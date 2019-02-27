@@ -19,16 +19,16 @@ for (var i = 0; i < keys.length; i++)
         DESCRIPTION: dorm_data["Features"],
         COLLEGE: "Columbia",
         THUMBNAIL_IMAGE: "react.png",
-        PROS: "",
-        CONS: "",
-        LATITUDE: 0,
-        LONGITUDE: 0,
+        PROS: dorm_data["What Students Say"],
+        CONS: dorm_data["Cleaning Schedule"],
+        LATITUDE: dorm_data["Latitude"],
+        LONGITUDE: dorm_data["Longitude"],
         LOTTERY_NUMS: cutoffs[keys[i]],
         WALKTHROUGH: dorm_data["Room Type"].toLowerCase().includes("through"),
         SINGLE: dorm_data["Room Type"].toLowerCase().includes("single"),
         DOUBLE: dorm_data["Room Type"].toLowerCase().includes("double"),
         TRIPLE: dorm_data["Room Type"].toLowerCase().includes("triple"),
-        CLASS_MAKEUP: []
+        CLASS_MAKEUP: [],
     }
     if (dorm_data["Class Make-Up"].toLowerCase().includes("first")) {
         dorm.CLASS_MAKEUP.push("first-years");
