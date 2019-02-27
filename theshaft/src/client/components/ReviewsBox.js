@@ -15,7 +15,6 @@ let Border = styled.div`
 let Reviews = styled.h3`
     margin-top: 2vh;
     margin-bottom: 2vh;
-    // margin-left: 2vw;
     padding-left: 0.5vw;
     color: grey;
     font-weight: bold;
@@ -28,15 +27,13 @@ let InfoBox = styled.div`
 `
 
 let StatBox = styled.div`
-    margin-top: 2vh;
+    // margin-top: 2vh;
     margin-bottom: 1vh;
-    // margin-left: 2vw;
 `
 
 let SlidingBox = styled.div`
     margin-top: 3vh;
-    // margin-left: 2vw;
-    width: 50%;
+    width: 60%;
 `
 
 
