@@ -7,7 +7,11 @@ let Border = styled.div`
     border: 1px grey solid;
     border-radius: 20px;
     padding: 0.8vw;
+    padding-top: 16%;
+    padding-bottom: 16%;
     margin-top: 2vw;
+    margin-right: 2vw;
+    text-align: center;
 `
 
 let Text = styled.div`
@@ -15,20 +19,19 @@ let Text = styled.div`
     margin-bottom: 1vw;
     margin-left: 0.6vw;
     margin-right: 0.6vw;
+    text-align: center;
 `
 
-let BoldText = styled.h2`
+let BoldText = styled.h1`
     color: grey;
-    font-size: 2rem;
+    font-size: 3rem;
     font-weight: bolder;
-    margin: .5rem 0 -0.5rem 1.2rem;
 `
 
 let SubText = styled.h6`
     color: grey;
-    font-size: 1rem;
-    font-weight: bolder;
-    margin: .5rem 0 -0.5rem 1.2rem;
+    font-size: 0.8rem;
+    font-weight: lighter;
 `
 
 export default class ReviewStat extends Component {

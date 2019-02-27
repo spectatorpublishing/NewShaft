@@ -5,11 +5,32 @@ import SearchBar from '../src/client/components/SearchBar.js';
 import PhotoBanner from '../src/client/components/PhotoBanner.js';
 import DormButton from '../src/client/components/DormButton.js';
 import Explore from '../src/client/containers/Explore.js';
-import FAQTimeline from "../src/client/components/FAQTimeline.js";
+import ProCon from '../src/client/components/ProCon.js';
+import QuickReview from '../src/client/components/QuickReview.js';
+import Review from '../src/client/components/Review.js';
+import FloorPlan from '../src/client/components/FloorPlan.js';
+import sampleFloor from '../src/client/assets/floor_plans/47 Claremont 1.jpg';
+import FilterButton from '../src/client/components/FilterButton.js';
+import FilterComponent from '../src/client/components/FilterComponent.js';
+import Expander from '../src/client/components/Expander.js';
+import Amenities from '../src/client/components/Amenities.js';
+import AtAGlance from '../src/client/components/AtAGlance.js';
+import FullReview from '../src/client/components/FullReview.js';
+import ReviewList from '../src/client/components/ReviewList.js';
+import RelatedDorms from '../src/client/components/RelatedDorms';
+import ExploreSidebar from '../src/client/components/ExploreSidebar';
+import { MemoryRouter } from 'react-router';
+//import RelatedDormsList from '../src/client/components/RelatedDormsList'
+import NavBar from '../src/client/components/NavBar.js'
+import FullScreen from '../src/client/components/FullScreen.js';
+import Maps from '../src/client/components/Maps.js'
+import FloorPlanSVG from '../src/client/components/FloorPlanSVG.js'
+import { ReactComponent as SymposiumSVG } from "../src/client/assets/test_floorplan.svg";
+// import ReviewSlider from "../src/client/components/ReviewSlider.js";
+import SlidingReview from "../src/client/components/SlidingReview.js";
 
-//FAQ Timeline
-storiesOf('ReviewSlider', module)
-  .add('FAQ Timeline', () => <FAQTimeline/>)
+// storiesOf('ReviewSlider', module)
+//   .add('test', () => <ReviewSlider />);
 
 storiesOf('Button', module)
   .add('with text', () => <Button>Hello Button</Button>)
@@ -58,8 +79,15 @@ storiesOf('Review', module)
 storiesOf('ReviewList', module)
   .add('ReviewList', () => <ReviewList />);
 
+let planArray = [
+  sampleFloor,"https://housing.columbia.edu/files/housing/Wien%208_2018.jpg",
+    "https://housing.columbia.edu/files/housing/600%209_2016_0.jpg",
+    "https://housing.columbia.edu/files/housing/Woodbridge%204_2018.jpg", 
+    "https://i.kym-cdn.com/entries/icons/original/000/026/642/kot1.jpg"
+]
+
 storiesOf('FloorPlan', module)
-  .add('keikaku means plan', () => <FloorPlan floorOffset={1} planArray={[sampleFloor,"https://housing.columbia.edu/files/housing/Wien%208_2018.jpg","https://housing.columbia.edu/files/housing/600%209_2016_0.jpg","https://housing.columbia.edu/files/housing/Woodbridge%204_2018.jpg", "https://i.kym-cdn.com/entries/icons/original/000/026/642/kot1.jpg"]}/>);
+  .add('keikaku means plan', () => <FloorPlan floorOffset={1} planArray={planArray}/>);
 
 storiesOf('Filter', module)
   .add('filter', () => <FilterButton name="barnard"/>);
@@ -101,6 +129,9 @@ storiesOf('AtAGlance', module)
 //   ["John Jay", "https://memegenerator.net/img/images/17438601/dat-sad-fat-cat.jpg", "link!"],
 //   ["John Jay", "https://memegenerator.net/img/images/17438601/dat-sad-fat-cat.jpg", "link!"]
 // ];
+
+storiesOf('SlidingReview', module)
+  .add('sliding review', () => <SlidingReview />);
 
 let sampleRelatedDorms = [
   {

@@ -9,8 +9,9 @@ import ProCon from "../components/ProCon";
 import FloorPlan from "../components/FloorPlan";
 import RelatedDorms from "../components/RelatedDorms";
 import ReviewsBox from "../components/ReviewsBox";
-import ReviewStat from "../components/ReviewStat";
 
+import Review from "../components/Review";
+import Scroller from "../components/Scroller";
 
 var fakedata = {
   "110": {
@@ -73,6 +74,41 @@ let sampleAmenities = [
   ["lounge", "Basement lounge"]
 ];
 
+var stars="4.5" 
+var recommend="28%" 
+var ranking="#7" 
+
+var reviews = [
+  {
+    stars: 4,
+    text: "It's on Frat Row, so it’s super loud. It’s also right outside the lounge, which gets pretty loud.",
+    room: "Room 203A",
+    year: "Freshman",
+    timestamp: "12 days ago"
+  },
+  {
+    stars: 4,
+    text: "nice",
+    room: "Room 203A",
+    year: "Freshman",
+    timestamp: "12 days ago"
+  },
+  {
+    stars: 4,
+    text: "nice",
+    room: "Room 203A",
+    year: "Freshman",
+    timestamp: "12 days ago"
+  },
+  {
+    stars: 4,
+    text: "nice",
+    room: "Room 203A",
+    year: "Freshman",
+    timestamp: "12 days ago"
+  }
+]
+
 let relatedDorms = [
   {
     id: "McBain",
@@ -121,6 +157,14 @@ let relatedDorms = [
   }
 ];
 
+const bannerImages = [
+  "https://blog.ocm.com/wp-content/uploads/2017/08/Kiss-Pleat_Gray_Main_Alt_Exp.jpg",
+  "https://arc-anglerfish-arc2-prod-spectator.s3.amazonaws.com/public/52FBXLYM2RGO3FJGK3SPD2KUEE.png",
+  "https://arc-anglerfish-arc2-prod-spectator.s3.amazonaws.com/public/52FBXLYM2RGO3FJGK3SPD2KUEE.png",
+  "https://arc-anglerfish-arc2-prod-spectator.s3.amazonaws.com/public/52FBXLYM2RGO3FJGK3SPD2KUEE.png",
+  "https://arc-anglerfish-arc2-prod-spectator.s3.amazonaws.com/public/52FBXLYM2RGO3FJGK3SPD2KUEE.png"
+];
+
 let Header = styled.div`
   display: flex;
   position: relative;
@@ -156,13 +200,14 @@ let Body = styled.div`
 
 let ColOne = styled.div`
   display: flex;
-  width: 15%;
+  width: 25%;
 `;
 
 let ColTwo = styled.div`
   display: flex;
   flex-direction: column;
-  width: ${mobile => (mobile ? `100%` : `50%`)};
+  scroll-behavior: smooth;
+  width: ${({ mobile }) => (mobile ? `100%` : `50%`)};
 `;
 
 let ColThree = styled.div`
@@ -171,21 +216,31 @@ let ColThree = styled.div`
   margin-left: 5vw;
 `;
 
-const bannerImages = [
-  "https://blog.ocm.com/wp-content/uploads/2017/08/Kiss-Pleat_Gray_Main_Alt_Exp.jpg",
-  "https://arc-anglerfish-arc2-prod-spectator.s3.amazonaws.com/public/52FBXLYM2RGO3FJGK3SPD2KUEE.png",
-  "https://arc-anglerfish-arc2-prod-spectator.s3.amazonaws.com/public/52FBXLYM2RGO3FJGK3SPD2KUEE.png",
-  "https://arc-anglerfish-arc2-prod-spectator.s3.amazonaws.com/public/52FBXLYM2RGO3FJGK3SPD2KUEE.png",
-  "https://arc-anglerfish-arc2-prod-spectator.s3.amazonaws.com/public/52FBXLYM2RGO3FJGK3SPD2KUEE.png"
-];
+let ScrollMenu = styled(ColOne)`
+  flex-direction: column;
+  left: 0;
+  position: ${({ isFixed }) => (isFixed ? 'fixed' : 'absolute')};
+
+  // 80px = 60px (navbar height) + 20px (padding 
+  // which matches the value added in handleScroll())
+  ${({ isFixed }) => isFixed && `
+    top: 80px;
+  `};
+`
 
 export default class Dorm extends React.PureComponent {
   constructor(props) {
     super(props);
     let screen_width = window.innerWidth;
-    console.log(screen_width);
-    console.log()
     let info = fakedata[this.props.match.params.dorm];
+    this.amenitiesRef = React.createRef();
+    this.proconRef = React.createRef();
+    this.floorplansRef = React.createRef();
+    this.reviewsRef = React.createRef();
+    this.locationRef = React.createRef();
+    this.spectrumRef = React.createRef();
+    this.suggestionsRef = React.createRef();
+    this.scrollMenuRef = React.createRef();
     this.state = {
       dormInfo: {
         address: info["address"],
@@ -203,14 +258,19 @@ export default class Dorm extends React.PureComponent {
         amenities: sampleAmenities,
         relatedDorms: relatedDorms
       },
+      scrollMenuFixed: false,
+      scrollMenuOffset: null,
       width: screen_width
     };
 
     this.handleWindowSizeChange = this.handleWindowSizeChange.bind(this);
+    this.handleScroll = this.handleScroll.bind(this);
+    this.isFixed = this.isFixed.bind(this);
   }
 
   componentDidMount() {
     window.addEventListener("resize", this.handleWindowSizeChange);
+    window.addEventListener('scroll', this.handleScroll);
     // fetch('/api/getDormInfo?table=theshaft.dorm_static_info?DORM=' + this.props.match.params.dorm)
     //   .then(res => {res.json(); console.log(res);})
     //   .then(dormInfo => this.setState({dormInfo: dormInfo}));
@@ -218,17 +278,54 @@ export default class Dorm extends React.PureComponent {
 
   componentWillUnmount() {
     window.removeEventListener("resize", this.handleWindowSizeChange);
+    window.removeEventListener('scroll', this.handleScroll);
   }
 
   //   componentWillReceiveProps(nextProps){
-  //     //call your api and update state with new props
+  //     //call your api and uptimestamp state with new props
   //  }
 
   handleWindowSizeChange() {
     this.setState({ width: window.innerWidth });
   }
 
+  handleScroll(e) {
+    // Add 20px to give a little bit of padding on top between the navbar and the menu
+    this.isFixed(e.target.scrollingElement.scrollTop + 20);
+  }
+
+  isFixed(scrollPosition) {
+    // If the menu isn't fixed, we should save the offset value before fixing
+    // the menu in place because otherwise we will lose access to this value.
+    // If the menu is already fixed, we should used the saved offset value
+    // because the fixed menu will otherwise calculate a different offset value.
+    // Subtract 60 from the offset value to account for the navbar height (60px).
+    let top = this.state.scrollMenuOffset || this.scrollMenuRef.current.offsetTop - 60;
+    if (this.state.scrollMenuFixed) {
+      if (scrollPosition < top) {
+        this.setState({
+          scrollMenuFixed: false,
+          scrollMenuOffset: null
+        });
+      }
+    }
+    else {
+      if (scrollPosition >= top) {
+        this.setState({
+          scrollMenuFixed: true,
+          scrollMenuOffset: top
+        });
+      }
+    }
+  }
+
   render() {
+    // Use ref forwarding so Scroller component can directly access the DOM nodes
+    const ScrollerTarget = React.forwardRef((props, ref) => (
+      <div ref={ref}>
+        {props.children}
+      </div>
+    ));
     const isMobile = this.state.width <= 700;
     let roomtype = "";
     if (this.state.dormInfo.suite.length != 0) {
@@ -255,7 +352,21 @@ export default class Dorm extends React.PureComponent {
         <Blurb>{this.state.dormInfo.description}</Blurb>
 
         <Body>
-          {!isMobile && <ColOne />}
+          {!isMobile && <ColOne>
+            <ScrollMenu 
+              ref={this.scrollMenuRef} 
+              isFixed={this.state.scrollMenuFixed}
+            >
+              <Scroller compRef={this.amenitiesRef} label={"Amenities"} />
+              <Scroller compRef={this.locationRef} label={"Location"} />
+              <Scroller compRef={this.proconRef} label={"Pros and Cons"} />
+              <Scroller compRef={this.floorplansRef} label={"Floor Plans"} />
+              <Scroller compRef={this.reviewsRef} label={"Reviews"} />
+              {/* <Scroller compRef={this.spectrumRef} label={"Spectrum"} /> */}
+              <Scroller compRef={this.suggestionsRef} label={"Related Dorms"} />
+            </ScrollMenu>
+          </ColOne>
+          }
 
           <ColTwo mobile={isMobile}>
             {isMobile && (
@@ -266,38 +377,52 @@ export default class Dorm extends React.PureComponent {
                 numfloors="13"
               />
             )}
-            <Amenities amenities={this.state.dormInfo.amenities} />
-            <Maps
-              latitudes={[40.7128, 40.7129, 40.7128]}
-              longitudes={[-74.006, -74.007, -74.008]}
-              popupInfo={["Carman", "McBain", "John Jay"]}
-              popupId={["Carman", "McBain", "JohnJay"]}
-              width={"100%"}
-              height={"300px"}
-            />
-            <ProCon
-              pros={this.state.dormInfo.pros}
-              cons={this.state.dormInfo.cons}
-            />
-            <FloorPlan
-              floorOffset={1}
-              planArray={[
-                "https://housing.columbia.edu/files/housing/Wien%208_2018.jpg",
-                "https://housing.columbia.edu/files/housing/Wien%208_2018.jpg",
-                "https://housing.columbia.edu/files/housing/600%209_2016_0.jpg",
-                "https://housing.columbia.edu/files/housing/Woodbridge%204_2018.jpg",
-                "https://i.kym-cdn.com/entries/icons/original/000/026/642/kot1.jpg"
-              ]}
-            />
-            <ReviewsBox>
-              <ReviewStat boldText="4.5" subText="average stars"/>
-              <ReviewStat boldText="28%" subText="recommend"/>
-              <ReviewStat boldText="#7" subText="best ranking"/>
-            </ReviewsBox>
-            <RelatedDorms
-              name={this.props.match.params.dorm}
-              relatedDorms={relatedDorms}
-            />
+            <ScrollerTarget ref={this.amenitiesRef}>
+              <Amenities amenities={this.state.dormInfo.amenities}/>
+            </ScrollerTarget>
+
+            <ScrollerTarget ref={this.locationRef}>
+              <Maps
+                latitudes={[40.7128, 40.7129, 40.7128]}
+                longitudes={[-74.006, -74.007, -74.008]}
+                popupInfo={["Carman", "McBain", "John Jay"]}
+                popupId={["Carman", "McBain", "JohnJay"]}
+                width={"100%"}
+                height={"300px"}
+              />
+            </ScrollerTarget>
+            <ScrollerTarget ref={this.proconRef}>
+              <ProCon
+                pros={this.state.dormInfo.pros}
+                cons={this.state.dormInfo.cons}
+              />
+            </ScrollerTarget>
+            <ScrollerTarget ref={this.floorplansRef}>
+              <FloorPlan
+                floorOffset={1}
+                planArray={[
+                  "https://housing.columbia.edu/files/housing/Wien%208_2018.jpg",
+                  "https://housing.columbia.edu/files/housing/Wien%208_2018.jpg",
+                  "https://housing.columbia.edu/files/housing/600%209_2016_0.jpg",
+                  "https://housing.columbia.edu/files/housing/Woodbridge%204_2018.jpg",
+                  "https://i.kym-cdn.com/entries/icons/original/000/026/642/kot1.jpg"
+                ]}
+              />
+            </ScrollerTarget>
+            <ScrollerTarget ref={this.reviewsRef}>
+              <ReviewsBox style={"display: inline-block"} 
+                stars={stars}
+                recommend={recommend}
+                ranking={ranking}
+                reviews={reviews}>
+              </ReviewsBox>
+            </ScrollerTarget>
+            <ScrollerTarget ref={this.suggestionsRef}>
+              <RelatedDorms
+                name={this.props.match.params.dorm}
+                relatedDorms={relatedDorms}
+              />
+            </ScrollerTarget>
           </ColTwo>
 
           {!isMobile && (
