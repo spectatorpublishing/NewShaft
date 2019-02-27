@@ -4,14 +4,11 @@ import Expander from './Expander.js';
 import icon from "../assets/marker.svg"; // to-do: import all actual icons
 
 let AmenitiesTitle = styled.h2`
-    color: ${props => props.theme.darkGray};
-    margin-top: -0.3vw;
-    margin-bottom: 1vw;
-    margin-left: 0.6vw;
+    margin-bottom: 1rem;
+    margin-left: 0.5rem;
 `
 
 let Amenity = styled.div`
-    color: ${props => props.theme.darkGray};
     display: flex;
     flex-direction: row;
     width: 50%;

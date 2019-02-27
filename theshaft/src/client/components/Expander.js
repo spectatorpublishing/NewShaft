@@ -20,7 +20,6 @@ let ToggleSize = styled.button`
     border-bottom-left-radius: 10px;
     border-bottom-right-radius: 10px;
     border-top: 1px ${props => props.theme.lightGray} solid;
-    color: ${props => props.theme.darkGray};
     display: flex;
     font-weight: bold;
     justify-content: center;
