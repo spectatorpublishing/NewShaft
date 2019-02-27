@@ -1,6 +1,6 @@
 var fakedata = {
   Carman: {
-    dorm: "Carman", // name of dorm for display
+    dorm: "Schapiro", // name of dorm for display
     address: "619 W 113th St",
     description: "Comedy House",
     college: "columbia",
