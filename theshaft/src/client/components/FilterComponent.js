@@ -58,18 +58,31 @@ export default class FilterComponent extends React.PureComponent {
 			this.setfilter = this.setfilter.bind(this)
 	}
 
+	// Sets the single active filter
 	setfilter(key, val){
 		this.setState({openFilters: 0})
+		// val is the value we are setting (1 or 0) and
+		// key is the index of the filter we are setting. 
+		// If key is 2 and value is 1, we set openFilters 
+		// to 1<<2, which is 0100. We then know that the 
+		// second filter is active. 
 		this.setState({openFilters: val<<key})
 		console.log(this.state.openFilters)
 	}
 
 	render() {
+		// The open prop bitshifts this.state.open over i values. For example, if the 
+		// state is 2 aka 0010, we want the second filter to be active. 
+		// If i is 1, it is bitshifted to 0001. We then mask it with 1, which
+		// makes it so we only take the rightmost bit. Then we apply the ! operator
+		// twice which just makes it a boolean. 
+		// If i is not 1, then it is either bitshifted to 0000 or something greater than
+		// 1, which is then masked out by our AND 1 operation. 
 		const Filters = Object.keys(filterElements).map((filterName, i)=>{
 			return <FilterCategory 
 				key={i}
 				i={i}
-				open={1 & this.state.openFilters>>i}
+				open={!!(1 & this.state.openFilters>>i)}
 				setfilter={this.setfilter}
 				handleChange={this.state.handleChange}
 				headerTitle={filterName}

@@ -81,7 +81,7 @@ export default class FilterComponent extends React.PureComponent {
         console.log(`this.state.filters: ${this.state.filters}`)
         const filters = this.state.filters
         console.log(`the FILTERS: ${filters}`)
-        const listOpen = !!this.props.open
+        const listOpen = this.props.open
         console.log("open is:"+listOpen)
         
         return(
