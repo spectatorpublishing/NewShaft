@@ -54,11 +54,11 @@ let MenuLink = styled(NavLink)`
   text-transform: uppercase;
 
     :hover {
-      color: ${props => props.theme.mediumGray};
+      color: ${props => props.theme.lightGray};
     }
 
     :focus {
-      color: ${props => props.theme.mediumGray};
+      color: ${props => props.theme.lightGray};
     }
 
     &.navLinkActive {
