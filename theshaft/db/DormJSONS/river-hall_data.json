@@ -1,1 +1,21 @@
-{"Residential Area":"West Campus","Building Type":"Large suite-style","Room Type":"Singles, one double","Class Make-Up":"Few Sophomores, Juniors, Seniors","Rate":"$9,538/year","Entrance Info":"628 W. 114th St. (b/t Broadway and Riverside)","Number of Residential Floors":"6","Single/Double Rooms":"127/1","Bathroom":"Shared4 unisex, private bathrooms per floor","Laundry":"AvailableIn basement; laundry is free","Flooring":"No carpet","Kitchen":"SharedPer floor","Lounge":"Basement LoungeWith large flat-screen TV","Cleaning Schedule":"KitchensResident responsibility , BathroomsWeekly , Trash Removal (Room/Suite)Resident responsibility , RecyclingWeekly","Fitness Room":"AvailableIn basement","Computer Lab":"AvailableIn basement","A/C":"No","Features":"Music practice room in basementShort walk to Riverside Park","What Students Say":"“River Hall is a [great] place all to itself just down a hill. The hill can be daunting on cold mornings, but the quiet and close proximity to Riverside Park for morning jogs is wonderful. The new facilities with a small group kitchen, bathrooms, and [a common room] are well-kept and inviting.”"}
+{
+  "Residential Area": "West Campus",
+  "Building Type": "Large suite-style",
+  "Room Type": "Singles, one double",
+  "Class Make-Up": "Few Sophomores, Juniors, Seniors",
+  "Rate": "$9,538/year",
+  "Entrance Info": "628 W. 114th St. (b/t Broadway and Riverside)",
+  "Number of Residential Floors": "6",
+  "Single/Double Rooms": "127/1",
+  "Bathroom": "Shared4 unisex, private bathrooms per floor",
+  "Laundry": "AvailableIn basement; laundry is free",
+  "Flooring": "No carpet",
+  "Kitchen": "SharedPer floor",
+  "Lounge": "Basement LoungeWith large flat-screen TV",
+  "Cleaning Schedule": "KitchensResident responsibility , BathroomsWeekly , Trash Removal (Room/Suite)Resident responsibility , RecyclingWeekly",
+  "Fitness Room": "AvailableIn basement",
+  "Computer Lab": "AvailableIn basement",
+  "A/C": "No",
+  "Features": "Music practice room in basementShort walk to Riverside Park",
+  "What Students Say": "“River Hall is a [great] place all to itself just down a hill. The hill can be daunting on cold mornings, but the quiet and close proximity to Riverside Park for morning jogs is wonderful. The new facilities with a small group kitchen, bathrooms, and [a common room] are well-kept and inviting.”"
+}

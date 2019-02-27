@@ -1,6 +1,6 @@
 var fs = require('fs');
 
-var path = "/Users/nahumgetachew/Desktop/Spec/NewShaft/theshaft/db/DormJSONS";
+var path = "../db/DormJSONS";
 fs.readdir(path, handleJSONs);
 
 function handleJSONs(err, files)
