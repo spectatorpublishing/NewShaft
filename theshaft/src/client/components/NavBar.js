@@ -54,11 +54,11 @@ let MenuLink = styled(NavLink)`
   text-transform: uppercase;
 
     :hover {
-      color: ${props => props.theme.lightGray};
+      color: ${props => props.theme.mediumGray};
     }
 
     :focus {
-      color: ${props => props.theme.lightGray};
+      color: ${props => props.theme.mediumGray};
     }
 
     &.navLinkActive {
@@ -157,12 +157,12 @@ let NavIcon = styled.span`
 `
 
 let DisabledMenuLink = styled(MenuLink)`
-  color: ${props => props.theme.lightGray};
+  color: ${props => props.theme.mediumGray};
   pointer-events: none;
 `
 
 let Soon = styled.h6`
-  color: ${props => props.theme.lightGray};
+  color: ${props => props.theme.mediumGray};
 
   ${({ mobile }) => !mobile && `
     position: absolute;
