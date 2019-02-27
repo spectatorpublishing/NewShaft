@@ -2,7 +2,7 @@ import React, { Component } from "react";
 import styled from 'styled-components';
 
 let ExpanderBox = styled.div`
-    border: 1px ${props => props.theme.darkGray} solid;
+    border: 1px ${props => props.theme.lightGray} solid;
     border-radius: 10px;
 `
 
@@ -19,7 +19,7 @@ let ToggleSize = styled.button`
     border: none;
     border-bottom-left-radius: 10px;
     border-bottom-right-radius: 10px;
-    border-top: 1px ${props => props.theme.darkGray} solid;
+    border-top: 1px ${props => props.theme.lightGray} solid;
     color: ${props => props.theme.darkGray};
     display: flex;
     font-weight: bold;
