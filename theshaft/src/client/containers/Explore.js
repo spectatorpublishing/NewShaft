@@ -13,11 +13,13 @@ let ExploreContainer = styled.div`
 `
 
 let SideBar = styled.div`
-  width: 90%;
-  padding-left: 1em;
+  width: 100%;
+  padding: 0 5%;
   overflow-y: scroll; 
+  min-height: 200px;
   @media only screen and (min-width: 768px) {
     width: 55%;
+    padding: 0 2.5%;
     min-height: 100%;
     z-index: 1;
   }
@@ -53,22 +55,63 @@ let ColTwo = styled.div`
   top: 0;
   flex-direction: column;
   `
+// Converts name of filter in front-end
+// to name used in body payload
+const filterNameToKey = {
+    "Columbia":"columbia",
+		"Barnard":"barnard",
+		"Single":"single",
+		"Double":"double",
+		"Triple":"triple",
+		"2 Person":"two_suite",
+		"3 Person":"three_suite",
+		"4 Person":"four_suite",
+		"5 Person":"five_suite",
+		"6 Person":"six_suite",
+		"7 Person":"seven_suite",
+		"8 Person":"eight_suite",
+		"9 Person":"nine_suite",
+		"First Year":"freshmen",
+		"Sophomore":"sophomores",
+		"Junior":"juniors",
+		"Senior":"seniors",
+		"A/C":"ac",
+		"Accessibility":"accessibility",
+		"Gym":"gym",
+		"Bathroom":"bathroom"
+}
   
 export default class Explore extends Component {
   constructor(props){
     super(props);
     this.state = {
       payload: {
-        "college": -1,
-        "single": false,
-        "double": false,
-        "triple": false,
-        "suite": [],
-        "make_up":[]
+        columbia: null,
+        barnard: null,
+        single: null,
+        double: null,
+        triple: null,
+        two_suite: null,
+        three_suite: null,
+        four_suite: null,
+        five_suite: null,
+        six_suite: null,
+        seven_suite: null,
+        eight_suite: null,
+        nine_suite: null,
+        freshmen: null,
+        sophomores: null,
+        juniors: null,
+        seniors: null,
+        ac: null,
+        accessibility: null,
+        gym: null,
+        bathroom: null
       },
       dorms: []
     }
-  }
+    this.updatePayload = this.updatePayload.bind(this)
+    }
 
   
   componentDidMount(){
@@ -89,37 +132,12 @@ export default class Explore extends Component {
 
   updatePayload(isClicked, name){
     let payload = this.state.payload;
-		if(!isClicked){
+		if(isClicked){
 			console.log("button was false now clicked")
-			if(name === "columbia" || name === "barnard"){
-				console.log("columbia or barnard button clicked")
-				if(payload.college !== name && payload.college !==-1){
-					payload.college = -1
-				}
-				else if (payload.college ===-1){
-					payload.college = name
-				}
-
-			}
-			else if (name == "single" || name == "double" || name == "triple"){
-				payload[name] = true
-			}
+			payload[filterNameToKey[name]] = true
 		}
 		else{
-			if(payload.college === name){
-				payload.college = -1
-			}
-			else if( name == "columbia" || name=="barnard"){
-				if(name ==='barnard' && payload.college ===-1){
-					payload.college = 'columbia'
-				}
-				else{
-					payload.college = "barnard"
-				}
-			}
-			else if (name == "single" || name == "double" || name == "triple"){
-				payload[name] = false
-			}
+			payload[filterNameToKey[name]] = null
     }
     this.setState({payload: payload}, () => this.filterDorms())
 		console.log(this.state.payload)
@@ -147,7 +165,7 @@ export default class Explore extends Component {
           <SideBar>
             <div className="filters">
               <h2>The Shaft</h2>
-              <Filter handleChange={this.updatePayload.bind(this)}/>
+              <Filter handleChange={this.updatePayload}/>
             </div>
             <ExploreSidebar dorms={this.state.dorms}/>
           </SideBar>

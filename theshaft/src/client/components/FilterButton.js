@@ -6,7 +6,7 @@ let Button = styled.button`
 	background: none;
 	border: none;
 	margin: 0;
-	padding-left: 1em;
+	padding: 0 1em;
 	font-size: 9pt;
 
 	${({ clicked }) => clicked && `
@@ -19,25 +19,26 @@ export default class FilterButton extends React.PureComponent {
 	    super(props);
 
 	    this.state = {
-				handleClick: this.props.handleClick,
-	    	name: this.props.name,
 				clicked: false
 	    };
 
 	    this.onClick = this.onClick.bind(this);
 	}
-	
+
+	componentDidUpdate(prevState) {
+		if (this.state.clicked != prevState.clicked) {
+			this.props.handleClick(this.state.clicked, this.props.name)
+		}
+	}
+
 	onClick() {
-		this.state.handleClick(this.state.clicked, this.props.name)
-		
-		console.log(this.props.name+"button clicked")		
-		this.setState({clicked: !this.state.clicked})		
+		this.setState({clicked: !this.state.clicked})
 	}
 
 	render() {
 		return (
 			<div>
-				<Button clicked={this.state.clicked} onClick={()=>this.onClick()}>{this.state.name}</Button>
+				<Button clicked={this.state.clicked} onClick={()=>this.onClick()}>{this.props.name}</Button>
 			</div>
 		)
 	}
