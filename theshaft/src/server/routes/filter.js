@@ -252,7 +252,8 @@ function filterDormInfo(data, request, callback) {
 
 router.post("/", function(req, res, next) {
   // console.log("filtering selection of",req.body)
-
+  console.log("ENTER POST");
+  console.log(req.body);
   filterDormInfo(fakedata, req.body, dormInfo => {
     console.log("server side dorminfo", dormInfo);
     // JSON.stringify(dormInfo[0])
