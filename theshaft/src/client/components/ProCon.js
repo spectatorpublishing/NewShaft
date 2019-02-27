@@ -22,9 +22,24 @@ let Divider = styled.div`
 
 let Head = styled.div`
     color: grey;
-    font-size: 1.5rem;
+    font-size: 5rem;
     font-weight: bolder;
     margin: .5rem 0 -0.5rem 1.2rem;
+`
+
+let h2 = styled.div`
+    color: grey;
+    font-size: 3rem;
+    font-weight: bolder;
+    margin: .5rem 0 -0.5rem 1.2rem;
+    padding: 2vw;
+`
+
+let li = styled.div`
+    color: grey;
+    font-size: 1.0rem;
+    margin: .5rem 0 -0.5rem 1.2rem;
+    padding: 2vw;
 `
 
 
@@ -33,31 +48,69 @@ export default class ProCon extends Component {
         super(props);
     
         this.state = {
+          width: window.innerWidth,
           pros: this.props.pros,
           cons: this.props.cons,
         };
       }
-    
+
+  componentWillMount() {
+    window.addEventListener("resize", this.handleWindowSizeChange);
+  }
+
+  componentWillUnmount() {
+    window.removeEventListener("resize", this.handleWindowSizeChange);
+  }
+
+  handleWindowSizeChange = () => {
+    this.setState({ width: window.innerWidth });
+  };
+
       render() {
+        const { width } = this.state;
+        const isMobile = width <= 700;
         let k = 0;
-        return (
-          <Section>
-            <ListBox>
-              <Head>Pros</Head>
-                <ul>
-                  {this.state.pros.map(pro => (
-                    <li key={k++}>{pro}</li>))}
-                </ul>
-            </ListBox>
-            <Divider/>
-            <ListBox>
-              <Head>Cons</Head>
-                <ul>
-                  {this.state.cons.map(con => (
-                    <li key={k++}>{con}</li>))}
-                </ul>
-            </ListBox>
-          </Section>
-        );
+        if(isMobile){
+          return (
+              <div>
+              <h1> The Good and Not-So-Good </h1>
+                  <h2>&#128522;</h2>
+                    <ul>
+                      {this.state.pros.map(pro => (
+                        <li key={k++}>{pro}</li>))}
+                    </ul>
+              <Divider/>
+                  <h2>&#128555;</h2>
+                    <ul>
+                      {this.state.cons.map(con => (
+                        <li key={k++}>{con}</li>))}
+                    </ul>
+              </div>
+            ); 
+        } else{
+          return (
+              <div>
+              <h1> The Good and Not-So-Good </h1>
+              <Section>
+                <ListBox>
+                  <Head>&#128522;</Head>
+                    <ul>
+                      {this.state.pros.map(pro => (
+                        <li key={k++}>{pro}</li>))}
+                    </ul>
+                </ListBox>
+                <Divider/>
+                <ListBox>
+                  <Head>&#128555;</Head>
+                    <ul>
+                      {this.state.cons.map(con => (
+                        <li key={k++}>{con}</li>))}
+                    </ul>
+                </ListBox>
+              </Section>
+              </div>
+            ); 
+        }
+        
       }
 }
