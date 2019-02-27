@@ -72,12 +72,12 @@ export default class FilterComponent extends React.PureComponent {
 
 	render() {
 		// The open prop bitshifts this.state.open over i values. For example, if the 
-		// state is 2 aka 0010, we want the second filter to be active. 
-		// If i is 1, it is bitshifted to 0001. We then mask it with 1, which
-		// makes it so we only take the rightmost bit. Then we apply the ! operator
-		// twice which just makes it a boolean. 
+		// state is 0010, we want the second filter to be active. 
+		// If i is 1, open is bitshifted to 0001. We then mask it with 1, which
+		// makes only take the rightmost bit signficant. Then we apply the ! operator
+		// twice which just casts 1 to true. 
 		// If i is not 1, then it is either bitshifted to 0000 or something greater than
-		// 1, which is then masked out by our AND 1 operation. 
+		// 1, which is then masked out by our AND 1 operation to 0. We then cast 0 to false. 
 		const Filters = Object.keys(filterElements).map((filterName, i)=>{
 			return <FilterCategory 
 				key={i}
