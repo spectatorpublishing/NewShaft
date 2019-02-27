@@ -156,7 +156,6 @@ export default class Explore extends Component {
               latitudes={this.state.dorms.map((dorm) => dorm.latitude)} 
               longitudes={this.state.dorms.map((dorm) => dorm.longitude)} 
               popupInfo={this.state.dorms.map((dorm) => dorm.dorm)} 
-              popupId={this.state.dorms.map((dorm) => dorm.id)}
               width={"100%"}
               height={"900px"}
               />

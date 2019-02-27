@@ -1,7 +1,6 @@
 var fakedata = {
   Carman: {
     dorm: "Carman", // name of dorm for display
-    id: "Carman", // link to dorm page
     address: "619 W 113th St",
     description: "Comedy House",
     college: "columbia",
@@ -20,7 +19,6 @@ var fakedata = {
 
   Mcbain: {
     dorm: "McBain",
-    id: "McBain",
     address: "McBain Fake Address",
     description: "On Campus",
     college: "columbia",
@@ -38,7 +36,6 @@ var fakedata = {
   },
   Test: {
     dorm: "110",
-    id: "110",
     address: "601 W 110th St",
     description: "Off-campus but not really",
     college: "barnard",
