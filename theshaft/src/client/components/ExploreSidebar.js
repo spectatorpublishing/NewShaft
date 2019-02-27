@@ -29,7 +29,7 @@ const Dorms = styled.div`
     height: 100%;
     display: grid;
     grid-column-gap: 50px;
-    grid-template-columns: 50% 50%;
+    grid-template-columns: calc(50% - 25px) calc(50% - 25px);
 `
 
 const SidebarDivider = styled.div`
