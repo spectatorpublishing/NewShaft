@@ -203,7 +203,6 @@ var fakedata = {
 var express = require("express");
 var router = express.Router();
 var mysql = require("mysql");
-var _ = require("underscore");
 
 const filterItems = [
   "columbia",
@@ -231,9 +230,12 @@ const filterItems = [
 
 function filterDormInfo(data, request, callback) {
   console.log("request received", request)
-  console.log(_.values(data))
-  let result = _.values(data)
+  let result = Object.values(data)
 
+  // Reduce through each of the different
+  // attributes we are filtering on, and
+  // filter each. null indicates a don't care
+  // condition. 
   const reducer = (newResult, filterItem) => (
     newResult.filter(el => {
       if (request[filterItem] !== null) {
