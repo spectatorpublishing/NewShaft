@@ -1,37 +1,37 @@
 DORM, ADDRESS, PRIVATE BATHROOM, LAUNDRY, CARPET, FLOOR KITCHEN, PRIVATE KITCHEN, LOUNGE, FITNESS ROOM, BIKE STORAGE, COMPUTER LAB, PRINT STATION, AC, MUSIC PRACTICE ROOMS
-"Claremont", "47 Claremont Avenue", TRUE, TRUE, FALSE, FALSE, TRUE, TRUE, TRUE, TRUE, TRUE, TRUE, FALSE, FALSE
-"Nussbaum", "600 West 113th Street", TRUE, TRUE, FALSE, FALSE, TRUE, TRUE, FALSE, FALSE, TRUE, TRUE, FALSE, FALSE
-"Broadway", "556 West 114th Street", FALSE, TRUE, FALSE, TRUE, FALSE, TRUE, TRUE, FALSE, TRUE, TRUE, TRUE, TRUE
-"Carlton Arms", "362 Riverside Drive", TRUE, TRUE, FALSE, FALSE, TRUE, TRUE, FALSE, TRUE, FALSE, TRUE, FALSE, FALSE
-"Carman Hall", "545 West 114th Street", TRUE, TRUE, FALSE, FALSE, FALSE, TRUE, TRUE, FALSE, TRUE, TRUE, TRUE, TRUE
-"East Campus", "70 Morningside Drive", TRUE, TRUE, TRUE, FALSE, TRUE, TRUE, TRUE, FALSE, TRUE, TRUE, TRUE, TRUE
-"FSL Brownstones", "113th and 114th Streets", FALSE, TRUE, FALSE, TRUE, FALSE, TRUE, FALSE, FALSE, FALSE, FALSE, FALSE, FALSE
-"Furnald Hall", "2940 Broadway", FALSE, TRUE, FLASE, TRUE, FALSE, TRUE, FALSE, TRUE, TRUE, TRUE, TRUE, FALSE
-"Harmony Hall", "544 West 110th Street", FALSE, TRUE, FALSE, TRUE, FALSE, TRUE, TRUE, TRUE, FALSE, TRUE, FALSE, FALSE
-"Hartley Hall", "1124 Amsterdam Avenue", TRUE, TRUE, TRUE, FALSE, TRUE, TRUE, FALSE, FALSE, TRUE, TRUE, FALSE, FALSE
-"Hogan Hall", "566 W. 114th Street", TRUE, TRUE, FALSE, FALSE, TRUE, FALSE, FALSE, TRUE, FALSE, FALSE, TRUE, TRUE
-"John Jay Hall", " 519 West 114th Street", FALSE, TRUE, TRUE, FALSE, FALSE, TRUE, FALSE, FALSE, TRUE, TRUE, FALSE, FALSE
-"McBain Hall", "562 West 113th Street", FALSE, TRUE, TRUE, TRUE, FALSE, TRUE, TRUE, FALSE, TRUE, TRUE, FALSE, FALSE
-"Residential Brownstones", "113th Street and 115th Street", TRUE, TRUE, FALSE, FALSE, TRUE, FALSE, FALSE, FALSE, FALSE, FALSE, FALSE, FALSE
-"River Hall", "628 West 114th Street", FALSE, TRUE, FALSE, TRUE, FALSE, TRUE, TRUE, FALSE, TRUE, FALSE, FALSE, TRUE
-"Ruggles Hall", "508 West 114th Street", TRUE, TRUE, FALSE, FALSE, TRUE, TRUE, TRUE, TRUE, FALSE, TRUE, FALSE, FALSE
-"Schapiro Hall", "605 West 115th Street", FALSE, TRUE, FALSE, TRUE, FALSE, TRUE, FALSE, FALSE, TRUE, TRUE, TRUE, TRUE
-"SIC Residences", "Various locations", FALSE, TRUE, FALSE, TRUE, FALSE, TRUE, FALSE, FALSE, FALSE, TRUE, FALSE, FALSE
-"Wallach Hall", "1116 Amsterdam Avenue", FALSE, TRUE, FALSE, TRUE, FALSE, TRUE, FALSE, FALSE, FALSE, TRUE, FALSE, FALSE
-"Watt Hall", "549 West 113th Street", TRUE, TRUE, FALSE, FALSE, TRUE, FALSE, FALSE, FALSE, FALSE, TRUE, FALSE, FALSE
-"Wien Hall", "411 West 116th Street", FALSE, TRUE, FALSE, TRUE, FALSE, TRUE, FALSE, FALSE, TRUE, TRUE, FALSE, FALSE
-"Woodbridge Hall", "431 Riverside Drive", TRUE, TRUE, TRUE, FALSE, TRUE, FALSE, TRUE, FALSE, FALSE, FALSE, FALSE, FALSE
-"Andersen Hall", "134 Claremont Avenue", FALSE, TRUE, NULL, NULL, NULL, TRUE, TRUE, FALSE, NULL, NULL, TRUE, FALSE
-"Brooks Hall", "3009 Broadway", FALSE, TRUE, NULL, TRUE, FALSE, TRUE, FALSE, FALSE, TRUE, TRUE, FALSE, TRUE
-"Hewitt Hall", "3009 Broadway", FALSE, TRUE, NULL, TRUE, FALSE, TRUE, FALSE, FALSE, TRUE, TRUE, FALSE, TRUE
-"Reid Hall", "3009 Broadway", FALSE, TRUE, NULL, TRUE, FALSE, TRUE, FALSE, FALSE, TRUE, TRUE, FALSE, TRUE
-"Sulzberger Hall", "3009 Broadway", FALSE, TRUE, NULL, TRUE, FALSE, TRUE, FALSE, FALSE, TRUE, TRUE, FALSE, TRUE
-"Elliot Hall", "49 Claremont Avenue", FALSE, TRUE, NULL, TRUE, FALSE, TRUE, FALSE, FALSE, FALSE, NULL, TRUE, FALSE
-"Sulzberger Tower", "3009 Broadway", FALSE, TRUE, NULL, TRUE, FALSE, TRUE, FALSE, FALSE, TRUE, TRUE, TRUE, FALSE
-"600", "600 West 116th Street", TRUE, TRUE, NULL, FALSE, TRUE, FALSE, FALSE, FALSE, FALSE, TRUE, FALSE, FALSE
-"616", "616 West 116th Street", TRUE, TRUE, NULL, FALSE, TRUE, TRUE, FALSE, FALSE, TRUE, TRUE, FALSE, FALSE
-"620", "620 West 116th Street", TRUE, TRUE, NULL, FALSE, TRUE, FALSE, FALSE, FALSE, FALSE, TRUE, FALSE, FALSE
-"110", "601 West 110th Street", TRUE, TRUE, NULL, FALSE, TRUE, FALSE, FALSE, FALSE, FALSE, FALSE, FALSE, FALSE
-"Cathedral Gardens", "217 Manhattan Ave", TRUE, TRUE, NULL, FALSE, TRUE, TRUE, FALSE, FALSE, FALSE, FALSE, TRUE, FALSE
-"Plimpton Hall", "1235 Amsterdam Avenue", TRUE, TRUE, NULL, FALSE, TRUE, TRUE, FALSE, FALSE, TRUE, TRUE, TRUE, FALSE
+"Claremont", "47 Claremont Avenue", 1, 1, 0, 0, 1, 1, 1, 1, 1, 1, 0, 0
+"Nussbaum", "600 West 113th Street", 1, 1, 0, 0, 1, 1, 0, 0, 1, 1, 0, 0
+"Broadway", "556 West 114th Street", 0, 1, 0, 1, 0, 1, 1, 0, 1, 1, 1, 1
+"Carlton Arms", "362 Riverside Drive", 1, 1, 0, 0, 1, 1, 0, 1, 0, 1, 0, 0
+"Carman Hall", "545 West 114th Street", 1, 1, 0, 0, 0, 1, 1, 0, 1, 1, 1, 1
+"East Campus", "70 Morningside Drive", 1, 1, 1, 0, 1, 1, 1, 0, 1, 1, 1, 1
+"FSL Brownstones", "113th and 114th Streets", 0, 1, 0, 1, 0, 1, 0, 0, 0, 0, 0, 0
+"Furnald Hall", "2940 Broadway", 0, 1, FLASE, 1, 0, 1, 0, 1, 1, 1, 1, 0
+"Harmony Hall", "544 West 110th Street", 0, 1, 0, 1, 0, 1, 1, 1, 0, 1, 0, 0
+"Hartley Hall", "1124 Amsterdam Avenue", 1, 1, 1, 0, 1, 1, 0, 0, 1, 1, 0, 0
+"Hogan Hall", "566 W. 114th Street", 1, 1, 0, 0, 1, 0, 0, 1, 0, 0, 1, 1
+"John Jay Hall", " 519 West 114th Street", 0, 1, 1, 0, 0, 1, 0, 0, 1, 1, 0, 0
+"McBain Hall", "562 West 113th Street", 0, 1, 1, 1, 0, 1, 1, 0, 1, 1, 0, 0
+"Residential Brownstones", "113th Street and 115th Street", 1, 1, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0
+"River Hall", "628 West 114th Street", 0, 1, 0, 1, 0, 1, 1, 0, 1, 0, 0, 1
+"Ruggles Hall", "508 West 114th Street", 1, 1, 0, 0, 1, 1, 1, 1, 0, 1, 0, 0
+"Schapiro Hall", "605 West 115th Street", 0, 1, 0, 1, 0, 1, 0, 0, 1, 1, 1, 1
+"SIC Residences", "Various locations", 0, 1, 0, 1, 0, 1, 0, 0, 0, 1, 0, 0
+"Wallach Hall", "1116 Amsterdam Avenue", 0, 1, 0, 1, 0, 1, 0, 0, 0, 1, 0, 0
+"Watt Hall", "549 West 113th Street", 1, 1, 0, 0, 1, 0, 0, 0, 0, 1, 0, 0
+"Wien Hall", "411 West 116th Street", 0, 1, 0, 1, 0, 1, 0, 0, 1, 1, 0, 0
+"Woodbridge Hall", "431 Riverside Drive", 1, 1, 1, 0, 1, 0, 1, 0, 0, 0, 0, 0
+"Andersen Hall", "134 Claremont Avenue", 0, 1, NULL, NULL, NULL, 1, 1, 0, NULL, NULL, 1, 0
+"Brooks Hall", "3009 Broadway", 0, 1, NULL, 1, 0, 1, 0, 0, 1, 1, 0, 1
+"Hewitt Hall", "3009 Broadway", 0, 1, NULL, 1, 0, 1, 0, 0, 1, 1, 0, 1
+"Reid Hall", "3009 Broadway", 0, 1, NULL, 1, 0, 1, 0, 0, 1, 1, 0, 1
+"Sulzberger Hall", "3009 Broadway", 0, 1, NULL, 1, 0, 1, 0, 0, 1, 1, 0, 1
+"Elliot Hall", "49 Claremont Avenue", 0, 1, NULL, 1, 0, 1, 0, 0, 0, NULL, 1, 0
+"Sulzberger Tower", "3009 Broadway", 0, 1, NULL, 1, 0, 1, 0, 0, 1, 1, 1, 0
+"600", "600 West 116th Street", 1, 1, NULL, 0, 1, 0, 0, 0, 0, 1, 0, 0
+"616", "616 West 116th Street", 1, 1, NULL, 0, 1, 1, 0, 0, 1, 1, 0, 0
+"620", "620 West 116th Street", 1, 1, NULL, 0, 1, 0, 0, 0, 0, 1, 0, 0
+"110", "601 West 110th Street", 1, 1, NULL, 0, 1, 0, 0, 0, 0, 0, 0, 0
+"Cathedral Gardens", "217 Manhattan Ave", 1, 1, NULL, 0, 1, 1, 0, 0, 0, 0, 1, 0
+"Plimpton Hall", "1235 Amsterdam Avenue", 1, 1, NULL, 0, 1, 1, 0, 0, 1, 1, 1, 0
 
