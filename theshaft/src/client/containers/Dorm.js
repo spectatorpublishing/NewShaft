@@ -91,33 +91,33 @@ let relatedDorms = [
       "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla nulla nulla, condimentum a mattis in, faucibus id sapien. Sed rhoncus.",
     amenities: "No AC"
   },
-  {
-    id: "Sulzberger",
-    school: "Barnard",
-    name: "Sulzberger Tower",
-    image: "https://housing.columbia.edu/files/housing/McBain.jpg",
-    description:
-      "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla nulla nulla, condimentum a mattis in, faucibus id sapien. Sed rhoncus.",
-    amenities: "No AC"
-  },
-  {
-    id: "mcbain",
-    school: "Columbia",
-    name: "McBain Hall",
-    image: "https://housing.columbia.edu/files/housing/McBain.jpg",
-    description:
-      "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla nulla nulla, condimentum a mattis in, faucibus id sapien. Sed rhoncus.",
-    amenities: "No AC"
-  },
-  {
-    id: "mcbain",
-    school: "Columbia",
-    name: "McBain Hall",
-    image: "https://housing.columbia.edu/files/housing/McBain.jpg",
-    description:
-      "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla nulla nulla, condimentum a mattis in, faucibus id sapien. Sed rhoncus.",
-    amenities: "No AC"
-  }
+  // {
+  //   id: "Sulzberger",
+  //   school: "Barnard",
+  //   name: "Sulzberger Tower",
+  //   image: "https://housing.columbia.edu/files/housing/McBain.jpg",
+  //   description:
+  //     "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla nulla nulla, condimentum a mattis in, faucibus id sapien. Sed rhoncus.",
+  //   amenities: "No AC"
+  // },
+  // {
+  //   id: "mcbain",
+  //   school: "Columbia",
+  //   name: "McBain Hall",
+  //   image: "https://housing.columbia.edu/files/housing/McBain.jpg",
+  //   description:
+  //     "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla nulla nulla, condimentum a mattis in, faucibus id sapien. Sed rhoncus.",
+  //   amenities: "No AC"
+  // },
+  // {
+  //   id: "mcbain",
+  //   school: "Columbia",
+  //   name: "McBain Hall",
+  //   image: "https://housing.columbia.edu/files/housing/McBain.jpg",
+  //   description:
+  //     "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla nulla nulla, condimentum a mattis in, faucibus id sapien. Sed rhoncus.",
+  //   amenities: "No AC"
+  // }
 ];
 
 const bannerImages = [
