@@ -6,7 +6,7 @@ let DDHeader = styled.div`
 `
 
 let DDHeaderTitle = styled.div`
-    text-shadow: ${props => props.shadow ? "1px 1px 1px rgba(0,0,0,0.4)" : "none"};
+    text-shadow: ${props => props.shadow ? props.theme.textShadow : "none"};
     cursor: pointer;
     user-select: none;
     color: ${props => props.theme.columbiaBlue};
@@ -16,7 +16,7 @@ let ListElement = styled.li`
     list-style-type:none;
     display: inline-block;
     border-radius: 10px;
-    border: 1px solid lightgray;
+    border: 1px solid ${props => props.theme.lightGray};
     padding: 5px;
     margin: 5px 10px;
     @media (min-width: 650px) {
@@ -24,7 +24,7 @@ let ListElement = styled.li`
         border: none;
         left: 10px;
         padding: 2px;
-        background: white;
+        background: ${props => props.theme.white};
         width: 100%;
     }
 `
@@ -36,7 +36,7 @@ let FilterList = styled.ul`
     left: 0;
     width: 100%;
     overflow: hidden;
-    background: white;
+    background: ${props => props.theme.white};
     
     @media (min-width: 650px) {
         position: absolute;
@@ -45,7 +45,7 @@ let FilterList = styled.ul`
         left: auto;
         width: 15%;
         border-radius: 10px;
-        border: 1px solid gray;
+        border: 1px solid ${props => props.theme.lightGray};
         overflow: hidden;
     }
 `

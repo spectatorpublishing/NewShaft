@@ -17,14 +17,6 @@ let Filter = styled.div`
 
 let FilterLabel = styled.div`
     color: ${props => props.theme.columbiaBlue};
-    font-weight: bold;
-`
-
-let Text = styled.li`
-	padding-top: 2px;
-	color: rgb(176, 214, 132);
-	font-size: 15pt;
-	white-space: nowrap;
 `
 
 export default class FilterComponent extends React.PureComponent {
@@ -64,7 +56,7 @@ export default class FilterComponent extends React.PureComponent {
 			]
 			return(
 				<Filter>
-					<FilterLabel>Filters</FilterLabel>
+					<FilterLabel><h4>Filters</h4></FilterLabel>
 					<FilterCategory handleChange={this.state.handleChange} headerTitle="School" filters={schoolFilters}></FilterCategory>
 					<FilterCategory handleChange={this.state.handleChange} headerTitle="Year" filters={yearFilters}></FilterCategory>
 					<FilterCategory handleChange={this.state.handleChange} headerTitle="Room Type" filters={roomTypeFilters}></FilterCategory>
