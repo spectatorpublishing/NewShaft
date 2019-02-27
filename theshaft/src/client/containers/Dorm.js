@@ -195,7 +195,6 @@ export default class Dorm extends React.PureComponent {
   constructor(props) {
     super(props);
     let screen_width = window.innerWidth;
-    let info = fakedata[this.props.match.params.dorm];
     this.amenitiesRef = React.createRef();
     this.proconRef = React.createRef();
     this.floorplansRef = React.createRef();
@@ -206,20 +205,21 @@ export default class Dorm extends React.PureComponent {
     this.scrollMenuRef = React.createRef();
     this.state = {
       dormInfo: {
-        address: info["address"],
-        description: info["description"],
-        college: info["college"],
-        thumbnail_image: info["thumbnail_image"],
-        suite: info["suite"],
-        walkthrough: info["walkthrough"],
-        single: info["single"],
-        double: info["double"],
-        triple: info["triple"],
-        make_up: info["make_up"],
-        pros: info["pros"],
-        cons: info["cons"],
-        amenities: sampleAmenities,
-        relatedDorms: relatedDorms
+        DORM: "",
+        ADDRESS: "",
+        DESCRIPTION: "",
+        COLLEGE: "",
+        THUMBNAIL_IMAGE: "",
+        SUITE: "",
+        WALKTHROUGH: "",
+        SINGLE_: "",
+        DOUBLE_: "",
+        TRIPLE_: "",
+        CLASS_MAKEUP: "",
+        PROS: ["pro1", "pro2", "pro3"],
+        CONS: ["con1", "con2", "con3"],
+        AMENITIES: sampleAmenities,
+        RELATEDDORMS: relatedDorms
       },
       scrollMenuFixed: false,
       scrollMenuOffset: null,
@@ -234,15 +234,32 @@ export default class Dorm extends React.PureComponent {
   componentDidMount() {
     window.addEventListener("resize", this.handleWindowSizeChange);
     window.addEventListener('scroll', this.handleScroll);
-    // fetch('/api/getDormInfo?table=theshaft.dorm_static_info?DORM=' + this.props.match.params.dorm)
-    //   .then(res => {res.json(); console.log(res);})
-    //   .then(dormInfo => this.setState({dormInfo: dormInfo}));
+    this.fetchDormInfo(this.props.match.params.dorm + " Hall")
   }
 
   componentWillUnmount() {
     window.removeEventListener("resize", this.handleWindowSizeChange);
     window.removeEventListener('scroll', this.handleScroll);
   }
+
+  fetchDormInfo(name) {
+    fetch('/api/getDormInfo', {
+      method: "POST",
+      body: JSON.stringify({ 
+        table: "dorm_static_info",
+        DORM: name
+      }),
+      headers: { "Content-Type": "application/json"},
+    })
+      .then(res => res.json())
+      .then(dormInfo => {
+        dormInfo[0].AMENITIES = [];
+        dormInfo[0].PROS = [];
+        dormInfo[0].CONS = [];
+        this.setState({dormInfo: dormInfo[0]})
+      });
+  }
+
 
   //   componentWillReceiveProps(nextProps){
   //     //call your api and update state with new props
@@ -291,28 +308,28 @@ export default class Dorm extends React.PureComponent {
     ));
     const isMobile = this.state.width <= 700;
     let roomtype = "";
-    if (this.state.dormInfo.suite.length != 0) {
+    if (this.state.dormInfo.SUITE.length != 0) {
       roomtype += "Suite-style";
-      if (this.state.dormInfo.single && this.state.dormInfo.double)
+      if (this.state.dormInfo.SINGLE_ && this.state.dormInfo.DOUBLE_)
         roomtype += " singles and doubles";
-      else if (this.state.dormInfo.single) roomtype += " singles";
-      else if (this.state.dormInfo.double) roomtype += " doubles";
-    } else if (this.state.dormInfo.walkthrough)
+      else if (this.state.dormInfo.SINGLE_) roomtype += " singles";
+      else if (this.state.dormInfo.DOUBLE_) roomtype += " doubles";
+    } else if (this.state.dormInfo.WALKTHROUGH)
       roomtype += "Doubles and walkthrough doubles";
     else {
-      if (this.state.dormInfo.single && this.state.dormInfo.double)
+      if (this.state.dormInfo.SINGLE_ && this.state.dormInfo.DOUBLE_)
         roomtype += "Singles and doubles";
-      else if (this.state.dormInfo.single) roomtype += "Singles";
-      else if (this.state.dormInfo.double) roomtype += "Doubles";
+      else if (this.state.dormInfo.SINGLE_) roomtype += "Singles";
+      else if (this.state.dormInfo.DOUBLE_) roomtype += "Doubles";
     }
-    if (this.state.dormInfo.triple) roomtype += " and triples";
+    if (this.state.dormInfo.TRIPLE_) roomtype += " and triples";
     return (
       <div>
         <PhotoBanner bannerImages={bannerImages} />
         <Header>
           <DormName>{this.props.match.params.dorm}</DormName>
         </Header>
-        <Blurb>{this.state.dormInfo.description}</Blurb>
+        <Blurb>{this.state.dormInfo.DESCRIPTION}</Blurb>
 
         <Body>
           {!isMobile && <ColOne>
@@ -334,14 +351,14 @@ export default class Dorm extends React.PureComponent {
           <ColTwo mobile={isMobile}>
             {isMobile && (
               <AtAGlance
-                location={this.state.dormInfo.address}
+                location={this.state.dormInfo.ADDRESS}
                 roomtype={roomtype}
-                classmakeup={this.state.dormInfo.make_up}
+                classmakeup={this.state.dormInfo.CLASS_MAKEUP}
                 numfloors="13"
               />
             )}
             <ScrollerTarget ref={this.amenitiesRef}>
-              <Amenities amenities={this.state.dormInfo.amenities}/>
+              <Amenities amenities={this.state.dormInfo.AMENITIES}/>
             </ScrollerTarget>
 
             <ScrollerTarget ref={this.locationRef}>
@@ -356,8 +373,8 @@ export default class Dorm extends React.PureComponent {
             </ScrollerTarget>
             <ScrollerTarget ref={this.proconRef}>
               <ProCon
-                pros={this.state.dormInfo.pros}
-                cons={this.state.dormInfo.cons}
+                pros={this.state.dormInfo.PROS}
+                cons={this.state.dormInfo.CONS}
               />
             </ScrollerTarget>
             <ScrollerTarget ref={this.floorplansRef}>
@@ -386,9 +403,9 @@ export default class Dorm extends React.PureComponent {
           {!isMobile && (
             <ColThree>
               <AtAGlance
-                location={this.state.dormInfo.address}
+                location={this.state.dormInfo.ADDRESS}
                 roomtype={roomtype}
-                classmakeup={this.state.dormInfo.make_up}
+                classmakeup={this.state.dormInfo.CLASS_MAKEUP}
                 numfloors="13"
               />
             </ColThree>
