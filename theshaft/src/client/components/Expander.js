@@ -2,12 +2,12 @@ import React, { Component } from "react";
 import styled from 'styled-components';
 
 let ExpanderBox = styled.div`
-    border: 1px darkgray solid;
+    border: 1px ${props => props.theme.lightGray} solid;
     border-radius: 10px;
 `
 
 let ExpanderContent = styled.div`
-    padding: 1em;
+    padding: 1rem;
 `
 
 let ExpanderList = styled.div`
@@ -16,24 +16,22 @@ let ExpanderList = styled.div`
 `
 
 let ToggleSize = styled.button`
-    color: blue;
     border: none;
     border-bottom-left-radius: 10px;
     border-bottom-right-radius: 10px;
-    border-top: 1px darkgray solid;
+    border-top: 1px ${props => props.theme.lightGray} solid;
     display: flex;
-    font-size: 1em;
     font-weight: bold;
     justify-content: center;
-    padding: 0.3em;
+    padding: 0.3rem;
     width: 100%;
 
     :hover {
-      background-color: whitesmoke;
+      background-color: ${props => props.theme.lightGray};
     }
 
     :active {
-      background-color: lightgray;
+      background-color: ${props => props.theme.lightGray};
     }
 `
 
@@ -61,7 +59,7 @@ export default class Expander extends Component {
           </ExpanderList>
         </ExpanderContent>
         <ToggleSize onClick={this.toggleSize}>
-          Show {this.state.expanded ? "Less" : "All"}  
+          <h6>Show {this.state.expanded ? "Less" : "All"}</h6>
         </ToggleSize>
       </ExpanderBox>
     );

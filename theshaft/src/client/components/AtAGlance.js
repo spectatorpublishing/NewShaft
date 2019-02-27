@@ -14,6 +14,7 @@ let Span = styled.div`
 `
 
 let Title = styled.h2`
+  margin-bottom: 1rem;
 `
 
 let Content = styled.span`
