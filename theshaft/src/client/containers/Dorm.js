@@ -12,55 +12,7 @@ import ReviewsBox from "../components/ReviewsBox";
 
 import Scroller from "../components/Scroller";
 
-var fakedata = {
-  "110": {
-    dorm: "110",
-    address: "601 W 110th St",
-    description: "Off-campus but not really",
-    college: "barnard",
-    thumbnail_image: "N/A",
-    suite: ["6"],
-    walkthrough: false,
-    single: true,
-    double: true,
-    triple: true,
-    make_up: ["first-years", "sophomores", "juniors", "seniors"],
-    pros: ["pro1", "pro2", "pro3"],
-    cons: ""
-  },
 
-  "Carman": {
-    dorm: "Carman",
-    address: "619 W 113th St",
-    description: "Comedy House",
-    college: "columbia",
-    thumbnail_image: "N/A",
-    suite: ["5"],
-    walkthrough: false,
-    single: true,
-    double: true,
-    triple: false,
-    make_up: ["sophomores", "juniors", "seniors"],
-    pros: ["pro1", "pro2", "pro3"],
-    cons: ["con1", "con2", "con3"]
-  },
-
-  "McBain": {
-    dorm: "McBain",
-    address: "McBain Fake Address",
-    description: "On Campus",
-    college: "columbia",
-    thumbnail_image: "N/A",
-    suite: ["4", "3"],
-    walkthrough: false,
-    single: true,
-    double: true,
-    triple: true,
-    make_up: ["sophomores"],
-    pros: ["pro1", "pro2", "pro3"],
-    cons: ["con1", "con2", "con3"]
-  }
-};
 
 let sampleAmenities = [
   ["bathroom", "Semi-private"],
@@ -267,12 +219,21 @@ export default class Dorm extends React.PureComponent {
   componentDidMount() {
     window.addEventListener("resize", this.handleWindowSizeChange);
     window.addEventListener('scroll', this.handleScroll);
-    this.fetchDormInfo(this.props.match.params.dorm + " Hall")
+    // This will not fetch the right data for all dorms need to pass the data correctly into the dorm
+    console.log(this.props.location.dorm);
+    this.fetchDormInfo(this.props.location.dorm)
   }
 
   componentWillUnmount() {
     window.removeEventListener("resize", this.handleWindowSizeChange);
     window.removeEventListener('scroll', this.handleScroll);
+  }
+
+  componentWillReceiveProps(newProps){
+    console.log("HELLO")
+    console.log(newProps.location.dorm)
+    this.fetchDormInfo(newProps.location.dorm)
+    window.scrollTo(0, 0)
   }
 
   fetchDormInfo(name) {
@@ -286,17 +247,14 @@ export default class Dorm extends React.PureComponent {
     })
       .then(res => res.json())
       .then(dormInfo => {
-        dormInfo[0].AMENITIES = [];
-        dormInfo[0].PROS = [];
-        dormInfo[0].CONS = [];
+        console.log(dormInfo);
+        dormInfo[0].AMENITIES = sampleAmenities;
+        dormInfo[0].PROS = ["Pro 1", "Pro 2", "Pro 3"];
+        dormInfo[0].CONS = ["Con 1", "Con 2", "Con 3"];
         this.setState({dormInfo: dormInfo[0]})
       });
   }
 
-
-  //   componentWillReceiveProps(nextProps){
-  //     //call your api and uptimestamp state with new props
-  //  }
 
   handleWindowSizeChange() {
     this.setState({ width: window.innerWidth });
