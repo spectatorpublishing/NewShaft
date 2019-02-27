@@ -52,7 +52,6 @@ export default class FilterComponent extends React.PureComponent {
 
 	    this.state = {
 				type: this.props.type,
-				handleChange: this.props.handleChange,
 				openFilters: 0
 			};
 			this.setfilter = this.setfilter.bind(this)
@@ -84,12 +83,12 @@ export default class FilterComponent extends React.PureComponent {
 				i={i}
 				open={!!(1 & this.state.openFilters>>i)}
 				setfilter={this.setfilter}
-				handleChange={this.state.handleChange}
+				handleChange={this.props.handleChange}
 				headerTitle={filterName}
 				filters={filterElements[filterName]}>
 			</FilterCategory>
 		})
-		console.log(Filters);
+
 		return(
 			<Filter>
 				<FilterLabel><h4>Filters</h4></FilterLabel>

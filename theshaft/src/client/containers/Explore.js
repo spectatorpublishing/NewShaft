@@ -73,7 +73,8 @@ export default class Explore extends Component {
       },
       dorms: []
     }
-  }
+    this.updatePayload = this.updatePayload.bind(this)
+    }
 
   componentDidMount(){
     this.fetchDorms();
@@ -81,7 +82,7 @@ export default class Explore extends Component {
 
   updatePayload(isClicked, name){
     let payload = this.state.payload;
-		if(!isClicked){
+		if(isClicked){
 			console.log("button was false now clicked")
 			if(name === "columbia" || name === "barnard"){
 				console.log("columbia or barnard button clicked")
@@ -139,7 +140,7 @@ export default class Explore extends Component {
           <SideBar>
             <div className="filters">
               <h2>The Shaft</h2>
-              <Filter handleChange={this.updatePayload.bind(this)}/>
+              <Filter handleChange={this.updatePayload}/>
             </div>
             <ExploreSidebar dorms={this.state.dorms}/>
           </SideBar>

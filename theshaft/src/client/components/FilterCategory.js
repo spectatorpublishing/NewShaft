@@ -64,14 +64,10 @@ export default class FilterComponent extends React.PureComponent {
 
         this.state = {
             headerTitle: this.props.title,
-            handleChange: this.props.handleChange,
             filters: this.props.filters
         }
     }
 
-    handleClickOutside(){
-        this.props.setfilter(0)
-    }
     toggleList(){
         this.props.setfilter(this.props.i, Number(!this.props.open))
         console.log("setfilter " + this.props.i + Number(!this.props.open))
@@ -94,7 +90,7 @@ export default class FilterComponent extends React.PureComponent {
                 {listOpen && <FilterList>
                     {filters.map((item, index) => (
                         <ListElement key={index++} > 
-                        <FilterButton handleClick={this.state.handleChange} name={item}></FilterButton>
+                        <FilterButton handleClick={this.props.handleChange} name={item}></FilterButton>
                         </ListElement>
                     ))}
                 </FilterList>}

@@ -5,24 +5,6 @@ import styled from 'styled-components'
 
 import DormButton from '../components/DormButton';
 
-const Header = styled.div`
-	margin: 0 auto;
-	width: 100%;
-	text-align: center;
-`
-
-const SchoolButton = styled.div`
-	display: inline-block;
-	font-size: 15pt;
-	text-align: center;
-	border: 1px solid #9B9B9B;
-	color: #9B9B9B;
-	height: 20px;
-	margin: 20px 10px;
-	padding: 2px;
-	cursor: pointer;
-`
-
 const Dorms = styled.div`
 	margin: 0 auto;
 	overflow: scroll;
@@ -67,7 +49,8 @@ export default class ExploreSidebar extends Component {
                                 name={dorm.dorm + ' Hall'}
                                 image={dorm.thumbnail_image}
                                 description={dorm.description}
-                                amenities={dorm.amenities}/>
+                                amenities={dorm.amenities}
+                            />
                         </Link>
                     )}
                 </Dorms>
