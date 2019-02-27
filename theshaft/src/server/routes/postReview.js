@@ -10,8 +10,10 @@ var mysql = require('mysql');
  * to table=theshaft.dorm_static_info
  */
 
+ //^ yeetful legacy comment, pls disregard :3
 
-function getDormInfo(con, request, callback) {
+
+function postReview(con, request, callback) {
 	con.connect(function(err) {
 		if (err) throw err;
 		console.log("Connected!");
@@ -21,7 +23,7 @@ function getDormInfo(con, request, callback) {
 		
 		con.query(sqlStatement, function(err, res) {
 			if (err) throw err;
-			callback(res)
+			callback("good shit bruh")
 		});
 
 		con.end(); // DO NOT REMOVE!
@@ -39,7 +41,7 @@ router.post('/', function(req, res, next) {
 
 	console.log("adding!",req.body)
 	
-	getDormInfo(con, req.body, (resp) => {
+	postReview(con, req.body, (resp) => {
 		console.log(resp)
 		res.json(resp)
 	})
