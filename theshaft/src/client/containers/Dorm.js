@@ -91,33 +91,33 @@ let relatedDorms = [
       "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla nulla nulla, condimentum a mattis in, faucibus id sapien. Sed rhoncus.",
     amenities: "No AC"
   },
-  {
-    id: "Sulzberger",
-    school: "Barnard",
-    name: "Sulzberger Tower",
-    image: "https://housing.columbia.edu/files/housing/McBain.jpg",
-    description:
-      "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla nulla nulla, condimentum a mattis in, faucibus id sapien. Sed rhoncus.",
-    amenities: "No AC"
-  },
-  {
-    id: "mcbain",
-    school: "Columbia",
-    name: "McBain Hall",
-    image: "https://housing.columbia.edu/files/housing/McBain.jpg",
-    description:
-      "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla nulla nulla, condimentum a mattis in, faucibus id sapien. Sed rhoncus.",
-    amenities: "No AC"
-  },
-  {
-    id: "mcbain",
-    school: "Columbia",
-    name: "McBain Hall",
-    image: "https://housing.columbia.edu/files/housing/McBain.jpg",
-    description:
-      "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla nulla nulla, condimentum a mattis in, faucibus id sapien. Sed rhoncus.",
-    amenities: "No AC"
-  }
+  // {
+  //   id: "Sulzberger",
+  //   school: "Barnard",
+  //   name: "Sulzberger Tower",
+  //   image: "https://housing.columbia.edu/files/housing/McBain.jpg",
+  //   description:
+  //     "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla nulla nulla, condimentum a mattis in, faucibus id sapien. Sed rhoncus.",
+  //   amenities: "No AC"
+  // },
+  // {
+  //   id: "mcbain",
+  //   school: "Columbia",
+  //   name: "McBain Hall",
+  //   image: "https://housing.columbia.edu/files/housing/McBain.jpg",
+  //   description:
+  //     "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla nulla nulla, condimentum a mattis in, faucibus id sapien. Sed rhoncus.",
+  //   amenities: "No AC"
+  // },
+  // {
+  //   id: "mcbain",
+  //   school: "Columbia",
+  //   name: "McBain Hall",
+  //   image: "https://housing.columbia.edu/files/housing/McBain.jpg",
+  //   description:
+  //     "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla nulla nulla, condimentum a mattis in, faucibus id sapien. Sed rhoncus.",
+  //   amenities: "No AC"
+  // }
 ];
 
 const bannerImages = [
@@ -239,6 +239,30 @@ export default class Dorm extends React.PureComponent {
   componentWillUnmount() {
     window.removeEventListener("resize", this.handleWindowSizeChange);
     window.removeEventListener('scroll', this.handleScroll);
+  }
+
+  componentWillReceiveProps(newProps){
+    console.log("Rerender to another dorm "+newProps.match.params.dorm);
+    let info = fakedata[newProps.match.params.dorm];
+    this.setState ({
+      dormInfo: {
+        address: info["address"],
+        description: info["description"],
+        college: info["college"],
+        thumbnail_image: info["thumbnail_image"],
+        suite: info["suite"],
+        walkthrough: info["walkthrough"],
+        single: info["single"],
+        double: info["double"],
+        triple: info["triple"],
+        make_up: info["make_up"],
+        pros: info["pros"],
+        cons: info["cons"],
+        amenities: sampleAmenities,
+        relatedDorms: relatedDorms
+      }
+    })
+    window.scrollTo(0, 0)
   }
 
   //   componentWillReceiveProps(nextProps){
