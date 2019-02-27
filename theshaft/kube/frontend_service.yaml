@@ -1,0 +1,18 @@
+kind: Service
+apiVersion: v1
+metadata:
+  name: shaft-service
+spec:
+  selector:
+    app: shaft-frontend
+  ports:
+  - protocol: TCP
+    port: 8080
+    targetPort: 8080
+  clusterIP: 10.245.0.7
+  loadBalancerIP: 78.11.24.17
+  type: LoadBalancer
+status:
+  loadBalancer:
+    ingress:
+    - ip: 146.148.47.154

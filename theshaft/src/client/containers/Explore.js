@@ -1,12 +1,7 @@
 import React, { Component } from 'react';
 import styled from "styled-components";
-import { Route, Link, BrowserRouter as Router } from 'react-router-dom';
-import DormButton from '../components/DormButton';
-import Dorm from './Dorm.js';
-import Updater from '../components/Updater';
 import ExploreSidebar from "../components/ExploreSidebar";
 import Filter from '../components/FilterComponent.js'
-import map from "../assets/map.png";
 import Maps from "../components/Maps";
 
 let ExploreContainer = styled.div`
@@ -118,8 +113,21 @@ export default class Explore extends Component {
     this.updatePayload = this.updatePayload.bind(this)
     }
 
+  
   componentDidMount(){
     this.fetchDorms();
+  }
+
+  fetchDorms(){
+    fetch('/api/getExploreInfo', {
+      method: "GET",
+      headers: {"Content-Type": "application/json"},
+    })
+    .then(res => res.json())
+    .then(dormInfo => {
+      console.log(dormInfo)
+      this.setState({dorms: dormInfo})
+    })
   }
 
   updatePayload(isClicked, name){
@@ -131,11 +139,11 @@ export default class Explore extends Component {
 		else{
 			payload[filterNameToKey[name]] = null
     }
-    this.setState({payload: payload}, () => this.fetchDorms())
+    this.setState({payload: payload}, () => this.filterDorms())
 		console.log(this.state.payload)
   }
 
-  fetchDorms(){
+  filterDorms(){
     // console.log("PAYLOAD: " + JSON.stringify(this.state.payload))
     fetch('/api/filterDorm', {
         method: 'POST',
@@ -165,15 +173,14 @@ export default class Explore extends Component {
         <ColTwo>
           <MapView>
             <Maps
-              latitudes={this.state.dorms.map((dorm) => dorm.latitude)} 
-              longitudes={this.state.dorms.map((dorm) => dorm.longitude)} 
-              popupInfo={this.state.dorms.map((dorm) => dorm.dorm)} 
+              latitudes={this.state.dorms.map((dorm) => dorm.LATITUDE)} 
+              longitudes={this.state.dorms.map((dorm) => dorm.LONGITUDE)} 
+              popupInfo={this.state.dorms.map((dorm) => dorm.DORM)} 
               width={"100%"}
               height={"900px"}
               />
           </MapView>
         </ColTwo>
-        <Updater interval="15" />
       </ExploreContainer>
     );
   }

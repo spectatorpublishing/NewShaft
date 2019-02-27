@@ -43,7 +43,7 @@ export default class ExploreSidebar extends Component {
                 <SidebarDivider><hr></hr></SidebarDivider>
                 <Dorms>
                     {this.state.dorms.map((dorm, index) => 
-                        <Link key={index} to={"/explore/" + dorm.dorm.replace(/\s+/g, '')} style={{textDecoration: 'none'}}>
+                        <Link key={index}  to={{pathname : "/explore/" + dorm.DORM.replace(/\s+/g, ''), dorm : dorm.DORM}} style={{textDecoration: 'none'}}>
                             <DormButton key={index}
                                 school={dorm.college}
                                 name={dorm.dorm + ' Hall'}
