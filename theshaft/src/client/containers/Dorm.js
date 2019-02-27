@@ -10,7 +10,6 @@ import FloorPlan from "../components/FloorPlan";
 import RelatedDorms from "../components/RelatedDorms";
 import ReviewsBox from "../components/ReviewsBox";
 
-import Review from "../components/Review";
 import Scroller from "../components/Scroller";
 
 var fakedata = {
