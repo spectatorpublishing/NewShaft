@@ -69,6 +69,8 @@ Type | url | params | returns
 POST | /api/getDormInfo | ``` {"table": <table>, <key>:<value>, ...} ``` | ```"SELECT * FROM <table> WHERE <key>=<value> AND ..."```
 POST | /api/deleteDormInfo _1_ | ``` {"table": <table>, <key>:<value>, ...} ``` | ```{"Status": "Success"/"Failure"}```
 POST | /api/filterDorm | ``` {"college": <college>, "single": <value>, ...} ``` | ```[{ "dorm": "110", "adress": "601 W 110th St",...},...] ```
+POST | /api/postReview | ```{"DORM": <DORM>, "ADDRESS": <ADDRESS>, ...}```| NULL
+}
 
 _1_: will NOT allow deletion of all entries in <table>. You must specify at least one key to query on.
 
