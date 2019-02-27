@@ -10,8 +10,8 @@ const Dorms = styled.div`
 	overflow: scroll;
     height: 100%;
     display: grid;
-    grid-column-gap: 50px;
-    grid-template-columns: calc(50% - 25px) calc(50% - 25px);
+    grid-column-gap: 5%;
+    grid-template-columns: 47.5% 47.5%;
 `
 
 const SidebarDivider = styled.div`

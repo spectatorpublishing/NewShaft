@@ -2,6 +2,12 @@ import React, { Component } from "react";
 import FilterButton from "./FilterButton.js"
 import styled from 'styled-components';
 
+let DDWrapper = styled.div`
+    @media(min-width: 768px){
+        position: relative; // So that the filter list will position itself relative to this div
+    }
+`
+
 let DDHeader = styled.div`
 `
 
@@ -31,9 +37,10 @@ let ListElement = styled.li`
 
 let FilterList = styled.ul`
     position: absolute;
-    margin: 10px;
-    padding: 5px 0;
+    margin: 0;
+    padding: 0;
     left: 0;
+    top: 3rem;
     width: 100%;
     overflow: hidden;
     background: ${props => props.theme.white};
@@ -43,10 +50,12 @@ let FilterList = styled.ul`
         margin: 5px 0 0 0;
         padding: 0;
         left: auto;
-        width: 15%;
+        top: 1rem;
+        width: 100%;
         border-radius: 10px;
         border: 1px solid ${props => props.theme.lightGray};
         overflow: hidden;
+        z-index: 1;
     }
 `
 
@@ -81,7 +90,7 @@ export default class FilterComponent extends React.PureComponent {
         console.log("open is:"+listOpen)
         
         return(
-            <div className="dd-wrapper">
+            <DDWrapper>
 
                 <DDHeader onClick={() => this.toggleList()}>
                     <DDHeaderTitle shadow={this.props.open}>{this.props.headerTitle}</DDHeaderTitle>
@@ -94,7 +103,7 @@ export default class FilterComponent extends React.PureComponent {
                         </ListElement>
                     ))}
                 </FilterList>}
-            </div>
+            </DDWrapper>
   )
     }
 }

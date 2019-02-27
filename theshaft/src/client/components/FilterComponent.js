@@ -4,15 +4,11 @@ import FilterCategory from "./FilterCategory.js";
 import styled from 'styled-components';
 
 let Filter = styled.div`
-	display: flex;
-	flex-direction: row;
-	justify-content: space-between;
-	
-	// @media (max-width: 650px) {
-	// 	display: flex;
-	// 	flex-direction: column;
-	// 	justify-content: center;
-	// }
+	display: grid;
+	grid-template-columns: repeat(3, 33%);
+	@media(max-width: 768px){
+		position: relative; // So that the filter list will position itself relative to this div
+	}
 `
 
 let FilterLabel = styled.div`
@@ -21,27 +17,39 @@ let FilterLabel = styled.div`
 
 const filterElements = {
 	"School": [
-		"columbia",
-		"barnard"
+		"Columbia",
+		"Barnard"
 	],
 
 	"Room Type": [
-		"single",
-		"double",
-		"# person suite"
+		"Single",
+		"Double",
+		"Triple",
+	],
+
+	"Suite Size": [
+		"2 Person",
+		"3 Person",
+		"4 Person",
+		"5 Person",
+		"6 Person",
+		"7 Person",
+		"8 Person",
+		"9 Person"
 	],
 
 	"Year": [
-		"first year",
-		"sophomore",
-		"junior",
-		"senior"
+		"First Year",
+		"Sophomore",
+		"Junior",
+		"Senior"
 	],
 
 	"Amenities": [
-		"Food",
-		"Toilet",
-		"interior decoration by RamondLiCSS"
+		"A/C",
+		"Accessibility",
+		"Gym",
+		"Bathroom"
 	]
 }
 

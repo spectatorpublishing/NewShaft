@@ -3,53 +3,200 @@ var fakedata = {
     dorm: "Carman", // name of dorm for display
     address: "619 W 113th St",
     description: "Comedy House",
-    college: "columbia",
+    columbia: true,
+    barnard: false,
     thumbnail_image: "https://housing.columbia.edu/files/housing/Carman.jpg",
     suite: ["5"],
     walkthrough: false,
     single: true,
     double: true,
     triple: false,
-    make_up: ["sophomores", "juniors", "seniors"],
+    two_suite: false,
+    three_suite: false,
+    four_suite: false,
+    five_suite: false,
+    six_suite: false,
+    seven_suite: false,
+    eight_suite: false,
+    nine_suite: false,
+    freshmen: false,
+    sophomores: true,
+    juniors: true,
+    seniors: true,
     pros: ["pro1", "pro2", "pro3"],
     cons: ["con1", "con2", "con3"],
     latitude: 40.7128,
-    longitude: -74.006
+    longitude: -74.006,
+    ac: false,
+    accessibility: false,
+    gym: false,
+    bathroom: false
   },
 
   Mcbain: {
     dorm: "McBain",
     address: "McBain Fake Address",
     description: "On Campus",
-    college: "columbia",
+    columbia: true,
+    barnard: false,
     thumbnail_image: "https://housing.columbia.edu/files/housing/McBain.jpg",
     suite: ["4", "3"],
     walkthrough: false,
     single: true,
     double: true,
     triple: true,
-    make_up: ["sophomores"],
+    two_suite: false,
+    three_suite: false,
+    four_suite: false,
+    five_suite: false,
+    six_suite: false,
+    seven_suite: false,
+    eight_suite: false,
+    nine_suite: false,
+    freshmen: false,
+    sophomores: true,
+    juniors: false,
+    seniors: false,
     pros: ["pro1", "pro2", "pro3"],
     cons: ["con1", "con2", "con3"],
     latitude: 40.7127,
-    longitude: -74.005
+    longitude: -74.005,
+    ac: false,
+    accessibility: false,
+    gym: false,
+    bathroom: false
   },
   Test: {
     dorm: "110",
     address: "601 W 110th St",
     description: "Off-campus but not really",
-    college: "barnard",
+    columbia: false,
+    barnard: true,
     thumbnail_image: "https://housing.columbia.edu/files/housing/McBain.jpg",
     suite: ["6"],
     walkthrough: false,
     single: true,
     double: false,
     triple: false,
-    make_up: ["first-years", "sophomores", "juniors", "seniors"],
+    two_suite: false,
+    three_suite: false,
+    four_suite: false,
+    five_suite: false,
+    six_suite: false,
+    seven_suite: false,
+    eight_suite: false,
+    nine_suite: false,
+    freshmen: true,
+    sophomores: true,
+    juniors: true,
+    seniors: true,
     pros: ["pro1", "pro2", "pro3"],
     cons: "",
     latitude: 40.7129,
-    longitude: -74.004
+    longitude: -74.004,
+    ac: false,
+    accessibility: false,
+    gym: false,
+    bathroom: false
+  },
+  EC: {
+    dorm: "East Campus",
+    address: "601 W 110th St",
+    description: "Off-campus but not really",
+    columbia: true,
+    barnard: false,
+    thumbnail_image: "https://housing.columbia.edu/files/housing/McBain.jpg",
+    suite: ["6"],
+    walkthrough: false,
+    single: true,
+    double: false,
+    triple: false,
+    two_suite: false,
+    three_suite: false,
+    four_suite: true,
+    five_suite: true,
+    six_suite: true,
+    seven_suite: false,
+    eight_suite: false,
+    nine_suite: false,
+    freshmen: false,
+    sophomores: false,
+    juniors: true,
+    seniors: true,
+    pros: ["pro1", "pro2", "pro3"],
+    cons: "",
+    latitude: 40.7135,
+    longitude: -74.004,
+    ac: false,
+    accessibility: false,
+    gym: false,
+    bathroom: false
+  },
+  DC: {
+    dorm: "East Campus",
+    address: "601 W 110th St",
+    description: "Off-campus but not really",
+    columbia: true,
+    barnard: false,
+    thumbnail_image: "https://housing.columbia.edu/files/housing/McBain.jpg",
+    suite: ["6"],
+    walkthrough: false,
+    single: true,
+    double: false,
+    triple: false,
+    two_suite: false,
+    three_suite: false,
+    four_suite: false,
+    five_suite: false,
+    six_suite: false,
+    seven_suite: false,
+    eight_suite: false,
+    nine_suite: false,
+    freshmen: false,
+    sophomores: false,
+    juniors: true,
+    seniors: true,
+    pros: ["pro1", "pro2", "pro3"],
+    cons: "",
+    latitude: 40.7135,
+    longitude: -74.004,
+    ac: false,
+    accessibility: false,
+    gym: false,
+    bathroom: false
+  },
+  FC: {
+    dorm: "East Campus",
+    address: "601 W 110th St",
+    description: "Off-campus but not really",
+    columbia: "true",
+    barnard: "false",
+    thumbnail_image: "https://housing.columbia.edu/files/housing/McBain.jpg",
+    suite: ["6"],
+    walkthrough: false,
+    single: true,
+    double: false,
+    triple: false,
+    two_suite: false,
+    three_suite: false,
+    four_suite: false,
+    five_suite: false,
+    six_suite: false,
+    seven_suite: false,
+    eight_suite: false,
+    nine_suite: false,
+    freshmen: false,
+    sophomores: false,
+    juniors: true,
+    seniors: true,
+    pros: ["pro1", "pro2", "pro3"],
+    cons: "",
+    latitude: 40.7135,
+    longitude: -74.004,
+    ac: false,
+    accessibility: false,
+    gym: false,
+    bathroom: false
   }
 };
 
@@ -58,35 +205,47 @@ var router = express.Router();
 var mysql = require("mysql");
 var _ = require("underscore");
 
+const filterItems = [
+  "columbia",
+  "barnard",
+  "single",
+  "double",
+  "triple",
+  "two_suite",
+  "three_suite",
+  "four_suite",
+  "five_suite",
+  "six_suite",
+  "seven_suite",
+  "eight_suite",
+  "nine_suite",
+  "freshmen",
+  "sophomores",
+  "juniors",
+  "seniors",
+  "ac",
+  "accessibility",
+  "gym",
+  "bathroom"
+]
+
 function filterDormInfo(data, request, callback) {
   console.log("request received", request)
-  //console.log(_.values(data))
-  result = _.values(data)
+  console.log(_.values(data))
+  let result = _.values(data)
 
+  const reducer = (newResult, filterItem) => (
+    newResult.filter(el => {
+      if (request[filterItem] !== null) {
+        return el[filterItem] === request[filterItem];
+      }
+      return true;
+    })
+  )
 
-  var result = result.filter(function(el) {
-    if (request.college != -1) {
-      return el.college == request.college;
-    }
-    return typeof el.college == "string";
-  });
+  const filteredResult = filterItems.reduce(reducer, result)
 
-  result = result.filter(function(el) {
-    // console.log(!_.isEqual(_.difference(request.suite, el.suite),(request.suite))) //debug
-    // If request make_up is empty, defaults to all
-    // Same thing with suite
-    return (
-      (!_.isEqual(_.difference(request.make_up, el.make_up), request.make_up) ||
-        request.make_up.length === 0) &&
-      (!_.isEqual(_.difference(request.suite, el.suite), request.suite) ||
-        request.suite.length === 0) &&
-      ((!request.single || el.single == request.single) &&
-        (!request.double || el.double == request.double) &&
-        (!request.triple || el.triple == request.triple))
-    );
-  });
-
-  callback(result);
+  callback(filteredResult);
 }
 
 router.post("/", function(req, res, next) {
