@@ -64,6 +64,7 @@ export const theme = {
     barnardBlue: "#00489A",
     columbiaBlue: "#62A8E5",
     darkGray: "#555555",
+    mediumGray: "#AAAAAA",
     lightGray: "#DDDDDD",
     textShadow: "rgba(0, 0, 0, 0.3) 0 0 10px"
 };
