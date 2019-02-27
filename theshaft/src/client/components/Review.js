@@ -32,15 +32,12 @@ export default class Review extends Component {
           <div className="stars">
             {this.createStars(this.props.stars)}
           </div>
-          <div>
-            User would recommend
-          </div>
         </div>
         <div className="fullReview">
           <div className="review">
             {this.props.review}
           </div>
-          <div className="thumbs">
+          {/* <div className="thumbs">
             <div>
                 <button>
                     <span>&#x1F44D;</span>
@@ -53,10 +50,10 @@ export default class Review extends Component {
                     <span>{this.props.thumbsDown}</span>
                 </button>
             </div>
-          </div>
+          </div> */}
         </div>
         <div className="reviewerInfo">
-          reviewerInfo
+          {this.props.room + "•" + this.props.year + "•" + this.props.timestamp}
         </div>
       </div>
     );
