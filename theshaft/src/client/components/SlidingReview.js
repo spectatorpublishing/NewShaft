@@ -38,6 +38,11 @@ export default class SlidingReview extends Component {
 
     render() {
         const settings = {
+            customPaging: function(i) {
+              return (
+                <a>{i + 1}</a>
+              );
+            },
             dots: true,
             infinite: false,
             speed: 500,
