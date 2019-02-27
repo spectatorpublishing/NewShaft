@@ -2,8 +2,6 @@ import React, { Component } from "react";
 import FilterButton from "./FilterButton.js"
 import styled from 'styled-components';
 
-import {theme} from '../util/GlobalStyles'
-
 let DDHeader = styled.div`
 `
 
@@ -11,10 +9,11 @@ let DDHeaderTitle = styled.div`
     text-shadow: ${props => props.shadow ? "1px 1px 1px rgba(0,0,0,0.4)" : "none"};
     cursor: pointer;
     user-select: none;
-    color: ${theme.columbiaBlue};
+    color: ${props => props.theme.columbiaBlue};
 `
 
 let ListElement = styled.li`
+    list-style-type:none;
     display: inline-block;
     border-radius: 10px;
     border: 1px solid lightgray;
@@ -22,7 +21,7 @@ let ListElement = styled.li`
     margin: 5px 10px;
     @media (min-width: 650px) {
         display: block;
-        list-style-type:none;
+        border: none;
         left: 10px;
         padding: 2px;
         background: white;
@@ -43,6 +42,7 @@ let FilterList = styled.ul`
         position: absolute;
         margin: 5px 0 0 0;
         padding: 0;
+        left: auto;
         width: 15%;
         border-radius: 10px;
         border: 1px solid gray;

@@ -2,7 +2,6 @@ import React, { Component } from "react";
 import FilterButton from "./FilterButton.js";
 import FilterCategory from "./FilterCategory.js";
 import styled from 'styled-components';
-import {theme} from '../util/GlobalStyles'
 
 let Filter = styled.div`
 	display: flex;
@@ -17,7 +16,7 @@ let Filter = styled.div`
 `
 
 let FilterLabel = styled.div`
-    color: ${theme.columbiaBlue};
+    color: ${props => props.theme.columbiaBlue};
     font-weight: bold;
 `
 
