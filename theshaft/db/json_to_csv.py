@@ -14,6 +14,7 @@ def JSON_to_CSV(json_file):
 	sets_keys = ['CLASS_MAKEUP']
 	new_json_arr = []
 	for j in json_arr:
+		print j['DORM']
 		to_add = True
 
 		# handle bad vals
@@ -27,7 +28,6 @@ def JSON_to_CSV(json_file):
 
 		# format set properly (follow for suite once thats done)
 		if(len(j["CLASS_MAKEUP"])==1):
-			print j["CLASS_MAKEUP"][0]
 			j["CLASS_MAKEUP"] = "'" + j["CLASS_MAKEUP"][0] + "'"
 		else:
 			j["CLASS_MAKEUP"] = ("%s") % (",".join(j["CLASS_MAKEUP"]))
@@ -52,7 +52,7 @@ def JSON_to_CSV(json_file):
 			writer.writerow(row)
 
 def insert_to_sql():
-	JSON_to_CSV('DormJSONS/_alldata.json')
+	JSON_to_CSV('otherJSONS/_alldata.json')
 	os.system("./insert_script.sh dorm_static_info json_csvd.csv")
 
 insert_to_sql()

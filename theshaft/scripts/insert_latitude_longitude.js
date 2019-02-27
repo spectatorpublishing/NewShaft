@@ -6,6 +6,7 @@
     (3) Ensure that your data is in the following format: data0,data1,data2 
         (data can contain spaces but must be seperated only by commas)
     (3a) Ensure that the data you enter matches the following dorm order based on latlong.txt
+    (3b) Follow the order that is listed in the DormJSONS folder (claremont, nuss, broadway, carlton...)
     (4) at line 70 change the name of the text file to desired
     (5) add keys and values
     (5a) keys are hardcoded the values is dependent on what it reads in from the text file
