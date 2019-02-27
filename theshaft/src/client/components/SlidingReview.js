@@ -39,7 +39,7 @@ export default class SlidingReview extends Component {
     render() {
         const settings = {
             dots: true,
-            infinite: true,
+            infinite: false,
             speed: 500,
             slidesToShow: 1,
             slidesToScroll: 1,
@@ -48,9 +48,9 @@ export default class SlidingReview extends Component {
             // prevArrow: <PrevArrow />
         };
         return (
-        <div>
+          <div>
             <Slider {...settings}>
-                <div style={""}>
+                <div>
                     {this.props.reviews.map((review) => <Review style={"flexDirection: column"} stars={review.stars} review={review.text} />)}                
                 </div>
                 <div>
@@ -63,7 +63,7 @@ export default class SlidingReview extends Component {
                     {this.props.reviews.map((review) => <Review style={"flexDirection: column"} stars={review.stars} review={review.text} />)}                
                 </div>
             </Slider>
-        </div>
+          </div>
         );
     }
 }
