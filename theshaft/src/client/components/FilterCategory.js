@@ -63,7 +63,6 @@ export default class FilterComponent extends React.PureComponent {
         console.log(`filters: ${this.props.filters}`)
 
         this.state = {
-            listOpen: false,
             headerTitle: this.props.title,
             handleChange: this.props.handleChange,
             filters: this.props.filters
@@ -71,27 +70,25 @@ export default class FilterComponent extends React.PureComponent {
     }
 
     handleClickOutside(){
-        this.setState({
-          listOpen: false
-        })
+        this.props.setfilter(0)
     }
     toggleList(){
-    this.setState(prevState => ({
-        listOpen: !prevState.listOpen
-    }))
+        this.props.setfilter(this.props.i, Number(!this.props.open))
+        console.log("setfilter " + this.props.i + Number(!this.props.open))
     }
     
     render() {
         console.log(`this.state.filters: ${this.state.filters}`)
         const filters = this.state.filters
         console.log(`the FILTERS: ${filters}`)
-        const listOpen = this.state.listOpen
+        const listOpen = !!this.props.open
+        console.log("open is:"+listOpen)
         
         return(
             <div className="dd-wrapper">
 
                 <DDHeader onClick={() => this.toggleList()}>
-                    <DDHeaderTitle shadow={this.state.listOpen}>{this.props.headerTitle}</DDHeaderTitle>
+                    <DDHeaderTitle shadow={this.props.open}>{this.props.headerTitle}</DDHeaderTitle>
                 </DDHeader>
 
                 {listOpen && <FilterList>
@@ -105,10 +102,3 @@ export default class FilterComponent extends React.PureComponent {
   )
     }
 }
-
-
-{/* <li><FilterButton handleClick={this.state.handleChange} name={item}></FilterButton></li> */}
-
-{/* <FontAwesome name="angle-up" size="2x"/> */}
-
-{/* <FontAwesome name="angle-down" size="2x"/> */}

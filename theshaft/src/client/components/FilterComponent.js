@@ -19,61 +19,70 @@ let FilterLabel = styled.div`
     color: ${props => props.theme.columbiaBlue};
 `
 
+const filterElements = {
+	"School": [
+		"columbia",
+		"barnard"
+	],
+
+	"Room Type": [
+		"single",
+		"double",
+		"# person suite"
+	],
+
+	"Year": [
+		"first year",
+		"sophomore",
+		"junior",
+		"senior"
+	],
+
+	"Amenities": [
+		"Food",
+		"Toilet",
+		"interior decoration by RamondLiCSS"
+	]
+}
+
 export default class FilterComponent extends React.PureComponent {
 
 	constructor(props) {
 	    super(props);
 
 	    this.state = {
-			type: this.props.type,
-			handleChange: this.props.handleChange
-	    };
+				type: this.props.type,
+				handleChange: this.props.handleChange,
+				openFilters: 0
+			};
+			this.setfilter = this.setfilter.bind(this)
+	}
+
+	setfilter(key, val){
+		this.setState({openFilters: 0})
+		this.setState({openFilters: val<<key})
+		console.log(this.state.openFilters)
 	}
 
 	render() {
-			const schoolFilters = [
-				"columbia",
-				"barnard"
-			]
-
-			const roomTypeFilters = [
-				"single",
-				"double",
-				"# person suite"
-			]
-
-			const yearFilters = [
-				"first year",
-				"sophomore",
-				"junior",
-				"senior"
-			]
-
-			const amenitiesFilters = [
-				"Food",
-				"Toilet",
-				"interior decoration by RamondLiCSS"
-			]
-			return(
-				<Filter>
-					<FilterLabel><h4>Filters</h4></FilterLabel>
-					<FilterCategory handleChange={this.state.handleChange} headerTitle="School" filters={schoolFilters}></FilterCategory>
-					<FilterCategory handleChange={this.state.handleChange} headerTitle="Year" filters={yearFilters}></FilterCategory>
-					<FilterCategory handleChange={this.state.handleChange} headerTitle="Room Type" filters={roomTypeFilters}></FilterCategory>
-					<FilterCategory handleChange={this.state.handleChange} headerTitle="Amenities" filters={amenitiesFilters}></FilterCategory>
-					{/* <Text> Filter by school: </Text> */}
-					{/* <Text> Filter by {this.state.type}: </Text> */}
-					{/* <FilterButton handleClick={this.state.handleChange} name="columbia"/>
-					<FilterButton handleClick={this.state.handleChange} name="barnard"/> */}
-					{/* <FilterButton handleClick={this.state.handleChange} name="single"/>
-					<FilterButton handleClick={this.state.handleChange} name="double"/>
-					<FilterButton handleClick={this.state.handleChange} name="# person room"/>
-					<FilterButton handleClick={this.state.handleChange} name="freshperson"/>
-					<FilterButton handleClick={this.state.handleChange} name="sophomore"/>
-					<FilterButton handleClick={this.state.handleChange} name="junior"/>
-					<FilterButton handleClick={this.state.handleChange} name="senior"/> */}
-			    </Filter>
-			)
+		const Filters = Object.keys(filterElements).map((filterName, i)=>{
+			return <FilterCategory 
+				key={i}
+				i={i}
+				open={1 & this.state.openFilters>>i}
+				setfilter={this.setfilter}
+				handleChange={this.state.handleChange}
+				headerTitle={filterName}
+				filters={filterElements[filterName]}>
+			</FilterCategory>
+		})
+		console.log(Filters);
+		return(
+			<Filter>
+				<FilterLabel><h4>Filters</h4></FilterLabel>
+				{Filters}
+			</Filter>
+		)
 		}
 		
 	}
