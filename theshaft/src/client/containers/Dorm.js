@@ -200,7 +200,7 @@ export default class Dorm extends React.PureComponent {
         AMENITIES: sampleAmenities,
         RELATEDDORMS: relatedDorms
       },
-      amenitites: {
+      amenities: {
         P_BATHROOM: 0,
         LAUNDRY: 0,
         CARPET: 0,
@@ -277,7 +277,6 @@ export default class Dorm extends React.PureComponent {
     })
       .then(res => res.json())
       .then(amenitiesInfo => {
-        console.log(amenitiesInfo)
         this.setState({amenities: amenitiesInfo[0]})
       });
   }
@@ -377,7 +376,7 @@ export default class Dorm extends React.PureComponent {
             )}
             <Margin>
               <ScrollerTarget ref={this.amenitiesRef}>
-                <Amenities amenities={this.state.dormInfo.AMENITIES}/>
+                <Amenities amenities={this.state.amenities}/>
               </ScrollerTarget>
             </Margin>
             
