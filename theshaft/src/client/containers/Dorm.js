@@ -15,16 +15,6 @@ import SpectrumSidebar from "../components/SpectrumSidebar";
 
 
 
-let sampleAmenities = [
-  ["bathroom", "Semi-private"],
-  ["laundry", "Laundry - in basement"],
-  ["kitchen", "Kitchen - in basement"],
-  ["airConditioning", "Air conditioning"],
-  ["lounge", "Floor lounge"],
-  ["fitness", "Fitness room"],
-  ["lounge", "Sky lounge"],
-  ["lounge", "Basement lounge"]
-];
 
 var stars="4.5" 
 var recommend="28%" 
@@ -197,7 +187,8 @@ export default class Dorm extends React.PureComponent {
         CLASS_MAKEUP: "",
         PROS: ["pro1", "pro2", "pro3"],
         CONS: ["con1", "con2", "con3"],
-        AMENITIES: sampleAmenities,
+        LATITUDE: 0,
+        LONGITUDE: 0,
         RELATEDDORMS: relatedDorms
       },
       amenities: {
@@ -258,7 +249,6 @@ export default class Dorm extends React.PureComponent {
       .then(res => res.json())
       .then(dormInfo => {
         console.log(dormInfo)
-        dormInfo[0].AMENITIES = sampleAmenities;
         dormInfo[0].PROS = ["Pro 1", "Pro 2", "Pro 3"];
         dormInfo[0].CONS = ["Con 1", "Con 2", "Con 3"];
         this.setState({dormInfo: dormInfo[0]})
@@ -383,10 +373,12 @@ export default class Dorm extends React.PureComponent {
             <Margin>
               <ScrollerTarget ref={this.locationRef}>
                 <Maps
-                  latitudes={[40.7128, 40.7129, 40.7128]}
-                  longitudes={[-74.006, -74.007, -74.008]}
-                  popupInfo={["Carman", "McBain", "John Jay"]}
-                  popupId={["Carman", "McBain", "JohnJay"]}
+                  latitudes={[this.state.dormInfo.LATITUDE]}
+                  longitudes={[this.state.dormInfo.LONGITUDE]}
+                  popupInfo={[this.state.dormInfo.DORM]}
+                  popupId={[this.state.dormInfo.DORM]}
+                  centerLatitude={this.state.dormInfo.LATITUDE}
+                  centerLongitude={this.state.dormInfo.LONGITUDE}
                   width={"100%"}
                   height={"300px"}
                 />

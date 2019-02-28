@@ -170,6 +170,8 @@ export default class Explore extends Component {
               latitudes={this.state.dorms.map((dorm) => dorm.LATITUDE)} 
               longitudes={this.state.dorms.map((dorm) => dorm.LONGITUDE)} 
               popupInfo={this.state.dorms.map((dorm) => dorm.DORM)} 
+              centerLatitude={40.808601}
+              centerLongitude={-73.966095}
               width={"100%"}
               height={"900px"}
               />
