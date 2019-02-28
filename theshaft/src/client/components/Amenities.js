@@ -105,7 +105,7 @@ export default class Amenities extends Component {
 
   render() {
     const { width } = this.state;
-    const isMobile = width <= 700;
+    const isMobile = width <= 768;
     if(isMobile) {
       return (
       <Expander showAll={this.showAllAmenities()} showSome={this.showSomeAmenities()}>

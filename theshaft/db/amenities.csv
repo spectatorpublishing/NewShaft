@@ -1,0 +1,16 @@
+DORM,'PRIVATE BATHROOM',LAUNDRY,CARPET,'FLOOR KITCHEN','PRIVATE KITCHEN',LOUNGE,'FITNESS ROOM','BIKE STORAGE','COMPUTER LAB',AC,'PRINT STATION','MUSIC PRACTICE ROOM'
+'47 Claremont',1,1,1,0,1,1,1,1,1,0,1,0
+'600 W 113th',1,1,1,0,1,1,0,0,1,0,1,0
+'Broadway Hall',0,1,1,1,0,1,1,0,1,1,0,0
+'Carlton Arms',1,1,1,0,1,1,0,1,0,0,1,0
+'East Campus',1,1,1,1,1,1,1,0,1,1,1,0
+'Furnald Hall',0,1,1,1,0,1,0,1,1,1,0,0
+'Harmony Hall',0,1,1,1,0,1,1,1,0,0,1,0
+'Hogan Hall',1,1,1,0,1,0,0,1,0,0,0,1
+'McBain Hall',0,1,1,1,0,1,1,0,1,0,0,0
+'River Hall',1,1,1,1,0,1,1,0,1,0,0,0
+'Ruggles Hall',1,1,1,0,1,1,1,1,0,0,0,0
+'Schapiro Hall',0,1,1,1,0,1,0,0,1,1,0,0
+'Watt Hall',1,1,1,0,1,0,0,0,0,0,0,0
+'Wien Hall',0,1,1,1,0,1,0,0,1,0,0,0
+'Woodbridge Hall',1,1,0,0,1,0,1,0,0,0,0,0
