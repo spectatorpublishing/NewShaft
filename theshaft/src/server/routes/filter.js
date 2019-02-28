@@ -5,24 +5,6 @@ var mysql = require("mysql");
 
 
 function filterDormInfo(con, request, callback) {
-  //let newResult = Object.values(data);
-  //console.log(newResult);
-
-  // Reduce through each of the different
-  // attributes we are filtering on, and
-  // filter each. null indicates a don't care
-  // condition.
-  /*const reducer = (newResult, filterItem) =>
-    newResult.filter(el => {
-      if (request[filterItem] !== null) {
-        return el[filterItem] === request[filterItem];
-      }
-      return true;
-    });
-
-  const filteredResult = filterItems.reduce(reducer, newResult);
-
-  callback(filteredResult); */
 
   var sqlStatement = `SELECT DORM, DESCRIPTION, COLLEGE, THUMBNAIL_IMAGE, LATITUDE, LONGITUDE FROM dorm_static_info `
 
@@ -39,12 +21,20 @@ function filterDormInfo(con, request, callback) {
 
   // Prevent iteration through COLUMBIA and BARNARD
   for(i = 2; i < keys.length; i++) {
-    if(request[keys[i]] === 1){
+    if(typeof request[keys[i]] === "number" && request[keys[i]] === 1){
       if(firstKey) {
 				firstKey = false
 				sqlStatement += `WHERE ${keys[i]}=${request[keys[i]]}`
 			} else {
 				sqlStatement += ` AND ${keys[i]}=${request[keys[i]]}`
+			}
+    }
+    else if((typeof request[keys[i]] === "string" && request[keys[i]].length > 0)){
+      if(firstKey) {
+				firstKey = false
+				sqlStatement += `WHERE ${keys[i]} LIKE '${request[keys[i]]}%'`
+			} else {
+				sqlStatement += ` AND ${keys[i]} LIKE '${request[keys[i]]}%'`
 			}
     }
 	}
