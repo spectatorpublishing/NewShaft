@@ -139,8 +139,8 @@ let ScrollMenu = styled(ColOne)`
   `};
 `
 const dorm_name_map = {
-  "CarmanHall": "Carman Hall",
-  "MacbainHall": "Macbain Hall",
+  CarmanHall: "Carman Hall",
+  McbainHall: "Mcbain Hall",
   "47Claremont": "47 Claremont",
   "600W113th": "600 W 113th",
   "BroadwayHall": "Broadway Hall",
@@ -218,8 +218,7 @@ export default class Dorm extends React.PureComponent {
 
   componentWillReceiveProps(newProps){
     //map spaceless dorm names to spacy names
-    name = dorm_name_map[newProps.match.params.dorm]
-    this.fetchDormInfo(name)
+    this.fetchDormInfo(dorm_name_map[newProps.match.params.dorm])
     window.scrollTo(0, 0)
   }
 
@@ -234,6 +233,7 @@ export default class Dorm extends React.PureComponent {
     })
       .then(res => res.json())
       .then(dormInfo => {
+        console.log(dormInfo)
         dormInfo[0].AMENITIES = sampleAmenities;
         dormInfo[0].PROS = ["Pro 1", "Pro 2", "Pro 3"];
         dormInfo[0].CONS = ["Con 1", "Con 2", "Con 3"];
