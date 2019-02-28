@@ -21,7 +21,7 @@ let SideBar = styled.div`
   @media only screen and (min-width: 768px) {
     width: 55%;
     padding: 0 2.5%;
-    min-height: 100%;
+    min-height: 500px;
     z-index: 1;
   }
 `
