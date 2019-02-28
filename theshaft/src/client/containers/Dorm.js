@@ -410,11 +410,7 @@ export default class Dorm extends React.PureComponent {
               />
             </ScrollerTarget>
             <ScrollerTarget ref={this.reviewsRef}>
-<<<<<<< HEAD
-              <ReviewsBox 
-=======
               <ReviewsBox
->>>>>>> 7630803b8d2067e0afda84148bb3a02b22e44c1e
                 stars={stars}
                 recommend={recommend}
                 ranking={ranking}

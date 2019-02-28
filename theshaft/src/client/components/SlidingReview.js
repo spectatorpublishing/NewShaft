@@ -4,6 +4,34 @@ import 'slick-carousel/slick/slick.css';
 import 'slick-carousel/slick/slick-theme.css';
 import Review from "./Review.js"
 import '../css/ReviewButton.css'
+import styled from 'styled-components';
+
+class PageButton extends Component {
+  constructor(props) {
+    super(props);
+
+    this.state = {
+      pageNumber: this.props.pageNumber
+    }
+
+    this.handleClick = this.handleClick.bind(this)
+  }
+
+  handleClick() {
+    console.log(`Page Number: ${this.state.pageNumber}`)
+  }
+
+  render() {
+    return(
+      <button onClick={this.handleClick}>
+        {this.props.pageNumber}
+      </button>
+
+    );
+  }
+
+}
+
 
 function NextArrow(props) {
     const { className, style, onClick } = props;
@@ -40,7 +68,10 @@ export default class SlidingReview extends Component {
         const settings = {
             customPaging: function(i) {
               return (
-                <a>{i + 1}</a>
+                <a>
+                  {i+1}
+                  {/* <PageButton pageNumber={i + 1}/> */}
+                </a>
               );
             },
             dots: true,
