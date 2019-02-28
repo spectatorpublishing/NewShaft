@@ -11,6 +11,7 @@ import RelatedDorms from "../components/RelatedDorms";
 import ReviewsBox from "../components/ReviewsBox";
 
 import Scroller from "../components/Scroller";
+import SpectrumSidebar from "../components/SpectrumSidebar";
 
 
 
@@ -383,21 +384,43 @@ export default class Dorm extends React.PureComponent {
             </Margin>
 
             <Margin>
-              <ScrollerTarget ref={this.reviewsRef}>
-                <ReviewsBox
-                  stars={stars}
-                  recommend={recommend}
-                  ranking={ranking}
-                  reviews={reviews}>
-                </ReviewsBox>
-              </ScrollerTarget>
-              <ScrollerTarget ref={this.suggestionsRef}>
-                <RelatedDorms
-                  name={this.state.dormInfo.DORM}
-                  relatedDorms={relatedDorms}
-                />
-              </ScrollerTarget>
+            <ScrollerTarget ref={this.reviewsRef}>
+              <ReviewsBox
+                stars={stars}
+                recommend={recommend}
+                ranking={ranking}
+                reviews={reviews}>
+              </ReviewsBox>
+            </ScrollerTarget>
+            <ScrollerTarget ref={this.suggestionsRef}>
+              <RelatedDorms
+                name={this.state.dormInfo.DORM}
+                relatedDorms={relatedDorms}
+              />
+            </ScrollerTarget>
             </Margin>
+
+            <Margin>
+            <ScrollerTarget ref={this.spectrumRef}>
+              <SpectrumSidebar
+                spectrumSidebarData = {[
+                  {
+                    title: "How Have Local Hiring Targets Shaped Columbia’s Manhattanville Construction Site?", 
+                    img_src: "https://www.gstatic.com/webp/gallery/1.jpg", 
+                    author: "BY YULONG LI",
+                    date: "APRIL 8, 2018"
+                  },
+                  {
+                    title: "Newly proposed committee for Barnard calls for increased transparency", 
+                    img_src: "https://www.gstatic.com/webp/gallery/3.jpg", 
+                    author: "BY ROUNAK",
+                    date: "APRIL 7, 2018"
+                  }
+                ]}
+              />
+            </ScrollerTarget>
+            </Margin>
+
           </ColTwo>
 
           {!isMobile && (
