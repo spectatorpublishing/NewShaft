@@ -200,11 +200,24 @@ export default class Dorm extends React.PureComponent {
         AMENITIES: sampleAmenities,
         RELATEDDORMS: relatedDorms
       },
+      amenitites: {
+        P_BATHROOM: 0,
+        LAUNDRY: 0,
+        CARPET: 0,
+        F_KITCHEN: 0,
+        P_KITCHEN: 0,
+        LOUNGE: 0,
+        GYM: 0,
+        BIKE: 0,
+        COMPUTER: 0,
+        PRINT:0,
+        AC: 0,
+        MUSIC: 0
+      },
       scrollMenuFixed: false,
       scrollMenuOffset: null,
       width: screen_width
     };
-    this.fetchDormInfo(dorm_name_map[this.props.match.params.dorm])
     this.handleWindowSizeChange = this.handleWindowSizeChange.bind(this);
     this.handleScroll = this.handleScroll.bind(this);
     this.isFixed = this.isFixed.bind(this);
@@ -214,7 +227,10 @@ export default class Dorm extends React.PureComponent {
     window.addEventListener("resize", this.handleWindowSizeChange);
     window.addEventListener('scroll', this.handleScroll);
     // This will not fetch the right data for all dorms need to pass the data correctly into the dorm
-    this.fetchDormInfo(this.props.match.params.dorm)
+    var dormName = this.props.match.params.dorm;
+    this.fetchDormInfo(dormName);
+    this.fetchAmenities(dormName);
+    //this.fetchDormInfo(dorm_name_map[this.props.match.params.dorm])
     window.scrollTo(0, 0)
   }
 
@@ -230,12 +246,12 @@ export default class Dorm extends React.PureComponent {
   }
 
   fetchDormInfo(name) {
-    const databaseName = dorm_name_map[name]
+    const dormName = dorm_name_map[name]
     fetch('/api/getDormInfo', {
       method: "POST",
       body: JSON.stringify({ 
         table: "dorm_static_info",
-        DORM: databaseName
+        DORM: dormName
       }),
       headers: { "Content-Type": "application/json"},
     })
@@ -246,6 +262,23 @@ export default class Dorm extends React.PureComponent {
         dormInfo[0].PROS = ["Pro 1", "Pro 2", "Pro 3"];
         dormInfo[0].CONS = ["Con 1", "Con 2", "Con 3"];
         this.setState({dormInfo: dormInfo[0]})
+      });
+  }
+
+  fetchAmenities(name) {
+    const dormName = dorm_name_map[name]
+    fetch('/api/getAmenities', {
+      method: "POST",
+      body: JSON.stringify({ 
+        table: "dorm_static_info",
+        DORM: dormName
+      }),
+      headers: { "Content-Type": "application/json"},
+    })
+      .then(res => res.json())
+      .then(amenitiesInfo => {
+        console.log(amenitiesInfo)
+        this.setState({amenities: amenitiesInfo[0]})
       });
   }
 

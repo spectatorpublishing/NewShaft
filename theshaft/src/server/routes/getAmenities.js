@@ -24,7 +24,9 @@ function getAmentities(con, request, callback) {
 		}
 		*/
 
-        var sqlStatement = `SELECT * FROM amenities
+		var sqlStatement = `SELECT P_BATHROOM, LAUNDRY, CARPET,
+		F_KITCHEN, P_KITCHEN, LOUNGE, GYM, BIKE, COMPUTER, PRINT,
+		AC, MUSIC FROM amenities
         WHERE DORM = "${request["DORM"]}";`
 		
 		con.query(sqlStatement, function(err, res) {
