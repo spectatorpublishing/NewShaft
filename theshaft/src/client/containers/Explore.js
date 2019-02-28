@@ -58,27 +58,27 @@ let ColTwo = styled.div`
 // Converts name of filter in front-end
 // to name used in body payload
 const filterNameToKey = {
-    "Columbia":"columbia",
-		"Barnard":"barnard",
-		"Single":"single",
-		"Double":"double",
-		"Triple":"triple",
-		"2 Person":"two_suite",
-		"3 Person":"three_suite",
-		"4 Person":"four_suite",
-		"5 Person":"five_suite",
-		"6 Person":"six_suite",
-		"7 Person":"seven_suite",
-		"8 Person":"eight_suite",
-		"9 Person":"nine_suite",
-		"First Year":"freshmen",
-		"Sophomore":"sophomores",
-		"Junior":"juniors",
-		"Senior":"seniors",
-		"A/C":"ac",
-		"Accessibility":"accessibility",
-		"Gym":"gym",
-		"Bathroom":"bathroom"
+    "Columbia":"COLUMBIA",
+		"Barnard":"BARNARD",
+		"Single":"SINGLE_",
+		"Double":"DOUBLE_",
+		"Triple":"TRIPLE_",
+		"2 Person":"TWO_SUITE",
+		"3 Person":"THREE_SUITE",
+		"4 Person":"FOUR_SUITE",
+		"5 Person":"FIVE_SUITE",
+		"6 Person":"SIX_SUITE",
+		"7 Person":"SEVEN_SUITE",
+		"8 Person":"EIGHT_SUITE",
+		"9 Person":"NINE_SUITE",
+		"First Year":"FRESHMEN",
+		"Sophomore":"SOPHMORE",
+		"Junior":"JUNIOR",
+		"Senior":"SENIOR",
+		"A/C":"AC",
+		"Accessibility":"ACCESSIBILITY",
+		"Gym":"GYM",
+		"Bathroom":"BATHROOM"
 }
   
 export default class Explore extends Component {
@@ -86,27 +86,27 @@ export default class Explore extends Component {
     super(props);
     this.state = {
       payload: {
-        columbia: null,
-        barnard: null,
-        single: null,
-        double: null,
-        triple: null,
-        two_suite: null,
-        three_suite: null,
-        four_suite: null,
-        five_suite: null,
-        six_suite: null,
-        seven_suite: null,
-        eight_suite: null,
-        nine_suite: null,
-        freshmen: null,
-        sophomores: null,
-        juniors: null,
-        seniors: null,
-        ac: null,
-        accessibility: null,
-        gym: null,
-        bathroom: null
+        COLUMBIA: 0,
+        BARNARD: 0,
+        SINGLE_: 0,
+        DOUBLE_: 0,
+        TRIPLE_: 0,
+        TWO_SUITE: 0,
+        THREE_SUITE: 0,
+        FOUR_SUITE: 0,
+        FIVE_SUITE: 0,
+        SIX_SUITE: 0,
+        SEVEN_SUITE: 0,
+        EIGHT_SUITE: 0,
+        NINE_SUITE: 0,
+        FRESHMEN: 0,
+        SOPHOMORE: 0,
+        JUNIOR: 0,
+        SENIOR: 0,
+        AC: 0,
+        ACCESSIBILITY: 0,
+        GYM: 0,
+        BATHROOM: 0
       },
       dorms: []
     }
@@ -125,7 +125,6 @@ export default class Explore extends Component {
     })
     .then(res => res.json())
     .then(dormInfo => {
-      console.log(dormInfo)
       this.setState({dorms: dormInfo})
     })
   }
@@ -133,18 +132,16 @@ export default class Explore extends Component {
   updatePayload(isClicked, name){
     let payload = this.state.payload;
 		if(isClicked){
-			console.log("button was false now clicked")
-			payload[filterNameToKey[name]] = true
+			payload[filterNameToKey[name]] = 1
 		}
 		else{
-			payload[filterNameToKey[name]] = null
+			payload[filterNameToKey[name]] = 0
     }
     this.setState({payload: payload}, () => this.filterDorms())
-		console.log(this.state.payload)
   }
 
   filterDorms(){
-    // console.log("PAYLOAD: " + JSON.stringify(this.state.payload))
+    //console.log("PAYLOAD: " + JSON.stringify(this.state.payload))
     fetch('/api/filterDorm', {
         method: 'POST',
         headers: {
