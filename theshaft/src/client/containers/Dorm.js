@@ -12,8 +12,6 @@ import ReviewsBox from "../components/ReviewsBox";
 
 import Scroller from "../components/Scroller";
 
-
-
 let sampleAmenities = [
   ["bathroom", "Semi-private"],
   ["laundry", "Laundry - in basement"],
@@ -24,6 +22,13 @@ let sampleAmenities = [
   ["lounge", "Sky lounge"],
   ["lounge", "Basement lounge"]
 ];
+
+let sampleAtAGlance = [
+  ["location", "545 W street"],
+  ["is it nice", "its aight"],
+  ["who leaves there", "seenyas only"]
+];
+  
 
 var stars="4.5" 
 var recommend="28%" 
@@ -164,7 +169,7 @@ let ColThree = styled.div`
   margin-left: 5vw;
 `;
 
-let ScrollMenu = styled(ColOne)`
+let ScrollMenu = styled(ColOne)`ATAGLANCE
   flex-direction: column;
   left: 0;
   position: ${({ isFixed }) => (isFixed ? 'fixed' : 'absolute')};
@@ -190,6 +195,7 @@ export default class Dorm extends React.PureComponent {
     this.scrollMenuRef = React.createRef();
     this.state = {
       dormInfo: {
+        GLANCE: sampleAtAGlance,
         DORM: "",
         ADDRESS: "",
         DESCRIPTION: "",
@@ -314,6 +320,8 @@ export default class Dorm extends React.PureComponent {
       else if (this.state.dormInfo.DOUBLE_) roomtype += "Doubles";
     }
     if (this.state.dormInfo.TRIPLE_) roomtype += " and triples";
+    console.log(this.state.dormInfo);
+    
     return (
       <div>
         <PhotoBanner bannerImages={bannerImages} />
@@ -342,10 +350,7 @@ export default class Dorm extends React.PureComponent {
           <ColTwo mobile={isMobile}>
             {isMobile && (
               <AtAGlance
-                location={this.state.dormInfo.ADDRESS}
-                roomtype={roomtype}
-                classmakeup={this.state.dormInfo.CLASS_MAKEUP}
-                numfloors="13"
+                atAGlance={this.state.dormInfo.GLANCE}
               />
             )}
             <ScrollerTarget ref={this.amenitiesRef}>
@@ -399,10 +404,7 @@ export default class Dorm extends React.PureComponent {
           {!isMobile && (
             <ColThree>
               <AtAGlance
-                location={this.state.dormInfo.ADDRESS}
-                roomtype={roomtype}
-                classmakeup={this.state.dormInfo.CLASS_MAKEUP}
-                numfloors="13"
+                 atAGlance={this.state.dormInfo.GLANCE}
               />
             </ColThree>
           )}
