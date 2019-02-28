@@ -4,6 +4,14 @@ import styled from 'styled-components';
 import 'react-image-lightbox/style.css'; 
 import Lightbox from 'react-image-lightbox';
 
+let FloorPlanTitleMobile = styled.h3`
+	margin-top: 3vh;
+	margin-bottom: 0;
+	padding-left: 0.5vw;
+	color: grey;
+	font-weight: bold;
+	font-size: 1.7em;  
+`
 
 let FloorPlanBox = styled.div` 
 	border: 1px black solid;
@@ -29,6 +37,7 @@ let FloorButton = styled.button`
 	color: #76aaf2;
 	font-size: 1.5rem;
 	background: none;
+	padding: 1px 4px 2px 4px;
 `
 
 let PlanDisplay = styled.div`
@@ -42,14 +51,16 @@ let FloorPlanTopMobile = styled.div`
 	display: flex;
 	flex-direction: row;
 	justify-content: space-between;
-	padding: 10px 20px 5px 20px;
+	padding: 1px 5px 1px 5px;
 `
-
+// mobile removes box border
 let FloorPlanBoxMobile = styled.div` 
-	border: 1px black solid;
-    border-radius: 10px;
+	// border: 1px black solid;
+    // border-radius: 10px;
 	display: flex;
 	flex-direction: column;
+	margin-top: 1vw;
+	padding-top: 0;
 `
 
 let FloorListMobile = styled.div`
@@ -61,9 +72,16 @@ let FloorListMobile = styled.div`
 let PlanDisplayMobile = styled.div`
 	width: 100%;
 `
+// Floor #
+let FloorNumberMobile = styled.h4`
+	margin-top: 1vh;
+	margin-bottom: 1vh;
+	margin-left: 0;
+	padding-left: 0;
 
-let FloorNumberMobile = styled.h1`
-	margin: 0;
+	color: #62a8e5;
+	font-weight: normal;
+	font-size: 1.5em;
 `
 
 let CurrentPlanMobile = styled.img`
@@ -173,7 +191,7 @@ export default class FloorPlan extends React.PureComponent {
 		if(isMobile) {
 			return (
 				<div>
-					<h1> Floor Plans </h1>
+					<FloorPlanTitleMobile> Floor Plans </FloorPlanTitleMobile>
 					<FloorPlanBoxMobile>
 						<PlanDisplayMobile>
 							<FloorPlanTopMobile>
