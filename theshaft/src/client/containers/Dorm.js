@@ -11,6 +11,7 @@ import RelatedDorms from "../components/RelatedDorms";
 import ReviewsBox from "../components/ReviewsBox";
 
 import Scroller from "../components/Scroller";
+import SpectrumSidebar from "../components/SpectrumSidebar";
 
 
 
@@ -163,6 +164,11 @@ const dorm_name_map = {
   "WoodbridgeHall": "Woodbridge Hall"
 
 }
+
+let Margin = styled.div`
+  margin-top: 2vh;
+  margin-bottom: 2vh;
+`
 
 export default class Dorm extends React.PureComponent {
   constructor(props) {
@@ -334,26 +340,35 @@ export default class Dorm extends React.PureComponent {
                 numfloors="13"
               />
             )}
-            <ScrollerTarget ref={this.amenitiesRef}>
-              <Amenities amenities={this.state.dormInfo.AMENITIES}/>
-            </ScrollerTarget>
+            <Margin>
+              <ScrollerTarget ref={this.amenitiesRef}>
+                <Amenities amenities={this.state.dormInfo.AMENITIES}/>
+              </ScrollerTarget>
+            </Margin>
+            
+            <Margin>
+              <ScrollerTarget ref={this.locationRef}>
+                <Maps
+                  latitudes={[40.7128, 40.7129, 40.7128]}
+                  longitudes={[-74.006, -74.007, -74.008]}
+                  popupInfo={["Carman", "McBain", "John Jay"]}
+                  popupId={["Carman", "McBain", "JohnJay"]}
+                  width={"100%"}
+                  height={"300px"}
+                />
+              </ScrollerTarget>
+            </Margin>
 
-            <ScrollerTarget ref={this.locationRef}>
-              <Maps
-                latitudes={[40.7128, 40.7129, 40.7128]}
-                longitudes={[-74.006, -74.007, -74.008]}
-                popupInfo={["Carman", "McBain", "John Jay"]}
-                popupId={["Carman", "McBain", "JohnJay"]}
-                width={"100%"}
-                height={"300px"}
-              />
-            </ScrollerTarget>
-            <ScrollerTarget ref={this.proconRef}>
-              <ProCon
-                pros={this.state.dormInfo.PROS}
-                cons={this.state.dormInfo.CONS}
-              />
-            </ScrollerTarget>
+            <Margin>
+              <ScrollerTarget ref={this.proconRef}>
+                <ProCon
+                  pros={this.state.dormInfo.PROS}
+                  cons={this.state.dormInfo.CONS}
+                />
+              </ScrollerTarget>
+            </Margin>
+            
+            <Margin>
             <ScrollerTarget ref={this.floorplansRef}>
               <FloorPlan
                 floorOffset={1}
@@ -366,6 +381,9 @@ export default class Dorm extends React.PureComponent {
                 ]}
               />
             </ScrollerTarget>
+            </Margin>
+
+            <Margin>
             <ScrollerTarget ref={this.reviewsRef}>
               <ReviewsBox
                 stars={stars}
@@ -380,6 +398,29 @@ export default class Dorm extends React.PureComponent {
                 relatedDorms={relatedDorms}
               />
             </ScrollerTarget>
+            </Margin>
+
+            <Margin>
+            <ScrollerTarget ref={this.spectrumRef}>
+              <SpectrumSidebar
+                spectrumSidebarData = {[
+                  {
+                    title: "How Have Local Hiring Targets Shaped Columbia’s Manhattanville Construction Site?", 
+                    img_src: "https://www.gstatic.com/webp/gallery/1.jpg", 
+                    author: "BY YULONG LI",
+                    date: "APRIL 8, 2018"
+                  },
+                  {
+                    title: "Newly proposed committee for Barnard calls for increased transparency", 
+                    img_src: "https://www.gstatic.com/webp/gallery/3.jpg", 
+                    author: "BY ROUNAK",
+                    date: "APRIL 7, 2018"
+                  }
+                ]}
+              />
+            </ScrollerTarget>
+            </Margin>
+
           </ColTwo>
 
           {!isMobile && (
