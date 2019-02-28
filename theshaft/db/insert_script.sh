@@ -24,4 +24,5 @@ while read LINE; do
 done < $FILE
 
 # actually insert to sql!
+echo $sql_query
 mysql -u root -p -h 157.230.66.55 --database="dorms" --execute "${sql_query}"
