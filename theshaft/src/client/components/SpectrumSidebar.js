@@ -16,20 +16,24 @@ const ImageDiv = styled.div `
 	
 	@media only screen and (max-width: 767px) {
 		width: 100%;
+		margin-right: 0px;
 	}
 `
 
 const Image = styled.img `
 	width: 100%;
-	height: 200px;
+	height: auto;
 	object-fit: cover;
 `
-const Title = styled.p `
+const Title = styled.h3 `
 	margin-top: -3px;
+
+	@media only screen and (max-width: 767px) {
+		font-size: 18px;
+	}
 `
 
 const AuthorLine = styled.p `
-    font-size: 12px;
     color: grey;
   `
 
@@ -55,10 +59,13 @@ const Logo = styled.img `
   	margin-left: auto;
   	margin-right: auto;
   	margin-bottom: 50px;
-  	width: 30%;
+  	margin-top: 20px;
+  	width: 40%;
 
   	@media only screen and (max-width: 767px) {
   		width: 80%;
+		margin-bottom: 20px;
+		margin-top: 0;
   	}
 `
 
@@ -79,9 +86,10 @@ class SidebarItem extends Component {
 					<Image src={this.props.img_src}/>
 				</ImageDiv>
 				<TextDiv>
-					<Title><h3>{this.props.title}</h3></Title>
+					<Title>{this.props.title}</Title>
 					<hr/>
-					<AuthorLine><p>{this.props.author}</p><p>{this.props.date}</p></AuthorLine>
+					<AuthorLine>{this.props.author}</AuthorLine>
+					<AuthorLine>{this.props.date}</AuthorLine>
 				</TextDiv>
 			</SmallWrapper>
     	);
