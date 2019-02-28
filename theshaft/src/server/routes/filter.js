@@ -6,7 +6,9 @@ var mysql = require("mysql");
 
 function filterDormInfo(con, request, callback) {
 
-  var sqlStatement = `SELECT DORM, DESCRIPTION, COLLEGE, THUMBNAIL_IMAGE, LATITUDE, LONGITUDE FROM dorm_static_info `
+  var sqlStatement = `SELECT d.DORM as DORM, d.DESCRIPTION as DESCRIPTION, d.COLLEGE as COLLEGE, 
+  d.THUMBNAIL_IMAGE as THUMBNAIL_IMAGE, d.LATITUDE as LATITUDE, d.LONGITUDE as LONGITUDE, a.AC as AC, a.GYM as GYM,
+  a.BATHROOM as BATHROOM FROM dorm_static_info as d JOIN amenities as a on a.DORM = d.DORM `
 
   var firstKey = true
   var keys = Object.keys(request);
