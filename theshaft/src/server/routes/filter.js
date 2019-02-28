@@ -1,6 +1,6 @@
 var fakedata = {
   Carman: {
-    dorm: "Carman",
+    dorm: "Carman", // name of dorm for display
     address: "619 W 113th St",
     description: "Comedy House",
     college: "columbia",
@@ -12,7 +12,9 @@ var fakedata = {
     triple: false,
     make_up: ["sophomores", "juniors", "seniors"],
     pros: ["pro1", "pro2", "pro3"],
-    cons: ["con1", "con2", "con3"]
+    cons: ["con1", "con2", "con3"],
+    latitude: 40.7128,
+    longitude: -74.006
   },
 
   Mcbain: {
@@ -28,7 +30,9 @@ var fakedata = {
     triple: true,
     make_up: ["sophomores"],
     pros: ["pro1", "pro2", "pro3"],
-    cons: ["con1", "con2", "con3"]
+    cons: ["con1", "con2", "con3"],
+    latitude: 40.7127,
+    longitude: -74.005
   },
   Test: {
     dorm: "110",
@@ -39,11 +43,13 @@ var fakedata = {
     suite: ["6"],
     walkthrough: false,
     single: true,
-    double: true,
-    triple: true,
+    double: false,
+    triple: false,
     make_up: ["first-years", "sophomores", "juniors", "seniors"],
     pros: ["pro1", "pro2", "pro3"],
-    cons: ""
+    cons: "",
+    latitude: 40.7129,
+    longitude: -74.004
   }
 };
 

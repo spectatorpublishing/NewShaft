@@ -2,12 +2,10 @@ import React, { Component } from 'react';
 import styled from "styled-components";
 import { Route, Link, BrowserRouter as Router } from 'react-router-dom';
 import DormButton from '../components/DormButton';
-import '../css/Explore.css';
 import Dorm from './Dorm.js';
 import Updater from '../components/Updater';
 import ExploreSidebar from "../components/ExploreSidebar";
 import Filter from '../components/FilterComponent.js'
-import "../css/Explore.css";
 import map from "../assets/map.png";
 import Maps from "../components/Maps";
 
@@ -24,7 +22,7 @@ let SideBar = styled.div`
   padding-left: 1em;
   overflow-y: scroll; 
   @media only screen and (min-width: 768px) {
-    width: 30%;
+    width: 55%;
     min-height: 100%;
     z-index: 1;
   }
@@ -38,7 +36,7 @@ width: 0%;
   position: fixed;
   padding-left: 1em;
   float: right;
-  width: 67%;
+  width: 40%;
   right: 0;
   top: 0;
   z-index:1;
@@ -58,11 +56,7 @@ let ColTwo = styled.div`
   height: 100%;
   right: 0;
   top: 0;
-  //z-index:1;
-  // display: flex;
   flex-direction: column;
-  width: ${(mobile) => mobile ? '67%': '50%'};
-  //width: 50%;
   `
   
 export default class Explore extends Component {
@@ -76,41 +70,66 @@ export default class Explore extends Component {
         "triple": false,
         "suite": [],
         "make_up":[]
-      }
+      },
+      dorms: []
     }
   }
 
+  componentDidMount(){
+    this.fetchDorms();
+  }
+
   updatePayload(isClicked, name){
-    let statePayload = this.state.payload;
+    let payload = this.state.payload;
 		if(!isClicked){
-			if(name === 'columbia' || name === 'barnard'){
-				if(this.state.payload.college !=-1){
-					statePayload.college = -1;
-					this.setState({payload: statePayload});
+			console.log("button was false now clicked")
+			if(name === "columbia" || name === "barnard"){
+				console.log("columbia or barnard button clicked")
+				if(payload.college !== name && payload.college !==-1){
+					payload.college = -1
 				}
-				else{
-					statePayload.college = name;
-					this.setState({payload: statePayload});
+				else if (payload.college ===-1){
+					payload.college = name
 				}
+
+			}
+			else if (name == "single" || name == "double" || name == "triple"){
+				payload[name] = true
 			}
 		}
 		else{
-			if(this.state.payload.college === name){
-				statePayload.college = -1;
-				this.setState({payload: statePayload});
+			if(payload.college === name){
+				payload.college = -1
 			}
-			else {
-				if(name ==='barnard'){
-					statePayload.college = 'columbia';
-					this.setState({payload: statePayload});
+			else if( name == "columbia" || name=="barnard"){
+				if(name ==='barnard' && payload.college ===-1){
+					payload.college = 'columbia'
 				}
 				else{
-					statePayload.college = 'barnard';
-					this.setState({payload: statePayload});
+					payload.college = "barnard"
 				}
 			}
-		}
+			else if (name == "single" || name == "double" || name == "triple"){
+				payload[name] = false
+			}
+    }
+    this.setState({payload: payload}, () => this.fetchDorms())
 		console.log(this.state.payload)
+  }
+
+  fetchDorms(){
+    // console.log("PAYLOAD: " + JSON.stringify(this.state.payload))
+    fetch('/api/filterDorm', {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(this.state.payload)
+    }).then(res => res.json())
+    .then(response => {
+        // console.log("RESPONSE: " + JSON.stringify(response))
+        this.setState({dorms: response})
+    });      
   }
   
   render() {
@@ -122,16 +141,15 @@ export default class Explore extends Component {
               <h2>The Shaft</h2>
               <Filter handleChange={this.updatePayload.bind(this)}/>
             </div>
-            <ExploreSidebar payload={this.state.payload}/>
+            <ExploreSidebar dorms={this.state.dorms}/>
           </SideBar>
         </ColOne>
         <ColTwo>
           <MapView>
-            <Maps 
-              latitudes={[40.7128, 40.7129, 40.7128]} 
-              longitudes={[-74.006, -74.007, -74.008]} 
-              popupInfo={["Carman", "McBain", "John Jay"]} 
-              popupId={["Carman", "McBain", "JohnJay"]}
+            <Maps
+              latitudes={this.state.dorms.map((dorm) => dorm.latitude)} 
+              longitudes={this.state.dorms.map((dorm) => dorm.longitude)} 
+              popupInfo={this.state.dorms.map((dorm) => dorm.dorm)} 
               width={"100%"}
               height={"900px"}
               />
