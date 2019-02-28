@@ -1,5 +1,6 @@
 import styled from "styled-components";
 import React, { Component } from "react";
+import { is } from "immutable";
 
 let Border = styled.div`
     display: flex;
@@ -12,6 +13,22 @@ let Border = styled.div`
     margin-top: 2vw;
     margin-right: 2vw;
     text-align: center;
+    //width: 100%;
+`
+let MobileBorder = styled.div`
+    display: flex;
+    flex-direction: column;
+    border: 1px grey solid;
+    border-radius: 20px;
+    padding: 0.8vw;
+    padding-top: 8%;
+    padding-bottom: 10%;
+    margin-top: 2vw;
+    margin-right: 4vw;
+    margin-left: 4vw;
+    text-align: center;
+    width: 100%;
+    
 `
 
 let Text = styled.div`
@@ -41,18 +58,33 @@ export default class ReviewStat extends Component {
         this.state = {
             boldText: this.props.boldText,
             subText: this.props.subText,
+            isMobile: this.props.isMobile,
         }
     }
 
     render() {
-        return(
-            <Border>
-                <Text>
-                    <BoldText>{this.props.boldText}</BoldText>
-                    <SubText>{this.props.subText}</SubText>
-                </Text>
-            </Border>
-        );
+        const { isMobile } = this.state;
+
+        if(isMobile) {
+            return(
+                <MobileBorder>
+                    <Text>
+                        <BoldText>{this.props.boldText}</BoldText>
+                        <SubText>{this.props.subText}</SubText>
+                    </Text>
+                </MobileBorder>
+            );
+        }
+        else {
+            return(
+                <Border>
+                    <Text>
+                        <BoldText>{this.props.boldText}</BoldText>
+                        <SubText>{this.props.subText}</SubText>
+                    </Text>
+                </Border>
+            );
+        }
     }
 
     
