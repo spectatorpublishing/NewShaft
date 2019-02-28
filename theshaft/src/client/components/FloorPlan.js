@@ -32,12 +32,21 @@ let FloorNumber = styled.h1`
 `
 
 let FloorButton = styled.button`
-	background-color: #FFFFFF;
 	border: none;
-	color: #76aaf2;
-	font-size: 1.5rem;
+	margin-top: -0.5rem;
+	font-size: 2rem;
 	background: none;
-	padding: 1px 4px 2px 4px;
+	padding: 0 0.5rem;
+	color: ${props => props.theme.darkGray};
+	@media only screen and (min-width: 768px){
+		background-color: #FFFFFF;
+		margin-top: 0;
+		border: none;
+		font-size: 1.5rem;
+		background: none;
+		padding: 1px 4px 2px 4px;
+		color: ${props => props.theme.columbiaBlue};
+	}
 `
 
 let PlanDisplay = styled.div`
@@ -47,7 +56,7 @@ let PlanDisplay = styled.div`
 	height: 100%;
 `
 
-let FloorPlanTopMobile = styled.div`
+let FloorPlanNavMobile = styled.div`
 	display: flex;
 	flex-direction: row;
 	justify-content: space-between;
@@ -74,12 +83,8 @@ let PlanDisplayMobile = styled.div`
 `
 // Floor #
 let FloorNumberMobile = styled.h4`
-	margin-top: 1vh;
-	margin-bottom: 1vh;
 	margin-left: 0;
 	padding-left: 0;
-
-	color: #62a8e5;
 	font-weight: normal;
 	font-size: 1.5em;
 `
@@ -194,14 +199,14 @@ export default class FloorPlan extends React.PureComponent {
 					<FloorPlanTitleMobile> Floor Plans </FloorPlanTitleMobile>
 					<FloorPlanBoxMobile>
 						<PlanDisplayMobile>
-							<FloorPlanTopMobile>
+							<CurrentPlanMobile src={this.state.currentPlan} />
+							<FloorPlanNavMobile>
 								<FloorNumberMobile> Floor {this.state.currentFloor} </FloorNumberMobile>
 								<FloorListMobile>
 									<FloorButton onClick = {() => this.floorDown()}> &#8249; </FloorButton>
 									<FloorButton onClick = {() => this.floorUp()} > &#8250; </FloorButton>
 								</FloorListMobile>
-							</FloorPlanTopMobile>
-							<CurrentPlanMobile src={this.state.currentPlan} />
+							</FloorPlanNavMobile>
 						</PlanDisplayMobile>
 					</FloorPlanBoxMobile>
 				</div>
