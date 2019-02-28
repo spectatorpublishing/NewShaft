@@ -62,12 +62,12 @@ var reviews = [
 
 let relatedDorms = [
   {
-    DORM: "Mcbain Hall",
+    DORM: "McBain Hall",
     image: "https://housing.columbia.edu/files/housing/McBain.jpg",
   },
   {
-    DORM: "Carman Hall",
-    image: "https://housing.columbia.edu/files/housing/Carman.jpg",
+    DORM: "Furnald Hall",
+    image: "https://housing.columbia.edu/files/housing/Furnald.jpg",
   },
 ];
 
@@ -139,8 +139,8 @@ let ScrollMenu = styled(ColOne)`
   `};
 `
 const dorm_name_map = {
-  CarmanHall: "Carman Hall",
-  McbainHall: "Mcbain Hall",
+  "CarmanHall": "Carman Hall",
+  "McBainHall": "McBain Hall",
   "47Claremont": "47 Claremont",
   "600W113th": "600 W 113th",
   "BroadwayHall": "Broadway Hall",
@@ -198,7 +198,7 @@ export default class Dorm extends React.PureComponent {
       scrollMenuOffset: null,
       width: screen_width
     };
-
+    this.fetchDormInfo(dorm_name_map[this.props.match.params.dorm])
     this.handleWindowSizeChange = this.handleWindowSizeChange.bind(this);
     this.handleScroll = this.handleScroll.bind(this);
     this.isFixed = this.isFixed.bind(this);
@@ -208,7 +208,8 @@ export default class Dorm extends React.PureComponent {
     window.addEventListener("resize", this.handleWindowSizeChange);
     window.addEventListener('scroll', this.handleScroll);
     // This will not fetch the right data for all dorms need to pass the data correctly into the dorm
-    this.fetchDormInfo(this.props.location.dorm)
+    this.fetchDormInfo(this.props.match.params.dorm)
+    window.scrollTo(0, 0)
   }
 
   componentWillUnmount() {
@@ -218,16 +219,17 @@ export default class Dorm extends React.PureComponent {
 
   componentWillReceiveProps(newProps){
     //map spaceless dorm names to spacy names
-    this.fetchDormInfo(dorm_name_map[newProps.match.params.dorm])
+    this.fetchDormInfo(newProps.match.params.dorm)
     window.scrollTo(0, 0)
   }
 
   fetchDormInfo(name) {
+    const databaseName = dorm_name_map[name]
     fetch('/api/getDormInfo', {
       method: "POST",
       body: JSON.stringify({ 
         table: "dorm_static_info",
-        DORM: name
+        DORM: databaseName
       }),
       headers: { "Content-Type": "application/json"},
     })
