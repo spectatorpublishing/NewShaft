@@ -27,7 +27,7 @@ export default class FilterButton extends React.PureComponent {
 
 	componentDidUpdate(prevState) {
 		if (this.state.clicked != prevState.clicked) {
-			this.props.handleClick(this.state.clicked, this.props.name)
+			this.props.handleClick(Number(this.state.clicked), this.props.name)
 		}
 	}
 
