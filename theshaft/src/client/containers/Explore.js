@@ -60,9 +60,9 @@ let ColTwo = styled.div`
 const filterNameToKey = {
     "Columbia":"COLUMBIA",
 		"Barnard":"BARNARD",
-		"Single":"SINGLE",
-		"Double":"DOUBLE",
-		"Triple":"TRIPLE",
+		"Single":"SINGLE_",
+		"Double":"DOUBLE_",
+		"Triple":"TRIPLE_",
 		"2 Person":"TWO_SUITE",
 		"3 Person":"THREE_SUITE",
 		"4 Person":"FOUR_SUITE",
@@ -86,27 +86,27 @@ export default class Explore extends Component {
     super(props);
     this.state = {
       payload: {
-        COLUMBIA: null,
-        BARNARD: null,
-        SINGLE: null,
-        DOUBLE: null,
-        TRIPLE: null,
-        TWO_SUITE: null,
-        THREE_SUITE: null,
-        FOUR_SUITE: null,
-        FIVE_SUITE: null,
-        SIX_SUITE: null,
-        SEVEN_SUITE: null,
-        EIGHT_SUITE: null,
-        NINE_SUITE: null,
-        FRESHMEN: null,
-        SOPHOMORE: null,
-        JUNIOR: null,
-        SENIOR: null,
-        AC: null,
-        ACCESSIBILITY: null,
-        GYM: null,
-        BATHROOM: null
+        COLUMBIA: 0,
+        BARNARD: 0,
+        SINGLE_: 0,
+        DOUBLE_: 0,
+        TRIPLE_: 0,
+        TWO_SUITE: 0,
+        THREE_SUITE: 0,
+        FOUR_SUITE: 0,
+        FIVE_SUITE: 0,
+        SIX_SUITE: 0,
+        SEVEN_SUITE: 0,
+        EIGHT_SUITE: 0,
+        NINE_SUITE: 0,
+        FRESHMEN: 0,
+        SOPHOMORE: 0,
+        JUNIOR: 0,
+        SENIOR: 0,
+        AC: 0,
+        ACCESSIBILITY: 0,
+        GYM: 0,
+        BATHROOM: 0
       },
       dorms: []
     }
@@ -125,7 +125,6 @@ export default class Explore extends Component {
     })
     .then(res => res.json())
     .then(dormInfo => {
-      console.log(dormInfo)
       this.setState({dorms: dormInfo})
     })
   }
@@ -133,18 +132,16 @@ export default class Explore extends Component {
   updatePayload(isClicked, name){
     let payload = this.state.payload;
 		if(isClicked){
-			console.log("button was false now clicked")
-			payload[filterNameToKey[name]] = true
+			payload[filterNameToKey[name]] = 1
 		}
 		else{
-			payload[filterNameToKey[name]] = null
+			payload[filterNameToKey[name]] = 0
     }
     this.setState({payload: payload}, () => this.filterDorms())
-		console.log(this.state.payload)
   }
 
   filterDorms(){
-    // console.log("PAYLOAD: " + JSON.stringify(this.state.payload))
+    //console.log("PAYLOAD: " + JSON.stringify(this.state.payload))
     fetch('/api/filterDorm', {
         method: 'POST',
         headers: {
