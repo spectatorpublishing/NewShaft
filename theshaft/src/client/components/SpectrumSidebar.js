@@ -47,6 +47,10 @@ const Logo = styled.img `
   	margin-right: auto;
   	margin-bottom: 50px;
   	width: 30%;
+
+  	@media only screen and (max-width: 767px) {
+  		width: 80%;
+  	}
 `
 
 class SidebarItem extends Component {
