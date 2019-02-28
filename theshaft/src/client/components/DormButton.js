@@ -104,6 +104,7 @@ export default class DormButton extends Component {
 
   render() {
 
+    // Truncate dorm desciption to 100 characters if exceeds
     const truncatedDescription = this.state.description.length > 100 
       ? this.state.description.substring(0,100) + '...'
       : this.state.description
