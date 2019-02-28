@@ -37,31 +37,38 @@ function addJSON(el){
 	console.log("Welcome to addJSON method. Woot")
 	console.log(el); 
 
-	// request(el)
-	// .then()
-	// {
+	request(el)
+		.then((html) => {
+			if (html){
+				// //const info = $('#div.field-item.', html).find('table')
+				// const info = $('#node-1479', html).find('table')
+				// //.find('ul.menu.nav').find('li.expanded.active-trail.active.menu-mlid-2148.active').find('ul.menu.nav')
+				// console.log(info.text())
+				// if (info.text() === ""){
+				// 	console.log("Not here: " + el)
+				// }
+				// else{
+				// 	console.log("this url works: " + el)
+				// }
 
-	
+				const info2 =  $('div.field-item.even', html).find('table')
+				if (info2.text() === ""){
+					console.log("Not here: " + el)
+				}
+				else{
+					console.log("this url works: " + el)
+				}
+				//console.log(info2.text())
+				// var file = fs.createWriteStream("../db/BarnardDormJSONS/test/" + el + '_data'+".json");
+				// file.on('open', function(fd) {
+				// file.write(JSON.stringify(info2),function(err){file.end();});
+
+			}
+			else{
+				console.log("there was an error eek")
+				return("123")
+			}
+		}); 
 }
+	
 
-// request("https://barnard.edu/reslife/housing-options/600", function(err, resp, html) {
-// 	if (!err){
-// 				const $= cheerio.load(html);
-// 				const menu = $('#block-menu-block-barnard-edu-main-menu-3-4').text();
-// 				console.log(menu)
-
-// 				console.log("BREAK \n")
-// 				const dorms = $('#block-menu-block-barnard-edu-main-menu-3-4').find('ul.menu.nav').find('li.expanded.active-trail.active.menu-mlid-2148.active').find('ul.menu.nav')
-// 				console.log(dorms.text())
-				
-// 				var links = [];   
-// 				dorms.each( function () {
-// 					var link = $(this).attr('href');
-// 					links.push({"link": link});
-// 					links.push({"link": link});
-// 				});
-				
-// 				console.log(links); 
-
-//   }
-// });
