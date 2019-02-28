@@ -50,7 +50,9 @@ function addJSON(el){
 					console.log(name); 
 					var file = fs.createWriteStream("../db/BarnardDormJSONS/test/" + name + '_data'+".json");
 					file.on('open', function(fd) {
+						//TODO
 						//Prak plz help. stringify not working 
+						//WORK HERE TO MAKE JSON FORMAT RIGHT 
 						file.write(JSON.stringify(info),function(err){file.end();});
 					});
 
