@@ -63,50 +63,13 @@ var reviews = [
 
 let relatedDorms = [
   {
-    id: "McBain",
-    school: "Columbia",
-    name: "McBain Hall",
+    DORM: "Mcbain Hall",
     image: "https://housing.columbia.edu/files/housing/McBain.jpg",
-    description:
-      "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla nulla nulla, condimentum a mattis in, faucibus id sapien. Sed rhoncus.",
-    amenities: "No AC"
   },
   {
-    id: "Carman",
-    school: "Columbia",
-    name: "Carman Hall",
+    DORM: "Carman Hall",
     image: "https://housing.columbia.edu/files/housing/Carman.jpg",
-    description:
-      "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla nulla nulla, condimentum a mattis in, faucibus id sapien. Sed rhoncus.",
-    amenities: "No AC"
   },
-  // {
-  //   id: "Sulzberger",
-  //   school: "Barnard",
-  //   name: "Sulzberger Tower",
-  //   image: "https://housing.columbia.edu/files/housing/McBain.jpg",
-  //   description:
-  //     "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla nulla nulla, condimentum a mattis in, faucibus id sapien. Sed rhoncus.",
-  //   amenities: "No AC"
-  // },
-  // {
-  //   id: "mcbain",
-  //   school: "Columbia",
-  //   name: "McBain Hall",
-  //   image: "https://housing.columbia.edu/files/housing/McBain.jpg",
-  //   description:
-  //     "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla nulla nulla, condimentum a mattis in, faucibus id sapien. Sed rhoncus.",
-  //   amenities: "No AC"
-  // },
-  // {
-  //   id: "mcbain",
-  //   school: "Columbia",
-  //   name: "McBain Hall",
-  //   image: "https://housing.columbia.edu/files/housing/McBain.jpg",
-  //   description:
-  //     "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla nulla nulla, condimentum a mattis in, faucibus id sapien. Sed rhoncus.",
-  //   amenities: "No AC"
-  // }
 ];
 
 const bannerImages = [
@@ -176,6 +139,31 @@ let ScrollMenu = styled(ColOne)`
     top: 80px;
   `};
 `
+const dorm_name_map = {
+  CarmanHall: "Carman Hall",
+  McbainHall: "Mcbain Hall",
+  "47Claremont": "47 Claremont",
+  "600W113th": "600 W 113th",
+  "BroadwayHall": "Broadway Hall",
+  "CarltonArms": "Carlton Arms",
+  "EastCampus": "East Campus",
+  "FslBrownstones": "Fsl Brownstones",
+  "FurnaldHall": "Furnald Hall",
+  "HarmonyHall": "Harmony Hall",
+  "HartleyHall": "Hartley Hall",
+  "HoganHall": "Hogan Hall",
+  "JohnJayHall": "John Jay Hall",
+  "ResidentialBrownstones": "Residential Brownstones",
+  "RiverHall": "River Hall",
+  "RugglesHall": "Ruggles Hall",
+  "SchapiroHall": "Schapiro Hall",
+  "SicResidences": "Sic Residences",
+  "WallachHall": "Wallach Hall",
+  "WattHall": "Watt Hall",
+  "WienHall": "Wien Hall",
+  "WoodbridgeHall": "Woodbridge Hall"
+
+}
 
 export default class Dorm extends React.PureComponent {
   constructor(props) {
@@ -221,7 +209,6 @@ export default class Dorm extends React.PureComponent {
     window.addEventListener("resize", this.handleWindowSizeChange);
     window.addEventListener('scroll', this.handleScroll);
     // This will not fetch the right data for all dorms need to pass the data correctly into the dorm
-    console.log(this.props.location.dorm);
     this.fetchDormInfo(this.props.location.dorm)
   }
 
@@ -231,9 +218,8 @@ export default class Dorm extends React.PureComponent {
   }
 
   componentWillReceiveProps(newProps){
-    console.log("HELLO")
-    console.log(newProps.location.dorm)
-    this.fetchDormInfo(newProps.location.dorm)
+    //map spaceless dorm names to spacy names
+    this.fetchDormInfo(dorm_name_map[newProps.match.params.dorm])
     window.scrollTo(0, 0)
   }
 
@@ -248,7 +234,7 @@ export default class Dorm extends React.PureComponent {
     })
       .then(res => res.json())
       .then(dormInfo => {
-        console.log(dormInfo);
+        console.log(dormInfo)
         dormInfo[0].AMENITIES = sampleAmenities;
         dormInfo[0].PROS = ["Pro 1", "Pro 2", "Pro 3"];
         dormInfo[0].CONS = ["Con 1", "Con 2", "Con 3"];
@@ -319,7 +305,7 @@ export default class Dorm extends React.PureComponent {
       <div>
         <PhotoBanner bannerImages={bannerImages} />
         <Header>
-          <DormName>{this.props.match.params.dorm}</DormName>
+          <DormName>{this.state.dormInfo.DORM}</DormName>
         </Header>
         <Blurb>{this.state.dormInfo.DESCRIPTION}</Blurb>
 
@@ -391,7 +377,7 @@ export default class Dorm extends React.PureComponent {
             </ScrollerTarget>
             <ScrollerTarget ref={this.suggestionsRef}>
               <RelatedDorms
-                name={this.props.match.params.dorm}
+                name={this.state.dormInfo.DORM}
                 relatedDorms={relatedDorms}
               />
             </ScrollerTarget>
