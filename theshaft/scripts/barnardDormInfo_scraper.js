@@ -40,29 +40,22 @@ function addJSON(el){
 	request(el)
 		.then((html) => {
 			if (html){
-				// //const info = $('#div.field-item.', html).find('table')
-				// const info = $('#node-1479', html).find('table')
-				// //.find('ul.menu.nav').find('li.expanded.active-trail.active.menu-mlid-2148.active').find('ul.menu.nav')
-				// console.log(info.text())
-				// if (info.text() === ""){
-				// 	console.log("Not here: " + el)
-				// }
-				// else{
-				// 	console.log("this url works: " + el)
-				// }
-
-				const info2 =  $('div.field-item.even', html).find('table')
-				if (info2.text() === ""){
+				const info =  $('div.field-item.even', html).find('table')
+				if (info.text() === ""){
 					console.log("Not here: " + el)
 				}
 				else{
 					console.log("this url works: " + el)
-				}
-				//console.log(info2.text())
-				// var file = fs.createWriteStream("../db/BarnardDormJSONS/test/" + el + '_data'+".json");
-				// file.on('open', function(fd) {
-				// file.write(JSON.stringify(info2),function(err){file.end();});
+					var name = el.split('housing-options/')[1]; 
+					console.log(name); 
+					var file = fs.createWriteStream("../db/BarnardDormJSONS/test/" + name + '_data'+".json");
+					file.on('open', function(fd) {
+						//Prak plz help. stringify not working 
+						file.write(JSON.stringify(info),function(err){file.end();});
+					});
 
+				}
+				//console.log(info.text())
 			}
 			else{
 				console.log("there was an error eek")
