@@ -165,6 +165,11 @@ const dorm_name_map = {
 
 }
 
+let Margin = styled.div`
+  margin-top: 2vh;
+  margin-bottom: 2vh;
+`
+
 export default class Dorm extends React.PureComponent {
   constructor(props) {
     super(props);
@@ -335,26 +340,35 @@ export default class Dorm extends React.PureComponent {
                 numfloors="13"
               />
             )}
-            <ScrollerTarget ref={this.amenitiesRef}>
-              <Amenities amenities={this.state.dormInfo.AMENITIES}/>
-            </ScrollerTarget>
+            <Margin>
+              <ScrollerTarget ref={this.amenitiesRef}>
+                <Amenities amenities={this.state.dormInfo.AMENITIES}/>
+              </ScrollerTarget>
+            </Margin>
+            
+            <Margin>
+              <ScrollerTarget ref={this.locationRef}>
+                <Maps
+                  latitudes={[40.7128, 40.7129, 40.7128]}
+                  longitudes={[-74.006, -74.007, -74.008]}
+                  popupInfo={["Carman", "McBain", "John Jay"]}
+                  popupId={["Carman", "McBain", "JohnJay"]}
+                  width={"100%"}
+                  height={"300px"}
+                />
+              </ScrollerTarget>
+            </Margin>
 
-            <ScrollerTarget ref={this.locationRef}>
-              <Maps
-                latitudes={[40.7128, 40.7129, 40.7128]}
-                longitudes={[-74.006, -74.007, -74.008]}
-                popupInfo={["Carman", "McBain", "John Jay"]}
-                popupId={["Carman", "McBain", "JohnJay"]}
-                width={"100%"}
-                height={"300px"}
-              />
-            </ScrollerTarget>
-            <ScrollerTarget ref={this.proconRef}>
-              <ProCon
-                pros={this.state.dormInfo.PROS}
-                cons={this.state.dormInfo.CONS}
-              />
-            </ScrollerTarget>
+            <Margin>
+              <ScrollerTarget ref={this.proconRef}>
+                <ProCon
+                  pros={this.state.dormInfo.PROS}
+                  cons={this.state.dormInfo.CONS}
+                />
+              </ScrollerTarget>
+            </Margin>
+            
+            <Margin>
             <ScrollerTarget ref={this.floorplansRef}>
               <FloorPlan
                 floorOffset={1}
@@ -367,6 +381,9 @@ export default class Dorm extends React.PureComponent {
                 ]}
               />
             </ScrollerTarget>
+            </Margin>
+
+            <Margin>
             <ScrollerTarget ref={this.reviewsRef}>
               <ReviewsBox
                 stars={stars}
@@ -381,6 +398,9 @@ export default class Dorm extends React.PureComponent {
                 relatedDorms={relatedDorms}
               />
             </ScrollerTarget>
+            </Margin>
+
+            <Margin>
             <ScrollerTarget ref={this.spectrumRef}>
               <SpectrumSidebar
                 spectrumSidebarData = {[
@@ -399,6 +419,8 @@ export default class Dorm extends React.PureComponent {
                 ]}
               />
             </ScrollerTarget>
+            </Margin>
+
           </ColTwo>
 
           {!isMobile && (
