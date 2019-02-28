@@ -3,6 +3,7 @@ import styled from "styled-components";
 import ExploreSidebar from "../components/ExploreSidebar";
 import Filter from '../components/FilterComponent.js'
 import Maps from "../components/Maps";
+import SearchBar from "../components/SearchBar"
 
 let ExploreContainer = styled.div`
   width: 100%;
@@ -55,9 +56,11 @@ let ColTwo = styled.div`
   top: 0;
   flex-direction: column;
   `
+
 // Converts name of filter in front-end
 // to name used in body payload
 const filterNameToKey = {
+    "Dorm":"DORM",
     "Columbia":"COLUMBIA",
 		"Barnard":"BARNARD",
 		"Single":"SINGLE_",
@@ -108,11 +111,10 @@ export default class Explore extends Component {
         GYM: 0,
         BATHROOM: 0
       },
-      dorms: []
+      dorms: [],
     }
     this.updatePayload = this.updatePayload.bind(this)
     }
-
   
   componentDidMount(){
     this.fetchDorms();
@@ -129,14 +131,9 @@ export default class Explore extends Component {
     })
   }
 
-  updatePayload(isClicked, name){
+  updatePayload(newValue, name){
     let payload = this.state.payload;
-		if(isClicked){
-			payload[filterNameToKey[name]] = 1
-		}
-		else{
-			payload[filterNameToKey[name]] = 0
-    }
+		payload[filterNameToKey[name]] = newValue
     this.setState({payload: payload}, () => this.filterDorms())
   }
 
@@ -161,7 +158,7 @@ export default class Explore extends Component {
         <ColOne>
           <SideBar>
             <div className="filters">
-              <h2>The Shaft</h2>
+              <SearchBar handleChange={this.updatePayload}/>
               <Filter handleChange={this.updatePayload}/>
             </div>
             <ExploreSidebar dorms={this.state.dorms}/>
