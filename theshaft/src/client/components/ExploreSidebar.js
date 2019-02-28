@@ -5,31 +5,13 @@ import styled from 'styled-components'
 
 import DormButton from '../components/DormButton';
 
-const Header = styled.div`
-	margin: 0 auto;
-	width: 100%;
-	text-align: center;
-`
-
-const SchoolButton = styled.div`
-	display: inline-block;
-	font-size: 15pt;
-	text-align: center;
-	border: 1px solid #9B9B9B;
-	color: #9B9B9B;
-	height: 20px;
-	margin: 20px 10px;
-	padding: 2px;
-	cursor: pointer;
-`
-
 const Dorms = styled.div`
 	margin: 0 auto;
 	overflow: scroll;
     height: 100%;
     display: grid;
-    grid-column-gap: 50px;
-    grid-template-columns: auto auto;
+    grid-column-gap: 5%;
+    grid-template-columns: 47.5% 47.5%;
 `
 
 const SidebarDivider = styled.div`
@@ -61,13 +43,14 @@ export default class ExploreSidebar extends Component {
                 <SidebarDivider><hr></hr></SidebarDivider>
                 <Dorms>
                     {this.state.dorms.map((dorm, index) => 
-                        <Link key={index} to={"/explore/" + dorm.dorm.replace(/\s+/g, '')} style={{textDecoration: 'none'}}>
+                        <Link key={index}  to={{pathname : "/explore/" + dorm.DORM.replace(/\s+/g, ''), dorm : dorm.DORM}} style={{textDecoration: 'none'}}>
                             <DormButton key={index}
-                                school={dorm.college}
-                                name={dorm.dorm + ' Hall'}
-                                image={dorm.thumbnail_image}
-                                description={dorm.description}
-                                amenities={dorm.amenities}/>
+                                school={dorm.COLLEGE}
+                                name={dorm.DORM}
+                                image={"https://housing.columbia.edu/files/housing/McBain.jpg"}
+                                description={dorm.DESCRIPTION}
+                                amenities={dorm.AMENITIES}
+                            />
                         </Link>
                     )}
                 </Dorms>

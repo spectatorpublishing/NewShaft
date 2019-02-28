@@ -80,8 +80,8 @@ export default class Maps extends Component {
 
     this.state = {
       viewport: {
-        latitude: 40.7128,
-        longitude: -74.006,
+        latitude: 40.810173,
+        longitude: -73.963966,
         zoom: 16
       },
       coordinates: {

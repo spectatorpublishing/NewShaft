@@ -23,6 +23,7 @@ const DormButtonWrapper = styled.div`
     width: 100%;
     margin-right: 10px;
     margin-bottom: 10px;
+    object-fit: cover;
   }
   @media only screen and (min-width: 768px) {
     display: flex;
