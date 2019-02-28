@@ -103,6 +103,11 @@ export default class DormButton extends Component {
   }
 
   render() {
+
+    const truncatedDescription = this.state.description.length > 100 
+      ? this.state.description.substring(0,100) + '...'
+      : this.state.description
+
     return (
       <DormButtonWrapper>
         <img className="dormimage" src={this.state.image} />
@@ -110,7 +115,7 @@ export default class DormButton extends Component {
             <SchoolName> { this.state.school } </SchoolName>
             <DormName> {this.state.name} </DormName>
             <Amenities> {this.state.amenities} </Amenities>
-            <Description> {this.state.description} </Description>
+            <Description> {truncatedDescription} </Description>
             <SeeMore>see more ></SeeMore>
         </div>
         <br />
