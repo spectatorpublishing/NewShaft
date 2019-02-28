@@ -5,26 +5,13 @@ var mysql = require("mysql");
 
 
 function filterDormInfo(con, request, callback) {
-  //let newResult = Object.values(data);
-  //console.log(newResult);
 
-  // Reduce through each of the different
-  // attributes we are filtering on, and
-  // filter each. null indicates a don't care
-  // condition.
-  /*const reducer = (newResult, filterItem) =>
-    newResult.filter(el => {
-      if (request[filterItem] !== null) {
-        return el[filterItem] === request[filterItem];
-      }
-      return true;
-    });
-
-  const filteredResult = filterItems.reduce(reducer, newResult);
-
-  callback(filteredResult); */
-
-  var sqlStatement = `SELECT DORM, DESCRIPTION, COLLEGE, THUMBNAIL_IMAGE, LATITUDE, LONGITUDE FROM dorm_static_info `
+  var sqlStatement = `SELECT d.DORM as DORM, d.DESCRIPTION as DESCRIPTION, d.COLLEGE as COLLEGE, 
+  d.THUMBNAIL_IMAGE as THUMBNAIL_IMAGE, d.LATITUDE as LATITUDE, d.LONGITUDE as LONGITUDE, a.AC as AC, a.GYM as GYM,
+  a.BATHROOM as BATHROOM, ifnull(s.TWO_SUITE, 0) as TWO_SUITE, ifnull(s.THREE_SUITE, 0) as THREE_SUITE, 
+  ifnull(s.FOUR_SUITE, 0) as FOUR_SUITE, ifnull(s.FIVE_SUITE, 0) as FIVE_SUITE, ifnull(s.SIX_SUITE, 0) as SIX_SUITE,
+  ifnull(s.SEVEN_SUITE, 0) as SEVEN_SUITE, ifnull(s.EIGHT_SUITE, 0) as EIGHT_SUITE, ifnull(s.NINE_SUITE, 0) as NINE_SUITE 
+  FROM dorm_static_info as d JOIN amenities as a on a.DORM = d.DORM LEFT JOIN suites as s on s.DORM = d.DORM `
 
   var firstKey = true
   var keys = Object.keys(request);
@@ -39,12 +26,20 @@ function filterDormInfo(con, request, callback) {
 
   // Prevent iteration through COLUMBIA and BARNARD
   for(i = 2; i < keys.length; i++) {
-    if(request[keys[i]] === 1){
+    if(typeof request[keys[i]] === "number" && request[keys[i]] === 1){
       if(firstKey) {
 				firstKey = false
 				sqlStatement += `WHERE ${keys[i]}=${request[keys[i]]}`
 			} else {
 				sqlStatement += ` AND ${keys[i]}=${request[keys[i]]}`
+			}
+    }
+    else if((typeof request[keys[i]] === "string" && request[keys[i]].length > 0)){
+      if(firstKey) {
+				firstKey = false
+				sqlStatement += `WHERE d.${keys[i]} LIKE '${request[keys[i]]}%'`
+			} else {
+				sqlStatement += ` AND d.${keys[i]} LIKE '${request[keys[i]]}%'`
 			}
     }
 	}

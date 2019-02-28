@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import icon from "../assets/react.png";
-import spec from "../assets/searchButton.png";
+import speclogo from "../assets/spectator-logo.png";
+import shaftlogo from "../assets/shaft-logo.png"
 import { Link, NavLink } from 'react-router-dom';
 import styled from 'styled-components';
 
@@ -20,13 +21,26 @@ let NavContainer = styled.div `
 `
 
 let LogoContainer = styled.div`
-  margin-left: 10%;
+  margin: 0 5%;
   width: 20%;
+  display: flex;
+  align-items: center;
+`
+let ShaftLogo = styled.img`
+  height: 45px;
+  padding: 0;
+  width: 45px;
+  object-fit: cover;
 `
 
-let Logo = styled.img`
-  height: 100%;
+let SpecLogo = styled.img`
+  height: auto;
   padding: 0;
+  width: 150px;
+  object-fit: cover;
+  @media only screen and (max-width: 768px){
+    width: 40%;
+  }
 `
 
 let MenuContainer = styled.div`
@@ -253,7 +267,7 @@ export default class NavBar extends Component {
           </MenuRow>
           <LogoContainer>
             <a href="https://www.columbiaspectator.com/" target="_blank">
-              <Logo src={spec} alt="Columbia Daily Spectator"/>
+              <SpecLogo src={speclogo} alt="Columbia Daily Spectator"/>
             </a>
           </LogoContainer>
         </MenuContainer>
@@ -281,7 +295,7 @@ export default class NavBar extends Component {
             target="_blank"
             onClick={this.forceClose}
           >
-            <Logo src={spec} alt="Columbia Daily Spectator"/>
+            <SpecLogo src={speclogo} alt="Columbia Daily Spectator"/>
           </MenuLink>
         </MenuColumn>
       </React.Fragment>
@@ -291,7 +305,7 @@ export default class NavBar extends Component {
         <NavContainer fixed={this.props.fixed}>
           <LogoContainer>
             <Link to="/">
-              <Logo src={icon} alt="The Shaft"/>
+              <ShaftLogo src={shaftlogo} alt="The Shaft"/>
             </Link>
           </LogoContainer>
           {isMobile ? mobileMenu : desktopMenu}

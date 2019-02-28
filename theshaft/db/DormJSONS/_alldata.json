@@ -6,8 +6,8 @@
 	"THUMBNAIL_IMAGE": "react.png",
 	"PROS": "",
 	"CONS": "",
-	"LATITUDE": 0,
-	"LONGITUDE": 0,
+	"LATITUDE": 40.810172,
+	"LONGITUDE": -73.963963,
 	"LOTTERY_NUMS": {
 		"3-Person Suite": "30/2228",
 		"4-Person Suite": "30/2370",
@@ -48,8 +48,8 @@
 	"THUMBNAIL_IMAGE": "react.png",
 	"PROS": "",
 	"CONS": "",
-	"LATITUDE": 0,
-	"LONGITUDE": 0,
+	"LATITUDE": 40.806091,
+	"LONGITUDE": -73.964719,
 	"LOTTERY_NUMS": {
 		"Interior Single": "11.6667/349",
 		"Interior Double": "10/2231",
@@ -72,8 +72,8 @@
 	"THUMBNAIL_IMAGE": "react.png",
 	"PROS": "",
 	"CONS": "",
-	"LATITUDE": 0,
-	"LONGITUDE": 0,
+	"LATITUDE": 40.803830,
+	"LONGITUDE": -73.968630,
 	"LOTTERY_NUMS": {
 		"3 Person Suite (1 Sgl/1 Dbl)": "10/321",
 		"4 Person Suite (2 Sgl/1 Dbl)": "10/983",
@@ -96,8 +96,8 @@
 	"THUMBNAIL_IMAGE": "react.png",
 	"PROS": "",
 	"CONS": "",
-	"LATITUDE": 0,
-	"LONGITUDE": 0,
+	"LATITUDE": 40.807102,
+	"LONGITUDE": -73.958915,
 	"LOTTERY_NUMS": {
 		"2-Person Flat": "30/1910",
 		"5 Person (3 Sgl/1 Dbl)": "20/548",
@@ -123,8 +123,8 @@
 	"THUMBNAIL_IMAGE": "react.png",
 	"PROS": "",
 	"CONS": "",
-	"LATITUDE": 0,
-	"LONGITUDE": 0,
+	"LATITUDE": 40.807415,
+	"LONGITUDE": -73.963882,
 	"LOTTERY_NUMS": {
 		"Double": "FY",
 		"Single": "10/181"
@@ -142,8 +142,8 @@
 	"THUMBNAIL_IMAGE": "react.png",
 	"PROS": "",
 	"CONS": "",
-	"LATITUDE": 0,
-	"LONGITUDE": 0,
+	"LATITUDE": 40.801890,
+	"LONGITUDE": -73.961270,
 	"LOTTERY_NUMS": {
 		"Double": "10/2712",
 		"6 Person Suite (4 Sgl/1 Dbl)": "20/2948",
@@ -162,8 +162,8 @@
 	"THUMBNAIL_IMAGE": "react.png",
 	"PROS": "",
 	"CONS": "",
-	"LATITUDE": 0,
-	"LONGITUDE": 0,
+	"LATITUDE": 40.806331,
+	"LONGITUDE": -73.964564,
 	"LOTTERY_NUMS": {
 		"2 in 4 Person Suite w/RA": "30/2423",
 		"4 in 6 Person Suite w/RA": "30/1499",
@@ -178,12 +178,13 @@
 }, {
 	"DORM": "McBain Hall",
 	"ADDRESS": "562 West 113th Street",
+	"DESCRIPTION": "Mcbain Description",
 	"COLLEGE": "Columbia",
 	"THUMBNAIL_IMAGE": "react.png",
 	"PROS": "",
 	"CONS": "",
-	"LATITUDE": 0,
-	"LONGITUDE": 0,
+	"LATITUDE": 40.805855,
+	"LONGITUDE": -73.964996,
 	"LOTTERY_NUMS": {
 		"Double": "10/367",
 		"Single": "10/1385"
@@ -201,8 +202,8 @@
 	"THUMBNAIL_IMAGE": "react.png",
 	"PROS": "",
 	"CONS": "",
-	"LATITUDE": 0,
-	"LONGITUDE": 0,
+	"LATITUDE": 40.807361,
+	"LONGITUDE": -73.966360,
 	"LOTTERY_NUMS": {
 		"Big Single": "30/2137",
 		"Single": "20/1454"
@@ -220,8 +221,8 @@
 	"THUMBNAIL_IMAGE": "react.png",
 	"PROS": "",
 	"CONS": "",
-	"LATITUDE": 0,
-	"LONGITUDE": 0,
+	"LATITUDE": 40.805751,
+	"LONGITUDE": -73.962695,
 	"LOTTERY_NUMS": {
 		"2 in 4-person Suite w/RA": "20/816",
 		"4-Person Suite": "30/2470",
@@ -241,8 +242,8 @@
 	"THUMBNAIL_IMAGE": "react.png",
 	"PROS": "",
 	"CONS": "",
-	"LATITUDE": 0,
-	"LONGITUDE": 0,
+	"LATITUDE": 40.808495,
+	"LONGITUDE": -73.965302,
 	"LOTTERY_NUMS": {
 		"Double": "10/2953",
 		"Single": "11.667/349",
@@ -261,8 +262,8 @@
 	"THUMBNAIL_IMAGE": "react.png",
 	"PROS": "",
 	"CONS": "",
-	"LATITUDE": 0,
-	"LONGITUDE": 0,
+	"LATITUDE": 40.806093,
+	"LONGITUDE": -73.964471,
 	"LOTTERY_NUMS": {
 		"1-Bedroom Apartment": "20/240",
 		"2-Bedroom Apartment": "30/803",
@@ -282,8 +283,8 @@
 	"THUMBNAIL_IMAGE": "react.png",
 	"PROS": "",
 	"CONS": "",
-	"LATITUDE": 0,
-	"LONGITUDE": 0,
+	"LATITUDE": 40.806912,
+	"LONGITUDE": -73.959758,
 	"LOTTERY_NUMS": {
 		"Double": "10/2934",
 		"Single": "10/2959"
@@ -301,8 +302,8 @@
 	"THUMBNAIL_IMAGE": "react.png",
 	"PROS": "",
 	"CONS": "",
-	"LATITUDE": 0,
-	"LONGITUDE": 0,
+	"LATITUDE": 40.808603,
+	"LONGITUDE": -73.966093,
 	"LOTTERY_NUMS": {
 		"High Demand (H, K, C lines)": "30/2012",
 		"Medium Demand (all others)": "20/110",
