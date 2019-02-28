@@ -37,9 +37,9 @@ function filterDormInfo(con, request, callback) {
     else if((typeof request[keys[i]] === "string" && request[keys[i]].length > 0)){
       if(firstKey) {
 				firstKey = false
-				sqlStatement += `WHERE ${keys[i]} LIKE '${request[keys[i]]}%'`
+				sqlStatement += `WHERE d.${keys[i]} LIKE '${request[keys[i]]}%'`
 			} else {
-				sqlStatement += ` AND ${keys[i]} LIKE '${request[keys[i]]}%'`
+				sqlStatement += ` AND d.${keys[i]} LIKE '${request[keys[i]]}%'`
 			}
     }
 	}
