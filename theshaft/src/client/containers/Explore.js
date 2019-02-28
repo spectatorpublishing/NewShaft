@@ -75,7 +75,7 @@ const filterNameToKey = {
 		"8 Person":"EIGHT_SUITE",
 		"9 Person":"NINE_SUITE",
 		"First Year":"FRESHMEN",
-		"Sophomore":"SOPHMORE",
+		"Sophomore":"SOPHOMORE",
 		"Junior":"JUNIOR",
 		"Senior":"SENIOR",
 		"A/C":"AC",
