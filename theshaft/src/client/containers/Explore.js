@@ -81,7 +81,7 @@ const filterNameToKey = {
 		"A/C":"AC",
 		"Accessibility":"ACCESSIBILITY",
 		"Gym":"GYM",
-		"Bathroom":"BATHROOM"
+		"Private Bathroom":"P_BATHROOM"
 }
   
 export default class Explore extends Component {
@@ -109,7 +109,7 @@ export default class Explore extends Component {
         AC: 0,
         ACCESSIBILITY: 0,
         GYM: 0,
-        BATHROOM: 0
+        P_BATHROOM: 0
       },
       dorms: [],
     }
@@ -170,6 +170,8 @@ export default class Explore extends Component {
               latitudes={this.state.dorms.map((dorm) => dorm.LATITUDE)} 
               longitudes={this.state.dorms.map((dorm) => dorm.LONGITUDE)} 
               popupInfo={this.state.dorms.map((dorm) => dorm.DORM)} 
+              centerLatitude={40.808601}
+              centerLongitude={-73.966095}
               width={"100%"}
               height={"900px"}
               />

@@ -15,16 +15,6 @@ import SpectrumSidebar from "../components/SpectrumSidebar";
 
 
 
-let sampleAmenities = [
-  ["bathroom", "Semi-private"],
-  ["laundry", "Laundry - in basement"],
-  ["kitchen", "Kitchen - in basement"],
-  ["airConditioning", "Air conditioning"],
-  ["lounge", "Floor lounge"],
-  ["fitness", "Fitness room"],
-  ["lounge", "Sky lounge"],
-  ["lounge", "Basement lounge"]
-];
 
 var stars="4.5" 
 var recommend="28%" 
@@ -197,14 +187,28 @@ export default class Dorm extends React.PureComponent {
         CLASS_MAKEUP: "",
         PROS: ["pro1", "pro2", "pro3"],
         CONS: ["con1", "con2", "con3"],
-        AMENITIES: sampleAmenities,
+        LATITUDE: 0,
+        LONGITUDE: 0,
         RELATEDDORMS: relatedDorms
+      },
+      amenities: {
+        P_BATHROOM: 0,
+        LAUNDRY: 0,
+        CARPET: 0,
+        F_KITCHEN: 0,
+        P_KITCHEN: 0,
+        LOUNGE: 0,
+        GYM: 0,
+        BIKE: 0,
+        COMPUTER: 0,
+        PRINT:0,
+        AC: 0,
+        MUSIC: 0
       },
       scrollMenuFixed: false,
       scrollMenuOffset: null,
       width: screen_width
     };
-    this.fetchDormInfo(dorm_name_map[this.props.match.params.dorm])
     this.handleWindowSizeChange = this.handleWindowSizeChange.bind(this);
     this.handleScroll = this.handleScroll.bind(this);
     this.isFixed = this.isFixed.bind(this);
@@ -214,7 +218,10 @@ export default class Dorm extends React.PureComponent {
     window.addEventListener("resize", this.handleWindowSizeChange);
     window.addEventListener('scroll', this.handleScroll);
     // This will not fetch the right data for all dorms need to pass the data correctly into the dorm
-    this.fetchDormInfo(this.props.match.params.dorm)
+    var dormName = this.props.match.params.dorm;
+    this.fetchDormInfo(dormName);
+    this.fetchAmenities(dormName);
+    //this.fetchDormInfo(dorm_name_map[this.props.match.params.dorm])
     window.scrollTo(0, 0)
   }
 
@@ -230,22 +237,37 @@ export default class Dorm extends React.PureComponent {
   }
 
   fetchDormInfo(name) {
-    const databaseName = dorm_name_map[name]
+    const dormName = dorm_name_map[name]
     fetch('/api/getDormInfo', {
       method: "POST",
       body: JSON.stringify({ 
         table: "dorm_static_info",
-        DORM: databaseName
+        DORM: dormName
       }),
       headers: { "Content-Type": "application/json"},
     })
       .then(res => res.json())
       .then(dormInfo => {
         console.log(dormInfo)
-        dormInfo[0].AMENITIES = sampleAmenities;
         dormInfo[0].PROS = ["Pro 1", "Pro 2", "Pro 3"];
         dormInfo[0].CONS = ["Con 1", "Con 2", "Con 3"];
         this.setState({dormInfo: dormInfo[0]})
+      });
+  }
+
+  fetchAmenities(name) {
+    const dormName = dorm_name_map[name]
+    fetch('/api/getAmenities', {
+      method: "POST",
+      body: JSON.stringify({ 
+        table: "dorm_static_info",
+        DORM: dormName
+      }),
+      headers: { "Content-Type": "application/json"},
+    })
+      .then(res => res.json())
+      .then(amenitiesInfo => {
+        this.setState({amenities: amenitiesInfo[0]})
       });
   }
 
@@ -344,17 +366,19 @@ export default class Dorm extends React.PureComponent {
             )}
             <Margin>
               <ScrollerTarget ref={this.amenitiesRef}>
-                <Amenities amenities={this.state.dormInfo.AMENITIES}/>
+                <Amenities amenities={this.state.amenities}/>
               </ScrollerTarget>
             </Margin>
             
             <Margin>
               <ScrollerTarget ref={this.locationRef}>
                 <Maps
-                  latitudes={[40.7128, 40.7129, 40.7128]}
-                  longitudes={[-74.006, -74.007, -74.008]}
-                  popupInfo={["Carman", "McBain", "John Jay"]}
-                  popupId={["Carman", "McBain", "JohnJay"]}
+                  latitudes={[this.state.dormInfo.LATITUDE]}
+                  longitudes={[this.state.dormInfo.LONGITUDE]}
+                  popupInfo={[this.state.dormInfo.DORM]}
+                  popupId={[this.state.dormInfo.DORM]}
+                  centerLatitude={this.state.dormInfo.LATITUDE}
+                  centerLongitude={this.state.dormInfo.LONGITUDE}
                   width={"100%"}
                   height={"300px"}
                 />
