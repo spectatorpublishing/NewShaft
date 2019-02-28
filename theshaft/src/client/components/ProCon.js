@@ -91,7 +91,7 @@ export default class ProCon extends Component {
     
       render() {
       const { width } = this.state;
-      const isMobile = width <= 700;
+      const isMobile = width <= 768;
       if (isMobile) {
         let k = 0;
         return (
