@@ -5,15 +5,24 @@ const SmallWrapper = styled.div `
 	width: 100%;
 	display: flex;
 	margin-bottom: 15px;
+
+	@media only screen and (max-width: 767px) {
+		display: block;
+	}
 `
 const ImageDiv = styled.div `
 	width: 40%;
 	margin-right: 15px;
+	
+	@media only screen and (max-width: 767px) {
+		width: 100%;
+	}
 `
 
 const Image = styled.img `
 	width: 100%;
 	height: 200px;
+	object-fit: cover;
 `
 const Title = styled.p `
 	margin-top: -3px;
@@ -53,6 +62,15 @@ const Logo = styled.img `
   	}
 `
 
+const TextDiv = styled.div `
+	width: 70%;
+
+	@media only screen and (max-width: 767px) {
+		width: 100%;
+		margin-top: 5px;
+	}
+`
+
 class SidebarItem extends Component {
     render(){
     	return (
@@ -60,11 +78,11 @@ class SidebarItem extends Component {
 				<ImageDiv>
 					<Image src={this.props.img_src}/>
 				</ImageDiv>
-				<div style={{width: "70%"}}>
+				<TextDiv>
 					<Title><h3>{this.props.title}</h3></Title>
 					<hr/>
 					<AuthorLine><p>{this.props.author}</p><p>{this.props.date}</p></AuthorLine>
-				</div>
+				</TextDiv>
 			</SmallWrapper>
     	);
     }
