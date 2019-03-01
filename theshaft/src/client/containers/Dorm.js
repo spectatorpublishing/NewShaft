@@ -313,7 +313,8 @@ export default class Dorm extends React.PureComponent {
             title: relatedArticles[i].TITLE, 
             img_src: relatedArticles[i].IMAGE_URL, 
             author: relatedArticles[i].AUTHOR,
-            date: relatedArticles[i].DATE
+            date: relatedArticles[i].DATE,
+            url: relatedArticles[i].RELATED
           })
         }
         this.setState({relatedArticles: relArticles})
