@@ -64,14 +64,6 @@ let relatedDorms = [
   },
 ];
 
-const bannerImages = [
-  "https://blog.ocm.com/wp-content/uploads/2017/08/Kiss-Pleat_Gray_Main_Alt_Exp.jpg",
-  "https://arc-anglerfish-arc2-prod-spectator.s3.amazonaws.com/public/52FBXLYM2RGO3FJGK3SPD2KUEE.png",
-  "https://arc-anglerfish-arc2-prod-spectator.s3.amazonaws.com/public/52FBXLYM2RGO3FJGK3SPD2KUEE.png",
-  "https://arc-anglerfish-arc2-prod-spectator.s3.amazonaws.com/public/52FBXLYM2RGO3FJGK3SPD2KUEE.png",
-  "https://arc-anglerfish-arc2-prod-spectator.s3.amazonaws.com/public/52FBXLYM2RGO3FJGK3SPD2KUEE.png"
-];
-
 let Header = styled.div`
   display: flex;
   position: relative;
@@ -121,23 +113,29 @@ let ColTwo = styled.div`
   width: ${({ mobile }) => (mobile ? `100%` : `50%`)};
 `;
 
-let ColThree = styled.div`
-  display: flex;
-  width: 35%;
-  margin-left: 5vw;
-`;
-
 let ScrollMenu = styled(ColOne)`
   flex-direction: column;
   left: 0;
   position: ${({ isFixed }) => (isFixed ? 'fixed' : 'absolute')};
 
-  // 80px = 60px (navbar height) + 20px (padding 
-  // which matches the value added in handleScroll())
+  // 60px matches the value added in handleScroll())
   ${({ isFixed }) => isFixed && `
-    top: 80px;
+    top: calc(60px + 20%);
   `};
 `
+
+let ScrollAAG = styled(ScrollMenu)`
+  display: flex;
+  padding-right: 20px;
+  left: initial;
+  right: 0;
+`
+
+let Margin = styled.div`
+  margin-top: 2vh;
+  margin-bottom: 2vh;
+`
+
 const dorm_name_map = {
   "CarmanHall": "Carman Hall",
   "McBainHall": "McBain Hall",
@@ -163,11 +161,6 @@ const dorm_name_map = {
   "WoodbridgeHall": "Woodbridge Hall"
 
 }
-
-let Margin = styled.div`
-  margin-top: 2vh;
-  margin-bottom: 2vh;
-`
 
 export default class Dorm extends React.PureComponent {
   constructor(props) {
@@ -398,7 +391,7 @@ export default class Dorm extends React.PureComponent {
   handleScroll(e) {
     if (this.state.width > 700) {
       // Add 20px to give a little bit of padding on top between the navbar and the menu
-      this.isFixed(e.target.scrollingElement.scrollTop + 20);
+      this.isFixed(e.target.scrollingElement.scrollTop + window.innerHeight * 0.2);
     }
   }
 
@@ -482,7 +475,7 @@ export default class Dorm extends React.PureComponent {
                 location={this.state.dormInfo.ADDRESS}
                 roomtype={roomtype}
                 classmakeup={this.state.dormInfo.CLASS_MAKEUP}
-                numfloors={this.state.floorPlans.length}
+                cutoff={this.state.dormInfo.LOTTERY_NUMS}
               />
             )}
             <ScrollerTarget ref={this.amenitiesRef}>
@@ -516,20 +509,10 @@ export default class Dorm extends React.PureComponent {
             </ScrollerTarget>
             
             <ScrollerTarget ref={this.floorplansRef}>
-              <FloorPlan
-                floorOffset={0}
-                planArray={this.state.floorPlans}
-              />
               <Margin>
                 <FloorPlan
-                  floorOffset={1}
-                  planArray={[
-                    "https://housing.columbia.edu/files/housing/Wien%208_2018.jpg",
-                    "https://housing.columbia.edu/files/housing/Wien%208_2018.jpg",
-                    "https://housing.columbia.edu/files/housing/600%209_2016_0.jpg",
-                    "https://housing.columbia.edu/files/housing/Woodbridge%204_2018.jpg",
-                    "https://i.kym-cdn.com/entries/icons/original/000/026/642/kot1.jpg"
-                  ]}
+                  floorOffset={0}
+                  planArray={this.state.floorPlans}
                 />
               </Margin>
             </ScrollerTarget>
@@ -565,14 +548,14 @@ export default class Dorm extends React.PureComponent {
           </ColTwo>
 
           {!isMobile && (
-            <ColThree>
+            <ScrollAAG isFixed={this.state.scrollMenuFixed}>
               <AtAGlance
                 location={this.state.dormInfo.ADDRESS}
                 roomtype={roomtype}
                 classmakeup={this.state.dormInfo.CLASS_MAKEUP}
-                numfloors={this.state.floorPlans.length}
+                cutoff={this.state.dormInfo.LOTTERY_NUMS}
               />
-            </ColThree>
+            </ScrollAAG>
           )}
         </Body>
       </ScrollToTop>
