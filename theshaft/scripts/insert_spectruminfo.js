@@ -1,7 +1,7 @@
 var fs = require("fs");
 
-var alldata_json = JSON.parse(fs.readFileSync("../db/DormJSONS/_alldata.json"));
-var spectrum_json = JSON.parse(fs.readFileSync("../db/DormJSONS/_spectruminfo.json"));
+var alldata_json = JSON.parse(fs.readFileSync("../db/OtherJSONS/_alldata.json"));
+var spectrum_json = JSON.parse(fs.readFileSync("../db/OtherJSONS/_spectruminfo.json"));
 var spectrum = {};
 var alldata = {};
 
@@ -64,4 +64,4 @@ for (var i = 0; i < alldata_keys.length; i++)
     }
 }
 
-fs.writeFileSync("../db/DormJSONS/_alldata.json", JSON.stringify(dorms));
+fs.writeFileSync("../db/OtherJSONS/_alldata.json", JSON.stringify(dorms));
