@@ -23,12 +23,17 @@ let sampleAmenities = [
   ["lounge", "Basement lounge"]
 ];
 
+/*
 let sampleAtAGlance = [
-  ["location", "545 W street"],
-  ["is it nice", "its aight"],
-  ["who leaves there", "seenyas only"]
+  ["Location", "545 W Street"],
+  ["Room Type", "its aight"],
+  ["Class Make-Up", "seenyas only"],
+  ["# of floors", ],
+  ["# of singles", ],
+  ["# of doubles", ],
+  ["Cut-off lottery #", ]
 ];
-  
+*/
 
 var stars="4.5" 
 var recommend="28%" 
@@ -183,7 +188,6 @@ export default class Dorm extends React.PureComponent {
     this.scrollMenuRef = React.createRef();
     this.state = {
       dormInfo: {
-        GLANCE: sampleAtAGlance,
         DORM: "",
         ADDRESS: "",
         DESCRIPTION: "",
@@ -198,12 +202,21 @@ export default class Dorm extends React.PureComponent {
         PROS: ["pro1", "pro2", "pro3"],
         CONS: ["con1", "con2", "con3"],
         AMENITIES: sampleAmenities,
-        RELATEDDORMS: relatedDorms
+        RELATEDDORMS: relatedDorms,
+        GLANCE: [
+          ["Location", {ADDRESS}],
+          ["Room Type", "Empty"],
+          ["Class Make-Up", "Empty"],
+          ["# of floors", "Empty"],
+          ["# of singles", {SINGLE_}],
+          ["# of doubles", {DOUBLE_}],
+          ["Cut-off lottery #", "Empty"]
+        ]
       },
       scrollMenuFixed: false,
       scrollMenuOffset: null,
       width: screen_width
-    };
+  };
 
     this.handleWindowSizeChange = this.handleWindowSizeChange.bind(this);
     this.handleScroll = this.handleScroll.bind(this);
