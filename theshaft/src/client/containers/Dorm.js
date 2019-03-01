@@ -315,8 +315,7 @@ export default class Dorm extends React.PureComponent {
     })
       .then(res => res.json())
       .then(reviewsInfo => {
-        // console.log(reviewsInfo)
-        this.setState({reviews: reviewsInfo})
+        this.setState({reviews: reviewsInfo.reviews, avg_rating: reviewsInfo.avg_rating})
       });
   }
 
@@ -516,7 +515,7 @@ export default class Dorm extends React.PureComponent {
             <ScrollerTarget ref={this.reviewsRef}>
               <Margin>
                 <ReviewsBox
-                  stars={stars}
+                  stars={this.state.avg_rating}
                   recommend={recommend}
                   ranking={ranking}
                   reviews={this.state.reviews}>

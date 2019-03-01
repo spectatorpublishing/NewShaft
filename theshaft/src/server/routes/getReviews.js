@@ -25,7 +25,13 @@ function getReviews(con, request, callback) {
 		
 		con.query(sqlStatement, function(err, res) {
 			if (err) throw err;
-			callback(res)
+			var avg_rating = 0
+			for (var i = 0; i < res.length; i++)
+			{
+				avg_rating += res[i].NUM_STARS;
+			}
+			to_return = {avg_rating: (avg_rating / res.length).toFixed(1), reviews: res};
+			callback(to_return);
 		});
 
 		con.end(); // DO NOT REMOVE!
