@@ -21,10 +21,11 @@ let NavContainer = styled.div `
 `
 
 let LogoContainer = styled.div`
-  margin: 0 5%;
+  margin: 0 5vw;
   width: 20%;
   display: flex;
   align-items: center;
+  justify-content: center;
 `
 let ShaftLogo = styled.img`
   height: 35px;
@@ -44,7 +45,7 @@ let MenuContainer = styled.div`
   align-items: center;
   display: flex;
   justify-content: center;
-  margin-right: 5%;
+  margin-right: vw;
   width: 65%;
 `
 
@@ -269,12 +270,12 @@ export default class NavBar extends Component {
           <MenuRow>
             {this.getMenuItems(isMobile)}
           </MenuRow>
-          <LogoContainer>
-            <a href="https://www.columbiaspectator.com/" target="_blank">
-              <SpecLogo src={speclogo} alt="Columbia Daily Spectator"/>
-            </a>
-          </LogoContainer>
         </MenuContainer>
+        <LogoContainer>
+          <a href="http://www.specpublishing.com/" target="_blank">
+            <SpecLogo src={speclogo} alt="Spectator Publishing Company"/>
+          </a>
+        </LogoContainer>
       </React.Fragment>
     );
     const mobileMenu = (

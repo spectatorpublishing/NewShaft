@@ -80,6 +80,7 @@ let Button = styled.button`
     border: none;
     padding: 0;
     font-weight: bold;
+    cursor: pointer;
 
     ${({ clicked }) => clicked && `
         background: black;
@@ -111,15 +112,11 @@ export default class PhotoBanner extends Component {
   };
 
   componentWillReceiveProps(newProps){
-    console.log("NEW PROPS");
-    console.log(newProps.bannerImages);
     this.setState({images: newProps.bannerImages})
   }
 
   render() {
     const { width, photoIndex, isOpen } = this.state;
-    console.log("IMAGES")
-    console.log(this.state.images);
     const isMobile = width <= 700;
 
     if (isMobile) {
