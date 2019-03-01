@@ -43,7 +43,7 @@ export default class ExploreSidebar extends Component {
                             <DormButton key={index}
                                 school={dorm.COLLEGE}
                                 name={dorm.DORM}
-                                image={"https://housing.columbia.edu/files/housing/McBain.jpg"}
+                                image={dorm.THUMBNAIL_IMAGE}
                                 description={dorm.DESCRIPTION}
                                 amenities={dorm.AMENITIES}
                             />
