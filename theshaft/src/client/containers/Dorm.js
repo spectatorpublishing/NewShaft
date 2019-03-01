@@ -76,6 +76,9 @@ let Header = styled.div`
   top: -100px;
   margin: 0 15%;
   pointer-events: none;
+  @media only screen and (max-width: 767px) {
+    top: -220px;
+  }
 `;
 let DormName = styled.h1`
   color: ${props => props.theme.white};
@@ -91,6 +94,10 @@ let Blurb = styled.div`
   margin: 0 15% -100px 15%;
   padding: 1.8vw;
   border-radius: 1.5vw;
+  @media only screen and (max-width: 767px) {
+    top: -220px;
+    margin-bottom: -220px;
+  }
 `;
 
 let Body = styled.div`
