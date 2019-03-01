@@ -15,6 +15,7 @@ var postReview = require('./routes/postReview');
 var getExploreInfo = require('./routes/getExploreInfo');
 var getAmenities = require('./routes/getAmenities');
 var getReviews = require('./routes/getReviews');
+var getRelatedArticles = require('./routes/getRelatedArticles');
 
 app.use(bodyParser.json())
 app.use(express.static('dist'));
@@ -25,6 +26,7 @@ app.use('/api/getReviews', (req, res) => getReviews(req, res) );
 app.use('/api/filterDorm', (req, res) => filterDormInfo(req, res));
 app.use('/api/postReview', (req, res) => postReview(req, res));
 app.use('/api/getExploreInfo', (req, res) => getExploreInfo(req,res));
+app.use('/api/getRelatedArticles', (req, res) => getRelatedArticles(req,res));
 
 var server = app.listen(8080, () => {
 	console.log('Listening on port 8080!')
