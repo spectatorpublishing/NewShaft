@@ -154,9 +154,6 @@ export default class Maps extends Component {
           doubleClickZoom={false}
         >
         {markers}
-        <Popup latitude={40} longitude={-75.41} closeButton={true} closeOnClick={false} anchor="top">
-          <h1>You are here</h1>
-        </Popup>
         </ReactMapGL>
       </div>
     );
