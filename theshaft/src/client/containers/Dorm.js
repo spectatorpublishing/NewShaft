@@ -264,8 +264,6 @@ export default class Dorm extends React.PureComponent {
     })
       .then(res => res.json())
       .then(dormPhotos => {
-        console.log(dormPhotos);
-
         this.setState({dorm_photos: Object.values(dormPhotos[0])})
       });
 
@@ -285,7 +283,8 @@ export default class Dorm extends React.PureComponent {
       .then(dormInfo => {
         dormInfo[0].PROS = dormInfo[0].PROS.substring(1, dormInfo[0].PROS.length - 1).split(',');
         dormInfo[0].CONS = dormInfo[0].CONS.substring(1, dormInfo[0].CONS.length - 1).split(',');
-        this.setState({dormInfo: dormInfo[0]})
+        this.setState({dormInfo: dormInfo[0]});
+        document.title = this.state.dormInfo.DORM;
       });
       
   }
@@ -362,18 +361,15 @@ export default class Dorm extends React.PureComponent {
       .then(floorPlans => {
         var floorPlan = floorPlans[0];
         var floor_state = []
-        console.log(floorPlan)
         var keys = Object.keys(floorPlan);
         for (var i = 0; i < keys.length; i++)
         {
           var floorNum = keys[i];
-          console.log(floorPlan[floorNum]);
           if (floorPlan[floorNum] == null || keys[i] == "DORM") {
             continue;
           }
           floor_state[floorNum - 1] = "http://localhost:8080/floor_plans/" + floorPlan[floorNum];
         }
-        console.log(floor_state)
         return floor_state
       }).then(thing => {
         this.setState({

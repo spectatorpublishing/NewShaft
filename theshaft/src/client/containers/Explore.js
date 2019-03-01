@@ -132,6 +132,7 @@ export default class Explore extends Component {
     }
   
   componentDidMount(){
+    document.title = "The Shaft";
     this.fetchDorms();
   }
 
