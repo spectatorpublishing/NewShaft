@@ -1,6 +1,6 @@
 import styled from "styled-components";
 import React, { Component } from "react";
-import { Link } from "react-router-dom";
+import { withRouter } from 'react-router';
 import PhotoBanner from "../components/PhotoBanner";
 import Amenities from "../components/Amenities";
 import AtAGlance from "../components/AtAGlance";
@@ -11,9 +11,7 @@ import RelatedDorms from "../components/RelatedDorms";
 import ReviewsBox from "../components/ReviewsBox";
 import Scroller from "../components/Scroller";
 import SpectrumSidebar from "../components/SpectrumSidebar";
-
-
-
+import ScrollToTop from "../components/ScrollToTop";
 
 var stars="4.5" 
 var recommend="28%" 
@@ -223,7 +221,7 @@ export default class Dorm extends React.PureComponent {
     this.fetchAmenities(dormName);
     this.fetchReviews(dormName);
     //this.fetchDormInfo(dorm_name_map[this.props.match.params.dorm])
-    window.scrollTo(0, 0)
+    window.scrollTo(0, 0);
   }
 
   componentWillUnmount() {
@@ -236,7 +234,7 @@ export default class Dorm extends React.PureComponent {
     this.fetchDormInfo(newProps.match.params.dorm)
     this.fetchAmenities(newProps.match.params.dorm)
     this.fetchReviews(newProps.match.params.dorm)
-    window.scrollTo(0, 0)
+    window.scrollTo(0, 0);
   }
 
   fetchDormInfo(name) {
@@ -353,7 +351,7 @@ export default class Dorm extends React.PureComponent {
     }
     if (this.state.dormInfo.TRIPLE_) roomtype += " and triples";
     return (
-      <div>
+      <ScrollToTop>
         <PhotoBanner bannerImages={bannerImages} />
         <Header>
           <DormName>{this.state.dormInfo.DORM}</DormName>
@@ -371,8 +369,8 @@ export default class Dorm extends React.PureComponent {
               <Scroller compRef={this.proconRef} label={"Pros and Cons"} />
               <Scroller compRef={this.floorplansRef} label={"Floor Plans"} />
               <Scroller compRef={this.reviewsRef} label={"Reviews"} />
-              {/* <Scroller compRef={this.spectrumRef} label={"Spectrum"} /> */}
               <Scroller compRef={this.suggestionsRef} label={"Related Dorms"} />
+              <Scroller compRef={this.spectrumRef} label={"Spectrum"} />
             </ScrollMenu>
           </ColOne>
           }
@@ -386,14 +384,14 @@ export default class Dorm extends React.PureComponent {
                 numfloors="13"
               />
             )}
-            <Margin>
-              <ScrollerTarget ref={this.amenitiesRef}>
+            <ScrollerTarget ref={this.amenitiesRef}>
+              <Margin>
                 <Amenities amenities={this.state.amenities}/>
-              </ScrollerTarget>
-            </Margin>
+              </Margin>
+            </ScrollerTarget>
             
-            <Margin>
-              <ScrollerTarget ref={this.locationRef}>
+            <ScrollerTarget ref={this.locationRef}>
+              <Margin>
                 <Maps
                   latitudes={[this.state.dormInfo.LATITUDE]}
                   longitudes={[this.state.dormInfo.LONGITUDE]}
@@ -404,73 +402,73 @@ export default class Dorm extends React.PureComponent {
                   width={"100%"}
                   height={"300px"}
                 />
-              </ScrollerTarget>
-            </Margin>
+              </Margin>
+            </ScrollerTarget>
 
-            <Margin>
-              <ScrollerTarget ref={this.proconRef}>
+            <ScrollerTarget ref={this.proconRef}>
+              <Margin>
                 <ProCon
                   pros={this.state.dormInfo.PROS}
                   cons={this.state.dormInfo.CONS}
                 />
-              </ScrollerTarget>
-            </Margin>
+              </Margin>
+            </ScrollerTarget>
             
-            <Margin>
             <ScrollerTarget ref={this.floorplansRef}>
-              <FloorPlan
-                floorOffset={1}
-                planArray={[
-                  "https://housing.columbia.edu/files/housing/Wien%208_2018.jpg",
-                  "https://housing.columbia.edu/files/housing/Wien%208_2018.jpg",
-                  "https://housing.columbia.edu/files/housing/600%209_2016_0.jpg",
-                  "https://housing.columbia.edu/files/housing/Woodbridge%204_2018.jpg",
-                  "https://i.kym-cdn.com/entries/icons/original/000/026/642/kot1.jpg"
-                ]}
-              />
+              <Margin>
+                <FloorPlan
+                  floorOffset={1}
+                  planArray={[
+                    "https://housing.columbia.edu/files/housing/Wien%208_2018.jpg",
+                    "https://housing.columbia.edu/files/housing/Wien%208_2018.jpg",
+                    "https://housing.columbia.edu/files/housing/600%209_2016_0.jpg",
+                    "https://housing.columbia.edu/files/housing/Woodbridge%204_2018.jpg",
+                    "https://i.kym-cdn.com/entries/icons/original/000/026/642/kot1.jpg"
+                  ]}
+                />
+              </Margin>
             </ScrollerTarget>
-            </Margin>
 
-            <Margin>
             <ScrollerTarget ref={this.reviewsRef}>
-              <ReviewsBox
-                stars={stars}
-                recommend={recommend}
-                ranking={ranking}
-                reviews={this.state.reviews}>
-              </ReviewsBox>
+              <Margin>
+                <ReviewsBox
+                  stars={stars}
+                  recommend={recommend}
+                  ranking={ranking}
+                  reviews={this.state.reviews}>
+                </ReviewsBox>
+              </Margin>
             </ScrollerTarget>
-            </Margin>
 
-            <Margin>
             <ScrollerTarget ref={this.suggestionsRef}>
-              <RelatedDorms
-                name={this.state.dormInfo.DORM}
-                relatedDorms={relatedDorms}
-              />
+              <Margin>
+                <RelatedDorms
+                  name={this.state.dormInfo.DORM}
+                  relatedDorms={relatedDorms}
+                />
+              </Margin>
             </ScrollerTarget>
-            </Margin>
 
-            <Margin>
             <ScrollerTarget ref={this.spectrumRef}>
-              <SpectrumSidebar
-                spectrumSidebarData = {[
-                  {
-                    title: "How Have Local Hiring Targets Shaped Columbia’s Manhattanville Construction Site?", 
-                    img_src: "https://www.gstatic.com/webp/gallery/1.jpg", 
-                    author: "BY YULONG LI",
-                    date: "APRIL 8, 2018"
-                  },
-                  {
-                    title: "Newly proposed committee for Barnard calls for increased transparency", 
-                    img_src: "https://www.gstatic.com/webp/gallery/3.jpg", 
-                    author: "BY ROUNAK",
-                    date: "APRIL 7, 2018"
-                  }
-                ]}
-              />
+              <Margin>
+                <SpectrumSidebar
+                  spectrumSidebarData = {[
+                    {
+                      title: "How Have Local Hiring Targets Shaped Columbia’s Manhattanville Construction Site?", 
+                      img_src: "https://www.gstatic.com/webp/gallery/1.jpg", 
+                      author: "BY YULONG LI",
+                      date: "APRIL 8, 2018"
+                    },
+                    {
+                      title: "Newly proposed committee for Barnard calls for increased transparency", 
+                      img_src: "https://www.gstatic.com/webp/gallery/3.jpg", 
+                      author: "BY ROUNAK",
+                      date: "APRIL 7, 2018"
+                    }
+                  ]}
+                />
+              </Margin>
             </ScrollerTarget>
-            </Margin>
 
           </ColTwo>
 
@@ -485,7 +483,7 @@ export default class Dorm extends React.PureComponent {
             </ColThree>
           )}
         </Body>
-      </div>
+      </ScrollToTop>
     );
   }
 }
