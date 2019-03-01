@@ -21,6 +21,7 @@ var getDormPhotos = require('./routes/getDormPhotos');
 var getRelatedDorms = require('./routes/getRelatedDorms.js')
 
 app.use(bodyParser.json())
+app.use(express.static('dist'));
 app.use('/floor_plans', express.static(__dirname + '/floor_plans'));
 
 app.use('/api/getAmenities', (req, res) => getAmenities(req, res) );
