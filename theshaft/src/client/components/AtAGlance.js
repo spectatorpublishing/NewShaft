@@ -44,16 +44,16 @@ export default class AtAGlance extends Component {
 			["Cut-off lottery #", this.props.cutoff]
 		]
 
-		const AtAGlanceMapped = glanceMap.map((el)=>{
+		const AtAGlanceMapped = glanceMap.map((el, i)=>{
 			if(el[1] && el[1] != "" && el[1] != "0" && el[1] != " "){
 				return (
-				<Table>
+				<Table key={i}>
 					<Category>{el[0]}</Category> 
 					<Content><b>{el[1]}</b></Content>
 				</Table>
 				)
 			}
-			else return (<div/>);
+			else return (<div key={i}/>);
 		})
 
 		return (

@@ -101,14 +101,14 @@ let Body = styled.div`
 
 let ColOne = styled.div`
   display: flex;
-  width: 25%;
+  width: 15%;
 `;
 
 let ColTwo = styled.div`
   display: flex;
   flex-direction: column;
   scroll-behavior: smooth;
-  width: ${({ mobile }) => (mobile ? `100%` : `50%`)};
+  width: ${({ mobile }) => (mobile ? `100%` : `60%`)};
 `;
 
 let ScrollMenu = styled(ColOne)`
@@ -127,6 +127,7 @@ let ScrollAAG = styled(ScrollMenu)`
   padding-right: 20px;
   left: initial;
   right: 0;
+  width: 25%;
 `
 
 let Margin = styled.div`
