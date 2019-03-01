@@ -59,11 +59,11 @@ function getReviews(con, request, callback) {
 router.post('/', function(req, res, next) {
 	console.log("request received");
 	var con = mysql.createConnection({
-	    host: "157.230.66.55",
-  		user: "root",
-  		password: "spec1877",
-  		database: "dorms"
-	});
+		host: "192.34.62.10",
+		user: "USERNAME",
+		password: "PASSWORD",
+		database: "dorms"
+	  });
 	console.log("requesting selection of" , req.body)
 	
 	getReviews(con, req.body, (revInfo) => {

@@ -57,9 +57,9 @@ function filterDormInfo(con, request, callback) {
 
 router.post("/", function(req, res, next) {
   var con = mysql.createConnection({
-    host: "157.230.66.55",
-    user: "root",
-    password: "spec1877",
+    host: "192.34.62.10",
+    user: "USERNAME",
+    password: "PASSWORD",
     database: "dorms"
   });
   filterDormInfo(con, req.body, dormInfo => {

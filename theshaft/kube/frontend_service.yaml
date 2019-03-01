@@ -7,7 +7,7 @@ spec:
     app: shaft-frontend
   ports:
   - protocol: TCP
-    port: 8080
+    port: 80
     targetPort: 8080
   clusterIP: 10.245.0.7
   loadBalancerIP: 78.11.24.17

@@ -227,8 +227,8 @@ export default class Dorm extends React.PureComponent {
     this.fetchDormInfo(dormName);
     this.fetchAmenities(dormName);
     this.fetchReviews(dormName);
-    this.fetchRelatedArticles(dormName);
-    this.fetchFloorPlans(dormName);
+    //this.fetchRelatedArticles(dormName);
+    //this.fetchFloorPlans(dormName);
     this.fetchDormPhotos(dormName);
     //this.fetchDormInfo(dorm_name_map[this.props.match.params.dorm])
     window.scrollTo(0, 0);
@@ -244,8 +244,8 @@ export default class Dorm extends React.PureComponent {
     this.fetchDormInfo(newProps.match.params.dorm);
     this.fetchAmenities(newProps.match.params.dorm);
     this.fetchReviews(newProps.match.params.dorm);
-    this.fetchRelatedArticles(newProps.match.params.dorm);
-    this.fetchFloorPlans(newProps.match.params.dorm);
+    //this.fetchRelatedArticles(newProps.match.params.dorm);
+    //this.fetchFloorPlans(newProps.match.params.dorm);
     this.fetchDormPhotos(newProps.match.params.dorm);
 
 
@@ -503,14 +503,14 @@ export default class Dorm extends React.PureComponent {
               </Margin>
             </ScrollerTarget>
             
-            <ScrollerTarget ref={this.floorplansRef}>
+            {/*<ScrollerTarget ref={this.floorplansRef}>
               <Margin>
                 <FloorPlan
                   floorOffset={0}
                   planArray={this.state.floorPlans}
                 />
               </Margin>
-            </ScrollerTarget>
+            </ScrollerTarget>*/}
 
             <ScrollerTarget ref={this.reviewsRef}>
               <Margin>
