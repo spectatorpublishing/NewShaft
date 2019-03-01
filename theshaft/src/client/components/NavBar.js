@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import icon from "../assets/react.png";
 import speclogo from "../assets/spectator-logo.png";
-import shaftlogo from "../assets/shaft-logo.png"
+import shaftlogo from "../assets/shaft-logo-text.png"
 import { Link, NavLink } from 'react-router-dom';
 import styled from 'styled-components';
 
@@ -27,9 +27,9 @@ let LogoContainer = styled.div`
   align-items: center;
 `
 let ShaftLogo = styled.img`
-  height: 45px;
+  height: 35px;
   padding: 0;
-  width: 45px;
+  width: auto;
   object-fit: cover;
 `
 
