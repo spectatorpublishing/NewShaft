@@ -140,6 +140,14 @@ const dorm_name_map = {
   "McBainHall": "McBain Hall",
   "47Claremont": "47 Claremont",
   "600W113th": "600 W 113th",
+  "600W116th": "600 W 116th",
+  "616W116th": "616 W 116th",
+  "620W116th": "620 W 116th",
+  "601W110th": "601 W 110th",
+  "CathedralGardens": "CathedralGardens",
+  "HewittHall": "Hewitt Hall",
+  "ElliotHall": "Elliot Hall",
+  "SulzbergerTower": "Sulzberger Tower",
   "BroadwayHall": "Broadway Hall",
   "CarltonArms": "Carlton Arms",
   "EastCampus": "East Campus",
@@ -157,7 +165,8 @@ const dorm_name_map = {
   "WallachHall": "Wallach Hall",
   "WattHall": "Watt Hall",
   "WienHall": "Wien Hall",
-  "WoodbridgeHall": "Woodbridge Hall"
+  "WoodbridgeHall": "Woodbridge Hall",
+  "PlimptonHall" : "Plimpton Hall"
 
 }
 

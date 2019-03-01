@@ -30,7 +30,6 @@ router.post('/', function(req, res, next) {
 	console.log("requesting selection of" , req.body)
 	
 	getFloorPlans(con, req.body, (revInfo) => {
-		console.log(revInfo)
 		res.json(revInfo)
 	})
 

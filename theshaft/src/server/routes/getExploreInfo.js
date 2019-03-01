@@ -36,7 +36,6 @@ router.get('/', function(req, res, next) {
 	  });
 	
 	getExploreInfo(con, (dormInfo) => {
-		console.log(dormInfo)
 		res.json(dormInfo)
 		// lmao wtf why => res.send(JSON.stringify(res))
 	})

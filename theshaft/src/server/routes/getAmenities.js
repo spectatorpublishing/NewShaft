@@ -27,7 +27,9 @@ function getAmentities(con, request, callback) {
 		var sqlStatement = `SELECT P_BATHROOM, LAUNDRY, CARPET,
 		F_KITCHEN, P_KITCHEN, LOUNGE, GYM, BIKE, COMPUTER, PRINT,
 		AC, MUSIC FROM amenities
-        WHERE DORM = "${request["DORM"]}";`
+		WHERE DORM = "${request["DORM"]}";`
+		
+		console.log(sqlStatement);
 		
 		con.query(sqlStatement, function(err, res) {
 			if (err) throw err;
@@ -49,7 +51,6 @@ router.post('/', function(req, res, next) {
 	console.log("requesting selection of" , req.body)
 	
 	getAmentities(con, req.body, (dormInfo) => {
-		console.log(dormInfo)
 		res.json(dormInfo)
 	})
 

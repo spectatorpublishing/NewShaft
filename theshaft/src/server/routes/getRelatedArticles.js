@@ -37,7 +37,6 @@ router.post('/', function(req, res, next) {
 	console.log("requesting selection of" , req.body)
 	
 	getRelatedArticles(con, req.body, (dormInfo) => {
-		console.log(dormInfo)
 		res.json(dormInfo)
 	})
 

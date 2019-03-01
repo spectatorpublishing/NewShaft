@@ -44,7 +44,6 @@ function filterDormInfo(con, request, callback) {
     }
 	}
   sqlStatement+=`;`
-  console.log(sqlStatement);
   
   con.query(sqlStatement, function(err, res) {
     if (err) throw err;
@@ -63,8 +62,6 @@ router.post("/", function(req, res, next) {
     database: "dorms"
   });
   filterDormInfo(con, req.body, dormInfo => {
-    console.log("server side dorminfo", dormInfo);
-    // JSON.stringify(dormInfo[0])
     res.json(dormInfo);
   });
 });

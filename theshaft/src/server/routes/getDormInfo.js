@@ -58,7 +58,6 @@ router.post('/', function(req, res, next) {
 	console.log("requesting selection o f" , req.body)
 	
 	getDormInfo(con, req.body, (dormInfo) => {
-		console.log(dormInfo)
 		res.json(dormInfo)
 		// lmao wtf why => res.send(JSON.stringify(res))
 	})
