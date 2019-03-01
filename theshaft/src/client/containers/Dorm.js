@@ -203,15 +203,6 @@ export default class Dorm extends React.PureComponent {
         CONS: ["con1", "con2", "con3"],
         AMENITIES: sampleAmenities,
         RELATEDDORMS: relatedDorms,
-        GLANCE: [
-          ["Location", {ADDRESS}],
-          ["Room Type", "Empty"],
-          ["Class Make-Up", "Empty"],
-          ["# of floors", "Empty"],
-          ["# of singles", {SINGLE_}],
-          ["# of doubles", {DOUBLE_}],
-          ["Cut-off lottery #", "Empty"]
-        ]
       },
       scrollMenuFixed: false,
       scrollMenuOffset: null,
@@ -403,7 +394,9 @@ export default class Dorm extends React.PureComponent {
           {!isMobile && (
             <ColThree>
               <AtAGlance
-                 atAGlance={this.state.dormInfo.GLANCE}
+                 address= {this.state.dormInfo.ADDRESS}
+                 singles = {this.state.dormInfo.SINGLE_}
+                 double = {this.state.dormInfo.DOUBLE_}
               />
             </ColThree>
           )}

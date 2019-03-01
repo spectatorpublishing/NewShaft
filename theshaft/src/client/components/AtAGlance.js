@@ -10,7 +10,7 @@ padding-bottom: 0.5rem;
 margin-bottom: 0.5rem;
 `
 
-let Span = styled.div`
+let Category = styled.div`
 color: grey; 
 `
 
@@ -19,7 +19,9 @@ margin-bottom: 1rem;
 `
 
 let Content = styled.span`
-color: #5a5a5a;
+marign-left: 1rem;
+color: #3C3B3B;
+font-color: #3C3B3B;
 `
 
 export default class AtAGlance extends Component {
@@ -29,11 +31,19 @@ super(props);
 }
 
 render() {
-console.log(this.props.atAGlance);
-const AtAGlanceMapped = this.props.atAGlance.map((el)=>{
-return <Table>
-<Span>{el}</Span> <Content>{this.props.atAGlance[el]}</Content>
+let glanceMap = [
+    ["Location", this.props.address],
+    ["# of singles", this.props.singles],
+    ["# of doubles", this.props.doubls]
+]
+
+const AtAGlanceMapped = glanceMap.map((el)=>{
+return (
+<Table>
+    <Category>{el[0]}           </Category> 
+    <Content>{el[1]}</Content>
 </Table>
+)
 })
 
 return (
