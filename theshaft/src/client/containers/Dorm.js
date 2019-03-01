@@ -11,15 +11,8 @@ import RelatedDorms from "../components/RelatedDorms";
 import ReviewsBox from "../components/ReviewsBox";
 import Scroller from "../components/Scroller";
 import SpectrumSidebar from "../components/SpectrumSidebar";
-<<<<<<< HEAD
-import { floor } from "gl-matrix/src/gl-matrix/vec2";
-
-
-
-=======
 import ScrollToTop from "../components/ScrollToTop";
 import AdManager from "../components/AdManager";
->>>>>>> 80bf17328abf350f16d1715ce2802682c4a569c9
 
 var stars="4.5" 
 var recommend="28%" 
@@ -239,11 +232,8 @@ export default class Dorm extends React.PureComponent {
     this.fetchAmenities(dormName);
     this.fetchReviews(dormName);
     this.fetchRelatedArticles(dormName);
-<<<<<<< HEAD
     this.fetchFloorPlans(dormName);
-=======
     this.fetchDormPhotos(dormName);
->>>>>>> 80bf17328abf350f16d1715ce2802682c4a569c9
     //this.fetchDormInfo(dorm_name_map[this.props.match.params.dorm])
     window.scrollTo(0, 0);
   }
@@ -259,12 +249,9 @@ export default class Dorm extends React.PureComponent {
     this.fetchAmenities(newProps.match.params.dorm);
     this.fetchReviews(newProps.match.params.dorm);
     this.fetchRelatedArticles(newProps.match.params.dorm);
-<<<<<<< HEAD
     this.fetchFloorPlans(newProps.match.params.dorm);
-=======
     this.fetchDormPhotos(newProps.match.params.dorm);
 
->>>>>>> 80bf17328abf350f16d1715ce2802682c4a569c9
 
     window.scrollTo(0, 0)
   }
@@ -300,11 +287,11 @@ export default class Dorm extends React.PureComponent {
     })
       .then(res => res.json())
       .then(dormInfo => {
-        console.log(dormInfo)
-        dormInfo[0].PROS = ["Pro 1", "Pro 2", "Pro 3"];
-        dormInfo[0].CONS = ["Con 1", "Con 2", "Con 3"];
+        dormInfo[0].PROS = dormInfo[0].PROS.substring(1, dormInfo[0].PROS.length - 1).split(',');
+        dormInfo[0].CONS = dormInfo[0].CONS.substring(1, dormInfo[0].CONS.length - 1).split(',');
         this.setState({dormInfo: dormInfo[0]})
       });
+      
   }
 
   fetchAmenities(name) {
@@ -525,25 +512,10 @@ export default class Dorm extends React.PureComponent {
             </ScrollerTarget>
             
             <ScrollerTarget ref={this.floorplansRef}>
-<<<<<<< HEAD
               <FloorPlan
                 floorOffset={0}
                 planArray={this.state.floorPlans}
               />
-=======
-              <Margin>
-                <FloorPlan
-                  floorOffset={1}
-                  planArray={[
-                    "https://housing.columbia.edu/files/housing/Wien%208_2018.jpg",
-                    "https://housing.columbia.edu/files/housing/Wien%208_2018.jpg",
-                    "https://housing.columbia.edu/files/housing/600%209_2016_0.jpg",
-                    "https://housing.columbia.edu/files/housing/Woodbridge%204_2018.jpg",
-                    "https://i.kym-cdn.com/entries/icons/original/000/026/642/kot1.jpg"
-                  ]}
-                />
-              </Margin>
->>>>>>> 80bf17328abf350f16d1715ce2802682c4a569c9
             </ScrollerTarget>
 
             <ScrollerTarget ref={this.reviewsRef}>
