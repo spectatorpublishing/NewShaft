@@ -5,28 +5,22 @@ import SlidingReview from "./SlidingReview";
 
 
 let Border = styled.div`
-    border: 1px grey solid;
-    border-radius: 10px;
+    ${props => props.theme.grayBorder}
     padding: 2vw;
     padding-bottom: 6vh;
     display: flex;
     flex-direction: column;
 `
 let MobileBorder = styled.div`
-    // border: 1px grey solid;
-    // border-radius: 10px;
     display: flex;
     flex-direction: column;
     margin-bottom: 6vw;
 `
 
-let Reviews = styled.h3`
+let Reviews = styled.h2`
     margin-top: 2vh;
     margin-bottom: 2vh;
-    padding-left: 0.5vw;
-    color: grey;
-    font-weight: bold;
-    font-size: 1.7em;    
+    padding-left: 0.5vw;  
 `
 
 let InfoBox = styled.div`

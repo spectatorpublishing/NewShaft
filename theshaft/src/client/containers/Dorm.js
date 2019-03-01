@@ -440,6 +440,9 @@ export default class Dorm extends React.PureComponent {
                 reviews={this.state.reviews}>
               </ReviewsBox>
             </ScrollerTarget>
+            </Margin>
+
+            <Margin>
             <ScrollerTarget ref={this.suggestionsRef}>
               <RelatedDorms
                 name={this.state.dormInfo.DORM}
