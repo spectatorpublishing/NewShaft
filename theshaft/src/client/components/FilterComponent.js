@@ -9,10 +9,19 @@ let Filter = styled.div`
 	@media(max-width: 768px){
 		position: relative; // So that the filter list will position itself relative to this div
 	}
+	margin-top: 0;
+	padding-top: 2%;
+	//padding-right: 10%;
+	padding-bottom: 2%;
+	padding-left: 2%;
+	background-color: ${props => props.theme.columbiaBlue};
 `
 
 let FilterLabel = styled.div`
     color: ${props => props.theme.columbiaBlue};
+`
+let FilterTitle = styled.h4`
+	color: ${props => props.theme.white};
 `
 
 const filterElements = {
@@ -99,7 +108,7 @@ export default class FilterComponent extends React.PureComponent {
 
 		return(
 			<Filter>
-				<FilterLabel><h4>Filters</h4></FilterLabel>
+				<FilterLabel><FilterTitle>Filters</FilterTitle></FilterLabel>
 				{Filters}
 			</Filter>
 		)
