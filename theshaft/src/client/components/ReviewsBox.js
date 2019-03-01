@@ -79,7 +79,7 @@ export default class ReviewsBox extends Component {
     render() {
         const { width } = this.state;
         const isMobile = width <= 768;
-        console.log('WIDTH WIDTH WIDTH ' + width);
+        // console.log('WIDTH WIDTH WIDTH ' + width);
 
         if(isMobile) {
             return(

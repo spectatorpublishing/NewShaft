@@ -295,7 +295,7 @@ export default class Dorm extends React.PureComponent {
     })
       .then(res => res.json())
       .then(reviewsInfo => {
-        console.log(reviewsInfo)
+        // console.log(reviewsInfo)
         this.setState({reviews: reviewsInfo})
       });
   }

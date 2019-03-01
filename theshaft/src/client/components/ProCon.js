@@ -35,7 +35,6 @@ let Head = styled.h1`
 `
 
 let Title = styled.h2`
-    text-align: center;
     padding-bottom: 1vw;
 `
 

@@ -101,14 +101,15 @@ export default class SlidingReview extends Component {
           <div>
             <Slider {...settings}>
                 {reviewsByPage.map((reviews, i) => (
-                  <div id={"" + i}>
-                    {reviews.map((review) => (
+                  <div key={"" + i}>
+                    {reviews.map((review, j) => (
                       <Review
-                              stars={review.NUM_STARS}
-                              review={review.REVIEW_TXT} 
-                              room={review.ROOM_NUM} 
-                              year={years_map[review.YEAR]} 
-                              timestamp={review.TIME_STAMP.substring(0, 10)}/>
+                        key={""+j}
+                        stars={review.NUM_STARS}
+                        review={review.REVIEW_TXT} 
+                        room={review.ROOM_NUM} 
+                        year={years_map[review.YEAR]} 
+                        timestamp={review.TIME_STAMP.substring(0, 10)}/>
                     ))}
                   </div>
                 ))}
