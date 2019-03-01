@@ -8,6 +8,7 @@ let Border = styled.div`
     border: 1px grey solid;
     border-radius: 10px;
     padding: 2vw;
+    padding-bottom: 6vh;
     display: flex;
     flex-direction: column;
 `

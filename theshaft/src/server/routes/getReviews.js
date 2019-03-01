@@ -40,7 +40,7 @@ router.post('/', function(req, res, next) {
   		password: "spec1877",
   		database: "dorms"
 	});
-	console.log("requesting selection o f" , req.body)
+	console.log("requesting selection of" , req.body)
 	
 	getReviews(con, req.body, (revInfo) => {
 		console.log(revInfo)
