@@ -11,10 +11,6 @@ import RelatedDorms from "../components/RelatedDorms";
 import ReviewsBox from "../components/ReviewsBox";
 import Scroller from "../components/Scroller";
 import SpectrumSidebar from "../components/SpectrumSidebar";
-import { floor } from "gl-matrix/src/gl-matrix/vec2";
-
-
-
 import ScrollToTop from "../components/ScrollToTop";
 import AdManager from "../components/AdManager";
 
@@ -284,11 +280,11 @@ export default class Dorm extends React.PureComponent {
     })
       .then(res => res.json())
       .then(dormInfo => {
-        console.log(dormInfo)
-        dormInfo[0].PROS = ["Pro 1", "Pro 2", "Pro 3"];
-        dormInfo[0].CONS = ["Con 1", "Con 2", "Con 3"];
+        dormInfo[0].PROS = dormInfo[0].PROS.substring(1, dormInfo[0].PROS.length - 1).split(',');
+        dormInfo[0].CONS = dormInfo[0].CONS.substring(1, dormInfo[0].CONS.length - 1).split(',');
         this.setState({dormInfo: dormInfo[0]})
       });
+      
   }
 
   fetchAmenities(name) {
