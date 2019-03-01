@@ -2,37 +2,35 @@ import React, { Component } from "react";
 import styled from 'styled-components';
 
 let ExpanderBox = styled.div`
-    border: 1px ${props => props.theme.lightGray} solid;
-    border-radius: 10px;
+  ${props => props.theme.grayBorder}
 `
 
 let ExpanderContent = styled.div`
-    padding: 1rem;
+  padding: 1rem;
 `
 
 let ExpanderList = styled.div`
-    display: flex;
-    flex-wrap: wrap;
+  display: flex;
+  flex-wrap: wrap;
 `
 
 let ToggleSize = styled.button`
-    border: none;
-    border-bottom-left-radius: 10px;
-    border-bottom-right-radius: 10px;
-    border-top: 1px ${props => props.theme.lightGray} solid;
-    display: flex;
-    font-weight: bold;
-    justify-content: center;
-    padding: 0.3rem;
-    width: 100%;
+  border: none;
+  border-bottom-left-radius: ${props => props.theme.borderRadius};
+  border-bottom-right-radius: ${props => props.theme.borderRadius};
+  border-top: 1px ${props => props.theme.lightGray} solid;
+  display: flex;
+  justify-content: center;
+  padding: 0.3rem;
+  width: 100%;
 
-    :hover {
-      background-color: ${props => props.theme.lightGray};
-    }
+  :hover {
+    background-color: ${props => props.theme.lightGray};
+  }
 
-    :active {
-      background-color: ${props => props.theme.lightGray};
-    }
+  :active {
+    background-color: ${props => props.theme.lightGray};
+  }
 `
 
 export default class Expander extends Component {
