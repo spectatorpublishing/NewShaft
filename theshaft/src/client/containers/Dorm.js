@@ -408,11 +408,10 @@ export default class Dorm extends React.PureComponent {
 
           <ColTwo mobile={isMobile}>
             {isMobile && (
-              <AtAGlance
-                location={this.state.dormInfo.ADDRESS}
-                roomtype={roomtype}
-                classmakeup={this.state.dormInfo.CLASS_MAKEUP}
-                numfloors="13"
+            <AtAGlance
+                 address= {this.state.dormInfo.ADDRESS}
+                 singles = {this.state.dormInfo.SINGLE_}
+                 double = {this.state.dormInfo.DOUBLE_}
               />
             )}
             <Margin>
