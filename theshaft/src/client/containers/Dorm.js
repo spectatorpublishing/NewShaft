@@ -81,12 +81,14 @@ let Blurb = styled.div`
   color: white;
   position: relative;
   top: -100px;
+  min-height: 40px;
   margin: 0 15% -100px 15%;
   padding: 1.8vw;
   border-radius: 1.5vw;
   @media only screen and (max-width: 767px) {
     top: -220px;
     margin-bottom: -220px;
+    min-height: 80px;
   }
 `;
 

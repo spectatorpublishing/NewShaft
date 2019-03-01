@@ -13,12 +13,11 @@ let Button = styled.div`
 const DormButtonWrapper = styled.div`
 	display: flex;
 	flex-direction: column;
-	color: black;
 	cursor: pointer;
-  margin-bottom: 2px;
+  margin-bottom: 1rem;
   & img{
     padding: 0px;
-    border: 1px solid #777777;
+    border: 1px solid ${props => props.theme.lightGray};
     max-height: 100vw;
     width: 100%;
     margin-right: 10px;
@@ -26,18 +25,10 @@ const DormButtonWrapper = styled.div`
     object-fit: cover;
   }
   @media only screen and (min-width: 768px) {
-    display: flex;
 		flex-direction: row;
-		color: black;
-		cursor: pointer;
-    margin-bottom: 2px;
     & img{
-      padding: 0px;
-      border: 1px solid #777777;
       max-height: 10vw;
       width: 50%;
-      margin-right: 10px;
-      margin-bottom: 10px;
     }
   }
 `

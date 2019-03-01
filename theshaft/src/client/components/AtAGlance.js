@@ -14,7 +14,6 @@ let Table = styled.div`
 `
 
 let Category = styled.div`
-	// color: grey;
 `
 
 let Title = styled.h2`
