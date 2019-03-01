@@ -9,13 +9,7 @@ import ProCon from "../components/ProCon";
 import FloorPlan from "../components/FloorPlan";
 import RelatedDorms from "../components/RelatedDorms";
 import ReviewsBox from "../components/ReviewsBox";
-<<<<<<< Updated upstream
-
-=======
->>>>>>> Stashed changes
 import Scroller from "../components/Scroller";
-
-
 
 let sampleAmenities = [
   ["bathroom", "Semi-private"],
