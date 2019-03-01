@@ -5,6 +5,8 @@ var spectrum_json = JSON.parse(fs.readFileSync("../db/DormJSONS/_spectruminfo.js
 var spectrum = {};
 var alldata = {};
 
+// This takes in CSV converted to JSON at https://www.csvjson.com/csv2json
+
 // Convert from Array to Object
 for (var dorm in spectrum_json) {
     spectrum[spectrum_json[dorm]["Dorm"]] = spectrum_json[dorm];
