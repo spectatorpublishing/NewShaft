@@ -19,7 +19,7 @@ let MainPic = styled.div`
 `
 
 let Img = styled.img`
-  width: 100%;
+  width: 100vw;
   margin-top:-25%;
   object-fit: cover;
   object-position: center; 
@@ -78,7 +78,7 @@ let PicMobile = styled.div`
 let Button = styled.button`
     background: none;
     border: none;
-    padding: 5px;
+    padding: 0;
     font-weight: bold;
 
     ${({ clicked }) => clicked && `
