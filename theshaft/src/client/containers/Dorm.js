@@ -81,12 +81,14 @@ let Blurb = styled.div`
   color: white;
   position: relative;
   top: -100px;
+  min-height: 40px;
   margin: 0 15% -100px 15%;
   padding: 1.8vw;
   border-radius: 1.5vw;
   @media only screen and (max-width: 767px) {
     top: -220px;
     margin-bottom: -220px;
+    min-height: 80px;
   }
 `;
 
@@ -99,14 +101,14 @@ let Body = styled.div`
 
 let ColOne = styled.div`
   display: flex;
-  width: 25%;
+  width: 15%;
 `;
 
 let ColTwo = styled.div`
   display: flex;
   flex-direction: column;
   scroll-behavior: smooth;
-  width: ${({ mobile }) => (mobile ? `100%` : `50%`)};
+  width: ${({ mobile }) => (mobile ? `100%` : `60%`)};
 `;
 
 let ScrollMenu = styled(ColOne)`
@@ -125,6 +127,7 @@ let ScrollAAG = styled(ScrollMenu)`
   padding-right: 20px;
   left: initial;
   right: 0;
+  width: 25%;
 `
 
 let Margin = styled.div`
