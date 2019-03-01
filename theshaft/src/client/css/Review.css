@@ -29,12 +29,13 @@
   align-self: center;
   font-weight: bold;
   color: 	gray;
+  font-size: 1rem;
 }
 
 .reviewerInfo {
   display: flex;
   flex-direction: row;
-  font-size: 1rem;
+  font-size: 0.75rem;
   color: 	gray;
   justify-content: left;
   width: 100%;
@@ -55,4 +56,20 @@
   color: rgb(110, 155, 184);
   font-size: 1.15rem;
   align-self: center;
+}
+
+.slick-prev:before{
+  color: grey;
+}
+
+.slick-next:before{
+  color: grey;
+}
+
+.slick-dots{
+  text-align: left;
+}
+
+.slick-dots li{
+  margin: 0px;
 }

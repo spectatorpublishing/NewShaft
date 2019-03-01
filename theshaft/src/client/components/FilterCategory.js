@@ -15,7 +15,14 @@ let DDHeaderTitle = styled.div`
     text-shadow: ${props => props.shadow ? props.theme.textShadow : "none"};
     cursor: pointer;
     user-select: none;
-    color: ${props => props.theme.columbiaBlue};
+    color: white;
+`
+
+let Bolded = styled.b`
+    text-shadow: ${props => props.shadow ? props.theme.textShadow : "none"};
+    cursor: pointer;
+    user-select: none;
+    color: ${props => props.theme.white};
 `
 
 let ListElement = styled.li`
@@ -93,7 +100,7 @@ export default class FilterComponent extends React.PureComponent {
             <DDWrapper>
 
                 <DDHeader onClick={() => this.toggleList()}>
-                    <DDHeaderTitle shadow={this.props.open}>{this.props.headerTitle}</DDHeaderTitle>
+                    <DDHeaderTitle shadow={this.props.open}>{this.props.headerTitle} <Bolded>&or;</Bolded></DDHeaderTitle>
                 </DDHeader>
 
                 {listOpen && <FilterList>
