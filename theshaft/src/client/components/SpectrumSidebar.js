@@ -77,9 +77,15 @@ const TextDiv = styled.div `
 	}
 `
 
+const LinkDiv = styled.a`
+	text-decoration: none;
+	color: black;
+`
+
 class SidebarItem extends Component {
     render(){
     	return (
+				<LinkDiv target="_blank" rel="noopener noreferrer" href={this.props.url}>
 	        <SmallWrapper>
 				<ImageLink href="https://www.columbiaspectator.com/spectrum/shaft/" target="_blank">
 					<Image src={this.props.img_src}/>
@@ -91,6 +97,7 @@ class SidebarItem extends Component {
 					<AuthorLine>{this.props.date}</AuthorLine>
 				</TextDiv>
 			</SmallWrapper>
+			</LinkDiv>
     	);
     }
 }
@@ -100,12 +107,15 @@ class SpectrumSidebar extends Component {
 	articleMap(){
 		const articleData = this.props.spectrumSidebarData;
 		return (
-			articleData.map(data =>{
+			articleData.map((data, index) =>{
 					return <SidebarItem 
+						key={index}
 						title={data.title} 
 						img_src={data.img_src} 
 						author = {data.author}
-						date = {data.date}/>
+						date = {data.date}
+						url = {data.url}
+						/>
 				}
 			)
 		)

@@ -12,6 +12,7 @@ import ReviewsBox from "../components/ReviewsBox";
 import Scroller from "../components/Scroller";
 import SpectrumSidebar from "../components/SpectrumSidebar";
 import ScrollToTop from "../components/ScrollToTop";
+import AdManager from "../components/AdManager";
 
 var stars="4.5" 
 var recommend="28%" 
@@ -73,6 +74,9 @@ let Header = styled.div`
   top: -100px;
   margin: 0 15%;
   pointer-events: none;
+  @media only screen and (max-width: 767px) {
+    top: -220px;
+  }
 `;
 let DormName = styled.h1`
   color: ${props => props.theme.white};
@@ -88,6 +92,10 @@ let Blurb = styled.div`
   margin: 0 15% -100px 15%;
   padding: 1.8vw;
   border-radius: 1.5vw;
+  @media only screen and (max-width: 767px) {
+    top: -220px;
+    margin-bottom: -220px;
+  }
 `;
 
 let Body = styled.div`
@@ -203,6 +211,7 @@ export default class Dorm extends React.PureComponent {
         MUSIC: 0
       },
       reviews: {},
+      relatedArticles: [],
       scrollMenuFixed: false,
       scrollMenuOffset: null,
       width: screen_width
@@ -220,6 +229,7 @@ export default class Dorm extends React.PureComponent {
     this.fetchDormInfo(dormName);
     this.fetchAmenities(dormName);
     this.fetchReviews(dormName);
+    this.fetchRelatedArticles(dormName);
     //this.fetchDormInfo(dorm_name_map[this.props.match.params.dorm])
     window.scrollTo(0, 0);
   }
@@ -231,10 +241,11 @@ export default class Dorm extends React.PureComponent {
 
   componentWillReceiveProps(newProps){
     //map spaceless dorm names to spacy names
-    this.fetchDormInfo(newProps.match.params.dorm)
-    this.fetchAmenities(newProps.match.params.dorm)
-    this.fetchReviews(newProps.match.params.dorm)
-    window.scrollTo(0, 0);
+    this.fetchDormInfo(newProps.match.params.dorm);
+    this.fetchAmenities(newProps.match.params.dorm);
+    this.fetchReviews(newProps.match.params.dorm);
+    this.fetchRelatedArticles(newProps.match.params.dorm);
+    window.scrollTo(0, 0)
   }
 
   fetchDormInfo(name) {
@@ -289,6 +300,32 @@ export default class Dorm extends React.PureComponent {
       });
   }
 
+
+  fetchRelatedArticles(name){
+    const dormName = dorm_name_map[name]
+    fetch('/api/getRelatedArticles', {
+      method: "POST",
+      body: JSON.stringify({ 
+        DORM: dormName
+      }),
+      headers: { "Content-Type": "application/json"},
+    })
+      .then(res => res.json())
+      .then(relatedArticles => {
+        var relArticles = [];
+        for (var i = 0; i < relatedArticles.length; i++)
+        {
+          relArticles.push({
+            title: relatedArticles[i].TITLE, 
+            img_src: relatedArticles[i].IMAGE_URL, 
+            author: relatedArticles[i].AUTHOR,
+            date: relatedArticles[i].DATE,
+            url: relatedArticles[i].RELATED
+          })
+        }
+        this.setState({relatedArticles: relArticles})
+      });
+  }
 
   handleWindowSizeChange() {
     this.setState({ width: window.innerWidth });
@@ -451,24 +488,11 @@ export default class Dorm extends React.PureComponent {
 
             <ScrollerTarget ref={this.spectrumRef}>
               <Margin>
-                <SpectrumSidebar
-                  spectrumSidebarData = {[
-                    {
-                      title: "How Have Local Hiring Targets Shaped Columbia’s Manhattanville Construction Site?", 
-                      img_src: "https://www.gstatic.com/webp/gallery/1.jpg", 
-                      author: "BY YULONG LI",
-                      date: "APRIL 8, 2018"
-                    },
-                    {
-                      title: "Newly proposed committee for Barnard calls for increased transparency", 
-                      img_src: "https://www.gstatic.com/webp/gallery/3.jpg", 
-                      author: "BY ROUNAK",
-                      date: "APRIL 7, 2018"
-                    }
-                  ]}
-                />
+                 <SpectrumSidebar spectrumSidebarData = {this.state.relatedArticles}/>
               </Margin>
             </ScrollerTarget>
+
+            <AdManager/>
 
           </ColTwo>
 
