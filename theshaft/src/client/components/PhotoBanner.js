@@ -80,6 +80,7 @@ let Button = styled.button`
     border: none;
     padding: 0;
     font-weight: bold;
+    cursor: pointer;
 
     ${({ clicked }) => clicked && `
         background: black;
