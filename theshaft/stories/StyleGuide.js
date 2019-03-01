@@ -24,7 +24,7 @@ let ColumbiaBlueBG = styled(ClearBG)`
 `
 
 let BorderBG = styled(ClearBG)`
-  border: solid 1px ${props => props.theme.lightGray};
+  ${props => props.theme.grayBorder}
 `
 
 let Black = styled.h3`
@@ -44,7 +44,7 @@ let White = styled.h3`
 `
 
 let WhiteShadowed = styled(White)`
-  text-shadow: ${props => props.theme.textShadow};
+  ${props => props.theme.textShadow}
 `
 
 let DarkGray = styled.h3`
@@ -77,9 +77,9 @@ storiesOf('Style Guide', module)
       <br/>
       <br/>
       <h6>e.g.</h6>
-      <code>{"border: solid 1px ${props => props.theme.columbiaBlue};"}</code>
+      <code>{"color: ${props => props.theme.columbiaBlue};"}</code>
       <h6>renders as</h6>
-      <code>{"border: solid 1px #62A8E5;"}</code>
+      <code>{"color: #62A8E5;"}</code>
       <br/>
       <br/>
       <h6>except `textShadow` should only be used with the `text-shadow` css property:</h6>
@@ -96,7 +96,7 @@ storiesOf('Style Guide', module)
       <ColumbiaBlueBG><WhiteShadowed>white with textShadow on columbiaBlue</WhiteShadowed></ColumbiaBlueBG>
       <ClearBG><WhiteShadowed>textShadow</WhiteShadowed></ClearBG>
       <ClearBG><DarkGray>darkGray</DarkGray></ClearBG>
-      <BorderBG><LightGray>lightGray</LightGray></BorderBG>
+      <BorderBG><LightGray>lightGray with lightGray border</LightGray></BorderBG>
       <br/>
       <br/>
       <b>Styled Component Source Code:</b>
@@ -121,7 +121,7 @@ storiesOf('Style Guide', module)
       <br/>
       <code>{`
       let BorderBG = styled(ClearBG)\`
-      border: solid 1px ${props => props.theme.lightGray};
+      ${props => props.theme.grayBorder}
       \`
       `}</code>
       <br/>
@@ -151,7 +151,7 @@ storiesOf('Style Guide', module)
       <br/>
       <code>{`
       let WhiteShadowed = styled(White)\`
-      text-shadow: ${props => props.theme.textShadow};
+      ${props => props.theme.textShadow}
       \`
       `}</code>
       <br/>

@@ -78,7 +78,7 @@ let Header = styled.div`
 `;
 let DormName = styled.h1`
   color: ${props => props.theme.white};
-  text-shadow: ${props => props.theme.textShadow};
+  ${props => props.theme.textShadow}
   pointer-events: initial;
 `;
 
