@@ -101,8 +101,9 @@ class SpectrumSidebar extends Component {
 	articleMap(){
 		const articleData = this.props.spectrumSidebarData;
 		return (
-			articleData.map(data =>{
+			articleData.map((data, index) =>{
 					return <SidebarItem 
+						key={index}
 						title={data.title} 
 						img_src={data.img_src} 
 						author = {data.author}
