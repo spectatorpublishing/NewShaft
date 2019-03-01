@@ -29,6 +29,7 @@ import { ReactComponent as SymposiumSVG } from "../src/client/assets/test_floorp
 // import ReviewSlider from "../src/client/components/ReviewSlider.js";
 import SlidingReview from "../src/client/components/SlidingReview.js";
 import SpectrumSidebar from "../src/client/components/SpectrumSidebar.js";
+import AdManager from "../src/client/components/AdManager";
 
 storiesOf('SpectrumSidebar', module)
   .add('SpectrumSidebar', () =>
@@ -95,6 +96,9 @@ storiesOf('Review', module)
 
 storiesOf('ReviewList', module)
   .add('ReviewList', () => <ReviewList />);
+
+storiesOf('AdManager', module)
+  .add('AdManager', () => <AdManager/>);
 
 let planArray = [
   sampleFloor,"https://housing.columbia.edu/files/housing/Wien%208_2018.jpg",
