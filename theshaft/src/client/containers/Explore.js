@@ -21,7 +21,7 @@ let SideBar = styled.div`
   @media only screen and (min-width: 768px) {
     width: 60%;
     padding: 0 0% 0% 0%;
-    min-height: 100%;
+    min-height: 100vh;
     z-index: 1;
   }
 `
@@ -96,7 +96,7 @@ const filterNameToKey = {
 		"Senior":"SENIOR",
 		"A/C":"AC",
 		"Gym":"GYM",
-		"Private Bathroom":"P_BATHROOM",
+		"Single-Use Bathroom":"P_BATHROOM",
 		"Private Kitchen":"P_KITCHEN"
 }
   

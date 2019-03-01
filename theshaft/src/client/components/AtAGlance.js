@@ -3,7 +3,6 @@ import styled from 'styled-components';
 import { __values } from "tslib";
 
 let Wrapper = styled.div`
-	width: 90%;
 `
 
 let Table = styled.div`
