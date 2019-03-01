@@ -53,7 +53,7 @@ export default class Review extends Component {
           </div> */}
         </div>
         <div className="reviewerInfo">
-          {this.props.room + "•" + this.props.year + "•" + this.props.timestamp}
+          {"Room" + this.props.room + " • " + this.props.year + " • " + this.props.timestamp}
         </div>
       </div>
     );

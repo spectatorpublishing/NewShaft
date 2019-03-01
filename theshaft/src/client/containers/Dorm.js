@@ -205,6 +205,7 @@ export default class Dorm extends React.PureComponent {
         AC: 0,
         MUSIC: 0
       },
+      reviews: {},
       scrollMenuFixed: false,
       scrollMenuOffset: null,
       width: screen_width
@@ -221,6 +222,7 @@ export default class Dorm extends React.PureComponent {
     var dormName = this.props.match.params.dorm;
     this.fetchDormInfo(dormName);
     this.fetchAmenities(dormName);
+    this.fetchReviews(dormName);
     //this.fetchDormInfo(dorm_name_map[this.props.match.params.dorm])
     window.scrollTo(0, 0)
   }
@@ -233,6 +235,8 @@ export default class Dorm extends React.PureComponent {
   componentWillReceiveProps(newProps){
     //map spaceless dorm names to spacy names
     this.fetchDormInfo(newProps.match.params.dorm)
+    this.fetchAmenities(newProps.match.params.dorm)
+    this.fetchReviews(newProps.match.params.dorm)
     window.scrollTo(0, 0)
   }
 
@@ -268,6 +272,23 @@ export default class Dorm extends React.PureComponent {
       .then(res => res.json())
       .then(amenitiesInfo => {
         this.setState({amenities: amenitiesInfo[0]})
+      });
+  }
+
+  fetchReviews(name){
+    const dormName = dorm_name_map[name]
+    fetch('/api/getReviews', {
+      method: "POST",
+      body: JSON.stringify({ 
+        table: "dorm_static_info",
+        DORM: dormName
+      }),
+      headers: { "Content-Type": "application/json"},
+    })
+      .then(res => res.json())
+      .then(reviewsInfo => {
+        console.log(reviewsInfo)
+        this.setState({reviews: reviewsInfo})
       });
   }
 
@@ -415,7 +436,7 @@ export default class Dorm extends React.PureComponent {
                 stars={stars}
                 recommend={recommend}
                 ranking={ranking}
-                reviews={reviews}>
+                reviews={this.state.reviews}>
               </ReviewsBox>
             </ScrollerTarget>
             <ScrollerTarget ref={this.suggestionsRef}>
