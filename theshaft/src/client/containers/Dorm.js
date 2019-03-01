@@ -13,41 +13,11 @@ import Scroller from "../components/Scroller";
 import SpectrumSidebar from "../components/SpectrumSidebar";
 import ScrollToTop from "../components/ScrollToTop";
 import AdManager from "../components/AdManager";
+import Expander from "../components/Expander";
+import { theme } from "../util/GlobalStyles";
 
-var stars="4.5" 
 var recommend="28%" 
 var ranking="#7" 
-
-var reviews = [
-  {
-    stars: 4,
-    text: "It's on Frat Row, so it’s super loud. It’s also right outside the lounge, which gets pretty loud.",
-    room: "Room 203A",
-    year: "Freshman",
-    timestamp: "12 days ago"
-  },
-  {
-    stars: 4,
-    text: "nice",
-    room: "Room 203A",
-    year: "Freshman",
-    timestamp: "12 days ago"
-  },
-  {
-    stars: 4,
-    text: "nice",
-    room: "Room 203A",
-    year: "Freshman",
-    timestamp: "12 days ago"
-  },
-  {
-    stars: 4,
-    text: "nice",
-    room: "Room 203A",
-    year: "Freshman",
-    timestamp: "12 days ago"
-  }
-]
 
 let relatedDorms = [
   {
@@ -78,13 +48,13 @@ let DormName = styled.h1`
 
 let Blurb = styled.div`
   background-color: ${props => props.theme.columbiaBlue};
-  color: white;
+  color: ${props => props.theme.white};
   position: relative;
   top: -100px;
   min-height: 40px;
   margin: 0 15% -100px 15%;
   padding: 1.8vw;
-  border-radius: 1.5vw;
+  border-radius: 20px;
   @media only screen and (max-width: 767px) {
     top: -220px;
     margin-bottom: -220px;
@@ -442,13 +412,42 @@ export default class Dorm extends React.PureComponent {
       else if (this.state.dormInfo.DOUBLE_) roomtype += "Doubles";
     }
     if (this.state.dormInfo.TRIPLE_) roomtype += " and triples";
+    
+    let fullDescription = this.state.dormInfo.DESCRIPTION.substring(0, this.state.dormInfo.DESCRIPTION.length - 1);
+    let truncatedDescription = (fullDescription.length > 100) ? fullDescription.substring(0,100) + '...' : null;
     return (
       <ScrollToTop>
         <PhotoBanner bannerImages={this.state.dorm_photos} />
         <Header>
           <DormName>{this.state.dormInfo.DORM}</DormName>
         </Header>
-        <Blurb>{this.state.dormInfo.DESCRIPTION.substring(1, this.state.dormInfo.DESCRIPTION.length - 1)}</Blurb>
+        {(isMobile && truncatedDescription) ? 
+          <Expander 
+            custom={{
+              boxStyle: `
+                background-color: ${theme.columbiaBlue};
+                position: relative;
+                top: -100px;
+                min-height: 40px;
+                margin: 0 15% -100px 15%;
+                padding: 1.8vw;
+                border-radius: 20px;
+                @media only screen and (max-width: 767px) {
+                  top: -220px;
+                  margin-bottom: -220px;
+                  min-height: 80px;
+                }
+              `,
+              color: theme.columbiaBlue,
+              textColor: theme.white,
+            }} 
+            showAll={fullDescription}
+            showSome={truncatedDescription}
+          />
+        :
+          <Blurb>{fullDescription}</Blurb>
+        }
+        
 
         <Body>
           {!isMobile && <ColOne>

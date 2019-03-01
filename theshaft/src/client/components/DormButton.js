@@ -89,7 +89,7 @@ export default class DormButton extends Component {
 
     // Truncate dorm desciption to 100 characters if exceeds
     const truncatedDescription = this.state.description.length > 100 
-      ? this.state.description.substring(1,120) + '...'
+      ? this.state.description.substring(1,100) + '...'
       : this.state.description
 
     let schoolName = this.state.school.toLowerCase();
