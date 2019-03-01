@@ -71,7 +71,7 @@ const ChrisV = styled.div`
     display: inline-block;
     & img {
         transform: ${ props=> props.flip ? "scaleY(-1)" : "none"};
-        margin: 2.75px 0;
+        margin: 2px 0;
     }
 `
 
