@@ -80,8 +80,8 @@ export default class Maps extends Component {
 
     this.state = {
       viewport: {
-        latitude: 40.810173,
-        longitude: -73.963966,
+        latitude: this.props.centerLatitude,
+        longitude: this.props.centerLongitude,
         zoom: 16
       },
       coordinates: {
@@ -102,6 +102,11 @@ export default class Maps extends Component {
   componentDidUpdate(oldProps){
     if(oldProps != this.props){
       this.setState({
+        viewport: {
+          latitude: this.props.centerLatitude,
+          longitude: this.props.centerLongitude,
+          zoom: 16
+        },
         coordinates: {
           latitudes: this.props.latitudes,
           longitudes: this.props.longitudes
@@ -109,7 +114,9 @@ export default class Maps extends Component {
         popup: {
           popupInfo: this.props.popupInfo,
           popupIndex: this.props.popupInfo.map(() => {return false})
-        }
+        },
+        centerLatitude: this.props.centerLatitude,
+        centerLongitude: this.props.centerLongitude
       })
     }
   }

@@ -13,10 +13,12 @@ var getDormInfo = require('./routes/getDormInfo');
 var filterDormInfo = require('./routes/filter');
 var postReview = require('./routes/postReview');
 var getExploreInfo = require('./routes/getExploreInfo');
+var getAmenities = require('./routes/getAmenities');
 
 app.use(bodyParser.json())
 app.use(express.static('dist'));
 
+app.use('/api/getAmenities', (req, res) => getAmenities(req, res) );
 app.use('/api/getDormInfo', (req, res) => getDormInfo(req, res) );
 app.use('/api/filterDorm', (req, res) => filterDormInfo(req, res));
 app.use('/api/postReview', (req, res) => postReview(req, res));
