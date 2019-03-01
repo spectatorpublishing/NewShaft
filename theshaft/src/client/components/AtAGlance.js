@@ -1,41 +1,68 @@
 import React, { Component } from "react";
 import styled from 'styled-components';
+import { __values } from "tslib";
 
-let Table = styled.div`
-  display: flex;
-  justify-content: space-between;
-  border-bottom: 2px solid lightgray;
-  padding-bottom: 0.5rem;
-  margin-bottom: 0.5rem;
+let Wrapper = styled.div`
+width: 90%;
 `
 
-let Span = styled.div`
-  color: grey;  
+let Table = styled.div`
+display: flex;
+justify-content: space-between;
+border-bottom: 2px solid lightgray;
+padding-bottom: 0.5rem;
+margin-bottom: 0.5rem;
+`
+
+let Category = styled.div`
+color: grey;
 `
 
 let Title = styled.h2`
-  margin-bottom: 1rem;
+margin-bottom: 1rem;
 `
 
 let Content = styled.span`
-  color: #5a5a5a;
+margin-left: 1rem;
+color: #3C3B3B;
+font-color: #3C3B3B;
+text-align: right;
+font-style: bold;
 `
 
 export default class AtAGlance extends Component {
-  constructor(props) {
-    super(props);
-  }
+constructor(props) {
+super(props);
 
-  render() {
-    return (
-      <div className="AtAGlance">
-          <Title> At a glance </Title>
-          <Table> <Span>Location</Span> <Content>{this.props.location}</Content> </Table>
-          <Table> <Span>Room Type</Span> <Content>{this.props.roomtype}</Content> </Table>
-          <Table> <Span>Class Make-Up</Span> <Content>{this.props.classmakeup}</Content> </Table>
-          <Table> <Span># of Floors</Span> <Content>{this.props.numfloors}</Content> </Table>
-          <br/>
-      </div>
-    );
-  }
+}
+
+render() {
+let glanceMap = [
+    ["Location", this.props.location],
+    ["Room types", this.props.roomtype],
+    ["Class makeup", this.props.classmakeup],
+    ["Cut-off lottery #", this.props.cutoff]
+]
+
+const AtAGlanceMapped = glanceMap.map((el)=>{
+	console.log(el[1]);
+	if(el[1] && el[1] != "" && el[1] != "0" && el[1] != " "){
+	return (
+	<Table>
+	    <Category>{el[0]}           </Category> 
+	    <Content>{el[1]}</Content>
+	</Table>
+	)
+	}
+	else return (<div/>);
+})
+
+return (
+<Wrapper>
+<Title> At a glance </Title>
+{AtAGlanceMapped}
+<br/>
+</Wrapper>
+);
+}
 }
