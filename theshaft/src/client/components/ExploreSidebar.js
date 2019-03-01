@@ -5,31 +5,15 @@ import styled from 'styled-components'
 
 import DormButton from '../components/DormButton';
 
-const Header = styled.div`
-	margin: 0 auto;
-	width: 100%;
-	text-align: center;
-`
-
-const SchoolButton = styled.div`
-	display: inline-block;
-	font-size: 15pt;
-	text-align: center;
-	border: 1px solid #9B9B9B;
-	color: #9B9B9B;
-	height: 20px;
-	margin: 20px 10px;
-	padding: 2px;
-	cursor: pointer;
-`
-
 const Dorms = styled.div`
 	margin: 0 auto;
 	overflow: scroll;
     height: 100%;
     display: grid;
-    grid-column-gap: 50px;
-    grid-template-columns: auto auto;
+    grid-column-gap: 5%;
+    grid-template-columns: 47.5% 47.5%;
+    // Height of each element never goes below 15vw
+    grid-auto-rows: minmax(15vw, auto);
 `
 
 const SidebarDivider = styled.div`
@@ -65,10 +49,10 @@ export default class ExploreSidebar extends Component {
                             <DormButton key={index}
                                 school={dorm.COLLEGE}
                                 name={dorm.DORM}
-                                //image={dorm.THUMBNAIL_IMAGE}
                                 image={"https://housing.columbia.edu/files/housing/McBain.jpg"}
                                 description={dorm.DESCRIPTION}
-                                amenities={dorm.AMENITIES}/>
+                                amenities={dorm.AMENITIES}
+                            />
                         </Link>
                     )}
                 </Dorms>

@@ -4,6 +4,14 @@ import styled from 'styled-components';
 import 'react-image-lightbox/style.css'; 
 import Lightbox from 'react-image-lightbox';
 
+let FloorPlanTitleMobile = styled.h3`
+	margin-top: 3vh;
+	margin-bottom: 0;
+	padding-left: 0.5vw;
+	color: grey;
+	font-weight: bold;
+	font-size: 1.7em;  
+`
 
 let FloorPlanBox = styled.div` 
 	border: 1px ${props => props.theme.black} solid;
@@ -24,11 +32,21 @@ let FloorNumber = styled.h2`
 `
 
 let FloorButton = styled.button`
-	background-color: ${props => props.theme.white};
 	border: none;
-	color: ${props => props.theme.columbiaBlue};
-	font-size: 1.5rem;
+	margin-top: -0.5rem;
+	font-size: 2rem;
 	background: none;
+	padding: 0 0.5rem;
+	color: ${props => props.theme.darkGray};
+	@media only screen and (min-width: 768px){
+		background-color: #FFFFFF;
+		margin-top: 0;
+		border: none;
+		font-size: 1.5rem;
+		background: none;
+		padding: 1px 4px 2px 4px;
+		color: ${props => props.theme.columbiaBlue};
+	}
 `
 
 let PlanDisplay = styled.div`
@@ -38,18 +56,20 @@ let PlanDisplay = styled.div`
 	height: 100%;
 `
 
-let FloorPlanTopMobile = styled.div`
+let FloorPlanNavMobile = styled.div`
 	display: flex;
 	flex-direction: row;
 	justify-content: space-between;
-	padding: 10px 20px 5px 20px;
+	padding: 1px 5px 1px 5px;
 `
-
+// mobile removes box border
 let FloorPlanBoxMobile = styled.div` 
-	border: 1px ${props => props.theme.black} solid;
-    border-radius: 10px;
+	// border: 1px black solid;
+    // border-radius: 10px;
 	display: flex;
 	flex-direction: column;
+	margin-top: 1vw;
+	padding-top: 0;
 `
 
 let FloorListMobile = styled.div`
@@ -61,9 +81,12 @@ let FloorListMobile = styled.div`
 let PlanDisplayMobile = styled.div`
 	width: 100%;
 `
-
-let FloorNumberMobile = styled.h2`
-	margin: 0;
+// Floor #
+let FloorNumberMobile = styled.h4`
+	margin-left: 0;
+	padding-left: 0;
+	font-weight: normal;
+	font-size: 1.5em;
 `
 
 let CurrentPlanMobile = styled.img`
@@ -174,17 +197,17 @@ export default class FloorPlan extends React.PureComponent {
 		if(isMobile) {
 			return (
 				<div>
-					<h2> Floor Plans </h2>
+					<FloorPlanTitleMobile> Floor Plans </FloorPlanTitleMobile>
 					<FloorPlanBoxMobile>
 						<PlanDisplayMobile>
-							<FloorPlanTopMobile>
+							<CurrentPlanMobile src={this.state.currentPlan} />
+							<FloorPlanNavMobile>
 								<FloorNumberMobile> Floor {this.state.currentFloor} </FloorNumberMobile>
 								<FloorListMobile>
 									<FloorButton onClick = {() => this.floorDown()}> &#8249; </FloorButton>
 									<FloorButton onClick = {() => this.floorUp()} > &#8250; </FloorButton>
 								</FloorListMobile>
-							</FloorPlanTopMobile>
-							<CurrentPlanMobile src={this.state.currentPlan} />
+							</FloorPlanNavMobile>
 						</PlanDisplayMobile>
 					</FloorPlanBoxMobile>
 				</div>

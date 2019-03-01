@@ -35,10 +35,10 @@ def JSON_to_CSV(json_file):
 				break
 			if isinstance(j[ky], basestring):
 				if j[ky]=="" or (j[ky][0] != "'" and ky not in sets_keys):
-					print j[ky]
+					print(j[ky])
 					j[ky] = "'%s'"%(j[ky].encode("utf8"))
-					print j[ky]
-					print " "
+					print(j[ky])
+					print(" ")
 	
 		if to_add:
 			new_json_arr.append(j)
