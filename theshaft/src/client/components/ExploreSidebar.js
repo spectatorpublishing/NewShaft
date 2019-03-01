@@ -18,13 +18,6 @@ const Dorms = styled.div`
     grid-auto-rows: minmax(15vw, auto);
 `
 
-const SidebarDivider = styled.div`
-    & hr{
-        border: 1px solid #509e80;
-        border-radius: 5px;
-    }
-`
-
 
 export default class ExploreSidebar extends Component {
     constructor(props) {
@@ -44,7 +37,6 @@ export default class ExploreSidebar extends Component {
     render() {
         return (
             <div>
-                {/* <SidebarDivider><hr></hr></SidebarDivider> */}
                 <Dorms>
                     {this.state.dorms.map((dorm, index) => 
                         <Link key={index}  to={{pathname : "/explore/" + dorm.DORM.replace(/\s+/g, ''), dorm : dorm.DORM}} style={{textDecoration: 'none'}}>
