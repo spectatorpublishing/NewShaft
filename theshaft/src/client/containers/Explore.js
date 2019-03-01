@@ -21,7 +21,7 @@ let SideBar = styled.div`
   @media only screen and (min-width: 768px) {
     width: 60%;
     padding: 0 0% 0% 0%;
-    min-height: 100%;
+    min-height: 100vh;
     z-index: 1;
   }
 `
@@ -90,13 +90,13 @@ const filterNameToKey = {
 		"7 Person":"SEVEN_SUITE",
 		"8 Person":"EIGHT_SUITE",
 		"9 Person":"NINE_SUITE",
-		"First Year":"FRESHMEN",
+		"First Year":"FRESHMAN",
 		"Sophomore":"SOPHOMORE",
 		"Junior":"JUNIOR",
 		"Senior":"SENIOR",
 		"A/C":"AC",
 		"Gym":"GYM",
-		"Private Bathroom":"P_BATHROOM",
+		"Single-Use Bathroom":"P_BATHROOM",
 		"Private Kitchen":"P_KITCHEN"
 }
   
@@ -118,12 +118,11 @@ export default class Explore extends Component {
         SEVEN_SUITE: 0,
         EIGHT_SUITE: 0,
         NINE_SUITE: 0,
-        FRESHMEN: 0,
+        FRESHMAN: 0,
         SOPHOMORE: 0,
         JUNIOR: 0,
         SENIOR: 0,
         AC: 0,
-        ACCESSIBILITY: 0,
         GYM: 0,
         P_BATHROOM: 0
       },
@@ -133,6 +132,7 @@ export default class Explore extends Component {
     }
   
   componentDidMount(){
+    document.title = "The Shaft";
     this.fetchDorms();
   }
 
@@ -163,6 +163,7 @@ export default class Explore extends Component {
         body: JSON.stringify(this.state.payload)
     }).then(res => res.json())
     .then(response => {
+        console.log(JSON.stringify(response));
         // console.log("RESPONSE: " + JSON.stringify(response))
         this.setState({dorms: response})
     });      

@@ -10,9 +10,11 @@ let ScrollButton = styled.button`
   margin-bottom: 15px;
   padding: 0 0 0 25px;
   text-align: left;
+`
 
+let Label = styled.p`
   &:hover {
-    color: ${props => props.theme.black};
+    color: ${props => props.theme.columbiaBlue};
   }
 `
 
@@ -84,7 +86,7 @@ export default class Scroller extends Component {
             <ActiveLabel>{this.props.label}</ActiveLabel>
           </React.Fragment>
         :
-          <p>{this.props.label}</p>
+          <Label>{this.props.label}</Label>
         }
       </ScrollButton>
     );

@@ -56,9 +56,9 @@ const filterElements = {
 
 	"Amenities": [
 		"A/C",
-		"Accessibility",
+		"Private Kitchen",
 		"Gym",
-		"Private Bathroom"
+		"Single-Use Bathroom"
 	]
 }
 

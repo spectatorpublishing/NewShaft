@@ -1,7 +1,8 @@
 import { createGlobalStyle } from "styled-components";
 
 export const GlobalStyles = createGlobalStyle`
-  body {
+  body,
+  button {
     @import url('https://fonts.googleapis.com/css?family=Raleway:400,700,800');
     font-family: 'Raleway', sans-serif;
   }

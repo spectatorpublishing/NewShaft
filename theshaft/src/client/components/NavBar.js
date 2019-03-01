@@ -21,10 +21,11 @@ let NavContainer = styled.div `
 `
 
 let LogoContainer = styled.div`
-  margin: 0 5%;
+  margin: 0 5vw;
   width: 20%;
   display: flex;
   align-items: center;
+  justify-content: center;
 `
 let ShaftLogo = styled.img`
   height: 35px;
@@ -38,16 +39,13 @@ let SpecLogo = styled.img`
   padding: 0;
   width: 150px;
   object-fit: cover;
-  @media only screen and (max-width: 768px){
-    width: 40%;
-  }
 `
 
 let MenuContainer = styled.div`
   align-items: center;
   display: flex;
   justify-content: center;
-  margin-right: 5%;
+  margin-right: vw;
   width: 65%;
 `
 
@@ -93,7 +91,7 @@ let NavBuffer = styled.div`
 
 let MenuColumn = styled.div`
   align-items: center;
-  background-color: rgba(0,0,0,0.75);
+  background-color: rgba(0,0,0,0.85);
   display: flex;
   flex-direction: column;
   height: 100vh;
@@ -106,14 +104,11 @@ let MenuColumn = styled.div`
   z-index: 1;
 `
 
-let MenuItem = styled.div`
-`
-
 let MenuBtn = styled.input`
   display: none;
 
   &:checked ~ ${MenuColumn} {
-    width: 80vw;
+    width: 50vw;
   }
 `
 
@@ -178,11 +173,20 @@ let DisabledMenuLink = styled(MenuLink)`
 
 let Soon = styled.h6`
   color: ${props => props.theme.mediumGray};
+  font-size: 0.7rem;
 
   ${({ mobile }) => !mobile && `
     position: absolute;
-    margin-top: -4px;
+    margin-top: -3px;
   `}
+`
+
+let DesktopItem = styled.h4`
+  color: inherit;
+`
+
+let MobileItem = styled.h3`
+  color: inherit;
 `
 
 
@@ -236,7 +240,7 @@ export default class NavBar extends Component {
           to={""}
           onClick={this.negateClick}
         >
-          {item["name"]}
+          {isMobile ? <MobileItem>{item["name"]}</MobileItem> : <DesktopItem>{item["name"]}</DesktopItem>}
           <Soon mobile={isMobile}>Coming Soon!</Soon>
         </DisabledMenuLink>
       }
@@ -252,7 +256,7 @@ export default class NavBar extends Component {
           activeClassName={item["external"] ? undefined : "navLinkActive"}
           onClick={this.forceClose}
         >
-          {item["name"]}
+          {isMobile ? <MobileItem>{item["name"]}</MobileItem> : <DesktopItem>{item["name"]}</DesktopItem>}
         </MenuLink>
       }
     });
@@ -266,12 +270,12 @@ export default class NavBar extends Component {
           <MenuRow>
             {this.getMenuItems(isMobile)}
           </MenuRow>
-          <LogoContainer>
-            <a href="https://www.columbiaspectator.com/" target="_blank">
-              <SpecLogo src={speclogo} alt="Columbia Daily Spectator"/>
-            </a>
-          </LogoContainer>
         </MenuContainer>
+        <LogoContainer>
+          <a href="http://www.specpublishing.com/" target="_blank">
+            <SpecLogo src={speclogo} alt="Spectator Publishing Company"/>
+          </a>
+        </LogoContainer>
       </React.Fragment>
     );
     const mobileMenu = (

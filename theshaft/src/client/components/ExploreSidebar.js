@@ -14,15 +14,6 @@ const Dorms = styled.div`
     display: grid;
     grid-column-gap: 5%;
     grid-template-columns: 47.5% 47.5%;
-    // Height of each element never goes below 15vw
-    grid-auto-rows: minmax(15vw, auto);
-`
-
-const SidebarDivider = styled.div`
-    & hr{
-        border: 1px solid #509e80;
-        border-radius: 5px;
-    }
 `
 
 
@@ -44,14 +35,13 @@ export default class ExploreSidebar extends Component {
     render() {
         return (
             <div>
-                {/* <SidebarDivider><hr></hr></SidebarDivider> */}
                 <Dorms>
                     {this.state.dorms.map((dorm, index) => 
                         <Link key={index}  to={{pathname : "/explore/" + dorm.DORM.replace(/\s+/g, ''), dorm : dorm.DORM}} style={{textDecoration: 'none'}}>
                             <DormButton key={index}
                                 school={dorm.COLLEGE}
                                 name={dorm.DORM}
-                                image={"https://housing.columbia.edu/files/housing/McBain.jpg"}
+                                image={dorm.THUMBNAIL_IMAGE}
                                 description={dorm.DESCRIPTION}
                                 amenities={dorm.AMENITIES}
                             />

@@ -11,10 +11,6 @@ import RelatedDorms from "../components/RelatedDorms";
 import ReviewsBox from "../components/ReviewsBox";
 import Scroller from "../components/Scroller";
 import SpectrumSidebar from "../components/SpectrumSidebar";
-import { floor } from "gl-matrix/src/gl-matrix/vec2";
-
-
-
 import ScrollToTop from "../components/ScrollToTop";
 import AdManager from "../components/AdManager";
 
@@ -85,12 +81,14 @@ let Blurb = styled.div`
   color: white;
   position: relative;
   top: -100px;
+  min-height: 40px;
   margin: 0 15% -100px 15%;
   padding: 1.8vw;
   border-radius: 1.5vw;
   @media only screen and (max-width: 767px) {
     top: -220px;
     margin-bottom: -220px;
+    min-height: 80px;
   }
 `;
 
@@ -103,14 +101,14 @@ let Body = styled.div`
 
 let ColOne = styled.div`
   display: flex;
-  width: 25%;
+  width: 15%;
 `;
 
 let ColTwo = styled.div`
   display: flex;
   flex-direction: column;
   scroll-behavior: smooth;
-  width: ${({ mobile }) => (mobile ? `100%` : `50%`)};
+  width: ${({ mobile }) => (mobile ? `100%` : `60%`)};
 `;
 
 let ScrollMenu = styled(ColOne)`
@@ -129,6 +127,7 @@ let ScrollAAG = styled(ScrollMenu)`
   padding-right: 20px;
   left: initial;
   right: 0;
+  width: 25%;
 `
 
 let Margin = styled.div`
@@ -265,8 +264,6 @@ export default class Dorm extends React.PureComponent {
     })
       .then(res => res.json())
       .then(dormPhotos => {
-        console.log(dormPhotos);
-
         this.setState({dorm_photos: Object.values(dormPhotos[0])})
       });
 
@@ -284,11 +281,13 @@ export default class Dorm extends React.PureComponent {
     })
       .then(res => res.json())
       .then(dormInfo => {
-        console.log(dormInfo)
-        dormInfo[0].PROS = ["Pro 1", "Pro 2", "Pro 3"];
-        dormInfo[0].CONS = ["Con 1", "Con 2", "Con 3"];
-        this.setState({dormInfo: dormInfo[0]})
+        dormInfo[0].PROS = dormInfo[0].PROS.substring(1, dormInfo[0].PROS.length - 1).split(',');
+        dormInfo[0].CONS = dormInfo[0].CONS.substring(1, dormInfo[0].CONS.length - 1).split(',');
+        this.setState({dormInfo: dormInfo[0]});
+        document.title = this.state.dormInfo.DORM;
+
       });
+      
   }
 
   fetchAmenities(name) {
@@ -319,8 +318,7 @@ export default class Dorm extends React.PureComponent {
     })
       .then(res => res.json())
       .then(reviewsInfo => {
-        console.log(reviewsInfo)
-        this.setState({reviews: reviewsInfo})
+        this.setState({reviews: reviewsInfo.reviews, avg_rating: reviewsInfo.avg_rating, reccomend: reviewsInfo.reccomended, ranking: reviewsInfo.ranking})
       });
   }
 
@@ -364,18 +362,15 @@ export default class Dorm extends React.PureComponent {
       .then(floorPlans => {
         var floorPlan = floorPlans[0];
         var floor_state = []
-        console.log(floorPlan)
         var keys = Object.keys(floorPlan);
         for (var i = 0; i < keys.length; i++)
         {
           var floorNum = keys[i];
-          console.log(floorPlan[floorNum]);
           if (floorPlan[floorNum] == null || keys[i] == "DORM") {
             continue;
           }
           floor_state[floorNum - 1] = "http://localhost:8080/floor_plans/" + floorPlan[floorNum];
         }
-        console.log(floor_state)
         return floor_state
       }).then(thing => {
         this.setState({
@@ -520,9 +515,9 @@ export default class Dorm extends React.PureComponent {
             <ScrollerTarget ref={this.reviewsRef}>
               <Margin>
                 <ReviewsBox
-                  stars={stars}
-                  recommend={recommend}
-                  ranking={ranking}
+                  stars={this.state.avg_rating}
+                  recommend={this.state.reccomend}
+                  ranking={this.state.ranking}
                   reviews={this.state.reviews}>
                 </ReviewsBox>
               </Margin>

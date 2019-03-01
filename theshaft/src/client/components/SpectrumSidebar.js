@@ -11,7 +11,7 @@ const SmallWrapper = styled.div`
 		display: block;
 	}
 `
-const ImageLink = styled.a`
+const ImageContainer = styled.div`
 	width: 40%;
 	margin-right: 15px;
 	
@@ -85,18 +85,18 @@ const LinkDiv = styled.a`
 class SidebarItem extends Component {
     render(){
     	return (
-				<LinkDiv target="_blank" rel="noopener noreferrer" href={this.props.url}>
-	        <SmallWrapper>
-				<ImageLink href="https://www.columbiaspectator.com/spectrum/shaft/" target="_blank">
-					<Image src={this.props.img_src}/>
-				</ImageLink>
-				<TextDiv>
-					<Title>{this.props.title}</Title>
-					<Hr></Hr>
-					<AuthorLine>{this.props.author}</AuthorLine>
-					<AuthorLine>{this.props.date}</AuthorLine>
-				</TextDiv>
-			</SmallWrapper>
+			<LinkDiv target="_blank" rel="noopener noreferrer" href={this.props.url}>
+				<SmallWrapper>
+					<ImageContainer>
+						<Image src={this.props.img_src}/>
+					</ImageContainer>
+					<TextDiv>
+						<Title>{this.props.title}</Title>
+						<Hr></Hr>
+						<AuthorLine>{this.props.author}</AuthorLine>
+						<AuthorLine>{this.props.date}</AuthorLine>
+					</TextDiv>
+				</SmallWrapper>
 			</LinkDiv>
     	);
     }
