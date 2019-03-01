@@ -37,7 +37,7 @@ def JSON_to_CSV(json_file):
 			writer.writerow(row)
 
 def insert_to_sql():
-	JSON_to_CSV('DormJSONS/_amenities.json')
+	JSON_to_CSV('otherJSONS/_amenities.json')
 	os.system("./insert_script.sh amenities json_csvd.csv")
 
 insert_to_sql()

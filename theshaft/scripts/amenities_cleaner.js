@@ -1,6 +1,6 @@
 var fs = require("fs");
 
-var cutoffs_json = fs.readFileSync("../db/DormJSONS/_cutoffs.json");
+var cutoffs_json = fs.readFileSync("../db/otherJSONS/_cutoffs.json");
 var cutoffs = JSON.parse(cutoffs_json);
 
 var keys = Object.keys(cutoffs);
@@ -31,4 +31,4 @@ for (var i = 0; i < keys.length; i++)
     amenities.push(dorm);
 }
 
-fs.writeFileSync("../db/DormJSONS/_amenities.json", JSON.stringify(amenities));
+fs.writeFileSync("../db/otherJSONS/_amenities.json", JSON.stringify(amenities));
