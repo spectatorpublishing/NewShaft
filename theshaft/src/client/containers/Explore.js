@@ -15,13 +15,13 @@ let ExploreContainer = styled.div`
 
 let SideBar = styled.div`
   width: 100%;
-  padding: 0 5%;
+  padding: 0% 0% 0% 0%;
   overflow-y: scroll; 
   min-height: 200px;
   @media only screen and (min-width: 768px) {
-    width: 55%;
-    padding: 0 2.5%;
-    min-height: 500px;
+    width: 60%;
+    padding: 0 0% 0% 0%;
+    min-height: 100%;
     z-index: 1;
   }
 `
@@ -158,6 +158,7 @@ export default class Explore extends Component {
         <ColOne>
           <SideBar>
             <div className="filters">
+              {/* <h2>The Shaft</h2> */}
               <SearchBar handleChange={this.updatePayload}/>
               <Filter handleChange={this.updatePayload}/>
             </div>

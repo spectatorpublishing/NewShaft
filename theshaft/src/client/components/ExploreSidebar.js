@@ -6,7 +6,9 @@ import styled from 'styled-components'
 import DormButton from '../components/DormButton';
 
 const Dorms = styled.div`
-	margin: 0 auto;
+    margin: 0 auto;
+    padding: 0 5%;
+    margin-top: 2vh;
 	overflow: scroll;
     height: 100%;
     display: grid;
@@ -42,7 +44,7 @@ export default class ExploreSidebar extends Component {
     render() {
         return (
             <div>
-                <SidebarDivider><hr></hr></SidebarDivider>
+                {/* <SidebarDivider><hr></hr></SidebarDivider> */}
                 <Dorms>
                     {this.state.dorms.map((dorm, index) => 
                         <Link key={index}  to={{pathname : "/explore/" + dorm.DORM.replace(/\s+/g, ''), dorm : dorm.DORM}} style={{textDecoration: 'none'}}>
