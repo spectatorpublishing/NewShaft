@@ -11,7 +11,7 @@ const SmallWrapper = styled.div`
 		display: block;
 	}
 `
-const ImageDiv = styled.div`
+const ImageLink = styled.a`
 	width: 40%;
 	margin-right: 15px;
 	
@@ -56,11 +56,8 @@ const Hr = styled.hr`
 
 const Logo = styled.img `
 	display: block;
-  	margin-left: auto;
-  	margin-right: auto;
-  	margin-bottom: 50px;
-  	margin-top: 20px;
-  	width: 40%;
+  	margin: 20px auto;
+  	width: 60%;
 
   	@media only screen and (max-width: 767px) {
   		width: 80%;
@@ -68,6 +65,8 @@ const Logo = styled.img `
 			margin-top: 0;
   	}
 `
+
+let LogoLink = styled.a``
 
 const TextDiv = styled.div `
 	width: 70%;
@@ -88,9 +87,9 @@ class SidebarItem extends Component {
     	return (
 				<LinkDiv target="_blank" rel="noopener noreferrer" href={this.props.url}>
 	        <SmallWrapper>
-				<ImageDiv>
+				<ImageLink href="https://www.columbiaspectator.com/spectrum/shaft/" target="_blank">
 					<Image src={this.props.img_src}/>
-				</ImageDiv>
+				</ImageLink>
 				<TextDiv>
 					<Title>{this.props.title}</Title>
 					<Hr></Hr>
@@ -124,8 +123,10 @@ class SpectrumSidebar extends Component {
 
     render(){
         return(
-	        <Wrapper>
-				<Logo src="https://www.columbiaspectator.com/pb/resources/img/spectrum-logo-NEW.png"/>
+	        <Wrapper >
+				<LogoLink href="https://www.columbiaspectator.com/spectrum/shaft/" target="_blank">
+					<Logo src="https://www.columbiaspectator.com/pb/resources/img/spectrum-logo-NEW.png"/>
+				</LogoLink>
 				{this.articleMap()}
 			</Wrapper>
 		);

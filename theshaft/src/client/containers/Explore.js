@@ -95,9 +95,9 @@ const filterNameToKey = {
 		"Junior":"JUNIOR",
 		"Senior":"SENIOR",
 		"A/C":"AC",
-		"Accessibility":"ACCESSIBILITY",
 		"Gym":"GYM",
-		"Private Bathroom":"P_BATHROOM"
+		"Private Bathroom":"P_BATHROOM",
+		"Private Kitchen":"P_KITCHEN"
 }
   
 export default class Explore extends Component {

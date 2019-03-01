@@ -23,7 +23,6 @@ let Input = styled.input`
     width: 60%;
     font-family: inherit;
     font-size: 1rem;
-    font-style: italic;
     margin: 0.75rem 0 0 1.5%;
     padding: 0.75% 1% 0.75%;
     box-sizing: content-box;

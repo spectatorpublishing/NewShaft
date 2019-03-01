@@ -15,20 +15,20 @@ const menuItems = [
     "disabled": false,
   },
   {
-    "name": "Whiteboard",
-    "link": "/whiteboard",
+    "name": "Shaft Live",
+    "link": "/shaftlive",
     "external": false,
     "disabled": true,
   },
   {
-    "name": "FAQ",
-    "link": "/faq",
+    "name": "Housing 101",
+    "link": "/housing101",
     "external": false,
     "disabled": true,
   },
   {
     "name": "Spectrum",
-    "link": "https://www.columbiaspectator.com/spectrum/",
+    "link": "https://www.columbiaspectator.com/spectrum/shaft/",
     "external": true,
     "disabled": false,
   }
