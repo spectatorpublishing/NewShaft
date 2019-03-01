@@ -445,7 +445,7 @@ export default class Dorm extends React.PureComponent {
         <Header>
           <DormName>{this.state.dormInfo.DORM}</DormName>
         </Header>
-        <Blurb>{this.state.dormInfo.DESCRIPTION}</Blurb>
+        <Blurb>{this.state.dormInfo.DESCRIPTION.substring(1, this.state.dormInfo.DESCRIPTION.length - 1)}</Blurb>
 
         <Body>
           {!isMobile && <ColOne>
