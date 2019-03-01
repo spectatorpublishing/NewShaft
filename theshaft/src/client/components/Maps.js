@@ -80,9 +80,9 @@ export default class Maps extends Component {
 
     this.state = {
       viewport: {
-        latitude: 40.7128,
-        longitude: -74.006,
-        zoom: 15
+        latitude: this.props.centerLatitude,
+        longitude: this.props.centerLongitude,
+        zoom: 16
       },
       coordinates: {
         latitudes: this.props.latitudes,
@@ -102,6 +102,11 @@ export default class Maps extends Component {
   componentDidUpdate(oldProps){
     if(oldProps != this.props){
       this.setState({
+        viewport: {
+          latitude: this.props.centerLatitude,
+          longitude: this.props.centerLongitude,
+          zoom: 16
+        },
         coordinates: {
           latitudes: this.props.latitudes,
           longitudes: this.props.longitudes
@@ -109,7 +114,9 @@ export default class Maps extends Component {
         popup: {
           popupInfo: this.props.popupInfo,
           popupIndex: this.props.popupInfo.map(() => {return false})
-        }
+        },
+        centerLatitude: this.props.centerLatitude,
+        centerLongitude: this.props.centerLongitude
       })
     }
   }
@@ -141,8 +148,15 @@ export default class Maps extends Component {
           height={this.props.height}
           zoom={view.zoom}
           onViewportChange={this.handleViewportChange}
+          scrollZoom ={false}
+          //minzoom={view.zoom}
+         // maxzoom={view.zoom}
+          doubleClickZoom={false}
         >
         {markers}
+        <Popup latitude={40} longitude={-75.41} closeButton={true} closeOnClick={false} anchor="top">
+          <h1>You are here</h1>
+        </Popup>
         </ReactMapGL>
       </div>
     );

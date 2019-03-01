@@ -1,1 +1,21 @@
-{"Residential Area":"E-Block","Building Type":"Corridor-style","Room Type":"Singles, Doubles, large walk-through doubles","Class Make-Up":"Sophomores, Juniors, Few Seniors","Rate":"$9,538/year","Entrance Info":"Inside gate on 116th Street between Amsterdam and Morningside Drive","Number of Residential Floors":"11","Single/Double Rooms":"283/45","Bathroom":"SharedSeparate men's and women's per floor","Laundry":"Available2nd floor","Flooring":"No carpet","Kitchen":"AvailableAll floor lounges have a cooking area with a sink, stove, and microwave.","Lounge":"Building LoungeGround floor , Kitchen LoungeAll floors , Floor LoungeAll floorsA ki","Cleaning Schedule":"BathroomsDaily, M-F , LoungesDaily, M-F , Trash Removal (Room/Suite)Resident responsibility","Computer Lab":"Available2nd floor","A/C":"No","Piano":"AvailableIn building lounge","Features":"Bedrooms equipped with personal sinks","What Students Say":"Higher floors known for amazing views of Morningside Park and Central Park","Latitude":"40.806912","Longitude":"-73.959758"}
+{
+  "Residential Area": "E-Block",
+  "Building Type": "Corridor-style",
+  "Room Type": "Singles, Doubles, large walk-through doubles",
+  "Class Make-Up": "Sophomores, Juniors, Few Seniors",
+  "Rate": "$9,538/year",
+  "Entrance Info": "Inside gate on 116th Street between Amsterdam and Morningside Drive",
+  "Number of Residential Floors": "11",
+  "Single/Double Rooms": "283/45",
+  "Bathroom": "SharedSeparate men's and women's per floor",
+  "Laundry": "Available2nd floor",
+  "Flooring": "No carpet",
+  "Kitchen": "AvailableAll floor lounges have a cooking area with a sink, stove, and microwave.",
+  "Lounge": "Building LoungeGround floor , Kitchen LoungeAll floors , Floor LoungeAll floorsA ki",
+  "Cleaning Schedule": "BathroomsDaily, M-F , LoungesDaily, M-F , Trash Removal (Room/Suite)Resident responsibility",
+  "Computer Lab": "Available2nd floor",
+  "A/C": "No",
+  "Piano": "AvailableIn building lounge",
+  "Features": "Bedrooms equipped with personal sinks",
+  "What Students Say": "Higher floors known for amazing views of Morningside Park and Central Park"
+}

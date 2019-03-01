@@ -1,1 +1,23 @@
-{"Residential Area":"West Campus","Building Type":"Suite-style","Room Type":"Suites with singles and doubles","Class Make-Up":"Juniors, Seniors","Rate":"$9,538/year","Entrance Info":"47 Claremont","Number of Residential Floors":"6","Single/Double Rooms":"79/22","Bathroom":"PrivateOne per suite","Laundry":"AvailableIn basement; laundry is free","Flooring":"No carpet","Kitchen":"PrivatePer suite","Lounge":"TV LoungeIn basement","Cleaning Schedule":"BathroomsTwice weekly , KitchensTwice weekly , Trash Removal (Room/Suite)Resident responsibility , RecyclingWeekly","Fitness Room":"AvailableIn basement","Bike Storage":"AvailableIn basement","Computer Lab":"AvailableIn basement","Print Station":"AvailableIn basement","A/C":"No","Features":"Closest building to Barnard residencesQuick access to Barnard’s Hewitt Dining HallShort walk to Riverside ParkE line rooms have space constraints and lofted bedsNo common area in suitesFitness room","What Students Say":"\"At times, residents of 47 Claremont may seem isolated from their friends who live on the central campus, but in return they get an intimate group living experience that they will likely remember fondly throughout college and beyond.\"","Latitude":"40.810172","Longitude":"-73.963963"}
+{
+  "Residential Area": "West Campus",
+  "Building Type": "Suite-style",
+  "Room Type": "Suites with singles and doubles",
+  "Class Make-Up": "Juniors, Seniors",
+  "Rate": "$9,538/year",
+  "Entrance Info": "47 Claremont",
+  "Number of Residential Floors": "6",
+  "Single/Double Rooms": "79/22",
+  "Bathroom": "PrivateOne per suite",
+  "Laundry": "AvailableIn basement; laundry is free",
+  "Flooring": "No carpet",
+  "Kitchen": "PrivatePer suite",
+  "Lounge": "TV LoungeIn basement",
+  "Cleaning Schedule": "BathroomsTwice weekly , KitchensTwice weekly , Trash Removal (Room/Suite)Resident responsibility , RecyclingWeekly",
+  "Fitness Room": "AvailableIn basement",
+  "Bike Storage": "AvailableIn basement",
+  "Computer Lab": "AvailableIn basement",
+  "Print Station": "AvailableIn basement",
+  "A/C": "No",
+  "Features": "Closest building to Barnard residencesQuick access to Barnard’s Hewitt Dining HallShort walk to Riverside ParkE line rooms have space constraints and lofted bedsNo common area in suitesFitness room",
+  "What Students Say": "\"At times, residents of 47 Claremont may seem isolated from their friends who live on the central campus, but in return they get an intimate group living experience that they will likely remember fondly throughout college and beyond.\""
+}

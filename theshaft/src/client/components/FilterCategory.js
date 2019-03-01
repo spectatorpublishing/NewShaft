@@ -2,22 +2,61 @@ import React, { Component } from "react";
 import FilterButton from "./FilterButton.js"
 import styled from 'styled-components';
 
+let DDWrapper = styled.div`
+    @media(min-width: 768px){
+        position: relative; // So that the filter list will position itself relative to this div
+    }
+`
+
+let DDHeader = styled.div`
+`
+
+let DDHeaderTitle = styled.div`
+    text-shadow: ${props => props.shadow ? props.theme.textShadow : "none"};
+    cursor: pointer;
+    user-select: none;
+    color: ${props => props.theme.columbiaBlue};
+`
+
 let ListElement = styled.li`
-	// padding-top: 1px;
-	// color: rgb(176, 214, 132);
-	// font-size: 9pt;
-    // // white-space: nowrap;
     list-style-type:none;
-    //margin: -10px;
-    left: 10px;
-    padding: 2px;
-    background: white;
-    // height: 100px;
+    display: inline-block;
+    border-radius: 10px;
+    border: 1px solid ${props => props.theme.lightGray};
+    padding: 5px;
+    margin: 5px 10px;
+    @media (min-width: 650px) {
+        display: block;
+        border: none;
+        left: 10px;
+        padding: 2px;
+        background: ${props => props.theme.white};
+        width: 100%;
+    }
 `
 
 let FilterList = styled.ul`
     position: absolute;
-    margin: -10px;
+    margin: 0;
+    padding: 0;
+    left: 0;
+    top: 3rem;
+    width: 100%;
+    overflow: hidden;
+    background: ${props => props.theme.white};
+    
+    @media (min-width: 650px) {
+        position: absolute;
+        margin: 5px 0 0 0;
+        padding: 0;
+        left: auto;
+        top: 1rem;
+        width: 100%;
+        border-radius: 10px;
+        border: 1px solid ${props => props.theme.lightGray};
+        overflow: hidden;
+        z-index: 1;
+    }
 `
 
 
@@ -33,56 +72,38 @@ export default class FilterComponent extends React.PureComponent {
         console.log(`filters: ${this.props.filters}`)
 
         this.state = {
-            listOpen: false,
             headerTitle: this.props.title,
-            handleChange: this.props.handleChange,
             filters: this.props.filters
         }
     }
 
-    handleClickOutside(){
-        this.setState({
-          listOpen: false
-        })
-    }
     toggleList(){
-    this.setState(prevState => ({
-        listOpen: !prevState.listOpen
-    }))
+        this.props.setfilter(this.props.i, Number(!this.props.open))
+        console.log("setfilter " + this.props.i + Number(!this.props.open))
     }
     
     render() {
         console.log(`this.state.filters: ${this.state.filters}`)
         const filters = this.state.filters
         console.log(`the FILTERS: ${filters}`)
-        const listOpen = this.state.listOpen
+        const listOpen = this.props.open
+        console.log("open is:"+listOpen)
         
         return(
-            <div className="dd-wrapper">
+            <DDWrapper>
 
-                <div className="dd-header" onClick={() => this.toggleList()}>
-                    <div className="dd-header-title">{this.props.headerTitle}</div>
-                    {listOpen
-                        ? <h3>∧</h3>
-                        : <h3>∨</h3>
-                    }
-                </div>
+                <DDHeader onClick={() => this.toggleList()}>
+                    <DDHeaderTitle shadow={this.props.open}>{this.props.headerTitle}</DDHeaderTitle>
+                </DDHeader>
 
                 {listOpen && <FilterList>
                     {filters.map((item, index) => (
                         <ListElement key={index++} > 
-                        <FilterButton handleClick={this.state.handleChange} name={item}></FilterButton>
+                        <FilterButton handleClick={this.props.handleChange} name={item}></FilterButton>
                         </ListElement>
                     ))}
                 </FilterList>}
-            </div>
+            </DDWrapper>
   )
     }
 }
-
-
-{/* <li><FilterButton handleClick={this.state.handleChange} name={item}></FilterButton></li> */}
-
-{/* <FontAwesome name="angle-up" size="2x"/> */}
-
-{/* <FontAwesome name="angle-down" size="2x"/> */}

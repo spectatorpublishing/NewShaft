@@ -24,7 +24,7 @@ function getDormInfo(con, request, callback) {
 		}
 		*/
 
-		var sqlStatement = `SELECT * FROM ${request.table} `
+		var sqlStatement = `SELECT * FROM dorm_static_info `
 		delete request.table;
 		var firstKey = true
 
@@ -55,8 +55,7 @@ router.post('/', function(req, res, next) {
   		password: "spec1877",
   		database: "dorms"
 	});
-
-	console.log("requesting selection of",req.body)
+	console.log("requesting selection o f" , req.body)
 	
 	getDormInfo(con, req.body, (dormInfo) => {
 		console.log(dormInfo)

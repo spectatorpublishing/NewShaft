@@ -54,7 +54,8 @@ export default class RelatedDorms extends Component {
     //   }
 
     render() {
-        var relatedDormsList = this.state.relatedDorms.map((dorm, index) => (<Link key={index} to={"/explore/" + dorm.id} style={{ textDecoration: 'none' }}><img src={dorm.image} className="relatedDormImage" alt={dorm.name}/><div className="relatedDormName"> {dorm.name} </div></Link>));
+        
+        var relatedDormsList = this.state.relatedDorms.map((dorm, index) => (<Link key={index} to={{pathname : "/explore/" + dorm.DORM.replace(/\s+/g, ''), dorm : dorm.DORM}} style={{ textDecoration: 'none' }}><img src={dorm.image} className="relatedDormImage" alt={dorm.DORM}/><div className="relatedDormName"> {dorm.DORM} </div></Link>));
         return (
             <div className="relatedDormsList">
                 {/* ===> The title component's text prop needs to be passed in here! <=== */}

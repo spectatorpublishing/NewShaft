@@ -14,7 +14,6 @@ def JSON_to_CSV(json_file):
 	sets_keys = ['CLASS_MAKEUP']
 	new_json_arr = []
 	for j in json_arr:
-		print j['DORM']
 		to_add = True
 
 		# handle bad vals

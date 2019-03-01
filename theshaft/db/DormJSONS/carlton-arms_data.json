@@ -1,1 +1,19 @@
-{"Residential Area":"West Campus","Building Type":"Large suite-style","Room Type":"Singles, doubles","Class Make-Up":"Combined Plan, Transfer Students","Rate":"$9,538/year","Entrance Info":"362 Riverside Drive","Number of Residential Floors":"9","Single/Double Rooms":"25/53","Bathroom":"PrivatePer suite","Laundry":"AvailableIn basement. Laundry is free for residents with a Columbia Undergraduate Housing contract. Eligible residents will receive a Smart Chip Card on the first day of classes for the fall and spring terms.","Flooring":"No carpet","Kitchen":"PrivatePer suite","Lounge":"Study LoungePer suite","Cleaning Schedule":"BathroomsOnce weekly , KitchensOnce weekly , Trash Removal (Room/Suite)Daily , RecyclingDaily","Bike Storage":"In basement","Print Station":"AvailableIn lobby","Features":"Wireless Internet","Latitude":"40.803830","Longitude":"-73.968630"}
+{
+  "Residential Area": "West Campus",
+  "Building Type": "Large suite-style",
+  "Room Type": "Singles, doubles",
+  "Class Make-Up": "Combined Plan, Transfer Students",
+  "Rate": "$9,538/year",
+  "Entrance Info": "362 Riverside Drive",
+  "Number of Residential Floors": "9",
+  "Single/Double Rooms": "25/53",
+  "Bathroom": "PrivatePer suite",
+  "Laundry": "AvailableIn basement. Laundry is free for residents with a Columbia Undergraduate Housing contract. Eligible residents will receive a Smart Chip Card on the first day of classes for the fall and spring terms.",
+  "Flooring": "No carpet",
+  "Kitchen": "PrivatePer suite",
+  "Lounge": "Study LoungePer suite",
+  "Cleaning Schedule": "BathroomsOnce weekly , KitchensOnce weekly , Trash Removal (Room/Suite)Daily , RecyclingDaily",
+  "Bike Storage": "In basement",
+  "Print Station": "AvailableIn lobby",
+  "Features": "Wireless Internet"
+}

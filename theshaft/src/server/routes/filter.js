@@ -1,98 +1,68 @@
-var fakedata = {
-  Carman: {
-    dorm: "Carman", // name of dorm for display
-    address: "619 W 113th St",
-    description: "Comedy House",
-    college: "columbia",
-    thumbnail_image: "https://housing.columbia.edu/files/housing/Carman.jpg",
-    suite: ["5"],
-    walkthrough: false,
-    single: true,
-    double: true,
-    triple: false,
-    make_up: ["sophomores", "juniors", "seniors"],
-    pros: ["pro1", "pro2", "pro3"],
-    cons: ["con1", "con2", "con3"],
-    latitude: 40.7128,
-    longitude: -74.006
-  },
-
-  Mcbain: {
-    dorm: "McBain",
-    address: "McBain Fake Address",
-    description: "On Campus",
-    college: "columbia",
-    thumbnail_image: "https://housing.columbia.edu/files/housing/McBain.jpg",
-    suite: ["4", "3"],
-    walkthrough: false,
-    single: true,
-    double: true,
-    triple: true,
-    make_up: ["sophomores"],
-    pros: ["pro1", "pro2", "pro3"],
-    cons: ["con1", "con2", "con3"],
-    latitude: 40.7127,
-    longitude: -74.005
-  },
-  Test: {
-    dorm: "110",
-    address: "601 W 110th St",
-    description: "Off-campus but not really",
-    college: "barnard",
-    thumbnail_image: "https://housing.columbia.edu/files/housing/McBain.jpg",
-    suite: ["6"],
-    walkthrough: false,
-    single: true,
-    double: false,
-    triple: false,
-    make_up: ["first-years", "sophomores", "juniors", "seniors"],
-    pros: ["pro1", "pro2", "pro3"],
-    cons: "",
-    latitude: 40.7129,
-    longitude: -74.004
-  }
-};
 
 var express = require("express");
 var router = express.Router();
 var mysql = require("mysql");
-var _ = require("underscore");
-
-function filterDormInfo(data, request, callback) {
-  console.log("request received", request)
-  //console.log(_.values(data))
-  result = _.values(data)
 
 
-  var result = result.filter(function(el) {
-    if (request.college != -1) {
-      return el.college == request.college;
+function filterDormInfo(con, request, callback) {
+
+  var sqlStatement = `SELECT d.DORM as DORM, d.DESCRIPTION as DESCRIPTION, d.COLLEGE as COLLEGE, 
+  d.THUMBNAIL_IMAGE as THUMBNAIL_IMAGE, d.LATITUDE as LATITUDE, d.LONGITUDE as LONGITUDE, a.AC as AC, a.GYM as GYM,
+  a.BATHROOM as BATHROOM, ifnull(s.TWO_SUITE, 0) as TWO_SUITE, ifnull(s.THREE_SUITE, 0) as THREE_SUITE, 
+  ifnull(s.FOUR_SUITE, 0) as FOUR_SUITE, ifnull(s.FIVE_SUITE, 0) as FIVE_SUITE, ifnull(s.SIX_SUITE, 0) as SIX_SUITE,
+  ifnull(s.SEVEN_SUITE, 0) as SEVEN_SUITE, ifnull(s.EIGHT_SUITE, 0) as EIGHT_SUITE, ifnull(s.NINE_SUITE, 0) as NINE_SUITE 
+  FROM dorm_static_info as d JOIN amenities as a on a.DORM = d.DORM LEFT JOIN suites as s on s.DORM = d.DORM `
+
+  var firstKey = true
+  var keys = Object.keys(request);
+
+  if(request["COLUMBIA"] === 1 && request["BARNARD"] == 0){
+    firstKey = false;
+    sqlStatement += `WHERE COLLEGE = "COLUMBIA"`;
+  }else if(request["COLUMBIA"] == 0 && request["BARNARD"] == 1 ){
+    firstkey = false;
+    sqlStatement += `WHERE COLLEGE = "BARNARD"`;
+  }
+
+  // Prevent iteration through COLUMBIA and BARNARD
+  for(i = 2; i < keys.length; i++) {
+    if(typeof request[keys[i]] === "number" && request[keys[i]] === 1){
+      if(firstKey) {
+				firstKey = false
+				sqlStatement += `WHERE ${keys[i]}=${request[keys[i]]}`
+			} else {
+				sqlStatement += ` AND ${keys[i]}=${request[keys[i]]}`
+			}
     }
-    return typeof el.college == "string";
+    else if((typeof request[keys[i]] === "string" && request[keys[i]].length > 0)){
+      if(firstKey) {
+				firstKey = false
+				sqlStatement += `WHERE d.${keys[i]} LIKE '${request[keys[i]]}%'`
+			} else {
+				sqlStatement += ` AND d.${keys[i]} LIKE '${request[keys[i]]}%'`
+			}
+    }
+	}
+  sqlStatement+=`;`
+  console.log(sqlStatement);
+  
+  con.query(sqlStatement, function(err, res) {
+    if (err) throw err;
+    callback(res)
   });
 
-  result = result.filter(function(el) {
-    // console.log(!_.isEqual(_.difference(request.suite, el.suite),(request.suite))) //debug
-    // If request make_up is empty, defaults to all
-    // Same thing with suite
-    return (
-      (!_.isEqual(_.difference(request.make_up, el.make_up), request.make_up) ||
-        request.make_up.length === 0) &&
-      (!_.isEqual(_.difference(request.suite, el.suite), request.suite) ||
-        request.suite.length === 0) &&
-      ((!request.single || el.single == request.single) &&
-        (!request.double || el.double == request.double) &&
-        (!request.triple || el.triple == request.triple))
-    );
-  });
+  con.end(); // DO NOT REMOVE!
 
-  callback(result);
 }
 
 router.post("/", function(req, res, next) {
-  // console.log("filtering selection of",req.body)
-
-  filterDormInfo(fakedata, req.body, dormInfo => {
+  var con = mysql.createConnection({
+    host: "157.230.66.55",
+    user: "root",
+    password: "spec1877",
+    database: "dorms"
+  });
+  filterDormInfo(con, req.body, dormInfo => {
     console.log("server side dorminfo", dormInfo);
     // JSON.stringify(dormInfo[0])
     res.json(dormInfo);

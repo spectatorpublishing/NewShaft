@@ -1,1 +1,22 @@
-{"Residential Area":"West Campus","Building Type":"Corridor-style","Room Type":"Singles, Doubles","Class Make-Up":"Sophomores, Juniors, Few Seniors","Rate":"$9,538/year","Entrance Info":"544 West 110th Street","Number of Residential Floors":"8","Single/Double Rooms":"80/7","Bathroom":"SharedShared men’s, women’s, and coed facilities","Laundry":"AvailableIn basement; laundry is free","Flooring":"No carpet","Kitchen":"SharedPer floor","Lounge":"Kitchen LoungePer floor with flat-screen, cable TV","Cleaning Schedule":"BathroomsDaily, M-F , KitchensThree times a week , Trash Removal (Room/Suite)Resident responsibility","Fitness Room":"Available2nd floor","Bike Storage":"AvailableIn basement","Print Station":"AvailableIn lobby","A/C":"No","Features":"Off-campus experience, near Chipotle and Westside MarketRooms wired for Time Warner Cable","What Students Say":"Fun building that provides a taste of off-campus life.","Latitude":"40.801890","Longitude":"-73.961270"}
+{
+  "Residential Area": "West Campus",
+  "Building Type": "Corridor-style",
+  "Room Type": "Singles, Doubles",
+  "Class Make-Up": "Sophomores, Juniors, Few Seniors",
+  "Rate": "$9,538/year",
+  "Entrance Info": "544 West 110th Street",
+  "Number of Residential Floors": "8",
+  "Single/Double Rooms": "80/7",
+  "Bathroom": "SharedShared men’s, women’s, and coed facilities",
+  "Laundry": "AvailableIn basement; laundry is free",
+  "Flooring": "No carpet",
+  "Kitchen": "SharedPer floor",
+  "Lounge": "Kitchen LoungePer floor with flat-screen, cable TV",
+  "Cleaning Schedule": "BathroomsDaily, M-F , KitchensThree times a week , Trash Removal (Room/Suite)Resident responsibility",
+  "Fitness Room": "Available2nd floor",
+  "Bike Storage": "AvailableIn basement",
+  "Print Station": "AvailableIn lobby",
+  "A/C": "No",
+  "Features": "Off-campus experience, near Chipotle and Westside MarketRooms wired for Time Warner Cable",
+  "What Students Say": "Fun building that provides a taste of off-campus life."
+}

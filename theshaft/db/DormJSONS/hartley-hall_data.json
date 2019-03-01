@@ -1,1 +1,20 @@
-{"Residential Area":"First Year Area","Building Type":"Large suite-style","Room Type":"Suites with singles and doubles","Class Make-Up":"First-Year, Sophomores","Rate":"First Year $8,412/year; Upperclass: $9,538/year","Entrance Info":"Inside campus between 115th and 116th Streets","Number of Residential Floors":"10","Single/Double Rooms":"158/36","Bathroom":"Semi-PrivateWithin suite","Laundry":"AvailableIn basement","Flooring":"Hallways and rooms carpeted","Kitchen":"PrivatePer suite","Lounge":"Building Lounge1st floor with game room including pool and ping pong tables , Study Lounge10th floor , Common AreaPer suite with cable TV","Cleaning Schedule":"BathroomsTwice weekly , KitchensResident responsibility , Trash Removal (Room/Suite)Resident responsibility , RecyclingTwice weekly","Computer Lab":"Available1st floor","A/C":"No","Features":"Vending machines located in building","What Students Say":"“Hartley was a great place to spend my first year at Columbia. Living in such a comfortable setting with upperclassmen really helped me learn the ins-and-outs of Columbia, and it was great to be so close to the action on campus.\" \"Hartley is not only a nice place to live, but has a convenient location. Just downstairs in the lobby is the Hartley Hospitality Desk, a CUIT computer lab, and a lounge with pool and ping pong tables! In addition, it only takes two minutes to get to classes in Hamilton.\"","Latitude":"40.806412","Longitude":"-73.961683"}
+{
+  "Residential Area": "First Year Area",
+  "Building Type": "Large suite-style",
+  "Room Type": "Suites with singles and doubles",
+  "Class Make-Up": "First-Year, Sophomores",
+  "Rate": "First Year $8,412/year; Upperclass: $9,538/year",
+  "Entrance Info": "Inside campus between 115th and 116th Streets",
+  "Number of Residential Floors": "10",
+  "Single/Double Rooms": "158/36",
+  "Bathroom": "Semi-PrivateWithin suite",
+  "Laundry": "AvailableIn basement",
+  "Flooring": "Hallways and rooms carpeted",
+  "Kitchen": "PrivatePer suite",
+  "Lounge": "Building Lounge1st floor with game room including pool and ping pong tables , Study Lounge10th floor , Common AreaPer suite with cable TV",
+  "Cleaning Schedule": "BathroomsTwice weekly , KitchensResident responsibility , Trash Removal (Room/Suite)Resident responsibility , RecyclingTwice weekly",
+  "Computer Lab": "Available1st floor",
+  "A/C": "No",
+  "Features": "Vending machines located in building",
+  "What Students Say": "“Hartley was a great place to spend my first year at Columbia. Living in such a comfortable setting with upperclassmen really helped me learn the ins-and-outs of Columbia, and it was great to be so close to the action on campus.\" \"Hartley is not only a nice place to live, but has a convenient location. Just downstairs in the lobby is the Hartley Hospitality Desk, a CUIT computer lab, and a lounge with pool and ping pong tables! In addition, it only takes two minutes to get to classes in Hamilton.\""
+}

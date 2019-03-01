@@ -1,0 +1,24 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: shaft-frontend
+  labels:
+    app: shaft-frontend
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: shaft-frontend
+  template:
+    metadata:
+      labels:
+        app: shaft-frontend
+    spec:
+      containers:
+      - name: columbiaspectator
+        image: columbiaspectator/newshaft:latest
+        imagePullPolicy: Always
+        ports:
+        - containerPort: 8080
+      imagePullSecrets:
+      - name: myregistrykey

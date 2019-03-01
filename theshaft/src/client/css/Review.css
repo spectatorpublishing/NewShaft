@@ -6,7 +6,7 @@
   flex-wrap: wrap;
   align-items: flex-start;
   height: 100%;
-  width: 30%;
+  width: 100%;
   font-size: 20px;
   font-family: 'Raleway', sans-serif;
 }
@@ -29,14 +29,14 @@
   align-self: center;
   font-weight: bold;
   color: 	gray;
-  width: 60%;
 }
 
 .reviewerInfo {
   display: flex;
   flex-direction: row;
+  font-size: 1rem;
   color: 	gray;
-  justify-content: flex-end;
+  justify-content: left;
   width: 100%;
   padding-bottom: 0.5rem;
   padding-top: 0.5rem;

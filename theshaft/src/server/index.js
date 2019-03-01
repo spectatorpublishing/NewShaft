@@ -11,13 +11,20 @@ var fakeRequest = {
 }
 var getDormInfo = require('./routes/getDormInfo');
 var filterDormInfo = require('./routes/filter');
+var postReview = require('./routes/postReview');
+var getExploreInfo = require('./routes/getExploreInfo');
+var getAmenities = require('./routes/getAmenities');
+var getReviews = require('./routes/getReviews');
 
 app.use(bodyParser.json())
 app.use(express.static('dist'));
 
-app.get('/api/getUsername', (req, res) => res.send({ username: os.userInfo().username }));
-app.use('/api/getDormInfo', (req, res) => getDormInfo(req, res) )
-app.use('/api/filterDorm', (req, res) => filterDormInfo(req, res))
+app.use('/api/getAmenities', (req, res) => getAmenities(req, res) );
+app.use('/api/getDormInfo', (req, res) => getDormInfo(req, res) );
+app.use('/api/getReviews', (req, res) => getReviews(req, res) );
+app.use('/api/filterDorm', (req, res) => filterDormInfo(req, res));
+app.use('/api/postReview', (req, res) => postReview(req, res));
+app.use('/api/getExploreInfo', (req, res) => getExploreInfo(req,res));
 
 var server = app.listen(8080, () => {
 	console.log('Listening on port 8080!')
