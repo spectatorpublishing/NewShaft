@@ -4,7 +4,7 @@ import Expander from './Expander.js';
 import icon from "../assets/marker.svg"; // to-do: import all actual icons
 
 const amenitiesMap = {
-  P_BATHROOM: "Private Bathroom",
+  P_BATHROOM: "Single-Use Bathroom",
   LAUNDRY: "Laundry in Building",
   CARPET: "Carpeted Floor",
   F_KITCHEN: "Floor Kitchen",
