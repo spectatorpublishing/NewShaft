@@ -148,7 +148,7 @@ export default class Maps extends Component {
           height={this.props.height}
           zoom={view.zoom}
           onViewportChange={this.handleViewportChange}
-          scrollZoom ={false}
+          scrollZoom ={true}
           //minzoom={view.zoom}
          // maxzoom={view.zoom}
           doubleClickZoom={false}

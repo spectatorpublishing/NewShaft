@@ -1,6 +1,6 @@
 import styled from "styled-components";
 import React, { Component } from "react";
-import { Link } from "react-router-dom";
+import { withRouter } from 'react-router';
 import PhotoBanner from "../components/PhotoBanner";
 import Amenities from "../components/Amenities";
 import AtAGlance from "../components/AtAGlance";
@@ -11,10 +11,15 @@ import RelatedDorms from "../components/RelatedDorms";
 import ReviewsBox from "../components/ReviewsBox";
 import Scroller from "../components/Scroller";
 import SpectrumSidebar from "../components/SpectrumSidebar";
+<<<<<<< HEAD
 import { floor } from "gl-matrix/src/gl-matrix/vec2";
 
 
 
+=======
+import ScrollToTop from "../components/ScrollToTop";
+import AdManager from "../components/AdManager";
+>>>>>>> 80bf17328abf350f16d1715ce2802682c4a569c9
 
 var stars="4.5" 
 var recommend="28%" 
@@ -76,6 +81,9 @@ let Header = styled.div`
   top: -100px;
   margin: 0 15%;
   pointer-events: none;
+  @media only screen and (max-width: 767px) {
+    top: -220px;
+  }
 `;
 let DormName = styled.h1`
   color: ${props => props.theme.white};
@@ -91,6 +99,10 @@ let Blurb = styled.div`
   margin: 0 15% -100px 15%;
   padding: 1.8vw;
   border-radius: 1.5vw;
+  @media only screen and (max-width: 767px) {
+    top: -220px;
+    margin-bottom: -220px;
+  }
 `;
 
 let Body = styled.div`
@@ -206,6 +218,7 @@ export default class Dorm extends React.PureComponent {
         MUSIC: 0
       },
       reviews: {},
+      dorm_photos: [],
       relatedArticles: [],
       floorPlans: [],
       scrollMenuFixed: false,
@@ -226,9 +239,13 @@ export default class Dorm extends React.PureComponent {
     this.fetchAmenities(dormName);
     this.fetchReviews(dormName);
     this.fetchRelatedArticles(dormName);
+<<<<<<< HEAD
     this.fetchFloorPlans(dormName);
+=======
+    this.fetchDormPhotos(dormName);
+>>>>>>> 80bf17328abf350f16d1715ce2802682c4a569c9
     //this.fetchDormInfo(dorm_name_map[this.props.match.params.dorm])
-    window.scrollTo(0, 0)
+    window.scrollTo(0, 0);
   }
 
   componentWillUnmount() {
@@ -242,9 +259,33 @@ export default class Dorm extends React.PureComponent {
     this.fetchAmenities(newProps.match.params.dorm);
     this.fetchReviews(newProps.match.params.dorm);
     this.fetchRelatedArticles(newProps.match.params.dorm);
+<<<<<<< HEAD
     this.fetchFloorPlans(newProps.match.params.dorm);
+=======
+    this.fetchDormPhotos(newProps.match.params.dorm);
+
+>>>>>>> 80bf17328abf350f16d1715ce2802682c4a569c9
 
     window.scrollTo(0, 0)
+  }
+
+  fetchDormPhotos(name){
+    const dormName = dorm_name_map[name]
+    fetch('/api/getDormPhotos', {
+      method: "POST",
+      body: JSON.stringify({ 
+        table: "dorm_static_info",
+        DORM: dormName
+      }),
+      headers: { "Content-Type": "application/json"},
+    })
+      .then(res => res.json())
+      .then(dormPhotos => {
+        console.log(dormPhotos);
+
+        this.setState({dorm_photos: Object.values(dormPhotos[0])})
+      });
+
   }
 
   fetchDormInfo(name) {
@@ -420,8 +461,8 @@ export default class Dorm extends React.PureComponent {
     }
     if (this.state.dormInfo.TRIPLE_) roomtype += " and triples";
     return (
-      <div>
-        <PhotoBanner bannerImages={bannerImages} />
+      <ScrollToTop>
+        <PhotoBanner bannerImages={this.state.dorm_photos} />
         <Header>
           <DormName>{this.state.dormInfo.DORM}</DormName>
         </Header>
@@ -438,8 +479,8 @@ export default class Dorm extends React.PureComponent {
               <Scroller compRef={this.proconRef} label={"Pros and Cons"} />
               <Scroller compRef={this.floorplansRef} label={"Floor Plans"} />
               <Scroller compRef={this.reviewsRef} label={"Reviews"} />
-              {/* <Scroller compRef={this.spectrumRef} label={"Spectrum"} /> */}
               <Scroller compRef={this.suggestionsRef} label={"Related Dorms"} />
+              <Scroller compRef={this.spectrumRef} label={"Spectrum"} />
             </ScrollMenu>
           </ColOne>
           }
@@ -453,14 +494,14 @@ export default class Dorm extends React.PureComponent {
                 numfloors={this.state.floorPlans.length}
               />
             )}
-            <Margin>
-              <ScrollerTarget ref={this.amenitiesRef}>
+            <ScrollerTarget ref={this.amenitiesRef}>
+              <Margin>
                 <Amenities amenities={this.state.amenities}/>
-              </ScrollerTarget>
-            </Margin>
+              </Margin>
+            </ScrollerTarget>
             
-            <Margin>
-              <ScrollerTarget ref={this.locationRef}>
+            <ScrollerTarget ref={this.locationRef}>
+              <Margin>
                 <Maps
                   latitudes={[this.state.dormInfo.LATITUDE]}
                   longitudes={[this.state.dormInfo.LONGITUDE]}
@@ -471,52 +512,67 @@ export default class Dorm extends React.PureComponent {
                   width={"100%"}
                   height={"300px"}
                 />
-              </ScrollerTarget>
-            </Margin>
+              </Margin>
+            </ScrollerTarget>
 
-            <Margin>
-              <ScrollerTarget ref={this.proconRef}>
+            <ScrollerTarget ref={this.proconRef}>
+              <Margin>
                 <ProCon
                   pros={this.state.dormInfo.PROS}
                   cons={this.state.dormInfo.CONS}
                 />
-              </ScrollerTarget>
-            </Margin>
+              </Margin>
+            </ScrollerTarget>
             
-            <Margin>
             <ScrollerTarget ref={this.floorplansRef}>
+<<<<<<< HEAD
               <FloorPlan
                 floorOffset={0}
                 planArray={this.state.floorPlans}
               />
+=======
+              <Margin>
+                <FloorPlan
+                  floorOffset={1}
+                  planArray={[
+                    "https://housing.columbia.edu/files/housing/Wien%208_2018.jpg",
+                    "https://housing.columbia.edu/files/housing/Wien%208_2018.jpg",
+                    "https://housing.columbia.edu/files/housing/600%209_2016_0.jpg",
+                    "https://housing.columbia.edu/files/housing/Woodbridge%204_2018.jpg",
+                    "https://i.kym-cdn.com/entries/icons/original/000/026/642/kot1.jpg"
+                  ]}
+                />
+              </Margin>
+>>>>>>> 80bf17328abf350f16d1715ce2802682c4a569c9
             </ScrollerTarget>
-            </Margin>
 
-            <Margin>
             <ScrollerTarget ref={this.reviewsRef}>
-              <ReviewsBox
-                stars={stars}
-                recommend={recommend}
-                ranking={ranking}
-                reviews={this.state.reviews}>
-              </ReviewsBox>
+              <Margin>
+                <ReviewsBox
+                  stars={stars}
+                  recommend={recommend}
+                  ranking={ranking}
+                  reviews={this.state.reviews}>
+                </ReviewsBox>
+              </Margin>
             </ScrollerTarget>
-            </Margin>
 
-            <Margin>
             <ScrollerTarget ref={this.suggestionsRef}>
-              <RelatedDorms
-                name={this.state.dormInfo.DORM}
-                relatedDorms={relatedDorms}
-              />
+              <Margin>
+                <RelatedDorms
+                  name={this.state.dormInfo.DORM}
+                  relatedDorms={relatedDorms}
+                />
+              </Margin>
             </ScrollerTarget>
-            </Margin>
 
-            <Margin>
             <ScrollerTarget ref={this.spectrumRef}>
-              <SpectrumSidebar spectrumSidebarData = {this.state.relatedArticles}/>
+              <Margin>
+                 <SpectrumSidebar spectrumSidebarData = {this.state.relatedArticles}/>
+              </Margin>
             </ScrollerTarget>
-            </Margin>
+
+            <AdManager/>
 
           </ColTwo>
 
@@ -531,7 +587,7 @@ export default class Dorm extends React.PureComponent {
             </ColThree>
           )}
         </Body>
-      </div>
+      </ScrollToTop>
     );
   }
 }
