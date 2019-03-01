@@ -41,6 +41,22 @@ width: 0%;
 }
 `
 
+let FilterSearchBG = styled.div`
+  background-color: ${props => props.theme.columbiaBlue};
+  @media only screen and (min-width: 768px) {
+    // display: inline;
+    // position: fixed;
+    padding-left: 1em;
+    // float: right;
+    // width: 40%;
+    // right: 0;
+    // top: 0;
+    // z-index:1;
+  }
+  margin-top: 0px;
+  padding-top: 1%;
+`
+
 let ColOne = styled.div`
   display: flex;
   width: 100%;
@@ -157,11 +173,11 @@ export default class Explore extends Component {
       <ExploreContainer>
         <ColOne>
           <SideBar>
-            <div className="filters">
+            <FilterSearchBG>
               {/* <h2>The Shaft</h2> */}
               <SearchBar handleChange={this.updatePayload}/>
               <Filter handleChange={this.updatePayload}/>
-            </div>
+            </FilterSearchBG>
             <ExploreSidebar dorms={this.state.dorms}/>
           </SideBar>
         </ColOne>
