@@ -93,15 +93,16 @@ let NavBuffer = styled.div`
 
 let MenuColumn = styled.div`
   align-items: center;
-  background-color: ${props => props.theme.black};
+  background-color: rgba(0,0,0,0.75);
   display: flex;
   flex-direction: column;
-  height: 0;
+  height: 100vh;
+  width: 0;
   overflow: hidden;
   position: absolute;
   top: 60px;
-  transition: height .2s ease-out;
-  width: 100vw;
+  right: 0;
+  transition: width 0.2s ease-out;
   z-index: 1;
 `
 
@@ -112,7 +113,7 @@ let MenuBtn = styled.input`
   display: none;
 
   &:checked ~ ${MenuColumn} {
-    height: 100vh;
+    width: 80vw;
   }
 `
 
