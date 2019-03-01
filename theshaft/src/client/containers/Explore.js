@@ -90,7 +90,7 @@ const filterNameToKey = {
 		"7 Person":"SEVEN_SUITE",
 		"8 Person":"EIGHT_SUITE",
 		"9 Person":"NINE_SUITE",
-		"First Year":"FRESHMEN",
+		"First Year":"FRESHMAN",
 		"Sophomore":"SOPHOMORE",
 		"Junior":"JUNIOR",
 		"Senior":"SENIOR",
@@ -118,12 +118,11 @@ export default class Explore extends Component {
         SEVEN_SUITE: 0,
         EIGHT_SUITE: 0,
         NINE_SUITE: 0,
-        FRESHMEN: 0,
+        FRESHMAN: 0,
         SOPHOMORE: 0,
         JUNIOR: 0,
         SENIOR: 0,
         AC: 0,
-        ACCESSIBILITY: 0,
         GYM: 0,
         P_BATHROOM: 0
       },
@@ -163,6 +162,7 @@ export default class Explore extends Component {
         body: JSON.stringify(this.state.payload)
     }).then(res => res.json())
     .then(response => {
+        console.log(JSON.stringify(response));
         // console.log("RESPONSE: " + JSON.stringify(response))
         this.setState({dorms: response})
     });      

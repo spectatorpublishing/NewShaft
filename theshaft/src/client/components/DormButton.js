@@ -1,15 +1,6 @@
 import React, { Component } from "react";
 import styled from 'styled-components';
 
-let Button = styled.div`
-  text-align: left;
-  border: 5px solid #9B9B9B;
-  color: #9B9B9B;
-  display: inline-block;
-  cursor: pointer;
-  margin: 10px;
-`
-
 const DormButtonWrapper = styled.div`
 	display: flex;
 	flex-direction: column;
@@ -33,38 +24,39 @@ const DormButtonWrapper = styled.div`
   }
 `
 
-const SchoolName = styled.h6`
-  color: #71a8e0;
+let SchoolName = styled.h6`
   margin-top: 5px;
   margin-bottom: 1px;
   text-transform: capitalize;
 `
 
-const DormName = styled.div`
-  color: #6f6f6f;
+let ColumbiaName = styled(SchoolName)`
+  color: ${props => props.theme.columbiaBlue};
+`
+
+let BarnardName = styled(SchoolName)`
+  color: ${props => props.theme.barnardBlue};
+`
+
+const DormName = styled.b`
   margin-top: .1em;
   margin-bottom: .25em;
 `
 
-const Amenities = styled.div`
-  color: #6f6f6f;
-  margin: 0px;
+const Amenities = styled.p`
 `
 
-const Description = styled.div`
+const Description = styled.p`
   display: none;
-  font-size: 13px;
   @media only screen and (min-width: 768px){
     display: inline;
   }
 `
 
-const SeeMore = styled.div`
+const SeeMore = styled.h6`
   display: inline;
-  font-size: .8em;
 	cursor: pointer;
-	color: #5187ec;
-	text-decoration: underline;
+	color: ${props => props.theme.columbiaBlue};
 	text-align: right;  
 `
 
@@ -100,15 +92,23 @@ export default class DormButton extends Component {
       ? this.state.description.substring(0,100) + '...'
       : this.state.description
 
+    let schoolName = this.state.school.toLowerCase();
     return (
       <DormButtonWrapper>
         <img className="dormimage" src={this.state.image} />
         <div className="details">
-            <SchoolName> { this.state.school.toLowerCase() } </SchoolName>
+            {schoolName == "columbia" ? 
+              <ColumbiaName> { schoolName } </ColumbiaName>
+            : (schoolName == "barnard" ?
+              <BarnardName> { schoolName } </BarnardName>
+            :
+              <SchoolName> { schoolName } </SchoolName>
+              )
+            }
             <DormName> {this.state.name} </DormName>
             <Amenities> {this.state.amenities} </Amenities>
             <Description> {truncatedDescription} </Description>
-            <SeeMore>see more ></SeeMore>
+            <SeeMore>see&nbsp;more&nbsp;></SeeMore>
         </div>
         <br />
       </DormButtonWrapper>
