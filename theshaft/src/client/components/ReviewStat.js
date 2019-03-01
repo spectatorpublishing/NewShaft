@@ -5,8 +5,8 @@ import { is } from "immutable";
 let Border = styled.div`
     display: flex;
     flex-direction: column;
-    border: 1px grey solid;
-    border-radius: 20px;
+    border: 1px ${props => props.theme.lightGray} solid;
+    border-radius: calc(${props => props.theme.borderRadius} * 2);
     padding: 0.8vw;
     padding-top: 16%;
     padding-bottom: 16%;
@@ -40,15 +40,9 @@ let Text = styled.div`
 `
 
 let BoldText = styled.h1`
-    color: grey;
-    font-size: 3rem;
-    font-weight: bolder;
 `
 
 let SubText = styled.h6`
-    color: grey;
-    font-size: 0.8rem;
-    font-weight: lighter;
 `
 
 export default class ReviewStat extends Component {

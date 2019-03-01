@@ -40,8 +40,9 @@ let FloorButton = styled.button`
     }
 `
 
-let FloorButtonNumber = styled.h3`
+let FloorButtonNumber = styled.h4`
   color: ${props => props.theme.columbiaBlue};
+  margin: 10px 0; 
 `
 
 let PlanDisplay = styled.div`

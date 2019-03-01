@@ -1,7 +1,8 @@
 import React, { Component } from 'react'
 import styled from 'styled-components'
+import { theme } from '../util/GlobalStyles';
 
-const SmallWrapper = styled.div `
+const SmallWrapper = styled.div`
 	width: 100%;
 	display: flex;
 	margin-bottom: 15px;
@@ -10,7 +11,7 @@ const SmallWrapper = styled.div `
 		display: block;
 	}
 `
-const ImageDiv = styled.div `
+const ImageDiv = styled.div`
 	width: 40%;
 	margin-right: 15px;
 	
@@ -20,39 +21,38 @@ const ImageDiv = styled.div `
 	}
 `
 
-const Image = styled.img `
+const Image = styled.img`
 	width: 100%;
 	height: auto;
 	object-fit: cover;
 `
-const Title = styled.h3 `
+const Title = styled.h3`
 	margin-top: -3px;
-
-	@media only screen and (max-width: 767px) {
-		font-size: 18px;
-	}
 `
 
-const AuthorLine = styled.p `
-    color: grey;
-  `
+const AuthorLine = styled.p`
+`
 
-const Wrapper = styled.div `
+const Wrapper = styled.div`
 	width: 100%;
 `
 
-const SectionHeader = styled.div `
-  border-radius: 3px;
-  background: #00BFFF;
-  text-align: center;
-  font-size: 20px;
-  color: white;
-  vertical-align: middle;
-  padding-top: 5px;
-  padding-bottom: 5px;
-  padding-right: 10px;
-  padding-left: 10px;
+const Hr = styled.hr`
+	border-color: ${props => props.theme.lightGray};
 `
+
+// const SectionHeader = styled.div `
+//   border-radius: 3px;
+//   background: #00BFFF;
+//   text-align: center;
+//   font-size: 20px;
+//   color: white;
+//   vertical-align: middle;
+//   padding-top: 5px;
+//   padding-bottom: 5px;
+//   padding-right: 10px;
+//   padding-left: 10px;
+// `
 
 const Logo = styled.img `
 	display: block;
@@ -64,8 +64,8 @@ const Logo = styled.img `
 
   	@media only screen and (max-width: 767px) {
   		width: 80%;
-		margin-bottom: 20px;
-		margin-top: 0;
+			margin-bottom: 20px;
+			margin-top: 0;
   	}
 `
 
@@ -78,20 +78,27 @@ const TextDiv = styled.div `
 	}
 `
 
+const LinkDiv = styled.a`
+	text-decoration: none;
+	color: black;
+`
+
 class SidebarItem extends Component {
     render(){
     	return (
+				<LinkDiv target="_blank" rel="noopener noreferrer" href={this.props.url}>
 	        <SmallWrapper>
 				<ImageDiv>
 					<Image src={this.props.img_src}/>
 				</ImageDiv>
 				<TextDiv>
 					<Title>{this.props.title}</Title>
-					<hr/>
+					<Hr></Hr>
 					<AuthorLine>{this.props.author}</AuthorLine>
 					<AuthorLine>{this.props.date}</AuthorLine>
 				</TextDiv>
 			</SmallWrapper>
+			</LinkDiv>
     	);
     }
 }
@@ -101,12 +108,15 @@ class SpectrumSidebar extends Component {
 	articleMap(){
 		const articleData = this.props.spectrumSidebarData;
 		return (
-			articleData.map(data =>{
+			articleData.map((data, index) =>{
 					return <SidebarItem 
+						key={index}
 						title={data.title} 
 						img_src={data.img_src} 
 						author = {data.author}
-						date = {data.date}/>
+						date = {data.date}
+						url = {data.url}
+						/>
 				}
 			)
 		)

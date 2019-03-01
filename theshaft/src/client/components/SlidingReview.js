@@ -38,14 +38,14 @@ const years_map = {
 const reviews_per_page = 4
 
 let PageNumberBlue = styled.p`
-  border: 1px grey solid;
+  border: 1px ${props => props.theme.columbiaBlue} solid;
   border-radius: 3px;
-  color: white;
+  color: ${props => props.theme.white};
   background-color: ${props => props.theme.columbiaBlue};  
   text-align: center;
 `
 let PageNumberBlack = styled.p`
-  border: 1px grey solid;
+  border: 1px ${props => props.theme.columbiaBlue} solid;
   border-radius: 3px;
   text-align: center;
 `
