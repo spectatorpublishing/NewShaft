@@ -41,9 +41,6 @@ let glanceMap = [
     ["Location", this.props.location],
     ["Room types", this.props.roomtype],
     ["Class makeup", this.props.classmakeup],
-    ["# of floors", this.props.numfloors],
-    ["# of singles", this.props.singles],
-    ["# of doubles", this.props.doubles],
     ["Cut-off lottery #", this.props.cutoff]
 ]
 

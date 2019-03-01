@@ -416,10 +416,11 @@ export default class Dorm extends React.PureComponent {
 
           <ColTwo mobile={isMobile}>
             {isMobile && (
-            <AtAGlance
-                 address= {this.state.dormInfo.ADDRESS}
-                 singles = {this.state.dormInfo.SINGLE_}
-                 double = {this.state.dormInfo.DOUBLE_}
+              <AtAGlance
+                location={this.state.dormInfo.ADDRESS}
+                roomtype={roomtype}
+                classmakeup={this.state.dormInfo.CLASS_MAKEUP}
+                cutoff={this.state.dormInfo.LOTTERY_NUMS}
               />
             )}
             <Margin>
@@ -503,7 +504,7 @@ export default class Dorm extends React.PureComponent {
                 location={this.state.dormInfo.ADDRESS}
                 roomtype={roomtype}
                 classmakeup={this.state.dormInfo.CLASS_MAKEUP}
-                numfloors="13"
+                cutoff={this.state.dormInfo.LOTTERY_NUMS}
               />
             </ColThree>
           )}
