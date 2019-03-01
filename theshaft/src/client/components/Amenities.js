@@ -3,6 +3,21 @@ import styled from 'styled-components';
 import Expander from './Expander.js';
 import icon from "../assets/marker.svg"; // to-do: import all actual icons
 
+const amenitiesMap = {
+  P_BATHROOM: "Private Bathroom",
+  LAUNDRY: "Laundry",
+  CARPET: "Carpet",
+  F_KITCHEN: "Floor Kitchen",
+  P_KITCHEN: "Private Kitchen",
+  LOUNGE: "Lounge",
+  GYM: "Gym",
+  BIKE: "Bike",
+  COMPUTER: "Computer Lab",
+  PRINT: "Print Station",
+  AC: "A/C",
+  MUSIC: "Music Room"
+}
+
 let AmenitiesTitle = styled.h2`
     margin-top: -0.3vw;
     margin-bottom: 1vw;
@@ -72,40 +87,59 @@ export default class Amenities extends Component {
     this.setState({ width: window.innerWidth });
   };
 
+  componentWillReceiveProps(newProps){
+    console.log("NEW PROPS");
+    console.log(newProps.amenities);
+    this.setState({amenities: newProps.amenities})
+  }
+
   showAllAmenities() {
-    let index = 0
-    return this.state.amenities.map((amenity) => {
-      return <Amenity key={index++}>
-        <AmenityIcon src={icon} alt={amenity[0]}/>
-        <div> {amenity[1]} </div>
+    const amenities = this.state.amenities;
+    console.log(amenities);
+    
+    return Object.keys(amenities).map((key, index) => {
+      if(amenities[key] == 1){
+        return <Amenity key={index++}>
+        <AmenityIcon src={icon} />
+        <div> {amenitiesMap[key]} </div>
       </Amenity>
+      }
       });
   }
 
   showSomeAmenities() {
-    let index = 0
-    return this.state.amenities.slice(0, 6).map((amenity) => {
-      return <Amenity key={index++}>
-        <AmenityIcon src={icon} alt={amenity[0]}/>
-        <div> {amenity[1]} </div>
+    //let index = 0
+    
+    const amenities = this.state.amenities;
+    console.log(amenities);
+    
+    return Object.keys(amenities).slice(0, 7).map((key, index) => {
+      if(amenities[key] == 1){
+        return <Amenity key={index++}>
+        <AmenityIcon src={icon} />
+        <div> {amenitiesMap[key]} </div>
       </Amenity>
+      }
       });
   }
 
   nonMobile() {
-    let index = 0
-    // this.props.amenities.unshift(["blankspace", " "]);
-    return this.state.amenities.map((amenity) => {
-      return <Amenity key={index++}>
-        <AmenityIcon src={icon} alt={amenity[0]}/>
-        <div> {amenity[1]}</div>
+    const amenities = this.state.amenities;
+    console.log(amenities);
+    
+    return Object.keys(amenities).map((key, index) => {
+      if(amenities[key] == 1){
+        return <Amenity key={index++}>
+        <AmenityIcon src={icon} />
+        <div> {amenitiesMap[key]} </div>
       </Amenity>
+      }
       });
   }
 
   render() {
     const { width } = this.state;
-    const isMobile = width <= 700;
+    const isMobile = width <= 768;
     if(isMobile) {
       return (
       <Expander showAll={this.showAllAmenities()} showSome={this.showSomeAmenities()}>

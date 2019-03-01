@@ -14,6 +14,8 @@ const Dorms = styled.div`
     display: grid;
     grid-column-gap: 5%;
     grid-template-columns: 47.5% 47.5%;
+    // Height of each element never goes below 15vw
+    grid-auto-rows: minmax(15vw, auto);
 `
 
 const SidebarDivider = styled.div`

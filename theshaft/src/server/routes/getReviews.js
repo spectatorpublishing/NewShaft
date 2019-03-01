@@ -11,32 +11,17 @@ var mysql = require('mysql');
  */
 
 
-function getDormInfo(con, request, callback) {
+function getReviews(con, request, callback) {
 	con.connect(function(err) {
 		if (err) throw err;
 		console.log("Connected!");
 
 		/* Code vague such as to apply to any table.
 		{
-			"table": "dorm_static_info",
-			"DORM": "110",
-			"ADDRESS": "601 W 110th Street"
-		}
-		*/
+			"table": */
 
-		var sqlStatement = `SELECT * FROM dorm_static_info `
-		delete request.table;
-		var firstKey = true
-
-		for (key in request)  {
-			if(firstKey) {
-				firstKey = false
-				sqlStatement += `WHERE ${key}="${request[key]}"`
-			} else {
-				sqlStatement += ` AND ${key}="${request[key]}"`
-			}
-		}
-		sqlStatement+=`;`
+        var sqlStatement = `SELECT * FROM review 
+        WHERE DORM = "${request["DORM"]}";`
 		
 		con.query(sqlStatement, function(err, res) {
 			if (err) throw err;
@@ -57,10 +42,9 @@ router.post('/', function(req, res, next) {
 	});
 	console.log("requesting selection o f" , req.body)
 	
-	getDormInfo(con, req.body, (dormInfo) => {
-		console.log(dormInfo)
-		res.json(dormInfo)
-		// lmao wtf why => res.send(JSON.stringify(res))
+	getReviews(con, req.body, (revInfo) => {
+		console.log(revInfo)
+		res.json(revInfo)
 	})
 
 })

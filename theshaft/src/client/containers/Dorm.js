@@ -11,19 +11,10 @@ import RelatedDorms from "../components/RelatedDorms";
 import ReviewsBox from "../components/ReviewsBox";
 
 import Scroller from "../components/Scroller";
+import SpectrumSidebar from "../components/SpectrumSidebar";
 
 
 
-let sampleAmenities = [
-  ["bathroom", "Semi-private"],
-  ["laundry", "Laundry - in basement"],
-  ["kitchen", "Kitchen - in basement"],
-  ["airConditioning", "Air conditioning"],
-  ["lounge", "Floor lounge"],
-  ["fitness", "Fitness room"],
-  ["lounge", "Sky lounge"],
-  ["lounge", "Basement lounge"]
-];
 
 var stars="4.5" 
 var recommend="28%" 
@@ -62,50 +53,13 @@ var reviews = [
 
 let relatedDorms = [
   {
-    id: "McBain",
-    school: "Columbia",
-    name: "McBain Hall",
+    DORM: "McBain Hall",
     image: "https://housing.columbia.edu/files/housing/McBain.jpg",
-    description:
-      "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla nulla nulla, condimentum a mattis in, faucibus id sapien. Sed rhoncus.",
-    amenities: "No AC"
   },
   {
-    id: "Carman",
-    school: "Columbia",
-    name: "Carman Hall",
-    image: "https://housing.columbia.edu/files/housing/Carman.jpg",
-    description:
-      "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla nulla nulla, condimentum a mattis in, faucibus id sapien. Sed rhoncus.",
-    amenities: "No AC"
+    DORM: "Furnald Hall",
+    image: "https://housing.columbia.edu/files/housing/Furnald.jpg",
   },
-  // {
-  //   id: "Sulzberger",
-  //   school: "Barnard",
-  //   name: "Sulzberger Tower",
-  //   image: "https://housing.columbia.edu/files/housing/McBain.jpg",
-  //   description:
-  //     "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla nulla nulla, condimentum a mattis in, faucibus id sapien. Sed rhoncus.",
-  //   amenities: "No AC"
-  // },
-  // {
-  //   id: "mcbain",
-  //   school: "Columbia",
-  //   name: "McBain Hall",
-  //   image: "https://housing.columbia.edu/files/housing/McBain.jpg",
-  //   description:
-  //     "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla nulla nulla, condimentum a mattis in, faucibus id sapien. Sed rhoncus.",
-  //   amenities: "No AC"
-  // },
-  // {
-  //   id: "mcbain",
-  //   school: "Columbia",
-  //   name: "McBain Hall",
-  //   image: "https://housing.columbia.edu/files/housing/McBain.jpg",
-  //   description:
-  //     "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla nulla nulla, condimentum a mattis in, faucibus id sapien. Sed rhoncus.",
-  //   amenities: "No AC"
-  // }
 ];
 
 const bannerImages = [
@@ -175,6 +129,36 @@ let ScrollMenu = styled(ColOne)`
     top: 80px;
   `};
 `
+const dorm_name_map = {
+  "CarmanHall": "Carman Hall",
+  "McBainHall": "McBain Hall",
+  "47Claremont": "47 Claremont",
+  "600W113th": "600 W 113th",
+  "BroadwayHall": "Broadway Hall",
+  "CarltonArms": "Carlton Arms",
+  "EastCampus": "East Campus",
+  "FslBrownstones": "Fsl Brownstones",
+  "FurnaldHall": "Furnald Hall",
+  "HarmonyHall": "Harmony Hall",
+  "HartleyHall": "Hartley Hall",
+  "HoganHall": "Hogan Hall",
+  "JohnJayHall": "John Jay Hall",
+  "ResidentialBrownstones": "Residential Brownstones",
+  "RiverHall": "River Hall",
+  "RugglesHall": "Ruggles Hall",
+  "SchapiroHall": "Schapiro Hall",
+  "SicResidences": "Sic Residences",
+  "WallachHall": "Wallach Hall",
+  "WattHall": "Watt Hall",
+  "WienHall": "Wien Hall",
+  "WoodbridgeHall": "Woodbridge Hall"
+
+}
+
+let Margin = styled.div`
+  margin-top: 2vh;
+  margin-bottom: 2vh;
+`
 
 export default class Dorm extends React.PureComponent {
   constructor(props) {
@@ -203,14 +187,28 @@ export default class Dorm extends React.PureComponent {
         CLASS_MAKEUP: "",
         PROS: ["pro1", "pro2", "pro3"],
         CONS: ["con1", "con2", "con3"],
-        AMENITIES: sampleAmenities,
+        LATITUDE: 0,
+        LONGITUDE: 0,
         RELATEDDORMS: relatedDorms
+      },
+      amenities: {
+        P_BATHROOM: 0,
+        LAUNDRY: 0,
+        CARPET: 0,
+        F_KITCHEN: 0,
+        P_KITCHEN: 0,
+        LOUNGE: 0,
+        GYM: 0,
+        BIKE: 0,
+        COMPUTER: 0,
+        PRINT:0,
+        AC: 0,
+        MUSIC: 0
       },
       scrollMenuFixed: false,
       scrollMenuOffset: null,
       width: screen_width
     };
-
     this.handleWindowSizeChange = this.handleWindowSizeChange.bind(this);
     this.handleScroll = this.handleScroll.bind(this);
     this.isFixed = this.isFixed.bind(this);
@@ -220,8 +218,11 @@ export default class Dorm extends React.PureComponent {
     window.addEventListener("resize", this.handleWindowSizeChange);
     window.addEventListener('scroll', this.handleScroll);
     // This will not fetch the right data for all dorms need to pass the data correctly into the dorm
-    console.log(this.props.location.dorm);
-    this.fetchDormInfo(this.props.location.dorm)
+    var dormName = this.props.match.params.dorm;
+    this.fetchDormInfo(dormName);
+    this.fetchAmenities(dormName);
+    //this.fetchDormInfo(dorm_name_map[this.props.match.params.dorm])
+    window.scrollTo(0, 0)
   }
 
   componentWillUnmount() {
@@ -230,28 +231,43 @@ export default class Dorm extends React.PureComponent {
   }
 
   componentWillReceiveProps(newProps){
-    console.log("HELLO")
-    console.log(newProps.location.dorm)
-    this.fetchDormInfo(newProps.location.dorm)
+    //map spaceless dorm names to spacy names
+    this.fetchDormInfo(newProps.match.params.dorm)
     window.scrollTo(0, 0)
   }
 
   fetchDormInfo(name) {
+    const dormName = dorm_name_map[name]
     fetch('/api/getDormInfo', {
       method: "POST",
       body: JSON.stringify({ 
         table: "dorm_static_info",
-        DORM: name
+        DORM: dormName
       }),
       headers: { "Content-Type": "application/json"},
     })
       .then(res => res.json())
       .then(dormInfo => {
-        console.log(dormInfo);
-        dormInfo[0].AMENITIES = sampleAmenities;
+        console.log(dormInfo)
         dormInfo[0].PROS = ["Pro 1", "Pro 2", "Pro 3"];
         dormInfo[0].CONS = ["Con 1", "Con 2", "Con 3"];
         this.setState({dormInfo: dormInfo[0]})
+      });
+  }
+
+  fetchAmenities(name) {
+    const dormName = dorm_name_map[name]
+    fetch('/api/getAmenities', {
+      method: "POST",
+      body: JSON.stringify({ 
+        table: "dorm_static_info",
+        DORM: dormName
+      }),
+      headers: { "Content-Type": "application/json"},
+    })
+      .then(res => res.json())
+      .then(amenitiesInfo => {
+        this.setState({amenities: amenitiesInfo[0]})
       });
   }
 
@@ -318,7 +334,7 @@ export default class Dorm extends React.PureComponent {
       <div>
         <PhotoBanner bannerImages={bannerImages} />
         <Header>
-          <DormName>{this.props.match.params.dorm}</DormName>
+          <DormName>{this.state.dormInfo.DORM}</DormName>
         </Header>
         <Blurb>{this.state.dormInfo.DESCRIPTION}</Blurb>
 
@@ -348,26 +364,37 @@ export default class Dorm extends React.PureComponent {
                 numfloors="13"
               />
             )}
-            <ScrollerTarget ref={this.amenitiesRef}>
-              <Amenities amenities={this.state.dormInfo.AMENITIES}/>
-            </ScrollerTarget>
+            <Margin>
+              <ScrollerTarget ref={this.amenitiesRef}>
+                <Amenities amenities={this.state.amenities}/>
+              </ScrollerTarget>
+            </Margin>
+            
+            <Margin>
+              <ScrollerTarget ref={this.locationRef}>
+                <Maps
+                  latitudes={[this.state.dormInfo.LATITUDE]}
+                  longitudes={[this.state.dormInfo.LONGITUDE]}
+                  popupInfo={[this.state.dormInfo.DORM]}
+                  popupId={[this.state.dormInfo.DORM]}
+                  centerLatitude={this.state.dormInfo.LATITUDE}
+                  centerLongitude={this.state.dormInfo.LONGITUDE}
+                  width={"100%"}
+                  height={"300px"}
+                />
+              </ScrollerTarget>
+            </Margin>
 
-            <ScrollerTarget ref={this.locationRef}>
-              <Maps
-                latitudes={[40.7128, 40.7129, 40.7128]}
-                longitudes={[-74.006, -74.007, -74.008]}
-                popupInfo={["Carman", "McBain", "John Jay"]}
-                popupId={["Carman", "McBain", "JohnJay"]}
-                width={"100%"}
-                height={"300px"}
-              />
-            </ScrollerTarget>
-            <ScrollerTarget ref={this.proconRef}>
-              <ProCon
-                pros={this.state.dormInfo.PROS}
-                cons={this.state.dormInfo.CONS}
-              />
-            </ScrollerTarget>
+            <Margin>
+              <ScrollerTarget ref={this.proconRef}>
+                <ProCon
+                  pros={this.state.dormInfo.PROS}
+                  cons={this.state.dormInfo.CONS}
+                />
+              </ScrollerTarget>
+            </Margin>
+            
+            <Margin>
             <ScrollerTarget ref={this.floorplansRef}>
               <FloorPlan
                 floorOffset={1}
@@ -380,6 +407,9 @@ export default class Dorm extends React.PureComponent {
                 ]}
               />
             </ScrollerTarget>
+            </Margin>
+
+            <Margin>
             <ScrollerTarget ref={this.reviewsRef}>
               <ReviewsBox
                 stars={stars}
@@ -390,10 +420,33 @@ export default class Dorm extends React.PureComponent {
             </ScrollerTarget>
             <ScrollerTarget ref={this.suggestionsRef}>
               <RelatedDorms
-                name={this.props.match.params.dorm}
+                name={this.state.dormInfo.DORM}
                 relatedDorms={relatedDorms}
               />
             </ScrollerTarget>
+            </Margin>
+
+            <Margin>
+            <ScrollerTarget ref={this.spectrumRef}>
+              <SpectrumSidebar
+                spectrumSidebarData = {[
+                  {
+                    title: "How Have Local Hiring Targets Shaped Columbia’s Manhattanville Construction Site?", 
+                    img_src: "https://www.gstatic.com/webp/gallery/1.jpg", 
+                    author: "BY YULONG LI",
+                    date: "APRIL 8, 2018"
+                  },
+                  {
+                    title: "Newly proposed committee for Barnard calls for increased transparency", 
+                    img_src: "https://www.gstatic.com/webp/gallery/3.jpg", 
+                    author: "BY ROUNAK",
+                    date: "APRIL 7, 2018"
+                  }
+                ]}
+              />
+            </ScrollerTarget>
+            </Margin>
+
           </ColTwo>
 
           {!isMobile && (

@@ -58,7 +58,7 @@ const filterElements = {
 		"A/C",
 		"Accessibility",
 		"Gym",
-		"Bathroom"
+		"Private Bathroom"
 	]
 }
 
@@ -69,7 +69,7 @@ export default class FilterComponent extends React.PureComponent {
 
 	    this.state = {
 				type: this.props.type,
-				openFilters: 0
+				openFilters: 0,
 			};
 			this.setfilter = this.setfilter.bind(this)
 	}

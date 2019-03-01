@@ -3,6 +3,7 @@ import styled from "styled-components";
 import ExploreSidebar from "../components/ExploreSidebar";
 import Filter from '../components/FilterComponent.js'
 import Maps from "../components/Maps";
+import SearchBar from "../components/SearchBar"
 
 let ExploreContainer = styled.div`
   width: 100%;
@@ -55,9 +56,11 @@ let ColTwo = styled.div`
   top: 0;
   flex-direction: column;
   `
+
 // Converts name of filter in front-end
 // to name used in body payload
 const filterNameToKey = {
+    "Dorm":"DORM",
     "Columbia":"COLUMBIA",
 		"Barnard":"BARNARD",
 		"Single":"SINGLE_",
@@ -72,13 +75,13 @@ const filterNameToKey = {
 		"8 Person":"EIGHT_SUITE",
 		"9 Person":"NINE_SUITE",
 		"First Year":"FRESHMEN",
-		"Sophomore":"SOPHMORE",
+		"Sophomore":"SOPHOMORE",
 		"Junior":"JUNIOR",
 		"Senior":"SENIOR",
 		"A/C":"AC",
 		"Accessibility":"ACCESSIBILITY",
 		"Gym":"GYM",
-		"Bathroom":"BATHROOM"
+		"Private Bathroom":"P_BATHROOM"
 }
   
 export default class Explore extends Component {
@@ -106,13 +109,12 @@ export default class Explore extends Component {
         AC: 0,
         ACCESSIBILITY: 0,
         GYM: 0,
-        BATHROOM: 0
+        P_BATHROOM: 0
       },
-      dorms: []
+      dorms: [],
     }
     this.updatePayload = this.updatePayload.bind(this)
     }
-
   
   componentDidMount(){
     this.fetchDorms();
@@ -129,14 +131,9 @@ export default class Explore extends Component {
     })
   }
 
-  updatePayload(isClicked, name){
+  updatePayload(newValue, name){
     let payload = this.state.payload;
-		if(isClicked){
-			payload[filterNameToKey[name]] = 1
-		}
-		else{
-			payload[filterNameToKey[name]] = 0
-    }
+		payload[filterNameToKey[name]] = newValue
     this.setState({payload: payload}, () => this.filterDorms())
   }
 
@@ -162,6 +159,7 @@ export default class Explore extends Component {
           <SideBar>
             <div className="filters">
               {/* <h2>The Shaft</h2> */}
+              <SearchBar handleChange={this.updatePayload}/>
               <Filter handleChange={this.updatePayload}/>
             </div>
             <ExploreSidebar dorms={this.state.dorms}/>
@@ -173,6 +171,8 @@ export default class Explore extends Component {
               latitudes={this.state.dorms.map((dorm) => dorm.LATITUDE)} 
               longitudes={this.state.dorms.map((dorm) => dorm.LONGITUDE)} 
               popupInfo={this.state.dorms.map((dorm) => dorm.DORM)} 
+              centerLatitude={40.808601}
+              centerLongitude={-73.966095}
               width={"100%"}
               height={"900px"}
               />
