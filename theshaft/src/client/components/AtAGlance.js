@@ -34,10 +34,15 @@ export default class AtAGlance extends Component {
 	}
 
 	render() {
+		let classMakeupFormat = this.props.classmakeup.split(',').map((el, i)=>(
+			el.charAt(0).toUpperCase() + el.slice(1)
+		)).join(', ')
+		
+
 		let glanceMap = [
 			["Location", this.props.location],
 			["Room types", this.props.roomtype],
-			["Class makeup", this.props.classmakeup],
+			["Class makeup", classMakeupFormat],
 			["Cut-off lottery #", this.props.cutoff]
 		]
 
