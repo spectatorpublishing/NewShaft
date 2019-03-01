@@ -9,7 +9,6 @@ import ProCon from "../components/ProCon";
 import FloorPlan from "../components/FloorPlan";
 import RelatedDorms from "../components/RelatedDorms";
 import ReviewsBox from "../components/ReviewsBox";
-
 import Scroller from "../components/Scroller";
 import SpectrumSidebar from "../components/SpectrumSidebar";
 
@@ -79,7 +78,7 @@ let Header = styled.div`
 `;
 let DormName = styled.h1`
   color: ${props => props.theme.white};
-  text-shadow: ${props => props.theme.textShadow};
+  ${props => props.theme.textShadow}
   pointer-events: initial;
 `;
 
@@ -326,8 +325,10 @@ export default class Dorm extends React.PureComponent {
   }
 
   handleScroll(e) {
-    // Add 20px to give a little bit of padding on top between the navbar and the menu
-    this.isFixed(e.target.scrollingElement.scrollTop + 20);
+    if (this.state.width > 700) {
+      // Add 20px to give a little bit of padding on top between the navbar and the menu
+      this.isFixed(e.target.scrollingElement.scrollTop + 20);
+    }
   }
 
   isFixed(scrollPosition) {
