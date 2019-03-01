@@ -18,7 +18,7 @@ class MapItem extends Component {
     super(props)
 
     this.state = {
-      popUp: "flex",
+      popUp: "none",
       lat: this.props.lat,
       long: this.props.long,
       popupInfo: this.props.popupInfo,
