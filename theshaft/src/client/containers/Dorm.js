@@ -285,6 +285,7 @@ export default class Dorm extends React.PureComponent {
         dormInfo[0].CONS = dormInfo[0].CONS.substring(1, dormInfo[0].CONS.length - 1).split(',');
         this.setState({dormInfo: dormInfo[0]});
         document.title = this.state.dormInfo.DORM;
+
       });
       
   }
@@ -317,7 +318,7 @@ export default class Dorm extends React.PureComponent {
     })
       .then(res => res.json())
       .then(reviewsInfo => {
-        this.setState({reviews: reviewsInfo.reviews, avg_rating: reviewsInfo.avg_rating})
+        this.setState({reviews: reviewsInfo.reviews, avg_rating: reviewsInfo.avg_rating, reccomend: reviewsInfo.reccomended, ranking: reviewsInfo.ranking})
       });
   }
 
@@ -444,7 +445,7 @@ export default class Dorm extends React.PureComponent {
         <Header>
           <DormName>{this.state.dormInfo.DORM}</DormName>
         </Header>
-        <Blurb>{this.state.dormInfo.DESCRIPTION.substring(1, this.state.dormInfo.DESCRIPTION.length - 1)}</Blurb>
+        <Blurb>{this.state.dormInfo.DESCRIPTION}</Blurb>
 
         <Body>
           {!isMobile && <ColOne>
@@ -515,8 +516,8 @@ export default class Dorm extends React.PureComponent {
               <Margin>
                 <ReviewsBox
                   stars={this.state.avg_rating}
-                  recommend={recommend}
-                  ranking={ranking}
+                  recommend={this.state.reccomend}
+                  ranking={this.state.ranking}
                   reviews={this.state.reviews}>
                 </ReviewsBox>
               </Margin>
