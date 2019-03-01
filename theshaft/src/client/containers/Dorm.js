@@ -11,6 +11,10 @@ import RelatedDorms from "../components/RelatedDorms";
 import ReviewsBox from "../components/ReviewsBox";
 import Scroller from "../components/Scroller";
 import SpectrumSidebar from "../components/SpectrumSidebar";
+import { floor } from "gl-matrix/src/gl-matrix/vec2";
+
+
+
 import ScrollToTop from "../components/ScrollToTop";
 import AdManager from "../components/AdManager";
 
@@ -213,6 +217,7 @@ export default class Dorm extends React.PureComponent {
       reviews: {},
       dorm_photos: [],
       relatedArticles: [],
+      floorPlans: [],
       scrollMenuFixed: false,
       scrollMenuOffset: null,
       width: screen_width
@@ -231,6 +236,7 @@ export default class Dorm extends React.PureComponent {
     this.fetchAmenities(dormName);
     this.fetchReviews(dormName);
     this.fetchRelatedArticles(dormName);
+    this.fetchFloorPlans(dormName);
     this.fetchDormPhotos(dormName);
     //this.fetchDormInfo(dorm_name_map[this.props.match.params.dorm])
     window.scrollTo(0, 0);
@@ -247,6 +253,7 @@ export default class Dorm extends React.PureComponent {
     this.fetchAmenities(newProps.match.params.dorm);
     this.fetchReviews(newProps.match.params.dorm);
     this.fetchRelatedArticles(newProps.match.params.dorm);
+    this.fetchFloorPlans(newProps.match.params.dorm);
     this.fetchDormPhotos(newProps.match.params.dorm);
 
 
@@ -349,6 +356,39 @@ export default class Dorm extends React.PureComponent {
         }
         this.setState({relatedArticles: relArticles})
       });
+  }
+
+  fetchFloorPlans(name){
+    const dormName = dorm_name_map[name]
+    fetch('/api/getFloorPlans', {
+      method: "POST",
+      body: JSON.stringify({ 
+        DORM: dormName
+      }),
+      headers: { "Content-Type": "application/json"},
+    })
+      .then(res => res.json())
+      .then(floorPlans => {
+        var floorPlan = floorPlans[0];
+        var floor_state = []
+        console.log(floorPlan)
+        var keys = Object.keys(floorPlan);
+        for (var i = 0; i < keys.length; i++)
+        {
+          var floorNum = keys[i];
+          console.log(floorPlan[floorNum]);
+          if (floorPlan[floorNum] == null || keys[i] == "DORM") {
+            continue;
+          }
+          floor_state[floorNum - 1] = "http://localhost:8080/floor_plans/" + floorPlan[floorNum];
+        }
+        console.log(floor_state)
+        return floor_state
+      }).then(thing => {
+        this.setState({
+          floorPlans: thing
+        });
+      })
   }
 
   handleWindowSizeChange() {
@@ -476,6 +516,10 @@ export default class Dorm extends React.PureComponent {
             </ScrollerTarget>
             
             <ScrollerTarget ref={this.floorplansRef}>
+              <FloorPlan
+                floorOffset={0}
+                planArray={this.state.floorPlans}
+              />
               <Margin>
                 <FloorPlan
                   floorOffset={1}
