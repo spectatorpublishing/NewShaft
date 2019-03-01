@@ -290,8 +290,8 @@ export default class Dorm extends React.PureComponent {
     })
       .then(res => res.json())
       .then(dormInfo => {
-        dormInfo[0].PROS = dormInfo[0].PROS.substring(1, dormInfo[0].PROS.length - 1).split(',');
-        dormInfo[0].CONS = dormInfo[0].CONS.substring(1, dormInfo[0].CONS.length - 1).split(',');
+        dormInfo[0].PROS = dormInfo[0].PROS.substring(0, dormInfo[0].PROS.length - 1).split(',');
+        dormInfo[0].CONS = dormInfo[0].CONS.substring(0, dormInfo[0].CONS.length - 1).split(',');
         this.setState({dormInfo: dormInfo[0]});
         document.title = this.state.dormInfo.DORM;
 
