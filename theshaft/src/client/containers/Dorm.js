@@ -12,6 +12,7 @@ import ReviewsBox from "../components/ReviewsBox";
 
 import Scroller from "../components/Scroller";
 import SpectrumSidebar from "../components/SpectrumSidebar";
+import AdManager from "../components/AdManager";
 
 
 
@@ -467,6 +468,8 @@ export default class Dorm extends React.PureComponent {
               />
             </ScrollerTarget>
             </Margin>
+            <AdManager/>
+
 
           </ColTwo>
 
