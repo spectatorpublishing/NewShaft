@@ -123,6 +123,12 @@ export default class FloorPlan extends React.PureComponent {
         window.addEventListener("resize", this.handleWindowSizeChange);
     }
 
+    componentWillReceiveProps(props) {
+        this.setState({
+            planArray: props.planArray
+        })
+    }
+
     // make sure to remove the listener
     // when the component is not mounted anymore
     componentWillUnmount() {

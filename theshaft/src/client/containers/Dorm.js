@@ -11,6 +11,7 @@ import RelatedDorms from "../components/RelatedDorms";
 import ReviewsBox from "../components/ReviewsBox";
 import Scroller from "../components/Scroller";
 import SpectrumSidebar from "../components/SpectrumSidebar";
+import { floor } from "gl-matrix/src/gl-matrix/vec2";
 
 
 
@@ -206,6 +207,7 @@ export default class Dorm extends React.PureComponent {
       },
       reviews: {},
       relatedArticles: [],
+      floorPlans: [],
       scrollMenuFixed: false,
       scrollMenuOffset: null,
       width: screen_width
@@ -224,6 +226,7 @@ export default class Dorm extends React.PureComponent {
     this.fetchAmenities(dormName);
     this.fetchReviews(dormName);
     this.fetchRelatedArticles(dormName);
+    this.fetchFloorPlans(dormName);
     //this.fetchDormInfo(dorm_name_map[this.props.match.params.dorm])
     window.scrollTo(0, 0)
   }
@@ -239,6 +242,8 @@ export default class Dorm extends React.PureComponent {
     this.fetchAmenities(newProps.match.params.dorm);
     this.fetchReviews(newProps.match.params.dorm);
     this.fetchRelatedArticles(newProps.match.params.dorm);
+    this.fetchFloorPlans(newProps.match.params.dorm);
+
     window.scrollTo(0, 0)
   }
 
@@ -319,6 +324,39 @@ export default class Dorm extends React.PureComponent {
         }
         this.setState({relatedArticles: relArticles})
       });
+  }
+
+  fetchFloorPlans(name){
+    const dormName = dorm_name_map[name]
+    fetch('/api/getFloorPlans', {
+      method: "POST",
+      body: JSON.stringify({ 
+        DORM: dormName
+      }),
+      headers: { "Content-Type": "application/json"},
+    })
+      .then(res => res.json())
+      .then(floorPlans => {
+        var floorPlan = floorPlans[0];
+        var floor_state = []
+        console.log(floorPlan)
+        var keys = Object.keys(floorPlan);
+        for (var i = 0; i < keys.length; i++)
+        {
+          var floorNum = keys[i];
+          console.log(floorPlan[floorNum]);
+          if (floorPlan[floorNum] == null || keys[i] == "DORM") {
+            continue;
+          }
+          floor_state[floorNum - 1] = "http://localhost:8080/floor_plans/" + floorPlan[floorNum];
+        }
+        console.log(floor_state)
+        return floor_state
+      }).then(thing => {
+        this.setState({
+          floorPlans: thing
+        });
+      })
   }
 
   handleWindowSizeChange() {
@@ -412,7 +450,7 @@ export default class Dorm extends React.PureComponent {
                 location={this.state.dormInfo.ADDRESS}
                 roomtype={roomtype}
                 classmakeup={this.state.dormInfo.CLASS_MAKEUP}
-                numfloors="13"
+                numfloors={this.state.floorPlans.length}
               />
             )}
             <Margin>
@@ -448,14 +486,8 @@ export default class Dorm extends React.PureComponent {
             <Margin>
             <ScrollerTarget ref={this.floorplansRef}>
               <FloorPlan
-                floorOffset={1}
-                planArray={[
-                  "https://housing.columbia.edu/files/housing/Wien%208_2018.jpg",
-                  "https://housing.columbia.edu/files/housing/Wien%208_2018.jpg",
-                  "https://housing.columbia.edu/files/housing/600%209_2016_0.jpg",
-                  "https://housing.columbia.edu/files/housing/Woodbridge%204_2018.jpg",
-                  "https://i.kym-cdn.com/entries/icons/original/000/026/642/kot1.jpg"
-                ]}
+                floorOffset={0}
+                planArray={this.state.floorPlans}
               />
             </ScrollerTarget>
             </Margin>
@@ -494,7 +526,7 @@ export default class Dorm extends React.PureComponent {
                 location={this.state.dormInfo.ADDRESS}
                 roomtype={roomtype}
                 classmakeup={this.state.dormInfo.CLASS_MAKEUP}
-                numfloors="13"
+                numfloors={this.state.floorPlans.length}
               />
             </ColThree>
           )}
