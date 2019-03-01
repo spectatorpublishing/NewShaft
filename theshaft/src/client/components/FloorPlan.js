@@ -4,7 +4,7 @@ import styled from 'styled-components';
 import 'react-image-lightbox/style.css'; 
 import Lightbox from 'react-image-lightbox';
 
-let FloorPlanTitleMobile = styled.h3`
+let FloorPlanTitleMobile = styled.h2`
     margin-top: 3vh;
     margin-bottom: 0;
     padding-left: 0.5vw;
