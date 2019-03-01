@@ -11,15 +11,12 @@ import RelatedDorms from "../components/RelatedDorms";
 import ReviewsBox from "../components/ReviewsBox";
 import Scroller from "../components/Scroller";
 import SpectrumSidebar from "../components/SpectrumSidebar";
-<<<<<<< HEAD
 import { floor } from "gl-matrix/src/gl-matrix/vec2";
 
 
 
-=======
 import ScrollToTop from "../components/ScrollToTop";
 import AdManager from "../components/AdManager";
->>>>>>> 80bf17328abf350f16d1715ce2802682c4a569c9
 
 var stars="4.5" 
 var recommend="28%" 
@@ -239,11 +236,8 @@ export default class Dorm extends React.PureComponent {
     this.fetchAmenities(dormName);
     this.fetchReviews(dormName);
     this.fetchRelatedArticles(dormName);
-<<<<<<< HEAD
     this.fetchFloorPlans(dormName);
-=======
     this.fetchDormPhotos(dormName);
->>>>>>> 80bf17328abf350f16d1715ce2802682c4a569c9
     //this.fetchDormInfo(dorm_name_map[this.props.match.params.dorm])
     window.scrollTo(0, 0);
   }
@@ -259,12 +253,9 @@ export default class Dorm extends React.PureComponent {
     this.fetchAmenities(newProps.match.params.dorm);
     this.fetchReviews(newProps.match.params.dorm);
     this.fetchRelatedArticles(newProps.match.params.dorm);
-<<<<<<< HEAD
     this.fetchFloorPlans(newProps.match.params.dorm);
-=======
     this.fetchDormPhotos(newProps.match.params.dorm);
 
->>>>>>> 80bf17328abf350f16d1715ce2802682c4a569c9
 
     window.scrollTo(0, 0)
   }
@@ -525,12 +516,10 @@ export default class Dorm extends React.PureComponent {
             </ScrollerTarget>
             
             <ScrollerTarget ref={this.floorplansRef}>
-<<<<<<< HEAD
               <FloorPlan
                 floorOffset={0}
                 planArray={this.state.floorPlans}
               />
-=======
               <Margin>
                 <FloorPlan
                   floorOffset={1}
@@ -543,7 +532,6 @@ export default class Dorm extends React.PureComponent {
                   ]}
                 />
               </Margin>
->>>>>>> 80bf17328abf350f16d1715ce2802682c4a569c9
             </ScrollerTarget>
 
             <ScrollerTarget ref={this.reviewsRef}>
