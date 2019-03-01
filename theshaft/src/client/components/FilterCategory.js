@@ -22,7 +22,7 @@ let Bolded = styled.b`
     text-shadow: ${props => props.shadow ? props.theme.textShadow : "none"};
     cursor: pointer;
     user-select: none;
-    color: white;
+    color: ${props => props.theme.white};
 `
 
 let ListElement = styled.li`
