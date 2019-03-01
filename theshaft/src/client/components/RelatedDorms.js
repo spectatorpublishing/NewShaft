@@ -32,36 +32,26 @@ export default class RelatedDorms extends Component {
         // this.showRelatedDorms = this.showRelatedDorms.bind(this);
     }
 
-    /*  Displays related dorm information via the relatedDorms 
-        prop that works as a two-index array. The title is passed
-        from the [0] index and image source is passed from [0] of
-        the property. 
-
-        !!! ALERT !!!
-        The title of the dorm needs to be pulled from a Title Component.
-        */
-    // showRelatedDorms(dorms) {
-    //     let index = 0
-    //     console.log(`DORMS DORMS: ${dorms}`);
-    //     return dorms.map((relatedDorms) => {
-    //       return <Router>
-    //         <Link to={"/" + relatedDorms.id} style={{ textDecoration: 'none' }} className="relatedDorm" key={index++}>
-    //             <img src={relatedDorms.image} className="relatedDormImage" alt={relatedDorms.name}/>
-    //             <div className="relatedDormName"> {relatedDorms.name} </div>
-    //         </Link>
-    //       </Router>
-    //       });
-    //   }
+    getRelatedDormsList(relatedDorms) {
+        return relatedDorms.map((dorm, index) => (
+            <Link 
+                key={index} 
+                to={{pathname : "/explore/" + dorm.DORM.replace(/\s+/g, ''), dorm : dorm.DORM}} 
+                style={{ textDecoration: 'none' }}
+            >
+                <img src={dorm.image} className="relatedDormImage" alt={dorm.DORM}/>
+                <div className="relatedDormName"> {dorm.DORM} </div>
+            </Link>
+        ));
+    }
 
     render() {
-        
-        var relatedDormsList = this.state.relatedDorms.map((dorm, index) => (<Link key={index} to={{pathname : "/explore/" + dorm.DORM.replace(/\s+/g, ''), dorm : dorm.DORM}} style={{ textDecoration: 'none' }}><img src={dorm.image} className="relatedDormImage" alt={dorm.DORM}/><div className="relatedDormName"> {dorm.DORM} </div></Link>));
         return (
             <div className="relatedDormsList">
                 {/* ===> The title component's text prop needs to be passed in here! <=== */}
                 <h2 className="relatedDormsTitle"> If you're interested in {this.state.name} </h2>
                 <div className="relatedDormsHorizontalView">
-                    {relatedDormsList}
+                    {this.getRelatedDormsList(this.state.relatedDorms)}
                     {/* {this.showRelatedDorms(dorms)} */}
                 </div>
             </div>

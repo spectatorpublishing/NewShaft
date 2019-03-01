@@ -100,6 +100,10 @@ let Button = styled.button`
     padding: 0;
 `
 
+let FloorArrow = styled.h3`
+    color: ${props => props.theme.columbiaBlue}
+`
+
 export default class FloorPlan extends React.PureComponent {
 
     constructor(props){
@@ -191,8 +195,8 @@ export default class FloorPlan extends React.PureComponent {
                             <FloorPlanNavMobile>
                                 <FloorNumberMobile> Floor {this.state.currentFloor} </FloorNumberMobile>
                                 <FloorListMobile>
-                                    <FloorButton onClick = {() => this.floorDown()}> &#8249; </FloorButton>
-                                    <FloorButton onClick = {() => this.floorUp()} > &#8250; </FloorButton>
+                                    <FloorButton onClick = {() => this.floorDown()}><FloorArrow>&#8249;</FloorArrow></FloorButton>
+                                    <FloorButton onClick = {() => this.floorUp()} ><FloorArrow>&#8250;</FloorArrow></FloorButton>
                                 </FloorListMobile>
                             </FloorPlanNavMobile>
                         </PlanDisplayMobile>

@@ -42,11 +42,11 @@ const DormButtonWrapper = styled.div`
   }
 `
 
-const SchoolName = styled.div`
+const SchoolName = styled.h6`
   color: #71a8e0;
   margin-top: 5px;
   margin-bottom: 1px;
-  font-size: 0.9em;
+  text-transform: capitalize;
 `
 
 const DormName = styled.div`
@@ -113,7 +113,7 @@ export default class DormButton extends Component {
       <DormButtonWrapper>
         <img className="dormimage" src={this.state.image} />
         <div className="details">
-            <SchoolName> { this.state.school } </SchoolName>
+            <SchoolName> { this.state.school.toLowerCase() } </SchoolName>
             <DormName> {this.state.name} </DormName>
             <Amenities> {this.state.amenities} </Amenities>
             <Description> {truncatedDescription} </Description>
