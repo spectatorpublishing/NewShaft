@@ -211,6 +211,7 @@ export default class Dorm extends React.PureComponent {
         MUSIC: 0
       },
       reviews: {},
+      dorm_photos: [],
       relatedArticles: [],
       scrollMenuFixed: false,
       scrollMenuOffset: null,
@@ -230,6 +231,7 @@ export default class Dorm extends React.PureComponent {
     this.fetchAmenities(dormName);
     this.fetchReviews(dormName);
     this.fetchRelatedArticles(dormName);
+    this.fetchDormPhotos(dormName);
     //this.fetchDormInfo(dorm_name_map[this.props.match.params.dorm])
     window.scrollTo(0, 0);
   }
@@ -245,7 +247,29 @@ export default class Dorm extends React.PureComponent {
     this.fetchAmenities(newProps.match.params.dorm);
     this.fetchReviews(newProps.match.params.dorm);
     this.fetchRelatedArticles(newProps.match.params.dorm);
+    this.fetchDormPhotos(newProps.match.params.dorm);
+
+
     window.scrollTo(0, 0)
+  }
+
+  fetchDormPhotos(name){
+    const dormName = dorm_name_map[name]
+    fetch('/api/getDormPhotos', {
+      method: "POST",
+      body: JSON.stringify({ 
+        table: "dorm_static_info",
+        DORM: dormName
+      }),
+      headers: { "Content-Type": "application/json"},
+    })
+      .then(res => res.json())
+      .then(dormPhotos => {
+        console.log(dormPhotos);
+
+        this.setState({dorm_photos: Object.values(dormPhotos[0])})
+      });
+
   }
 
   fetchDormInfo(name) {
@@ -389,7 +413,7 @@ export default class Dorm extends React.PureComponent {
     if (this.state.dormInfo.TRIPLE_) roomtype += " and triples";
     return (
       <ScrollToTop>
-        <PhotoBanner bannerImages={bannerImages} />
+        <PhotoBanner bannerImages={this.state.dorm_photos} />
         <Header>
           <DormName>{this.state.dormInfo.DORM}</DormName>
         </Header>

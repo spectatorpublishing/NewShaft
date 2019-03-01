@@ -20,7 +20,7 @@ function getDormPhotos(con, request, callback) {
 		{
 			"table": */
 
-        var sqlStatement = `SELECT * FROM dorm_explore_photos 
+        var sqlStatement = `SELECT MAIN_IMAGE, OTHER1, OTHER2, OTHER3 FROM dorm_explore_photos 
         WHERE DORM = "${request["DORM"]}";`
 		
 		con.query(sqlStatement, function(err, res) {
@@ -45,6 +45,7 @@ router.post('/', function(req, res, next) {
 	getDormPhotos(con, req.body, (revInfo) => {
 		console.log(revInfo)
 		res.json(revInfo)
+
 	})
 
 })
