@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import FilterButton from "./FilterButton.js"
 import styled from 'styled-components';
+import chris_v from '../assets/chrisv.svg'
 
 let DDWrapper = styled.div`
     @media(min-width: 768px){
@@ -66,6 +67,14 @@ let FilterList = styled.ul`
     }
 `
 
+const ChrisV = styled.div`
+    display: inline-block;
+    & img {
+        transform: ${ props=> props.flip ? "scaleY(-1)" : "none"};
+        margin: 2.75px 0;
+    }
+`
+
 
 export default class FilterComponent extends React.PureComponent {
     constructor(props) {
@@ -100,7 +109,7 @@ export default class FilterComponent extends React.PureComponent {
             <DDWrapper>
 
                 <DDHeader onClick={() => this.toggleList()}>
-                    <DDHeaderTitle shadow={this.props.open}>{this.props.headerTitle} <Bolded>&or;</Bolded></DDHeaderTitle>
+                    <DDHeaderTitle shadow={this.props.open}>{this.props.headerTitle} <ChrisV flip={listOpen}><img src={chris_v}></img></ChrisV></DDHeaderTitle>
                 </DDHeader>
 
                 {listOpen && <FilterList>
