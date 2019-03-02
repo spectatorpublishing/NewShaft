@@ -10,7 +10,8 @@
     "server": "nodemon src/server/index.js",
     "dev": "concurrently \"npm run server\" \"npm run client\"",
     "test": "jest",
-    "storybook": "start-storybook -p 9001 -c .storybook"
+    "storybook": "start-storybook -p 9001 -c .storybook",
+    "dump-db": "node scripts/dump_mysql.js"
   },
   "jest": {
     "moduleNameMapper": {
