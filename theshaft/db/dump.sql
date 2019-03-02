@@ -2334,6 +2334,44 @@ VALUES
     'placeholder',
     'sophomores,juniors,seniors'
   );
+INSERT INTO
+  `dorm_static_info` (
+    `DORM`,
+    `ADDRESS`,
+    `DESCRIPTION`,
+    `COLLEGE`,
+    `THUMBNAIL_IMAGE`,
+    `SUITE`,
+    `WALKTHROUGH`,
+    `SINGLE_`,
+    `DOUBLE_`,
+    `TRIPLE_`,
+    `PROS`,
+    `CONS`,
+    `LATITUDE`,
+    `LONGITUDE`,
+    `LOTTERY_NUMS`,
+    `CLASS_MAKEUP`
+  )
+VALUES
+  (
+    'Wien Hall',
+    'Inside gate on 116th Street between Amsterdam and Morningside',
+    'Comprised mostly of sophomores and juniors, Wien Hall is known for being the \"dorm with a sink in each room.\" However, that\'s not all that Wien has to offer! Located on 116th between Amsterdam and Morningside Drive, Wien has some of the greatest views you can get of Central Park and Morningside Park (especially on the higher floors), as well as—you guessed it—the mailing center, just an elevator ride away in the basement. Wien also has a spacious lounge on the first floor (with a piano, if you happen to play) and all floor lounges have a sink, a stove, and a microwave. If you\'re looking for a single, you would have a good chance at snagging one in Wien.',
+    'COLUMBIA',
+    'https://arc-anglerfish-arc2-prod-spectator.s3.amazonaws.com/public/CYBIXSCDP5FFBFEGSV6AV7AQ6U.jpg',
+    '',
+    1,
+    1,
+    1,
+    0,
+    'Sink in each room,Computer lab on 2nd floor,Mailing center is in Wien,Many singles available',
+    'No A/C,Must keep sinks clean to prevent unwanted pests,Walls are relatively thin',
+    40.806911,
+    -73.959755,
+    'placeholder',
+    'sophomores,juniors,seniors'
+  );
 
 # ------------------------------------------------------------
 # DATA DUMP FOR TABLE: floor_plans
