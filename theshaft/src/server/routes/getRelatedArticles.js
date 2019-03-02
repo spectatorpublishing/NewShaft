@@ -34,7 +34,7 @@ router.post('/', function(req, res, next) {
 		password: "PASSWORD",
 		database: "dorms"
 	  });
-	console.log("requesting selection of" , req.body)
+	console.log("requesting selection of" , req.body, '!')
 	
 	getRelatedArticles(con, req.body, (dormInfo) => {
 		res.json(dormInfo)
