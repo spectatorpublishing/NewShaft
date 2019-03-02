@@ -88,17 +88,27 @@ export default class SlidingReview extends Component {
 
         let reviewsByPage = []
         let numReviews = this.props.reviews.length
-        let numPages = Math.ceil(numReviews / reviews_per_page)
-        for(let i = 0; i < numPages; i++){
-          let reviews = []
-          for(let j = i * reviews_per_page; j < (i * reviews_per_page) + reviews_per_page && j < numReviews; j++){
-            reviews.push(this.props.reviews[j])
-          }
-          reviewsByPage.push(reviews)
+        
+        if(numReviews == 0){
+          return(
+            <h2>No Reviews :(</h2>
+          );
         }
+        else{
+          let numPages = Math.ceil(numReviews / reviews_per_page)
+          for(let i = 0; i < numPages; i++){
+            let reviews = []
+            for(let j = i * reviews_per_page; j < (i * reviews_per_page) + reviews_per_page && j < numReviews; j++){
+              reviews.push(this.props.reviews[j])
+            }
+            reviewsByPage.push(reviews)
+          }
+        }
+        
         
         return (
           <div>
+          
             <Slider {...settings}>
                 {reviewsByPage.map((reviews, i) => (
                   <div key={"" + i}>
