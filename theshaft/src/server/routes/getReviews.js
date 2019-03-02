@@ -29,8 +29,6 @@ function getReviews(con, request, callback) {
 		var sqlStatement3 = `SELECT @row_number:=@row_number+1 AS row_number,DORM FROM dorms.avg_stars,
 		(SELECT @row_number:=0) AS t
 		ORDER BY avg_stars DESC;`
-
-		console.log(sqlStatement);
 		
 		con.query(sqlStatement, function(err, res) {
 			if (err) throw err;
@@ -39,7 +37,7 @@ function getReviews(con, request, callback) {
 				avg_rating += res[i].NUM_STARS;
 			}
 			var avg_rating =  (avg_rating / res.length).toFixed(1);
-			/*con.query(sqlStatement2, function(err, res2) {
+			con.query(sqlStatement2, function(err, res2) {
 				var reccomended = Object.values(res2[0])[0].toFixed(1) * 100 + "%";
 				con.query(sqlStatement3, function(err, res3) {
 					var ranking = "-"
@@ -47,26 +45,29 @@ function getReviews(con, request, callback) {
 						if (res3[i]["DORM"] == request["DORM"]) {
 							var ranking = res3[i]["row_number"];
 						}
-					} */
-					var to_return = { avg_rating: avg_rating,  reviews: res};
+					}
+					var to_return = {reccomended: reccomended, avg_rating: avg_rating, ranking: ranking, reviews: res};
 					callback(to_return);
 				});
 				con.end(); // DO NOT REMOVE!
 			});
-	
+		});
+
+	});
 }
 
 router.post('/', function(req, res, next) {
 	console.log("request received");
 	var con = mysql.createConnection({
-		host: "192.34.62.10",
-		user: "USERNAME",
-		password: "PASSWORD",
-		database: "dorms"
-	  });
+	    host: "192.34.62.10",
+  		user: "USERNAME",
+  		password: "PASSWORD",
+  		database: "dorms"
+	});
 	console.log("requesting selection of" , req.body)
 	
 	getReviews(con, req.body, (revInfo) => {
+		console.log(revInfo)
 		res.json(revInfo)
 	})
 

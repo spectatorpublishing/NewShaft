@@ -40,6 +40,7 @@ let Text = styled.div`
 `
 
 let BoldText = styled.h1`
+    font-weight: bold;
 `
 
 let SubText = styled.h6`
