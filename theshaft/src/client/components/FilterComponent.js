@@ -83,7 +83,6 @@ export default class FilterComponent extends React.PureComponent {
 		// to 1<<2, which is 0100. We then know that the 
 		// second filter is active. 
 		this.setState({openFilters: val<<key})
-		console.log(this.state.openFilters)
 	}
 
 	render() {
