@@ -139,7 +139,7 @@ export default class Maps extends Component {
     return (
       <div>
         <ReactMapGL
-          mapboxApiAccessToken={process.env.MAPBOX}
+          mapboxApiAccessToken={"pk.eyJ1IjoiYXJzYWxhYW4iLCJhIjoiY2pxeDViZW41MDlmejQ4bnduMnE2aGhyNCJ9.0-y9yPqzqlWLd-yhUe5tcg"}
           mapStyle={"mapbox://styles/mapbox/basic-v9"}
           latitude={view.latitude}
           longitude={view.longitude}

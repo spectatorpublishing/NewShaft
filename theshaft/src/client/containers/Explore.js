@@ -4,6 +4,7 @@ import ExploreSidebar from "../components/ExploreSidebar";
 import Filter from '../components/FilterComponent.js'
 import Maps from "../components/Maps";
 import SearchBar from "../components/SearchBar"
+import CurrFilters from "../components/CurrFilters"
 
 let ExploreContainer = styled.div`
   width: 100%;
@@ -179,6 +180,7 @@ export default class Explore extends Component {
               <SearchBar handleChange={this.updatePayload}/>
               <Filter handleChange={this.updatePayload}/>
             </FilterSearchBG>
+            <CurrFilters filterNameToKey={filterNameToKey} filters={this.state.payload} removeFilter={(name)=>{this.updatePayload(0, name)}}/>
             <ExploreSidebar dorms={this.state.dorms}/>
           </SideBar>
         </ColOne>
