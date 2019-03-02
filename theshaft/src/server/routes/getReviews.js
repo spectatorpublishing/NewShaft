@@ -33,7 +33,8 @@ function getReviews(con, request, callback) {
 		con.query(sqlStatement, function(err, res) {
 			if (err) throw err;
 			if(res.length == 0){
-				callback([]);
+				var to_return = {reccomended: "—", avg_rating: "—", ranking: "—", reviews: [{TIMESTAMP: 'No Review', ADDRESS: '', DORM: request["DORM"], YEAR: '2018', NUM_STARS : 0, RECOMMEND: 0, ROOM_NUM: 'No Room' , REVIEW_TXT: 'No Reviews', THUMBS_UP: '', THUMBS_DOWN: ''}]}
+				callback(to_return);
 			}else{
 				var avg_rating = 0
 				for (var i = 0; i < res.length; i++) {
@@ -50,6 +51,7 @@ function getReviews(con, request, callback) {
 							}
 						}
 						var to_return = {reccomended: reccomended, avg_rating: avg_rating, ranking: ranking, reviews: res};
+						console.log(`to_return ${to_return}`);
 						callback(to_return);
 					});
 					con.end(); // DO NOT REMOVE!
