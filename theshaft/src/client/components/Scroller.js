@@ -7,7 +7,8 @@ let ScrollButton = styled.button`
   border: none;
   color: ${props => props.theme.darkGray};
   display: flex;
-  margin-bottom: 15px;
+  margin-bottom: 20px;
+  margin-left: 10px;
   padding: 0 0 0 25px;
   text-align: left;
 `

@@ -11,6 +11,7 @@ let Table = styled.div`
 	border-bottom: 1px solid ${props => props.theme.lightGray};
 	padding-bottom: 0.5rem;
 	margin-bottom: 0.5rem;
+	margin-right: 1.5rem;
 `
 
 let Category = styled.div`
@@ -41,7 +42,6 @@ export default class AtAGlance extends Component {
 			["Location", this.props.location],
 			["Room types", this.props.roomtype],
 			["Class makeup", classMakeupFormat],
-			["Cut-off lottery #", this.props.cutoff]
 		]
 
 		const AtAGlanceMapped = glanceMap.map((el, i)=>{

@@ -57,7 +57,7 @@ const Hr = styled.hr`
 const Logo = styled.img `
 	display: block;
   	margin: 20px auto;
-  	width: 60%;
+  	width: 55%;
 
   	@media only screen and (max-width: 767px) {
   		width: 80%;

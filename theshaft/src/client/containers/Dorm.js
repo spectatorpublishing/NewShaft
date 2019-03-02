@@ -503,7 +503,7 @@ export default class Dorm extends React.PureComponent {
                 location={this.state.dormInfo.ADDRESS}
                 roomtype={roomtype}
                 classmakeup={this.state.dormInfo.CLASS_MAKEUP}
-                cutoff={this.state.dormInfo.LOTTERY_NUMS}
+                //cutoff={this.state.dormInfo.LOTTERY_NUMS}
               />
             )}
             <ScrollerTarget ref={this.amenitiesRef}>
@@ -571,7 +571,6 @@ export default class Dorm extends React.PureComponent {
               </Margin>
             </ScrollerTarget>
 
-            <AdManager/>
 
           </ColTwo>
 

@@ -4,6 +4,10 @@ import styled from 'styled-components';
 import 'react-image-lightbox/style.css'; 
 import Lightbox from 'react-image-lightbox';
 
+let FloorPlanTitle = styled.h2`
+    margin-bottom: 20px;
+`
+
 let FloorPlanTitleMobile = styled.h2`
     margin-top: 3vh;
     margin-bottom: 0;
@@ -212,7 +216,7 @@ export default class FloorPlan extends React.PureComponent {
         } else { 
             return (
                 <div>
-                    <h2> Floor Plans </h2>
+                    <FloorPlanTitle> Floor Plans </FloorPlanTitle>
                     <FloorPlanBox>
                         <PlanDisplay>
                             <FloorNumber> Floor {this.state.currentFloor} </FloorNumber>

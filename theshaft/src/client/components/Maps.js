@@ -13,6 +13,10 @@ let MarkerIcon = styled.img`
   width : 25px;
 `
 
+let LocationTitle = styled.h2`
+  margin-bottom: 20px;
+`
+
 class MapItem extends Component {
   constructor(props) {
     super(props)
@@ -138,6 +142,7 @@ export default class Maps extends Component {
     
     return (
       <div>
+        <LocationTitle>Location</LocationTitle>
         <ReactMapGL
           mapboxApiAccessToken={"pk.eyJ1IjoiYXJzYWxhYW4iLCJhIjoiY2pxeDViZW41MDlmejQ4bnduMnE2aGhyNCJ9.0-y9yPqzqlWLd-yhUe5tcg"}
           mapStyle={"mapbox://styles/mapbox/basic-v9"}
