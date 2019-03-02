@@ -155,7 +155,6 @@ export default class Explore extends Component {
   }
 
   filterDorms(){
-    //console.log("PAYLOAD: " + JSON.stringify(this.state.payload))
     fetch('/api/filterDorm', {
         method: 'POST',
         headers: {
@@ -164,8 +163,6 @@ export default class Explore extends Component {
         body: JSON.stringify(this.state.payload)
     }).then(res => res.json())
     .then(response => {
-        console.log(JSON.stringify(response));
-        // console.log("RESPONSE: " + JSON.stringify(response))
         this.setState({dorms: response})
     });      
   }
