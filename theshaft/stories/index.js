@@ -122,7 +122,7 @@ storiesOf('FullReview', module)
   .add('fullreview', () => <FullReview />);
 
 storiesOf('test', module)
-  .add('test', () => <Expander showAll={<QuickReview/>} showSome="Here's a preview shown."><h1>Some Static Heading</h1></Expander>);
+  .add('test', () => <Expander custom={null} showAll={<QuickReview/>} showSome="Here's a preview shown."><h1>Some Static Heading</h1></Expander>);
 
 let sampleAmenities = [
   ["bathroom", "Semi-private"],
