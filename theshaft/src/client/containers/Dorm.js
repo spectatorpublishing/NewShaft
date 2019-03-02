@@ -189,6 +189,7 @@ export default class Dorm extends React.PureComponent {
       dorm_photos: [],
       relatedArticles: [],
       floorPlans: [],
+      relatedDorms : [],
       scrollMenuFixed: false,
       scrollMenuOffset: null,
       width: screen_width
@@ -206,8 +207,9 @@ export default class Dorm extends React.PureComponent {
     this.fetchDormInfo(dormName);
     this.fetchAmenities(dormName);
     this.fetchReviews(dormName);
-    //this.fetchRelatedArticles(dormName);
+    this.fetchRelatedArticles(dormName);
     //this.fetchFloorPlans(dormName);
+    this.fetchRelatedDorms(dormName);
     this.fetchDormPhotos(dormName);
     //this.fetchDormInfo(dorm_name_map[this.props.match.params.dorm])
     window.scrollTo(0, 0);
@@ -326,6 +328,28 @@ export default class Dorm extends React.PureComponent {
         }
         this.setState({relatedArticles: relArticles})
       });
+  }
+
+  fetchRelatedDorms(name){
+    const dormName = dorm_name_map[name]
+    fetch('/api/getRelatedDorms', {
+      method: "POST",
+      body: JSON.stringify({
+        DORM: dormName
+      }),
+      headers: { "Content-Type": "application/json"},
+    }).then((res=>res.json()))
+    .then(relatedDorms => {
+      let relDorms = []
+      for (let i = 0; i < relatedDorms.length; i++){
+        relDorms.push({
+          "DORM": relatedDorms[i].RELATED,
+          "image": relatedDorms[i].IMAGE
+          }
+        )
+      }
+      this.setState({relatedDorms : relDorms})
+    })
   }
 
   fetchFloorPlans(name){
@@ -534,7 +558,7 @@ export default class Dorm extends React.PureComponent {
               <Margin>
                 <RelatedDorms
                   name={this.state.dormInfo.DORM}
-                  relatedDorms={relatedDorms}
+                  relatedDorms={this.state.relatedDorms}
                 />
               </Margin>
             </ScrollerTarget>
