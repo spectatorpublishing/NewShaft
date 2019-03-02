@@ -490,8 +490,8 @@ export default class Dorm extends React.PureComponent {
               <Scroller compRef={this.proconRef} label={"Pros and Cons"} />
               <Scroller compRef={this.floorplansRef} label={"Floor Plans"} />
               <Scroller compRef={this.reviewsRef} label={"Reviews"} />
-              <Scroller compRef={this.suggestionsRef} label={"Related Dorms"} />
               <Scroller compRef={this.spectrumRef} label={"Spectrum"} />
+              <Scroller compRef={this.suggestionsRef} label={"Related Dorms"} />
             </ScrollMenu>
           </ColOne>
           }
@@ -555,18 +555,18 @@ export default class Dorm extends React.PureComponent {
               </Margin>
             </ScrollerTarget>
 
+            <ScrollerTarget ref={this.spectrumRef}>
+              <Margin>
+                 <SpectrumSidebar spectrumSidebarData = {this.state.relatedArticles}/>
+              </Margin>
+            </ScrollerTarget>
+
             <ScrollerTarget ref={this.suggestionsRef}>
               <Margin>
                 <RelatedDorms
                   name={this.state.dormInfo.DORM}
                   relatedDorms={this.state.relatedDorms}
                 />
-              </Margin>
-            </ScrollerTarget>
-
-            <ScrollerTarget ref={this.spectrumRef}>
-              <Margin>
-                 <SpectrumSidebar spectrumSidebarData = {this.state.relatedArticles}/>
               </Margin>
             </ScrollerTarget>
 
