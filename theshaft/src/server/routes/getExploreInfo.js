@@ -16,6 +16,7 @@ function getExploreInfo(con, callback) {
 
 	
 		var sqlStatement = `SELECT DORM, DESCRIPTION, COLLEGE, THUMBNAIL_IMAGE, LATITUDE, LONGITUDE FROM dorm_static_info; `
+
 		
 		con.query(sqlStatement, function(err, res) {
 			if (err) throw err;
