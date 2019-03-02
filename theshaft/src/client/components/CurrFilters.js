@@ -23,7 +23,7 @@ const CurrActiveFilter = styled.div`
 const Close = styled.span`
     position: absolute;
     margin-left: 0.2rem;
-    z-index: 0;
+    z-index: -1;
     color: ${props=>props.theme.lightGray};
 `
 
