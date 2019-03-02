@@ -32,25 +32,32 @@ function getReviews(con, request, callback) {
 		
 		con.query(sqlStatement, function(err, res) {
 			if (err) throw err;
-			var avg_rating = 0
-			for (var i = 0; i < res.length; i++) {
-				avg_rating += res[i].NUM_STARS;
-			}
-			var avg_rating =  (avg_rating / res.length).toFixed(1);
-			con.query(sqlStatement2, function(err, res2) {
-				var reccomended = Object.values(res2[0])[0].toFixed(1) * 100 + "%";
-				con.query(sqlStatement3, function(err, res3) {
-					var ranking = "-"
-					for (var i = 0; i < res3.length; i++) {
-						if (res3[i]["DORM"] == request["DORM"]) {
-							var ranking = res3[i]["row_number"];
+			if(res.length == 0){
+				var to_return = {reccomended: "—", avg_rating: "—", ranking: "—", reviews: [{TIMESTAMP: 'No Review', ADDRESS: '', DORM: request["DORM"], YEAR: '2018', NUM_STARS : 0, RECOMMEND: 0, ROOM_NUM: 'No Room' , REVIEW_TXT: 'No Reviews', THUMBS_UP: '', THUMBS_DOWN: ''}]}
+				callback(to_return);
+			}else{
+				var avg_rating = 0
+				for (var i = 0; i < res.length; i++) {
+					avg_rating += res[i].NUM_STARS;
+				}
+				var avg_rating =  (avg_rating / res.length).toFixed(1);
+				con.query(sqlStatement2, function(err, res2) {
+					var reccomended = Object.values(res2[0])[0].toFixed(1) * 100 + "%";
+					con.query(sqlStatement3, function(err, res3) {
+						var ranking = "-"
+						for (var i = 0; i < res3.length; i++) {
+							if (res3[i]["DORM"] == request["DORM"]) {
+								var ranking = res3[i]["row_number"];
+							}
 						}
-					}
-					var to_return = {reccomended: reccomended, avg_rating: avg_rating, ranking: ranking, reviews: res};
-					callback(to_return);
+						var to_return = {reccomended: reccomended, avg_rating: avg_rating, ranking: ranking, reviews: res};
+						console.log(`to_return ${to_return}`);
+						callback(to_return);
+					});
+					con.end(); // DO NOT REMOVE!
 				});
-				con.end(); // DO NOT REMOVE!
-			});
+			}
+		
 		});
 
 	});
@@ -64,7 +71,6 @@ router.post('/', function(req, res, next) {
   		password: "PASSWORD",
   		database: "dorms"
 	});
-	console.log("requesting selection of" , req.body)
 	
 	getReviews(con, req.body, (revInfo) => {
 		console.log(revInfo)

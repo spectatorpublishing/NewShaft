@@ -79,11 +79,7 @@ export default class Amenities extends Component {
     this.setState({ width: window.innerWidth });
   };
 
-  componentWillReceiveProps(newProps){
-    console.log("NEW PROPS");
-    console.log(newProps.amenities);
-    this.setState({amenities: newProps.amenities})
-  }
+ 
 
   populateAmenities(a) {
     return a.map((key, index) => {
