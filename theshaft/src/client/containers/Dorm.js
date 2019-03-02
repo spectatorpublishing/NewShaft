@@ -225,8 +225,9 @@ export default class Dorm extends React.PureComponent {
     this.fetchDormInfo(newProps.match.params.dorm);
     this.fetchAmenities(newProps.match.params.dorm);
     this.fetchReviews(newProps.match.params.dorm);
-    //this.fetchRelatedArticles(newProps.match.params.dorm);
+    this.fetchRelatedArticles(newProps.match.params.dorm);
     //this.fetchFloorPlans(newProps.match.params.dorm);
+    this.fetchRelatedDorms(dormName);
     this.fetchDormPhotos(newProps.match.params.dorm);
 
 
