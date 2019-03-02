@@ -1229,7 +1229,7 @@ VALUES
   (
     'Hewitt Hall',
     'Arielle Shternfeld',
-    'https://arc-anglerfish-arc2-prod-spectator.s3.amazonaws.com/OIU3XCRAH5EQPA5EVXQUNF644M.jpg',
+    'https://arc-anglerfish-arc2-prod-spectator.s3.amazonaws.com/public/OIU3XCRAH5EQPA5EVXQUNF644M.jpg',
     'https://arc-anglerfish-arc2-prod-spectator.s3.amazonaws.com/public/CJD6JS3FZRDV5DXBM42KYQXACM.jpg',
     'https://arc-anglerfish-arc2-prod-spectator.s3.amazonaws.com/public/7PER4MDJSJDRRB5LI3RYJWUZFA.jpg',
     '',
@@ -1979,7 +1979,7 @@ VALUES
     'The Quad (3009 Broadway)',
     'Hewitt Hall is perfect for any upperclassmen that miss the convenience of living in the quad. It is predominately made up of singles, with a smattering of doubles and a shared bathroom. Although you will be enrolled on the quad meal plan, residents also have access to the Sulz kitchen if they want to cook. Living in Hewitt, you are in close proximity to the subway station, Hewitt dining hall, classes on Barnard campus and all the great restaurants on Broadway. Hewitt is perfect for anyone who appreciates having their own privacy, but still enjoys the lively atmosphere of living on the quad. \'',
     'BARNARD',
-    'https://arc-anglerfish-arc2-prod-spectator.s3.amazonaws.com/OIU3XCRAH5EQPA5EVXQUNF644M.jpg',
+    'https://arc-anglerfish-arc2-prod-spectator.s3.amazonaws.com/public/OIU3XCRAH5EQPA5EVXQUNF644M.jpg',
     '',
     0,
     1,
@@ -4725,7 +4725,7 @@ VALUES
 INSERT INTO
   `related_dorms` (`DORM`, `RELATED1`, `RELATED2`)
 VALUES
-  ('Furnald', 'Wien Hall', 'Harmony Hall');
+  ('Furnald Hall', 'Wien Hall', 'Harmony Hall');
 INSERT INTO
   `related_dorms` (`DORM`, `RELATED1`, `RELATED2`)
 VALUES
