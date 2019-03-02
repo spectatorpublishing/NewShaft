@@ -114,7 +114,7 @@ const dorm_name_map = {
   "616W116th": "616 W 116th",
   "620W116th": "620 W 116th",
   "601W110th": "601 W 110th",
-  "CathedralGardens": "CathedralGardens",
+  "CathedralGardens": "Cathedral Gardens",
   "HewittHall": "Hewitt Hall",
   "ElliotHall": "Elliot Hall",
   "SulzbergerTower": "Sulzberger Tower",
