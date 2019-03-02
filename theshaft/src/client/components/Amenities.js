@@ -117,6 +117,7 @@ export default class Amenities extends Component {
     if(isMobile) {
       return (
       <Expander 
+        custom={null} 
         showAll={this.wrapAmenitiesGrid(this.showAllAmenities())} 
         showSome={this.wrapAmenitiesGrid(this.showSomeAmenities())}>
           <AmenitiesTitle>Amenities</AmenitiesTitle>
