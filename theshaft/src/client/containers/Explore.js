@@ -160,7 +160,7 @@ export default class Explore extends Component {
   }
 
   resetPayload(){
-    this.setState({payload: initialPayload}, this.filterDorms)
+    this.setState({payload: _.clone(initialPayload)}, this.filterDorms)
   }
 
   filterDorms(){
