@@ -3,14 +3,19 @@ import React, { Component } from "react";
 import ReactMapGL, { Marker, Popup} from "react-map-gl";
 import { fromJS } from "immutable";
 import "mapbox-gl/src/css/mapbox-gl.css";
-import mark from "../assets/marker.svg";
+import mark from "../assets/marker2.svg";
 import { Route, Link, BrowserRouter as Router } from 'react-router-dom';
 
+let PopupContainer = styled.div`
+  opacity: 0;
+  transition: opacity 0.3s;
+  -webkit-transition: opacity 0.3s;
+`
 
 let MarkerIcon = styled.img`
   transform: translate(-50%, -100%);
-  height: 25px;
-  width : 25px;
+  height: 12px;
+  width : 12px;
 `
 
 let LocationTitle = styled.h2`
@@ -48,11 +53,15 @@ class MapItem extends Component {
   }
 
   setPopUp() {
-    this.setState({popUp: "flex", isOpen: true});
+    this.setState({popUp: "1", isOpen: true, display: "flex"});
   }
 
   clearPopUp() {
-    this.setState({popUp: "none", isOpen: false});
+    this.setState({popUp: "0", isOpen: false});
+    setTimeout(() => {
+      if (!this.state.mouseTracked) {
+          this.setState({display: "none"});      }
+    }, 100);
   }
 
   trackMouse() {
@@ -68,29 +77,30 @@ class MapItem extends Component {
       if (!this.state.mouseTracked) {
         this.clearPopUp();
       }
-    }, 1000);
+    }, 100);
   }
 
 
   render(){
-    return <div>
+    return <div
+          onClick={this.setPopUp} 
+          onMouseEnter={this.trackMouse} 
+          onMouseLeave={this.untrackMouse} 
+    >
       <Marker
         latitude={this.state.lat}
         longitude={this.state.long}
       >
         <div 
-          onClick={this.setPopUp} 
-          onMouseEnter={this.trackMouse} 
-          onMouseLeave={this.untrackMouse} 
         >
           <MarkerIcon src={mark} alt="fireSpot"/>
         </div>                
       </Marker>
-      <div style={{display:this.state.popUp}} onMouseLeave={this.delayClearPopUp}>
+      <PopupContainer style={{opacity:this.state.popUp, display:this.state.display}}>
         <Popup tipSize={5}
           anchor="bottom-left"
-          offsetTop={-23}
-          offsetLeft={7}
+          offsetTop={-8}
+          offsetLeft={0}
           dynamicPosition={true}
           longitude={this.state.long}
           latitude={this.state.lat}
@@ -98,7 +108,7 @@ class MapItem extends Component {
           closeOnClick={true}>
           <Link to={"/explore/" + this.state.popupInfo.replace(/\s+/g, '')} style={{margin:'0'}}>{this.state.popupInfo}</Link>
         </Popup>
-      </div>
+      </PopupContainer>
   </div>
   }
 }
