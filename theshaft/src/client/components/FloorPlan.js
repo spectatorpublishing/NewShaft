@@ -18,6 +18,7 @@ let FloorPlanBox = styled.div`
     ${props => props.theme.grayBorder}
     display: flex;
     flex-direction: row;
+    overflow: hidden;
 `
 
 let FloorList = styled.div`
