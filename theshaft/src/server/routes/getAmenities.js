@@ -1,6 +1,8 @@
 var express = require('express');
 var router = express.Router();
 var mysql = require('mysql');
+var redis = require('redis');
+var client = redis.createClient();
 
 /**
  * How to test:
@@ -42,16 +44,24 @@ function getAmentities(con, request, callback) {
 
 router.post('/', function(req, res, next) {
 	console.log("request received");
-	var con = mysql.createConnection({
-		host: "192.34.62.10",
-		user: "USERNAME",
-		password: "PASSWORD",
-		database: "dorms"
-	  });
-	console.log("requesting selection of" , req.body)
-	
-	getAmentities(con, req.body, (dormInfo) => {
-		res.json(dormInfo)
+	var redis_key = "amenities_" + req.body.DORM;
+	console.log("requesting selection of" , req.body.DORM)
+	client.get(redis_key, function(err, reply){
+		if(reply == null){
+			var con = mysql.createConnection({
+				host: "192.34.62.10",
+				user: "USERNAME",
+				password: "PASSWORD",
+				database: "dorms"
+			  });
+			
+			getAmentities(con, req.body, (dormInfo) => {
+				client.set(redis_key, dormInfo)
+				res.json(dormInfo)
+			})
+		} else {
+			res.json(reply)
+		}
 	})
 
 })
