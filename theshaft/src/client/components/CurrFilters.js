@@ -18,6 +18,10 @@ const CurrActiveFilter = styled.div`
             color: ${props=>props.theme.mediumGray};
         }
     }
+    &.clearFilters {
+        background: ${props=>props.theme.columbiaBlue};
+        color: ${props=>props.theme.white};
+    }
 `
 
 const Close = styled.span`
@@ -31,15 +35,20 @@ const CurrFilters = (props) => {
     console.log(props)
     const filterKeyToName = _.invert(props.filterNameToKey)
     const activeFilters = []
-    Object.keys(props.filters).map((filterKey)=>{
+    Object.keys(props.filters).map((filterKey, i)=>{
         if (typeof props.filters[filterKey] === "number" && !!props.filters[filterKey]){
             console.log('a')
-            activeFilters.push(<CurrActiveFilter onClick={()=>props.removeFilter(filterKeyToName[filterKey])}>
+            activeFilters.push(<CurrActiveFilter key={i+1} onClick={()=>props.removeFilter(filterKeyToName[filterKey])}>
                 {filterKeyToName[filterKey]}
                 <Close className="close">&times;</Close>
             </CurrActiveFilter>)
         }
     })
+    if (activeFilters.length > 0){
+        activeFilters.unshift(<CurrActiveFilter key={0} className="clearFilters" onClick={props.removeAll}>
+        {"Clear Filters"}
+        </CurrActiveFilter>)
+    }
     return <CurrFiltersWrapper>
         {activeFilters}
     </CurrFiltersWrapper>
