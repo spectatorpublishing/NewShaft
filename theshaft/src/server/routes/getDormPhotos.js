@@ -38,7 +38,7 @@ function getDormPhotos(con, request, callback) {
 router.post('/', function(req, res, next) {
 	console.log("request received");
 	var redis_key = "dormphotos_" + req.body.DORM;
-	client.get(redis_key, (err, reply)=> {
+	client.get(redis_key, (err, reply)=> { 
 		if(reply == null){
 			console.log("Using mysql for " + redis_key)
 			var con = mysql.createConnection({
@@ -50,6 +50,7 @@ router.post('/', function(req, res, next) {
 
 			getDormPhotos(con, req.body, (revInfo) => {
 				client.set(redis_key, JSON.stringify(revInfo[0]))
+				client.expire(redis_key,86400)
 				res.json(revInfo)
 			})
 		} else {
@@ -57,6 +58,7 @@ router.post('/', function(req, res, next) {
 			res.json(JSON.parse(reply))
 		}
 	})
+
 
 })
 

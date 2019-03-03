@@ -57,6 +57,7 @@ router.post('/', function(req, res, next) {
 			
 			getAmentities(con, req.body, (dormInfo) => {
 				client.set(redis_key, JSON.stringify(dormInfo[0]))
+				client.expire(redis_key,86400)
 				res.json(dormInfo)
 			})
 		} else {

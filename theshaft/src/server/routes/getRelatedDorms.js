@@ -57,6 +57,7 @@ router.post('/', function(req, res, next) {
 			
 			getRelatedDorms(con, req.body, (revInfo) => {
 				client.set(redis_key, JSON.stringify(revInfo))
+				client.expire(redis_key,86400)
 				res.json(revInfo)
 			})
 		} else {

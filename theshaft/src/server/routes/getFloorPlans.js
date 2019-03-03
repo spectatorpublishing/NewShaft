@@ -1,6 +1,8 @@
 var express = require('express');
 var router = express.Router();
+var redis = require("redis");
 var mysql = require('mysql');
+var client = redis.createClient();
 
 function getFloorPlans(con, request, callback) {
 	con.connect(function(err) {
@@ -20,17 +22,26 @@ function getFloorPlans(con, request, callback) {
 }
 
 router.post('/', function(req, res, next) {
-	console.log("request received");
-	var con = mysql.createConnection({
-		host: "192.34.62.10",
-		user: "USERNAME",
-		password: "PASSWORD",
-		database: "dorms"
-	  });
-	console.log("requesting selection of" , req.body)
-	
-	getFloorPlans(con, req.body, (revInfo) => {
-		res.json(revInfo)
+	console.log("request received");var redis_key = "dormphotos_" + req.body.DORM;
+	client.get(redis_key, (err, reply)=> { 
+		if(reply == null){
+			console.log("Using mysql for " + redis_key)
+			var con = mysql.createConnection({
+				host: "192.34.62.10",
+				user: "USERNAME",
+				password: "PASSWORD",
+				database: "dorms"
+			});
+
+			getFloorPlans(con, req.body, (dormInfo) => {
+				client.set(redis_key, JSON.stringify(dormInfo[0]))
+				client.expire(redis_key,86400)
+				res.json(dormInfo)
+			})
+		} else {
+			console.log("Using redis for " + redis_key)
+			res.json(JSON.parse(reply))
+		}
 	})
 
 })
