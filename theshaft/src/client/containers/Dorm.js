@@ -110,13 +110,13 @@ const dorm_name_map = {
   "McBainHall": "McBain Hall",
   "47Claremont": "47 Claremont",
   "600W113th": "600 W 113th",
-  "600W116th": "600 W 116th",
-  "616W116th": "616 W 116th",
-  "620W116th": "620 W 116th",
-  "601W110th": "601 W 110th",
-  "CathedralGardens": "CathedralGardens",
+  "600W116thSt.": "600 W 116th St.",
+  "616W116thSt.": "616 W 116th St.",
+  "620W116thSt.": "620 W 116th St.",
+  "601W110thSt.": "601 W 110th St.",
+  "CathedralGardens": "Cathedral Gardens",
   "HewittHall": "Hewitt Hall",
-  "ElliotHall": "Elliot Hall",
+  "ElliottHall": "Elliott Hall",
   "SulzbergerTower": "Sulzberger Tower",
   "BroadwayHall": "Broadway Hall",
   "CarltonArms": "Carlton Arms",
@@ -189,6 +189,7 @@ export default class Dorm extends React.PureComponent {
       dorm_photos: [],
       relatedArticles: [],
       floorPlans: [],
+      relatedDorms : [],
       scrollMenuFixed: false,
       scrollMenuOffset: null,
       width: screen_width
@@ -206,8 +207,9 @@ export default class Dorm extends React.PureComponent {
     this.fetchDormInfo(dormName);
     this.fetchAmenities(dormName);
     this.fetchReviews(dormName);
-    //this.fetchRelatedArticles(dormName);
-    //this.fetchFloorPlans(dormName);
+    this.fetchRelatedArticles(dormName);
+    this.fetchFloorPlans(dormName);
+    this.fetchRelatedDorms(dormName);
     this.fetchDormPhotos(dormName);
     //this.fetchDormInfo(dorm_name_map[this.props.match.params.dorm])
     window.scrollTo(0, 0);
@@ -223,8 +225,9 @@ export default class Dorm extends React.PureComponent {
     this.fetchDormInfo(newProps.match.params.dorm);
     this.fetchAmenities(newProps.match.params.dorm);
     this.fetchReviews(newProps.match.params.dorm);
-    //this.fetchRelatedArticles(newProps.match.params.dorm);
-    //this.fetchFloorPlans(newProps.match.params.dorm);
+    this.fetchRelatedArticles(newProps.match.params.dorm);
+    this.fetchFloorPlans(newProps.match.params.dorm);
+    this.fetchRelatedDorms(newProps.match.params.dorm);
     this.fetchDormPhotos(newProps.match.params.dorm);
 
 
@@ -328,6 +331,28 @@ export default class Dorm extends React.PureComponent {
       });
   }
 
+  fetchRelatedDorms(name){
+    const dormName = dorm_name_map[name]
+    fetch('/api/getRelatedDorms', {
+      method: "POST",
+      body: JSON.stringify({
+        DORM: dormName
+      }),
+      headers: { "Content-Type": "application/json"},
+    }).then((res=>res.json()))
+    .then(relatedDorms => {
+      let relDorms = []
+      for (let i = 0; i < relatedDorms.length; i++){
+        relDorms.push({
+          "DORM": relatedDorms[i].RELATED,
+          "image": relatedDorms[i].IMAGE
+          }
+        )
+      }
+      this.setState({relatedDorms : relDorms})
+    })
+  }
+
   fetchFloorPlans(name){
     const dormName = dorm_name_map[name]
     fetch('/api/getFloorPlans', {
@@ -348,7 +373,8 @@ export default class Dorm extends React.PureComponent {
           if (floorPlan[floorNum] == null || keys[i] == "DORM") {
             continue;
           }
-          floor_state[floorNum - 1] = "http://localhost:8080/floor_plans/" + floorPlan[floorNum];
+          //floor_state[floorNum - 1] = "http://localhost:8080/floor_plans/" + floorPlan[floorNum];
+          floor_state[floorNum -1] = 'https://s3.amazonaws.com/shaft-dorm-floorplans/' + floorPlan[floorNum].replace(/ /g, '+')
         }
         return floor_state
       }).then(thing => {
@@ -465,8 +491,8 @@ export default class Dorm extends React.PureComponent {
               <Scroller compRef={this.proconRef} label={"Pros and Cons"} />
               <Scroller compRef={this.floorplansRef} label={"Floor Plans"} />
               <Scroller compRef={this.reviewsRef} label={"Reviews"} />
-              <Scroller compRef={this.suggestionsRef} label={"Related Dorms"} />
               <Scroller compRef={this.spectrumRef} label={"Spectrum"} />
+              <Scroller compRef={this.suggestionsRef} label={"Related Dorms"} />
             </ScrollMenu>
           </ColOne>
           }
@@ -477,7 +503,7 @@ export default class Dorm extends React.PureComponent {
                 location={this.state.dormInfo.ADDRESS}
                 roomtype={roomtype}
                 classmakeup={this.state.dormInfo.CLASS_MAKEUP}
-                cutoff={this.state.dormInfo.LOTTERY_NUMS}
+                //cutoff={this.state.dormInfo.LOTTERY_NUMS}
               />
             )}
             <ScrollerTarget ref={this.amenitiesRef}>
@@ -510,14 +536,14 @@ export default class Dorm extends React.PureComponent {
               </Margin>
             </ScrollerTarget>
             
-            {/*<ScrollerTarget ref={this.floorplansRef}>
+            <ScrollerTarget ref={this.floorplansRef}>
               <Margin>
                 <FloorPlan
                   floorOffset={0}
                   planArray={this.state.floorPlans}
                 />
               </Margin>
-            </ScrollerTarget>*/}
+            </ScrollerTarget>
 
             <ScrollerTarget ref={this.reviewsRef}>
               <Margin>
@@ -530,22 +556,21 @@ export default class Dorm extends React.PureComponent {
               </Margin>
             </ScrollerTarget>
 
-            <ScrollerTarget ref={this.suggestionsRef}>
-              <Margin>
-                <RelatedDorms
-                  name={this.state.dormInfo.DORM}
-                  relatedDorms={relatedDorms}
-                />
-              </Margin>
-            </ScrollerTarget>
-
             <ScrollerTarget ref={this.spectrumRef}>
               <Margin>
                  <SpectrumSidebar spectrumSidebarData = {this.state.relatedArticles}/>
               </Margin>
             </ScrollerTarget>
 
-            <AdManager/>
+            <ScrollerTarget ref={this.suggestionsRef}>
+              <Margin>
+                <RelatedDorms
+                  name={this.state.dormInfo.DORM}
+                  relatedDorms={this.state.relatedDorms}
+                />
+              </Margin>
+            </ScrollerTarget>
+
 
           </ColTwo>
 

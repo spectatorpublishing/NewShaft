@@ -22,7 +22,6 @@ let NavContainer = styled.div `
 
 let LogoContainer = styled.div`
   margin: 0 5vw;
-  width: 20%;
   display: flex;
   align-items: center;
   justify-content: center;

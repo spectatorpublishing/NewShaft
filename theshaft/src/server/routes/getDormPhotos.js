@@ -21,7 +21,9 @@ function getDormPhotos(con, request, callback) {
 			"table": */
 
         var sqlStatement = `SELECT MAIN_IMAGE, OTHER1, OTHER2, OTHER3 FROM dorm_explore_photos 
-        WHERE DORM = "${request["DORM"]}";`
+		WHERE DORM = "${request["DORM"]}";`
+		
+		console.log(sqlStatement);
 		
 		con.query(sqlStatement, function(err, res) {
 			if (err) throw err;

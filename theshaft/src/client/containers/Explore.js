@@ -4,6 +4,7 @@ import ExploreSidebar from "../components/ExploreSidebar";
 import Filter from '../components/FilterComponent.js'
 import Maps from "../components/Maps";
 import SearchBar from "../components/SearchBar"
+import CurrFilters from "../components/CurrFilters"
 
 let ExploreContainer = styled.div`
   width: 100%;
@@ -154,7 +155,6 @@ export default class Explore extends Component {
   }
 
   filterDorms(){
-    //console.log("PAYLOAD: " + JSON.stringify(this.state.payload))
     fetch('/api/filterDorm', {
         method: 'POST',
         headers: {
@@ -163,8 +163,6 @@ export default class Explore extends Component {
         body: JSON.stringify(this.state.payload)
     }).then(res => res.json())
     .then(response => {
-        console.log(JSON.stringify(response));
-        // console.log("RESPONSE: " + JSON.stringify(response))
         this.setState({dorms: response})
     });      
   }
@@ -179,6 +177,7 @@ export default class Explore extends Component {
               <SearchBar handleChange={this.updatePayload}/>
               <Filter handleChange={this.updatePayload}/>
             </FilterSearchBG>
+            <CurrFilters filterNameToKey={filterNameToKey} filters={this.state.payload} removeFilter={(name)=>{this.updatePayload(0, name)}}/>
             <ExploreSidebar dorms={this.state.dorms}/>
           </SideBar>
         </ColOne>

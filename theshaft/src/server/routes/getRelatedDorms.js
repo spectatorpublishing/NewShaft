@@ -20,8 +20,16 @@ function getRelatedDorms(con, request, callback) {
 		{
 			"table": */
 
-        var sqlStatement = `SELECT RELATED1, RELATED2 FROM related_dorms 
-        WHERE DORM = "${request["DORM"]}";`
+        var sqlStatement = `
+				SELECT d.DORM AS RELATED, d.THUMBNAIL_IMAGE AS IMAGE FROM related_dorms r
+					JOIN dorm_static_info d ON r.RELATED1 = d.DORM
+					WHERE r.DORM = "${request["DORM"]}"
+					UNION
+				SELECT d.DORM AS RELATED, d.THUMBNAIL_IMAGE AS IMAGE FROM related_dorms r
+					JOIN dorm_static_info d ON r.RELATED2 = d.DORM
+					WHERE r.DORM = "${request["DORM"]}"
+				;
+`
 		
 		con.query(sqlStatement, function(err, res) {
 			if (err) throw err;
