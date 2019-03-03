@@ -42,6 +42,11 @@ let FloorButton = styled.button`
         background: none;
         padding: 1px 4px 2px 4px;
     }
+    &>h4 {
+        @media only screen and (min-width: 768px){
+            color: ${props => props.active ? props.theme.darkGray : props.theme.columbiaBlue};
+        }
+    }
 `
 
 let FloorButtonNumber = styled.h4`
@@ -152,6 +157,7 @@ export default class FloorPlan extends React.PureComponent {
             currentFloor: floorNumber + this.state.floorOffset,
             currentPlan: this.state.planArray[floorNumber]
         })
+
     }
 
     floorUp() {
@@ -219,7 +225,7 @@ export default class FloorPlan extends React.PureComponent {
                     <FloorPlanTitle> Floor Plans </FloorPlanTitle>
                     <FloorPlanBox>
                         <PlanDisplay>
-                            <FloorNumber> Floor {this.state.currentFloor} </FloorNumber>
+                            {/* <FloorNumber> Floor {this.state.currentFloor} </FloorNumber> */}
                             <Button 
                                 type="button" 
                                 onClick = {
@@ -256,7 +262,7 @@ export default class FloorPlan extends React.PureComponent {
                         <FloorList>
                             { 
                                   this.props.planArray.map((floor, i) =>
-                                    (<FloorButton key = {i} onClick = {() => this.selectFloor(i)}> 
+                                    (<FloorButton key = {i} active = {this.state.currentFloor === i+1} onClick = {() => this.selectFloor(i)}> 
                                     <FloorButtonNumber>Floor {i + this.state.floorOffset}</FloorButtonNumber>
                                      </FloorButton>)
                                 )
