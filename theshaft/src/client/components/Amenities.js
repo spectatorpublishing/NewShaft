@@ -111,22 +111,22 @@ export default class Amenities extends Component {
     const { width } = this.state;
     const isMobile = width <= 768;
     if(isMobile) {
-      return (
-      <Expander 
-        custom={null} 
-        showAll={this.wrapAmenitiesGrid(this.showAllAmenities())} 
-        showSome={this.wrapAmenitiesGrid(this.showSomeAmenities())}>
-          <AmenitiesTitle>Amenities</AmenitiesTitle>
-      </Expander>
-      );
+      return [
+        <AmenitiesTitle>Amenities</AmenitiesTitle>,
+        <Expander 
+          custom={null} 
+          showAll={this.wrapAmenitiesGrid(this.showAllAmenities())} 
+          showSome={this.wrapAmenitiesGrid(this.showSomeAmenities())}>
+        </Expander>
+      ];
     } 
     else {
-      return (
+      return [
+        <AmenitiesTitle>Amenities</AmenitiesTitle>,
         <AmenitiesContainer>
-          <AmenitiesTitle>Amenities</AmenitiesTitle>
           {this.wrapAmenitiesGrid(this.showAllAmenities())}
         </AmenitiesContainer>
-      );
+      ];
     }
   }
 }
