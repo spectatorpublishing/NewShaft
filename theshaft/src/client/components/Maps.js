@@ -26,10 +26,15 @@ class MapItem extends Component {
       lat: this.props.lat,
       long: this.props.long,
       popupInfo: this.props.popupInfo,
+      isOpen: false,
+      mouseTracked: false,
     }
 
     this.setPopUp = this.setPopUp.bind(this);
     this.clearPopUp = this.clearPopUp.bind(this);
+    this.trackMouse = this.trackMouse.bind(this);
+    this.untrackMouse = this.untrackMouse.bind(this);
+
   }
 
   componentDidUpdate(oldProps){
@@ -43,12 +48,29 @@ class MapItem extends Component {
   }
 
   setPopUp() {
-    this.setState({popUp: "flex"});
+    this.setState({popUp: "flex", isOpen: true});
   }
 
   clearPopUp() {
-    this.setState({popUp: "none"});
+    this.setState({popUp: "none", isOpen: false});
   }
+
+  trackMouse() {
+    this.setState({ mouseTracked: true });
+    if (!this.state.isOpen) {
+      this.setPopUp();
+    }
+  }
+
+  untrackMouse() {
+    this.setState({ mouseTracked: false });
+    setTimeout(() => {
+      if (!this.state.mouseTracked) {
+        this.clearPopUp();
+      }
+    }, 1000);
+  }
+
 
   render(){
     return <div>
@@ -56,11 +78,15 @@ class MapItem extends Component {
         latitude={this.state.lat}
         longitude={this.state.long}
       >
-        <div onClick={this.setPopUp}>
-        <MarkerIcon src={mark} alt="fireSpot"/>
+        <div 
+          onClick={this.setPopUp} 
+          onMouseEnter={this.trackMouse} 
+          onMouseLeave={this.untrackMouse} 
+        >
+          <MarkerIcon src={mark} alt="fireSpot"/>
         </div>                
       </Marker>
-      <div style={{display:this.state.popUp}}>
+      <div style={{display:this.state.popUp}} onMouseLeave={this.delayClearPopUp}>
         <Popup tipSize={5}
           anchor="bottom-left"
           offsetTop={-23}
