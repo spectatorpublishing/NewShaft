@@ -56,11 +56,12 @@ router.post('/', function(req, res, next) {
 			  });
 			
 			getAmentities(con, req.body, (dormInfo) => {
-				client.set(redis_key, dormInfo)
+				console.log(JSON.stringify(dormInfo[0]))
+				client.set(redis_key, JSON.stringify(dormInfo[0]))
 				res.json(dormInfo)
 			})
 		} else {
-			res.json(reply)
+			res.json(JSON.parse(reply))
 		}
 	})
 
