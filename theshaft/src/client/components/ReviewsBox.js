@@ -80,7 +80,11 @@ export default class ReviewsBox extends Component {
         const { width } = this.state;
         const isMobile = width <= 768;
         // console.log('WIDTH WIDTH WIDTH ' + width);
-
+        if(this.props.reviews.length == 0){
+            return(
+                <Border>No Reviews</Border>
+            )
+        }
         if(isMobile) {
             return(
                 <MobileBorder>
