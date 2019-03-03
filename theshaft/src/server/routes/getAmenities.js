@@ -45,22 +45,22 @@ function getAmentities(con, request, callback) {
 router.post('/', function(req, res, next) {
 	console.log("request received");
 	var redis_key = "amenities_" + req.body.DORM;
-	console.log("requesting selection of" , req.body.DORM)
 	client.get(redis_key, function(err, reply){
 		if(reply == null){
+			console.log("Using mysql for " + redis_key)
 			var con = mysql.createConnection({
 				host: "192.34.62.10",
 				user: "USERNAME",
 				password: "PASSWORD",
 				database: "dorms"
-			  });
+			});
 			
 			getAmentities(con, req.body, (dormInfo) => {
-				console.log(JSON.stringify(dormInfo[0]))
 				client.set(redis_key, JSON.stringify(dormInfo[0]))
 				res.json(dormInfo)
 			})
 		} else {
+			console.log("Using redis for " + redis_key)
 			res.json(JSON.parse(reply))
 		}
 	})
