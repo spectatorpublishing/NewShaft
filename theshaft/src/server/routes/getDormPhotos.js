@@ -40,7 +40,7 @@ router.post('/', function(req, res, next) {
 		host: "192.34.62.10",
 		user: "USERNAME",
 		password: "PASSWORD",
-		database: "dorms"
+		database: "dev"
 	  });
 	console.log("requesting selection of" , req.body)
 	
