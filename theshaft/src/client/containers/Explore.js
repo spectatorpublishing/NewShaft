@@ -130,11 +130,24 @@ export default class Explore extends Component {
       dorms: [],
     }
     this.updatePayload = this.updatePayload.bind(this)
-    }
+
+    // var i = new Image();
+    // i.src = "https://arc-anglerfish-arc2-prod-spectator.s3.amazonaws.com/public/FHXBX6S53BANRLVYYEP2SM7KBQ.jpg";
+  }
   
   componentDidMount(){
     document.title = "The Shaft";
     this.fetchDorms();
+  }
+
+  preloadImages(dorms, callback){
+    dorms.forEach((dorm) => {
+      console.log(dorm.DORM);
+      var i = new Image()
+      i.src = dorm.THUMBNAIL_IMAGE;
+    })
+
+    callback();
   }
 
   fetchDorms(){
@@ -144,7 +157,7 @@ export default class Explore extends Component {
     })
     .then(res => res.json())
     .then(dormInfo => {
-      this.setState({dorms: dormInfo})
+      this.preloadImages(dormInfo, () => this.setState({dorms: dormInfo}));      
     })
   }
 
