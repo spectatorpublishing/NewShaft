@@ -64,9 +64,7 @@ router.post('/', function(req, res, next) {
 			console.log("Using redis for " + redis_key)
 			res.json(JSON.parse(reply))
 		}
-
 	})
-
 })
 
 module.exports = router;
