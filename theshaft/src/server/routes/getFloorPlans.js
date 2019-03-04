@@ -5,7 +5,6 @@ var mysql = require('mysql');
 function getFloorPlans(con, request, callback) {
 	con.connect(function(err) {
 		if (err) throw err;
-		console.log("Connected!");
 
         var sqlStatement = `SELECT * FROM floor_plans 
         WHERE DORM = "${request["DORM"]}";`
@@ -20,14 +19,12 @@ function getFloorPlans(con, request, callback) {
 }
 
 router.post('/', function(req, res, next) {
-	console.log("request received");
 	var con = mysql.createConnection({
 		host: "192.34.62.10",
 		user: "USERNAME",
 		password: "PASSWORD",
 		database: "dev"
 	  });
-	console.log("requesting selection of" , req.body)
 	
 	getFloorPlans(con, req.body, (revInfo) => {
 		res.json(revInfo)

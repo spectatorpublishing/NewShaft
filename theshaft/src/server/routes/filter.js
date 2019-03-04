@@ -16,16 +16,6 @@ function filterDormInfo(con, request, callback) {
   let firstKey = true
   let keys = Object.keys(request);
 
-  /*if(request["COLUMBIA"] === 1 && request["BARNARD"] === 0){
-    firstKey = false;
-    sqlStatement += `WHERE COLLEGE = "COLUMBIA"`;
-  }else if(request["COLUMBIA"] == 0 && request["BARNARD"] === 1 ){
-    firstkey = false;
-    console.log(`Barnard first key: ${firstkey}`)
-    sqlStatement += `WHERE COLLEGE = "BARNARD"`;
-  }
-  console.log(firstKey); */
-
   // Prevent iteration through COLUMBIA and BARNARD
   for(i = 0; i < keys.length; i++) {
     if(typeof request[keys[i]] === "number" && request[keys[i]] === 1){

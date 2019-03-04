@@ -6,9 +6,7 @@ const bodyParser = require('body-parser')
 var cors = require('cors');
 app.use(cors())
 
-var fakeRequest = {
-	"dorm": "barnard"
-}
+
 var getDormInfo = require('./routes/getDormInfo');
 var filterDormInfo = require('./routes/filter');
 var postReview = require('./routes/postReview');
@@ -36,7 +34,7 @@ app.use('/api/getRelatedDorms', (req, res) => getRelatedDorms(req, res))
 
 
 var server = app.listen(8080, () => {
-	console.log('Listening on port 8080!')
+	console.log("Connected on Port 8080")
 });
 
 module.exports = server;

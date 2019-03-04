@@ -30,12 +30,10 @@ const Close = styled.span`
 `
 
 const CurrFilters = (props) => {
-    console.log(props)
     const filterKeyToName = _.invert(props.filterNameToKey)
     const activeFilters = []
     Object.keys(props.filters).map((filterKey, i)=>{
         if (typeof props.filters[filterKey] === "number" && !!props.filters[filterKey]){
-            console.log('a')
             activeFilters.push(<CurrActiveFilter key={i+1} onClick={()=>props.removeFilter(filterKeyToName[filterKey])}>
                 {filterKeyToName[filterKey]}
                 <Close>&times;</Close>

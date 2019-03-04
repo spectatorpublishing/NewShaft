@@ -47,7 +47,6 @@ export default class Expander extends Component {
   constructor(props) {
     super(props);
 
-    console.log(props);
 
     this.state = {
       expanded: false,

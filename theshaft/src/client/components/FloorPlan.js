@@ -253,7 +253,6 @@ export default class FloorPlan extends React.PureComponent {
                                         photoIndex: (photoIndex + 1) % this.props.planArray.length,
                                         // this.state.currentFloor - this.state.floorOffset
                                     });
-                                    console.log(this.state.photoIndex);
                                 }
                             }
                               />
