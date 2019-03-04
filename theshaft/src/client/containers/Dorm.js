@@ -1,6 +1,5 @@
 import styled from "styled-components";
 import React, { Component } from "react";
-import { withRouter } from 'react-router';
 import PhotoBanner from "../components/PhotoBanner";
 import Amenities from "../components/Amenities";
 import AtAGlance from "../components/AtAGlance";

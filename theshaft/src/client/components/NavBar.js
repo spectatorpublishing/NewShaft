@@ -1,5 +1,4 @@
 import React, { Component } from "react";
-import icon from "../assets/react.png";
 import speclogo from "../assets/spectator-logo.png";
 import shaftlogo from "../assets/shaft-logo-text.png"
 import { Link, NavLink } from 'react-router-dom';

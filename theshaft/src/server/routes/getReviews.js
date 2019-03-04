@@ -2,14 +2,6 @@ var express = require('express');
 var router = express.Router();
 var mysql = require('mysql');
 
-/**
- * How to test:
- * Using Postman, send POST request to 
- * localhost:8080/api/getDormInfo/
- * In params, make sure you set key=value 
- * to table=theshaft.dorm_static_info
- */
-
 
 function getReviews(con, request, callback) {
 	con.connect(function(err) {

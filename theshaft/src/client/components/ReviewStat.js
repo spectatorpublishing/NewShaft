@@ -1,6 +1,5 @@
 import styled from "styled-components";
 import React, { Component } from "react";
-import { is } from "immutable";
 
 let Border = styled.div`
     display: flex;
