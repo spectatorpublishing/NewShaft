@@ -123,7 +123,8 @@ const initialPayload = {
   SENIOR: 0,
   AC: 0,
   GYM: 0,
-  P_BATHROOM: 0
+  P_BATHROOM: 0,
+  P_KITCHEN: 0
 }
   
 export default class Explore extends Component {
