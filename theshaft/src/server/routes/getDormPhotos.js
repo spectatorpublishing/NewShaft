@@ -45,10 +45,9 @@ router.post('/', function(req, res, next) {
 				host: "192.34.62.10",
 				user: "USERNAME",
 				password: "PASSWORD",
-				database: "dorms"
+				database: "dev"
 			});
-
-			getDormPhotos(con, req.body, (revInfo) => {
+      getDormPhotos(con, req.body, (revInfo) => {
 				client.set(redis_key, JSON.stringify(revInfo[0]))
 				client.expire(redis_key,86400)
 				res.json(revInfo)
@@ -57,9 +56,7 @@ router.post('/', function(req, res, next) {
 			console.log("Using redis for " + redis_key)
 			res.json(JSON.parse(reply))
 		}
-	})
-
-
+  })
 })
 
 module.exports = router;

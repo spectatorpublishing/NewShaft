@@ -29,7 +29,6 @@ function getRelatedArticles(con, request, callback) {
 }
 
 router.post('/', function(req, res, next) {
-	console.log("request received");
 	var redis_key = "relatedArticles_" + req.body.DORM;
 	client.get(redis_key, (err, reply)=> { 
 		if(reply == null){
@@ -38,9 +37,8 @@ router.post('/', function(req, res, next) {
 				host: "192.34.62.10",
 				user: "USERNAME",
 				password: "PASSWORD",
-				database: "dorms"
+				database: "dev"
 			});
-
 			getRelatedArticles(con, req.body, (ArticleInfo) => {
 				client.set(redis_key, JSON.stringify(ArticleInfo[0]))
 				client.expire(redis_key,86400)

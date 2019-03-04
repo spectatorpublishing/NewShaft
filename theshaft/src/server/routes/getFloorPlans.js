@@ -22,7 +22,7 @@ function getFloorPlans(con, request, callback) {
 }
 
 router.post('/', function(req, res, next) {
-	console.log("request received");var redis_key = "dormphotos_" + req.body.DORM;
+  var redis_key = "dormphotos_" + req.body.DORM;
 	client.get(redis_key, (err, reply)=> { 
 		if(reply == null){
 			console.log("Using mysql for " + redis_key)
@@ -30,7 +30,7 @@ router.post('/', function(req, res, next) {
 				host: "192.34.62.10",
 				user: "USERNAME",
 				password: "PASSWORD",
-				database: "dorms"
+				database: "dev"
 			});
 
 			getFloorPlans(con, req.body, (dormInfo) => {
@@ -41,9 +41,7 @@ router.post('/', function(req, res, next) {
 		} else {
 			console.log("Using redis for " + redis_key)
 			res.json(JSON.parse(reply))
-		}
-	})
-
+    }
 })
 
 module.exports = router;
