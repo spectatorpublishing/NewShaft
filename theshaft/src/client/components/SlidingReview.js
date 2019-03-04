@@ -119,6 +119,7 @@ export default class SlidingReview extends Component {
                         review={review.REVIEW_TXT} 
                         room={review.ROOM_NUM} 
                         year={years_map[review.YEAR]} 
+                        timestamp={review.TIMESTAMP}
                         />
                     ))}
                   </div>

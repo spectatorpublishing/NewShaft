@@ -142,6 +142,16 @@ export default class Explore extends Component {
     this.fetchDorms();
   }
 
+  preloadImages(dorms, callback){
+    dorms.forEach((dorm) => {
+      console.log(dorm.DORM);
+      var i = new Image()
+      i.src = dorm.THUMBNAIL_IMAGE;
+    })
+
+    callback();
+  }
+
   fetchDorms(){
     fetch('/api/getExploreInfo', {
       method: "GET",
@@ -149,7 +159,7 @@ export default class Explore extends Component {
     })
     .then(res => res.json())
     .then(dormInfo => {
-      this.setState({dorms: dormInfo})
+      this.preloadImages(dormInfo, () => this.setState({dorms: dormInfo}));      
     })
   }
 
