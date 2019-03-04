@@ -1,6 +1,8 @@
 var express = require('express');
 var router = express.Router();
 var mysql = require('mysql');
+var redis = require('redis')
+var client = redis.createClient();
 
 function getRelatedArticles(con, request, callback) {
 	con.connect(function(err) {
@@ -27,19 +29,26 @@ function getRelatedArticles(con, request, callback) {
 }
 
 router.post('/', function(req, res, next) {
-	console.log("request received");
-	var con = mysql.createConnection({
-		host: "192.34.62.10",
-		user: "USERNAME",
-		password: "PASSWORD",
-		database: "dev"
-	  });
-	console.log("requesting selection of" , req.body, '!')
-	
-	getRelatedArticles(con, req.body, (dormInfo) => {
-		res.json(dormInfo)
+	var redis_key = "relatedArticles_" + req.body.DORM;
+	client.get(redis_key, (err, reply)=> { 
+		if(reply == null){
+			console.log("Using mysql for " + redis_key)
+			var con = mysql.createConnection({
+				host: "192.34.62.10",
+				user: "USERNAME",
+				password: "PASSWORD",
+				database: "dev"
+			});
+			getRelatedArticles(con, req.body, (ArticleInfo) => {
+				client.set(redis_key, JSON.stringify(ArticleInfo[0]))
+				client.expire(redis_key,86400)
+				res.json(ArticleInfo)
+			})
+		} else {
+			console.log("Using redis for " + redis_key)
+			res.json(JSON.parse(reply))
+		}
 	})
-
 })
 
 module.exports = router;
