@@ -13,21 +13,24 @@ function filterDormInfo(con, request, callback) {
   ifnull(s.SEVEN_SUITE, 0) as SEVEN_SUITE, ifnull(s.EIGHT_SUITE, 0) as EIGHT_SUITE, ifnull(s.NINE_SUITE, 0) as NINE_SUITE 
   FROM dorm_static_info as d JOIN amenities as a on a.DORM = d.DORM JOIN class_makeup as c ON c.DORM = d.DORM LEFT JOIN suites as s on s.DORM = d.DORM `
 
-  var firstKey = true
-  var keys = Object.keys(request);
+  let firstKey = true
+  let keys = Object.keys(request);
 
-  if(request["COLUMBIA"] === 1 && request["BARNARD"] == 0){
+  if(request["COLUMBIA"] === 1 && request["BARNARD"] === 0){
     firstKey = false;
     sqlStatement += `WHERE COLLEGE = "COLUMBIA"`;
-  }else if(request["COLUMBIA"] == 0 && request["BARNARD"] == 1 ){
+  }else if(request["COLUMBIA"] == 0 && request["BARNARD"] === 1 ){
     firstkey = false;
+    console.log(`Barnard first key: ${firstkey}`)
     sqlStatement += `WHERE COLLEGE = "BARNARD"`;
   }
+  console.log(firstKey);
 
   // Prevent iteration through COLUMBIA and BARNARD
   for(i = 2; i < keys.length; i++) {
     if(typeof request[keys[i]] === "number" && request[keys[i]] === 1){
       if(firstKey) {
+        console.log("FIRST KEY")
 				firstKey = false
 				sqlStatement += `WHERE ${keys[i]}=${request[keys[i]]}`
 			} else {
@@ -44,6 +47,7 @@ function filterDormInfo(con, request, callback) {
     }
 	}
   sqlStatement+=`;`
+  console.log(sqlStatement);
   
   con.query(sqlStatement, function(err, res) {
     if (err) throw err;

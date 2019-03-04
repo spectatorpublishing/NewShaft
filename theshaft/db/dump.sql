@@ -1521,7 +1521,7 @@ VALUES
   (
     '600 W 113th',
     '600 West 113th Street',
-    '600 W 113th, located on 113th and Broadway, is the perfect place for you if you want to get a taste of actually living in New York City. The dorm is just a block away from main campus, but also has close access to all the great restaurants in Morningside Heights, Westside, and Duane Reade. It’s made up of apartment style suites with a shared kitchen, private bathrooms and a mix of singles and doubles. 600 is quiet, cozy and convenient, and perfect for anyone who is looking for a more residential feel.\'',
+    '600 W 113th, commonly known as Nuss, located on 113th and Broadway, is the perfect place for you if you want to get a taste of actually living in New York City. The dorm is just a block away from main campus, but also has close access to all the great restaurants in Morningside Heights, Westside, and Duane Reade. It’s made up of apartment style suites with a shared kitchen, private bathrooms and a mix of singles and doubles. 600 is quiet, cozy and convenient, and perfect for anyone who is looking for a more residential feel.\'',
     'COLUMBIA',
     'https://arc-anglerfish-arc2-prod-spectator.s3.amazonaws.com/public/52QDVVUAVJB6VPQ7HJZD77F2YY.jpg',
     '',
@@ -2452,12 +2452,12 @@ INSERT INTO
 VALUES
   (
     '523 West 113th',
+    '523 West 113th Basement.jpg',
     '523 West 113th 1.jpg',
     '523 West 113th 2.jpg',
     '523 West 113th 3.jpg',
     '523 West 113th 4.jpg',
     '523 West 113th 5.jpg',
-    '523 West 113th Basement.jpg',
     NULL,
     NULL,
     NULL,
@@ -2500,12 +2500,12 @@ INSERT INTO
 VALUES
   (
     '531 West 113th',
+    '531 West 113th Basement.jpg',
     '531 West 113th 1.jpg',
     '531 West 113th 2.jpg',
     '531 West 113th 3.jpg',
     '531 West 113th 4.jpg',
     '531 West 113th 5.jpg',
-    '531 West 113th Basement.jpg',
     NULL,
     NULL,
     NULL,
@@ -2548,11 +2548,11 @@ INSERT INTO
 VALUES
   (
     '534 West 114th',
+    '534 West 114th Basement.jpg',
     '534 West 114th 1.jpg',
     '534 West 114th 2.jpg',
     '534 West 114th 3.jpg',
     '534 West 114th 4.jpg',
-    '534 West 114th Basement.jpg',
     NULL,
     NULL,
     NULL,
@@ -2596,12 +2596,12 @@ INSERT INTO
 VALUES
   (
     '536 West 114th',
+    '536 West 114th Basement.jpg',
     '536 West 114th 1.jpg',
     '536 West 114th 2.jpg',
     '536 West 114th 3.jpg',
     '536 West 114th 4.jpg',
     '536 West 114th 5.jpg',
-    '536 West 114th Basement.jpg',
     NULL,
     NULL,
     NULL,
@@ -2644,11 +2644,11 @@ INSERT INTO
 VALUES
   (
     '540 West 114th',
+    '540 West 114th Basement.jpg',
     '540 West 114th 1.jpg',
     '540 West 114th 2.jpg',
     '540 West 114th 3.jpg',
     '540 West 114th 4.jpg',
-    '540 West 114th Basement.jpg',
     NULL,
     NULL,
     NULL,
@@ -2740,12 +2740,12 @@ INSERT INTO
 VALUES
   (
     '546 West 114th',
+    '546 West 114th Basement.jpg',
     '546 West 114th 1st floor.jpg',
     '546 West 114th 2nd floor.jpg',
     '546 West 114th 3rd floor.jpg',
     '546 West 114th 4th floor.jpg',
     '546 West 114th 5th floor.jpg',
-    '546 West 114th Basement.jpg',
     NULL,
     NULL,
     NULL,
@@ -2836,11 +2836,11 @@ INSERT INTO
 VALUES
   (
     '548 West 113th',
+    '548 West 113th Basement.jpg',
     '548 West 113th 1.jpg',
     '548 West 113th 2.jpg',
     '548 West 113th 3.jpg',
     '548 West 113th 4.jpg',
-    '548 West 113th Basement.jpg',
     NULL,
     NULL,
     NULL,
@@ -2884,12 +2884,12 @@ INSERT INTO
 VALUES
   (
     '548 West 114th',
+    '548 West 114th Basement.jpg',
     '548 West 114th 1.jpg',
     '548 West 114th 2.jpg',
     '548 West 114th 3.jpg',
     '548 West 114th 4.jpg',
     '548 West 114th 5.jpg',
-    '548 West 114th Basement.jpg',
     NULL,
     NULL,
     NULL,
@@ -2932,11 +2932,11 @@ INSERT INTO
 VALUES
   (
     '550 West 113th',
+    '550 West 113th Basement.jpg',
     '550 West 113th 1.jpg',
     '550 West 113th 2.jpg',
     '550 West 113th 3.jpg',
     '550 West 113th 4.jpg',
-    '550 West 113th Basement.jpg',
     NULL,
     NULL,
     NULL,
@@ -2980,11 +2980,11 @@ INSERT INTO
 VALUES
   (
     '552 West 113th',
+    '552 West 113th Basement.jpg',
     '552 West 113th 1.jpg',
     '552 West 113th 2.jpg',
     '552 West 113th 3.jpg',
     '552 West 113th 4.jpg',
-    '552 West 113th Basement.jpg',
     NULL,
     NULL,
     NULL,
@@ -3028,12 +3028,12 @@ INSERT INTO
 VALUES
   (
     '552 West 114th',
+    '552 West 114th Basement.jpg',
     '552 West 114th 1st Floor.jpg',
     '552 West 114th 2nd Floor.jpg',
     '552 West 114th 3rd Floor.jpg',
     '552 West 114th 4th Floor.jpg',
     '552 West 114th 5th Floor.jpg',
-    '552 West 114th Basement.jpg',
     NULL,
     NULL,
     NULL,
@@ -3172,10 +3172,10 @@ INSERT INTO
 VALUES
   (
     '556 West 113th',
+    '556 West 113th Basement.jpg',
     '556 West 113th 1.jpg',
     '556 West 113th 2.jpg',
     '556 West 113th 4.jpg',
-    '556 West 113th Basement.jpg',
     NULL,
     NULL,
     NULL,
@@ -3219,7 +3219,7 @@ INSERT INTO
   )
 VALUES
   (
-    '600 West 113',
+    '600 W 113th',
     '600 West 113 _10.jpg',
     '600 West 113 _2.jpg',
     '600 West 113 _3.jpg',
@@ -3268,10 +3268,10 @@ INSERT INTO
 VALUES
   (
     '604 West 114',
+    '604 West 114 Basement.jpg',
     '604 West 114 1st Floor.jpg',
     '604 West 114 2nd Floor.jpg',
     '604 West 114 3rd Floor.jpg',
-    '604 West 114 Basement.jpg',
     NULL,
     NULL,
     NULL,
@@ -3364,11 +3364,11 @@ INSERT INTO
 VALUES
   (
     '606 West 114',
+    '606 West 114 Basement.jpg',
     '606 West 114 1st Floor.jpg',
     '606 West 114 2nd Floor.jpg',
     '606 West 114 3rd Floor.jpg',
     '606 West 114 4th Floor.jpg',
-    '606 West 114 Basement.jpg',
     NULL,
     NULL,
     NULL,
@@ -3460,13 +3460,13 @@ INSERT INTO
 VALUES
   (
     '627 West 115',
+    '627 West 115 Basement.jpg',
     '627 West 115 1st Floor.jpg',
     '627 West 115 2nd Floor.jpg',
     '627 West 115 3rd Floor.jpg',
     '627 West 115 4th Floor.jpg',
     '627 West 115 5th Floor.jpg',
     '627 West 115 6th Floor.jpg',
-    '627 West 115 Basement.jpg',
     NULL,
     NULL,
     NULL,
@@ -3507,11 +3507,7 @@ INSERT INTO
   )
 VALUES
   (
-    'Broadway',
-    'Broadway 10.jpg',
-    'Broadway 11.jpg',
-    'Broadway 12.jpg',
-    'Broadway 13.jpg',
+    'Broadway Hall',
     'Broadway 3.jpg',
     'Broadway 4.jpg',
     'Broadway 5.jpg',
@@ -3519,6 +3515,10 @@ VALUES
     'Broadway 7.jpg',
     'Broadway 8.jpg',
     'Broadway 9.jpg',
+    'Broadway 10.jpg',
+    'Broadway 11.jpg',
+    'Broadway 12.jpg',
+    'Broadway 13.jpg',
     NULL,
     NULL,
     NULL,
@@ -3603,11 +3603,8 @@ INSERT INTO
   )
 VALUES
   (
-    'Carman',
-    'Carman 10.jpg',
-    'Carman 11.jpg',
-    'Carman 12.jpg',
-    'Carman 13.jpg',
+    'Carman Hall',
+    'Carman Mezzanine.jpg',
     'Carman 2.jpg',
     'Carman 4.jpg',
     'Carman 5.jpg',
@@ -3615,7 +3612,10 @@ VALUES
     'Carman 7.jpg',
     'Carman 8.jpg',
     'Carman 9.jpg',
-    'Carman Mezzanine.jpg',
+    'Carman 10.jpg',
+    'Carman 11.jpg',
+    'Carman 12.jpg',
+    'Carman 13.jpg',
     NULL,
     NULL,
     NULL,
@@ -3652,20 +3652,20 @@ INSERT INTO
 VALUES
   (
     'East Campus',
+    'East Campus 6.jpg',
+    'East Campus 8.jpg',
     'East Campus 10.jpg',
     'East Campus 12.jpg',
     'East Campus 14.jpg',
     'East Campus 16.jpg',
     'East Campus 18.jpg',
     'East Campus 20.jpg',
-    'East Campus 6.jpg',
-    'East Campus 8.jpg',
+    'East Campus Townhouses Lobby.jpg',
     'East Campus Lower Townhouses.jpg',
     'East Campus Middle Townhouses 1.jpg',
     'East Campus Middle Townhouses 2.jpg',
     'East Campus Middle Townhouses 3.jpg',
     'East Campus Middle Townhouses 4.jpg',
-    'East Campus Townhouses Lobby.jpg',
     'East Campus Upper Townhouses 1.jpg',
     'East Campus Upper Townhouses 2.jpg',
     'East Campus Upper Townhouses 3.jpg',
@@ -3699,9 +3699,8 @@ INSERT INTO
   )
 VALUES
   (
-    'Furnald',
+    'Furnald Hall',
     'Furnald 1.jpg',
-    'Furnald 10.jpg',
     'Furnald 2.jpg',
     'Furnald 3.jpg',
     'Furnald 4.jpg',
@@ -3710,6 +3709,7 @@ VALUES
     'Furnald 7.jpg',
     'Furnald 8.jpg',
     'Furnald 9.jpg',
+    'Furnald 10.jpg',
     NULL,
     NULL,
     NULL,
@@ -3747,7 +3747,8 @@ INSERT INTO
   )
 VALUES
   (
-    'Harmony',
+    'Harmony Hall',
+    'Harmony Mezzanine.jpg',
     'Harmony 1.jpg',
     'Harmony 2.jpg',
     'Harmony 3.jpg',
@@ -3756,7 +3757,6 @@ VALUES
     'Harmony 6.jpg',
     'Harmony 7.jpg',
     'Harmony 8.jpg',
-    'Harmony Mezzanine.jpg',
     NULL,
     NULL,
     NULL,
@@ -3795,8 +3795,7 @@ INSERT INTO
   )
 VALUES
   (
-    'Hartley',
-    'Hartley 10.jpg',
+    'Hartley Hall',
     'Hartley 2.jpg',
     'Hartley 3.jpg',
     'Hartley 4.jpg',
@@ -3805,6 +3804,7 @@ VALUES
     'Hartley 7.jpg',
     'Hartley 8.jpg',
     'Hartley 9.jpg',
+    'Hartley 10.jpg',
     NULL,
     NULL,
     NULL,
@@ -3843,7 +3843,7 @@ INSERT INTO
   )
 VALUES
   (
-    'Hogan',
+    'Hogan Hall',
     'Hogan 2.jpg',
     'Hogan 3.jpg',
     'Hogan 4.jpg',
@@ -3891,18 +3891,18 @@ INSERT INTO
   )
 VALUES
   (
-    'John Jay',
+    'John Jay Hall',
+    'John Jay 5.jpg',
+    'John Jay 6.jpg',
+    'John Jay 7.jpg',
+    'John Jay 8.jpg',
+    'John Jay 9.jpg',
     'John Jay 10.jpg',
     'John Jay 11.jpg',
     'John Jay 12.jpg',
     'John Jay 13.jpg',
     'John Jay 14.jpg',
     'John Jay 15.jpg',
-    'John Jay 5.jpg',
-    'John Jay 6.jpg',
-    'John Jay 7.jpg',
-    'John Jay 8.jpg',
-    'John Jay 9.jpg',
     NULL,
     NULL,
     NULL,
@@ -3939,7 +3939,7 @@ INSERT INTO
   )
 VALUES
   (
-    'McBain',
+    'McBain Hall',
     'McBain 1.jpg',
     'McBain 2.jpg',
     'McBain 3.jpg',
@@ -3987,7 +3987,7 @@ INSERT INTO
   )
 VALUES
   (
-    'River',
+    'River Hall',
     'River 1.jpg',
     'River 2.jpg',
     'River 3.jpg',
@@ -4035,7 +4035,7 @@ INSERT INTO
   )
 VALUES
   (
-    'Ruggles',
+    'Ruggles Hall',
     'Ruggles 1.jpg',
     'Ruggles 2.jpg',
     'Ruggles 3.jpg',
@@ -4083,15 +4083,7 @@ INSERT INTO
   )
 VALUES
   (
-    'Schapiro',
-    'Schapiro 10.jpg',
-    'Schapiro 11.jpg',
-    'Schapiro 12.jpg',
-    'Schapiro 13.jpg',
-    'Schapiro 14.jpg',
-    'Schapiro 15.jpg',
-    'Schapiro 16.jpg',
-    'Schapiro 17.jpg',
+    'Schapiro Hall',
     'Schapiro 2.jpg',
     'Schapiro 3.jpg',
     'Schapiro 4.jpg',
@@ -4100,6 +4092,14 @@ VALUES
     'Schapiro 7.jpg',
     'Schapiro 8.jpg',
     'Schapiro 9.jpg',
+    'Schapiro 10.jpg',
+    'Schapiro 11.jpg',
+    'Schapiro 12.jpg',
+    'Schapiro 13.jpg',
+    'Schapiro 14.jpg',
+    'Schapiro 15.jpg',
+    'Schapiro 16.jpg',
+    'Schapiro 17.jpg',
     NULL,
     NULL,
     NULL,
@@ -4131,8 +4131,7 @@ INSERT INTO
   )
 VALUES
   (
-    'Wallach',
-    'Wallach 10.jpg',
+    'Wallach Hall',
     'Wallach 2.jpg',
     'Wallach 3.jpg',
     'Wallach 4.jpg',
@@ -4141,6 +4140,7 @@ VALUES
     'Wallach 7.jpg',
     'Wallach 8.jpg',
     'Wallach 9.jpg',
+    'Wallach 10.jpg',
     NULL,
     NULL,
     NULL,
@@ -4179,7 +4179,7 @@ INSERT INTO
   )
 VALUES
   (
-    'Watt',
+    'Watt Hall',
     'Watt 1.jpg',
     'Watt 2.jpg',
     'Watt 3.jpg',
@@ -4227,10 +4227,7 @@ INSERT INTO
   )
 VALUES
   (
-    'Wien',
-    'Wien 10.jpg',
-    'Wien 11.jpg',
-    'Wien 12.jpg',
+    'Wien Hall',
     'Wien 2.jpg',
     'Wien 3.jpg',
     'Wien 4.jpg',
@@ -4239,6 +4236,9 @@ VALUES
     'Wien 7.jpg',
     'Wien 8.jpg',
     'Wien 9.jpg',
+    'Wien 10.jpg',
+    'Wien 11.jpg',
+    'Wien 12.jpg',
     NULL,
     NULL,
     NULL,
@@ -4275,7 +4275,7 @@ INSERT INTO
   )
 VALUES
   (
-    'Woodbridge',
+    'Woodbridge Hall',
     'Woodbridge 1.jpg',
     'Woodbridge 2.jpg',
     'Woodbridge 3.jpg',
