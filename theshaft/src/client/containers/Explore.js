@@ -6,6 +6,8 @@ import Maps from "../components/Maps";
 import SearchBar from "../components/SearchBar"
 import CurrFilters from "../components/CurrFilters"
 
+import _ from "lodash"
+
 let ExploreContainer = styled.div`
   width: 100%;
   height: 100%;
@@ -100,40 +102,40 @@ const filterNameToKey = {
 		"Single-Use Bathroom":"P_BATHROOM",
 		"Private Kitchen":"P_KITCHEN"
 }
+
+const initialPayload = {
+  COLUMBIA: 0,
+  BARNARD: 0,
+  SINGLE_: 0,
+  DOUBLE_: 0,
+  TRIPLE_: 0,
+  TWO_SUITE: 0,
+  THREE_SUITE: 0,
+  FOUR_SUITE: 0,
+  FIVE_SUITE: 0,
+  SIX_SUITE: 0,
+  SEVEN_SUITE: 0,
+  EIGHT_SUITE: 0,
+  NINE_SUITE: 0,
+  FRESHMAN: 0,
+  SOPHOMORE: 0,
+  JUNIOR: 0,
+  SENIOR: 0,
+  AC: 0,
+  GYM: 0,
+  P_BATHROOM: 0
+}
   
 export default class Explore extends Component {
   constructor(props){
     super(props);
     this.state = {
-      payload: {
-        COLUMBIA: 0,
-        BARNARD: 0,
-        SINGLE_: 0,
-        DOUBLE_: 0,
-        TRIPLE_: 0,
-        TWO_SUITE: 0,
-        THREE_SUITE: 0,
-        FOUR_SUITE: 0,
-        FIVE_SUITE: 0,
-        SIX_SUITE: 0,
-        SEVEN_SUITE: 0,
-        EIGHT_SUITE: 0,
-        NINE_SUITE: 0,
-        FRESHMAN: 0,
-        SOPHOMORE: 0,
-        JUNIOR: 0,
-        SENIOR: 0,
-        AC: 0,
-        GYM: 0,
-        P_BATHROOM: 0
-      },
+      payload: _.clone(initialPayload),
       dorms: [],
     }
     this.updatePayload = this.updatePayload.bind(this)
-
-    // var i = new Image();
-    // i.src = "https://arc-anglerfish-arc2-prod-spectator.s3.amazonaws.com/public/FHXBX6S53BANRLVYYEP2SM7KBQ.jpg";
-  }
+    this.resetPayload = this.resetPayload.bind(this)
+    }
   
   componentDidMount(){
     document.title = "The Shaft";
@@ -167,6 +169,10 @@ export default class Explore extends Component {
     this.setState({payload: payload}, () => this.filterDorms())
   }
 
+  resetPayload(){
+    this.setState({payload: _.clone(initialPayload)}, this.filterDorms)
+  }
+
   filterDorms(){
     fetch('/api/filterDorm', {
         method: 'POST',
@@ -190,7 +196,7 @@ export default class Explore extends Component {
               <SearchBar handleChange={this.updatePayload}/>
               <Filter handleChange={this.updatePayload}/>
             </FilterSearchBG>
-            <CurrFilters filterNameToKey={filterNameToKey} filters={this.state.payload} removeFilter={(name)=>{this.updatePayload(0, name)}}/>
+            <CurrFilters filterNameToKey={filterNameToKey} filters={this.state.payload} removeFilter={(name)=>{this.updatePayload(0, name)}} removeAll={this.resetPayload}/>
             <ExploreSidebar dorms={this.state.dorms}/>
           </SideBar>
         </ColOne>
