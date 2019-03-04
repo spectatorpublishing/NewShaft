@@ -6,8 +6,14 @@ import NavBar from './components/NavBar.js';
 import { ThemeProvider } from "styled-components";
 import { GlobalStyles, theme } from "./util/GlobalStyles";
 import './css/App.css';
-import ReactGA from 'react-ga';
+import createHistory from 'history/createBrowserHistory'
+import ReactGA from 'react-ga'
 
+const history = createHistory()
+history.listen(location => {
+	ReactGA.set({ page: location.pathname })
+	ReactGA.pageview(location.pathname)
+})
 
 const menuItems = [
   {
@@ -36,8 +42,6 @@ const menuItems = [
   }
 ];
 
-ReactGA.initialize('UA-135479210-1');
-ReactGA.pageview(window.location.pathname);
 
 const App = () => (
   <ThemeProvider theme={theme}>
