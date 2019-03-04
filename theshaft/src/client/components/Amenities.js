@@ -18,6 +18,21 @@ const amenitiesMap = {
   MUSIC: "Music Room"
 }
 
+const mapToS3Map = {
+  "Single-Use Bathroom": "toilet.svg",
+  "Laundry in Building":"laundry.svg",
+  "Carpeted Floor":"",
+  "Floor Kitchen":"kitchen.svg",
+  "Private Kitchen":"kitchen.svg",
+  "Lounge":"",
+  "Fitness Center":"gym.svg",
+  "Bike Storage":"maintenance.svg",
+  "Computer Lab":"",
+  "Print Station":"",
+  "A/C" : "a_c.svg",
+  "Music Room":""
+}
+
 let AmenitiesTitle = styled.h2`
   margin-top: -0.3vw;
   margin-bottom: 1vw;
@@ -84,14 +99,8 @@ export default class Amenities extends Component {
   populateAmenities(a) {
     return a.map((key, index) => {
       if(this.state.amenities[key] == 1){
-        if (a.keys=="Lounge") {
-          return <Amenity key={index++}>
-            <AmenityIcon src={"https://s3.amazonaws.com/shafticons/a_c.svg"} />
-            <p>{amenitiesMap[key]}</p>
-          </Amenity>
-        }
         return <Amenity key={index++}>
-        <AmenityIcon src={icon} />
+        <AmenityIcon src={"https://s3.amazonaws.com/shafticons/" + mapToS3Map[amenitiesMap[key]]} />
         <p>{amenitiesMap[key]}</p>
       </Amenity>
       }
