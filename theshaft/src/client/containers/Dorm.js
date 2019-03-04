@@ -433,7 +433,7 @@ export default class Dorm extends React.PureComponent {
         {props.children}
       </div>
     ));
-    const isMobile = this.state.width <= 700;
+    const isMobile = this.state.width <= 768;
     let roomtype = "";
     if (this.state.dormInfo.SUITE.length != 0) {
       roomtype += "Suite-style";
@@ -533,7 +533,7 @@ export default class Dorm extends React.PureComponent {
               </Margin>
             </ScrollerTarget>
 
-            <AdCenter><AdManager/></AdCenter>
+            <AdCenter><AdManager mobile = {isMobile}/></AdCenter>
 
 
             <ScrollerTarget ref={this.proconRef}>
@@ -565,7 +565,7 @@ export default class Dorm extends React.PureComponent {
               </Margin>
             </ScrollerTarget>
 
-            <AdCenter><AdManager/></AdCenter>
+            <AdCenter><AdManager mobile = {isMobile}/></AdCenter>
 
             <ScrollerTarget ref={this.spectrumRef}>
               <Margin>
