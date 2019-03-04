@@ -68,6 +68,13 @@ let Body = styled.div`
   padding: 2rem 10vw 6rem 10vw;
 `;
 
+let AdCenter = styled.div`
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+`
+
 let ColOne = styled.div`
   display: flex;
   width: 15%;
@@ -526,6 +533,9 @@ export default class Dorm extends React.PureComponent {
               </Margin>
             </ScrollerTarget>
 
+            <AdCenter><AdManager/></AdCenter>
+
+
             <ScrollerTarget ref={this.proconRef}>
               <Margin>
                 <ProCon
@@ -555,6 +565,8 @@ export default class Dorm extends React.PureComponent {
               </Margin>
             </ScrollerTarget>
 
+            <AdCenter><AdManager/></AdCenter>
+
             <ScrollerTarget ref={this.spectrumRef}>
               <Margin>
                  <SpectrumSidebar spectrumSidebarData = {this.state.relatedArticles}/>
@@ -569,8 +581,7 @@ export default class Dorm extends React.PureComponent {
                 />
               </Margin>
             </ScrollerTarget>
-
-
+          
           </ColTwo>
 
           {!isMobile && (

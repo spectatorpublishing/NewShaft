@@ -33,12 +33,7 @@ app.use('/api/getRelatedArticles', (req, res) => getRelatedArticles(req,res));
 app.use('/api/getFloorPlans', (req,res) => getFloorPlans(req,res));
 app.use('/api/getDormPhotos', (req,res) => getDormPhotos(req,res));
 app.use('/api/getRelatedDorms', (req, res) => getRelatedDorms(req, res))
-app.get('*.js', function (req, res, next) {
-	console.log("REQUEST");
-	req.url = req.url + '.gz';
-	res.set('Content-Encoding', 'gzip');
-	next();
-  });
+
 
 var server = app.listen(8080, () => {
 	console.log('Listening on port 8080!')
