@@ -84,6 +84,12 @@ export default class Amenities extends Component {
   populateAmenities(a) {
     return a.map((key, index) => {
       if(this.state.amenities[key] == 1){
+        if (a.keys=="Lounge") {
+          return <Amenity key={index++}>
+            <AmenityIcon src={"https://s3.amazonaws.com/shafticons/a_c.svg"} />
+            <p>{amenitiesMap[key]}</p>
+          </Amenity>
+        }
         return <Amenity key={index++}>
         <AmenityIcon src={icon} />
         <p>{amenitiesMap[key]}</p>
