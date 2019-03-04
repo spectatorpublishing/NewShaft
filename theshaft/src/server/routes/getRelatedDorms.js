@@ -1,8 +1,6 @@
 var express = require('express');
 var router = express.Router();
 var mysql = require('mysql');
-var redis = require('redis');
-var client = redis.createClient();
 
 /**
  * How to test:
@@ -44,27 +42,18 @@ function getRelatedDorms(con, request, callback) {
 
 router.post('/', function(req, res, next) {
 	console.log("request received");
-	var redis_key = "relateddorms_" + req.body.DORM
-	client.get(redis_key, (err, reply) => {
-		if(reply == null){
-			console.log("Using mysql for " + redis_key)
-			var con = mysql.createConnection({
-				host: "192.34.62.10",
-				user: "USERNAME",
-				password: "PASSWORD",
-				database: "dev"
-			  });
-			
-			getRelatedDorms(con, req.body, (revInfo) => {
-				client.set(redis_key, JSON.stringify(revInfo))
-				client.expire(redis_key,86400)
-				res.json(revInfo)
-			})
-		} else {
-			console.log("Using redis for " + redis_key)
-			res.json(JSON.parse(reply))
-		}
+	var con = mysql.createConnection({
+		host: "192.34.62.10",
+		user: "USERNAME",
+		password: "PASSWORD",
+		database: "dev"
+	  });
+	console.log("requesting selection of" , req.body)
+	
+	getRelatedDorms(con, req.body, (revInfo) => {
+		res.json(revInfo)
 	})
+
 })
 
 module.exports = router;
