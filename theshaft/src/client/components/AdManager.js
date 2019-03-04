@@ -18,7 +18,7 @@ export default class Example extends Component {
         <div>
           <DFPSlotsProvider dfpNetworkId="59699124">
             <div className="desktop-ads">
-              <AdSlot sizes={[[728, 90]]} adUnit="shaftleader" />
+              <AdSlot sizes={[[728, 90]]} adUnit={this.props.name} />
             </div>
           </DFPSlotsProvider>
           </div>

@@ -533,7 +533,7 @@ export default class Dorm extends React.PureComponent {
               </Margin>
             </ScrollerTarget>
 
-            <AdCenter><AdManager mobile = {isMobile}/></AdCenter>
+            <AdCenter><AdManager name = "shaftleader" mobile = {isMobile}/></AdCenter>
 
 
             <ScrollerTarget ref={this.proconRef}>
@@ -565,7 +565,7 @@ export default class Dorm extends React.PureComponent {
               </Margin>
             </ScrollerTarget>
 
-            <AdCenter><AdManager mobile = {isMobile}/></AdCenter>
+            <AdCenter><AdManager name = "cds_leaderboard" mobile = {isMobile}/></AdCenter>
 
             <ScrollerTarget ref={this.spectrumRef}>
               <Margin>
