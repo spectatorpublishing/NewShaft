@@ -5,7 +5,7 @@ import App from "./App";
 
 import ReactGA from 'react-ga'
 
-ReactGA.initialize('YourAnalyticsID')
+ReactGA.initialize('UA-135479210-1')
 
 
 
