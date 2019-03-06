@@ -3,27 +3,49 @@ import styled from 'styled-components';
 import Expander from './Expander.js';
 import icon from "../assets/marker.svg"; // to-do: import all actual icons
 
-let AmenitiesTitle = styled.h2`
-    margin-top: -0.3vw;
-    margin-bottom: 1vw;
-    margin-left: 0.6vw;
-    color: grey;
-    font-weight: 5000;
-    font-size: 1.7em;
-`
+const amenitiesMap = {
+  P_BATHROOM: "Single-Use Bathroom",
+  LAUNDRY: "Laundry in Building",
+  CARPET: "Carpeted Floor",
+  F_KITCHEN: "Floor Kitchen",
+  P_KITCHEN: "Private Kitchen",
+  LOUNGE: "Lounge",
+  GYM: "Fitness Center",
+  BIKE: "Bike Storage",
+  COMPUTER: "Computer Lab",
+  PRINT: "Print Station",
+  AC: "A/C",
+  MUSIC: "Music Room"
+}
 
-let Amenity = styled.div`
-    color: grey;
-    display: flex;
-    flex-direction: row;
-    width: 50%;
-    font-size: 1em;
-    margin-top: 15px;
+let AmenitiesTitle = styled.h2`
+  margin-top: -0.3vw;
+  margin-bottom: 1vw;
+  margin-left: 0.6vw;
+  font-weight: 5000;
+  width: 100%;
 `
 
 let AmenityIcon = styled.img`
-    opacity: 0.5;
-    height: 20px;
+  opacity: 0.5;
+  height: 20px;
+`
+
+let AllAmenities = styled.div`
+  display: grid;
+  grid-template-columns: repeat(auto-fill,minmax(50%, 1fr));
+  width: 100%;
+`
+
+let AmenitiesContainer = styled.div`
+  ${props => props.theme.grayBorder}
+  padding: 3vw;
+`
+
+let Amenity = styled.div`
+  display: flex;
+  flex-direction: row;
+  margin-top: 15px;
 `
 
 export default class Amenities extends Component {
@@ -36,38 +58,75 @@ export default class Amenities extends Component {
       the inner string array is a key-value pair
       in the format of [amenityType, amenityLabel]. 
       See example in storybook. */
-      amenities: this.props.amenities
+      amenities: this.props.amenities,
+      width: window.innerWidth,
     };
 
+    this.populateAmenities = this.populateAmenities.bind(this);
     this.showAllAmenities = this.showAllAmenities.bind(this);
     this.showSomeAmenities = this.showSomeAmenities.bind(this);
   }
 
-  showAllAmenities() {
-    let index = 0
-    return this.state.amenities.map((amenity) => {
-      return <Amenity key={index++}>
-        <AmenityIcon src={icon} alt={amenity[0]}/>
-        <div> {amenity[1]} </div>
+  componentWillMount() {
+    window.addEventListener("resize", this.handleWindowSizeChange);
+  }
+
+  componentWillUnmount() {
+    window.removeEventListener("resize", this.handleWindowSizeChange);
+  }
+
+  handleWindowSizeChange = () => {
+    this.setState({ width: window.innerWidth });
+  };
+
+ 
+
+  populateAmenities(a) {
+    return a.map((key, index) => {
+      if(this.state.amenities[key] == 1){
+        return <Amenity key={index++}>
+        <AmenityIcon src={icon} />
+        <p>{amenitiesMap[key]}</p>
       </Amenity>
-      });
+      }
+    });
+  }
+
+  showAllAmenities() {
+    return this.populateAmenities(Object.keys(this.state.amenities));
   }
 
   showSomeAmenities() {
-    let index = 0
-    return this.state.amenities.slice(0, 6).map((amenity) => {
-      return <Amenity key={index++}>
-        <AmenityIcon src={icon} alt={amenity[0]}/>
-        <div> {amenity[1]} </div>
-      </Amenity>
-      });
+    //let index = 0
+    return this.populateAmenities(Object.keys(this.state.amenities).slice(0, 7));
+  }
+
+  wrapAmenitiesGrid(amenities) {
+    return <AllAmenities>
+      {amenities}
+    </AllAmenities>
   }
 
   render() {
-    return (
-        <Expander showAll={this.showAllAmenities()} showSome={this.showSomeAmenities()}>
-          <AmenitiesTitle> Amenities </AmenitiesTitle>
+    const { width } = this.state;
+    const isMobile = width <= 768;
+    if(isMobile) {
+      return [
+        <AmenitiesTitle>Amenities</AmenitiesTitle>,
+        <Expander 
+          custom={null} 
+          showAll={this.wrapAmenitiesGrid(this.showAllAmenities())} 
+          showSome={this.wrapAmenitiesGrid(this.showSomeAmenities())}>
         </Expander>
-    );
+      ];
+    } 
+    else {
+      return [
+        <AmenitiesTitle>Amenities</AmenitiesTitle>,
+        <AmenitiesContainer>
+          {this.wrapAmenitiesGrid(this.showAllAmenities())}
+        </AmenitiesContainer>
+      ];
+    }
   }
 }

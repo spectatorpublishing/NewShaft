@@ -1,13 +1,12 @@
 import React, { Component } from 'react';
 import styled from "styled-components";
-import { Route, Link, BrowserRouter as Router } from 'react-router-dom';
-import DormButton from '../components/DormButton';
-import Dorm from './Dorm.js';
-import Updater from '../components/Updater';
 import ExploreSidebar from "../components/ExploreSidebar";
 import Filter from '../components/FilterComponent.js'
-import map from "../assets/map.png";
 import Maps from "../components/Maps";
+import SearchBar from "../components/SearchBar"
+import CurrFilters from "../components/CurrFilters"
+
+import _ from "lodash"
 
 let ExploreContainer = styled.div`
   width: 100%;
@@ -18,12 +17,14 @@ let ExploreContainer = styled.div`
 `
 
 let SideBar = styled.div`
-  width: 90%;
-  padding-left: 1em;
+  width: 100%;
+  padding: 0% 0% 0% 0%;
   overflow-y: scroll; 
+  min-height: 200px;
   @media only screen and (min-width: 768px) {
-    width: 55%;
-    min-height: 100%;
+    width: 60%;
+    padding: 0 0% 0% 0%;
+    min-height: 100vh;
     z-index: 1;
   }
 `
@@ -43,6 +44,22 @@ width: 0%;
 }
 `
 
+let FilterSearchBG = styled.div`
+  background-color: ${props => props.theme.columbiaBlue};
+  @media only screen and (min-width: 768px) {
+    // display: inline;
+    // position: fixed;
+    padding-left: 1em;
+    // float: right;
+    // width: 40%;
+    // right: 0;
+    // top: 0;
+    // z-index:1;
+  }
+  margin-top: 0px;
+  padding-top: 1%;
+`
+
 let ColOne = styled.div`
   display: flex;
   width: 100%;
@@ -58,67 +75,106 @@ let ColTwo = styled.div`
   top: 0;
   flex-direction: column;
   `
+
+// Converts name of filter in front-end
+// to name used in body payload
+const filterNameToKey = {
+    "Dorm":"DORM",
+    "Columbia":"COLUMBIA",
+		"Barnard":"BARNARD",
+		"Single":"SINGLE_",
+		"Double":"DOUBLE_",
+		"Triple":"TRIPLE_",
+		"2 Person":"TWO_SUITE",
+		"3 Person":"THREE_SUITE",
+		"4 Person":"FOUR_SUITE",
+		"5 Person":"FIVE_SUITE",
+		"6 Person":"SIX_SUITE",
+		"7 Person":"SEVEN_SUITE",
+		"8 Person":"EIGHT_SUITE",
+		"9 Person":"NINE_SUITE",
+		"First Year":"FRESHMAN",
+		"Sophomore":"SOPHOMORE",
+		"Junior":"JUNIOR",
+		"Senior":"SENIOR",
+		"A/C":"AC",
+		"Gym":"GYM",
+		"Single-Use Bathroom":"P_BATHROOM",
+		"Private Kitchen":"P_KITCHEN"
+}
+
+const initialPayload = {
+  COLUMBIA: 0,
+  BARNARD: 0,
+  SINGLE_: 0,
+  DOUBLE_: 0,
+  TRIPLE_: 0,
+  TWO_SUITE: 0,
+  THREE_SUITE: 0,
+  FOUR_SUITE: 0,
+  FIVE_SUITE: 0,
+  SIX_SUITE: 0,
+  SEVEN_SUITE: 0,
+  EIGHT_SUITE: 0,
+  NINE_SUITE: 0,
+  FRESHMAN: 0,
+  SOPHOMORE: 0,
+  JUNIOR: 0,
+  SENIOR: 0,
+  AC: 0,
+  GYM: 0,
+  P_BATHROOM: 0,
+  P_KITCHEN: 0
+}
   
 export default class Explore extends Component {
   constructor(props){
     super(props);
     this.state = {
-      payload: {
-        "college": -1,
-        "single": false,
-        "double": false,
-        "triple": false,
-        "suite": [],
-        "make_up":[]
-      },
-      dorms: []
+      payload: _.clone(initialPayload),
+      dorms: [],
     }
-  }
-
+    this.updatePayload = this.updatePayload.bind(this)
+    this.resetPayload = this.resetPayload.bind(this)
+    }
+  
   componentDidMount(){
+    document.title = "The Shaft";
     this.fetchDorms();
   }
 
-  updatePayload(isClicked, name){
-    let payload = this.state.payload;
-		if(!isClicked){
-			console.log("button was false now clicked")
-			if(name === "columbia" || name === "barnard"){
-				console.log("columbia or barnard button clicked")
-				if(payload.college !== name && payload.college !==-1){
-					payload.college = -1
-				}
-				else if (payload.college ===-1){
-					payload.college = name
-				}
+  preloadImages(dorms, callback){
+    dorms.forEach((dorm) => {
+      console.log(dorm.DORM);
+      var i = new Image()
+      i.src = dorm.THUMBNAIL_IMAGE;
+    })
 
-			}
-			else if (name == "single" || name == "double" || name == "triple"){
-				payload[name] = true
-			}
-		}
-		else{
-			if(payload.college === name){
-				payload.college = -1
-			}
-			else if( name == "columbia" || name=="barnard"){
-				if(name ==='barnard' && payload.college ===-1){
-					payload.college = 'columbia'
-				}
-				else{
-					payload.college = "barnard"
-				}
-			}
-			else if (name == "single" || name == "double" || name == "triple"){
-				payload[name] = false
-			}
-    }
-    this.setState({payload: payload}, () => this.fetchDorms())
-		console.log(this.state.payload)
+    callback();
   }
 
   fetchDorms(){
-    // console.log("PAYLOAD: " + JSON.stringify(this.state.payload))
+    fetch('/api/getExploreInfo', {
+      method: "GET",
+      headers: {"Content-Type": "application/json"},
+    })
+    .then(res => res.json())
+    .then(dormInfo => {
+      this.preloadImages(dormInfo, () => this.setState({dorms: dormInfo}));      
+    })
+  }
+
+  updatePayload(newValue, name){
+    let payload = this.state.payload;
+		payload[filterNameToKey[name]] = newValue
+    this.setState({payload: payload}, () => this.filterDorms())
+  }
+
+  resetPayload(){
+    this.setState({payload: _.clone(initialPayload)}, this.filterDorms)
+  }
+
+  filterDorms(){
     fetch('/api/filterDorm', {
         method: 'POST',
         headers: {
@@ -127,7 +183,6 @@ export default class Explore extends Component {
         body: JSON.stringify(this.state.payload)
     }).then(res => res.json())
     .then(response => {
-        // console.log("RESPONSE: " + JSON.stringify(response))
         this.setState({dorms: response})
     });      
   }
@@ -137,25 +192,28 @@ export default class Explore extends Component {
       <ExploreContainer>
         <ColOne>
           <SideBar>
-            <div className="filters">
-              <h2>The Shaft</h2>
-              <Filter handleChange={this.updatePayload.bind(this)}/>
-            </div>
+            <FilterSearchBG>
+              {/* <h2>The Shaft</h2> */}
+              <SearchBar handleChange={this.updatePayload}/>
+              <Filter handleChange={this.updatePayload}/>
+            </FilterSearchBG>
+            <CurrFilters filterNameToKey={filterNameToKey} filters={this.state.payload} removeFilter={(name)=>{this.updatePayload(0, name)}} removeAll={this.resetPayload}/>
             <ExploreSidebar dorms={this.state.dorms}/>
           </SideBar>
         </ColOne>
         <ColTwo>
           <MapView>
             <Maps
-              latitudes={this.state.dorms.map((dorm) => dorm.latitude)} 
-              longitudes={this.state.dorms.map((dorm) => dorm.longitude)} 
-              popupInfo={this.state.dorms.map((dorm) => dorm.dorm)} 
+              latitudes={this.state.dorms.map((dorm) => dorm.LATITUDE)} 
+              longitudes={this.state.dorms.map((dorm) => dorm.LONGITUDE)} 
+              popupInfo={this.state.dorms.map((dorm) => dorm.DORM)} 
+              centerLatitude={40.808601}
+              centerLongitude={-73.966095}
               width={"100%"}
               height={"900px"}
               />
           </MapView>
         </ColTwo>
-        <Updater interval="15" />
       </ExploreContainer>
     );
   }

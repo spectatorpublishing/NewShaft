@@ -14,7 +14,6 @@ var mysql = require('mysql');
 function getDormInfo(con, request, callback) {
 	con.connect(function(err) {
 		if (err) throw err;
-		console.log("Connected!");
 
 		/* Code vague such as to apply to any table.
 		{
@@ -24,7 +23,7 @@ function getDormInfo(con, request, callback) {
 		}
 		*/
 
-		var sqlStatement = `SELECT * FROM ${request.table} `
+		var sqlStatement = `SELECT * FROM dorm_static_info `
 		delete request.table;
 		var firstKey = true
 
@@ -37,6 +36,7 @@ function getDormInfo(con, request, callback) {
 			}
 		}
 		sqlStatement+=`;`
+
 		
 		con.query(sqlStatement, function(err, res) {
 			if (err) throw err;
@@ -48,18 +48,14 @@ function getDormInfo(con, request, callback) {
 }
 
 router.post('/', function(req, res, next) {
-	console.log("request received");
 	var con = mysql.createConnection({
-	    host: "157.230.66.55",
-  		user: "root",
-  		password: "spec1877",
-  		database: "dorms"
-	});
-
-	console.log("requesting selection of",req.body)
+		host: "192.34.62.10",
+		user: "USERNAME",
+		password: "PASSWORD",
+		database: "dev"
+	  });
 	
 	getDormInfo(con, req.body, (dormInfo) => {
-		console.log(dormInfo)
 		res.json(dormInfo)
 		// lmao wtf why => res.send(JSON.stringify(res))
 	})

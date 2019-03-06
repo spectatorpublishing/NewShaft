@@ -1,11 +1,11 @@
 import React, { Component } from "react";
-import icon from "../assets/react.png";
-import spec from "../assets/searchButton.png";
+import speclogo from "../assets/spectator-logo.png";
+import shaftlogo from "../assets/shaft-logo-text.png"
 import { Link, NavLink } from 'react-router-dom';
 import styled from 'styled-components';
 
 let NavContainer = styled.div `
-  background-color: black;
+  background-color: ${props => props.theme.black};
   display: flex;
   flex-direction: row;
   height: 60px;
@@ -20,25 +20,35 @@ let NavContainer = styled.div `
 `
 
 let LogoContainer = styled.div`
-  margin-left: 10%;
-  width: 20%;
+  margin: 0 5vw;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+`
+let ShaftLogo = styled.img`
+  height: 35px;
+  padding: 0;
+  width: auto;
+  object-fit: cover;
 `
 
-let Logo = styled.img`
-  height: 100%;
+let SpecLogo = styled.img`
+  height: auto;
   padding: 0;
+  width: 150px;
+  object-fit: cover;
 `
 
 let MenuContainer = styled.div`
   align-items: center;
   display: flex;
   justify-content: center;
-  margin-right: 5%;
+  margin-right: vw;
   width: 65%;
 `
 
 let MenuRow = styled.div`
-  border-bottom: solid 1px white;
+  border-bottom: solid 1px ${props => props.theme.white};
   display: flex;
   flex-direction: row;
   flex-grow: 1;
@@ -47,25 +57,25 @@ let MenuRow = styled.div`
 
 let MenuLink = styled(NavLink)`
   border-bottom: none;
-  color: white;
-  font-weight: bold;
+  color: ${props => props.theme.white};
   padding-bottom: 0.5rem;
+  text-align: center;
   text-decoration: none;
   text-transform: uppercase;
 
     :hover {
-      color: #ddd;
+      color: ${props => props.theme.lightGray};
     }
 
     :focus {
-      color: #ddd;
+      color: ${props => props.theme.lightGray};
     }
 
     &.navLinkActive {
-      border-bottom: solid 2px white;
+      border-bottom: solid 2px ${props => props.theme.white};
     }
 
-  ${({ mobile }) => mobile && `
+  ${({ mobile }) => !!mobile && `
     border: none;
     padding: 10px 0;
     margin: 20px 0;
@@ -79,26 +89,24 @@ let NavBuffer = styled.div`
 
 let MenuColumn = styled.div`
   align-items: center;
-  background-color: black;
+  background-color: rgba(0,0,0,0.85);
   display: flex;
   flex-direction: column;
-  height: 0;
+  height: 100vh;
+  width: 0;
   overflow: hidden;
   position: absolute;
   top: 60px;
-  transition: height .2s ease-out;
-  width: 100vw;
+  right: 0;
+  transition: width 0.2s ease-out;
   z-index: 1;
-`
-
-let MenuItem = styled.div`
 `
 
 let MenuBtn = styled.input`
   display: none;
 
   &:checked ~ ${MenuColumn} {
-    height: 100vh;
+    width: 50vw;
   }
 `
 
@@ -110,7 +118,7 @@ let MenuIcon = styled.label`
 `
 
 let NavIcon = styled.span`
-  background: white;
+  background: ${props => props.theme.white};
   display: block;
   height: 2px;
   position: relative;
@@ -119,7 +127,7 @@ let NavIcon = styled.span`
 
   :before,
   :after {
-    background: white;
+    background: ${props => props.theme.white};
     content: '';
     display: block;
     height: 100%;
@@ -156,6 +164,30 @@ let NavIcon = styled.span`
   }
 `
 
+let DisabledMenuLink = styled(MenuLink)`
+  color: ${props => props.theme.mediumGray};
+  pointer-events: none;
+`
+
+let Soon = styled.h6`
+  color: ${props => props.theme.mediumGray};
+  font-size: 0.7rem;
+
+  ${({ mobile }) => !mobile && `
+    position: absolute;
+    margin-top: -3px;
+  `}
+`
+
+let DesktopItem = styled.h4`
+  color: inherit;
+`
+
+let MobileItem = styled.h3`
+  color: inherit;
+`
+
+
 export default class NavBar extends Component {
   constructor(props) {
     super(props);
@@ -191,22 +223,40 @@ export default class NavBar extends Component {
     this.setState({ checkedForMobile: false });
   }
 
+  negateClick(e) {
+    e.preventDefault();
+  }
+
   getMenuItems(isMobile) {
     let index = 0
     return this.props.menuItems.map((item) => {
-      return <MenuLink
-        key={index++}
-        styled={{isMobile}}
-        mobile={isMobile ? 1 : 0} // work around for react-router link not playing nice with non-standard attributes
-        as={item["external"] ? "a" : undefined}
-        href={item["external"] ? item["link"] : undefined}
-        target={item["external"] ? "_blank" : undefined}
-        to={item["external"] ? undefined : item["link"]}
-        activeClassName={item["external"] ? undefined : "navLinkActive"}
-        onClick={this.forceClose}
-      >
-        {item["name"]}
-      </MenuLink>
+      if (item["disabled"]) {
+        return <DisabledMenuLink
+          key={index++}
+          styled={{isMobile}}
+          mobile={isMobile ? 1 : 0} // work around for react-router link not playing nice with non-standard attributes
+          to={""}
+          onClick={this.negateClick}
+        >
+          {isMobile ? <MobileItem>{item["name"]}</MobileItem> : <DesktopItem>{item["name"]}</DesktopItem>}
+          <Soon mobile={isMobile}>Coming Soon!</Soon>
+        </DisabledMenuLink>
+      }
+      else {
+        return <MenuLink
+          key={index++}
+          styled={{isMobile}}
+          mobile={isMobile ? 1 : 0} // work around for react-router link not playing nice with non-standard attributes
+          as={item["external"] ? "a" : undefined}
+          href={item["external"] ? item["link"] : undefined}
+          target={item["external"] ? "_blank" : undefined}
+          to={item["external"] ? undefined : item["link"]}
+          activeClassName={item["external"] ? undefined : "navLinkActive"}
+          onClick={this.forceClose}
+        >
+          {isMobile ? <MobileItem>{item["name"]}</MobileItem> : <DesktopItem>{item["name"]}</DesktopItem>}
+        </MenuLink>
+      }
     });
   }
 
@@ -218,12 +268,12 @@ export default class NavBar extends Component {
           <MenuRow>
             {this.getMenuItems(isMobile)}
           </MenuRow>
-          <LogoContainer>
-            <a href="https://www.columbiaspectator.com/" target="_blank">
-              <Logo src={spec} alt="Columbia Daily Spectator"/>
-            </a>
-          </LogoContainer>
         </MenuContainer>
+        <LogoContainer>
+          <a href="http://www.specpublishing.com/" target="_blank">
+            <SpecLogo src={speclogo} alt="Spectator Publishing Company"/>
+          </a>
+        </LogoContainer>
       </React.Fragment>
     );
     const mobileMenu = (
@@ -248,7 +298,7 @@ export default class NavBar extends Component {
             target="_blank"
             onClick={this.forceClose}
           >
-            <Logo src={spec} alt="Columbia Daily Spectator"/>
+            <SpecLogo src={speclogo} alt="Columbia Daily Spectator"/>
           </MenuLink>
         </MenuColumn>
       </React.Fragment>
@@ -258,7 +308,7 @@ export default class NavBar extends Component {
         <NavContainer fixed={this.props.fixed}>
           <LogoContainer>
             <Link to="/">
-              <Logo src={icon} alt="The Shaft"/>
+              <ShaftLogo src={shaftlogo} alt="The Shaft"/>
             </Link>
           </LogoContainer>
           {isMobile ? mobileMenu : desktopMenu}

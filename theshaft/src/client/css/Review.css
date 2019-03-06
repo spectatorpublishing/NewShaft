@@ -6,13 +6,7 @@
   flex-wrap: wrap;
   align-items: flex-start;
   height: 100%;
-  width: 30%;
-  font-size: 20px;
-  font-family: 'Raleway', sans-serif;
-}
-
-.stars {
-  color: 	gray;
+  width: 100%;
 }
 
 .fullReview {
@@ -22,37 +16,21 @@
   padding-bottom: 0.5rem;
 }
 
-.review {
-  display: flex;
-  flex-direction: row;
-  justify-content: left;
-  align-self: center;
-  font-weight: bold;
-  color: 	gray;
-  width: 60%;
-}
-
-.reviewerInfo {
-  display: flex;
-  flex-direction: row;
-  color: 	gray;
-  justify-content: flex-end;
-  width: 100%;
-  padding-bottom: 0.5rem;
-  padding-top: 0.5rem;
-  border-bottom: 1px solid gray;
-}
-
 .row {
   display: flex;
   width: 100%;
   justify-content: space-between;
-  color: rgb(110, 155, 184);
   padding-bottom: 0.6rem;
 }
 
 .thumbs {
-  color: rgb(110, 155, 184);
-  font-size: 1.15rem;
   align-self: center;
+}
+
+.slick-dots{
+  text-align: left;
+}
+
+.slick-dots li{
+  margin: 0px;
 }

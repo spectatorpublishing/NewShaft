@@ -26,6 +26,10 @@ To run storybook run the following
 
 `yarn storybook`
 
+To backup the current MySQL database run the following
+
+`yarn dump-db`
+
 ## Documentation
 
 ### Database Schema (theshaft)
@@ -49,12 +53,28 @@ LONGITUDE | FLOAT(10,6)	|
 LOTTERY_NUMS	| VARCHAR(20) |
 CLASS_MAKEUP	| SET("first-years","sophomores","juniors","seniors") |
 
+#### review
+Field | Type | Constraints
+ --- | --- | ---
+DORM | VARCHAR(40) | NOT NULL
+ADDRESS | VARCHAR(60) | NOT NULL
+NUM_STARS | INT(11) | NOT NULL
+REVIEW_TXT | text | NOT NULL
+ROOM_NUM | CHAR(50) | NOT NULL
+YEAR | SET("first-years","sophomores","juniors","seniors") | NOT NULL
+THUMBS_UP | INT(11) | DEFAULT NULL
+THUMBS_DOWN | INT(11) | DEFAULT NULL
+id | INT(11) | NOT NULL AUTO_INCREMENT
+TIME_STAMP | TIMESTAMP | NOT NULL DEFAULT CURRENT_TIMESTAMP
+
 ### Endpoints
 Type | url | params | returns
  --- | --- | --- | ---
 POST | /api/getDormInfo | ``` {"table": <table>, <key>:<value>, ...} ``` | ```"SELECT * FROM <table> WHERE <key>=<value> AND ..."```
 POST | /api/deleteDormInfo _1_ | ``` {"table": <table>, <key>:<value>, ...} ``` | ```{"Status": "Success"/"Failure"}```
 POST | /api/filterDorm | ``` {"college": <college>, "single": <value>, ...} ``` | ```[{ "dorm": "110", "adress": "601 W 110th St",...},...] ```
+POST | /api/postReview | ```{"DORM": <DORM>, "ADDRESS": <ADDRESS>, ...}```| NULL
+}
 
 _1_: will NOT allow deletion of all entries in <table>. You must specify at least one key to query on.
 

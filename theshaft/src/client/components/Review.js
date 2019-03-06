@@ -1,5 +1,28 @@
 import React, { Component } from "react";
 import "../css/Review.css";
+import styled from 'styled-components';
+
+let Star = styled.span`
+  color: ${props => props.theme.columbiaBlue};
+`
+
+let ReviewText = styled.div`
+  display: flex;
+  flex-direction: row;
+  justify-content: left;
+  align-self: center;
+`
+
+let ReviewerInfo = styled.h6`
+  display: flex;
+  flex-direction: row;
+  justify-content: left;
+  width: 100%;
+  padding-bottom: 0.5rem;
+  margin-bottom: 0.5rem;
+  padding-top: 0.5rem;
+  border-bottom: 1px solid ${props => props.theme.lightGray};
+`
 
 export default class Review extends Component {
   constructor(props) {
@@ -16,31 +39,37 @@ export default class Review extends Component {
     let stars = [];
     let k = 0
     for(let i = 0; i < score; i++) {
-      stars.push(<span key={k++}>&#x2605;</span>);
+      stars.push(<Star key={k++}>&#x2605;</Star>);
     }
     for(let j = 0; j < 5 - score; j++) {
-      stars.push(<span key={k++}>&#x2606;</span>);
+      stars.push(<Star key={k++}>&#x2606;</Star>);
     }
     wrapper.push(<div key={k++}>{stars}</div>);
     return wrapper;
   }
 
+  createReviewerInfo(room, year, timestamp){
+    // parse year from MySQL timestamp
+    let parsedTime = timestamp.split('/', 3)[2].substring(0, 4)
+    return (<ReviewerInfo>
+              {"Room " + room + " • " + year  + " • " + parsedTime}
+            </ReviewerInfo>);
+  }
+
   render() {
+    let hasNoReviews = (this.props.review === "No Reviews")
     return (
       <div className="parent">
         <div className="row">
-          <div className="stars">
-            {this.createStars(this.props.stars)}
-          </div>
           <div>
-            User would recommend
+            {hasNoReviews ? null : this.createStars(this.props.stars)}
           </div>
         </div>
         <div className="fullReview">
-          <div className="review">
-            {this.props.review}
-          </div>
-          <div className="thumbs">
+          <ReviewText>
+            <p>{this.props.review}</p>
+          </ReviewText>
+          {/* <div className="thumbs">
             <div>
                 <button>
                     <span>&#x1F44D;</span>
@@ -53,11 +82,9 @@ export default class Review extends Component {
                     <span>{this.props.thumbsDown}</span>
                 </button>
             </div>
-          </div>
+          </div> */}
         </div>
-        <div className="reviewerInfo">
-          reviewerInfo
-        </div>
+        {hasNoReviews ? null : this.createReviewerInfo(this.props.room, this.props.year, this.props.timestamp)}
       </div>
     );
   }

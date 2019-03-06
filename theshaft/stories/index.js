@@ -26,11 +26,38 @@ import FullScreen from '../src/client/components/FullScreen.js';
 import Maps from '../src/client/components/Maps.js'
 import FloorPlanSVG from '../src/client/components/FloorPlanSVG.js'
 import { ReactComponent as SymposiumSVG } from "../src/client/assets/test_floorplan.svg";
+<<<<<<< HEAD
 import ReviewSlider from "../src/client/components/ReviewSlider.js";
 import TipTrick from "../src/client/components/TipTrick.js";
+=======
+// import ReviewSlider from "../src/client/components/ReviewSlider.js";
+import SlidingReview from "../src/client/components/SlidingReview.js";
+import SpectrumSidebar from "../src/client/components/SpectrumSidebar.js";
+import AdManager from "../src/client/components/AdManager";
+>>>>>>> 303e5c9420851cd6753b904020627f9ad4b3ebda
 
-storiesOf('ReviewSlider', module)
-  .add('test', () => <ReviewSlider />);
+storiesOf('SpectrumSidebar', module)
+  .add('SpectrumSidebar', () =>
+    <SpectrumSidebar
+                spectrumSidebarData = {[
+                  {
+                    title: "How Have Local Hiring Targets Shaped Columbia’s Manhattanville Construction Site?", 
+                    img_src: "https://www.gstatic.com/webp/gallery/1.jpg", 
+                    author: "BY YULONG LI",
+                    date: "APRIL 8, 2018"
+                  },
+                  {
+                    title: "Newly proposed committee for Barnard calls for increased transparency", 
+                    img_src: "https://www.gstatic.com/webp/gallery/3.jpg", 
+                    author: "BY ROUNAK",
+                    date: "APRIL 7, 2018"
+                  }
+                ]}
+    />
+    );
+
+// storiesOf('ReviewSlider', module)
+//   .add('test', () => <ReviewSlider />);
 
 storiesOf('Button', module)
   .add('with text', () => <Button>Hello Button</Button>)
@@ -41,10 +68,6 @@ storiesOf('Button', module)
       </span>
     </Button>
   ));
-
-storiesOf('SearchBar', module)
-  .add('with text', () => <SearchBar/>);
-
 
   let bannerImages = ["https://arc-anglerfish-arc2-prod-spectator.s3.amazonaws.com/public/52FBXLYM2RGO3FJGK3SPD2KUEE.png", 
   "https://memegenerator.net/img/images/17438601/dat-sad-fat-cat.jpg", 
@@ -79,6 +102,9 @@ storiesOf('Review', module)
 storiesOf('ReviewList', module)
   .add('ReviewList', () => <ReviewList />);
 
+storiesOf('AdManager', module)
+  .add('AdManager', () => <AdManager/>);
+
 let planArray = [
   sampleFloor,"https://housing.columbia.edu/files/housing/Wien%208_2018.jpg",
     "https://housing.columbia.edu/files/housing/600%209_2016_0.jpg",
@@ -101,7 +127,7 @@ storiesOf('FullReview', module)
   .add('fullreview', () => <FullReview />);
 
 storiesOf('test', module)
-  .add('test', () => <Expander showAll={<QuickReview/>} showSome="Here's a preview shown."><h1>Some Static Heading</h1></Expander>);
+  .add('test', () => <Expander custom={null} showAll={<QuickReview/>} showSome="Here's a preview shown."><h1>Some Static Heading</h1></Expander>);
 
 let sampleAmenities = [
   ["bathroom", "Semi-private"],
@@ -129,6 +155,9 @@ storiesOf('AtAGlance', module)
 //   ["John Jay", "https://memegenerator.net/img/images/17438601/dat-sad-fat-cat.jpg", "link!"],
 //   ["John Jay", "https://memegenerator.net/img/images/17438601/dat-sad-fat-cat.jpg", "link!"]
 // ];
+
+storiesOf('SlidingReview', module)
+  .add('sliding review', () => <SlidingReview />);
 
 let sampleRelatedDorms = [
   {

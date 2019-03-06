@@ -3,14 +3,23 @@ import React, { Component } from "react";
 import ReactMapGL, { Marker, Popup} from "react-map-gl";
 import { fromJS } from "immutable";
 import "mapbox-gl/src/css/mapbox-gl.css";
-import mark from "../assets/marker.svg";
+import mark from "../assets/marker2.svg";
 import { Route, Link, BrowserRouter as Router } from 'react-router-dom';
 
+let PopupContainer = styled.div`
+  opacity: 0;
+  transition: opacity 0.3s;
+  -webkit-transition: opacity 0.3s;
+`
 
 let MarkerIcon = styled.img`
   transform: translate(-50%, -100%);
-  height: 25px;
-  width : 25px;
+  height: 12px;
+  width : 12px;
+`
+
+let LocationTitle = styled.h2`
+  margin-bottom: 20px;
 `
 
 class MapItem extends Component {
@@ -18,14 +27,19 @@ class MapItem extends Component {
     super(props)
 
     this.state = {
-      popUp: "flex",
+      popUp: "none",
       lat: this.props.lat,
       long: this.props.long,
       popupInfo: this.props.popupInfo,
+      isOpen: false,
+      mouseTracked: false,
     }
 
     this.setPopUp = this.setPopUp.bind(this);
     this.clearPopUp = this.clearPopUp.bind(this);
+    this.trackMouse = this.trackMouse.bind(this);
+    this.untrackMouse = this.untrackMouse.bind(this);
+
   }
 
   componentDidUpdate(oldProps){
@@ -39,28 +53,54 @@ class MapItem extends Component {
   }
 
   setPopUp() {
-    this.setState({popUp: "flex"});
+    this.setState({popUp: "1", isOpen: true, display: "flex"});
   }
 
   clearPopUp() {
-    this.setState({popUp: "none"});
+    this.setState({popUp: "0", isOpen: false});
+    setTimeout(() => {
+      if (!this.state.mouseTracked) {
+          this.setState({display: "none"});      }
+    }, 100);
   }
 
+  trackMouse() {
+    this.setState({ mouseTracked: true });
+    if (!this.state.isOpen) {
+      this.setPopUp();
+    }
+  }
+
+  untrackMouse() {
+    this.setState({ mouseTracked: false });
+    setTimeout(() => {
+      if (!this.state.mouseTracked) {
+        this.clearPopUp();
+      }
+    }, 100);
+  }
+
+
   render(){
-    return <div>
+    return <div
+          onClick={this.setPopUp} 
+          onMouseEnter={this.trackMouse} 
+          onMouseLeave={this.untrackMouse} 
+    >
       <Marker
         latitude={this.state.lat}
         longitude={this.state.long}
       >
-        <div onClick={this.setPopUp}>
-        <MarkerIcon src={mark} alt="fireSpot"/>
+        <div 
+        >
+          <MarkerIcon src={mark} alt="fireSpot"/>
         </div>                
       </Marker>
-      <div style={{display:this.state.popUp}}>
+      <PopupContainer style={{opacity:this.state.popUp, display:this.state.display}}>
         <Popup tipSize={5}
           anchor="bottom-left"
-          offsetTop={-23}
-          offsetLeft={7}
+          offsetTop={-8}
+          offsetLeft={0}
           dynamicPosition={true}
           longitude={this.state.long}
           latitude={this.state.lat}
@@ -68,7 +108,7 @@ class MapItem extends Component {
           closeOnClick={true}>
           <Link to={"/explore/" + this.state.popupInfo.replace(/\s+/g, '')} style={{margin:'0'}}>{this.state.popupInfo}</Link>
         </Popup>
-      </div>
+      </PopupContainer>
   </div>
   }
 }
@@ -80,8 +120,8 @@ export default class Maps extends Component {
 
     this.state = {
       viewport: {
-        latitude: 40.7128,
-        longitude: -74.006,
+        latitude: this.props.centerLatitude,
+        longitude: this.props.centerLongitude,
         zoom: 16
       },
       coordinates: {
@@ -102,6 +142,11 @@ export default class Maps extends Component {
   componentDidUpdate(oldProps){
     if(oldProps != this.props){
       this.setState({
+        viewport: {
+          latitude: this.props.centerLatitude,
+          longitude: this.props.centerLongitude,
+          zoom: 16
+        },
         coordinates: {
           latitudes: this.props.latitudes,
           longitudes: this.props.longitudes
@@ -109,7 +154,9 @@ export default class Maps extends Component {
         popup: {
           popupInfo: this.props.popupInfo,
           popupIndex: this.props.popupInfo.map(() => {return false})
-        }
+        },
+        centerLatitude: this.props.centerLatitude,
+        centerLongitude: this.props.centerLongitude
       })
     }
   }
@@ -131,8 +178,9 @@ export default class Maps extends Component {
     
     return (
       <div>
+        <LocationTitle>Location</LocationTitle>
         <ReactMapGL
-          mapboxApiAccessToken={process.env.MAPBOX}
+          mapboxApiAccessToken={"pk.eyJ1IjoiYXJzYWxhYW4iLCJhIjoiY2pxeDViZW41MDlmejQ4bnduMnE2aGhyNCJ9.0-y9yPqzqlWLd-yhUe5tcg"}
           mapStyle={"mapbox://styles/mapbox/basic-v9"}
           latitude={view.latitude}
           longitude={view.longitude}
@@ -141,15 +189,12 @@ export default class Maps extends Component {
           height={this.props.height}
           zoom={view.zoom}
           onViewportChange={this.handleViewportChange}
-          scrollZoom ={false}
+          scrollZoom ={true}
           //minzoom={view.zoom}
          // maxzoom={view.zoom}
           doubleClickZoom={false}
         >
         {markers}
-        <Popup latitude={40} longitude={-75.41} closeButton={true} closeOnClick={false} anchor="top">
-          <h1>You are here</h1>
-        </Popup>
         </ReactMapGL>
       </div>
     );
