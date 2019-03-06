@@ -29,6 +29,12 @@ import { ReactComponent as SymposiumSVG } from "../src/client/assets/test_floorp
 import SlidingReview from "../src/client/components/SlidingReview.js";
 import SpectrumSidebar from "../src/client/components/SpectrumSidebar.js";
 import AdManager from "../src/client/components/AdManager";
+import TestSVG from "../src/client/components/TestSVGs.js";
+
+storiesOf('TestSVG', module)
+  .add('TestSVG', () => 
+    <TestSVG dorm="Carman Hall"/>
+  );
 
 storiesOf('SpectrumSidebar', module)
   .add('SpectrumSidebar', () =>
