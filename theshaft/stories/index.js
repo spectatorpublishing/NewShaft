@@ -9,7 +9,6 @@ import ProCon from '../src/client/components/ProCon.js';
 import QuickReview from '../src/client/components/QuickReview.js';
 import Review from '../src/client/components/Review.js';
 import FloorPlan from '../src/client/components/FloorPlan.js';
-import sampleFloor from '../src/client/assets/floor_plans/47 Claremont 1.jpg';
 import FilterButton from '../src/client/components/FilterButton.js';
 import FilterComponent from '../src/client/components/FilterComponent.js';
 import Expander from '../src/client/components/Expander.js';
@@ -99,13 +98,6 @@ storiesOf('ReviewList', module)
 
 storiesOf('AdManager', module)
   .add('AdManager', () => <AdManager/>);
-
-let planArray = [
-  sampleFloor,"https://housing.columbia.edu/files/housing/Wien%208_2018.jpg",
-    "https://housing.columbia.edu/files/housing/600%209_2016_0.jpg",
-    "https://housing.columbia.edu/files/housing/Woodbridge%204_2018.jpg", 
-    "https://i.kym-cdn.com/entries/icons/original/000/026/642/kot1.jpg"
-]
 
 storiesOf('FloorPlan', module)
   .add('keikaku means plan', () => <FloorPlan floorOffset={1} planArray={planArray}/>);
