@@ -1,7 +1,5 @@
 import React, { Component } from "react";
 import Slider from "react-slick";
-import 'slick-carousel/slick/slick.css';
-import 'slick-carousel/slick/slick-theme.css';
 import Review from "./Review.js"
 import '../css/Review.css'
 import styled from 'styled-components';
@@ -119,6 +117,7 @@ export default class SlidingReview extends Component {
                         review={review.REVIEW_TXT} 
                         room={review.ROOM_NUM} 
                         year={years_map[review.YEAR]} 
+                        timestamp={review.TIMESTAMP}
                         />
                     ))}
                   </div>

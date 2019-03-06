@@ -85,7 +85,6 @@ export default class FilterComponent extends React.PureComponent {
 		// 	handleChange: this.props.handleChange
         // };
         
-        console.log(`filters: ${this.props.filters}`)
 
         this.state = {
             headerTitle: this.props.title,
@@ -95,15 +94,11 @@ export default class FilterComponent extends React.PureComponent {
 
     toggleList(){
         this.props.setfilter(this.props.i, Number(!this.props.open))
-        console.log("setfilter " + this.props.i + Number(!this.props.open))
     }
     
     render() {
-        console.log(`this.state.filters: ${this.state.filters}`)
         const filters = this.state.filters
-        console.log(`the FILTERS: ${filters}`)
         const listOpen = this.props.open
-        console.log("open is:"+listOpen)
         
         return(
             <DDWrapper>

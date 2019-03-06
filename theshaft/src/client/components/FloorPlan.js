@@ -18,6 +18,7 @@ let FloorPlanBox = styled.div`
     ${props => props.theme.grayBorder}
     display: flex;
     flex-direction: row;
+    overflow: hidden;
 `
 
 let FloorList = styled.div`
@@ -41,6 +42,11 @@ let FloorButton = styled.button`
         border: none;
         background: none;
         padding: 1px 4px 2px 4px;
+    }
+    &>h4 {
+        @media only screen and (min-width: 768px){
+            color: ${props => props.active ? props.theme.darkGray : props.theme.columbiaBlue};
+        }
     }
 `
 
@@ -152,6 +158,7 @@ export default class FloorPlan extends React.PureComponent {
             currentFloor: floorNumber + this.state.floorOffset,
             currentPlan: this.state.planArray[floorNumber]
         })
+
     }
 
     floorUp() {
@@ -219,7 +226,7 @@ export default class FloorPlan extends React.PureComponent {
                     <FloorPlanTitle> Floor Plans </FloorPlanTitle>
                     <FloorPlanBox>
                         <PlanDisplay>
-                            <FloorNumber> Floor {this.state.currentFloor} </FloorNumber>
+                            {/* <FloorNumber> Floor {this.state.currentFloor} </FloorNumber> */}
                             <Button 
                                 type="button" 
                                 onClick = {
@@ -246,7 +253,6 @@ export default class FloorPlan extends React.PureComponent {
                                         photoIndex: (photoIndex + 1) % this.props.planArray.length,
                                         // this.state.currentFloor - this.state.floorOffset
                                     });
-                                    console.log(this.state.photoIndex);
                                 }
                             }
                               />
@@ -256,7 +262,7 @@ export default class FloorPlan extends React.PureComponent {
                         <FloorList>
                             { 
                                   this.props.planArray.map((floor, i) =>
-                                    (<FloorButton key = {i} onClick = {() => this.selectFloor(i)}> 
+                                    (<FloorButton key = {i} active = {this.state.currentFloor === i+1} onClick = {() => this.selectFloor(i)}> 
                                     <FloorButtonNumber>Floor {i + this.state.floorOffset}</FloorButtonNumber>
                                      </FloorButton>)
                                 )

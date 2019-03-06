@@ -1,6 +1,5 @@
 import styled from "styled-components";
 import React, { Component } from "react";
-import { withRouter } from 'react-router';
 import PhotoBanner from "../components/PhotoBanner";
 import Amenities from "../components/Amenities";
 import AtAGlance from "../components/AtAGlance";
@@ -68,6 +67,13 @@ let Body = styled.div`
   align-items: flex-start;
   padding: 2rem 10vw 6rem 10vw;
 `;
+
+let AdCenter = styled.div`
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+`
 
 let ColOne = styled.div`
   display: flex;
@@ -427,7 +433,7 @@ export default class Dorm extends React.PureComponent {
         {props.children}
       </div>
     ));
-    const isMobile = this.state.width <= 700;
+    const isMobile = this.state.width <= 768;
     let roomtype = "";
     if (this.state.dormInfo.SUITE.length != 0) {
       roomtype += "Suite-style";
@@ -527,6 +533,9 @@ export default class Dorm extends React.PureComponent {
               </Margin>
             </ScrollerTarget>
 
+            <AdCenter><AdManager name = "shaftleader" mobile = {isMobile}/></AdCenter>
+
+
             <ScrollerTarget ref={this.proconRef}>
               <Margin>
                 <ProCon
@@ -556,6 +565,8 @@ export default class Dorm extends React.PureComponent {
               </Margin>
             </ScrollerTarget>
 
+            <AdCenter><AdManager name = "cds_leaderboard" mobile = {isMobile}/></AdCenter>
+
             <ScrollerTarget ref={this.spectrumRef}>
               <Margin>
                  <SpectrumSidebar spectrumSidebarData = {this.state.relatedArticles}/>
@@ -570,8 +581,7 @@ export default class Dorm extends React.PureComponent {
                 />
               </Margin>
             </ScrollerTarget>
-
-
+          
           </ColTwo>
 
           {!isMobile && (

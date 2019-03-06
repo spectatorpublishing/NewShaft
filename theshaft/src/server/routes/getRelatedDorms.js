@@ -14,7 +14,6 @@ var mysql = require('mysql');
 function getRelatedDorms(con, request, callback) {
 	con.connect(function(err) {
 		if (err) throw err;
-		console.log("Connected!");
 
 		/* Code vague such as to apply to any table.
 		{
@@ -41,14 +40,12 @@ function getRelatedDorms(con, request, callback) {
 }
 
 router.post('/', function(req, res, next) {
-	console.log("request received");
 	var con = mysql.createConnection({
 		host: "192.34.62.10",
 		user: "USERNAME",
 		password: "PASSWORD",
-		database: "dorms"
+		database: "dev"
 	  });
-	console.log("requesting selection of" , req.body)
 	
 	getRelatedDorms(con, req.body, (revInfo) => {
 		res.json(revInfo)

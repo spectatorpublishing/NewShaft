@@ -1,6 +1,5 @@
 import React, { Component } from 'react'
 import styled from 'styled-components'
-import { theme } from '../util/GlobalStyles';
 
 const SmallWrapper = styled.div`
 	width: 100%;

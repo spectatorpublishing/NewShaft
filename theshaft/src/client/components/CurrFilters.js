@@ -12,9 +12,11 @@ const CurrActiveFilter = styled.div`
     padding: 0.1rem 1rem;
     margin: 0.25rem 0.25rem;
     cursor: pointer;
+    background-color: ${props=>props.blueBackground ? props.theme.columbiaBlue : "transparent"};
+    color: ${props=>props.blueBackground ? props.theme.white : "inherit"};
     &:hover {
-        background: ${props=>props.theme.lightGray};
-        & span.close {
+        background-color: ${props=>props.theme.lightGray};
+        &>span {
             color: ${props=>props.theme.mediumGray};
         }
     }
@@ -23,23 +25,26 @@ const CurrActiveFilter = styled.div`
 const Close = styled.span`
     position: absolute;
     margin-left: 0.2rem;
-    z-index: -1;
+    z-index: 0;
     color: ${props=>props.theme.lightGray};
 `
 
 const CurrFilters = (props) => {
-    console.log(props)
     const filterKeyToName = _.invert(props.filterNameToKey)
     const activeFilters = []
-    Object.keys(props.filters).map((filterKey)=>{
+    Object.keys(props.filters).map((filterKey, i)=>{
         if (typeof props.filters[filterKey] === "number" && !!props.filters[filterKey]){
-            console.log('a')
-            activeFilters.push(<CurrActiveFilter onClick={()=>props.removeFilter(filterKeyToName[filterKey])}>
+            activeFilters.push(<CurrActiveFilter key={i+1} onClick={()=>props.removeFilter(filterKeyToName[filterKey])}>
                 {filterKeyToName[filterKey]}
-                <Close className="close">&times;</Close>
+                <Close>&times;</Close>
             </CurrActiveFilter>)
         }
     })
+    if (activeFilters.length > 0){
+        activeFilters.unshift(<CurrActiveFilter key={0} blueBackground onClick={props.removeAll}>
+        {"Clear Filters"}
+        </CurrActiveFilter>)
+    }
     return <CurrFiltersWrapper>
         {activeFilters}
     </CurrFiltersWrapper>

@@ -5,7 +5,6 @@ var mysql = require('mysql');
 function getRelatedArticles(con, request, callback) {
 	con.connect(function(err) {
 		if (err) throw err;
-		console.log("Connected!");
 
 		var sqlStatement = `SELECT related_articles.RELATED1 AS RELATED, related_articles_metadata.TITLE, related_articles_metadata.IMAGE_URL, related_articles_metadata.AUTHOR, related_articles_metadata.DATE 
         FROM related_articles
@@ -27,14 +26,12 @@ function getRelatedArticles(con, request, callback) {
 }
 
 router.post('/', function(req, res, next) {
-	console.log("request received");
 	var con = mysql.createConnection({
 		host: "192.34.62.10",
 		user: "USERNAME",
 		password: "PASSWORD",
-		database: "dorms"
+		database: "dev"
 	  });
-	console.log("requesting selection of" , req.body, '!')
 	
 	getRelatedArticles(con, req.body, (dormInfo) => {
 		res.json(dormInfo)

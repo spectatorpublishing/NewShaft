@@ -51,6 +51,9 @@ const Description = styled.p`
   @media only screen and (min-width: 768px){
     display: inline;
   }
+  &>h6 {
+    font-weight: 400; // Normal
+  }
 `
 
 const SeeMore = styled.h6`
@@ -107,7 +110,7 @@ export default class DormButton extends Component {
             }
             <DormName> {this.state.name} </DormName>
             <Amenities> {this.state.amenities} </Amenities>
-            <Description> {truncatedDescription} </Description>
+            <Description><h6>{truncatedDescription}</h6></Description>
             <SeeMore>see&nbsp;more&nbsp;></SeeMore>
         </div>
         <br />

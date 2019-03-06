@@ -14,7 +14,6 @@ var mysql = require('mysql');
 function getDormPhotos(con, request, callback) {
 	con.connect(function(err) {
 		if (err) throw err;
-		console.log("Connected!");
 
 		/* Code vague such as to apply to any table.
 		{
@@ -23,7 +22,6 @@ function getDormPhotos(con, request, callback) {
         var sqlStatement = `SELECT MAIN_IMAGE, OTHER1, OTHER2, OTHER3 FROM dorm_explore_photos 
 		WHERE DORM = "${request["DORM"]}";`
 		
-		console.log(sqlStatement);
 		
 		con.query(sqlStatement, function(err, res) {
 			if (err) throw err;
@@ -35,14 +33,12 @@ function getDormPhotos(con, request, callback) {
 }
 
 router.post('/', function(req, res, next) {
-	console.log("request received");
 	var con = mysql.createConnection({
 		host: "192.34.62.10",
 		user: "USERNAME",
 		password: "PASSWORD",
-		database: "dorms"
+		database: "dev"
 	  });
-	console.log("requesting selection of" , req.body)
 	
 	getDormPhotos(con, req.body, (revInfo) => {
 		res.json(revInfo)

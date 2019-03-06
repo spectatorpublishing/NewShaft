@@ -48,12 +48,21 @@ export default class Review extends Component {
     return wrapper;
   }
 
+  createReviewerInfo(room, year, timestamp){
+    // parse year from MySQL timestamp
+    let parsedTime = timestamp.split('/', 3)[2].substring(0, 4)
+    return (<ReviewerInfo>
+              {"Room " + room + " • " + year  + " • " + parsedTime}
+            </ReviewerInfo>);
+  }
+
   render() {
+    let hasNoReviews = (this.props.review === "No Reviews")
     return (
       <div className="parent">
         <div className="row">
           <div>
-            {this.createStars(this.props.stars)}
+            {hasNoReviews ? null : this.createStars(this.props.stars)}
           </div>
         </div>
         <div className="fullReview">
@@ -75,9 +84,7 @@ export default class Review extends Component {
             </div>
           </div> */}
         </div>
-        <ReviewerInfo>
-          {"Room " + this.props.room + " • " + this.props.year}
-        </ReviewerInfo>
+        {hasNoReviews ? null : this.createReviewerInfo(this.props.room, this.props.year, this.props.timestamp)}
       </div>
     );
   }

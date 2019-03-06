@@ -1,6 +1,8 @@
 const path = require("path");
 const HtmlWebpackPlugin = require("html-webpack-plugin");
 const CleanWebpackPlugin = require("clean-webpack-plugin");
+const CompressionPlugin = require('compression-webpack-plugin');
+
 
 const outputDirectory = "dist";
 const Dotenv = require("dotenv-webpack");
@@ -25,10 +27,6 @@ module.exports = {
         test: /\.css$/,
         use: ["style-loader", "css-loader"]
       },
-      // {
-      //   test: /\.(png|woff|woff2|eot|ttf|svg)$/,
-      //   loader: "url-loader?limit=100000"
-      // }
       {
         test: /\.(eot|woff|woff2|ttf|svg|png|jpg|gif)$/,
         loader: 'url-loader?limit=30000&name=[name]-[hash].[ext]'
@@ -50,6 +48,7 @@ module.exports = {
       template: "./public/index.html",
       favicon: "./public/favicon.ico"
     }),
-    new Dotenv({ path: path.resolve(__dirname, "../.env") })
+    new Dotenv({ path: path.resolve(__dirname, "../.env") }),
+    new CompressionPlugin()
   ]
 };

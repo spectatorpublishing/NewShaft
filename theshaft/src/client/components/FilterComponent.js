@@ -1,5 +1,4 @@
 import React, { Component } from "react";
-import FilterButton from "./FilterButton.js";
 import FilterCategory from "./FilterCategory.js";
 import styled from 'styled-components';
 

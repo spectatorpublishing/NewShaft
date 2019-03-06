@@ -27,7 +27,6 @@ export default class ExploreSidebar extends Component {
 
     componentDidUpdate(prevProps){
         if(prevProps != this.props){
-            console.log("props updated")
             this.setState({dorms: this.props.dorms}); 
         }      
     }

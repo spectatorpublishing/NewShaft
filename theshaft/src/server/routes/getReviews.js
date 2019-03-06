@@ -2,19 +2,10 @@ var express = require('express');
 var router = express.Router();
 var mysql = require('mysql');
 
-/**
- * How to test:
- * Using Postman, send POST request to 
- * localhost:8080/api/getDormInfo/
- * In params, make sure you set key=value 
- * to table=theshaft.dorm_static_info
- */
-
 
 function getReviews(con, request, callback) {
 	con.connect(function(err) {
 		if (err) throw err;
-		console.log("Connected!");
 
 		/* Code vague such as to apply to any table.
 		{
@@ -51,7 +42,6 @@ function getReviews(con, request, callback) {
 							}
 						}
 						var to_return = {reccomended: reccomended, avg_rating: avg_rating, ranking: ranking, reviews: res};
-						console.log(`to_return ${to_return}`);
 						callback(to_return);
 					});
 					con.end(); // DO NOT REMOVE!
@@ -64,16 +54,14 @@ function getReviews(con, request, callback) {
 }
 
 router.post('/', function(req, res, next) {
-	console.log("request received");
 	var con = mysql.createConnection({
 	    host: "192.34.62.10",
   		user: "USERNAME",
   		password: "PASSWORD",
-  		database: "dorms"
+  		database: "dev"
 	});
 	
 	getReviews(con, req.body, (revInfo) => {
-		console.log(revInfo)
 		res.json(revInfo)
 	})
 

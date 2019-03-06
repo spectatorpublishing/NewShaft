@@ -6,6 +6,14 @@ import NavBar from './components/NavBar.js';
 import { ThemeProvider } from "styled-components";
 import { GlobalStyles, theme } from "./util/GlobalStyles";
 import './css/App.css';
+import createHistory from 'history/createBrowserHistory'
+import ReactGA from 'react-ga'
+
+const history = createHistory()
+history.listen(location => {
+	ReactGA.set({ page: location.pathname })
+	ReactGA.pageview(location.pathname)
+})
 
 const menuItems = [
   {
@@ -33,6 +41,7 @@ const menuItems = [
     "disabled": false,
   }
 ];
+
 
 const App = () => (
   <ThemeProvider theme={theme}>
