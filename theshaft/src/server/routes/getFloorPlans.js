@@ -22,7 +22,7 @@ function getFloorPlans(con, request, callback) {
 }
 
 router.post('/', function(req, res, next) {
-  var redis_key = "dormphotos_" + req.body.DORM;
+  var redis_key = "floorplans_" + req.body.DORM;
 	client.get(redis_key, (err, reply)=> { 
 		if(reply == null){
 			console.log("Using mysql for " + redis_key)
@@ -34,7 +34,7 @@ router.post('/', function(req, res, next) {
 			});
 
 			getFloorPlans(con, req.body, (dormInfo) => {
-				client.set(redis_key, JSON.stringify(dormInfo[0]))
+				client.set(redis_key, JSON.stringify(dormInfo))
 				client.expire(redis_key,86400)
 				res.json(dormInfo)
 			})

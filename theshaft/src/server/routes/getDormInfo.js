@@ -56,8 +56,8 @@ router.post('/', function(req, res, next) {
 		user: "USERNAME",
 		password: "PASSWORD",
 		database: "dev"
-	  });
-	console.log("requesting selection o f" , req.body)
+	});
+	console.log("requesting selection of " , req.body)
 	
 	getDormInfo(con, req.body, (dormInfo) => {
 		res.json(dormInfo)

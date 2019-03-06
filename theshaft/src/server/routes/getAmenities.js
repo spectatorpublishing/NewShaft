@@ -30,9 +30,7 @@ function getAmentities(con, request, callback) {
 		F_KITCHEN, P_KITCHEN, LOUNGE, GYM, BIKE, COMPUTER, PRINT,
 		AC, MUSIC FROM amenities
 		WHERE DORM = "${request["DORM"]}";`
-		
-		console.log(sqlStatement);
-		
+				
 		con.query(sqlStatement, function(err, res) {
 			if (err) throw err;
 			callback(res)
@@ -45,7 +43,7 @@ function getAmentities(con, request, callback) {
 router.post('/', function(req, res, next) {
 	console.log("request received");
 	var redis_key = "amenities_" + req.body.DORM;
-	client.get(redis_key, function(err, reply){
+	client.get(redis_key, (err, reply) => {
 		if(reply == null){
 			console.log("Using mysql for " + redis_key)
 			var con = mysql.createConnection({
@@ -53,10 +51,9 @@ router.post('/', function(req, res, next) {
 				user: "USERNAME",
 				password: "PASSWORD",
 				database: "dev"
-			});
-			
+			})
 			getAmentities(con, req.body, (dormInfo) => {
-				client.set(redis_key, JSON.stringify(dormInfo[0]))
+				client.set(redis_key, JSON.stringify(dormInfo))
 				client.expire(redis_key,86400)
 				res.json(dormInfo)
 			})

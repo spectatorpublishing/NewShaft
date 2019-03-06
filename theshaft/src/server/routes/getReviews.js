@@ -73,7 +73,6 @@ router.post('/', function(req, res, next) {
 	});
 	
 	getReviews(con, req.body, (revInfo) => {
-		console.log(revInfo)
 		res.json(revInfo)
 	})
 

@@ -48,7 +48,7 @@ router.post('/', function(req, res, next) {
 				database: "dev"
 			});
       getDormPhotos(con, req.body, (revInfo) => {
-				client.set(redis_key, JSON.stringify(revInfo[0]))
+				client.set(redis_key, JSON.stringify(revInfo))
 				client.expire(redis_key,86400)
 				res.json(revInfo)
 			})
