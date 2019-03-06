@@ -66,7 +66,7 @@ To install docker on your platform look at the following link: https://docs.dock
 To build the docker image for newshaft do the following:
 
 ```
-cd theshaft/
+
 docker build -t newshaft:latest .
 ```
 

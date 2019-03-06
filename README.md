@@ -26,6 +26,10 @@ To run storybook run the following
 
 `yarn storybook`
 
+To backup the current MySQL database run the following
+
+`yarn dump-db`
+
 ## Documentation
 
 ### Database Schema (theshaft)

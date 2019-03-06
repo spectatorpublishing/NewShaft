@@ -14,7 +14,6 @@ var mysql = require('mysql');
 function getAmentities(con, request, callback) {
 	con.connect(function(err) {
 		if (err) throw err;
-		console.log("Connected!");
 
 		/* Code vague such as to apply to any table.
 		{
@@ -27,7 +26,8 @@ function getAmentities(con, request, callback) {
 		var sqlStatement = `SELECT P_BATHROOM, LAUNDRY, CARPET,
 		F_KITCHEN, P_KITCHEN, LOUNGE, GYM, BIKE, COMPUTER, PRINT,
 		AC, MUSIC FROM amenities
-        WHERE DORM = "${request["DORM"]}";`
+		WHERE DORM = "${request["DORM"]}";`
+		
 		
 		con.query(sqlStatement, function(err, res) {
 			if (err) throw err;
@@ -39,17 +39,14 @@ function getAmentities(con, request, callback) {
 }
 
 router.post('/', function(req, res, next) {
-	console.log("request received");
 	var con = mysql.createConnection({
-	    host: "157.230.66.55",
-  		user: "root",
-  		password: "spec1877",
-  		database: "dorms"
-	});
-	console.log("requesting selection of" , req.body)
+		host: "192.34.62.10",
+		user: "USERNAME",
+		password: "PASSWORD",
+		database: "dev"
+	  });
 	
 	getAmentities(con, req.body, (dormInfo) => {
-		console.log(dormInfo)
 		res.json(dormInfo)
 	})
 

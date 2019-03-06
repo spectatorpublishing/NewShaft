@@ -4,6 +4,9 @@ import ExploreSidebar from "../components/ExploreSidebar";
 import Filter from '../components/FilterComponent.js'
 import Maps from "../components/Maps";
 import SearchBar from "../components/SearchBar"
+import CurrFilters from "../components/CurrFilters"
+
+import _ from "lodash"
 
 let ExploreContainer = styled.div`
   width: 100%;
@@ -15,13 +18,13 @@ let ExploreContainer = styled.div`
 
 let SideBar = styled.div`
   width: 100%;
-  padding: 0 5%;
+  padding: 0% 0% 0% 0%;
   overflow-y: scroll; 
   min-height: 200px;
   @media only screen and (min-width: 768px) {
-    width: 55%;
-    padding: 0 2.5%;
-    min-height: 500px;
+    width: 60%;
+    padding: 0 0% 0% 0%;
+    min-height: 100vh;
     z-index: 1;
   }
 `
@@ -39,6 +42,22 @@ width: 0%;
   top: 0;
   z-index:1;
 }
+`
+
+let FilterSearchBG = styled.div`
+  background-color: ${props => props.theme.columbiaBlue};
+  @media only screen and (min-width: 768px) {
+    // display: inline;
+    // position: fixed;
+    padding-left: 1em;
+    // float: right;
+    // width: 40%;
+    // right: 0;
+    // top: 0;
+    // z-index:1;
+  }
+  margin-top: 0px;
+  padding-top: 1%;
 `
 
 let ColOne = styled.div`
@@ -74,50 +93,64 @@ const filterNameToKey = {
 		"7 Person":"SEVEN_SUITE",
 		"8 Person":"EIGHT_SUITE",
 		"9 Person":"NINE_SUITE",
-		"First Year":"FRESHMEN",
+		"First Year":"FRESHMAN",
 		"Sophomore":"SOPHOMORE",
 		"Junior":"JUNIOR",
 		"Senior":"SENIOR",
 		"A/C":"AC",
-		"Accessibility":"ACCESSIBILITY",
 		"Gym":"GYM",
-		"Private Bathroom":"P_BATHROOM"
+		"Single-Use Bathroom":"P_BATHROOM",
+		"Private Kitchen":"P_KITCHEN"
+}
+
+const initialPayload = {
+  COLUMBIA: 0,
+  BARNARD: 0,
+  SINGLE_: 0,
+  DOUBLE_: 0,
+  TRIPLE_: 0,
+  TWO_SUITE: 0,
+  THREE_SUITE: 0,
+  FOUR_SUITE: 0,
+  FIVE_SUITE: 0,
+  SIX_SUITE: 0,
+  SEVEN_SUITE: 0,
+  EIGHT_SUITE: 0,
+  NINE_SUITE: 0,
+  FRESHMAN: 0,
+  SOPHOMORE: 0,
+  JUNIOR: 0,
+  SENIOR: 0,
+  AC: 0,
+  GYM: 0,
+  P_BATHROOM: 0,
+  P_KITCHEN: 0
 }
   
 export default class Explore extends Component {
   constructor(props){
     super(props);
     this.state = {
-      payload: {
-        COLUMBIA: 0,
-        BARNARD: 0,
-        SINGLE_: 0,
-        DOUBLE_: 0,
-        TRIPLE_: 0,
-        TWO_SUITE: 0,
-        THREE_SUITE: 0,
-        FOUR_SUITE: 0,
-        FIVE_SUITE: 0,
-        SIX_SUITE: 0,
-        SEVEN_SUITE: 0,
-        EIGHT_SUITE: 0,
-        NINE_SUITE: 0,
-        FRESHMEN: 0,
-        SOPHOMORE: 0,
-        JUNIOR: 0,
-        SENIOR: 0,
-        AC: 0,
-        ACCESSIBILITY: 0,
-        GYM: 0,
-        P_BATHROOM: 0
-      },
+      payload: _.clone(initialPayload),
       dorms: [],
     }
     this.updatePayload = this.updatePayload.bind(this)
+    this.resetPayload = this.resetPayload.bind(this)
     }
   
   componentDidMount(){
+    document.title = "The Shaft";
     this.fetchDorms();
+  }
+
+  preloadImages(dorms, callback){
+    dorms.forEach((dorm) => {
+      console.log(dorm.DORM);
+      var i = new Image()
+      i.src = dorm.THUMBNAIL_IMAGE;
+    })
+
+    callback();
   }
 
   fetchDorms(){
@@ -127,7 +160,7 @@ export default class Explore extends Component {
     })
     .then(res => res.json())
     .then(dormInfo => {
-      this.setState({dorms: dormInfo})
+      this.preloadImages(dormInfo, () => this.setState({dorms: dormInfo}));      
     })
   }
 
@@ -137,8 +170,11 @@ export default class Explore extends Component {
     this.setState({payload: payload}, () => this.filterDorms())
   }
 
+  resetPayload(){
+    this.setState({payload: _.clone(initialPayload)}, this.filterDorms)
+  }
+
   filterDorms(){
-    //console.log("PAYLOAD: " + JSON.stringify(this.state.payload))
     fetch('/api/filterDorm', {
         method: 'POST',
         headers: {
@@ -147,7 +183,6 @@ export default class Explore extends Component {
         body: JSON.stringify(this.state.payload)
     }).then(res => res.json())
     .then(response => {
-        // console.log("RESPONSE: " + JSON.stringify(response))
         this.setState({dorms: response})
     });      
   }
@@ -157,10 +192,12 @@ export default class Explore extends Component {
       <ExploreContainer>
         <ColOne>
           <SideBar>
-            <div className="filters">
+            <FilterSearchBG>
+              {/* <h2>The Shaft</h2> */}
               <SearchBar handleChange={this.updatePayload}/>
               <Filter handleChange={this.updatePayload}/>
-            </div>
+            </FilterSearchBG>
+            <CurrFilters filterNameToKey={filterNameToKey} filters={this.state.payload} removeFilter={(name)=>{this.updatePayload(0, name)}} removeAll={this.resetPayload}/>
             <ExploreSidebar dorms={this.state.dorms}/>
           </SideBar>
         </ColOne>

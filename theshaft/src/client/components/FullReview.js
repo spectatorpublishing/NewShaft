@@ -13,7 +13,7 @@ export default class FullReview extends Component {
 
   render() {
     return (
-      <Expander showSome={<QuickReview />} showAll={<ReviewList />} />
+      <Expander custom={null} showSome={<QuickReview />} showAll={<ReviewList />} />
     );
   }
 }

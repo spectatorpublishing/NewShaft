@@ -1,6 +1,5 @@
 import styled from "styled-components";
 import React, { Component } from "react";
-import { Link } from "react-router-dom";
 import PhotoBanner from "../components/PhotoBanner";
 import Amenities from "../components/Amenities";
 import AtAGlance from "../components/AtAGlance";
@@ -9,47 +8,15 @@ import ProCon from "../components/ProCon";
 import FloorPlan from "../components/FloorPlan";
 import RelatedDorms from "../components/RelatedDorms";
 import ReviewsBox from "../components/ReviewsBox";
-
 import Scroller from "../components/Scroller";
 import SpectrumSidebar from "../components/SpectrumSidebar";
+import ScrollToTop from "../components/ScrollToTop";
+import AdManager from "../components/AdManager";
+import Expander from "../components/Expander";
+import { theme } from "../util/GlobalStyles";
 
-
-
-
-var stars="4.5" 
 var recommend="28%" 
 var ranking="#7" 
-
-var reviews = [
-  {
-    stars: 4,
-    text: "It's on Frat Row, so it’s super loud. It’s also right outside the lounge, which gets pretty loud.",
-    room: "Room 203A",
-    year: "Freshman",
-    timestamp: "12 days ago"
-  },
-  {
-    stars: 4,
-    text: "nice",
-    room: "Room 203A",
-    year: "Freshman",
-    timestamp: "12 days ago"
-  },
-  {
-    stars: 4,
-    text: "nice",
-    room: "Room 203A",
-    year: "Freshman",
-    timestamp: "12 days ago"
-  },
-  {
-    stars: 4,
-    text: "nice",
-    room: "Room 203A",
-    year: "Freshman",
-    timestamp: "12 days ago"
-  }
-]
 
 let relatedDorms = [
   {
@@ -62,35 +29,36 @@ let relatedDorms = [
   },
 ];
 
-const bannerImages = [
-  "https://blog.ocm.com/wp-content/uploads/2017/08/Kiss-Pleat_Gray_Main_Alt_Exp.jpg",
-  "https://arc-anglerfish-arc2-prod-spectator.s3.amazonaws.com/public/52FBXLYM2RGO3FJGK3SPD2KUEE.png",
-  "https://arc-anglerfish-arc2-prod-spectator.s3.amazonaws.com/public/52FBXLYM2RGO3FJGK3SPD2KUEE.png",
-  "https://arc-anglerfish-arc2-prod-spectator.s3.amazonaws.com/public/52FBXLYM2RGO3FJGK3SPD2KUEE.png",
-  "https://arc-anglerfish-arc2-prod-spectator.s3.amazonaws.com/public/52FBXLYM2RGO3FJGK3SPD2KUEE.png"
-];
-
 let Header = styled.div`
   display: flex;
   position: relative;
   top: -100px;
   margin: 0 15%;
   pointer-events: none;
+  @media only screen and (max-width: 767px) {
+    top: -220px;
+  }
 `;
 let DormName = styled.h1`
   color: ${props => props.theme.white};
-  text-shadow: ${props => props.theme.textShadow};
+  ${props => props.theme.textShadow}
   pointer-events: initial;
 `;
 
 let Blurb = styled.div`
   background-color: ${props => props.theme.columbiaBlue};
-  color: white;
+  color: ${props => props.theme.white};
   position: relative;
   top: -100px;
+  min-height: 40px;
   margin: 0 15% -100px 15%;
   padding: 1.8vw;
-  border-radius: 1.5vw;
+  border-radius: 20px;
+  @media only screen and (max-width: 767px) {
+    top: -220px;
+    margin-bottom: -220px;
+    min-height: 80px;
+  }
 `;
 
 let Body = styled.div`
@@ -100,22 +68,23 @@ let Body = styled.div`
   padding: 2rem 10vw 6rem 10vw;
 `;
 
+let AdCenter = styled.div`
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+`
+
 let ColOne = styled.div`
   display: flex;
-  width: 25%;
+  width: 15%;
 `;
 
 let ColTwo = styled.div`
   display: flex;
   flex-direction: column;
   scroll-behavior: smooth;
-  width: ${({ mobile }) => (mobile ? `100%` : `50%`)};
-`;
-
-let ColThree = styled.div`
-  display: flex;
-  width: 35%;
-  margin-left: 5vw;
+  width: ${({ mobile }) => (mobile ? `100%` : `60%`)};
 `;
 
 let ScrollMenu = styled(ColOne)`
@@ -123,17 +92,38 @@ let ScrollMenu = styled(ColOne)`
   left: 0;
   position: ${({ isFixed }) => (isFixed ? 'fixed' : 'absolute')};
 
-  // 80px = 60px (navbar height) + 20px (padding 
-  // which matches the value added in handleScroll())
+  // 60px matches the value added in handleScroll())
   ${({ isFixed }) => isFixed && `
-    top: 80px;
+    top: calc(60px + 20%);
   `};
 `
+
+let ScrollAAG = styled(ScrollMenu)`
+  display: flex;
+  padding-right: 20px;
+  left: initial;
+  right: 0;
+  width: 25%;
+`
+
+let Margin = styled.div`
+  margin-top: 2vh;
+  margin-bottom: 2vh;
+`
+
 const dorm_name_map = {
   "CarmanHall": "Carman Hall",
   "McBainHall": "McBain Hall",
   "47Claremont": "47 Claremont",
   "600W113th": "600 W 113th",
+  "600W116thSt.": "600 W 116th St.",
+  "616W116thSt.": "616 W 116th St.",
+  "620W116thSt.": "620 W 116th St.",
+  "601W110thSt.": "601 W 110th St.",
+  "CathedralGardens": "Cathedral Gardens",
+  "HewittHall": "Hewitt Hall",
+  "ElliottHall": "Elliott Hall",
+  "SulzbergerTower": "Sulzberger Tower",
   "BroadwayHall": "Broadway Hall",
   "CarltonArms": "Carlton Arms",
   "EastCampus": "East Campus",
@@ -151,14 +141,10 @@ const dorm_name_map = {
   "WallachHall": "Wallach Hall",
   "WattHall": "Watt Hall",
   "WienHall": "Wien Hall",
-  "WoodbridgeHall": "Woodbridge Hall"
+  "WoodbridgeHall": "Woodbridge Hall",
+  "PlimptonHall" : "Plimpton Hall"
 
 }
-
-let Margin = styled.div`
-  margin-top: 2vh;
-  margin-bottom: 2vh;
-`
 
 export default class Dorm extends React.PureComponent {
   constructor(props) {
@@ -205,6 +191,11 @@ export default class Dorm extends React.PureComponent {
         AC: 0,
         MUSIC: 0
       },
+      reviews: {},
+      dorm_photos: [],
+      relatedArticles: [],
+      floorPlans: [],
+      relatedDorms : [],
       scrollMenuFixed: false,
       scrollMenuOffset: null,
       width: screen_width
@@ -221,8 +212,13 @@ export default class Dorm extends React.PureComponent {
     var dormName = this.props.match.params.dorm;
     this.fetchDormInfo(dormName);
     this.fetchAmenities(dormName);
+    this.fetchReviews(dormName);
+    this.fetchRelatedArticles(dormName);
+    this.fetchFloorPlans(dormName);
+    this.fetchRelatedDorms(dormName);
+    this.fetchDormPhotos(dormName);
     //this.fetchDormInfo(dorm_name_map[this.props.match.params.dorm])
-    window.scrollTo(0, 0)
+    window.scrollTo(0, 0);
   }
 
   componentWillUnmount() {
@@ -232,8 +228,33 @@ export default class Dorm extends React.PureComponent {
 
   componentWillReceiveProps(newProps){
     //map spaceless dorm names to spacy names
-    this.fetchDormInfo(newProps.match.params.dorm)
+    this.fetchDormInfo(newProps.match.params.dorm);
+    this.fetchAmenities(newProps.match.params.dorm);
+    this.fetchReviews(newProps.match.params.dorm);
+    this.fetchRelatedArticles(newProps.match.params.dorm);
+    this.fetchFloorPlans(newProps.match.params.dorm);
+    this.fetchRelatedDorms(newProps.match.params.dorm);
+    this.fetchDormPhotos(newProps.match.params.dorm);
+
+
     window.scrollTo(0, 0)
+  }
+
+  fetchDormPhotos(name){
+    const dormName = dorm_name_map[name]
+    fetch('/api/getDormPhotos', {
+      method: "POST",
+      body: JSON.stringify({ 
+        table: "dorm_static_info",
+        DORM: dormName
+      }),
+      headers: { "Content-Type": "application/json"},
+    })
+      .then(res => res.json())
+      .then(dormPhotos => {
+        this.setState({dorm_photos: Object.values(dormPhotos[0])})
+      });
+
   }
 
   fetchDormInfo(name) {
@@ -248,11 +269,13 @@ export default class Dorm extends React.PureComponent {
     })
       .then(res => res.json())
       .then(dormInfo => {
-        console.log(dormInfo)
-        dormInfo[0].PROS = ["Pro 1", "Pro 2", "Pro 3"];
-        dormInfo[0].CONS = ["Con 1", "Con 2", "Con 3"];
-        this.setState({dormInfo: dormInfo[0]})
+        dormInfo[0].PROS = dormInfo[0].PROS.substring(0, dormInfo[0].PROS.length - 1).split(',');
+        dormInfo[0].CONS = dormInfo[0].CONS.substring(0, dormInfo[0].CONS.length - 1).split(',');
+        this.setState({dormInfo: dormInfo[0]});
+        document.title = this.state.dormInfo.DORM;
+
       });
+      
   }
 
   fetchAmenities(name) {
@@ -271,14 +294,111 @@ export default class Dorm extends React.PureComponent {
       });
   }
 
+  fetchReviews(name){
+    const dormName = dorm_name_map[name]
+    fetch('/api/getReviews', {
+      method: "POST",
+      body: JSON.stringify({ 
+        table: "dorm_static_info",
+        DORM: dormName
+      }),
+      headers: { "Content-Type": "application/json"},
+    })
+      .then(res => res.json())
+      .then(reviewsInfo => {
+        this.setState({reviews: reviewsInfo.reviews, avg_rating: reviewsInfo.avg_rating, reccomend: reviewsInfo.reccomended, ranking: reviewsInfo.ranking})
+      });
+  }
+
+
+  fetchRelatedArticles(name){
+    const dormName = dorm_name_map[name]
+    fetch('/api/getRelatedArticles', {
+      method: "POST",
+      body: JSON.stringify({ 
+        DORM: dormName
+      }),
+      headers: { "Content-Type": "application/json"},
+    })
+      .then(res => res.json())
+      .then(relatedArticles => {
+        var relArticles = [];
+        for (var i = 0; i < relatedArticles.length; i++)
+        {
+          relArticles.push({
+            title: relatedArticles[i].TITLE, 
+            img_src: relatedArticles[i].IMAGE_URL, 
+            author: relatedArticles[i].AUTHOR,
+            date: relatedArticles[i].DATE,
+            url: relatedArticles[i].RELATED
+          })
+        }
+        this.setState({relatedArticles: relArticles})
+      });
+  }
+
+  fetchRelatedDorms(name){
+    const dormName = dorm_name_map[name]
+    fetch('/api/getRelatedDorms', {
+      method: "POST",
+      body: JSON.stringify({
+        DORM: dormName
+      }),
+      headers: { "Content-Type": "application/json"},
+    }).then((res=>res.json()))
+    .then(relatedDorms => {
+      let relDorms = []
+      for (let i = 0; i < relatedDorms.length; i++){
+        relDorms.push({
+          "DORM": relatedDorms[i].RELATED,
+          "image": relatedDorms[i].IMAGE
+          }
+        )
+      }
+      this.setState({relatedDorms : relDorms})
+    })
+  }
+
+  fetchFloorPlans(name){
+    const dormName = dorm_name_map[name]
+    fetch('/api/getFloorPlans', {
+      method: "POST",
+      body: JSON.stringify({ 
+        DORM: dormName
+      }),
+      headers: { "Content-Type": "application/json"},
+    })
+      .then(res => res.json())
+      .then(floorPlans => {
+        var floorPlan = floorPlans[0];
+        var floor_state = []
+        var keys = Object.keys(floorPlan);
+        for (var i = 0; i < keys.length; i++)
+        {
+          var floorNum = keys[i];
+          if (floorPlan[floorNum] == null || keys[i] == "DORM") {
+            continue;
+          }
+          //floor_state[floorNum - 1] = "http://localhost:8080/floor_plans/" + floorPlan[floorNum];
+          floor_state[floorNum -1] = 'https://s3.amazonaws.com/shaft-dorm-floorplans/' + floorPlan[floorNum].replace(/ /g, '+')
+        }
+        return floor_state
+      }).then(thing => {
+        this.setState({
+          floorPlans: thing
+        });
+      })
+  }
 
   handleWindowSizeChange() {
     this.setState({ width: window.innerWidth });
   }
 
   handleScroll(e) {
-    // Add 20px to give a little bit of padding on top between the navbar and the menu
-    this.isFixed(e.target.scrollingElement.scrollTop + 20);
+    if (this.state.width > 700) {
+      // Add 20px to give a little bit of padding on top between the navbar and the menu
+      this.isFixed(e.target.scrollingElement.scrollTop + window.innerHeight * 0.2);
+    }
   }
 
   isFixed(scrollPosition) {
@@ -313,7 +433,7 @@ export default class Dorm extends React.PureComponent {
         {props.children}
       </div>
     ));
-    const isMobile = this.state.width <= 700;
+    const isMobile = this.state.width <= 768;
     let roomtype = "";
     if (this.state.dormInfo.SUITE.length != 0) {
       roomtype += "Suite-style";
@@ -330,13 +450,41 @@ export default class Dorm extends React.PureComponent {
       else if (this.state.dormInfo.DOUBLE_) roomtype += "Doubles";
     }
     if (this.state.dormInfo.TRIPLE_) roomtype += " and triples";
+    
+    let fullDescription = this.state.dormInfo.DESCRIPTION.substring(0, this.state.dormInfo.DESCRIPTION.length - 1);
+    let truncatedDescription = (fullDescription.length > 100) ? fullDescription.substring(0,100) + '...' : null;
     return (
-      <div>
-        <PhotoBanner bannerImages={bannerImages} />
+      <ScrollToTop>
+        <PhotoBanner bannerImages={this.state.dorm_photos} />
         <Header>
           <DormName>{this.state.dormInfo.DORM}</DormName>
         </Header>
-        <Blurb>{this.state.dormInfo.DESCRIPTION}</Blurb>
+        {(isMobile && truncatedDescription) ? 
+          <Expander 
+            custom={{
+              boxStyle: `
+                background-color: ${theme.columbiaBlue};
+                position: relative;
+                top: -100px;
+                min-height: 40px;
+                margin: 0 15% -100px 15%;
+                padding: 1.8vw;
+                border-radius: 20px;
+                @media only screen and (max-width: 767px) {
+                  top: -220px;
+                  margin-bottom: -220px;
+                  min-height: 80px;
+                }
+              `,
+              color: theme.columbiaBlue,
+              textColor: theme.white,
+            }} 
+            showAll={fullDescription}
+            showSome={truncatedDescription}
+          />
+        :
+          <Blurb>{fullDescription}</Blurb>
+        }
 
         <Body>
           {!isMobile && <ColOne>
@@ -349,7 +497,7 @@ export default class Dorm extends React.PureComponent {
               <Scroller compRef={this.proconRef} label={"Pros and Cons"} />
               <Scroller compRef={this.floorplansRef} label={"Floor Plans"} />
               <Scroller compRef={this.reviewsRef} label={"Reviews"} />
-              {/* <Scroller compRef={this.spectrumRef} label={"Spectrum"} /> */}
+              <Scroller compRef={this.spectrumRef} label={"Spectrum"} />
               <Scroller compRef={this.suggestionsRef} label={"Related Dorms"} />
             </ScrollMenu>
           </ColOne>
@@ -361,17 +509,17 @@ export default class Dorm extends React.PureComponent {
                 location={this.state.dormInfo.ADDRESS}
                 roomtype={roomtype}
                 classmakeup={this.state.dormInfo.CLASS_MAKEUP}
-                numfloors="13"
+                //cutoff={this.state.dormInfo.LOTTERY_NUMS}
               />
             )}
-            <Margin>
-              <ScrollerTarget ref={this.amenitiesRef}>
+            <ScrollerTarget ref={this.amenitiesRef}>
+              <Margin>
                 <Amenities amenities={this.state.amenities}/>
-              </ScrollerTarget>
-            </Margin>
+              </Margin>
+            </ScrollerTarget>
             
-            <Margin>
-              <ScrollerTarget ref={this.locationRef}>
+            <ScrollerTarget ref={this.locationRef}>
+              <Margin>
                 <Maps
                   latitudes={[this.state.dormInfo.LATITUDE]}
                   longitudes={[this.state.dormInfo.LONGITUDE]}
@@ -382,85 +530,72 @@ export default class Dorm extends React.PureComponent {
                   width={"100%"}
                   height={"300px"}
                 />
-              </ScrollerTarget>
-            </Margin>
+              </Margin>
+            </ScrollerTarget>
 
-            <Margin>
-              <ScrollerTarget ref={this.proconRef}>
+            <AdCenter><AdManager name = "shaftleader" mobile = {isMobile}/></AdCenter>
+
+
+            <ScrollerTarget ref={this.proconRef}>
+              <Margin>
                 <ProCon
                   pros={this.state.dormInfo.PROS}
                   cons={this.state.dormInfo.CONS}
                 />
-              </ScrollerTarget>
-            </Margin>
+              </Margin>
+            </ScrollerTarget>
             
-            <Margin>
             <ScrollerTarget ref={this.floorplansRef}>
-              <FloorPlan
-                floorOffset={1}
-                planArray={[
-                  "https://housing.columbia.edu/files/housing/Wien%208_2018.jpg",
-                  "https://housing.columbia.edu/files/housing/Wien%208_2018.jpg",
-                  "https://housing.columbia.edu/files/housing/600%209_2016_0.jpg",
-                  "https://housing.columbia.edu/files/housing/Woodbridge%204_2018.jpg",
-                  "https://i.kym-cdn.com/entries/icons/original/000/026/642/kot1.jpg"
-                ]}
-              />
+              <Margin>
+                <FloorPlan
+                  floorOffset={0}
+                  planArray={this.state.floorPlans}
+                />
+              </Margin>
             </ScrollerTarget>
-            </Margin>
 
-            <Margin>
             <ScrollerTarget ref={this.reviewsRef}>
-              <ReviewsBox
-                stars={stars}
-                recommend={recommend}
-                ranking={ranking}
-                reviews={reviews}>
-              </ReviewsBox>
+              <Margin>
+                <ReviewsBox
+                  stars={this.state.avg_rating}
+                  recommend={this.state.reccomend}
+                  ranking={this.state.ranking}
+                  reviews={this.state.reviews}>
+                </ReviewsBox>
+              </Margin>
             </ScrollerTarget>
-            <ScrollerTarget ref={this.suggestionsRef}>
-              <RelatedDorms
-                name={this.state.dormInfo.DORM}
-                relatedDorms={relatedDorms}
-              />
-            </ScrollerTarget>
-            </Margin>
 
-            <Margin>
+            <AdCenter><AdManager name = "cds_leaderboard" mobile = {isMobile}/></AdCenter>
+
             <ScrollerTarget ref={this.spectrumRef}>
-              <SpectrumSidebar
-                spectrumSidebarData = {[
-                  {
-                    title: "How Have Local Hiring Targets Shaped Columbia’s Manhattanville Construction Site?", 
-                    img_src: "https://www.gstatic.com/webp/gallery/1.jpg", 
-                    author: "BY YULONG LI",
-                    date: "APRIL 8, 2018"
-                  },
-                  {
-                    title: "Newly proposed committee for Barnard calls for increased transparency", 
-                    img_src: "https://www.gstatic.com/webp/gallery/3.jpg", 
-                    author: "BY ROUNAK",
-                    date: "APRIL 7, 2018"
-                  }
-                ]}
-              />
+              <Margin>
+                 <SpectrumSidebar spectrumSidebarData = {this.state.relatedArticles}/>
+              </Margin>
             </ScrollerTarget>
-            </Margin>
 
+            <ScrollerTarget ref={this.suggestionsRef}>
+              <Margin>
+                <RelatedDorms
+                  name={this.state.dormInfo.DORM}
+                  relatedDorms={this.state.relatedDorms}
+                />
+              </Margin>
+            </ScrollerTarget>
+          
           </ColTwo>
 
           {!isMobile && (
-            <ColThree>
+            <ScrollAAG isFixed={this.state.scrollMenuFixed}>
               <AtAGlance
                 location={this.state.dormInfo.ADDRESS}
                 roomtype={roomtype}
                 classmakeup={this.state.dormInfo.CLASS_MAKEUP}
-                numfloors="13"
+                cutoff={this.state.dormInfo.LOTTERY_NUMS}
               />
-            </ColThree>
+            </ScrollAAG>
           )}
         </Body>
-      </div>
+      </ScrollToTop>
     );
   }
 }

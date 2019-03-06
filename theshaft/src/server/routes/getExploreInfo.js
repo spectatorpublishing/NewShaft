@@ -12,10 +12,10 @@ var mysql = require('mysql');
 function getExploreInfo(con, callback) {
 	con.connect(function(err) {
 		if (err) throw err;
-		console.log("Connected!");
 
 	
 		var sqlStatement = `SELECT DORM, DESCRIPTION, COLLEGE, THUMBNAIL_IMAGE, LATITUDE, LONGITUDE FROM dorm_static_info; `
+
 		
 		con.query(sqlStatement, function(err, res) {
 			if (err) throw err;
@@ -27,16 +27,14 @@ function getExploreInfo(con, callback) {
 }
 
 router.get('/', function(req, res, next) {
-	console.log("request received");
 	var con = mysql.createConnection({
-	    host: "157.230.66.55",
-  		user: "root",
-  		password: "spec1877",
-  		database: "dorms"
-	});
+		host: "192.34.62.10",
+		user: "USERNAME",
+		password: "PASSWORD",
+		database: "dev"
+	  });
 	
 	getExploreInfo(con, (dormInfo) => {
-		console.log(dormInfo)
 		res.json(dormInfo)
 		// lmao wtf why => res.send(JSON.stringify(res))
 	})

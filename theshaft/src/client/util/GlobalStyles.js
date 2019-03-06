@@ -1,7 +1,8 @@
 import { createGlobalStyle } from "styled-components";
 
 export const GlobalStyles = createGlobalStyle`
-  body {
+  body,
+  button {
     @import url('https://fonts.googleapis.com/css?family=Raleway:400,700,800');
     font-family: 'Raleway', sans-serif;
   }
@@ -59,12 +60,14 @@ export const GlobalStyles = createGlobalStyle`
 `
 
 export const theme = {
-    black: "#000000",
-    white: "#FFFFFF",
-    barnardBlue: "#00489A",
-    columbiaBlue: "#62A8E5",
-    darkGray: "#555555",
-    mediumGray: "#AAAAAA",
-    lightGray: "#DDDDDD",
-    textShadow: "rgba(0, 0, 0, 0.3) 0 0 10px"
+  black: "#000000",
+  white: "#FFFFFF",
+  barnardBlue: "#00489A",
+  columbiaBlue: "#62A8E5",
+  darkGray: "#555555",
+  mediumGray: "#AAAAAA",
+  lightGray: "#DDDDDD",
+  textShadow: "text-shadow: rgba(0, 0, 0, 0.3) 0 0 10px;",
+  grayBorder: "border: 1px #DDDDDD solid; border-radius: 10px;",
+  borderRadius: "10px",
 };

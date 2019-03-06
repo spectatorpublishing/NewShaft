@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import FilterButton from "./FilterButton.js"
 import styled from 'styled-components';
+import chris_v from '../assets/chrisv.svg'
 
 let DDWrapper = styled.div`
     @media(min-width: 768px){
@@ -15,7 +16,14 @@ let DDHeaderTitle = styled.div`
     text-shadow: ${props => props.shadow ? props.theme.textShadow : "none"};
     cursor: pointer;
     user-select: none;
-    color: ${props => props.theme.columbiaBlue};
+    color: white;
+`
+
+let Bolded = styled.b`
+    text-shadow: ${props => props.shadow ? props.theme.textShadow : "none"};
+    cursor: pointer;
+    user-select: none;
+    color: ${props => props.theme.white};
 `
 
 let ListElement = styled.li`
@@ -59,6 +67,14 @@ let FilterList = styled.ul`
     }
 `
 
+const ChrisV = styled.div`
+    display: inline-block;
+    & img {
+        transform: ${ props=> props.flip ? "scaleY(-1)" : "none"};
+        margin: 2px 0;
+    }
+`
+
 
 export default class FilterComponent extends React.PureComponent {
     constructor(props) {
@@ -69,7 +85,6 @@ export default class FilterComponent extends React.PureComponent {
 		// 	handleChange: this.props.handleChange
         // };
         
-        console.log(`filters: ${this.props.filters}`)
 
         this.state = {
             headerTitle: this.props.title,
@@ -79,21 +94,17 @@ export default class FilterComponent extends React.PureComponent {
 
     toggleList(){
         this.props.setfilter(this.props.i, Number(!this.props.open))
-        console.log("setfilter " + this.props.i + Number(!this.props.open))
     }
     
     render() {
-        console.log(`this.state.filters: ${this.state.filters}`)
         const filters = this.state.filters
-        console.log(`the FILTERS: ${filters}`)
         const listOpen = this.props.open
-        console.log("open is:"+listOpen)
         
         return(
             <DDWrapper>
 
                 <DDHeader onClick={() => this.toggleList()}>
-                    <DDHeaderTitle shadow={this.props.open}>{this.props.headerTitle}</DDHeaderTitle>
+                    <DDHeaderTitle shadow={this.props.open}>{this.props.headerTitle} <ChrisV flip={listOpen}><img src={chris_v}></img></ChrisV></DDHeaderTitle>
                 </DDHeader>
 
                 {listOpen && <FilterList>

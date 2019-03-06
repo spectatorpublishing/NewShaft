@@ -4,55 +4,37 @@ import styled from 'styled-components';
 let Section = styled.div`
     display: flex;
     flex-direction: row;
-    border: 1px grey solid;
-    border-radius: 10px;
+    ${props => props.theme.grayBorder}
     padding: 2vw;
 `
 
-let SectionMobile = styled.div`
-    display: flex;
+let SectionMobile = styled(Section)`
     flex-direction: column;
-    border: 1px grey solid;
-    border-radius: 10px;
-    padding: 2vw;
 `
 
 let ListBox = styled.div`
-    color: grey;
     flex: 1;
 `
 
 let Divider = styled.div`
     width: 1px;
     margin-right: 2vw;
-    background-color: grey;
+    background-color: ${props => props.theme.lightGray};
 `
 
 let DivideMobile = styled.div`
     height: 1px;
-    border-bottom: 1px grey solid;
+    border-bottom: 1px ${props => props.theme.lightGray} solid;
     padding-bottom: 1vw;
 `
 
-let Head = styled.div`
-    color: grey;
-    font-size: 4rem;
-    font-weight: bolder;
+let Head = styled.h1`
     text-align: center;
-    margin-top: -1.44vw;
+    font-weight: initial;
+    // margin-top: -1.44vw;
 `
 
-let HeadCon = styled.div`
-    color: grey;
-    font-size: 2.5rem;
-    font-weight: bolder;
-    text-align: center;
-`
-
-let Title = styled.div`
-    text-align: center;
-    font-size: 2rem;
-    padding-bottom: 1vw;
+let Title = styled.h2`
 `
 
 
@@ -96,7 +78,7 @@ export default class ProCon extends Component {
         let k = 0;
         return (
           <div>
-            <Title>The Good and the Not So Good</Title>
+            <Title>Pros and Cons</Title>
             <SectionMobile>
             <ListBox>
               <Head>&#9786;</Head>
@@ -107,7 +89,7 @@ export default class ProCon extends Component {
             </ListBox>
             <DivideMobile></DivideMobile>
             <ListBox>
-              <HeadCon>&#9785;</HeadCon>
+              <Head>&#9785;</Head>
                 <ul>
                   {this.state.cons.map(con => (
                     <li key={k++}>{con}</li>))}
@@ -122,10 +104,9 @@ export default class ProCon extends Component {
       let k = 0;
         return (
         <div>
-          <Title>The Good and the Not So Good</Title>
           <Section>
             <ListBox>
-              <Head>&#9786;</Head>
+              <Head><h2>Pros</h2></Head>
                 <ul>
                   {this.state.pros.map(pro => (
                     <li key={k++}>{pro}</li>))}
@@ -133,7 +114,7 @@ export default class ProCon extends Component {
             </ListBox>
             <Divider/>
             <ListBox>
-              <HeadCon>&#9785;</HeadCon>
+              <Head><h2>Cons</h2></Head>
                 <ul>
                   {this.state.cons.map(con => (
                     <li key={k++}>{con}</li>))}

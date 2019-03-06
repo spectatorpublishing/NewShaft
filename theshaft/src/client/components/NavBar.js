@@ -1,7 +1,6 @@
 import React, { Component } from "react";
-import icon from "../assets/react.png";
 import speclogo from "../assets/spectator-logo.png";
-import shaftlogo from "../assets/shaft-logo.png"
+import shaftlogo from "../assets/shaft-logo-text.png"
 import { Link, NavLink } from 'react-router-dom';
 import styled from 'styled-components';
 
@@ -21,15 +20,15 @@ let NavContainer = styled.div `
 `
 
 let LogoContainer = styled.div`
-  margin: 0 5%;
-  width: 20%;
+  margin: 0 5vw;
   display: flex;
   align-items: center;
+  justify-content: center;
 `
 let ShaftLogo = styled.img`
-  height: 45px;
+  height: 35px;
   padding: 0;
-  width: 45px;
+  width: auto;
   object-fit: cover;
 `
 
@@ -38,16 +37,13 @@ let SpecLogo = styled.img`
   padding: 0;
   width: 150px;
   object-fit: cover;
-  @media only screen and (max-width: 768px){
-    width: 40%;
-  }
 `
 
 let MenuContainer = styled.div`
   align-items: center;
   display: flex;
   justify-content: center;
-  margin-right: 5%;
+  margin-right: vw;
   width: 65%;
 `
 
@@ -93,26 +89,24 @@ let NavBuffer = styled.div`
 
 let MenuColumn = styled.div`
   align-items: center;
-  background-color: ${props => props.theme.black};
+  background-color: rgba(0,0,0,0.85);
   display: flex;
   flex-direction: column;
-  height: 0;
+  height: 100vh;
+  width: 0;
   overflow: hidden;
   position: absolute;
   top: 60px;
-  transition: height .2s ease-out;
-  width: 100vw;
+  right: 0;
+  transition: width 0.2s ease-out;
   z-index: 1;
-`
-
-let MenuItem = styled.div`
 `
 
 let MenuBtn = styled.input`
   display: none;
 
   &:checked ~ ${MenuColumn} {
-    height: 100vh;
+    width: 50vw;
   }
 `
 
@@ -177,11 +171,20 @@ let DisabledMenuLink = styled(MenuLink)`
 
 let Soon = styled.h6`
   color: ${props => props.theme.mediumGray};
+  font-size: 0.7rem;
 
   ${({ mobile }) => !mobile && `
     position: absolute;
-    margin-top: -4px;
+    margin-top: -3px;
   `}
+`
+
+let DesktopItem = styled.h4`
+  color: inherit;
+`
+
+let MobileItem = styled.h3`
+  color: inherit;
 `
 
 
@@ -235,7 +238,7 @@ export default class NavBar extends Component {
           to={""}
           onClick={this.negateClick}
         >
-          {item["name"]}
+          {isMobile ? <MobileItem>{item["name"]}</MobileItem> : <DesktopItem>{item["name"]}</DesktopItem>}
           <Soon mobile={isMobile}>Coming Soon!</Soon>
         </DisabledMenuLink>
       }
@@ -251,7 +254,7 @@ export default class NavBar extends Component {
           activeClassName={item["external"] ? undefined : "navLinkActive"}
           onClick={this.forceClose}
         >
-          {item["name"]}
+          {isMobile ? <MobileItem>{item["name"]}</MobileItem> : <DesktopItem>{item["name"]}</DesktopItem>}
         </MenuLink>
       }
     });
@@ -265,12 +268,12 @@ export default class NavBar extends Component {
           <MenuRow>
             {this.getMenuItems(isMobile)}
           </MenuRow>
-          <LogoContainer>
-            <a href="https://www.columbiaspectator.com/" target="_blank">
-              <SpecLogo src={speclogo} alt="Columbia Daily Spectator"/>
-            </a>
-          </LogoContainer>
         </MenuContainer>
+        <LogoContainer>
+          <a href="http://www.specpublishing.com/" target="_blank">
+            <SpecLogo src={speclogo} alt="Spectator Publishing Company"/>
+          </a>
+        </LogoContainer>
       </React.Fragment>
     );
     const mobileMenu = (

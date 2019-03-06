@@ -29,6 +29,7 @@ import { ReactComponent as SymposiumSVG } from "../src/client/assets/test_floorp
 // import ReviewSlider from "../src/client/components/ReviewSlider.js";
 import SlidingReview from "../src/client/components/SlidingReview.js";
 import SpectrumSidebar from "../src/client/components/SpectrumSidebar.js";
+import AdManager from "../src/client/components/AdManager";
 
 storiesOf('SpectrumSidebar', module)
   .add('SpectrumSidebar', () =>
@@ -96,6 +97,9 @@ storiesOf('Review', module)
 storiesOf('ReviewList', module)
   .add('ReviewList', () => <ReviewList />);
 
+storiesOf('AdManager', module)
+  .add('AdManager', () => <AdManager/>);
+
 let planArray = [
   sampleFloor,"https://housing.columbia.edu/files/housing/Wien%208_2018.jpg",
     "https://housing.columbia.edu/files/housing/600%209_2016_0.jpg",
@@ -118,7 +122,7 @@ storiesOf('FullReview', module)
   .add('fullreview', () => <FullReview />);
 
 storiesOf('test', module)
-  .add('test', () => <Expander showAll={<QuickReview/>} showSome="Here's a preview shown."><h1>Some Static Heading</h1></Expander>);
+  .add('test', () => <Expander custom={null} showAll={<QuickReview/>} showSome="Here's a preview shown."><h1>Some Static Heading</h1></Expander>);
 
 let sampleAmenities = [
   ["bathroom", "Semi-private"],

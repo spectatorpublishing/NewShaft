@@ -1,5 +1,4 @@
 import React, { Component } from "react";
-import FilterButton from "./FilterButton.js";
 import FilterCategory from "./FilterCategory.js";
 import styled from 'styled-components';
 
@@ -9,10 +8,19 @@ let Filter = styled.div`
 	@media(max-width: 768px){
 		position: relative; // So that the filter list will position itself relative to this div
 	}
+	margin-top: 0;
+	padding-top: 2%;
+	//padding-right: 10%;
+	padding-bottom: 2%;
+	padding-left: 2%;
+	background-color: ${props => props.theme.columbiaBlue};
 `
 
 let FilterLabel = styled.div`
     color: ${props => props.theme.columbiaBlue};
+`
+let FilterTitle = styled.h4`
+	color: ${props => props.theme.white};
 `
 
 const filterElements = {
@@ -47,9 +55,9 @@ const filterElements = {
 
 	"Amenities": [
 		"A/C",
-		"Accessibility",
+		"Private Kitchen",
 		"Gym",
-		"Private Bathroom"
+		"Single-Use Bathroom"
 	]
 }
 
@@ -74,7 +82,6 @@ export default class FilterComponent extends React.PureComponent {
 		// to 1<<2, which is 0100. We then know that the 
 		// second filter is active. 
 		this.setState({openFilters: val<<key})
-		console.log(this.state.openFilters)
 	}
 
 	render() {
@@ -99,7 +106,7 @@ export default class FilterComponent extends React.PureComponent {
 
 		return(
 			<Filter>
-				<FilterLabel><h4>Filters</h4></FilterLabel>
+				<FilterLabel><FilterTitle>Filters</FilterTitle></FilterLabel>
 				{Filters}
 			</Filter>
 		)

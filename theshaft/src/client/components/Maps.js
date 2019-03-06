@@ -13,12 +13,16 @@ let MarkerIcon = styled.img`
   width : 25px;
 `
 
+let LocationTitle = styled.h2`
+  margin-bottom: 20px;
+`
+
 class MapItem extends Component {
   constructor(props) {
     super(props)
 
     this.state = {
-      popUp: "flex",
+      popUp: "none",
       lat: this.props.lat,
       long: this.props.long,
       popupInfo: this.props.popupInfo,
@@ -138,8 +142,9 @@ export default class Maps extends Component {
     
     return (
       <div>
+        <LocationTitle>Location</LocationTitle>
         <ReactMapGL
-          mapboxApiAccessToken={process.env.MAPBOX}
+          mapboxApiAccessToken={"pk.eyJ1IjoiYXJzYWxhYW4iLCJhIjoiY2pxeDViZW41MDlmejQ4bnduMnE2aGhyNCJ9.0-y9yPqzqlWLd-yhUe5tcg"}
           mapStyle={"mapbox://styles/mapbox/basic-v9"}
           latitude={view.latitude}
           longitude={view.longitude}
@@ -148,15 +153,12 @@ export default class Maps extends Component {
           height={this.props.height}
           zoom={view.zoom}
           onViewportChange={this.handleViewportChange}
-          scrollZoom ={false}
+          scrollZoom ={true}
           //minzoom={view.zoom}
          // maxzoom={view.zoom}
           doubleClickZoom={false}
         >
         {markers}
-        <Popup latitude={40} longitude={-75.41} closeButton={true} closeOnClick={false} anchor="top">
-          <h1>You are here</h1>
-        </Popup>
         </ReactMapGL>
       </div>
     );

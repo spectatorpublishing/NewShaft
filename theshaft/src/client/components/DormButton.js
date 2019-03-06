@@ -1,24 +1,14 @@
 import React, { Component } from "react";
 import styled from 'styled-components';
 
-let Button = styled.div`
-  text-align: left;
-  border: 5px solid #9B9B9B;
-  color: #9B9B9B;
-  display: inline-block;
-  cursor: pointer;
-  margin: 10px;
-`
-
 const DormButtonWrapper = styled.div`
 	display: flex;
 	flex-direction: column;
-	color: black;
 	cursor: pointer;
-  margin-bottom: 2px;
+  margin-bottom: 1rem;
   & img{
     padding: 0px;
-    border: 1px solid #777777;
+    border: 1px solid ${props => props.theme.lightGray};
     max-height: 100vw;
     width: 100%;
     margin-right: 10px;
@@ -26,54 +16,50 @@ const DormButtonWrapper = styled.div`
     object-fit: cover;
   }
   @media only screen and (min-width: 768px) {
-    display: flex;
 		flex-direction: row;
-		color: black;
-		cursor: pointer;
-    margin-bottom: 2px;
     & img{
-      padding: 0px;
-      border: 1px solid #777777;
       max-height: 10vw;
       width: 50%;
-      margin-right: 10px;
-      margin-bottom: 10px;
     }
   }
 `
 
-const SchoolName = styled.div`
-  color: #71a8e0;
+let SchoolName = styled.h6`
   margin-top: 5px;
   margin-bottom: 1px;
-  font-size: 0.9em;
+  text-transform: capitalize;
 `
 
-const DormName = styled.div`
-  color: #6f6f6f;
+let ColumbiaName = styled(SchoolName)`
+  color: ${props => props.theme.columbiaBlue};
+`
+
+let BarnardName = styled(SchoolName)`
+  color: ${props => props.theme.barnardBlue};
+`
+
+const DormName = styled.b`
   margin-top: .1em;
   margin-bottom: .25em;
 `
 
-const Amenities = styled.div`
-  color: #6f6f6f;
-  margin: 0px;
+const Amenities = styled.p`
 `
 
-const Description = styled.div`
+const Description = styled.p`
   display: none;
-  font-size: 13px;
   @media only screen and (min-width: 768px){
     display: inline;
   }
+  &>h6 {
+    font-weight: 400; // Normal
+  }
 `
 
-const SeeMore = styled.div`
+const SeeMore = styled.h6`
   display: inline;
-  font-size: .8em;
 	cursor: pointer;
-	color: #5187ec;
-	text-decoration: underline;
+	color: ${props => props.theme.columbiaBlue};
 	text-align: right;  
 `
 
@@ -109,15 +95,23 @@ export default class DormButton extends Component {
       ? this.state.description.substring(0,100) + '...'
       : this.state.description
 
+    let schoolName = this.state.school.toLowerCase();
     return (
       <DormButtonWrapper>
         <img className="dormimage" src={this.state.image} />
         <div className="details">
-            <SchoolName> { this.state.school } </SchoolName>
+            {schoolName == "columbia" ? 
+              <ColumbiaName> { schoolName } </ColumbiaName>
+            : (schoolName == "barnard" ?
+              <BarnardName> { schoolName } </BarnardName>
+            :
+              <SchoolName> { schoolName } </SchoolName>
+              )
+            }
             <DormName> {this.state.name} </DormName>
             <Amenities> {this.state.amenities} </Amenities>
-            <Description> {truncatedDescription} </Description>
-            <SeeMore>see more ></SeeMore>
+            <Description><h6>{truncatedDescription}</h6></Description>
+            <SeeMore>see&nbsp;more&nbsp;></SeeMore>
         </div>
         <br />
       </DormButtonWrapper>

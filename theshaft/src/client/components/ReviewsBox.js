@@ -5,27 +5,22 @@ import SlidingReview from "./SlidingReview";
 
 
 let Border = styled.div`
-    border: 1px grey solid;
-    border-radius: 10px;
+    ${props => props.theme.grayBorder}
     padding: 2vw;
+    padding-bottom: 6vh;
     display: flex;
     flex-direction: column;
 `
 let MobileBorder = styled.div`
-    // border: 1px grey solid;
-    // border-radius: 10px;
     display: flex;
     flex-direction: column;
     margin-bottom: 6vw;
 `
 
-let Reviews = styled.h3`
+let Reviews = styled.h2`
     margin-top: 2vh;
     margin-bottom: 2vh;
-    padding-left: 0.5vw;
-    color: grey;
-    font-weight: bold;
-    font-size: 1.7em;    
+    padding-left: 0.5vw;  
 `
 
 let InfoBox = styled.div`
@@ -84,8 +79,6 @@ export default class ReviewsBox extends Component {
     render() {
         const { width } = this.state;
         const isMobile = width <= 768;
-        console.log('WIDTH WIDTH WIDTH ' + width);
-
         if(isMobile) {
             return(
                 <MobileBorder>
@@ -93,7 +86,7 @@ export default class ReviewsBox extends Component {
                     <MobileInfoBox>
                         <MobileStatBox>
                             <ReviewStat boldText={this.props.stars} subText="average stars" isMobile={isMobile}/>
-                            <ReviewStat boldText={this.props.ranking} subText="best ranking" isMobile={isMobile}/>
+                            <ReviewStat boldText={this.props.ranking} subText="ranking" isMobile={isMobile}/>
                         </MobileStatBox>
                         <MobileSlidingBox>
                             <SlidingReview reviews={this.props.reviews}/>
@@ -110,7 +103,7 @@ export default class ReviewsBox extends Component {
                         <StatBox>
                             <ReviewStat boldText={this.props.stars} subText="average stars" isMobile={isMobile}/>
                             <ReviewStat boldText={this.props.recommend} subText="recommend" isMobile={isMobile}/>
-                            <ReviewStat boldText={this.props.ranking} subText="best ranking" isMobile={isMobile}/>
+                            <ReviewStat boldText={this.props.ranking} subText="ranking" isMobile={isMobile}/>
                         </StatBox>
                         <SlidingBox>
                             <SlidingReview reviews={this.props.reviews}/>
