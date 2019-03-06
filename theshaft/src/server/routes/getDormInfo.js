@@ -52,7 +52,7 @@ router.post('/', function(req, res, next) {
 		host: "192.34.62.10",
 		user: "USERNAME",
 		password: "PASSWORD",
-		database: "dev"
+		database: "dorms"
 	  });
 	
 	getDormInfo(con, req.body, (dormInfo) => {

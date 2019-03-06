@@ -36,7 +36,7 @@ router.post('/', function(req, res, next) {
 	    host: "157.230.66.55",
   		user: "root",
   		password: "spec1877",
-  		database: "dev"
+  		database: "dorms"
 	});
 
 	console.log("adding!",req.body)

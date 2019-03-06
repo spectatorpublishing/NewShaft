@@ -43,7 +43,7 @@ router.post('/', function(req, res, next) {
 		host: "192.34.62.10",
 		user: "USERNAME",
 		password: "PASSWORD",
-		database: "dev"
+		database: "dorms"
 	  });
 	
 	getAmentities(con, req.body, (dormInfo) => {
