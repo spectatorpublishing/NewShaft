@@ -1,11 +1,11 @@
 import React, { Component } from 'react';
 import styled from 'styled-components';
-import sad from "../assets/icons/sad.svg";
-import happy from "../assets/icons/happy.svg";
+import sad from "../assets/Icons/sad.svg";
+import happy from "../assets/Icons/happy.svg";
 
 let Section = styled.div`
     display: flex;
-    flex-direction: row;
+    flex-directin: row;
     ${props => props.theme.grayBorder}
     padding: 1rem;
 `
