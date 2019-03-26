@@ -26,12 +26,6 @@ let Content = styled.span`
 export default class AtAGlance extends Component {
   constructor(props) {
     super(props);
-    this.state = {
-      location: this.props.location,
-      roomtype: this.props.roomtype,
-      classmakeup: this.props.classmakeup,
-      lottery: this.props.lottery
-    };
   }
 
   componentWillMount() {
@@ -42,26 +36,23 @@ export default class AtAGlance extends Component {
     window.removeEventListener("resize", this.handleWindowSizeChange);
   }
 
-  componentWillReceiveProps(nextProps) {
-    this.setState({ location: nextProps.location, roomtype: nextProps.roomtype, classmakeup: nextProps.classmakeup, lottery: nextProps.lottery });
-  }
   handleWindowSizeChange = () => {
     this.setState({ width: window.innerWidth });
   };
 
   render() {
-    let classMakeupFormat = this.state.classmakeup
+    let classMakeupFormat = this.props.classmakeup
       .split(",")
       .map((el, i) => el.charAt(0).toUpperCase() + el.slice(1))
       .join(", ");
 
     let glanceMap = [
-      ["Location", this.state.location],
-      ["Room types", this.state.roomtype],
+      ["Location", this.props.location],
+      ["Room types", this.props.roomtype],
       ["Class makeup", classMakeupFormat]
     ];
 
-    glanceMap = glanceMap.concat(this.state.lottery);
+    glanceMap = glanceMap.concat(this.props.lottery);
     console.log(glanceMap);
 
     const AtAGlanceMapped = glanceMap.map((el, i) => {
