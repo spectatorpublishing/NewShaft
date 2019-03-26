@@ -53,7 +53,6 @@ export default class AtAGlance extends Component {
     ];
 
     glanceMap = glanceMap.concat(this.props.lottery);
-    console.log(glanceMap);
 
     const AtAGlanceMapped = glanceMap.map((el, i) => {
       if (el[1] && el[1] != "" && el[1] != "0" && el[1] != " ") {
