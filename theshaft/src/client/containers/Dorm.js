@@ -175,6 +175,7 @@ export default class Dorm extends React.PureComponent {
         CONS: ["con1", "con2", "con3"],
         LATITUDE: 0,
         LONGITUDE: 0,
+        LOTTERY_NUMS: [],
         RELATEDDORMS: relatedDorms
       },
       amenities: {
@@ -272,9 +273,16 @@ export default class Dorm extends React.PureComponent {
       .then(dormInfo => {
         dormInfo[0].PROS = dormInfo[0].PROS.substring(0, dormInfo[0].PROS.length - 1).split(',');
         dormInfo[0].CONS = dormInfo[0].CONS.substring(0, dormInfo[0].CONS.length - 1).split(',');
-        this.setState({dormInfo: dormInfo[0]});
+        let tempLot = dormInfo[0].LOTTERY_NUMS.split(',');
+        let i = 0;
+        for(i = 0; i < tempLot.length; i++){
+          tempLot[i] = tempLot[i].split(':');
+        }
+        dormInfo[0].LOTTERY_NUMS = tempLot;
         document.title = this.state.dormInfo.DORM;
-
+        this.setState({dormInfo: dormInfo[0]},() => {
+          console.log(this.state.dormInfo)
+        });
       });
       
   }
@@ -512,7 +520,7 @@ export default class Dorm extends React.PureComponent {
                 location={this.state.dormInfo.ADDRESS}
                 roomtype={roomtype}
                 classmakeup={this.state.dormInfo.CLASS_MAKEUP}
-                //cutoff={this.state.dormInfo.LOTTERY_NUMS}
+                lottery={this.state.dormInfo.LOTTERY_NUMS}
               />
             )}
             <ScrollerTarget ref={this.amenitiesRef}>
@@ -594,7 +602,7 @@ export default class Dorm extends React.PureComponent {
                 location={this.state.dormInfo.ADDRESS}
                 roomtype={roomtype}
                 classmakeup={this.state.dormInfo.CLASS_MAKEUP}
-                cutoff={this.state.dormInfo.LOTTERY_NUMS}
+                lottery={this.state.dormInfo.LOTTERY_NUMS}
               />
             </ScrollAAG>
           )}
