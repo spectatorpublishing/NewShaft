@@ -219,7 +219,6 @@ export default class Dorm extends React.PureComponent {
     this.fetchFloorPlans(dormName);
     this.fetchRelatedDorms(dormName);
     this.fetchDormPhotos(dormName);
-    //this.fetchDormInfo(dorm_name_map[this.props.match.params.dorm])
     window.scrollTo(0, 0);
   }
 
@@ -390,7 +389,7 @@ export default class Dorm extends React.PureComponent {
             continue;
           }          
           floor_state[floorNum -1] = 'https://s3.amazonaws.com/shaft-dorm-floorplans/' + floorPlan[floorNum].replace(/ /g, '+')
-          floor_name[floorNum -1]= floorPlan[floorNum].slice(0, -4);
+          floor_name[floorNum -1]= floorPlan[floorNum].slice(0, -4).replace("_", " ");
         }
         return [floor_state, floor_name]
       }).then(floor_vals => {
