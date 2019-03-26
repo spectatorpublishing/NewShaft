@@ -120,6 +120,7 @@ export default class FloorPlan extends React.PureComponent {
         super(props)
         this.state = {
             planArray: this.props.planArray,			//array of floor plan links/picture files.
+            planNames: this.props.planNames,
             floorOffset: this.props.floorOffset + 1,	//offset of starting floor from ground level. eg wien has rooms starting on floor 2, not floor 1, so the offset is 1. the + 1 is because arrays starting at 0 doesn't mesh with floors starting at 1. 
             currentFloor: this.props.floorOffset + 1,
             currentPlan: this.props.planArray[0],
@@ -210,7 +211,7 @@ export default class FloorPlan extends React.PureComponent {
                         <PlanDisplayMobile>
                             <CurrentPlanMobile src={this.state.currentPlan} />
                             <FloorPlanNavMobile>
-                                <FloorNumberMobile> Floor {this.state.currentFloor} </FloorNumberMobile>
+                                <FloorNumberMobile> {this.state.planNames[this.state.currentFloor -1]}</FloorNumberMobile>
                                 <FloorListMobile>
                                     <FloorButton onClick = {() => this.floorDown()}><FloorArrow>&#8249;</FloorArrow></FloorButton>
                                     <FloorButton onClick = {() => this.floorUp()} ><FloorArrow>&#8250;</FloorArrow></FloorButton>
@@ -263,7 +264,7 @@ export default class FloorPlan extends React.PureComponent {
                             { 
                                   this.props.planArray.map((floor, i) =>
                                     (<FloorButton key = {i} active = {this.state.currentFloor === i+1} onClick = {() => this.selectFloor(i)}> 
-                                    <FloorButtonNumber>Floor {i + this.state.floorOffset}</FloorButtonNumber>
+                                    <FloorButtonNumber>{this.state.planNames[i + this.state.floorOffset -1]}</FloorButtonNumber>
                                      </FloorButton>)
                                 )
                             }
