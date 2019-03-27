@@ -1,18 +1,47 @@
 import React, { Component } from "react";
 import styled from 'styled-components';
 import { ReactComponent as ClaremontSVG } from "../assets/47 Claremont 1.svg";
+import ReactTooltip from 'react-tooltip';
 
 let FloorPlanWrapper = styled.div`
   & rect {
-    fill: none;
+    opacity: 0.3;
     pointer-events: all;
   }
-
-  & rect:hover {
-    fill: red;
-    opacity: 0.3;
-  }
 `
+
+let data = [
+  {
+      "ROOM": "4A",
+      "PRIORITY": "30",
+      "LOTTERY": "3000"
+  },
+  {
+      "ROOM": "4B",
+      "PRIORITY": "30",
+      "LOTTERY": "3000"
+  },
+  {
+      "ROOM": "4C",
+      "PRIORITY": "30",
+      "LOTTERY": "3000"
+  },
+  {
+    "ROOM": "1A",
+    "PRIORITY": "30",
+    "LOTTERY": "3000"
+},
+{
+    "ROOM": "1B",
+    "PRIORITY": "30",
+    "LOTTERY": "3000"
+},
+{
+    "ROOM": "1C",
+    "PRIORITY": "30",
+    "LOTTERY": "3000"
+}
+]
 
 export default class FloorPlanSVG extends Component {
   constructor(props) {
@@ -26,17 +55,31 @@ export default class FloorPlanSVG extends Component {
 
     this.state = {
       floorplanId: id,
-      floorplanUrl: url
+      floorplanUrl: url,
+      floorplanData: data
     };
 
-    this.handleRectClick = this.handleRectClick.bind(this);
+    this.hoverStart = this.hoverStart.bind(this);
   }
 
   componentDidMount() {
     let svgEl = document.getElementById(this.state.floorplanId);
     // Remove any SVG styling within the file
     console.log(svgEl.querySelector("style"));
-
+    for (var i = 0; i  < this.state.floorplanData.length; i++)
+    {
+        let room1 = this.state.floorplanData[i];
+        document.querySelectorAll("rect").forEach((roomEl) => 
+        {
+          let suiteEl = roomEl.parentElement;
+          let room2 = this.getDataFromSvg(suiteEl) + this.getDataFromSvg(roomEl);
+          if (room1["ROOM"] == room2 && room1["PRIORITY"])
+          {
+            console.log("MATCH! " + room1["ROOM"] + " " + room2);
+            roomEl.setAttribute("fill", "red");
+          }
+        });
+    }
     // Override the xlink:href attribute (which is deprecated)
     // with an href that links to the corresponding floorplan JPG
     let baseImage = svgEl.querySelectorAll("image")[0];
@@ -46,7 +89,7 @@ export default class FloorPlanSVG extends Component {
 
     let rectsArray = document.querySelectorAll("rect");
     rectsArray.forEach((rect) => {
-      rect.addEventListener("click", this.handleRectClick);
+      rect.addEventListener("mouseover", this.hoverStart);
     });
   }
 
@@ -55,16 +98,16 @@ export default class FloorPlanSVG extends Component {
   componentWillUnmount() {
     let rectsArray = document.querySelectorAll("rect");
     rectsArray.forEach((rect) => {
-      rect.removeEventListener("click", this.handleRectClick);
+      rect.removeEventListener("mouseover", this.hoverStart);
     });
   }
 
-  handleRectClick(e) {
+  hoverStart(e) {
     let roomEl = e.target;
     let suiteEl = roomEl.parentElement;
     let room = this.getDataFromSvg(roomEl);
     let suite = this.getDataFromSvg(suiteEl);
-    console.log("Suite: " + suite + "\tRoom: " + room);
+    console.log("START Suite: " + suite + "\tRoom: " + room);
   }
 
   getDataFromSvg(el) {
