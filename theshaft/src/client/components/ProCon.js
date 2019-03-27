@@ -1,11 +1,13 @@
 import React, { Component } from 'react';
 import styled from 'styled-components';
+import sad from "../assets/Icons/sad.svg";
+import happy from "../assets/Icons/happy.svg";
 
 let Section = styled.div`
     display: flex;
-    flex-direction: row;
+    flex-directin: row;
     ${props => props.theme.grayBorder}
-    padding: 2vw;
+    padding: 1rem;
 `
 
 let SectionMobile = styled(Section)`
@@ -16,25 +18,41 @@ let ListBox = styled.div`
     flex: 1;
 `
 
+let ListPoints = styled.ul`
+  padding-inline-start: 1.2rem;
+`
+
 let Divider = styled.div`
     width: 1px;
-    margin-right: 2vw;
+    margin: 0 2vw;
     background-color: ${props => props.theme.lightGray};
 `
 
 let DivideMobile = styled.div`
     height: 1px;
     border-bottom: 1px ${props => props.theme.lightGray} solid;
-    padding-bottom: 1vw;
+    margin-bottom: 1rem;
 `
 
-let Head = styled.h1`
+let Head = styled.div`
     text-align: center;
-    font-weight: initial;
-    // margin-top: -1.44vw;
 `
 
 let Title = styled.h2`
+`
+
+let ProConIcon = styled.img`
+  height: 50px;
+  width: 50px;
+  object-fit: cover;
+`
+
+let HappyIcon = styled(ProConIcon)`
+  object-position: 0 100%;
+`
+
+let SadIcon = styled(ProConIcon)`
+  object-position: 100% 0;
 `
 
 
@@ -81,19 +99,23 @@ export default class ProCon extends Component {
             <Title>Pros and Cons</Title>
             <SectionMobile>
             <ListBox>
-              <Head>&#9786;</Head>
-                <ul>
+              <Head>
+                <HappyIcon src={happy} alt="Pros"/>
+              </Head>
+                <ListPoints>
                   {this.state.pros.map(pro => (
                     <li key={k++}>{pro}</li>))}
-                </ul>
+                </ListPoints>
             </ListBox>
             <DivideMobile></DivideMobile>
             <ListBox>
-              <Head>&#9785;</Head>
-                <ul>
+              <Head>
+                <SadIcon src={sad} alt="Cons"/>
+              </Head>
+                <ListPoints>
                   {this.state.cons.map(con => (
                     <li key={k++}>{con}</li>))}
-                </ul>
+                </ListPoints>
             </ListBox>
           </SectionMobile>
           </div>
@@ -106,19 +128,23 @@ export default class ProCon extends Component {
         <div>
           <Section>
             <ListBox>
-              <Head><h2>Pros</h2></Head>
-                <ul>
-                  {this.state.pros.map(pro => (
-                    <li key={k++}>{pro}</li>))}
-                </ul>
+              <Head>
+                <HappyIcon src={happy} alt="Pros"/>
+              </Head>
+              <ListPoints>
+                {this.state.pros.map(pro => (
+                  <li key={k++}>{pro}</li>))}
+              </ListPoints>
             </ListBox>
             <Divider/>
             <ListBox>
-              <Head><h2>Cons</h2></Head>
-                <ul>
-                  {this.state.cons.map(con => (
-                    <li key={k++}>{con}</li>))}
-                </ul>
+              <Head>
+                <SadIcon src={sad} alt="Cons"/>
+              </Head>
+              <ListPoints>
+                {this.state.cons.map(con => (
+                  <li key={k++}>{con}</li>))}
+              </ListPoints>
             </ListBox>
           </Section>
           </div>
