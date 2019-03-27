@@ -35,14 +35,14 @@ const years_map = {
 
 const reviews_per_page = 4
 
-let PageNumberBlue = styled.p`
+let NumberBlue = styled.p`
   border: 1px ${props => props.theme.columbiaBlue} solid;
   border-radius: 3px;
   color: ${props => props.theme.white};
   background-color: ${props => props.theme.columbiaBlue};  
   text-align: center;
 `
-let PageNumberBlack = styled.p`
+let NumberBlack = styled.p`
   border: 1px ${props => props.theme.columbiaBlue} solid;
   border-radius: 3px;
   text-align: center;
@@ -65,10 +65,10 @@ export default class SlidingReview extends Component {
         const settings = {
             customPaging: function(i) {
                 if(activeSlide !== "undefined" && activeSlide + 1 === i + 1){
-                  return <a><PageNumberBlue>{i + 1}</PageNumberBlue></a>
+                  return <a><NumberBlue>{i + 1}</NumberBlue></a>
                 }
                 else{
-                  return <a><PageNumberBlack>{i + 1}</PageNumberBlack></a>
+                  return <a><NumberBlack>{i + 1}</NumberBlack></a>
                 }
             },
             dots: true,
