@@ -9,7 +9,7 @@ import ProCon from '../src/client/components/ProCon.js';
 import QuickReview from '../src/client/components/QuickReview.js';
 import Review from '../src/client/components/Review.js';
 import FloorPlan from '../src/client/components/FloorPlan.js';
-import sampleFloor from '../src/client/assets/floor_plans/47 Claremont 1.jpg';
+// import sampleFloor from '../src/client/assets/floor_plans/47 Claremont 1.jpg';
 import FilterButton from '../src/client/components/FilterButton.js';
 import FilterComponent from '../src/client/components/FilterComponent.js';
 import Expander from '../src/client/components/Expander.js';
@@ -29,7 +29,8 @@ import { ReactComponent as SymposiumSVG } from "../src/client/assets/test_floorp
 // import ReviewSlider from "../src/client/components/ReviewSlider.js";
 import SlidingReview from "../src/client/components/SlidingReview.js";
 import SpectrumSidebar from "../src/client/components/SpectrumSidebar.js";
-import AdManager from "../src/client/components/AdManager";
+// import AdManager from "../src/client/components/AdManager";
+import RoomAvailability from '../src/client/components/RoomAvailability.js';
 
 storiesOf('SpectrumSidebar', module)
   .add('SpectrumSidebar', () =>
@@ -97,15 +98,15 @@ storiesOf('Review', module)
 storiesOf('ReviewList', module)
   .add('ReviewList', () => <ReviewList />);
 
-storiesOf('AdManager', module)
-  .add('AdManager', () => <AdManager/>);
+// storiesOf('AdManager', module)
+//   .add('AdManager', () => <AdManager/>);
 
-let planArray = [
-  sampleFloor,"https://housing.columbia.edu/files/housing/Wien%208_2018.jpg",
-    "https://housing.columbia.edu/files/housing/600%209_2016_0.jpg",
-    "https://housing.columbia.edu/files/housing/Woodbridge%204_2018.jpg", 
-    "https://i.kym-cdn.com/entries/icons/original/000/026/642/kot1.jpg"
-]
+// let planArray = [
+//   sampleFloor,"https://housing.columbia.edu/files/housing/Wien%208_2018.jpg",
+//     "https://housing.columbia.edu/files/housing/600%209_2016_0.jpg",
+//     "https://housing.columbia.edu/files/housing/Woodbridge%204_2018.jpg", 
+//     "https://i.kym-cdn.com/entries/icons/original/000/026/642/kot1.jpg"
+// ]
 
 storiesOf('FloorPlan', module)
   .add('keikaku means plan', () => <FloorPlan floorOffset={1} planArray={planArray}/>);
@@ -251,9 +252,27 @@ storiesOf('NavBar', module)
 
   storiesOf('FullScreen', module)
   .add('full screen', () => <FullScreen/>);
+
 storiesOf('Maps', module)
   .add('map', () => <Maps latitudes={[40.7128, 40.7129, 40.7128]} longitudes={[-74.006, -74.007, -74.008]} popupInfo={["carman", "mcbain", "JJ"]}/>);
 
 storiesOf('FloorPlanSVG', module)
   .add('Symposium 1 floorplan', () => <FloorPlanSVG><SymposiumSVG /></FloorPlanSVG>);
+
+
+  let sampleRoomData = [
+    {
+      "ROOM": "101",
+      "PRIORITY": "30",
+      "LOTTERY": "3000"
+    },
+    {
+      "ROOM": "102",
+      "PRIORITY": "20",
+      "LOTTERY": "2000"
+    }
+  ]
+
+  storiesOf('RoomAvailability', module)
+  .add('room data', () => <RoomAvailability roomAvailability={sampleRoomData}/>);
 
