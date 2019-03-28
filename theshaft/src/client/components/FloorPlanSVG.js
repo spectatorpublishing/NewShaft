@@ -60,25 +60,26 @@ export default class FloorPlanSVG extends Component {
     };
 
     this.hoverStart = this.hoverStart.bind(this);
+    this.clickStart = this.clickStart.bind(this);
   }
 
   componentDidMount() {
     let svgEl = document.getElementById(this.state.floorplanId);
     // Remove any SVG styling within the file
-    console.log(svgEl.querySelector("style"));
-    for (var i = 0; i  < this.state.floorplanData.length; i++)
-    {
-        let room1 = this.state.floorplanData[i];
-        document.querySelectorAll("rect").forEach((roomEl) => 
-        {
-          let suiteEl = roomEl.parentElement;
-          let room2 = this.getDataFromSvg(suiteEl) + this.getDataFromSvg(roomEl);
-          if (room1["ROOM"] == room2 && room1["PRIORITY"])
-          {
-            console.log("MATCH! " + room1["ROOM"] + " " + room2);
-            roomEl.setAttribute("fill", "red");
-          }
-        });
+    svgEl.querySelector("style").remove();
+    for (var i = 0; i  < this.state.floorplanData.length; i++) {
+      let room1 = this.state.floorplanData[i];
+      console.log(room1);
+      document.querySelectorAll("rect").forEach((roomEl) => {
+        let suiteEl = roomEl.parentElement;
+        let room2 = this.getDataFromSvg(suiteEl) + this.getDataFromSvg(roomEl);
+        console.log(room2);
+        if (room1["ROOM"] == room2 && room1["PRIORITY"]) {
+          console.log("MATCH! " + room1["ROOM"] + " " + room2);
+          console.log(roomEl);
+          roomEl.setAttribute("fill", "red");
+        }
+      });
     }
     // Override the xlink:href attribute (which is deprecated)
     // with an href that links to the corresponding floorplan JPG
@@ -90,6 +91,7 @@ export default class FloorPlanSVG extends Component {
     let rectsArray = document.querySelectorAll("rect");
     rectsArray.forEach((rect) => {
       rect.addEventListener("mouseover", this.hoverStart);
+      rect.addEventListener("click", this.clickStart);
     });
   }
 
@@ -99,10 +101,19 @@ export default class FloorPlanSVG extends Component {
     let rectsArray = document.querySelectorAll("rect");
     rectsArray.forEach((rect) => {
       rect.removeEventListener("mouseover", this.hoverStart);
+      rect.removeEventListener("click", this.clickStart);
     });
   }
 
   hoverStart(e) {
+    this.getTargetRoom(e);
+  }
+
+  clickStart(e) {
+    this.getTargetRoom(e);
+  }
+
+  getTargetRoom(e) {
     let roomEl = e.target;
     let suiteEl = roomEl.parentElement;
     let room = this.getDataFromSvg(roomEl);
