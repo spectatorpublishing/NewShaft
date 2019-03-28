@@ -32,7 +32,7 @@ app.use('/api/getRelatedArticles', (req, res) => getRelatedArticles(req,res));
 app.use('/api/getFloorPlans', (req,res) => getFloorPlans(req,res));
 app.use('/api/getDormPhotos', (req,res) => getDormPhotos(req,res));
 app.use('/api/getRelatedDorms', (req, res) => getRelatedDorms(req, res))
-app.use('/api/getFloorPlanSVGs', (req, res) => getFloorPlanSVGs(req, res))
+app.use('/api/getLotteryNum', (req, res) => getRelatedDorms(req, res))
 
 
 var server = app.listen(8080, () => {

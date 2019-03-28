@@ -45,7 +45,7 @@ export default class FloorButton extends Component{
             else{
                 buttons.push(<NumberBlack onClick={() => {
                     this.setState({currentFloor: i})
-                    fetch('/api/getWhiteboardRooms', {
+                    fetch('/api/getLotteryNumbers', {
                         method: 'POST',
                         headers: {
                             'Content-Type': 'application/json'
