@@ -9,11 +9,7 @@ import ProCon from '../src/client/components/ProCon.js';
 import QuickReview from '../src/client/components/QuickReview.js';
 import Review from '../src/client/components/Review.js';
 import FloorPlan from '../src/client/components/FloorPlan.js';
-<<<<<<< HEAD
 // import sampleFloor from '../src/client/assets/floor_plans/47 Claremont 1.jpg';
-=======
-//import sampleFloor from '../src/client/assets/floor_plans/47 Claremont 1.jpg';
->>>>>>> 0aeec1623491b705abc3358829295b53e21a407c
 import FilterButton from '../src/client/components/FilterButton.js';
 import FilterComponent from '../src/client/components/FilterComponent.js';
 import Expander from '../src/client/components/Expander.js';
@@ -33,13 +29,9 @@ import { ReactComponent as SymposiumSVG } from "../src/client/assets/test_floorp
 // import ReviewSlider from "../src/client/components/ReviewSlider.js";
 import SlidingReview from "../src/client/components/SlidingReview.js";
 import SpectrumSidebar from "../src/client/components/SpectrumSidebar.js";
-<<<<<<< HEAD
 // import AdManager from "../src/client/components/AdManager";
 import RoomAvailability from '../src/client/components/RoomAvailability.js';
-=======
-import AdManager from "../src/client/components/AdManager";
 import WhiteboardTable from '../src/client/components/WhiteboardTable.js';
->>>>>>> 0aeec1623491b705abc3358829295b53e21a407c
 
 storiesOf('SpectrumSidebar', module)
   .add('SpectrumSidebar', () =>
@@ -113,21 +105,12 @@ storiesOf('ReviewList', module)
 // storiesOf('AdManager', module)
 //   .add('AdManager', () => <AdManager/>);
 
-<<<<<<< HEAD
 // let planArray = [
 //   sampleFloor,"https://housing.columbia.edu/files/housing/Wien%208_2018.jpg",
 //     "https://housing.columbia.edu/files/housing/600%209_2016_0.jpg",
 //     "https://housing.columbia.edu/files/housing/Woodbridge%204_2018.jpg", 
 //     "https://i.kym-cdn.com/entries/icons/original/000/026/642/kot1.jpg"
 // ]
-=======
-let planArray = [
-  "https://housing.columbia.edu/files/housing/Wien%208_2018.jpg",
-    "https://housing.columbia.edu/files/housing/600%209_2016_0.jpg",
-    "https://housing.columbia.edu/files/housing/Woodbridge%204_2018.jpg", 
-    "https://i.kym-cdn.com/entries/icons/original/000/026/642/kot1.jpg"
-]
->>>>>>> 0aeec1623491b705abc3358829295b53e21a407c
 
 storiesOf('FloorPlan', module)
   .add('keikaku means plan', () => <FloorPlan floorOffset={1} planArray={planArray}/>);
@@ -290,10 +273,38 @@ storiesOf('FloorPlanSVG', module)
     {
       "ROOM": "102",
       "PRIORITY": "20",
-      "LOTTERY": "2000"
+      "LOTTERY": "2050"
+    },
+    {
+      "ROOM": "103",
+      "PRIORITY": "30",
+      "LOTTERY": "1010"
+    },
+    {
+      "ROOM": "104",
+      "PRIORITY": "10",
+      "LOTTERY": "2510"
+    },
+    {
+      "ROOM": "105",
+      "PRIORITY": "20",
+      "LOTTERY": "1450"
+    },
+    {
+      "ROOM": "106",
+      "PRIORITY": "30",
+      "LOTTERY": "900"
+    },
+    {
+      "ROOM": "107",
+      "PRIORITY": "10",
+      "LOTTERY": "1200"
     }
   ]
 
   storiesOf('RoomAvailability', module)
   .add('room data', () => <RoomAvailability roomAvailability={sampleRoomData}/>);
+
+  storiesOf('RoomAvailability', module)
+  .add('table component', () => <WhiteboardTable roomAvailability={sampleRoomData}/>);
 

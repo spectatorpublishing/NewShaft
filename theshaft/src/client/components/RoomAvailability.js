@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import styled from 'styled-components';
+import { createDeflateRaw } from "zlib";
 
 let Wrapper = styled.div`
 `
@@ -23,18 +24,13 @@ let Content = styled.span`
 export default class RoomAvailability extends Component {
     constructor(props) {
         super(props);
-        // this.state = {
-        //     roomnum: this.props.roomnum,
-        //     priority: this.props.priority,
-        //     lottery: this.props.lottery,
-        // };
     }
-    render() {
+
+    render() {    
 
         let i = 0;
-        let roomMap = [];
-
-        for(i=0; i < this.props.roomAvailability; i++){
+        let roomMap = []; 
+        for(i=0; i < this.props.roomAvailability.length; i++){
             roomMap.push([this.props.roomAvailability[i]["ROOM"], this.props.roomAvailability[i]["PRIORITY"]+"/"+this.props.roomAvailability[i]["LOTTERY"]]);
         }
 
