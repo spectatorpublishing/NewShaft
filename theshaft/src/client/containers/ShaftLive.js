@@ -34,8 +34,8 @@ export default class ShaftLive extends Component {
 
         this.state = {
             dorm: null, //not sure what to type this as
-            numFloors: 1,
-            handleChange: null, //not sure what to type this as
+            numFloors: this.state.numFloors,
+            //handleChange: null, //not sure what to type this as
 
 
         }
@@ -46,21 +46,24 @@ export default class ShaftLive extends Component {
         //this.fetch____();  --> need to fetch data
     }
 
-    fetchFloorButtonData(floors){
+    fetchFloorButtonData(dormName){
         // this should fetch data for the FloorButtons
-        const numFloors = floors;
-        fetch('/api/getWhiteboardRooms', {
+
+        // dormName is being supplied by Matt's sidebar.
+        const dormName = //somehwere far far away
+        fetch('/api/getUniqueFloorNumbers', {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json'
             },
             body: JSON.stringify({
-                table: "dorm_static_info",
-                numFloors: numFloors})
+                DORM: dormName
+            })
             })
             .then(res => res.json())
-            .then(response => {this.state.handleChange(response)}
-        );
+            .then(floorNum => {
+                this.setState({numFloors: floorNum})
+            });
       }
 
     render() {
@@ -75,7 +78,10 @@ export default class ShaftLive extends Component {
                 </ColTwo>
 
                 <ColThree>
-                    <FloorButton/>
+                    <FloorButton 
+                        dorm={/* from Matt's sidebar*/} 
+                        numFloors={this.state.numFloors} 
+                        handleChange={/* Ask Serena how this thing works.*/}/>
                 </ColThree>
 
             </ShaftLiveContainer>
