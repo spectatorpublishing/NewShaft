@@ -44,16 +44,18 @@ export default class FloorButton extends Component{
             }
             else{
                 buttons.push(<NumberBlack onClick={() => {
-                    this.setState({currentFloor: i})
-                    fetch('/api/getLotteryNumbers', {
-                        method: 'POST',
-                        headers: {
-                            'Content-Type': 'application/json'
-                        },
-                        body: JSON.stringify({dorm: this.state.dorm, floor: this.state.currentFloor})
-                        }).then(res => res.json())
-                        .then(response => {this.state.handleChange(response)}
-                    );      
+                    this.setState({currentFloor: i}, () => {
+                        fetch('/api/getLotteryNum', {
+                            method: 'POST',
+                            headers: {
+                                'Content-Type': 'application/json'
+                            },
+                            body: JSON.stringify({DORM: this.state.dorm, FLOOR: this.state.currentFloor})
+                            }).then(res => res.json())
+                            .then(response => {console.log(respones); this.state.handleChange(response)}
+                        ); 
+                    })
+                         
                 }}>{i}</NumberBlack>)
             }
         }

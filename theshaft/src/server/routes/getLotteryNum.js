@@ -22,21 +22,9 @@ function getLotteryNum(con, request, callback) {
 			"ADDRESS": "601 W 110th Street"
 		}
 		*/
-
-		var sqlStatement = `SELECT * FROM whiteboard_test `
-		delete request.table;
-		var firstKey = true
-
-		for (key in request)  {
-			if(firstKey) {
-				firstKey = false
-				sqlStatement += `WHERE ${key}="${request[key]}"`
-			} else {
-				sqlStatement += ` AND ${key}="${request[key]}"`
-			}
-		}
-		sqlStatement+=`;`
-
+		console.log(request["DORM"])
+		console.log(request["FLOOR"])
+		var sqlStatement = `SELECT ROOM, NEW_PRIORITY, NEW_NUM FROM ShaftLive WHERE DORM="${request["DORM"]}" AND FLOOR="${request["FLOOR"]}";`
 		
 		con.query(sqlStatement, function(err, res) {
 			if (err) throw err;
@@ -52,7 +40,7 @@ router.post('/', function(req, res, next) {
 		host: "192.34.62.10",
 		user: "USERNAME",
 		password: "PASSWORD",
-		database: "dev"
+		database: "dorms"
 	  });
 	
 	getLotteryNum(con, req.body, (lotteryInfo) => {

@@ -17,7 +17,8 @@ var getRelatedArticles = require('./routes/getRelatedArticles');
 var getFloorPlans = require('./routes/getFloorPlans');
 var getDormPhotos = require('./routes/getDormPhotos');
 var getRelatedDorms = require('./routes/getRelatedDorms.js')
-var getFloorPlanSVGs = require('./routes/getFloorPlanSVGs.js')
+var getLotteryNum = require('./routes/getLotteryNum.js')
+
 
 app.use(bodyParser.json())
 app.use(express.static('dist'));
@@ -32,7 +33,7 @@ app.use('/api/getRelatedArticles', (req, res) => getRelatedArticles(req,res));
 app.use('/api/getFloorPlans', (req,res) => getFloorPlans(req,res));
 app.use('/api/getDormPhotos', (req,res) => getDormPhotos(req,res));
 app.use('/api/getRelatedDorms', (req, res) => getRelatedDorms(req, res))
-app.use('/api/getLotteryNum', (req, res) => getRelatedDorms(req, res))
+app.use('/api/getLotteryNum', (req, res) => getLotteryNum(req, res))
 
 
 var server = app.listen(8080, () => {
