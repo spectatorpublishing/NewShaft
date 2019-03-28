@@ -30,6 +30,17 @@ import SlidingReview from "../src/client/components/SlidingReview.js";
 import SpectrumSidebar from "../src/client/components/SpectrumSidebar.js";
 import AdManager from "../src/client/components/AdManager";
 import WhiteboardSidebar from "../src/client/components/WhiteboardSidebar.js";
+import TestSVG from "../src/client/components/TestSVGs.js";
+import FloorButton from "../src/client/components/FloorButton.js";
+
+storiesOf('FloorButton', module)
+  .add('FloorButton', () =>
+    <FloorButton dorm="Carman Hall" numFloors={10} />)
+
+storiesOf('TestSVG', module)
+  .add('TestSVG', () => 
+    <TestSVG dorm="Carman Hall"/>
+  );
 
 storiesOf('SpectrumSidebar', module)
   .add('SpectrumSidebar', () =>
