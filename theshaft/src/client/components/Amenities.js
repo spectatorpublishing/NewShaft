@@ -20,17 +20,17 @@ const amenitiesMap = {
 
 const mapToS3Map = {
   "Single-Use Bathroom": "toilet.svg",
-  "Laundry in Building":"laundry.svg",
-  "Carpeted Floor":"",
-  "Floor Kitchen":"kitchen.svg",
-  "Private Kitchen":"kitchen.svg",
-  "Lounge":"",
-  "Fitness Center":"gym.svg",
-  "Bike Storage":"maintenance.svg",
-  "Computer Lab":"",
-  "Print Station":"",
+  "Laundry in Building": "laundry.svg",
+  "Carpeted Floor": "carpet.svg",
+  "Floor Kitchen": "kitchen.svg",
+  "Private Kitchen": "kitchen.svg",
+  "Lounge": "lounge.svg",
+  "Fitness Center": "gym.svg",
+  "Bike Storage": "maintenance.svg",
+  "Computer Lab": "computer.svg",
+  "Print Station": "printer.svg",
   "A/C" : "a_c.svg",
-  "Music Room":""
+  "Music Room": ""
 }
 
 let AmenitiesTitle = styled.h2`
