@@ -34,7 +34,7 @@ export default class ShaftLive extends Component {
 
         this.state = {
             dorm: null, //not sure what to type this as
-            numFloors: this.state.numFloors,
+            // numFloors: this.state.numFloors,
             //handleChange: null, //not sure what to type this as
 
 
@@ -50,7 +50,7 @@ export default class ShaftLive extends Component {
         // this should fetch data for the FloorButtons
 
         // dormName is being supplied by Matt's sidebar.
-        const dormName = //somehwere far far away
+        // let dormName = //somehwere far far away
         fetch('/api/getUniqueFloorNumbers', {
             method: 'POST',
             headers: {
@@ -69,6 +69,7 @@ export default class ShaftLive extends Component {
     render() {
         return(
             <ShaftLiveContainer>
+                <p>this is shaft live ! </p>
                 <ColOne>
 
                 </ColOne>
@@ -78,10 +79,10 @@ export default class ShaftLive extends Component {
                 </ColTwo>
 
                 <ColThree>
-                    <FloorButton 
-                        dorm={/* from Matt's sidebar*/} 
+                    {/* <FloorButton 
+                        dorm= 
                         numFloors={this.state.numFloors} 
-                        handleChange={/* Ask Serena how this thing works.*/}/>
+                        handleChange= /> */}
                 </ColThree>
 
             </ShaftLiveContainer>
