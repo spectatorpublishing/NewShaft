@@ -21,6 +21,11 @@ let TooltipText = styled.p`
   text-shadow: ${props => props.theme.shadow};
 `
 
+let TooltipBold = styled.b`
+  color: ${props => props.theme.white};
+  text-shadow: ${props => props.theme.shadow};
+`
+
 let data = [
   {
       "ROOM": "4A",
@@ -183,19 +188,19 @@ export default class FloorPlanSVG extends Component {
     if (roomDic["PRIORITY"] == "") {
       // Not taken yet (Green)
       return <TooltipBox>
-      <TooltipText>{room}</TooltipText>
-      <ul>
-        <li>Cutoff: {roomDic["PRIORITY"] + " / " + roomDic["LOTTERY"] }</li>
-      </ul>
+      <TooltipText>Room: <TooltipBold>{room}</TooltipBold></TooltipText>
+      <TooltipText>
+        Last Year's Cutoff: <TooltipBold>{roomDic["PRIORITY"] + " / " + roomDic["LOTTERY"]}</TooltipBold>
+      </TooltipText>
     </TooltipBox>
     }
 
     // Taken room (Red)
     return <TooltipBox>
-      <TooltipText>{room}</TooltipText>
-      <ul>
-        <li>{roomDic["PRIORITY"] + " / " + roomDic["LOTTERY"] }</li>
-      </ul>
+      <TooltipText>Room: <TooltipBold>{room}</TooltipBold></TooltipText>
+      <TooltipText>
+        Taken By: <TooltipBold>{roomDic["PRIORITY"] + " / " + roomDic["LOTTERY"]}</TooltipBold>
+      </TooltipText>
     </TooltipBox>;
   }
 
