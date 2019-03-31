@@ -75,7 +75,8 @@ export default class FloorPlanSVG extends Component {
     this.state = {
       floorplanId: id,
       floorplanUrl: url,
-      floorplanData: data
+      floorplanData: data,
+      floorplanDic : {}
     };
 
     this.hoverStart = this.hoverStart.bind(this);
@@ -87,12 +88,16 @@ export default class FloorPlanSVG extends Component {
     let svgBoundingDivEl = document.getElementById(this.state.floorplanId);
 
     // Remove any SVG styling within the file
-    if(svgBoundingDivEl.querySelector("style")) {
+    if (svgBoundingDivEl.querySelector("style")) {
       svgBoundingDivEl.querySelector("style").remove();
     }
-    
+
+    var floorplanDic = {};
+
     for (var i = 0; i  < this.state.floorplanData.length; i++) {
       let roomFromDb = this.state.floorplanData[i];
+      floorplanDic[roomFromDb["ROOM"]] = {"PRIORITY": roomFromDb["PRIORITY"], "LOTTERY" : roomFromDb["LOTTERY"]};
+
       document.querySelectorAll("rect").forEach((roomEl) => {
         let suiteEl = roomEl.parentElement;
         let roomFromSvg = this.getDataFromSvg(suiteEl) + this.getDataFromSvg(roomEl);
@@ -113,6 +118,9 @@ export default class FloorPlanSVG extends Component {
         }
       });
     }
+
+    this.setState({floorplanDic : floorplanDic });
+
     // Override the xlink:href attribute (which is deprecated)
     // with an href that links to the corresponding floorplan JPG
     let baseImage = svgBoundingDivEl.querySelectorAll("image")[0];
@@ -162,13 +170,24 @@ export default class FloorPlanSVG extends Component {
   }
 
   getTooltipContent(room) {
+    let roomDic = this.state.floorplanDic[room];
+    if (!roomDic) {
+      return <TooltipBox><TooltipText>Not Available</TooltipText></TooltipBox>
+    }
+    
+    if (roomDic["PRIORITY"] == "") {
+      return <TooltipBox>
+      <TooltipText>{room}</TooltipText>
+      <ul>
+        <li>Cutoff: {roomDic["PRIORITY"] + " / " + roomDic["LOTTERY"] }</li>
+      </ul>
+    </TooltipBox>
+    }
+
     return <TooltipBox>
       <TooltipText>{room}</TooltipText>
-      <TooltipText>You can put every thing here</TooltipText>
       <ul>
-        <li>Word</li>
-        <li>Chart</li>
-        <li>Else</li>
+        <li>{roomDic["PRIORITY"] + " / " + roomDic["LOTTERY"] }</li>
       </ul>
     </TooltipBox>;
   }
@@ -181,7 +200,8 @@ export default class FloorPlanSVG extends Component {
           <ReactTooltip 
             id='global' 
             aria-haspopup='true' 
-            getContent={(dataTip) => this.getTooltipContent(dataTip)}
+            clickable='true'
+            getContent={ (dataTip) => this.getTooltipContent(dataTip)}
           />
         </FloorPlanWrapper>
     );
