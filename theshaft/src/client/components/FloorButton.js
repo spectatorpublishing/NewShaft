@@ -37,8 +37,9 @@ export default class FloorButton extends Component{
 
     render(){
         console.log("Current Floor: " + this.state.currentFloor)
+        let buttons = []
         if (this.state.floorNums){
-            let buttons = this.state.floorNums.map((i) => {
+            buttons = this.state.floorNums.map((i) => {
                 if(i == this.state.currentFloor){
                     return <NumberBlue>{i}</NumberBlue>
                 }
