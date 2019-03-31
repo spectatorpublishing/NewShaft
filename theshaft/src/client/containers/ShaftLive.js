@@ -71,7 +71,6 @@ export default class ShaftLive extends Component {
     }
 
     fetchFloorData(dorm, floor){
-        console.log(dorm + "," + floor)
         fetch('/api/getLotteryNum', {
             method: 'POST',
             headers: {

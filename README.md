@@ -4,10 +4,6 @@
 
 ## Developer Setup Frontend
 
-Source your .env file (ask a team member if you do not have this):
-
-`source .env`
-
 Make sure you are in theshaft directory:
 
 `cd theshaft`
