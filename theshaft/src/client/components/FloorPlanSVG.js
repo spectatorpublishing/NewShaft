@@ -171,11 +171,14 @@ export default class FloorPlanSVG extends Component {
 
   getTooltipContent(room) {
     let roomDic = this.state.floorplanDic[room];
+
     if (!roomDic) {
+      // RA Room / not a part of room selection (Gray)
       return <TooltipBox><TooltipText>Not Available</TooltipText></TooltipBox>
     }
     
     if (roomDic["PRIORITY"] == "") {
+      // Not taken yet (Green)
       return <TooltipBox>
       <TooltipText>{room}</TooltipText>
       <ul>
@@ -184,6 +187,7 @@ export default class FloorPlanSVG extends Component {
     </TooltipBox>
     }
 
+    // Taken room (Red)
     return <TooltipBox>
       <TooltipText>{room}</TooltipText>
       <ul>
