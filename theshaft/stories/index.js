@@ -9,7 +9,7 @@ import ProCon from '../src/client/components/ProCon.js';
 import QuickReview from '../src/client/components/QuickReview.js';
 import Review from '../src/client/components/Review.js';
 import FloorPlan from '../src/client/components/FloorPlan.js';
-import sampleFloor from '../src/client/assets/floor_plans/47 Claremont 1.jpg';
+// import sampleFloor from '../src/client/assets/floor_plans/47 Claremont 1.jpg';
 import FilterButton from '../src/client/components/FilterButton.js';
 import FilterComponent from '../src/client/components/FilterComponent.js';
 import Expander from '../src/client/components/Expander.js';
@@ -44,7 +44,7 @@ storiesOf('TestSVG', module)
   .add('TestSVG', () => 
     <TestSVG dorm="Carman Hall"/>
   );
-import WhiteboardSidebar from "../src/client/components/WhiteboardSidebar.js";
+// import WhiteboardSidebar from "../src/client/components/WhiteboardSidebar.js";
 
 storiesOf('SpectrumSidebar', module)
   .add('SpectrumSidebar', () =>
