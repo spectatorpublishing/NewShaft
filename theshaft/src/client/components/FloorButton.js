@@ -35,40 +35,63 @@ export default class FloorButton extends Component{
         }
     }
 
+    // componentDidMount(){
+    //     fetch('/api/getLotteryNum', {
+    //         method: 'POST',
+    //         headers: {
+    //             'Content-Type': 'application/json'
+    //         },
+    //         body: JSON.stringify({DORM: this.state.dorm, FLOOR: this.state.floorNums[0]})
+    //         }).then(res => res.json())
+    //         .then(response => {console.log(response); this.state.handleChange(response)}
+    //     ); 
+    // }
+
     componentDidUpdate(oldProps){
         if(oldProps != this.props){
             this.setState({
                 dorm: this.props.dorm,
-                floorNums : this.props.floorNums,
-                handleChange: this.props.handleChange,
-                currentFloorIndex: 0
+                floorNums : this.props.floorNums
             })
         }
     }
 
     render(){
-        console.log("Current Floor: " + this.state.currentFloorIndex)
         let buttons = []
         if (this.state.floorNums){
             buttons = this.state.floorNums.map((floor, idx) => {
+                let floorNum = floor["FLOOR"]
                 if(idx == this.state.currentFloorIndex){
-                    return <NumberBlue>{floor}</NumberBlue>
+                    return <NumberBlue onClick={() => {
+                       
+                        fetch('/api/getLotteryNum', {
+                            method: 'POST',
+                            headers: {
+                                'Content-Type': 'application/json'
+                            },
+                            body: JSON.stringify({DORM: this.state.dorm, FLOOR: floorNum})
+                            }).then(res => res.json())
+                            .then(response => {console.log(response); this.state.handleChange(response)}
+                        ); 
+                    }
+
+                    }>{floorNum}</NumberBlue>
                 }
                 else{
                     return <NumberBlack onClick={() => {
-                        this.setState({currentFloor: floor}, () => {
+                        this.setState({currentFloorIndex: idx}, () => {
                             fetch('/api/getLotteryNum', {
                                 method: 'POST',
                                 headers: {
                                     'Content-Type': 'application/json'
                                 },
-                                body: JSON.stringify({DORM: this.state.dorm, FLOOR: this.state.floorNums[this.state.currentFloorIndex]})
+                                body: JSON.stringify({DORM: this.state.dorm, FLOOR: floorNum})
                                 }).then(res => res.json())
-                                .then(response => {console.log(respones); this.state.handleChange(response)}
+                                .then(response => {console.log(response); this.state.handleChange(response)}
                             ); 
                         })
                             
-                    }}>{floor}</NumberBlack>
+                    }}>{floorNum}</NumberBlack>
                 }
             })
         }
