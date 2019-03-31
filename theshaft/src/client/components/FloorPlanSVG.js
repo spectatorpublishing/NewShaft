@@ -30,17 +30,27 @@ let data = [
     "ROOM": "1A",
     "PRIORITY": "30",
     "LOTTERY": "3000"
-},
-{
+  },
+  {
     "ROOM": "1B",
     "PRIORITY": "30",
     "LOTTERY": "3000"
-},
-{
+  },
+  {
     "ROOM": "1C",
     "PRIORITY": "30",
     "LOTTERY": "3000"
-}
+  },
+  {
+    "ROOM": "1D",
+    "PRIORITY": "",
+    "LOTTERY": ""
+  },
+  {
+    "ROOM": "1E",
+    "PRIORITY": "",
+    "LOTTERY": ""
+  }
 ]
 
 export default class FloorPlanSVG extends Component {
@@ -64,33 +74,44 @@ export default class FloorPlanSVG extends Component {
   }
 
   componentDidMount() {
-    let svgEl = document.getElementById(this.state.floorplanId);
+    // Get the parent div of the SVG element
+    let svgBoundingDivEl = document.getElementById(this.state.floorplanId);
+
     // Remove any SVG styling within the file
-    svgEl.querySelector("style").remove();
+    svgBoundingDivEl.querySelector("style").remove();
+    
     for (var i = 0; i  < this.state.floorplanData.length; i++) {
-      let room1 = this.state.floorplanData[i];
-      console.log(room1);
+      let roomFromDb = this.state.floorplanData[i];
       document.querySelectorAll("rect").forEach((roomEl) => {
         let suiteEl = roomEl.parentElement;
-        let room2 = this.getDataFromSvg(suiteEl) + this.getDataFromSvg(roomEl);
-        console.log(room2);
-        if (room1["ROOM"] == room2 && room1["PRIORITY"]) {
-          console.log("MATCH! " + room1["ROOM"] + " " + room2);
-          console.log(roomEl);
-          roomEl.setAttribute("fill", "red");
+        let roomFromSvg = this.getDataFromSvg(suiteEl) + this.getDataFromSvg(roomEl);
+        // Check if the room labeled on the SVG matches the name in the db
+        if (roomFromDb["ROOM"] == roomFromSvg) {
+          // Attach data attributes for react-tooltip
+          roomEl.setAttribute("data-tip", roomFromSvg);
+          roomEl.setAttribute("data-for", "global");
+          ReactTooltip.rebuild();
+
+          // Check if lottery number exists for it (i.e. it's already taken)
+          if (roomFromDb["PRIORITY"]) {
+            console.log("MATCH! " + roomFromDb["ROOM"] + " " + roomFromSvg);
+            roomEl.setAttribute("fill", "red");
+          } else {
+            roomEl.setAttribute("fill", "green");
+          }
         }
       });
     }
     // Override the xlink:href attribute (which is deprecated)
     // with an href that links to the corresponding floorplan JPG
-    let baseImage = svgEl.querySelectorAll("image")[0];
+    let baseImage = svgBoundingDivEl.querySelectorAll("image")[0];
     let xlinkHref = baseImage.getAttributeNode("xlink:href");
     baseImage.removeAttributeNode(xlinkHref);
     baseImage.setAttribute("href", this.state.floorplanUrl);
 
     let rectsArray = document.querySelectorAll("rect");
     rectsArray.forEach((rect) => {
-      rect.addEventListener("mouseover", this.hoverStart);
+      // rect.addEventListener("mouseover", this.hoverStart);
       rect.addEventListener("click", this.clickStart);
     });
   }
@@ -100,9 +121,13 @@ export default class FloorPlanSVG extends Component {
   componentWillUnmount() {
     let rectsArray = document.querySelectorAll("rect");
     rectsArray.forEach((rect) => {
-      rect.removeEventListener("mouseover", this.hoverStart);
+      // rect.removeEventListener("mouseover", this.hoverStart);
       rect.removeEventListener("click", this.clickStart);
     });
+  }
+
+  componentDidUpdate() {
+    ReactTooltip.rebuild();
   }
 
   hoverStart(e) {
@@ -129,6 +154,12 @@ export default class FloorPlanSVG extends Component {
     return (
         <FloorPlanWrapper id={this.state.floorplanId}>
           <ClaremontSVG></ClaremontSVG>
+
+          <ReactTooltip 
+            id='global' 
+            aria-haspopup='true' 
+            getContent={(dataTip) => `This little buddy is ${dataTip}`}
+          />
         </FloorPlanWrapper>
     );
   }
