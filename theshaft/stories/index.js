@@ -88,8 +88,6 @@ storiesOf('PhotoBanner', module)
   .add('for dorm pages', () =>
         <PhotoBanner bannerImages = {bannerImages}></PhotoBanner>);
 
-storiesOf('WhiteboardTable', module)
-  .add('Whiteboard Table', () => <WhiteboardTable/>)
 
 storiesOf('DormButton', module)
   .add('dorm button', () => <DormButton name="ADI House" address="21 Savage St." sundial_distance="12 minutes" description="It's lit"/>);
