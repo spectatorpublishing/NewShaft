@@ -6,9 +6,10 @@ function getFloorPlans(con, request, callback) {
 	con.connect(function(err) {
 		if (err) throw err;
 
-        var sqlStatement = `SELECT * FROM floor_plan_svgs 
-        WHERE DORM = "${request["DORM"]}";`
-		
+        var sqlStatement = `SELECT * FROM ShaftDormSVGs 
+        WHERE DORM = "${request["DORM"]}" AND FLOOR = "${request["FLOOR"]}";`
+
+				console.log(sqlStatement);
 		con.query(sqlStatement, function(err, res) {
 			if (err) throw err;
 			callback(res)
@@ -23,7 +24,7 @@ router.post('/', function(req, res, next) {
 		host: "192.34.62.10",
 		user: "USERNAME",
 		password: "PASSWORD",
-		database: "dev"
+		database: "dorms"
 	  });
 	
 	getFloorPlans(con, req.body, (revInfo) => {
