@@ -29,10 +29,7 @@ import { ReactComponent as SymposiumSVG } from "../src/client/assets/test_floorp
 import SlidingReview from "../src/client/components/SlidingReview.js";
 import SpectrumSidebar from "../src/client/components/SpectrumSidebar.js";
 import AdManager from "../src/client/components/AdManager";
-<<<<<<< HEAD
-=======
 import WhiteboardSidebar from "../src/client/components/WhiteboardSidebar.js";
->>>>>>> c93187830af74c04f5d14b122b11741f0dc3cf8f
 import TestSVG from "../src/client/components/TestSVGs.js";
 import FloorButton from "../src/client/components/FloorButton.js";
 
@@ -44,10 +41,7 @@ storiesOf('TestSVG', module)
   .add('TestSVG', () => 
     <TestSVG dorm="Carman Hall"/>
   );
-<<<<<<< HEAD
 import WhiteboardSidebar from "../src/client/components/WhiteboardSidebar.js";
-=======
->>>>>>> c93187830af74c04f5d14b122b11741f0dc3cf8f
 
 storiesOf('SpectrumSidebar', module)
   .add('SpectrumSidebar', () =>
