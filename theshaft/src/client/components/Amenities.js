@@ -30,7 +30,7 @@ const mapToS3Map = {
   "Computer Lab": "computer.svg",
   "Print Station": "printer.svg",
   "A/C" : "a_c.svg",
-  "Music Room": ""
+  "Music Room": "radio.svg"
 }
 
 let AmenitiesTitle = styled.h2`
