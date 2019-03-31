@@ -13,14 +13,14 @@ let DDHeader = styled.div`
 `
 
 let DDHeaderTitle = styled.div`
-    text-shadow: ${props => props.shadow ? props.theme.textShadow : "none"};
+    text-shadow: ${props => props.shadow ? props.theme.shadow : "none"};
     cursor: pointer;
     user-select: none;
     color: white;
 `
 
 let Bolded = styled.b`
-    text-shadow: ${props => props.shadow ? props.theme.textShadow : "none"};
+    text-shadow: ${props => props.shadow ? props.theme.shadow : "none"};
     cursor: pointer;
     user-select: none;
     color: ${props => props.theme.white};
