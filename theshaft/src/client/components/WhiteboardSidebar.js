@@ -2,14 +2,18 @@ import React, { Component } from "react";
 import styled from 'styled-components';
 
 let Sidebar = styled.div`
-    width: 20%;
-    height: 100%;
+    width: 7.5vw;
+    height: 100vh;
+    margin: 50% 20% 20% 20% ;
+    display:flex;
+    flex-direction:column;
 `
+
+
 
 let DormList = styled.div`
     display: flex;
     flex-direction: column;
-    text-align: left;
 `
 
 let Dorm = styled.button`
@@ -19,7 +23,7 @@ let Dorm = styled.button`
     color: #000;
     font-size: 1rem;
     background: none;
-    text-align: left;
+    text-align: center;
 
     &:hover {
         background-color: #9a9c9e;
@@ -41,6 +45,7 @@ export default class WhiteboardSidebar extends React.PureComponent {
         return (
             <div>
                 <Sidebar>
+                    <div className="sidebar" style={{textAlign:"center"}}>faspdo</div>
                     <DormList>
                         { 
                             dormArray.map((dorm) =>
