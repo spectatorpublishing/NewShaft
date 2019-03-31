@@ -1,0 +1,42 @@
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 1042 1600">
+    <defs>
+        <style>
+        .cls-1 {
+            fill: none;
+            stroke: #000;
+            stroke-miterlimit: 10;
+            stroke-width: 6px;
+        }
+        </style>
+    </defs>
+    <title>47Claremont_1</title>
+    <g id="Layer_1" data-name="Layer 1">
+        <image width="1042" height="1600" xlink:href="47 Claremont 1.jpg" />
+    </g>
+    <g id="Layer_2" data-name="Layer 2">
+        <g id="_4" data-name="4">
+            <rect id="A" class="cls-1" x="607" y="198" width="134" height="134" />
+            <rect id="B" class="cls-1" x="749" y="198" width="184" height="134" />
+            <rect id="C" class="cls-1" x="792" y="332" width="141" height="166" />
+        </g>
+        <g id="_3" data-name="3">
+            <rect id="A-2" data-name="A" class="cls-1" x="297" y="198" width="157" height="180" />
+            <rect id="B-2" data-name="B" class="cls-1" x="122" y="198" width="174" height="164" />
+            <rect id="C-2" data-name="C" class="cls-1" x="122" y="362" width="130" height="112" />
+            <rect id="D" class="cls-1" x="330" y="488" width="151" height="141" />
+        </g>
+        <g id="_2" data-name="2">
+            <rect id="A-3" data-name="A" class="cls-1" x="573" y="800" width="176" height="151" />
+            <rect id="B-3" data-name="B" class="cls-1" x="573" y="1131" width="159" height="188" />
+            <rect id="C-3" data-name="C" class="cls-1" x="732" y="1167" width="201" height="152" />
+            <rect id="D-2" data-name="D" class="cls-1" x="816" y="1021" width="117" height="146" />
+        </g>
+        <g id="_1" data-name="1">
+            <rect id="B-4" data-name="B" class="cls-1" x="296.5" y="754.5" width="184" height="169" />
+            <rect id="A-4" data-name="A" class="cls-1" x="296.5" y="645.5" width="184" height="109" />
+            <rect id="C-4" data-name="C" class="cls-1" x="340" y="1111" width="141" height="199" />
+            <rect id="D-3" data-name="D" class="cls-1" x="131" y="1145" width="209" height="165" />
+            <rect id="E" class="cls-1" x="131" y="1003" width="121" height="142" />
+        </g>
+    </g>
+</svg>
