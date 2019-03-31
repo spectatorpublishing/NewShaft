@@ -4,7 +4,7 @@ import styled from 'styled-components';
 let Sidebar = styled.div`
     width: 7.5vw;
     height: 100vh;
-    margin: 30% 20% 20% 20% ;
+    margin: 30% 40% 20% 70% ;
     display:flex;
     flex-direction:column;
 `
@@ -12,7 +12,9 @@ let SidebarTitle = styled.div`
     text-align:center;
     font-size:1.5rem;
     border-bottom:solid;
+    border-color:${props => props.theme.columbiaBlue}; 
     border-width:2px;
+    font-weight: bold;
 `
 
 

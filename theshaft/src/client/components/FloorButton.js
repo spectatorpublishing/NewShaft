@@ -2,8 +2,8 @@ import React, { Component } from "react";
 import styled from 'styled-components';
 
 let NumberBlue = styled.button`
-    width: 25px;
-    height: 25px;
+    width: 2.5rem;
+    height: 2.5rem;
     border: 1px ${props => props.theme.columbiaBlue} solid;
     border-radius: 3px;
     color: ${props => props.theme.white};
@@ -11,8 +11,8 @@ let NumberBlue = styled.button`
     text-align: center;
 `
 let NumberBlack = styled.button`
-    width: 25px;
-    height: 25px;
+    width: 2.5rem;
+    height: 2.5rem;
     border: 1px ${props => props.theme.columbiaBlue} solid;
     border-radius: 3px;
     background-color: white;
@@ -21,11 +21,13 @@ let NumberBlack = styled.button`
 let ButtonTopText= styled.div`
     color: 	#6495ED;
     margin-bottom:1vh;
+    margin-top:5vh;
 `
 
 let Buttons = styled.div`
-    display: inline-block;
-    margin-bottom:1vh;
+    display: flex;
+    flex-direction:row;
+    margin-bottom:4vh;
 `
 
 export default class FloorButton extends Component{
