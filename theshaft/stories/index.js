@@ -40,6 +40,7 @@ storiesOf('TestSVG', module)
   .add('TestSVG', () => 
     <TestSVG dorm="Carman Hall"/>
   );
+import WhiteboardSidebar from "../src/client/components/WhiteboardSidebar.js";
 
 storiesOf('SpectrumSidebar', module)
   .add('SpectrumSidebar', () =>
@@ -63,6 +64,8 @@ storiesOf('SpectrumSidebar', module)
 
 // storiesOf('ReviewSlider', module)
 //   .add('test', () => <ReviewSlider />);
+storiesOf('Sidebar', module)
+  .add('whiteboard', () => <WhiteboardSidebar sidebarModification={(dorm) => console.log(dorm)}/>)
 
 storiesOf('Button', module)
   .add('with text', () => <Button>Hello Button</Button>)
