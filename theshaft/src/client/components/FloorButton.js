@@ -37,13 +37,12 @@ export default class FloorButton extends Component{
 
     render(){
         console.log("Current Floor: " + this.state.currentFloor)
-        let buttons = []
-        for(let i = 1; i < this.state.numFloors + 1; i++){
+        let buttons = this.state.numFloors.map((i) => {
             if(i == this.state.currentFloor){
-                buttons.push(<NumberBlue>{i}</NumberBlue>)
+                return <NumberBlue>{i}</NumberBlue>
             }
             else{
-                buttons.push(<NumberBlack onClick={() => {
+                return <NumberBlack onClick={() => {
                     this.setState({currentFloor: i}, () => {
                         fetch('/api/getLotteryNum', {
                             method: 'POST',
@@ -55,10 +54,10 @@ export default class FloorButton extends Component{
                             .then(response => {console.log(respones); this.state.handleChange(response)}
                         ); 
                     })
-                         
-                }}>{i}</NumberBlack>)
+                        
+                }}>{i}</NumberBlack>
             }
-        }
+        })
         return <Buttons>{buttons}</Buttons>
     }
 }

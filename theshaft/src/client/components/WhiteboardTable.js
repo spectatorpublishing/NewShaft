@@ -65,14 +65,23 @@ export default class WhiteboardTable extends Component {
     constructor(props) {
         super(props);
 
+        this.state = {
+            roomAvailability : this.props.roomAvailability
+        }
+    }
+
+    componentDidUpdate(oldProps){
+        if (oldProps != this.props){
+            this.setState({roomAvailability : this.props.roomAvailability})
+        }
     }
 
     render() {
 
         let i = 0;
         let roomMap = []; 
-        for(i=0; i < this.props.roomAvailability.length; i++){
-            roomMap.push([this.props.roomAvailability[i]["ROOM"], this.props.roomAvailability[i]["PRIORITY"]+"/"+this.props.roomAvailability[i]["LOTTERY"]]);
+        for(i=0; i < this.state.roomAvailability.length; i++){
+            roomMap.push([this.state.roomAvailability[i]["ROOM"], this.state.roomAvailability[i]["NEW_PRIORITY"]+"/"+this.state.roomAvailability[i]["NEW_NUM"]]);
         }
 
         const AvailabilityMapped = roomMap.map((el, i)=>{
