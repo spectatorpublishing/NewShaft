@@ -35,8 +35,8 @@ export default class WhiteboardSidebar extends React.PureComponent {
     }
 
     render() {
-        const dormArray = ['47 CLAREMONT', 'BROADWAY', 'CARMAN', 'EAST CAMPUS', 'FURNALD', 'HARMONY',
-                       'HARTLEY', 'HOGAN', 'JOHN JAY', 'MCBAIN', 'NUSSBAUM', 'RIVER', 'RUGGLES', 
+        const dormArray = ['47 Claremont', 'Broadway Hall', 'Carman Hall', 'East Campus', 'Furnald Hall', 'Harmony Hall',
+                       'Hartley Hall', 'Hogan Hall', 'John Jay Hall', 'McBain Hall', 'NUSSBAUM', 'RIVER', 'RUGGLES', 
                        'SCHAPIRO', 'SYMPOSIUM', 'WALLACH', 'WATT', 'WIEN', 'WOODBRIDGE']
         return (
             <div>

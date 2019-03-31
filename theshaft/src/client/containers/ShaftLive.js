@@ -47,13 +47,14 @@ export default class ShaftLive extends Component {
 
     componentDidMount(){
         document.title = "Shaft Live";
-        this.fetchFloorButtonData(this.state.dorm)
+        this.fetchFloorNums(this.state.dorm)        
     }
 
-    fetchFloorButtonData(dormName){
+    fetchFloorNums(dormName){
         // this should fetch data for the FloorButtons
 
         // dormName is being supplied by Matt's sidebar.
+
         fetch('/api/getUniqueFloorNumbers', {
             method: 'POST',
             headers: {
@@ -69,12 +70,25 @@ export default class ShaftLive extends Component {
             });
     }
 
-    handleFloorChange(data){
-        this.setState({floorData : data})
+    fetchFloorData(dorm, floor){
+        console.log(dorm + "," + floor)
+        fetch('/api/getLotteryNum', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({DORM: dorm, FLOOR: floor})
+            }).then(res => res.json())
+            .then(response => {console.log(response); this.setState({floorData : response})}
+        ); 
+    }
+
+    handleFloorChange(floor){
+        this.fetchFloorData(this.state.dorm, floor)
     }
 
     handleDormChange(dorm){
-        this.setState({dorm : dorm})
+        this.setState({dorm : dorm}, () => {this.fetchFloorNums(this.state.dorm)})
     }
 
     render() {
@@ -87,7 +101,6 @@ export default class ShaftLive extends Component {
 
                 <ColTwo>
                     <FloorButton 
-                        dorm={this.state.dorm} 
                         floorNums={this.state.floorNums} 
                         handleChange={this.handleFloorChange}/>
                     <WhiteboardTable
