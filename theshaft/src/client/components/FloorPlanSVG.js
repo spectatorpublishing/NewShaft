@@ -10,6 +10,14 @@ let FloorPlanWrapper = styled.div`
   }
 `
 
+let TooltipBox = styled.div`
+  color: white;
+`
+
+let TooltipText = styled.p`
+  color: white;
+`
+
 let data = [
   {
       "ROOM": "4A",
@@ -78,7 +86,9 @@ export default class FloorPlanSVG extends Component {
     let svgBoundingDivEl = document.getElementById(this.state.floorplanId);
 
     // Remove any SVG styling within the file
-    svgBoundingDivEl.querySelector("style").remove();
+    if(svgBoundingDivEl.querySelector("style")) {
+      svgBoundingDivEl.querySelector("style").remove();
+    }
     
     for (var i = 0; i  < this.state.floorplanData.length; i++) {
       let roomFromDb = this.state.floorplanData[i];
@@ -150,6 +160,18 @@ export default class FloorPlanSVG extends Component {
     return el.dataset.name ? el.dataset.name : el.getAttribute("id");
   }
 
+  getTooltipContent(room) {
+    return <TooltipBox>
+      <TooltipText>{room}</TooltipText>
+      <TooltipText>You can put every thing here</TooltipText>
+      <ul>
+        <li>Word</li>
+        <li>Chart</li>
+        <li>Else</li>
+      </ul>
+    </TooltipBox>;
+  }
+
   render() {
     return (
         <FloorPlanWrapper id={this.state.floorplanId}>
@@ -158,7 +180,7 @@ export default class FloorPlanSVG extends Component {
           <ReactTooltip 
             id='global' 
             aria-haspopup='true' 
-            getContent={(dataTip) => `This little buddy is ${dataTip}`}
+            getContent={(dataTip) => this.getTooltipContent(dataTip)}
           />
         </FloorPlanWrapper>
     );
