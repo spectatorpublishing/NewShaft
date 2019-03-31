@@ -1,0 +1,19 @@
+.floorplan-tooltip {
+  background-color: #62A8E5 !important;
+  box-shadow: rgba(0, 0, 0, 0.3) 0 0 10px;
+  border-radius: 10px;
+  opacity: 1 !important;
+}
+
+.floorplan-tooltip.place-left::after {
+  border-left-color: #62A8E5 !important;
+}
+.floorplan-tooltip.place-right::after {
+  border-right-color: #62A8E5 !important;
+}
+.floorplan-tooltip.place-top::after {
+  border-top-color: #62A8E5 !important;
+}
+.floorplan-tooltip.place-bottom::after {
+  border-bottom-color: #62A8E5 !important;
+}

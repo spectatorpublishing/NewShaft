@@ -54,6 +54,7 @@ export default class ShaftLive extends Component {
         // this should fetch data for the FloorButtons
 
         // dormName is being supplied by Matt's sidebar.
+        // let dormName = //somehwere far far away
         fetch('/api/getUniqueFloorNumbers', {
             method: 'POST',
             headers: {
@@ -80,6 +81,7 @@ export default class ShaftLive extends Component {
     render() {
         return(
             <ShaftLiveContainer>
+                <p>this is shaft live ! </p>
                 <ColOne>
                     <WhiteboardSidebar
                         sidebarModification={this.handleDormChange}/>
@@ -95,7 +97,10 @@ export default class ShaftLive extends Component {
                 </ColTwo>
 
                 <ColThree>
-                    
+                    {/* <FloorButton 
+                        dorm= 
+                        numFloors={this.state.numFloors} 
+                        handleChange= /> */}
                 </ColThree>
 
             </ShaftLiveContainer>

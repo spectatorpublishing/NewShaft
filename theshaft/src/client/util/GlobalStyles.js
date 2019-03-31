@@ -67,7 +67,7 @@ export const theme = {
   darkGray: "#555555",
   mediumGray: "#AAAAAA",
   lightGray: "#DDDDDD",
-  shadow: "0 0 10px rgba(0, 0, 0, 0.3)",
+  shadow: "rgba(0, 0, 0, 0.3) 0 0 10px",
   grayBorder: "border: 1px #DDDDDD solid; border-radius: 10px;",
   borderRadius: "10px",
 };

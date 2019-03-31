@@ -10,7 +10,6 @@ let Table = styled.div`
 	padding-bottom: 0.5rem;
 	margin-bottom: 0.5rem;
     margin-right: 1.5rem;
-
 `
 let Map = styled.div`
     overflow-y: scroll;
@@ -35,7 +34,7 @@ let LeftTitle = styled.h4`
     color: ${props => props.theme.columbiaBlue}
 `
 let RightTitle = styled.h4`
-    margin-bottom: .5rem;
+    margin-bottom: 1rem;
     text-align: left;
     color: ${props => props.theme.columbiaBlue};
 `
