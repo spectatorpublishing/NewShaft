@@ -4,11 +4,16 @@ import styled from 'styled-components';
 let Sidebar = styled.div`
     width: 7.5vw;
     height: 100vh;
-    margin: 50% 20% 20% 20% ;
+    margin: 30% 20% 20% 20% ;
     display:flex;
     flex-direction:column;
 `
-
+let SidebarTitle = styled.div`
+    text-align:center;
+    font-size:1.5rem;
+    border-bottom:solid;
+    border-width:2px;
+`
 
 
 let DormList = styled.div`
@@ -45,7 +50,7 @@ export default class WhiteboardSidebar extends React.PureComponent {
         return (
             <div>
                 <Sidebar>
-                    <div className="sidebar" style={{textAlign:"center"}}>faspdo</div>
+                    <SidebarTitle>Dorms</SidebarTitle>
                     <DormList>
                         { 
                             dormArray.map((dorm) =>

@@ -10,6 +10,7 @@ let Table = styled.div`
 	padding-bottom: 0.5rem;
 	margin-bottom: 0.5rem;
     margin-right: 1.5rem;
+
 `
 let Map = styled.div`
     overflow-y: scroll;
@@ -19,6 +20,7 @@ let Map = styled.div`
 
 let Wrapper = styled.div`
     width: 50%;
+    background-color:red;
 `
 
 let TitleText = styled.div`

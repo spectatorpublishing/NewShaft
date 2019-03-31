@@ -18,9 +18,14 @@ let NumberBlack = styled.button`
     background-color: white;
     text-align: center;
 `
+let ButtonTopText= styled.div`
+    color: 	#6495ED;
+    margin-bottom:1vh;
+`
 
 let Buttons = styled.div`
     display: inline-block;
+    margin-bottom:1vh;
 `
 
 export default class FloorButton extends Component{
@@ -96,6 +101,11 @@ export default class FloorButton extends Component{
             })
         }
             
-        return <Buttons>{buttons}</Buttons>
+        return(
+            <div>
+                <ButtonTopText>Filter by number of people in group:</ButtonTopText>
+                <Buttons>{buttons}</Buttons>
+            </div>
+        )
     }
 }
