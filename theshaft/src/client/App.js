@@ -3,7 +3,6 @@ import { Switch, Redirect, Route } from 'react-router-dom'
 import Explore from './containers/Explore';
 import ShaftLive from './containers/ShaftLive';
 import Dorm from './containers/Dorm';
-import ShaftLive from './containers/ShaftLive';
 import NavBar from './components/NavBar.js';
 import { ThemeProvider } from "styled-components";
 import { GlobalStyles, theme } from "./util/GlobalStyles";

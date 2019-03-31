@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import styled from "styled-components";
 import FloorButton from "../components/FloorButton.js";
 import WhiteboardTable from "../components/WhiteboardTable.js";
+import FloorPlanSVG from "../components/FloorPlanSVG"
 
 import _ from "lodash"
 import WhiteboardSidebar from '../components/WhiteboardSidebar.js';
@@ -81,7 +82,6 @@ export default class ShaftLive extends Component {
     render() {
         return(
             <ShaftLiveContainer>
-                <p>this is shaft live ! </p>
                 <ColOne>
                     <WhiteboardSidebar
                         sidebarModification={this.handleDormChange}/>
@@ -97,10 +97,7 @@ export default class ShaftLive extends Component {
                 </ColTwo>
 
                 <ColThree>
-                    {/* <FloorButton 
-                        dorm= 
-                        numFloors={this.state.numFloors} 
-                        handleChange= /> */}
+                    <FloorPlanSVG/> 
                 </ColThree>
 
             </ShaftLiveContainer>
