@@ -78,7 +78,8 @@ export default class FloorPlanSVG extends Component {
     this.state = {
       floorplanId: id,
       floorplanUrl: url,
-      floorplanData: data
+      floorplanData: data,
+      floorplanDic : {}
     };
 
     this.hoverStart = this.hoverStart.bind(this);
@@ -90,12 +91,16 @@ export default class FloorPlanSVG extends Component {
     let svgBoundingDivEl = document.getElementById(this.state.floorplanId);
 
     // Remove any SVG styling within the file
-    if(svgBoundingDivEl.querySelector("style")) {
+    if (svgBoundingDivEl.querySelector("style")) {
       svgBoundingDivEl.querySelector("style").remove();
     }
-    
+
+    var floorplanDic = {};
+
     for (var i = 0; i  < this.state.floorplanData.length; i++) {
       let roomFromDb = this.state.floorplanData[i];
+      floorplanDic[roomFromDb["ROOM"]] = {"PRIORITY": roomFromDb["PRIORITY"], "LOTTERY" : roomFromDb["LOTTERY"]};
+
       document.querySelectorAll("rect").forEach((roomEl) => {
         let suiteEl = roomEl.parentElement;
         let roomFromSvg = this.getDataFromSvg(suiteEl) + this.getDataFromSvg(roomEl);
@@ -116,6 +121,9 @@ export default class FloorPlanSVG extends Component {
         }
       });
     }
+
+    this.setState({floorplanDic : floorplanDic });
+
     // Override the xlink:href attribute (which is deprecated)
     // with an href that links to the corresponding floorplan JPG
     let baseImage = svgBoundingDivEl.querySelectorAll("image")[0];
@@ -165,13 +173,28 @@ export default class FloorPlanSVG extends Component {
   }
 
   getTooltipContent(room) {
+    let roomDic = this.state.floorplanDic[room];
+
+    if (!roomDic) {
+      // RA Room / not a part of room selection (Gray)
+      return <TooltipBox><TooltipText>Not Available</TooltipText></TooltipBox>
+    }
+    
+    if (roomDic["PRIORITY"] == "") {
+      // Not taken yet (Green)
+      return <TooltipBox>
+      <TooltipText>{room}</TooltipText>
+      <ul>
+        <li>Cutoff: {roomDic["PRIORITY"] + " / " + roomDic["LOTTERY"] }</li>
+      </ul>
+    </TooltipBox>
+    }
+
+    // Taken room (Red)
     return <TooltipBox>
       <TooltipText>{room}</TooltipText>
-      <TooltipText>You can put every thing here</TooltipText>
       <ul>
-        <li>Word</li>
-        <li>Chart</li>
-        <li>Else</li>
+        <li>{roomDic["PRIORITY"] + " / " + roomDic["LOTTERY"] }</li>
       </ul>
     </TooltipBox>;
   }
@@ -184,8 +207,8 @@ export default class FloorPlanSVG extends Component {
           <ReactTooltip 
             id='global' 
             aria-haspopup='true' 
-            delayHide={100000} 
-            getContent={(dataTip) => this.getTooltipContent(dataTip)}
+            clickable='true'
+            getContent={ (dataTip) => this.getTooltipContent(dataTip)}
             className='floorplan-tooltip'
           />
         </FloorPlanWrapper>

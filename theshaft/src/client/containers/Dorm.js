@@ -175,6 +175,7 @@ export default class Dorm extends React.PureComponent {
         CONS: ["con1", "con2", "con3"],
         LATITUDE: 0,
         LONGITUDE: 0,
+        LOTTERY_NUMS: [],
         RELATEDDORMS: relatedDorms
       },
       amenities: {
@@ -195,6 +196,7 @@ export default class Dorm extends React.PureComponent {
       dorm_photos: [],
       relatedArticles: [],
       floorPlans: [],
+      floorNames: [],
       relatedDorms : [],
       scrollMenuFixed: false,
       scrollMenuOffset: null,
@@ -217,7 +219,6 @@ export default class Dorm extends React.PureComponent {
     this.fetchFloorPlans(dormName);
     this.fetchRelatedDorms(dormName);
     this.fetchDormPhotos(dormName);
-    //this.fetchDormInfo(dorm_name_map[this.props.match.params.dorm])
     window.scrollTo(0, 0);
   }
 
@@ -271,9 +272,16 @@ export default class Dorm extends React.PureComponent {
       .then(dormInfo => {
         dormInfo[0].PROS = dormInfo[0].PROS.substring(0, dormInfo[0].PROS.length - 1).split(',');
         dormInfo[0].CONS = dormInfo[0].CONS.substring(0, dormInfo[0].CONS.length - 1).split(',');
-        this.setState({dormInfo: dormInfo[0]});
+        let tempLot = dormInfo[0].LOTTERY_NUMS.split(',');
+        let i = 0;
+        for(i = 0; i < tempLot.length; i++){
+          tempLot[i] = tempLot[i].split(':');
+        }
+        dormInfo[0].LOTTERY_NUMS = tempLot;
         document.title = this.state.dormInfo.DORM;
-
+        this.setState({dormInfo: dormInfo[0]},() => {
+          console.log(this.state.dormInfo)
+        });
       });
       
   }
@@ -370,22 +378,24 @@ export default class Dorm extends React.PureComponent {
     })
       .then(res => res.json())
       .then(floorPlans => {
-        var floorPlan = floorPlans[0];
-        var floor_state = []
-        var keys = Object.keys(floorPlan);
+        let floorPlan = floorPlans[0];
+        let floor_state = []
+        let floor_name  = []
+        let keys = Object.keys(floorPlan);
         for (var i = 0; i < keys.length; i++)
         {
           var floorNum = keys[i];
           if (floorPlan[floorNum] == null || keys[i] == "DORM") {
             continue;
-          }
-          //floor_state[floorNum - 1] = "http://localhost:8080/floor_plans/" + floorPlan[floorNum];
+          }          
           floor_state[floorNum -1] = 'https://s3.amazonaws.com/shaft-dorm-floorplans/' + floorPlan[floorNum].replace(/ /g, '+')
+          floor_name[floorNum -1]= floorPlan[floorNum].slice(0, -4).replace("_", " ");
         }
-        return floor_state
-      }).then(thing => {
+        return [floor_state, floor_name]
+      }).then(floor_vals => {
         this.setState({
-          floorPlans: thing
+          floorPlans: floor_vals[0],
+          floorNames: floor_vals[1]
         });
       })
   }
@@ -434,6 +444,8 @@ export default class Dorm extends React.PureComponent {
       </div>
     ));
     const isMobile = this.state.width <= 768;
+    const isMedium = this.state.width <= 1400;
+
     let roomtype = "";
     if (this.state.dormInfo.SUITE.length != 0) {
       roomtype += "Suite-style";
@@ -509,7 +521,7 @@ export default class Dorm extends React.PureComponent {
                 location={this.state.dormInfo.ADDRESS}
                 roomtype={roomtype}
                 classmakeup={this.state.dormInfo.CLASS_MAKEUP}
-                //cutoff={this.state.dormInfo.LOTTERY_NUMS}
+                lottery={this.state.dormInfo.LOTTERY_NUMS}
               />
             )}
             <ScrollerTarget ref={this.amenitiesRef}>
@@ -533,7 +545,7 @@ export default class Dorm extends React.PureComponent {
               </Margin>
             </ScrollerTarget>
 
-            <AdCenter><AdManager name = "shaftleader" mobile = {isMobile}/></AdCenter>
+            <AdCenter><AdManager name = "shaftleader" mobile = {isMedium}/></AdCenter>
 
 
             <ScrollerTarget ref={this.proconRef}>
@@ -550,6 +562,7 @@ export default class Dorm extends React.PureComponent {
                 <FloorPlan
                   floorOffset={0}
                   planArray={this.state.floorPlans}
+                  planNames={this.state.floorNames}
                 />
               </Margin>
             </ScrollerTarget>
@@ -565,7 +578,7 @@ export default class Dorm extends React.PureComponent {
               </Margin>
             </ScrollerTarget>
 
-            <AdCenter><AdManager name = "cds_leaderboard" mobile = {isMobile}/></AdCenter>
+            <AdCenter><AdManager name = "cds_leaderboard" mobile = {isMedium}/></AdCenter>
 
             <ScrollerTarget ref={this.spectrumRef}>
               <Margin>
@@ -590,7 +603,7 @@ export default class Dorm extends React.PureComponent {
                 location={this.state.dormInfo.ADDRESS}
                 roomtype={roomtype}
                 classmakeup={this.state.dormInfo.CLASS_MAKEUP}
-                cutoff={this.state.dormInfo.LOTTERY_NUMS}
+                lottery={this.state.dormInfo.LOTTERY_NUMS}
               />
             </ScrollAAG>
           )}

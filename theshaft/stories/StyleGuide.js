@@ -85,7 +85,7 @@ storiesOf('Style Guide', module)
       <h6>except `shadow` should only be used with the `text-shadow` or `box-shadow` css property:</h6>
       <code>{"text-shadow: ${props => props.theme.shadow};"}</code>
       <h6>which renders as</h6>
-      <code>{"text-shadow: rgba(0, 0, 0, 0.3) 0 0 10px;"}</code>
+      <code>{"text-shadow: 0 0 10px rgba(0, 0, 0, 0.3);"}</code>
       <br/>
       <br/>
       <ClearBG><Black>black</Black></ClearBG>
@@ -93,8 +93,8 @@ storiesOf('Style Guide', module)
       <ClearBG><ColumbiaBlue>columbiaBlue</ColumbiaBlue></ClearBG>
       <BlackBG><White>white on black</White></BlackBG>
       <BarnardBlueBG><White>white on barnardBlue</White></BarnardBlueBG>
-      <ColumbiaBlueBG><WhiteShadowed>white with textShadow on columbiaBlue</WhiteShadowed></ColumbiaBlueBG>
-      <ClearBG><WhiteShadowed>textShadow</WhiteShadowed></ClearBG>
+      <ColumbiaBlueBG><WhiteShadowed>white with shadow on columbiaBlue</WhiteShadowed></ColumbiaBlueBG>
+      <ClearBG><WhiteShadowed>shadow</WhiteShadowed></ClearBG>
       <ClearBG><DarkGray>darkGray</DarkGray></ClearBG>
       <BorderBG><LightGray>lightGray with lightGray border</LightGray></BorderBG>
       <br/>

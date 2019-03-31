@@ -1,0 +1,12 @@
+{
+  "type": "service_account",
+  "project_id": "shaftwhiteboard",
+  "private_key_id": "2e790edd0bf32a79b9825a5bf86ef11387632398",
+  "private_key": "-----BEGIN PRIVATE KEY-----\nMIIEvQIBADANBgkqhkiG9w0BAQEFAASCBKcwggSjAgEAAoIBAQDGYsdTJZcSq5sO\nIiQ8eVkAu5+U/hbeYrPrNQJk+kSPRwty2ORPL0BP29ts6MLOHiIfioCcujHbcOWI\nmMUDwrHmNWKm6dQfy/Pe/+nzj+h5dm60P29J3eynPfcWyfykRBDIkelUHQUG/F02\nVSYoCrH8Az97InOdBNNno52E+4SYS7vgl3j3Q5v+OCSBUnDpiy5EscjHdHatLEu3\nJ28DOFBFhbB4CCJbb6EjxSnWSG/JixQJETrwKAOYdwDVjhxeg0KmYRbPi9qS5bo/\n+QwdyfnQ0VjjXGRGKShTu6r93PgJzBftKfqkR2vS19MuxajkqRP8hogzoCQFTXot\nEOKpHVZnAgMBAAECggEAM/xPejDYATr5wz7cGwK7eW8xFrRsnrLjrcdyzK4uSBNY\nYyyFy2A47JRS0BvAbI3F6Fj9cdRy2yue4mgR/HXI82fa5Z1RilGCItYR4tK7mxSX\nVuFmksc2S+73cD/W1d7GPSDLMVD3b8iyzlmKyaRf1oetW2GARU2t7jMYRHA6Y0PC\n8RoxFcN2/T9jdO2uCzkRXHu5oyfoGeNW5VtipN3GKenwOIV3nwdb9kMzBYqdcQUa\nXURql2exBw0qI6uJuoaMui/8i/XgUAHNZD/wdMlhpqu0+aw8bLjqodGm3puZkmjx\nCuk49i4FL/Tax518hFjtYI9gG53ZBvhZsI7HxAo98QKBgQDvZSfRP/8klRbdD7Yj\nVavh+BuITONmdX1DzzJW7JEIaZceKYQx28kEEEXW4ZLUEXIclnOmH5ID9gzPo+o/\nWuESKhOe6oy8ZoigWdWclTD8LDjdNgJpjbThpddA6nKplACrTqMlLYN7DfZmafc0\nSeX1aCjvizShb29Lexf3U1edVwKBgQDUJW/+xYhLqfBK63aW64Oz4KV0c+Uvdwm7\n3ThrjgMzzKLZ2hlLfTbBAcVZ90V1Q+vtgcOWiB7MWg/1ijDM1QBULRPszvcyxq0O\nAK6rJF4SsqeeYbgg6X37hhCWZ4qmvMXKT1pzee0GeyL1Z2eXBOQkUZ39nvosIwVq\nF58aBoVVcQKBgQCNJ/Uxce3MsUg48tGvxg1CgZwiY0vWl0JUYHDLRlRCRJiBhXNY\nPsMpbTrw+DMublb9ukzY0Fa1lTh6mqk90CVUI5FMK/rt//thqXbGDEZE+wJQlU8Y\n1CCqyLHCqjsP+J/oYsbZ3htfzJzUSHkl0MkSSeeRT2CqK93RAPThtbe8owKBgCmX\nwXJw5fz3r33w1kpWmHa+15GSW1/H9eeYQsSLjkMsns0ZfpYXUZHbuAagfUS1cV8a\nbu9ndqpYCgL4+gJezHa0c9Cc70hMPYeeSKCTO8JstoJN5FzHioSyzzO9zyhLoHe+\nwRwczoTTxZHZmSy5r8UTH2enMKNQpnIbeX0PxDpxAoGAOQIeF7CJB97GUbtYWg8V\n1YGycpoE3DIIuIwGlWjN+6AExqE8JKM24FsxNNhFDH9SdZat8iB3YfQ9qm6+SFl+\nfQ2pVCDQor/n1jT8G3c9lLLGCwBC+KG/4V/gId5fsMP54j0bivnZ6FcN5EnyRaMx\nN8nwadxFF5SPaXyzwqw0C0M=\n-----END PRIVATE KEY-----\n",
+  "client_email": "newshaft@shaftwhiteboard.iam.gserviceaccount.com",
+  "client_id": "101588611495523999578",
+  "auth_uri": "https://accounts.google.com/o/oauth2/auth",
+  "token_uri": "https://oauth2.googleapis.com/token",
+  "auth_provider_x509_cert_url": "https://www.googleapis.com/oauth2/v1/certs",
+  "client_x509_cert_url": "https://www.googleapis.com/robot/v1/metadata/x509/newshaft%40shaftwhiteboard.iam.gserviceaccount.com"
+}
