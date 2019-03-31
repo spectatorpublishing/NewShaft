@@ -80,9 +80,11 @@ export default class WhiteboardTable extends Component {
 
         let i = 0;
         let roomMap = []; 
-        for(i=0; i < this.state.roomAvailability.length; i++){
-            roomMap.push([this.state.roomAvailability[i]["ROOM"], this.state.roomAvailability[i]["NEW_PRIORITY"]+"/"+this.state.roomAvailability[i]["NEW_NUM"]]);
-        }
+        if(this.state.roomAvailability){
+            for(i=0; i < this.state.roomAvailability.length; i++){
+                roomMap.push([this.state.roomAvailability[i]["ROOM"], this.state.roomAvailability[i]["NEW_PRIORITY"]+"/"+this.state.roomAvailability[i]["NEW_NUM"]]);
+            }
+        }           
 
         const AvailabilityMapped = roomMap.map((el, i)=>{
 			if(el[1] && el[1] != "" && el[1] != "0" && el[1] != " "){
