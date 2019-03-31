@@ -86,15 +86,16 @@ export default class ShaftLive extends Component {
                 </ColOne>
 
                 <ColTwo>
+                    <FloorButton 
+                        dorm={this.state.dorm} 
+                        numFloors={this.state.numFloors} 
+                        handleChange={this.handleFloorChange}/>
                     <WhiteboardTable
                         roomAvailability={this.state.floorData} />
                 </ColTwo>
 
                 <ColThree>
-                    <FloorButton 
-                        dorm={this.state.dorm} 
-                        numFloors={this.state.numFloors} 
-                        handleChange={this.handleFloorChange}/>
+                    
                 </ColThree>
 
             </ShaftLiveContainer>
