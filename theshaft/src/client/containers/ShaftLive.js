@@ -36,7 +36,7 @@ export default class ShaftLive extends Component {
 
         this.state = {
             dorm: null,
-            numFloors: this.state.numFloors,
+            floorNums: this.state.floorNums,
             floorData: null
         }
 
@@ -65,7 +65,7 @@ export default class ShaftLive extends Component {
             })
             .then(res => res.json())
             .then(floorNum => {
-                this.setState({numFloors: floorNum})
+                this.setState({floorNums: floorNum})
             });
     }
 
@@ -88,7 +88,7 @@ export default class ShaftLive extends Component {
                 <ColTwo>
                     <FloorButton 
                         dorm={this.state.dorm} 
-                        numFloors={this.state.numFloors} 
+                        floorNums={this.state.floorNums} 
                         handleChange={this.handleFloorChange}/>
                     <WhiteboardTable
                         roomAvailability={this.state.floorData} />
