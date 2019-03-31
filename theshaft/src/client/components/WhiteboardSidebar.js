@@ -1,17 +1,23 @@
 import React, { Component } from "react";
 import styled from 'styled-components';
 
+
 let Sidebar = styled.div`
-    width: 20%;
     height: 100%;
+    display: flex;
+    flex-wrap: wrap;
 `
 
-let DormList = styled.div`
-    display: flex;
+let DormListDesktop = styled.div`
     flex-direction: column;
     text-align: left;
+    width: 20%;
 `
-
+let DormListMobile = styled.div`
+    flex-direction: row;
+    text-align: left;
+    
+`
 let Dorm = styled.button`
     padding: .5em;
     background-color: #FFFFFF;
@@ -27,31 +33,72 @@ let Dorm = styled.button`
     }
 `
 
-export default class WhiteboardSidebar extends React.PureComponent {
+export default class WhiteboardSidebar extends React.Component {
+    constructor(props) {
+        super(props);
+        this.state = {
+            width: window.innerWidth,
+        }
+    }
 
     onClick(dorm) {
         console.log(dorm)
         this.props.sidebarModification(dorm)
     }
 
+    componentWillMount() {
+        window.addEventListener("resize", this.handleWindowSizeChange);
+      }
+    
+      componentWillUnmount() {
+        window.removeEventListener("resize", this.handleWindowSizeChange);
+      }
+    
+      handleWindowSizeChange = () => {
+        this.setState({ width: window.innerWidth });
+      }
+
     render() {
-        const dormArray = ['47 Claremont', 'Broadway Hall', 'Carman Hall', 'East Campus', 'Furnald Hall', 'Harmony Hall',
-                       'Hartley Hall', 'Hogan Hall', 'John Jay Hall', 'McBain Hall', 'NUSSBAUM', 'RIVER', 'RUGGLES', 
-                       'SCHAPIRO', 'SYMPOSIUM', 'WALLACH', 'WATT', 'WIEN', 'WOODBRIDGE']
-        return (
-            <div>
+
+        const dormArray = ['47 CLAREMONT', 'BROADWAY', 'CARMAN', 'EAST CAMPUS', 'FURNALD', 'HARMONY',
+                       'HARTLEY', 'HOGAN', 'JOHN JAY', 'MCBAIN', 'NUSSBAUM', 'RIVER', 'RUGGLES', 
+                       'SCHAPIRO', 'SYMPOSIUM', 'WALLACH', 'WATT', 'WIEN', 'WOODBRIDGE'];
+        const { width } = this.state;
+        const isMobile = width <= 700;
+
+        if (isMobile) {
+            return (
                 <Sidebar>
-                    <DormList>
+                    <DormListMobile>
                         { 
-                            dormArray.map((dorm) =>
-                                (<Dorm onClick = {() => this.onClick(dorm)}> 
+                                dormArray.map((dorm) =>
+                                    (<Dorm onClick = {() => this.onClick(dorm)}> 
                                     {dorm}
                                 </Dorm>)
-                            )
-                        }
-                    </DormList>
+                                )
+                        } 
+                        
+
+                    </DormListMobile>
                 </Sidebar>
-            </div>
-        )
+            );
+        }
+        else {
+            return (
+                <div>
+                    <Sidebar>
+                        <DormListDesktop>
+                            { 
+                                dormArray.map((dorm) =>
+                                    (<Dorm onClick = {() => this.onClick(dorm)}> 
+                                    {dorm}
+                                </Dorm>)
+                                )
+                            }
+                        </DormListDesktop>
+                     </Sidebar>
+                </div>
+             )
+        }
     }
 }

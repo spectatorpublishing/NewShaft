@@ -43,6 +43,7 @@ storiesOf('TestSVG', module)
   .add('TestSVG', () => 
     <TestSVG dorm="Carman Hall"/>
   );
+// import WhiteboardSidebar from "../src/client/components/WhiteboardSidebar.js";
 
 storiesOf('SpectrumSidebar', module)
   .add('SpectrumSidebar', () =>
