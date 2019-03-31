@@ -47,7 +47,7 @@ export default class FloorButton extends Component{
     }
 
     render(){
-        console.log("Current Floor: " + this.state.currentFloor)
+        console.log("Current Floor: " + this.state.currentFloorIndex)
         let buttons = []
         if (this.state.floorNums){
             buttons = this.state.floorNums.map((floor, idx) => {
@@ -62,7 +62,7 @@ export default class FloorButton extends Component{
                                 headers: {
                                     'Content-Type': 'application/json'
                                 },
-                                body: JSON.stringify({DORM: this.state.dorm, FLOOR: this.state.currentFloor})
+                                body: JSON.stringify({DORM: this.state.dorm, FLOOR: this.state.floorNums[this.state.currentFloorIndex]})
                                 }).then(res => res.json())
                                 .then(response => {console.log(respones); this.state.handleChange(response)}
                             ); 

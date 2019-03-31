@@ -36,7 +36,7 @@ export default class ShaftLive extends Component {
 
         this.state = {
             dorm: "47 Claremont",
-            floorNums: this.state.floorNums,
+            floorNums: null,
             floorData: null
         }
 
