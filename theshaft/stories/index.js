@@ -29,6 +29,7 @@ import { ReactComponent as SymposiumSVG } from "../src/client/assets/test_floorp
 import SlidingReview from "../src/client/components/SlidingReview.js";
 import SpectrumSidebar from "../src/client/components/SpectrumSidebar.js";
 import AdManager from "../src/client/components/AdManager";
+import WhiteboardSidebar from "../src/client/components/WhiteboardSidebar.js";
 import TestSVG from "../src/client/components/TestSVGs.js";
 import FloorButton from "../src/client/components/FloorButton.js";
 
@@ -63,6 +64,8 @@ storiesOf('SpectrumSidebar', module)
 
 // storiesOf('ReviewSlider', module)
 //   .add('test', () => <ReviewSlider />);
+storiesOf('Sidebar', module)
+  .add('whiteboard', () => <WhiteboardSidebar sidebarModification={(dorm) => console.log(dorm)}/>)
 
 storiesOf('Button', module)
   .add('with text', () => <Button>Hello Button</Button>)
