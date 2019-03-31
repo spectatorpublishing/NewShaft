@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import styled from 'styled-components';
 import { ReactComponent as ClaremontSVG } from "../assets/47 Claremont 1.svg";
 import ReactTooltip from 'react-tooltip';
+import "../css/FloorPlanSVG.css";
 
 let FloorPlanWrapper = styled.div`
   & rect {
@@ -11,11 +12,13 @@ let FloorPlanWrapper = styled.div`
 `
 
 let TooltipBox = styled.div`
-  color: white;
+  color: ${props => props.theme.white};
+  text-shadow: ${props => props.theme.shadow};
 `
 
 let TooltipText = styled.p`
-  color: white;
+  color: ${props => props.theme.white};
+  text-shadow: ${props => props.theme.shadow};
 `
 
 let data = [
@@ -181,7 +184,9 @@ export default class FloorPlanSVG extends Component {
           <ReactTooltip 
             id='global' 
             aria-haspopup='true' 
+            delayHide={100000} 
             getContent={(dataTip) => this.getTooltipContent(dataTip)}
+            className='floorplan-tooltip'
           />
         </FloorPlanWrapper>
     );
