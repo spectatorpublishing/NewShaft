@@ -2,6 +2,7 @@ import React from 'react'
 import { Switch, Redirect, Route } from 'react-router-dom'
 import Explore from './containers/Explore';
 import Dorm from './containers/Dorm';
+import ShaftLive from './containers/ShaftLive';
 import NavBar from './components/NavBar.js';
 import { ThemeProvider } from "styled-components";
 import { GlobalStyles, theme } from "./util/GlobalStyles";
@@ -26,7 +27,7 @@ const menuItems = [
     "name": "Shaft Live",
     "link": "/shaftlive",
     "external": false,
-    "disabled": true,
+    "disabled": false,
   },
   {
     "name": "Housing 101",
@@ -52,6 +53,7 @@ const App = () => (
         <Route exact path="/" render={() => (<Redirect from='/' to='/explore'/>)}/>
         <Route exact path="/explore" component={Explore} />
         <Route path="/explore/:dorm" component={Dorm} />
+        <Route exact path="/shaftlive" component={ShaftLive} />        
       </Switch>
     </main>
   </ThemeProvider>

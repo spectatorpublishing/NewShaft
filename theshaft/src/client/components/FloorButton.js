@@ -35,6 +35,17 @@ export default class FloorButton extends Component{
         }
     }
 
+    componentDidUpdate(oldProps){
+        if(oldProps != this.props){
+            this.setState({
+                dorm: this.props.dorm,
+                floorNums : this.props.floorNums,
+                handleChange: this.props.handleChange,
+                currentFloorIndex: 0
+            })
+        }
+    }
+
     render(){
         console.log("Current Floor: " + this.state.currentFloor)
         let buttons = []

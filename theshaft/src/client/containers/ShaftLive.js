@@ -35,7 +35,7 @@ export default class ShaftLive extends Component {
         super(props);
 
         this.state = {
-            dorm: null,
+            dorm: "47 Claremont",
             floorNums: this.state.floorNums,
             floorData: null
         }
@@ -46,14 +46,13 @@ export default class ShaftLive extends Component {
 
     componentDidMount(){
         document.title = "Shaft Live";
-        //this.fetch____();  --> need to fetch data
+        this.fetchFloorButtonData(this.state.dorm)
     }
 
     fetchFloorButtonData(dormName){
         // this should fetch data for the FloorButtons
 
         // dormName is being supplied by Matt's sidebar.
-        const dormName = //somehwere far far away
         fetch('/api/getUniqueFloorNumbers', {
             method: 'POST',
             headers: {
