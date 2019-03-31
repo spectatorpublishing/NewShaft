@@ -9,7 +9,7 @@ import ProCon from '../src/client/components/ProCon.js';
 import QuickReview from '../src/client/components/QuickReview.js';
 import Review from '../src/client/components/Review.js';
 import FloorPlan from '../src/client/components/FloorPlan.js';
-// import sampleFloor from '../src/client/assets/floor_plans/47 Claremont 1.jpg';
+import sampleFloor from '../src/client/assets/floor_plans/47 Claremont 1.jpg';
 import FilterButton from '../src/client/components/FilterButton.js';
 import FilterComponent from '../src/client/components/FilterComponent.js';
 import Expander from '../src/client/components/Expander.js';
@@ -29,9 +29,21 @@ import { ReactComponent as SymposiumSVG } from "../src/client/assets/test_floorp
 // import ReviewSlider from "../src/client/components/ReviewSlider.js";
 import SlidingReview from "../src/client/components/SlidingReview.js";
 import SpectrumSidebar from "../src/client/components/SpectrumSidebar.js";
-// import AdManager from "../src/client/components/AdManager";
 import RoomAvailability from '../src/client/components/RoomAvailability.js';
 import WhiteboardTable from '../src/client/components/WhiteboardTable.js';
+import AdManager from "../src/client/components/AdManager";
+import WhiteboardSidebar from "../src/client/components/WhiteboardSidebar.js";
+import TestSVG from "../src/client/components/TestSVGs.js";
+import FloorButton from "../src/client/components/FloorButton.js";
+
+storiesOf('FloorButton', module)
+  .add('FloorButton', () =>
+    <FloorButton dorm="Carman Hall" numFloors={10} />)
+
+storiesOf('TestSVG', module)
+  .add('TestSVG', () => 
+    <TestSVG dorm="Carman Hall"/>
+  );
 
 storiesOf('SpectrumSidebar', module)
   .add('SpectrumSidebar', () =>
@@ -55,6 +67,8 @@ storiesOf('SpectrumSidebar', module)
 
 // storiesOf('ReviewSlider', module)
 //   .add('test', () => <ReviewSlider />);
+storiesOf('Sidebar', module)
+  .add('whiteboard', () => <WhiteboardSidebar sidebarModification={(dorm) => console.log(dorm)}/>)
 
 storiesOf('Button', module)
   .add('with text', () => <Button>Hello Button</Button>)

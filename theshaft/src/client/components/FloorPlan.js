@@ -156,14 +156,14 @@ export default class FloorPlan extends React.PureComponent {
     selectFloor(floorNumber) {
         this.setState({
             currentFloor: floorNumber + this.state.floorOffset,
-            currentPlan: this.state.planArray[floorNumber]
+            currentPlan: this.props.planArray[floorNumber]
         })
 
     }
 
     floorUp() {
         let tmp = this.state.currentFloor;
-        const maxFloor = this.state.planArray.length - 1 + this.state.floorOffset;
+        const maxFloor = this.props.planArray.length - 1 + this.state.floorOffset;
         if(tmp >= maxFloor) {
             this.setState({
                 currentFloor: this.props.floorOffset + 1,
@@ -174,7 +174,7 @@ export default class FloorPlan extends React.PureComponent {
             const floorIndex = floorNumber - this.state.floorOffset
             this.setState({
                 currentFloor: floorNumber,
-                currentPlan: this.state.planArray[floorIndex]
+                currentPlan: this.props.planArray[floorIndex]
             })
         }
     }
@@ -184,15 +184,15 @@ export default class FloorPlan extends React.PureComponent {
         const minFloor = this.state.floorOffset;
         if(tmp <= minFloor) {
             this.setState({
-                currentFloor: this.state.planArray.length - 1 + this.state.floorOffset,
-                currentPlan: this.props.planArray[this.state.planArray.length-1]
+                currentFloor: this.props.planArray.length - 1 + this.state.floorOffset,
+                currentPlan: this.props.planArray[this.props.planArray.length-1]
             })
         } else {
             const floorNumber = this.state.currentFloor - 1
             const floorIndex = floorNumber - this.state.floorOffset
             this.setState({
                 currentFloor: floorNumber,
-                currentPlan: this.state.planArray[floorIndex]
+                currentPlan: this.props.planArray[floorIndex]
             })
         }
     }
@@ -210,7 +210,7 @@ export default class FloorPlan extends React.PureComponent {
                         <PlanDisplayMobile>
                             <CurrentPlanMobile src={this.state.currentPlan} />
                             <FloorPlanNavMobile>
-                                <FloorNumberMobile> Floor {this.state.currentFloor} </FloorNumberMobile>
+                                <FloorNumberMobile> {this.props.planNames[this.state.currentFloor -1]}</FloorNumberMobile>
                                 <FloorListMobile>
                                     <FloorButton onClick = {() => this.floorDown()}><FloorArrow>&#8249;</FloorArrow></FloorButton>
                                     <FloorButton onClick = {() => this.floorUp()} ><FloorArrow>&#8250;</FloorArrow></FloorButton>
@@ -263,7 +263,7 @@ export default class FloorPlan extends React.PureComponent {
                             { 
                                   this.props.planArray.map((floor, i) =>
                                     (<FloorButton key = {i} active = {this.state.currentFloor === i+1} onClick = {() => this.selectFloor(i)}> 
-                                    <FloorButtonNumber>Floor {i + this.state.floorOffset}</FloorButtonNumber>
+                                    <FloorButtonNumber>{this.props.planNames[i + this.state.floorOffset -1]}</FloorButtonNumber>
                                      </FloorButton>)
                                 )
                             }

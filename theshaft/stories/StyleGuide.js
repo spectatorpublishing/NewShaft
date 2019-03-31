@@ -44,7 +44,7 @@ let White = styled.h3`
 `
 
 let WhiteShadowed = styled(White)`
-  ${props => props.theme.textShadow}
+  text-shadow: ${props => props.theme.shadow};
 `
 
 let DarkGray = styled.h3`
@@ -82,10 +82,10 @@ storiesOf('Style Guide', module)
       <code>{"color: #62A8E5;"}</code>
       <br/>
       <br/>
-      <h6>except `textShadow` should only be used with the `text-shadow` css property:</h6>
-      <code>{"text-shadow: ${props => props.theme.textShadow};"}</code>
+      <h6>except `shadow` should only be used with the `text-shadow` or `box-shadow` css property:</h6>
+      <code>{"text-shadow: ${props => props.theme.shadow};"}</code>
       <h6>which renders as</h6>
-      <code>{"text-shadow: rgba(0, 0, 0, 0.3) 0 0 10px;"}</code>
+      <code>{"text-shadow: 0 0 10px rgba(0, 0, 0, 0.3);"}</code>
       <br/>
       <br/>
       <ClearBG><Black>black</Black></ClearBG>
@@ -93,8 +93,8 @@ storiesOf('Style Guide', module)
       <ClearBG><ColumbiaBlue>columbiaBlue</ColumbiaBlue></ClearBG>
       <BlackBG><White>white on black</White></BlackBG>
       <BarnardBlueBG><White>white on barnardBlue</White></BarnardBlueBG>
-      <ColumbiaBlueBG><WhiteShadowed>white with textShadow on columbiaBlue</WhiteShadowed></ColumbiaBlueBG>
-      <ClearBG><WhiteShadowed>textShadow</WhiteShadowed></ClearBG>
+      <ColumbiaBlueBG><WhiteShadowed>white with shadow on columbiaBlue</WhiteShadowed></ColumbiaBlueBG>
+      <ClearBG><WhiteShadowed>shadow</WhiteShadowed></ClearBG>
       <ClearBG><DarkGray>darkGray</DarkGray></ClearBG>
       <BorderBG><LightGray>lightGray with lightGray border</LightGray></BorderBG>
       <br/>
@@ -151,7 +151,7 @@ storiesOf('Style Guide', module)
       <br/>
       <code>{`
       let WhiteShadowed = styled(White)\`
-      ${props => props.theme.textShadow}
+      text-shadow: ${props => props.theme.shadow};
       \`
       `}</code>
       <br/>
