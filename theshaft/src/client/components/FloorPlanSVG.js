@@ -61,7 +61,8 @@ export default class FloorPlanSVG extends Component {
     let id = this.props.name.replace(/\ /g, "-");
     // Generate AWS url
     let url = this.props.name.replace(/\ /g, "+");
-    url = "https://s3.amazonaws.com/shaft-dorm-floorplans/" + url + ".jpg";
+    //url = "https://s3.amazonaws.com/shaft-dorm-floorplans/" + url + ".jpg";
+    url = "https://s3.amazonaws.com/shaft-svg/"+ url +."svg"
 
     this.state = {
       floorplanId: id,
