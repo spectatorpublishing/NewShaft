@@ -2,8 +2,13 @@ import React, { Component } from "react";
 import styled from 'styled-components';
 
 let NumberBlue = styled.button`
+<<<<<<< HEAD
     width: 2.5rem;
     height: 2.5rem;
+=======
+    width: auto;
+    height: 25px;
+>>>>>>> 8cf08f9aa8270987cca7dcae69fac5068a5ed39a
     border: 1px ${props => props.theme.columbiaBlue} solid;
     border-radius: 3px;
     color: ${props => props.theme.white};
@@ -11,8 +16,13 @@ let NumberBlue = styled.button`
     text-align: center;
 `
 let NumberBlack = styled.button`
+<<<<<<< HEAD
     width: 2.5rem;
     height: 2.5rem;
+=======
+    width: auto;
+    height: 25px;
+>>>>>>> 8cf08f9aa8270987cca7dcae69fac5068a5ed39a
     border: 1px ${props => props.theme.columbiaBlue} solid;
     border-radius: 3px;
     background-color: white;
@@ -35,30 +45,19 @@ export default class FloorButton extends Component{
         super(props)
 
         this.state = {
-            dorm: this.props.dorm,
             floorNums : this.props.floorNums,
             handleChange: this.props.handleChange,
-            currentFloorIndex: 0 
+            currentFloorIndex: -1 
         }
     }
-
-    // componentDidMount(){
-    //     fetch('/api/getLotteryNum', {
-    //         method: 'POST',
-    //         headers: {
-    //             'Content-Type': 'application/json'
-    //         },
-    //         body: JSON.stringify({DORM: this.state.dorm, FLOOR: this.state.floorNums[0]})
-    //         }).then(res => res.json())
-    //         .then(response => {console.log(response); this.state.handleChange(response)}
-    //     ); 
-    // }
-
+    
     componentDidUpdate(oldProps){
-        if(oldProps != this.props){
+        if(JSON.stringify(oldProps) != JSON.stringify(this.props)){
+            console.log("old: " + JSON.stringify(oldProps))
+            console.log("new: " + JSON.stringify(this.props))
             this.setState({
-                dorm: this.props.dorm,
-                floorNums : this.props.floorNums
+                floorNums : this.props.floorNums,
+                currentFloorIndex : -1
             })
         }
     }
@@ -70,38 +69,25 @@ export default class FloorButton extends Component{
                 let floorNum = floor["FLOOR"]
                 if(idx == this.state.currentFloorIndex){
                     return <NumberBlue onClick={() => {
-                       
-                        fetch('/api/getLotteryNum', {
-                            method: 'POST',
-                            headers: {
-                                'Content-Type': 'application/json'
-                            },
-                            body: JSON.stringify({DORM: this.state.dorm, FLOOR: floorNum})
-                            }).then(res => res.json())
-                            .then(response => {console.log(response); this.state.handleChange(response)}
-                        ); 
-                    }
-
-                    }>{floorNum}</NumberBlue>
+                        this.state.handleChange(floorNum)
+                    }}>{floorNum}</NumberBlue>
                 }
                 else{
                     return <NumberBlack onClick={() => {
-                        this.setState({currentFloorIndex: idx}, () => {
-                            fetch('/api/getLotteryNum', {
-                                method: 'POST',
-                                headers: {
-                                    'Content-Type': 'application/json'
-                                },
-                                body: JSON.stringify({DORM: this.state.dorm, FLOOR: floorNum})
-                                }).then(res => res.json())
-                                .then(response => {console.log(response); this.state.handleChange(response)}
-                            ); 
-                        })
-                            
+                        this.setState({currentFloorIndex : idx})
+                        this.state.handleChange(floorNum)
                     }}>{floorNum}</NumberBlack>
                 }
             })
+
+            if(this.state.currentFloorIndex == -1){
+                console.log("initializing")
+                this.state.handleChange(this.state.floorNums[0]["FLOOR"])
+                this.setState({currentFloorIndex : 0})
+                
+            }
         }
+<<<<<<< HEAD
             
         return(
             <div>
@@ -109,5 +95,9 @@ export default class FloorButton extends Component{
                 <Buttons>{buttons}</Buttons>
             </div>
         )
+=======
+
+        return <Buttons>{buttons}</Buttons>
+>>>>>>> 8cf08f9aa8270987cca7dcae69fac5068a5ed39a
     }
 }
