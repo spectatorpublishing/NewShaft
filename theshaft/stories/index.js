@@ -9,6 +9,7 @@ import ProCon from '../src/client/components/ProCon.js';
 import QuickReview from '../src/client/components/QuickReview.js';
 import Review from '../src/client/components/Review.js';
 import FloorPlan from '../src/client/components/FloorPlan.js';
+// import sampleFloor from '../src/client/assets/floor_plans/47 Claremont 1.jpg';
 import FilterButton from '../src/client/components/FilterButton.js';
 import FilterComponent from '../src/client/components/FilterComponent.js';
 import Expander from '../src/client/components/Expander.js';
@@ -36,12 +37,13 @@ import FloorButton from "../src/client/components/FloorButton.js";
 
 storiesOf('FloorButton', module)
   .add('FloorButton', () =>
-    <FloorButton dorm="Carman Hall" numFloors={10} />)
+    <FloorButton dorm="Carman Hall" floorNums={[10]} />)
 
 storiesOf('TestSVG', module)
   .add('TestSVG', () => 
     <TestSVG dorm="Carman Hall"/>
   );
+// import WhiteboardSidebar from "../src/client/components/WhiteboardSidebar.js";
 
 storiesOf('SpectrumSidebar', module)
   .add('SpectrumSidebar', () =>
@@ -88,6 +90,8 @@ storiesOf('PhotoBanner', module)
   .add('for dorm pages', () =>
         <PhotoBanner bannerImages = {bannerImages}></PhotoBanner>);
 
+storiesOf('WhiteboardTable', module)
+  .add('Whiteboard Table', () => <WhiteboardTable roomAvailability={sampleRoomData}/>)
 
 storiesOf('DormButton', module)
   .add('dorm button', () => <DormButton name="ADI House" address="21 Savage St." sundial_distance="12 minutes" description="It's lit"/>);
@@ -277,38 +281,38 @@ storiesOf('FloorPlanSVG', module)
   let sampleRoomData = [
     {
       "ROOM": "101",
-      "PRIORITY": "30",
-      "LOTTERY": "3000"
+      "NEW_PRIORITY": "30",
+      "NEW_NUM": "3000"
     },
     {
       "ROOM": "102",
-      "PRIORITY": "20",
-      "LOTTERY": "2050"
+      "NEW_PRIORITY": "20",
+      "NEW_NUM": "2050"
     },
     {
       "ROOM": "103",
-      "PRIORITY": "30",
-      "LOTTERY": "1010"
+      "NEW_PRIORITY": "30",
+      "NEW_NUM": "1010"
     },
     {
       "ROOM": "104",
-      "PRIORITY": "10",
-      "LOTTERY": "2510"
+      "NEW_PRIORITY": "10",
+      "NEW_NUM": "2510"
     },
     {
       "ROOM": "105",
-      "PRIORITY": "20",
-      "LOTTERY": "1450"
+      "NEW_PRIORITY": "20",
+      "NEW_NUM": "1450"
     },
     {
       "ROOM": "106",
-      "PRIORITY": "30",
-      "LOTTERY": "900"
+      "NEW_PRIORITY": "30",
+      "NEW_NUM": "900"
     },
     {
       "ROOM": "107",
-      "PRIORITY": "10",
-      "LOTTERY": "1200"
+      "NEW_PRIORITY": "10",
+      "NEW_NUM": "1200"
     }
   ]
 

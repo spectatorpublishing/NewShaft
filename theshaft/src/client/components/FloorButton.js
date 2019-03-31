@@ -29,34 +29,73 @@ export default class FloorButton extends Component{
 
         this.state = {
             dorm: this.props.dorm,
-            numFloors : this.props.numFloors,
+            floorNums : this.props.floorNums,
             handleChange: this.props.handleChange,
-            currentFloor: 1
+            currentFloorIndex: 0 
+        }
+    }
+
+    // componentDidMount(){
+    //     fetch('/api/getLotteryNum', {
+    //         method: 'POST',
+    //         headers: {
+    //             'Content-Type': 'application/json'
+    //         },
+    //         body: JSON.stringify({DORM: this.state.dorm, FLOOR: this.state.floorNums[0]})
+    //         }).then(res => res.json())
+    //         .then(response => {console.log(response); this.state.handleChange(response)}
+    //     ); 
+    // }
+
+    componentDidUpdate(oldProps){
+        if(oldProps != this.props){
+            this.setState({
+                dorm: this.props.dorm,
+                floorNums : this.props.floorNums
+            })
         }
     }
 
     render(){
-        console.log("Current Floor: " + this.state.currentFloor)
         let buttons = []
-        for(let i = 1; i < this.state.numFloors + 1; i++){
-            if(i == this.state.currentFloor){
-                buttons.push(<NumberBlue>{i}</NumberBlue>)
-            }
-            else{
-                buttons.push(<NumberBlack onClick={() => {
-                    this.setState({currentFloor: i})
-                    fetch('/api/getWhiteboardRooms', {
-                        method: 'POST',
-                        headers: {
-                            'Content-Type': 'application/json'
-                        },
-                        body: JSON.stringify({dorm: this.state.dorm, floor: this.state.currentFloor})
-                        }).then(res => res.json())
-                        .then(response => {this.state.handleChange(response)}
-                    );      
-                }}>{i}</NumberBlack>)
-            }
+        if (this.state.floorNums){
+            buttons = this.state.floorNums.map((floor, idx) => {
+                let floorNum = floor["FLOOR"]
+                if(idx == this.state.currentFloorIndex){
+                    return <NumberBlue onClick={() => {
+                       
+                        fetch('/api/getLotteryNum', {
+                            method: 'POST',
+                            headers: {
+                                'Content-Type': 'application/json'
+                            },
+                            body: JSON.stringify({DORM: this.state.dorm, FLOOR: floorNum})
+                            }).then(res => res.json())
+                            .then(response => {console.log(response); this.state.handleChange(response)}
+                        ); 
+                    }
+
+                    }>{floorNum}</NumberBlue>
+                }
+                else{
+                    return <NumberBlack onClick={() => {
+                        this.setState({currentFloorIndex: idx}, () => {
+                            fetch('/api/getLotteryNum', {
+                                method: 'POST',
+                                headers: {
+                                    'Content-Type': 'application/json'
+                                },
+                                body: JSON.stringify({DORM: this.state.dorm, FLOOR: floorNum})
+                                }).then(res => res.json())
+                                .then(response => {console.log(response); this.state.handleChange(response)}
+                            ); 
+                        })
+                            
+                    }}>{floorNum}</NumberBlack>
+                }
+            })
         }
+            
         return <Buttons>{buttons}</Buttons>
     }
 }

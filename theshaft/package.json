@@ -36,6 +36,7 @@
     "mysqldump": "^2.2.1",
     "npm": "^6.4.1",
     "react": "^16.5.2",
+    "react-bootstrap": "^1.0.0-beta.6",
     "react-dfp": "^0.10.3",
     "react-dom": "^16.5.2",
     "react-ga": "^2.5.7",
