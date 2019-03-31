@@ -16,9 +16,10 @@ var getReviews = require('./routes/getReviews');
 var getRelatedArticles = require('./routes/getRelatedArticles');
 var getFloorPlans = require('./routes/getFloorPlans');
 var getDormPhotos = require('./routes/getDormPhotos');
-var getRelatedDorms = require('./routes/getRelatedDorms.js')
-var getFloorPlanSVGs = require('./routes/getFloorPlanSVGs.js')
-var getUniqueFloorNumbers = require('./routes/getUniqueFloorNumbers.js')
+var getRelatedDorms = require('./routes/getRelatedDorms.js');
+var getLotteryNum = require('./routes/getLotteryNum.js');
+var getFloorPlanSVGs = require('./routes/getFloorPlanSVGs.js');
+var getUniqueFloorNumbers = require('./routes/getUniqueFloorNumbers.js');
 
 app.use(bodyParser.json())
 app.use(express.static('dist'));
@@ -32,9 +33,10 @@ app.use('/api/getExploreInfo', (req, res) => getExploreInfo(req,res));
 app.use('/api/getRelatedArticles', (req, res) => getRelatedArticles(req,res));
 app.use('/api/getFloorPlans', (req,res) => getFloorPlans(req,res));
 app.use('/api/getDormPhotos', (req,res) => getDormPhotos(req,res));
-app.use('/api/getRelatedDorms', (req, res) => getRelatedDorms(req, res))
-app.use('/api/getFloorPlanSVGs', (req, res) => getFloorPlanSVGs(req, res))
-app.use('/api/getUniqueFloorNumbers', (req, res) => getUniqueFloorNumbers(req, res))
+app.use('/api/getRelatedDorms', (req, res) => getRelatedDorms(req, res));
+app.use('/api/getLotteryNum', (req, res) => getLotteryNum(req, res));
+app.use('/api/getFloorPlanSVGs', (req, res) => getFloorPlanSVGs(req, res));
+app.use('/api/getUniqueFloorNumbers', (req, res) => getUniqueFloorNumbers(req, res));
 
 
 var server = app.listen(8080, () => {
