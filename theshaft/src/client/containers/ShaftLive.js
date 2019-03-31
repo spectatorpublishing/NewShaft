@@ -64,8 +64,8 @@ export default class ShaftLive extends Component {
             })
             })
             .then(res => res.json())
-            .then(floorNum => {
-                this.setState({floorNums: floorNum})
+            .then(floorNums => {
+                this.setState({floorNums: floorNums})
             });
     }
 
