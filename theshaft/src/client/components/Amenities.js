@@ -45,6 +45,7 @@ let AmenityIcon = styled.img`
   opacity: 0.5;
   height: 20px;
   margin-right: 10px;
+  width: 20px;
 `
 
 let AllAmenities = styled.div`
