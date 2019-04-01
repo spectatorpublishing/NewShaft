@@ -72,6 +72,6 @@ export const MAPPING = {
     single: "Single"
   },
   Woodbridge: {
-    "apartment-1br": "20/110"
+    "apartment-1br": "Medium Demand (all others)"
   }
 };
