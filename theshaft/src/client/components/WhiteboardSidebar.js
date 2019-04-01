@@ -26,6 +26,16 @@ let DormListDesktop = styled.div`
     justify-content:column;
     flex-direction: column;
 `
+
+let DormListMobile = styled.div`
+    &>select{
+        border-radius: 10px;
+        background: ${props => props.theme.white};
+        border: 1px solid ${props => props.theme.lightGray};
+        padding: 4px;
+    }
+`
+
 let Dorm = styled.button`
     padding: .5em;
     background-color: #FFFFFF;
@@ -47,6 +57,7 @@ export default class WhiteboardSidebar extends React.Component {
         this.state = {
             width: window.innerWidth,
         }
+        this.onClick = this.onClick.bind(this)
     }
 
     onClick(dorm) {
@@ -76,20 +87,21 @@ export default class WhiteboardSidebar extends React.Component {
 
         if (isMobile) {
             return (
-                <Sidebar>
+                    <div>
                     <SidebarTitle>Dorms</SidebarTitle>
-                    <DormList>
+                    <DormListMobile>
+                        <select value={this.props.currDorm} onChange={e => this.onClick(e.target.value)}>
                         { 
                                 dormArray.map((dorm) =>
-                                    (<Dorm onClick = {() => this.onClick(dorm)}> 
+                                    (<option value={dorm}> 
                                     {dorm}
-                                </Dorm>)
+                                    </option>)
                                 )
                         } 
-                        
+                        </select>
 
-                    </DormList>
-                </Sidebar>
+                    </DormListMobile>
+                    </div>
             );
         }
         else {

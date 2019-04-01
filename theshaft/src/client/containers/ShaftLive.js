@@ -158,6 +158,7 @@ export default class ShaftLive extends Component {
             width: window.innerWidth,
             // numFloors: this.state.numFloors,
             //handleChange: null, //not sure what to type this as
+            mobileShowFloorPlan: false
         }
 
         this.handleFloorChange = this.handleFloorChange.bind(this)
@@ -220,16 +221,31 @@ export default class ShaftLive extends Component {
         this.setState({dorm : dorm}, () => {this.fetchFloorNums(this.state.dorm)})
     }
 
+    toggle
+
     render() {
       const { width } = this.state;
       const isMobile = width <= 700;
 
       if (isMobile) {
           return (
-              <ShaftLiveContainerMobile>
-                  <WhiteboardSidebar sidebarModification={(dorm) => console.log(dorm)}></WhiteboardSidebar>
-                  <WhiteboardTable roomAvailability={sampleRoomData}></WhiteboardTable>
-              </ShaftLiveContainerMobile>
+            <div>
+                <ShaftLiveContainerMobile>
+                <WhiteboardSidebar
+                        sidebarModification={this.handleDormChange}
+                        currDorm = {this.state.dorm}
+                />
+                <FloorButton 
+                        floorNums={this.state.floorNums} 
+                        handleChange={this.handleFloorChange}/>
+                
+                { this.state.mobileShowFloorPlan
+                    ? <FloorPlanSVG name="River 6" data={floorplanData} cutoffs={[]}/>
+                    : <WhiteboardTable
+                    roomAvailability={this.state.floorData} />
+                }
+                </ShaftLiveContainerMobile>
+            </div>
           );
       }else{
         return(
@@ -255,8 +271,6 @@ export default class ShaftLive extends Component {
                     </SVGContainer>
                 </ColThree>)}
             </ShaftLiveContainer>
-
-            { width <= 991 && (<FloorPlanSVG name="River 6" data={floorplanData} cutoffs={[]}/>)}
 
             </div>
 
