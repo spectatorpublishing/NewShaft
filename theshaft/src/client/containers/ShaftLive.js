@@ -152,9 +152,11 @@ export default class ShaftLive extends Component {
         super(props);
 
         this.state = {
-            dorm: "47 Claremont",
+            dorm: "Broadway Hall",
+            floor: "3",
             floorNums: null,
-            floorData: null,
+            floorData: []
+            ,
             width: window.innerWidth,
             // numFloors: this.state.numFloors,
             //handleChange: null, //not sure what to type this as
@@ -209,7 +211,7 @@ export default class ShaftLive extends Component {
             },
             body: JSON.stringify({DORM: dorm, FLOOR: floor})
             }).then(res => res.json())
-            .then(response => {console.log(response); this.setState({floorData : response})}
+            .then(response => {console.log(response); this.setState({floor: floor, floorData : response})}
         ); 
     }
 
@@ -267,11 +269,10 @@ export default class ShaftLive extends Component {
                 (<ColThree>
                     <SVGContainer>
                     <div>Floor Plan</div>
-                    <FloorPlanSVG name="River 6" data={floorplanData} cutoffs={[]}></FloorPlanSVG>
+                    <FloorPlanSVG dorm={this.state.dorm} floor={this.state.floor} data={this.state.floorData} cutoffs={[]}></FloorPlanSVG>
                     </SVGContainer>
                 </ColThree>)}
             </ShaftLiveContainer>
-
             </div>
 
        )

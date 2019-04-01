@@ -79,9 +79,12 @@ export default class WhiteboardSidebar extends React.Component {
 
     render() {
 
-        const dormArray = ['47 CLAREMONT', 'BROADWAY', 'CARMAN', 'EAST CAMPUS', 'FURNALD', 'HARMONY',
-                       'HARTLEY', 'HOGAN', 'JOHN JAY', 'MCBAIN', 'NUSSBAUM', 'RIVER', 'RUGGLES', 
-                       'SCHAPIRO', 'SYMPOSIUM', 'WALLACH', 'WATT', 'WIEN', 'WOODBRIDGE'];
+       
+
+      
+        const dormArray = ['47 Claremont', 'Broadway Hall', 'East Campus', 'Furnald Hall', 'Harmony Hall',
+                        'Hogan Hall', 'McBain Hall', '600 W 113th', 'River Hall', 'Ruggles Hall', 
+                       'Schapiro Hall', 'Watt Hall', 'Wien Hall', 'Woodbridge Hall'];
         const { width } = this.state;
         const isMobile = width <= 700;
 

@@ -24,7 +24,7 @@ function getLotteryNum(con, request, callback) {
 		*/
 		console.log(request["DORM"])
 		console.log(request["FLOOR"])
-		var sqlStatement = `SELECT ROOM, NEW_PRIORITY, NEW_NUM FROM ShaftLive WHERE DORM="${request["DORM"]}" AND FLOOR="${request["FLOOR"]}";`
+		var sqlStatement = `SELECT * FROM ShaftLive WHERE DORM="${request["DORM"]}" AND FLOOR="${request["FLOOR"]}";`
 		
 		con.query(sqlStatement, function(err, res) {
 			if (err) throw err;

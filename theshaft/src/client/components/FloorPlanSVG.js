@@ -2,7 +2,10 @@ import React, { Component } from "react";
 import styled from 'styled-components';
 import ReactSVG from 'react-svg'
 import ReactTooltip from 'react-tooltip';
-import "../css/FloorPlanSVG.css";
+import "../css/FloorPlanSVG.css"; // Because react-tooltip
+import { CUTOFFS, SUITE_PICK } from "../util/Cutoffs";
+import { MAPPING } from "../util/Mapping";
+import { update } from "immutable";
 
 let FloorPlanWrapper = styled.div`
   & rect {
@@ -30,182 +33,286 @@ export default class FloorPlanSVG extends Component {
   constructor(props) {
     super(props);
 
+    // Strip " Hall" out of the dorm name and concat with floor number
+    // e.g. dorm: River Hall, floor: 6 -> River 6
+    let dorm = props.dorm.replace(" Hall", "");
+    let name = dorm + " " + props.floor;
+    
     // Attach unique id to component to access SVG
-    let id = this.props.name.replace(/\ /g, "-");
-    // Generate AWS url
-    let url = this.props.name.replace(/\ /g, "+");
+    let id = name.replace(/\ /g, "-");
+
+    // Generate AWS urls for JPG and SVG
+    let url = name.replace(/\ /g, "+");
     let jpgUrl = "https://s3.amazonaws.com/shaft-dorm-floorplans/" + url + ".jpg";
     let svgUrl = "https://s3.amazonaws.com/shaft-svg/"+ url +".svg";
+    console.log(jpgUrl);
+    console.log(svgUrl);
 
-    this.state = {
-      floorplanId: id,
-      floorplanJpg: jpgUrl,
-      floorplanSvg: svgUrl,
-      floorplanDic : {}
-    };
 
-    this.hoverStart = this.hoverStart.bind(this);
-    this.clickStart = this.clickStart.bind(this);
-  }
-
-  componentDidMount() {
-    var floorplanDic = {};
-
+    // Turn data array passed in from endpoint into JSON for faster lookup
+    let dic = {};
     for (var i = 0; i  < this.props.data.length; i++) {
-      let roomFromDb = this.props.data[i];
-      floorplanDic[roomFromDb["ROOM"]] = {
-        "NEW_PRIORITY": roomFromDb["NEW_PRIORITY"],
-        "NEW_NUM" : roomFromDb["NEW_NUM"]
+      let dataFromDb = this.props.data[i];
+      dic[dataFromDb["ROOM"]] = {
+        "ROOM_TYPE": dataFromDb["ROOM_TYPE"],
+        "NEW_PRIORITY": dataFromDb["NEW_PRIORITY"],
+        "NEW_NUM" : dataFromDb["NEW_NUM"]
       };
     }
 
-    this.setState({floorplanDic : floorplanDic });
+    // Determine whether dorm type is suite-style or individual rooms
+    // Because lottery numbers reflect how suites/rooms are picked
+    let suitePickStyle = false;
+    // Harmony Floor 1 is suite-style picking but its other floors aren't
+    if (dorm == "Harmony") {
+      if (this.props.floor == "1") {
+        suitePickStyle = true;
+      }
+    }
+    else {
+      if (SUITE_PICK.has(dorm.toUpperCase())) {
+        suitePickStyle = true;
+      }
+    }
+
+    this.state = {
+      floorplanName: name,
+      floorplanDorm: dorm,
+      floorplanId: id,
+      floorplanJpg: jpgUrl,
+      floorplanSvg: svgUrl,
+      floorplanDic: dic,
+      suitePick: suitePickStyle
+    };
+
+    this.getStaticFloorplan = this.getStaticFloorplan.bind(this);
+  }
+
+  
+
+  svgUpdate(dorm_change){
+
+    // When the dorm changes, make sure that the correct first floor is picked
+    const firstFloor = {
+        "47 Claremont": "1",
+        "Broadway": "3",
+        "Carlton Arms": "1A",
+        "East Campus": "6",
+        "Furnald": "1",
+        "Harmony": "1",
+        "Hogan": "2",
+        "McBain": "1",
+        "600 West 113": "2",
+        "River": "1",
+        "Ruggles": "1",
+        "Schapiro": "2",
+        "Watt": "1",
+        "Wien": "2",
+        "Woodbridge": "1"
+    }
+
+    console.log("UPDATE")
+      let dorm = this.props.dorm.replace(" Hall", "");
+      if(dorm == "600 W 113th"){
+        dorm = "600 West 113";
+      }
+      
+      if(dorm_change == true){
+        var name = dorm + " " + firstFloor[dorm]
+      }
+      else{
+        var name = dorm + " " + this.props.floor;
+      }
+
+     
+      
+      // Attach unique id to component to access SVG
+      let id = name.replace(/\ /g, "-");
+
+      // Generate AWS urls for JPG and SVG
+      let url = name.replace(/\ /g, "+");
+      
+      let jpgUrl = "https://s3.amazonaws.com/shaft-dorm-floorplans/" + url + ".jpg";
+      let svgUrl = "https://s3.amazonaws.com/shaft-svg/"+ url +".svg";
+      
+      
+      console.log(jpgUrl);
+      console.log(svgUrl);
+      
+
+      // Turn data array passed in from endpoint into JSON for faster lookup
+      let dic = {};
+      for (var i = 0; i  < this.props.data.length; i++) {
+        let dataFromDb = this.props.data[i];
+        dic[dataFromDb["ROOM"]] = {
+          "ROOM_TYPE": dataFromDb["ROOM_TYPE"],
+          "NEW_PRIORITY": dataFromDb["NEW_PRIORITY"],
+          "NEW_NUM" : dataFromDb["NEW_NUM"]
+        };
+      }
+
+      // Determine whether dorm type is suite-style or individual rooms
+      // Because lottery numbers reflect how suites/rooms are picked
+      let suitePickStyle = false;
+      // Harmony Floor 1 is suite-style picking but its other floors aren't
+      if (dorm == "Harmony") {
+        if (this.props.floor == "1") {
+          suitePickStyle = true;
+        }
+      }
+      else {
+        if (SUITE_PICK.has(dorm.toUpperCase())) {
+          suitePickStyle = true;
+        }
+      }
+
+      this.setState({
+        floorplanName: name,
+        floorplanDorm: dorm,
+        floorplanId: id,
+        floorplanJpg: jpgUrl,
+        floorplanSvg: svgUrl,
+        floorplanDic: dic,
+        suitePick: suitePickStyle
+      })
+      
+      ReactTooltip.rebuild();
+
   }
 
   styleSVG(error, svg) {
-    console.log(error);
-    console.log(svg);
-
-    // Get the parent div of the SVG element
-    // let svgBoundingDivEl = document.getElementById(this.state.floorplanId);
     let svgBoundingDivEl = svg;
     // Remove any SVG styling within the file
     if (svgBoundingDivEl.querySelector("style")) {
       svgBoundingDivEl.querySelector("style").remove();
     }
 
-    for (var i = 0; i  < this.props.data.length; i++) {
-      let roomFromDb = this.props.data[i];
+    document.querySelectorAll("rect").forEach((roomEl) => {
+      // Get the name of the room or suite that the lottery number
+      // Is stored under in the db
+      let suiteEl = roomEl.parentElement;
+      let suiteFromSvg = this.getDataFromSvg(suiteEl);
+      // Nullify non-sensical suite value if not suite-style
+      if (!this.state.suitePick) {
+        suiteFromSvg = "";
+      }
+      let roomFromSvg = this.getDataFromSvg(roomEl);
+      let roomOrSuiteName = this.getRoomOrSuite(suiteFromSvg, roomFromSvg);
 
-      document.querySelectorAll("rect").forEach((roomEl) => {
-        let suiteEl = roomEl.parentElement;
-        let roomFromSvg = this.getRoomNumber(this.getDataFromSvg(suiteEl), this.getDataFromSvg(roomEl));
-        // Check if the room labeled on the SVG matches the name in the db
-        if (roomFromDb["ROOM"] == roomFromSvg) {
-          // Attach data attributes for react-tooltip
-          roomEl.setAttribute("data-tip", roomFromSvg);
-          roomEl.setAttribute("data-for", "global");
-          ReactTooltip.rebuild();
-
-          // Check if lottery number exists for it (i.e. it's already taken)
-          if (roomFromDb["NEW_PRIORITY"]) {
-            console.log("MATCH! " + roomFromDb["ROOM"] + " " + roomFromSvg);
-            roomEl.setAttribute("fill", "red");
-          } else {
-            roomEl.setAttribute("fill", "green");
-          }
+      // Check if the room labeled on the SVG matches the name in the db
+      let fromDb = this.state.floorplanDic[roomOrSuiteName];
+      if (fromDb) {
+        let selectableEl = roomEl;
+        if (this.state.suitePick) {
+          selectableEl = suiteEl;
         }
-      });
-    }
+        // Check if lottery number exists for it (i.e. it's already taken)
+        if (fromDb["NEW_PRIORITY"]) {
+          // console.log("TAKEN: " + roomOrSuiteName);
+          selectableEl.setAttribute("fill", "red");
+        } else {
+          // console.log("AVAILABLE: " + roomOrSuiteName);
+          selectableEl.setAttribute("fill", "green");
+        }
+        
+        // Attach data attributes for react-tooltip
+        selectableEl.setAttribute("data-tip", roomOrSuiteName);
+        selectableEl.setAttribute("data-for", "global");
+        ReactTooltip.rebuild();
+      }
+    });
 
+    let imageElements = svgBoundingDivEl.querySelectorAll("image");
+    let baseImage = imageElements[0];
+    let xlinkHref = baseImage.getAttributeNode("xlink:href");
     // Override the xlink:href attribute (which is deprecated)
     // with an href that links to the corresponding floorplan JPG
-    let imageElements = svgBoundingDivEl.querySelectorAll("image");
-    console.log(imageElements);
-    let baseImage = imageElements[0];
-    console.log(baseImage);
-    let xlinkHref = baseImage.getAttributeNode("xlink:href");
-    console.log(xlinkHref);
-    baseImage.removeAttributeNode(xlinkHref);
     if(xlinkHref) {
+      baseImage.removeAttributeNode(xlinkHref);
       baseImage.setAttribute("href", this.state.floorplanJpg);
+    } 
+  }
+
+  componentDidUpdate(prevProps) {
+    console.log(prevProps)
+    if(this.props.dorm != prevProps.dorm ){
+      let dorm_change = true;
+      this.svgUpdate(dorm_change)
+    }else if(this.props.floor != prevProps.floor){
+      let dorm_change = false;
+      this.svgUpdate(dorm_change)
     }
-
-    let rectsArray = document.querySelectorAll("rect");
-    rectsArray.forEach((rect) => {
-      // rect.addEventListener("mouseover", this.hoverStart);
-      rect.addEventListener("click", this.clickStart);
-    });
-  }
-
-  // make sure to remove the listener
-  // when the component is not mounted anymore
-  componentWillUnmount() {
-    let rectsArray = document.querySelectorAll("rect");
-    rectsArray.forEach((rect) => {
-      // rect.removeEventListener("mouseover", this.hoverStart);
-      rect.removeEventListener("click", this.clickStart);
-    });
-  }
-
-  componentDidUpdate() {
-    ReactTooltip.rebuild();
-  }
-
-  hoverStart(e) {
-    this.getTargetRoom(e);
-  }
-
-  clickStart(e) {
-    this.getTargetRoom(e);
-  }
-
-  getTargetRoom(e) {
-    let roomEl = e.target;
-    let suiteEl = roomEl.parentElement;
-    let room = this.getDataFromSvg(roomEl);
-    let suite = this.getDataFromSvg(suiteEl);
-    console.log("START Suite: " + suite + "\tRoom: " + room);
+    
   }
 
   getDataFromSvg(el) {
-    // Check if element is one level under svg
-    // If it is, this means it's a floor (not a suite)
-    // And that this floorplan doesn't have suites
-    if (el.parentElement.tagName.toLowerCase() == "svg") {
-      return "";
-    }
     return el.dataset.name ? el.dataset.name : el.getAttribute("id");
   }
 
-  getRoomNumber(suite, room) {
-    const exceptions = new Set(["600 W 113th", "Watt Hall", "Wien Hall"]);
-    if (exceptions.has(this.props.data[0]["DORM"])) {
+  getRoomOrSuite(suite, room) {
+    // TODO: all the conditions stuff of turning the combination of
+    // Floor #, Suite #, and Room # into whatever is stored in the db
+    // Get dorm name and floor number through props
+    // Have fun mapping Carlton Arms and Ruggles
+    if (suite) {
       return suite + room;
     }
-    return suite + room;
+    else {
+      return this.props.floor + room;
+    }
   }
 
   getTooltipContent(room) {
-    let roomDic = this.state.floorplanDic[room];
-
-    if (!roomDic) {
-      // RA Room / not a part of room selection (Gray)
-      return <TooltipBox><TooltipText>Not Available</TooltipText></TooltipBox>
-    }
+    let fromDb = this.state.floorplanDic[room];
+    let label = this.state.suitePick ? "Suite" : "Room";
     
-    if (roomDic["NEW_PRIORITY"] == "") {
-      // Not taken yet (Green)
-      return <TooltipBox>
-      <TooltipText>Room: <TooltipBold>{room}</TooltipBold></TooltipText>
-      <TooltipText>
-        Last Year's Cutoff: <TooltipBold>{roomDic["NEW_PRIORITY"] + " / " + roomDic["NEW_NUM"]}</TooltipBold>
-      </TooltipText>
-    </TooltipBox>
+    if (!fromDb) {
+      // RA Room / not a part of room selection (Gray)
+      return <TooltipBox><TooltipText>Not Available</TooltipText></TooltipBox>;
     }
+    else {
+      // Not taken yet (Green)
+      let lotteryLabel = "Last Year's Cutoff";
+      let lottery = this.getCutoff(fromDb["ROOM_TYPE"]);
 
-    // Taken room (Red)
-    return <TooltipBox>
-      <TooltipText>Room: <TooltipBold>{room}</TooltipBold></TooltipText>
-      <TooltipText>
-        Taken By: <TooltipBold>{roomDic["NEW_PRIORITY"] + " / " + roomDic["NEW_NUM"]}</TooltipBold>
-      </TooltipText>
-    </TooltipBox>;
+      // Taken room (Red)
+      if (fromDb["NEW_PRIORITY"]) {
+        lotteryLabel = "Taken By";
+        lottery = fromDb["NEW_PRIORITY"] + " / " + fromDb["NEW_NUM"];
+      }
+  
+      return <TooltipBox>
+        <TooltipText>{label}: <TooltipBold>{room}</TooltipBold></TooltipText>
+        <TooltipText>
+          {lotteryLabel}: <TooltipBold>{lottery}</TooltipBold>
+        </TooltipText>
+      </TooltipBox>;
+    }
+  }
+
+  getCutoff(roomType) {
+    let roomTypeMapped = MAPPING[this.state.floorplanDorm][roomType];
+    return CUTOFFS[this.state.floorplanDorm][roomTypeMapped];
+  }
+
+  getStaticFloorplan() {
+    return <img alt={this.state.floorplanName} src={this.state.floorplanJpg} />;
   }
 
   render() {
     return (
         <FloorPlanWrapper id={this.state.floorplanId}>
-          <ReactSVG src={this.state.floorplanSvg} 
-          onInjected={(error, svg) => this.styleSVG(error, svg)}
+          <ReactSVG 
+            src={this.state.floorplanSvg} 
+            onInjected={(error, svg) => this.styleSVG(error, svg)}
+            fallback={this.getStaticFloorplan}
           />
 
           <ReactTooltip 
-            id='global' 
-            aria-haspopup='true' 
-            clickable='true'
-            getContent={ (dataTip) => this.getTooltipContent(dataTip)}
-            className='floorplan-tooltip'
+            id="global"
+            aria-haspopup="true"
+            getContent={(dataTip) => this.getTooltipContent(dataTip)}
+            className="floorplan-tooltip"
           />
         </FloorPlanWrapper>
     );
