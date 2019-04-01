@@ -150,6 +150,11 @@ export default class FloorPlanSVG extends Component {
     // Floor #, Suite #, and Room # into whatever is stored in the db
     // Get dorm name and floor number through props
     // Have fun mapping Carlton Arms and Ruggles
+    // Helpful things
+    // boolean if suite-style: this.state.suitePick
+    // string floor number: this.props.floor
+    // string dorm name (e.g. "River Hall"): this.props.dorm
+    // string dorm name shortened (e.g. "River"): this.state.floorplanDorm
     if (suite) {
       return suite + room;
     }
