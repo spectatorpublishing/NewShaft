@@ -102,7 +102,7 @@ export default class FloorPlanSVG extends Component {
         "Harmony": "mezz",
         "Hogan": "2",
         "McBain": "1",
-        "600 W 113th": "2",
+        "600 West 113": "2",
         "River": "1",
         "Ruggles": "1",
         "Schapiro": "2",
@@ -113,6 +113,9 @@ export default class FloorPlanSVG extends Component {
 
     console.log("UPDATE")
       let dorm = this.props.dorm.replace(" Hall", "");
+      if(dorm == "600 W 113th"){
+        dorm = "600 West 113";
+      }
       
       if(dorm_change == true){
         var name = dorm + " " + firstFloor[dorm]
@@ -121,7 +124,6 @@ export default class FloorPlanSVG extends Component {
         var name = dorm + " " + this.props.floor;
       }
 
-      console.log(name)
      
       
       // Attach unique id to component to access SVG
@@ -129,8 +131,11 @@ export default class FloorPlanSVG extends Component {
 
       // Generate AWS urls for JPG and SVG
       let url = name.replace(/\ /g, "+");
+      
       let jpgUrl = "https://s3.amazonaws.com/shaft-dorm-floorplans/" + url + ".jpg";
       let svgUrl = "https://s3.amazonaws.com/shaft-svg/"+ url +".svg";
+      
+      
       console.log(jpgUrl);
       console.log(svgUrl);
       

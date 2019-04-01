@@ -73,5 +73,10 @@ export const MAPPING = {
   },
   Woodbridge: {
     "apartment-1br": "Low Demand (G + D + I lines)"
+  },
+  Wien:{
+    "double": "Double",
+    "double-walkthrough": "Double",
+    "single": "Single"
   }
 };
