@@ -3,19 +3,13 @@ import styled from 'styled-components';
 
 
 let Sidebar = styled.div`
-    width: 7.5vw;
+    width: auto;
     height: 100vh;
-    margin: 40% 50% 20% 70%;
+    margin-top:6vh;
+    margin-left:7vw;
     display:flex;
     flex-direction:column;
-
-    @media(max-width:991)
-    {
-        display:flex;
-        width:auto;
-        height:100vh;
-        flex-direction:column;
-    }
+    
 `
 let SidebarTitle = styled.div`
     text-align:center;
