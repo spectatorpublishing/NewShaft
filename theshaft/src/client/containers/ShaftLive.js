@@ -236,7 +236,7 @@ export default class ShaftLive extends Component {
             },
             body: JSON.stringify({DORM: dorm, FLOOR: floor})
             }).then(res => res.json())
-            .then(response => {console.log(response); this.setState({floor: floor, floorData : response})}
+            .then(response => {console.log(response); this.setState({floor: floor, floorData : response, init: false})}
         ); 
     }
 
@@ -299,7 +299,7 @@ export default class ShaftLive extends Component {
                 (<ColThree>
                     <SVGContainer>
                     <FloorPlanTitle>Interactive Floor Plans</FloorPlanTitle>
-                    <FloorPlanSVG dorm={this.state.dorm} floor={this.state.floor} data={this.state.floorData} cutoffs={[]} ></FloorPlanSVG>
+                    <FloorPlanSVG dorm={this.state.dorm} floor={this.state.floor} data={this.state.floorData} cutoffs={[]} init={this.state.init} ></FloorPlanSVG>
                     </SVGContainer>
                 </ColThree>)}
             </ShaftLiveContainer>

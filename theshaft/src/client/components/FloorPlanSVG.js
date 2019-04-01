@@ -235,7 +235,7 @@ export default class FloorPlanSVG extends Component {
 
   componentDidUpdate(prevProps) {
     console.log(prevProps)
-    if(this.props.dorm != prevProps.dorm ){
+    if(this.props.dorm != prevProps.dorm || this.props.init != prevProps.init){
       let dorm_change = true;
       this.svgUpdate(dorm_change)
     }else if(this.props.floor != prevProps.floor){
