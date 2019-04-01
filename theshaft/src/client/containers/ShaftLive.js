@@ -29,12 +29,9 @@ let SVGContainer = styled.div`
 
 
 let ShaftLiveContainerMobile = styled.div`
-    width: 100%;
-    height: 100%;
-    padding: 0 auto;
     overflow: hidden;
-    flex-direction: row;
-    justify-content: center;
+    flex-direction: column;
+    align-items: center;
 `
 
 let ColOne = styled.div`
@@ -61,6 +58,16 @@ let ColTwo = styled.div`
 
 let ColThree = styled.div`
     width:50vw;
+`
+
+let ToggleMobileView = styled.div`
+    display: flex;
+    color: ${props => props.theme.black};
+    text-transform: uppercase;
+    font-weight: bold;
+    &>div{
+      flex-grow: 1;
+    }
 `
 
 let floorplanData = [
@@ -240,9 +247,12 @@ export default class ShaftLive extends Component {
                 <FloorButton 
                         floorNums={this.state.floorNums} 
                         handleChange={this.handleFloorChange}/>
-                
+                <ToggleMobileView>
+                  <div onClick={()=>this.setState({mobileShowFloorPlan: false})}>Live Feed</div>
+                  <div onClick={()=>this.setState({mobileShowFloorPlan: true})}>Floor Plans</div>
+                </ToggleMobileView>
                 { this.state.mobileShowFloorPlan
-                    ? <FloorPlanSVG name="River 6" data={floorplanData} cutoffs={[]}/>
+                    ? <FloorPlanSVG dorm={this.state.dorm} floor={this.state.floor} data={floorplanData} cutoffs={[]}/>
                     : <WhiteboardTable
                     roomAvailability={this.state.floorData} />
                 }

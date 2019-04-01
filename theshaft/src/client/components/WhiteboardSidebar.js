@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import styled from 'styled-components';
+import ChrisV from '../assets/chrisv_blue.svg'
 
 
 let Sidebar = styled.div`
@@ -28,11 +29,21 @@ let DormListDesktop = styled.div`
 `
 
 let DormListMobile = styled.div`
+    display: flex;
+    align-items: center;
     &>select{
         border-radius: 10px;
         background: ${props => props.theme.white};
         border: 1px solid ${props => props.theme.lightGray};
-        padding: 4px;
+        padding: 10px;
+        font-family: Raleway, sans-serif;
+        font-size: 0.8rem;
+        color: ${props => props.theme.darkGray};
+        width: 90%;
+    }
+    &>select+img{
+        margin-left: -20px;
+        pointer-events: none;
     }
 `
 
@@ -91,7 +102,6 @@ export default class WhiteboardSidebar extends React.Component {
         if (isMobile) {
             return (
                     <div>
-                    <SidebarTitle>Dorms</SidebarTitle>
                     <DormListMobile>
                         <select value={this.props.currDorm} onChange={e => this.onClick(e.target.value)}>
                         { 
@@ -102,6 +112,7 @@ export default class WhiteboardSidebar extends React.Component {
                                 )
                         } 
                         </select>
+                        <img src={ChrisV}/>
 
                     </DormListMobile>
                     </div>
