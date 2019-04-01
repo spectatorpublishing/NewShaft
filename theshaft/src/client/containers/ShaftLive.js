@@ -56,44 +56,89 @@ let ColThree = styled.div`
     padding-left:2vw;
 `
 
-
-let sampleRoomData = [
+let floorplanData = [
     {
-      "ROOM": "101",
-      "PRIORITY": "30",
-      "LOTTERY": "3000"
+      "DORM": "47 Claremont",
+        "ROOM": "4",
+        "FLOOR": "1",
+        "ROOM_TYPE": "suite-3",
+        "NEW_PRIORITY": "30",
+        "NEW_NUM": "3000"
     },
     {
-      "ROOM": "102",
-      "PRIORITY": "20",
-      "LOTTERY": "2050"
+      "DORM": "47 Claremont",
+        "ROOM": "3",
+        "FLOOR": "1",
+        "ROOM_TYPE": "suite-4",
+        "NEW_PRIORITY": "30",
+        "NEW_NUM": "3000"
     },
     {
-      "ROOM": "103",
-      "PRIORITY": "30",
-      "LOTTERY": "1010"
+      "DORM": "47 Claremont",
+        "ROOM": "1",
+        "FLOOR": "1",
+        "ROOM_TYPE": "suite-6",
+        "NEW_PRIORITY": "30",
+        "NEW_NUM": "3000"
     },
     {
-      "ROOM": "104",
-      "PRIORITY": "10",
-      "LOTTERY": "2510"
+      "DORM": "47 Claremont",
+      "ROOM": "2",
+      "FLOOR": "1",
+      "ROOM_TYPE": "suite-5",
+      "NEW_PRIORITY": "30",
+      "NEW_NUM": "3000"
     },
     {
-      "ROOM": "105",
-      "PRIORITY": "20",
-      "LOTTERY": "1450"
+      "DORM": "47 Claremont",
+        "ROOM": "24",
+        "FLOOR": "2",
+        "ROOM_TYPE": "suite-3",
+        "NEW_PRIORITY": "30",
+        "NEW_NUM": "3000"
     },
     {
-      "ROOM": "106",
-      "PRIORITY": "30",
-      "LOTTERY": "900"
+      "DORM": "47 Claremont",
+        "ROOM": "23",
+        "FLOOR": "2",
+        "ROOM_TYPE": "suite-4",
+        "NEW_PRIORITY": "30",
+        "NEW_NUM": "3000"
     },
     {
-      "ROOM": "107",
-      "PRIORITY": "10",
-      "LOTTERY": "1200"
+      "DORM": "47 Claremont",
+        "ROOM": "21",
+        "FLOOR": "2",
+        "ROOM_TYPE": "suite-7",
+        "NEW_PRIORITY": "30",
+        "NEW_NUM": "3000"
+    },
+    {
+      "DORM": "47 Claremont",
+      "ROOM": "22",
+      "FLOOR": "2",
+      "ROOM_TYPE": "suite-7",
+      "NEW_PRIORITY": "30",
+      "NEW_NUM": "3000"
+    },
+    {
+      "DORM": "River Hall",
+      "ROOM": "606",
+      "FLOOR": "6",
+      "ROOM_TYPE": "single",
+      "NEW_PRIORITY": "",
+      "NEW_NUM": ""
+    },
+    {
+      "DORM": "River Hall",
+      "ROOM": "607",
+      "FLOOR": "6",
+      "ROOM_TYPE": "single",
+      "NEW_PRIORITY": "20",
+      "NEW_NUM": "1234"
     }
-  ]
+  ];
+
 
 export default class ShaftLive extends Component {
     constructor(props) {
@@ -195,11 +240,12 @@ export default class ShaftLive extends Component {
                     <WhiteboardTable
                         roomAvailability={this.state.floorData} />
                 </ColTwo>
-   
-                <ColThree>
-                    <FloorPlanSVG></FloorPlanSVG>
-                </ColThree>
                 
+                <ColThree>
+                    <div className="border">
+                    <FloorPlanSVG name="River 6" data={floorplanData} cutoffs={[]}></FloorPlanSVG>
+                    </div>
+                </ColThree>
             </ShaftLiveContainer>
 
             { width <= 991 && (<FloorPlanSVG/>)}
