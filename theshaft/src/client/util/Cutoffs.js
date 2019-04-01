@@ -16,11 +16,6 @@ export const CUTOFFS = {
             "7-Person Suite": "10/2645"
         }
     ],
-    "548 W 113th": [
-        {
-            "Double": "20/1237"
-        }
-    ],
     "600 W 113th": [
         {
             "Double": "10/2276"
@@ -30,14 +25,6 @@ export const CUTOFFS = {
         },
         {
             "Walk-Through Double": "10/2388"
-        }
-    ],
-    "627 W 115th": [
-        {
-            "2 person suite": "20/541"
-        },
-        {
-            "3 person suite": "10/2721"
         }
     ],
     "Broadway": [
@@ -86,38 +73,36 @@ export const CUTOFFS = {
             "8 Person Suite (2 Sgl/3 Dbl)": "10/393"
         }
     ],
-    "EC Highrise": [
+    "East Campus": [
         {
-            "2-Person Flat": "30/1910"
+            "2-Person Highrise Flat": "30/1910"
         },
         {
-            "5 Person (3 Sgl/1 Dbl)": "20/548"
+            "5 Person Highrise Suite (3 Sgl/1 Dbl)": "20/548"
         },
         {
-            "5 Person Suite (All Sgl)": "30/320"
+            "5 Person Highrise Suite (All Sgl)": "30/320"
         },
         {
-            "6 Person Suite (All Sgl)": "30/1459"
+            "6 Person Highrise Suite (All Sgl)": "30/1459"
         },
         {
-            "6th Floor Double": "10/1425"
-        }
-    ],
-    "EC Townhouse": [
-        {
-            "2 in 4 Person Suite (All Sgl) w/RA": "30/2122"
+            "6th Floor Highrise Double": "10/1425"
         },
         {
-            "4 in 6 Person Suite (All Sgl) w/RA": "30/1615"
+            "2 in 4 Person Townhouse Suite (All Sgl) w/RA": "30/2122"
         },
         {
-            "4 Person Suite (All Sgl)": "30/821"
+            "4 in 6 Person Townhouse Suite (All Sgl) w/RA": "30/1615"
         },
         {
-            "6-Person Suite (4 Sgl / 1 Dbl)": "30/2694"
+            "4 Person Townhouse Suite (All Sgl)": "30/821"
         },
         {
-            "6-Person Suite (all singles)": "30/2299"
+            "6-Person Townhouse Suite (4 Sgl / 1 Dbl)": "30/2694"
+        },
+        {
+            "6-Person Townhouse Suite (all singles)": "30/2299"
         }
     ],
     "Furnald": [
@@ -147,7 +132,7 @@ export const CUTOFFS = {
             "4 in 6 Person Suite w/RA": "30/1499"
         },
         {
-            "4-Person Suite\ufffd": "30/1292"
+            "4-Person Suite": "30/1292"
         },
         {
             "5-Person Suite": "30/1534"
@@ -177,10 +162,10 @@ export const CUTOFFS = {
             "4-Person Suite": "30/2470"
         },
         {
-            "6-Person Suite\ufffd": "21.6667/1578"
+            "6-Person Suite": "21.6667/1578"
         },
         {
-            "8-Person Suite\ufffd": "20/2990"
+            "8-Person Suite": "20/2990"
         }
     ],
     "Schapiro": [
