@@ -2,8 +2,8 @@ import React, { Component } from "react";
 import styled from 'styled-components';
 
 let NumberBlue = styled.button`
-    width: auto;
-    height: 25px;
+    width: 2.5rem;
+    height: 2.5rem;
     border: 1px ${props => props.theme.columbiaBlue} solid;
     border-radius: 3px;
     color: ${props => props.theme.white};
@@ -11,16 +11,27 @@ let NumberBlue = styled.button`
     text-align: center;
 `
 let NumberBlack = styled.button`
-    width: auto;
-    height: 25px;
+    width: 2.5rem;
+    height: 2.5rem;
     border: 1px ${props => props.theme.columbiaBlue} solid;
     border-radius: 3px;
     background-color: white;
     text-align: center;
 `
+let ButtonTopText= styled.div`
+    color: 	#6495ED;
+    margin-bottom:1vh;
+    margin-top:7vh;
+`
+
+let FloorButtonWrapper=styled.div`
+    width: 100%; 
+`
 
 let Buttons = styled.div`
-    display: inline-block;
+    display: flex;
+    flex-direction:row;
+    margin-bottom:4vh;
 `
 
 export default class FloorButton extends Component{
@@ -70,7 +81,14 @@ export default class FloorButton extends Component{
                 
             }
         }
-
-        return <Buttons>{buttons}</Buttons>
+            
+        return(
+            <div>
+                <FloorButtonWrapper>
+                    <ButtonTopText>Floor Number:</ButtonTopText>
+                    <Buttons>{buttons}</Buttons>
+                </FloorButtonWrapper>
+            </div>
+        )
     }
 }

@@ -3,20 +3,34 @@ import styled from 'styled-components';
 
 
 let Sidebar = styled.div`
-    height: 100%;
-    display: flex;
-    flex-wrap: wrap;
+    width: 7.5vw;
+    height: 100vh;
+    margin: 40% 50% 20% 70%;
+    display:flex;
+    flex-direction:column;
+
+    @media(max-width:991)
+    {
+        display:flex;
+        width:auto;
+        height:100vh;
+        flex-direction:column;
+    }
+`
+let SidebarTitle = styled.div`
+    text-align:center;
+    font-size:1.5rem;
+    border-bottom:solid;
+    border-color:${props => props.theme.columbiaBlue}; 
+    border-width:2px;
+    font-weight: bold;
 `
 
+
 let DormListDesktop = styled.div`
+    display:flex;
+    justify-content:column;
     flex-direction: column;
-    text-align: left;
-    width: 20%;
-`
-let DormListMobile = styled.div`
-    flex-direction: row;
-    text-align: left;
-    
 `
 let Dorm = styled.button`
     padding: .5em;
@@ -25,7 +39,7 @@ let Dorm = styled.button`
     color: #000;
     font-size: 1rem;
     background: none;
-    text-align: left;
+    text-align: center;
 
     &:hover {
         background-color: #9a9c9e;
@@ -69,7 +83,8 @@ export default class WhiteboardSidebar extends React.Component {
         if (isMobile) {
             return (
                 <Sidebar>
-                    <DormListMobile>
+                    <SidebarTitle>Dorms</SidebarTitle>
+                    <DormList>
                         { 
                                 dormArray.map((dorm) =>
                                     (<Dorm onClick = {() => this.onClick(dorm)}> 
@@ -79,7 +94,7 @@ export default class WhiteboardSidebar extends React.Component {
                         } 
                         
 
-                    </DormListMobile>
+                    </DormList>
                 </Sidebar>
             );
         }
@@ -87,6 +102,7 @@ export default class WhiteboardSidebar extends React.Component {
             return (
                 <div>
                     <Sidebar>
+                    <SidebarTitle>Dorms</SidebarTitle>
                         <DormListDesktop>
                             { 
                                 dormArray.map((dorm) =>

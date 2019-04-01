@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import styled from "styled-components";
 import FloorButton from "../components/FloorButton.js";
 import WhiteboardTable from "../components/WhiteboardTable.js";
+import FloorPlanSVG from "../components/FloorPlanSVG"
 
 import _ from "lodash"
 import WhiteboardSidebar from '../components/WhiteboardSidebar.js';
@@ -14,6 +15,19 @@ let ShaftLiveContainer = styled.div`
     overflow: hidden;
     flex-direction: row;
 `
+
+let SVGContainer = styled.div`
+    display:flex;
+    flex-direction:column;
+    height:auto;
+    margin-top:6vh;
+    width: 40vw;
+    height:auto;
+    object-position:cover;
+    padding-right:3vw;
+`
+
+
 let ShaftLiveContainerMobile = styled.div`
     width: 100%;
     height: 100%;
@@ -26,56 +40,112 @@ let ShaftLiveContainerMobile = styled.div`
 let ColOne = styled.div`
   display: flex;
   width: 20%;
+  @media(max-width: 991px){
+      display:flex;
+      width:50vw;
+  }
 `
 let ColTwo = styled.div`
     display: flex;
     flex-direction: column;
     scroll-behavior: smooth;
-    width: ${({ mobile }) => (mobile ? `100%` : `60%`)};
+    padding-left: 5%;
+    width: ${({ mobile }) => (mobile ? `100%` : `40%`)};
+    @media(max-width: 991px){
+        display: flex;
+        flex-direction: column;
+        scroll-behavior: smooth;
+        width:60vw;
+    }
 `
 
 let ColThree = styled.div`
-
+    width:50vw;
 `
 
-
-let sampleRoomData = [
+let floorplanData = [
     {
-      "ROOM": "101",
-      "PRIORITY": "30",
-      "LOTTERY": "3000"
+      "DORM": "47 Claremont",
+        "ROOM": "4",
+        "FLOOR": "1",
+        "ROOM_TYPE": "suite-3",
+        "NEW_PRIORITY": "30",
+        "NEW_NUM": "3000"
     },
     {
-      "ROOM": "102",
-      "PRIORITY": "20",
-      "LOTTERY": "2050"
+      "DORM": "47 Claremont",
+        "ROOM": "3",
+        "FLOOR": "1",
+        "ROOM_TYPE": "suite-4",
+        "NEW_PRIORITY": "30",
+        "NEW_NUM": "3000"
     },
     {
-      "ROOM": "103",
-      "PRIORITY": "30",
-      "LOTTERY": "1010"
+      "DORM": "47 Claremont",
+        "ROOM": "1",
+        "FLOOR": "1",
+        "ROOM_TYPE": "suite-6",
+        "NEW_PRIORITY": "30",
+        "NEW_NUM": "3000"
     },
     {
-      "ROOM": "104",
-      "PRIORITY": "10",
-      "LOTTERY": "2510"
+      "DORM": "47 Claremont",
+      "ROOM": "2",
+      "FLOOR": "1",
+      "ROOM_TYPE": "suite-5",
+      "NEW_PRIORITY": "30",
+      "NEW_NUM": "3000"
     },
     {
-      "ROOM": "105",
-      "PRIORITY": "20",
-      "LOTTERY": "1450"
+      "DORM": "47 Claremont",
+        "ROOM": "24",
+        "FLOOR": "2",
+        "ROOM_TYPE": "suite-3",
+        "NEW_PRIORITY": "30",
+        "NEW_NUM": "3000"
     },
     {
-      "ROOM": "106",
-      "PRIORITY": "30",
-      "LOTTERY": "900"
+      "DORM": "47 Claremont",
+        "ROOM": "23",
+        "FLOOR": "2",
+        "ROOM_TYPE": "suite-4",
+        "NEW_PRIORITY": "30",
+        "NEW_NUM": "3000"
     },
     {
-      "ROOM": "107",
-      "PRIORITY": "10",
-      "LOTTERY": "1200"
+      "DORM": "47 Claremont",
+        "ROOM": "21",
+        "FLOOR": "2",
+        "ROOM_TYPE": "suite-7",
+        "NEW_PRIORITY": "30",
+        "NEW_NUM": "3000"
+    },
+    {
+      "DORM": "47 Claremont",
+      "ROOM": "22",
+      "FLOOR": "2",
+      "ROOM_TYPE": "suite-7",
+      "NEW_PRIORITY": "30",
+      "NEW_NUM": "3000"
+    },
+    {
+      "DORM": "River Hall",
+      "ROOM": "606",
+      "FLOOR": "6",
+      "ROOM_TYPE": "single",
+      "NEW_PRIORITY": "",
+      "NEW_NUM": ""
+    },
+    {
+      "DORM": "River Hall",
+      "ROOM": "607",
+      "FLOOR": "6",
+      "ROOM_TYPE": "single",
+      "NEW_PRIORITY": "20",
+      "NEW_NUM": "1234"
     }
-  ]
+  ];
+
 
 export default class ShaftLive extends Component {
     constructor(props) {
@@ -88,7 +158,6 @@ export default class ShaftLive extends Component {
             width: window.innerWidth,
             // numFloors: this.state.numFloors,
             //handleChange: null, //not sure what to type this as
-
         }
 
         this.handleFloorChange = this.handleFloorChange.bind(this)
@@ -116,7 +185,6 @@ export default class ShaftLive extends Component {
         // this should fetch data for the FloorButtons
 
         // dormName is being supplied by Matt's sidebar.
-
         fetch('/api/getUniqueFloorNumbers', {
             method: 'POST',
             headers: {
@@ -165,6 +233,7 @@ export default class ShaftLive extends Component {
           );
       }else{
         return(
+            <div>
             <ShaftLiveContainer>
                 <ColOne>
                     <WhiteboardSidebar
@@ -178,12 +247,19 @@ export default class ShaftLive extends Component {
                     <WhiteboardTable
                         roomAvailability={this.state.floorData} />
                 </ColTwo>
-
-                <ColThree>
-                    
-                </ColThree>
-
+                {width > 991 &&
+                (<ColThree>
+                    <SVGContainer>
+                    <div>Floor Plan</div>
+                    <FloorPlanSVG name="River 6" data={floorplanData} cutoffs={[]}></FloorPlanSVG>
+                    </SVGContainer>
+                </ColThree>)}
             </ShaftLiveContainer>
+
+            { width <= 991 && (<FloorPlanSVG name="River 6" data={floorplanData} cutoffs={[]}/>)}
+
+            </div>
+
        )
       }
         

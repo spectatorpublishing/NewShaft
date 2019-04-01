@@ -14,7 +14,7 @@ export default class Updater extends React.Component {
 	}
 
 	tick() {
-		fetch('http://worldclockapi.com/api/json/est/now')
+		fetch('http://localhost:8080/api/getAmenities')
 			.then(response => response.json())
 			.then(data => this.setState(prevState => (
 					{
@@ -39,7 +39,7 @@ export default class Updater extends React.Component {
 	render() {
 		return (
 			<div>
-				Seconds: {this.state.time}
+				info: {this.state.time}
 			</div>
 		);
 	}
