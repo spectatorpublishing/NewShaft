@@ -55,7 +55,6 @@ export default class FloorPlanSVG extends Component {
         "NEW_NUM" : dataFromDb["NEW_NUM"]
       };
     }
-    console.log(dic);
 
     // Determine whether dorm type is suite-style or individual rooms
     // Because lottery numbers reflect how suites/rooms are picked
@@ -113,10 +112,10 @@ export default class FloorPlanSVG extends Component {
         }
         // Check if lottery number exists for it (i.e. it's already taken)
         if (fromDb["NEW_PRIORITY"]) {
-          console.log("TAKEN: " + roomOrSuiteName);
+          // console.log("TAKEN: " + roomOrSuiteName);
           selectableEl.setAttribute("fill", "red");
         } else {
-          console.log("AVAILABLE: " + roomOrSuiteName);
+          // console.log("AVAILABLE: " + roomOrSuiteName);
           selectableEl.setAttribute("fill", "green");
         }
         
