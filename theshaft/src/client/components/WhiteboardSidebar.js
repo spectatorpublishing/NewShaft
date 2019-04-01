@@ -1,21 +1,16 @@
 import React, { Component } from "react";
 import styled from 'styled-components';
+import ChrisV from '../assets/chrisv_blue.svg'
 
 
 let Sidebar = styled.div`
-    width: 7.5vw;
+    width: auto;
     height: 100vh;
-    margin: 40% 50% 20% 70%;
+    margin-top:6vh;
+    margin-left:7vw;
     display:flex;
     flex-direction:column;
-
-    @media(max-width:991)
-    {
-        display:flex;
-        width:auto;
-        height:100vh;
-        flex-direction:column;
-    }
+    
 `
 let SidebarTitle = styled.div`
     text-align:center;
@@ -24,14 +19,43 @@ let SidebarTitle = styled.div`
     border-color:${props => props.theme.columbiaBlue}; 
     border-width:2px;
     font-weight: bold;
+    @media only screen and (max-width: 992px){
+        color: 	${props => props.theme.white};
+        font-weight: bold;
+        padding-top: 1rem;
+        padding-bottom:0.5rem;
+        text-align: center;
+        border: none;
+        font-size: 1rem;
+    }
 `
-
 
 let DormListDesktop = styled.div`
     display:flex;
     justify-content:column;
     flex-direction: column;
 `
+
+let DormListMobile = styled.div`
+    display: flex;
+    align-items: center;
+    &>select{
+        border-radius: 10px;
+        border: none;
+        background: ${props => props.theme.white};
+        height: 2.5rem;
+        font-family: Raleway, sans-serif;
+        font-size: 0.8rem;
+        color: ${props => props.theme.darkGray};
+        width: 95%;
+        margin: 0 2.5%;
+    }
+    &>select+img{
+        margin-left: -30px;
+        pointer-events: none;
+    }
+`
+
 let Dorm = styled.button`
     padding: .5em;
     background-color: #FFFFFF;
@@ -53,6 +77,7 @@ export default class WhiteboardSidebar extends React.Component {
         this.state = {
             width: window.innerWidth,
         }
+        this.onClick = this.onClick.bind(this)
     }
 
     onClick(dorm) {
@@ -85,20 +110,22 @@ export default class WhiteboardSidebar extends React.Component {
 
         if (isMobile) {
             return (
-                <Sidebar>
-                    <SidebarTitle>Dorms</SidebarTitle>
-                    <DormList>
+                    <div>
+                    <SidebarTitle>Dorm</SidebarTitle>
+                    <DormListMobile>
+                        <select value={this.props.currDorm} onChange={e => this.onClick(e.target.value)}>
                         { 
                                 dormArray.map((dorm) =>
-                                    (<Dorm onClick = {() => this.onClick(dorm)}> 
+                                    (<option value={dorm}> 
                                     {dorm}
-                                </Dorm>)
+                                    </option>)
                                 )
                         } 
-                        
+                        </select>
+                        <img src={ChrisV}/>
 
-                    </DormList>
-                </Sidebar>
+                    </DormListMobile>
+                    </div>
             );
         }
         else {
