@@ -49,11 +49,13 @@ let FloorButtonWrapper=styled.div`
 let Buttons = styled.div`
     display: flex;
     flex-direction:row;
-    width: 95%; 
+    background: ${props => props.theme.white};
+    max-width: 95%; 
     margin: 0 2.5%;
     overflow: hidden;
     border-radius: 10px;
     @media only screen and (min-width: 992px){
+        background: transparent;
         width: 100%; 
         margin: 0;
         overflow: visible;
