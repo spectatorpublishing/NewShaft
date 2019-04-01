@@ -18,7 +18,7 @@ let Map = styled.div`
 `
 
 let Wrapper = styled.div`
-    width: 50%;`
+    width: 80%;`
 
 let TitleText = styled.div`
     display: flex;

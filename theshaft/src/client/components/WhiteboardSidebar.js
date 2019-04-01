@@ -8,6 +8,14 @@ let Sidebar = styled.div`
     margin: 40% 50% 20% 70%;
     display:flex;
     flex-direction:column;
+
+    @media(max-width:991)
+    {
+        display:flex;
+        width:auto;
+        height:100vh;
+        flex-direction:column;
+    }
 `
 let SidebarTitle = styled.div`
     text-align:center;
