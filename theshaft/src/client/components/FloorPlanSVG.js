@@ -2,6 +2,11 @@ import React, { Component } from "react";
 import styled from 'styled-components';
 
 let FloorPlanWrapper = styled.div`
+  display:flex
+  flex-direction:column;
+  text-align:left;
+  margin-top:7vh;
+
   & rect {
     fill: none;
     pointer-events: all;
@@ -12,6 +17,16 @@ let FloorPlanWrapper = styled.div`
     opacity: 0.3;
   }
 `
+
+let SVGWrapper = styled.div`
+  border: solid;
+  border-width:0.5rem;
+  height:80vh;
+  width:25vw;
+  border-color:${props => props.theme.columbiaBlue}
+
+`
+
 
 export default class FloorPlanSVG extends Component {
   constructor(props) {
@@ -43,7 +58,8 @@ export default class FloorPlanSVG extends Component {
   render() {
     return (
         <FloorPlanWrapper>
-          {this.props.children}
+          FloorPlanWrapper goes here
+          <SVGWrapper/>
         </FloorPlanWrapper>
     );
   }

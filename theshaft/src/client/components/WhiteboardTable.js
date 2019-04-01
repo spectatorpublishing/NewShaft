@@ -72,12 +72,6 @@ export default class WhiteboardTable extends Component {
         }
     }
 
-    componentDidUpdate(oldProps){
-        if (oldProps != this.props){
-            this.setState({roomAvailability : this.props.roomAvailability})
-        }
-    }
-
     render() {
 
         let i = 0;

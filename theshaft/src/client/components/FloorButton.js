@@ -2,13 +2,8 @@ import React, { Component } from "react";
 import styled from 'styled-components';
 
 let NumberBlue = styled.button`
-<<<<<<< HEAD
     width: 2.5rem;
     height: 2.5rem;
-=======
-    width: auto;
-    height: 25px;
->>>>>>> 8cf08f9aa8270987cca7dcae69fac5068a5ed39a
     border: 1px ${props => props.theme.columbiaBlue} solid;
     border-radius: 3px;
     color: ${props => props.theme.white};
@@ -16,13 +11,8 @@ let NumberBlue = styled.button`
     text-align: center;
 `
 let NumberBlack = styled.button`
-<<<<<<< HEAD
     width: 2.5rem;
     height: 2.5rem;
-=======
-    width: auto;
-    height: 25px;
->>>>>>> 8cf08f9aa8270987cca7dcae69fac5068a5ed39a
     border: 1px ${props => props.theme.columbiaBlue} solid;
     border-radius: 3px;
     background-color: white;
@@ -31,7 +21,11 @@ let NumberBlack = styled.button`
 let ButtonTopText= styled.div`
     color: 	#6495ED;
     margin-bottom:1vh;
-    margin-top:5vh;
+    margin-top:7vh;
+`
+
+let FloorButtonWrapper=styled.div`
+    width: 100%; 
 `
 
 let Buttons = styled.div`
@@ -87,17 +81,14 @@ export default class FloorButton extends Component{
                 
             }
         }
-<<<<<<< HEAD
             
         return(
             <div>
-                <ButtonTopText>Filter by number of people in group:</ButtonTopText>
-                <Buttons>{buttons}</Buttons>
+                <FloorButtonWrapper>
+                    <ButtonTopText>Floor Number:</ButtonTopText>
+                    <Buttons>{buttons}</Buttons>
+                </FloorButtonWrapper>
             </div>
         )
-=======
-
-        return <Buttons>{buttons}</Buttons>
->>>>>>> 8cf08f9aa8270987cca7dcae69fac5068a5ed39a
     }
 }

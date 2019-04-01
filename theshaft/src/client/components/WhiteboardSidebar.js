@@ -3,17 +3,11 @@ import styled from 'styled-components';
 
 
 let Sidebar = styled.div`
-<<<<<<< HEAD
     width: 7.5vw;
     height: 100vh;
-    margin: 30% 40% 20% 70% ;
+    margin: 40% 50% 20% 70%;
     display:flex;
     flex-direction:column;
-=======
-    height: 100%;
-    display: flex;
-    flex-wrap: wrap;
->>>>>>> 8cf08f9aa8270987cca7dcae69fac5068a5ed39a
 `
 let SidebarTitle = styled.div`
     text-align:center;
@@ -26,17 +20,9 @@ let SidebarTitle = styled.div`
 
 
 let DormListDesktop = styled.div`
+    display:flex;
+    justify-content:column;
     flex-direction: column;
-<<<<<<< HEAD
-=======
-    text-align: left;
-    width: 20%;
-`
-let DormListMobile = styled.div`
-    flex-direction: row;
-    text-align: left;
-    
->>>>>>> 8cf08f9aa8270987cca7dcae69fac5068a5ed39a
 `
 let Dorm = styled.button`
     padding: .5em;
@@ -89,12 +75,8 @@ export default class WhiteboardSidebar extends React.Component {
         if (isMobile) {
             return (
                 <Sidebar>
-<<<<<<< HEAD
                     <SidebarTitle>Dorms</SidebarTitle>
                     <DormList>
-=======
-                    <DormListMobile>
->>>>>>> 8cf08f9aa8270987cca7dcae69fac5068a5ed39a
                         { 
                                 dormArray.map((dorm) =>
                                     (<Dorm onClick = {() => this.onClick(dorm)}> 
@@ -104,7 +86,7 @@ export default class WhiteboardSidebar extends React.Component {
                         } 
                         
 
-                    </DormListMobile>
+                    </DormList>
                 </Sidebar>
             );
         }
@@ -112,6 +94,7 @@ export default class WhiteboardSidebar extends React.Component {
             return (
                 <div>
                     <Sidebar>
+                    <SidebarTitle>Dorms</SidebarTitle>
                         <DormListDesktop>
                             { 
                                 dormArray.map((dorm) =>

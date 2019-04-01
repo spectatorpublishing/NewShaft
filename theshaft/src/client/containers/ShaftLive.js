@@ -15,6 +15,11 @@ let ShaftLiveContainer = styled.div`
     overflow: hidden;
     flex-direction: row;
 `
+let MobileSVG = styled.div`
+visibility: ${props => props.window<=991 ? "visible":"hidden"};
+
+`
+
 let ShaftLiveContainerMobile = styled.div`
     width: 100%;
     height: 100%;
@@ -27,16 +32,28 @@ let ShaftLiveContainerMobile = styled.div`
 let ColOne = styled.div`
   display: flex;
   width: 20%;
+  @media(max-width: 991px){
+      display:flex;
+      width:40vw;
+  }
 `
 let ColTwo = styled.div`
     display: flex;
     flex-direction: column;
     scroll-behavior: smooth;
-    width: ${({ mobile }) => (mobile ? `100%` : `60%`)};
+    padding-left: 5%;
+    width: ${({ mobile }) => (mobile ? `100%` : `40%`)};
+    @media(max-width: 991px){
+        display: flex;
+        flex-direction: column;
+        scroll-behavior: smooth;
+        width:60vw;
+    }
 `
 
 let ColThree = styled.div`
-
+    width:38vw;
+    padding-left:2vw;
 `
 
 
@@ -164,6 +181,7 @@ export default class ShaftLive extends Component {
           );
       }else{
         return(
+            <div>
             <ShaftLiveContainer>
                 <ColOne>
                     <WhiteboardSidebar
@@ -177,12 +195,17 @@ export default class ShaftLive extends Component {
                     <WhiteboardTable
                         roomAvailability={this.state.floorData} />
                 </ColTwo>
-
+   
                 <ColThree>
-                    <FloorPlanSVG/> 
+                    <FloorPlanSVG></FloorPlanSVG>
                 </ColThree>
-
+                
             </ShaftLiveContainer>
+
+            { width <= 991 && (<FloorPlanSVG/>)}
+
+            </div>
+
        )
       }
         
