@@ -15,10 +15,18 @@ let ShaftLiveContainer = styled.div`
     overflow: hidden;
     flex-direction: row;
 `
-let MobileSVG = styled.div`
-visibility: ${props => props.window<=991 ? "visible":"hidden"};
 
+let SVGContainer = styled.div`
+    display:flex;
+    flex-direction:column;
+    height:auto;
+    margin-top:6vh;
+    width: 40vw;
+    height:auto;
+    object-position:cover;
+    padding-right:3vw;
 `
+
 
 let ShaftLiveContainerMobile = styled.div`
     width: 100%;
@@ -34,7 +42,7 @@ let ColOne = styled.div`
   width: 20%;
   @media(max-width: 991px){
       display:flex;
-      width:40vw;
+      width:50vw;
   }
 `
 let ColTwo = styled.div`
@@ -52,8 +60,7 @@ let ColTwo = styled.div`
 `
 
 let ColThree = styled.div`
-    width:38vw;
-    padding-left:2vw;
+    width:50vw;
 `
 
 let floorplanData = [
@@ -240,15 +247,16 @@ export default class ShaftLive extends Component {
                     <WhiteboardTable
                         roomAvailability={this.state.floorData} />
                 </ColTwo>
-                
-                <ColThree>
-                    <div className="border">
+                {width > 991 &&
+                (<ColThree>
+                    <SVGContainer>
+                    <div>Floor Plan</div>
                     <FloorPlanSVG name="River 6" data={floorplanData} cutoffs={[]}></FloorPlanSVG>
-                    </div>
-                </ColThree>
+                    </SVGContainer>
+                </ColThree>)}
             </ShaftLiveContainer>
 
-            { width <= 991 && (<FloorPlanSVG/>)}
+            { width <= 991 && (<FloorPlanSVG name="River 6" data={floorplanData} cutoffs={[]}/>)}
 
             </div>
 
