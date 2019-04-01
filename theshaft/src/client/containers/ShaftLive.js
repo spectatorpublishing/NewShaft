@@ -251,12 +251,12 @@ export default class ShaftLive extends Component {
                 (<ColThree>
                     <SVGContainer>
                     <div>Floor Plan</div>
-                    <FloorPlanSVG name="River 6" data={floorplanData} cutoffs={[]}></FloorPlanSVG>
+                    <FloorPlanSVG dorm="River Hall" floor="6" data={floorplanData} cutoffs={[]}></FloorPlanSVG>
                     </SVGContainer>
                 </ColThree>)}
             </ShaftLiveContainer>
 
-            { width <= 991 && (<FloorPlanSVG name="River 6" data={floorplanData} cutoffs={[]}/>)}
+            { width <= 991 && (<FloorPlanSVG dorm="River Hall" floor="6" data={floorplanData} cutoffs={[]}/>)}
 
             </div>
 

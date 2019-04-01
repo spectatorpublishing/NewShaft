@@ -125,3 +125,5 @@ export const CUTOFFS = {
     "Low Demand (G + D + I lines)": "20/2994"
   }
 };
+
+export const SUITE_PICK = new Set(['47 CLAREMONT', 'CARLTON ARMS', 'EAST CAMPUS', 'HARMONY', 'HOGAN', 'RUGGLES']);

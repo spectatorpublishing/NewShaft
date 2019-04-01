@@ -13,7 +13,7 @@ export const MAPPING = {
   },
   Broadway: {
     single: "Single",
-    double: "Double"
+    double: "Small Double (39/40 lines)"
   },
   "Carlton Arms": {
     "suite-3": "3-Person Suite",
@@ -72,6 +72,6 @@ export const MAPPING = {
     single: "Single"
   },
   Woodbridge: {
-    "apartment-1br": "Medium Demand (all others)"
+    "apartment-1br": "Low Demand (G + D + I lines)"
   }
 };
