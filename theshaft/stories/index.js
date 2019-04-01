@@ -9,10 +9,6 @@ import ProCon from '../src/client/components/ProCon.js';
 import QuickReview from '../src/client/components/QuickReview.js';
 import Review from '../src/client/components/Review.js';
 import FloorPlan from '../src/client/components/FloorPlan.js';
-<<<<<<< HEAD
-=======
-// import sampleFloor from '../src/client/assets/floor_plans/47 Claremont 1.jpg';
->>>>>>> 8cf08f9aa8270987cca7dcae69fac5068a5ed39a
 import FilterButton from '../src/client/components/FilterButton.js';
 import FilterComponent from '../src/client/components/FilterComponent.js';
 import Expander from '../src/client/components/Expander.js';

@@ -5,29 +5,25 @@ import ReactTooltip from 'react-tooltip';
 import "../css/FloorPlanSVG.css";
 
 let FloorPlanWrapper = styled.div`
-  display:flex
-  flex-direction:column;
-  text-align:left;
-  margin-top:7vh;
-
   & rect {
-    fill: none;
-    pointer-events: all;
-  }
-
-  & rect:hover {
-    fill: red;
     opacity: 0.3;
+    pointer-events: all;
   }
 `
 
-let SVGWrapper = styled.div`
-  border: solid;
-  border-width:0.5rem;
-  height:80vh;
-  width:25vw;
-  border-color:${props => props.theme.columbiaBlue}
+let TooltipBox = styled.div`
+  color: ${props => props.theme.white};
+  text-shadow: ${props => props.theme.shadow};
+`
 
+let TooltipText = styled.p`
+  color: ${props => props.theme.white};
+  text-shadow: ${props => props.theme.shadow};
+`
+
+let TooltipBold = styled.b`
+  color: ${props => props.theme.white};
+  text-shadow: ${props => props.theme.shadow};
 `
 
 export default class FloorPlanSVG extends Component {
@@ -117,7 +113,8 @@ export default class FloorPlanSVG extends Component {
 
     let rectsArray = document.querySelectorAll("rect");
     rectsArray.forEach((rect) => {
-      rect.addEventListener("click", this.handleRectClick);
+      // rect.addEventListener("mouseover", this.hoverStart);
+      rect.addEventListener("click", this.clickStart);
     });
   }
 
@@ -126,7 +123,8 @@ export default class FloorPlanSVG extends Component {
   componentWillUnmount() {
     let rectsArray = document.querySelectorAll("rect");
     rectsArray.forEach((rect) => {
-      rect.removeEventListener("click", this.handleRectClick);
+      // rect.removeEventListener("mouseover", this.hoverStart);
+      rect.removeEventListener("click", this.clickStart);
     });
   }
 
