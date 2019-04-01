@@ -4,37 +4,67 @@ import styled from 'styled-components';
 let NumberBlue = styled.button`
     width: 2.5rem;
     height: 2.5rem;
-    border: 1px ${props => props.theme.columbiaBlue} solid;
-    border-radius: 3px;
-    color: ${props => props.theme.white};
-    background-color: ${props => props.theme.columbiaBlue};  
+    color: ${props => props.theme.columbiaBlue};
+    background-color: ${props => props.theme.white};
+    border: none;
+    font-size: 1rem;
+    @media only screen and (min-width: 992px){
+        border: 1px ${props => props.theme.columbiaBlue} solid;
+        border-radius: 3px;
+        color: ${props => props.theme.white};
+        background-color: ${props => props.theme.columbiaBlue};  
+    }
     text-align: center;
 `
 let NumberBlack = styled.button`
     width: 2.5rem;
     height: 2.5rem;
-    border: 1px ${props => props.theme.columbiaBlue} solid;
-    border-radius: 3px;
-    background-color: white;
+    color: ${props => props.theme.black};
+    background-color: ${props => props.theme.white};
+    border: none;
+    font-size: 1rem;
+    @media only screen and (min-width: 992px){
+        border: 1px ${props => props.theme.columbiaBlue} solid;
+        border-radius: 3px;
+        background-color: ${props => props.theme.white};
+    }
     text-align: center;
 `
 let ButtonTopText= styled.div`
-    color: 	#6495ED;
-    margin-bottom:1vh;
-    margin-top:7vh;
+    color: 	${props => props.theme.white};
+    font-weight: bold;
+    margin-top: 1rem;
+    margin-bottom:0.5rem;
+    text-align: center;
+    @media only screen and (min-width: 992px){
+        margin-top:3.5rem;
+        color: 	${props => props.theme.columbiaBlue};
+    }
 `
 
 
 
 
 let FloorButtonWrapper=styled.div`
-    width: 100%; 
+    padding-bottom: 1rem;
 `
 
 let Buttons = styled.div`
     display: flex;
     flex-direction:row;
-    margin-bottom:4vh;
+    background: ${props => props.theme.white};
+    max-width: 95%; 
+    margin: 0 2.5%;
+    overflow: hidden;
+    border-radius: 10px;
+    @media only screen and (min-width: 992px){
+        background: transparent;
+        width: 100%; 
+        margin: 0;
+        overflow: visible;
+        border-radius: 0;
+        margin-bottom:4vh;
+    }
 `
 
 export default class FloorButton extends Component{
@@ -88,7 +118,7 @@ export default class FloorButton extends Component{
         return(
             <div>
                 <FloorButtonWrapper>
-                    <ButtonTopText>Floor Number:</ButtonTopText>
+                    <ButtonTopText>Floor</ButtonTopText>
                     <Buttons>{buttons}</Buttons>
                 </FloorButtonWrapper>
             </div>

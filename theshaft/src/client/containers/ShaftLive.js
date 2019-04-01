@@ -7,6 +7,10 @@ import FloorPlanSVG from "../components/FloorPlanSVG"
 import _ from "lodash"
 import WhiteboardSidebar from '../components/WhiteboardSidebar.js';
 
+let BlueBGMobile = styled.div`
+  background-color: ${props => props.theme.columbiaBlue};
+`
+
 let ShaftLiveContainer = styled.div`
     display: flex;
     width: 100%;
@@ -31,12 +35,9 @@ let FloorPlanTitle = styled.h3`
 
 
 let ShaftLiveContainerMobile = styled.div`
-    width: 100%;
-    height: 100%;
-    padding: 0 auto;
     overflow: hidden;
-    flex-direction: row;
-    justify-content: center;
+    flex-direction: column;
+    align-items: center;
 `
 
 let ColOne = styled.div`
@@ -63,6 +64,27 @@ let ColTwo = styled.div`
 
 let ColThree = styled.div`
     width:50vw;
+`
+
+let ToggleMobileView = styled.div`
+    height: 50px;
+    display: flex;
+    position: relative;
+    z-index: 1;
+    align-items: center;
+    color: ${props => props.theme.black};
+    text-transform: uppercase;
+    font-weight: bold;
+    box-shadow: 0 10px 10px -10px rgba(0, 0, 0, 0.3);
+    &>div{
+      flex-grow: 1;
+      text-align: center;
+      margin: 0 10%;
+      padding: 10px 0;
+    }
+    &>div:nth-child(2n+${props => String(props.currActive)}){
+      border-bottom: 5px solid ${props => props.theme.columbiaBlue};
+    }
 `
 
 let floorplanData = [
@@ -162,6 +184,7 @@ export default class ShaftLive extends Component {
             init: true,
             // numFloors: this.state.numFloors,
             //handleChange: null, //not sure what to type this as
+            mobileShowFloorPlan: false
         }
 
         this.handleFloorChange = this.handleFloorChange.bind(this)
@@ -225,16 +248,36 @@ export default class ShaftLive extends Component {
         this.setState({dorm : dorm, init: false}, () => {this.fetchFloorNums(this.state.dorm)})
     }
 
+    toggle
+
     render() {
       const { width } = this.state;
       const isMobile = width <= 700;
 
       if (isMobile) {
           return (
-              <ShaftLiveContainerMobile>
-                  <WhiteboardSidebar sidebarModification={this.handleDormChange}></WhiteboardSidebar>
-                  <WhiteboardTable roomAvailability={sampleRoomData}></WhiteboardTable>
-              </ShaftLiveContainerMobile>
+            <div>
+                <ShaftLiveContainerMobile>
+                  <BlueBGMobile>
+                  <WhiteboardSidebar
+                          sidebarModification={this.handleDormChange}
+                          currDorm = {this.state.dorm}
+                  />
+                  <FloorButton 
+                          floorNums={this.state.floorNums} 
+                          handleChange={this.handleFloorChange}/>
+                </BlueBGMobile>
+                <ToggleMobileView currActive={this.state.mobileShowFloorPlan ? 0 : 1}>
+                  <div onClick={()=>this.setState({mobileShowFloorPlan: false})}>Live Feed</div>
+                  <div onClick={()=>this.setState({mobileShowFloorPlan: true})}>Floor Plans</div>
+                </ToggleMobileView>
+                { this.state.mobileShowFloorPlan
+                    ? <FloorPlanSVG dorm={this.state.dorm} floor={this.state.floor} data={floorplanData} cutoffs={[]}/>
+                    : <WhiteboardTable
+                    roomAvailability={this.state.floorData} />
+                }
+                </ShaftLiveContainerMobile>
+            </div>
           );
       }else{
         return(
@@ -260,9 +303,6 @@ export default class ShaftLive extends Component {
                     </SVGContainer>
                 </ColThree>)}
             </ShaftLiveContainer>
-
-            { width <= 991 && (<FloorPlanSVG dorm="River Hall" floor="6" data={floorplanData} cutoffs={[]}/>)}
-
             </div>
 
        )
