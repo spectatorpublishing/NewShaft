@@ -270,45 +270,132 @@ storiesOf('NavBar', module)
 storiesOf('Maps', module)
   .add('map', () => <Maps latitudes={[40.7128, 40.7129, 40.7128]} longitudes={[-74.006, -74.007, -74.008]} popupInfo={["carman", "mcbain", "JJ"]}/>);
 
+let floorplanData = [
+  {
+    "DORM": "47 Claremont",
+      "ROOM": "4",
+      "FLOOR": "1",
+      "ROOM_TYPE": "suite-3",
+      "NEW_PRIORITY": "30",
+      "NEW_NUM": "3000"
+  },
+  {
+    "DORM": "47 Claremont",
+      "ROOM": "3",
+      "FLOOR": "1",
+      "ROOM_TYPE": "suite-4",
+      "NEW_PRIORITY": "30",
+      "NEW_NUM": "3000"
+  },
+  {
+    "DORM": "47 Claremont",
+      "ROOM": "1",
+      "FLOOR": "1",
+      "ROOM_TYPE": "suite-6",
+      "NEW_PRIORITY": "30",
+      "NEW_NUM": "3000"
+  },
+  {
+    "DORM": "47 Claremont",
+    "ROOM": "2",
+    "FLOOR": "1",
+    "ROOM_TYPE": "suite-5",
+    "NEW_PRIORITY": "30",
+    "NEW_NUM": "3000"
+  },
+  {
+    "DORM": "47 Claremont",
+      "ROOM": "24",
+      "FLOOR": "2",
+      "ROOM_TYPE": "suite-3",
+      "NEW_PRIORITY": "30",
+      "NEW_NUM": "3000"
+  },
+  {
+    "DORM": "47 Claremont",
+      "ROOM": "23",
+      "FLOOR": "2",
+      "ROOM_TYPE": "suite-4",
+      "NEW_PRIORITY": "30",
+      "NEW_NUM": "3000"
+  },
+  {
+    "DORM": "47 Claremont",
+      "ROOM": "21",
+      "FLOOR": "2",
+      "ROOM_TYPE": "suite-7",
+      "NEW_PRIORITY": "30",
+      "NEW_NUM": "3000"
+  },
+  {
+    "DORM": "47 Claremont",
+    "ROOM": "22",
+    "FLOOR": "2",
+    "ROOM_TYPE": "suite-7",
+    "NEW_PRIORITY": "30",
+    "NEW_NUM": "3000"
+  },
+  {
+    "DORM": "River Hall",
+    "ROOM": "606",
+    "FLOOR": "6",
+    "ROOM_TYPE": "single",
+    "NEW_PRIORITY": "",
+    "NEW_NUM": ""
+  },
+  {
+    "DORM": "River Hall",
+    "ROOM": "607",
+    "FLOOR": "6",
+    "ROOM_TYPE": "single",
+    "NEW_PRIORITY": "",
+    "NEW_NUM": ""
+  }
+];
+
+let cutoffData = [
+
+];
+
 storiesOf('FloorPlanSVG', module)
-  .add('47 Claremont 1 floorplan', () => <FloorPlanSVG name="47 Claremont 1"></FloorPlanSVG>);
+  .add('47 Claremont 1 floorplan', () => <FloorPlanSVG name="47 Claremont 2" data={floorplanData} cutoffs={cutoffData}></FloorPlanSVG>);
 
 
   let sampleRoomData = [
     {
       "ROOM": "101",
-      "PRIORITY": "30",
-      "LOTTERY": "3000"
+      "NEW_PRIORITY": "30",
+      "NEW_NUM": "3000"
     },
     {
       "ROOM": "102",
-      "PRIORITY": "20",
-      "LOTTERY": "2050"
+      "NEW_PRIORITY": "20",
+      "NEW_NUM": "2050"
     },
     {
       "ROOM": "103",
-      "PRIORITY": "30",
-      "LOTTERY": "1010"
+      "NEW_PRIORITY": "30",
+      "NEW_NUM": "1010"
     },
     {
       "ROOM": "104",
-      "PRIORITY": "10",
-      "LOTTERY": "2510"
+      "NEW_PRIORITY": "10",
+      "NEW_NUM": "2510"
     },
     {
       "ROOM": "105",
-      "PRIORITY": "20",
-      "LOTTERY": "1450"
+      "NEW_PRIORITY": "20",
+      "NEW_NUM": "1450"
     },
     {
       "ROOM": "106",
-      "PRIORITY": "30",
-      "LOTTERY": "900"
+      "NEW_PRIORITY": "30",
+      "NEW_NUM": "900"
     },
     {
       "ROOM": "107",
-      "PRIORITY": "10",
-      "LOTTERY": "1200"
+      "NEW_PRIORITY": "10",
+      "NEW_NUM": "1200"
     }
   ]
 

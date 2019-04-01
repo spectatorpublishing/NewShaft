@@ -26,49 +26,6 @@ let TooltipBold = styled.b`
   text-shadow: ${props => props.theme.shadow};
 `
 
-let data = [
-  {
-      "ROOM": "4A",
-      "PRIORITY": "30",
-      "LOTTERY": "3000"
-  },
-  {
-      "ROOM": "4B",
-      "PRIORITY": "30",
-      "LOTTERY": "3000"
-  },
-  {
-      "ROOM": "4C",
-      "PRIORITY": "30",
-      "LOTTERY": "3000"
-  },
-  {
-    "ROOM": "1A",
-    "PRIORITY": "30",
-    "LOTTERY": "3000"
-  },
-  {
-    "ROOM": "1B",
-    "PRIORITY": "30",
-    "LOTTERY": "3000"
-  },
-  {
-    "ROOM": "1C",
-    "PRIORITY": "30",
-    "LOTTERY": "3000"
-  },
-  {
-    "ROOM": "1D",
-    "PRIORITY": "",
-    "LOTTERY": ""
-  },
-  {
-    "ROOM": "1E",
-    "PRIORITY": "",
-    "LOTTERY": ""
-  }
-]
-
 export default class FloorPlanSVG extends Component {
   constructor(props) {
     super(props);
@@ -77,13 +34,13 @@ export default class FloorPlanSVG extends Component {
     let id = this.props.name.replace(/\ /g, "-");
     // Generate AWS url
     let url = this.props.name.replace(/\ /g, "+");
-    //url = "https://s3.amazonaws.com/shaft-dorm-floorplans/" + url + ".jpg";
-    url = "https://s3.amazonaws.com/shaft-svg/"+ url +".svg";
+    url = "https://s3.amazonaws.com/shaft-dorm-floorplans/" + url + ".jpg";
+    // url = "https://s3.amazonaws.com/shaft-svg/"+ url +".svg";
 
     this.state = {
       floorplanId: id,
       floorplanUrl: url,
-      floorplanData: data,
+      floorplanData: this.props.data,
       floorplanDic : {}
     };
 
@@ -96,15 +53,22 @@ export default class FloorPlanSVG extends Component {
 
     for (var i = 0; i  < this.state.floorplanData.length; i++) {
       let roomFromDb = this.state.floorplanData[i];
-      floorplanDic[roomFromDb["ROOM"]] = {"PRIORITY": roomFromDb["PRIORITY"], "LOTTERY" : roomFromDb["LOTTERY"]};
+      floorplanDic[roomFromDb["ROOM"]] = {
+        "PRIORITY": roomFromDb["PRIORITY"],
+        "LOTTERY" : roomFromDb["LOTTERY"]
+      };
     }
 
     this.setState({floorplanDic : floorplanDic });
   }
 
-  styleSVG(svg) {
+  styleSVG(error, svg) {
+    console.log(error);
+    console.log(svg);
+
     // Get the parent div of the SVG element
-    let svgBoundingDivEl = document.getElementById(this.state.floorplanId);
+    // let svgBoundingDivEl = document.getElementById(this.state.floorplanId);
+    let svgBoundingDivEl = svg;
     // Remove any SVG styling within the file
     if (svgBoundingDivEl.querySelector("style")) {
       svgBoundingDivEl.querySelector("style").remove();
@@ -136,12 +100,16 @@ export default class FloorPlanSVG extends Component {
 
     // Override the xlink:href attribute (which is deprecated)
     // with an href that links to the corresponding floorplan JPG
-    let baseImage = svgBoundingDivEl.querySelectorAll("image")[0];
+    let imageElements = svgBoundingDivEl.querySelectorAll("image");
+    console.log(imageElements);
+    let baseImage = imageElements[0];
     console.log(baseImage);
     let xlinkHref = baseImage.getAttributeNode("xlink:href");
     console.log(xlinkHref);
     baseImage.removeAttributeNode(xlinkHref);
-    baseImage.setAttribute("href", this.state.floorplanUrl);
+    if(xlinkHref) {
+      baseImage.setAttribute("href", this.state.floorplanUrl);
+    }
 
     let rectsArray = document.querySelectorAll("rect");
     rectsArray.forEach((rect) => {
@@ -181,6 +149,12 @@ export default class FloorPlanSVG extends Component {
   }
 
   getDataFromSvg(el) {
+    // Check if element is one level under svg
+    // If it is, this means it's a floor (not a suite)
+    // And that this floorplan doesn't have suites
+    if (el.parentElement.tagName.toLowerCase() == "svg") {
+      return "";
+    }
     return el.dataset.name ? el.dataset.name : el.getAttribute("id");
   }
 
@@ -214,8 +188,9 @@ export default class FloorPlanSVG extends Component {
   render() {
     return (
         <FloorPlanWrapper id={this.state.floorplanId}>
-          <ReactSVG src="https://s3.amazonaws.com/shaft-svg/47+Claremont+1.svg" 
-          onInjected={(error, svg) => this.styleSVG()}/>
+          <ReactSVG src="https://s3.amazonaws.com/shaft-svg/47+Claremont+2.svg" 
+          onInjected={(error, svg) => this.styleSVG(error, svg)}
+          />
 
           <ReactTooltip 
             id='global' 
