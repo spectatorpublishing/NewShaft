@@ -56,7 +56,6 @@ export default class WhiteboardSidebar extends React.Component {
     }
 
     onClick(dorm) {
-        console.log(dorm)
         this.props.sidebarModification(dorm)
     }
 

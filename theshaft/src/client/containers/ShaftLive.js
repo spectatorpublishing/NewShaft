@@ -26,6 +26,8 @@ let SVGContainer = styled.div`
     object-position:cover;
     padding-right:3vw;
 `
+let FloorPlanTitle = styled.h3`
+    margin-bottom: 20px;`
 
 
 let ShaftLiveContainerMobile = styled.div`
@@ -155,15 +157,16 @@ export default class ShaftLive extends Component {
             dorm: "Broadway Hall",
             floor: "3",
             floorNums: null,
-            floorData: []
-            ,
+            floorData: [],
             width: window.innerWidth,
+            init: true,
             // numFloors: this.state.numFloors,
             //handleChange: null, //not sure what to type this as
         }
 
         this.handleFloorChange = this.handleFloorChange.bind(this)
         this.handleDormChange = this.handleDormChange.bind(this)
+        this.handleDormChange(this.state.dorm);
     }
 
     componentWillMount() {
@@ -219,7 +222,7 @@ export default class ShaftLive extends Component {
     }
 
     handleDormChange(dorm){
-        this.setState({dorm : dorm}, () => {this.fetchFloorNums(this.state.dorm)})
+        this.setState({dorm : dorm, init: false}, () => {this.fetchFloorNums(this.state.dorm)})
     }
 
     render() {
@@ -229,7 +232,7 @@ export default class ShaftLive extends Component {
       if (isMobile) {
           return (
               <ShaftLiveContainerMobile>
-                  <WhiteboardSidebar sidebarModification={(dorm) => console.log(dorm)}></WhiteboardSidebar>
+                  <WhiteboardSidebar sidebarModification={this.handleDormChange}></WhiteboardSidebar>
                   <WhiteboardTable roomAvailability={sampleRoomData}></WhiteboardTable>
               </ShaftLiveContainerMobile>
           );
@@ -252,8 +255,8 @@ export default class ShaftLive extends Component {
                 {width > 991 &&
                 (<ColThree>
                     <SVGContainer>
-                    <div>Floor Plan</div>
-                    <FloorPlanSVG dorm={this.state.dorm} floor={this.state.floor} data={this.state.floorData} cutoffs={[]}></FloorPlanSVG>
+                    <FloorPlanTitle>Interactive Floor Plans</FloorPlanTitle>
+                    <FloorPlanSVG dorm={this.state.dorm} floor={this.state.floor} data={this.state.floorData} cutoffs={[]} ></FloorPlanSVG>
                     </SVGContainer>
                 </ColThree>)}
             </ShaftLiveContainer>
