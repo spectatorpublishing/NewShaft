@@ -2,8 +2,8 @@ import React, { Component } from "react";
 import styled from 'styled-components';
 
 let NumberBlue = styled.button`
-    width: 25px;
-    height: 25px;
+    width: 2.5rem;
+    height: 2.5rem;
     border: 1px ${props => props.theme.columbiaBlue} solid;
     border-radius: 3px;
     color: ${props => props.theme.white};
@@ -11,16 +11,27 @@ let NumberBlue = styled.button`
     text-align: center;
 `
 let NumberBlack = styled.button`
-    width: 25px;
-    height: 25px;
+    width: 2.5rem;
+    height: 2.5rem;
     border: 1px ${props => props.theme.columbiaBlue} solid;
     border-radius: 3px;
     background-color: white;
     text-align: center;
 `
+let ButtonTopText= styled.div`
+    color: 	#6495ED;
+    margin-bottom:1vh;
+    margin-top:7vh;
+`
+
+let FloorButtonWrapper=styled.div`
+    width: 100%; 
+`
 
 let Buttons = styled.div`
-    display: inline-block;
+    display: flex;
+    flex-direction:row;
+    margin-bottom:4vh;
 `
 
 export default class FloorButton extends Component{
@@ -28,35 +39,56 @@ export default class FloorButton extends Component{
         super(props)
 
         this.state = {
-            dorm: this.props.dorm,
-            numFloors : this.props.numFloors,
+            floorNums : this.props.floorNums,
             handleChange: this.props.handleChange,
-            currentFloor: 1
+            currentFloorIndex: -1 
+        }
+    }
+    
+    componentDidUpdate(oldProps){
+        if(JSON.stringify(oldProps) != JSON.stringify(this.props)){
+            console.log("old: " + JSON.stringify(oldProps))
+            console.log("new: " + JSON.stringify(this.props))
+            this.setState({
+                floorNums : this.props.floorNums,
+                currentFloorIndex : -1
+            })
         }
     }
 
     render(){
-        console.log("Current Floor: " + this.state.currentFloor)
         let buttons = []
-        for(let i = 1; i < this.state.numFloors + 1; i++){
-            if(i == this.state.currentFloor){
-                buttons.push(<NumberBlue>{i}</NumberBlue>)
-            }
-            else{
-                buttons.push(<NumberBlack onClick={() => {
-                    this.setState({currentFloor: i})
-                    fetch('/api/getWhiteboardRooms', {
-                        method: 'POST',
-                        headers: {
-                            'Content-Type': 'application/json'
-                        },
-                        body: JSON.stringify({dorm: this.state.dorm, floor: this.state.currentFloor})
-                        }).then(res => res.json())
-                        .then(response => {this.state.handleChange(response)}
-                    );      
-                }}>{i}</NumberBlack>)
+        if (this.state.floorNums){
+            buttons = this.state.floorNums.map((floor, idx) => {
+                let floorNum = floor["FLOOR"]
+                if(idx == this.state.currentFloorIndex){
+                    return <NumberBlue onClick={() => {
+                        this.state.handleChange(floorNum)
+                    }}>{floorNum}</NumberBlue>
+                }
+                else{
+                    return <NumberBlack onClick={() => {
+                        this.setState({currentFloorIndex : idx})
+                        this.state.handleChange(floorNum)
+                    }}>{floorNum}</NumberBlack>
+                }
+            })
+
+            if(this.state.currentFloorIndex == -1){
+                console.log("initializing")
+                this.state.handleChange(this.state.floorNums[0]["FLOOR"])
+                this.setState({currentFloorIndex : 0})
+                
             }
         }
-        return <Buttons>{buttons}</Buttons>
+            
+        return(
+            <div>
+                <FloorButtonWrapper>
+                    <ButtonTopText>Floor Number:</ButtonTopText>
+                    <Buttons>{buttons}</Buttons>
+                </FloorButtonWrapper>
+            </div>
+        )
     }
 }

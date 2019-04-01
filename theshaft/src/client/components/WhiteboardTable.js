@@ -13,21 +13,23 @@ let Table = styled.div`
 `
 let Map = styled.div`
     overflow-y: scroll;
-    height: 11rem;
+    height: 65vh;
     font-weight: bold;
 `
 
 let Wrapper = styled.div`
-    width: 50%;
-`
+    width: 80%;`
 
 let TitleText = styled.div`
     display: flex;
     justify-content: flex-start;
     flex-flow: row-wrap;
+    border-bottom: solid;
+    border-width:  3px;
+    border-color:${props => props.theme.lightGray};
 `
 let LeftTitle = styled.h4`
-    margin-bottom: 1rem;
+    margin-bottom: .5rem;
     width:50%;
     color: ${props => props.theme.columbiaBlue}
 `
@@ -63,17 +65,18 @@ let TooltipText = styled.span`
 
 export default class WhiteboardTable extends Component {
     constructor(props) {
-        super(props);
-
+        super(props); 
     }
 
     render() {
 
         let i = 0;
         let roomMap = []; 
-        for(i=0; i < this.props.roomAvailability.length; i++){
-            roomMap.push([this.props.roomAvailability[i]["ROOM"], this.props.roomAvailability[i]["PRIORITY"]+"/"+this.props.roomAvailability[i]["LOTTERY"]]);
-        }
+        if(this.props.roomAvailability){
+            for(i=0; i < this.props.roomAvailability.length; i++){
+                roomMap.push([this.props.roomAvailability[i]["ROOM"], this.props.roomAvailability[i]["NEW_PRIORITY"]+"/"+this.props.roomAvailability[i]["NEW_NUM"]]);
+            }
+        }           
 
         const AvailabilityMapped = roomMap.map((el, i)=>{
 			if(el[1] && el[1] != "" && el[1] != "0" && el[1] != " "){
@@ -90,8 +93,8 @@ export default class WhiteboardTable extends Component {
         return (
 			<Wrapper>
                 <TitleText>
-                    <LeftTitle>Room Number</LeftTitle>
-                    <RightTitle>Lottery Number</RightTitle>
+                        <LeftTitle>Room Number</LeftTitle>
+                        <RightTitle>Lottery Number</RightTitle>
                     <Question data-tip>?</Question>
                     <ReactToolTip><TooltipText>shows this year's (if taken) or last year's (if available) lottery number for this room</TooltipText></ReactToolTip>
                 </TitleText>

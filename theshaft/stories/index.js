@@ -36,12 +36,13 @@ import FloorButton from "../src/client/components/FloorButton.js";
 
 storiesOf('FloorButton', module)
   .add('FloorButton', () =>
-    <FloorButton dorm="Carman Hall" numFloors={10} />)
+    <FloorButton dorm="Carman Hall" floorNums={[10]} />)
 
 storiesOf('TestSVG', module)
   .add('TestSVG', () => 
     <TestSVG dorm="Carman Hall"/>
   );
+// import WhiteboardSidebar from "../src/client/components/WhiteboardSidebar.js";
 
 storiesOf('SpectrumSidebar', module)
   .add('SpectrumSidebar', () =>
@@ -88,6 +89,8 @@ storiesOf('PhotoBanner', module)
   .add('for dorm pages', () =>
         <PhotoBanner bannerImages = {bannerImages}></PhotoBanner>);
 
+storiesOf('WhiteboardTable', module)
+  .add('Whiteboard Table', () => <WhiteboardTable roomAvailability={sampleRoomData}/>)
 
 storiesOf('DormButton', module)
   .add('dorm button', () => <DormButton name="ADI House" address="21 Savage St." sundial_distance="12 minutes" description="It's lit"/>);
