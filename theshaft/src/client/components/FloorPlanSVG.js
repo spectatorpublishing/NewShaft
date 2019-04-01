@@ -34,13 +34,13 @@ export default class FloorPlanSVG extends Component {
     let id = this.props.name.replace(/\ /g, "-");
     // Generate AWS url
     let url = this.props.name.replace(/\ /g, "+");
-    url = "https://s3.amazonaws.com/shaft-dorm-floorplans/" + url + ".jpg";
-    // url = "https://s3.amazonaws.com/shaft-svg/"+ url +".svg";
+    let jpgUrl = "https://s3.amazonaws.com/shaft-dorm-floorplans/" + url + ".jpg";
+    let svgUrl = "https://s3.amazonaws.com/shaft-svg/"+ url +".svg";
 
     this.state = {
       floorplanId: id,
-      floorplanUrl: url,
-      floorplanData: this.props.data,
+      floorplanJpg: jpgUrl,
+      floorplanSvg: svgUrl,
       floorplanDic : {}
     };
 
@@ -51,11 +51,11 @@ export default class FloorPlanSVG extends Component {
   componentDidMount() {
     var floorplanDic = {};
 
-    for (var i = 0; i  < this.state.floorplanData.length; i++) {
-      let roomFromDb = this.state.floorplanData[i];
+    for (var i = 0; i  < this.props.data.length; i++) {
+      let roomFromDb = this.props.data[i];
       floorplanDic[roomFromDb["ROOM"]] = {
-        "PRIORITY": roomFromDb["PRIORITY"],
-        "LOTTERY" : roomFromDb["LOTTERY"]
+        "NEW_PRIORITY": roomFromDb["NEW_PRIORITY"],
+        "NEW_NUM" : roomFromDb["NEW_NUM"]
       };
     }
 
@@ -74,12 +74,12 @@ export default class FloorPlanSVG extends Component {
       svgBoundingDivEl.querySelector("style").remove();
     }
 
-    for (var i = 0; i  < this.state.floorplanData.length; i++) {
-      let roomFromDb = this.state.floorplanData[i];
+    for (var i = 0; i  < this.props.data.length; i++) {
+      let roomFromDb = this.props.data[i];
 
       document.querySelectorAll("rect").forEach((roomEl) => {
         let suiteEl = roomEl.parentElement;
-        let roomFromSvg = this.getDataFromSvg(suiteEl) + this.getDataFromSvg(roomEl);
+        let roomFromSvg = this.getRoomNumber(this.getDataFromSvg(suiteEl), this.getDataFromSvg(roomEl));
         // Check if the room labeled on the SVG matches the name in the db
         if (roomFromDb["ROOM"] == roomFromSvg) {
           // Attach data attributes for react-tooltip
@@ -88,7 +88,7 @@ export default class FloorPlanSVG extends Component {
           ReactTooltip.rebuild();
 
           // Check if lottery number exists for it (i.e. it's already taken)
-          if (roomFromDb["PRIORITY"]) {
+          if (roomFromDb["NEW_PRIORITY"]) {
             console.log("MATCH! " + roomFromDb["ROOM"] + " " + roomFromSvg);
             roomEl.setAttribute("fill", "red");
           } else {
@@ -108,7 +108,7 @@ export default class FloorPlanSVG extends Component {
     console.log(xlinkHref);
     baseImage.removeAttributeNode(xlinkHref);
     if(xlinkHref) {
-      baseImage.setAttribute("href", this.state.floorplanUrl);
+      baseImage.setAttribute("href", this.state.floorplanJpg);
     }
 
     let rectsArray = document.querySelectorAll("rect");
@@ -158,6 +158,14 @@ export default class FloorPlanSVG extends Component {
     return el.dataset.name ? el.dataset.name : el.getAttribute("id");
   }
 
+  getRoomNumber(suite, room) {
+    const exceptions = new Set(["600 W 113th", "Watt Hall", "Wien Hall"]);
+    if (exceptions.has(this.props.data[0]["DORM"])) {
+      return suite + room;
+    }
+    return suite + room;
+  }
+
   getTooltipContent(room) {
     let roomDic = this.state.floorplanDic[room];
 
@@ -166,12 +174,12 @@ export default class FloorPlanSVG extends Component {
       return <TooltipBox><TooltipText>Not Available</TooltipText></TooltipBox>
     }
     
-    if (roomDic["PRIORITY"] == "") {
+    if (roomDic["NEW_PRIORITY"] == "") {
       // Not taken yet (Green)
       return <TooltipBox>
       <TooltipText>Room: <TooltipBold>{room}</TooltipBold></TooltipText>
       <TooltipText>
-        Last Year's Cutoff: <TooltipBold>{roomDic["PRIORITY"] + " / " + roomDic["LOTTERY"]}</TooltipBold>
+        Last Year's Cutoff: <TooltipBold>{roomDic["NEW_PRIORITY"] + " / " + roomDic["NEW_NUM"]}</TooltipBold>
       </TooltipText>
     </TooltipBox>
     }
@@ -180,7 +188,7 @@ export default class FloorPlanSVG extends Component {
     return <TooltipBox>
       <TooltipText>Room: <TooltipBold>{room}</TooltipBold></TooltipText>
       <TooltipText>
-        Taken By: <TooltipBold>{roomDic["PRIORITY"] + " / " + roomDic["LOTTERY"]}</TooltipBold>
+        Taken By: <TooltipBold>{roomDic["NEW_PRIORITY"] + " / " + roomDic["NEW_NUM"]}</TooltipBold>
       </TooltipText>
     </TooltipBox>;
   }
@@ -188,7 +196,7 @@ export default class FloorPlanSVG extends Component {
   render() {
     return (
         <FloorPlanWrapper id={this.state.floorplanId}>
-          <ReactSVG src="https://s3.amazonaws.com/shaft-svg/47+Claremont+2.svg" 
+          <ReactSVG src={this.state.floorplanSvg} 
           onInjected={(error, svg) => this.styleSVG(error, svg)}
           />
 

@@ -352,8 +352,8 @@ let floorplanData = [
     "ROOM": "607",
     "FLOOR": "6",
     "ROOM_TYPE": "single",
-    "NEW_PRIORITY": "",
-    "NEW_NUM": ""
+    "NEW_PRIORITY": "20",
+    "NEW_NUM": "1234"
   }
 ];
 
@@ -362,7 +362,7 @@ let cutoffData = [
 ];
 
 storiesOf('FloorPlanSVG', module)
-  .add('47 Claremont 1 floorplan', () => <FloorPlanSVG name="47 Claremont 2" data={floorplanData} cutoffs={cutoffData}></FloorPlanSVG>);
+  .add('47 Claremont 1 floorplan', () => <FloorPlanSVG name="River 6" data={floorplanData} cutoffs={cutoffData}></FloorPlanSVG>);
 
 
   let sampleRoomData = [
