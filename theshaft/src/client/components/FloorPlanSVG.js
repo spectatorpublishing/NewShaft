@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import styled from 'styled-components';
-import { ReactComponent as ClaremontSVG } from "../assets/47 Claremont 1.svg";
+import ReactSVG from 'react-svg'
 import ReactTooltip from 'react-tooltip';
 import "../css/FloorPlanSVG.css";
 
@@ -26,49 +26,6 @@ let TooltipBold = styled.b`
   text-shadow: ${props => props.theme.shadow};
 `
 
-let data = [
-  {
-      "ROOM": "4A",
-      "PRIORITY": "30",
-      "LOTTERY": "3000"
-  },
-  {
-      "ROOM": "4B",
-      "PRIORITY": "30",
-      "LOTTERY": "3000"
-  },
-  {
-      "ROOM": "4C",
-      "PRIORITY": "30",
-      "LOTTERY": "3000"
-  },
-  {
-    "ROOM": "1A",
-    "PRIORITY": "30",
-    "LOTTERY": "3000"
-  },
-  {
-    "ROOM": "1B",
-    "PRIORITY": "30",
-    "LOTTERY": "3000"
-  },
-  {
-    "ROOM": "1C",
-    "PRIORITY": "30",
-    "LOTTERY": "3000"
-  },
-  {
-    "ROOM": "1D",
-    "PRIORITY": "",
-    "LOTTERY": ""
-  },
-  {
-    "ROOM": "1E",
-    "PRIORITY": "",
-    "LOTTERY": ""
-  }
-]
-
 export default class FloorPlanSVG extends Component {
   constructor(props) {
     super(props);
@@ -83,7 +40,7 @@ export default class FloorPlanSVG extends Component {
     this.state = {
       floorplanId: id,
       floorplanUrl: url,
-      floorplanData: data,
+      floorplanData: this.props.data,
       floorplanDic : {}
     };
 
@@ -92,19 +49,33 @@ export default class FloorPlanSVG extends Component {
   }
 
   componentDidMount() {
-    // Get the parent div of the SVG element
-    let svgBoundingDivEl = document.getElementById(this.state.floorplanId);
+    var floorplanDic = {};
 
+    for (var i = 0; i  < this.state.floorplanData.length; i++) {
+      let roomFromDb = this.state.floorplanData[i];
+      floorplanDic[roomFromDb["ROOM"]] = {
+        "PRIORITY": roomFromDb["PRIORITY"],
+        "LOTTERY" : roomFromDb["LOTTERY"]
+      };
+    }
+
+    this.setState({floorplanDic : floorplanDic });
+  }
+
+  styleSVG(error, svg) {
+    console.log(error);
+    console.log(svg);
+
+    // Get the parent div of the SVG element
+    // let svgBoundingDivEl = document.getElementById(this.state.floorplanId);
+    let svgBoundingDivEl = svg;
     // Remove any SVG styling within the file
     if (svgBoundingDivEl.querySelector("style")) {
       svgBoundingDivEl.querySelector("style").remove();
     }
 
-    var floorplanDic = {};
-
     for (var i = 0; i  < this.state.floorplanData.length; i++) {
       let roomFromDb = this.state.floorplanData[i];
-      floorplanDic[roomFromDb["ROOM"]] = {"PRIORITY": roomFromDb["PRIORITY"], "LOTTERY" : roomFromDb["LOTTERY"]};
 
       document.querySelectorAll("rect").forEach((roomEl) => {
         let suiteEl = roomEl.parentElement;
@@ -127,14 +98,18 @@ export default class FloorPlanSVG extends Component {
       });
     }
 
-    this.setState({floorplanDic : floorplanDic });
-
     // Override the xlink:href attribute (which is deprecated)
     // with an href that links to the corresponding floorplan JPG
-    let baseImage = svgBoundingDivEl.querySelectorAll("image")[0];
+    let imageElements = svgBoundingDivEl.querySelectorAll("image");
+    console.log(imageElements);
+    let baseImage = imageElements[0];
+    console.log(baseImage);
     let xlinkHref = baseImage.getAttributeNode("xlink:href");
+    console.log(xlinkHref);
     baseImage.removeAttributeNode(xlinkHref);
-    baseImage.setAttribute("href", this.state.floorplanUrl);
+    if(xlinkHref) {
+      baseImage.setAttribute("href", this.state.floorplanUrl);
+    }
 
     let rectsArray = document.querySelectorAll("rect");
     rectsArray.forEach((rect) => {
@@ -174,6 +149,12 @@ export default class FloorPlanSVG extends Component {
   }
 
   getDataFromSvg(el) {
+    // Check if element is one level under svg
+    // If it is, this means it's a floor (not a suite)
+    // And that this floorplan doesn't have suites
+    if (el.parentElement.tagName.toLowerCase() == "svg") {
+      return "";
+    }
     return el.dataset.name ? el.dataset.name : el.getAttribute("id");
   }
 
@@ -207,7 +188,9 @@ export default class FloorPlanSVG extends Component {
   render() {
     return (
         <FloorPlanWrapper id={this.state.floorplanId}>
-          <ClaremontSVG></ClaremontSVG>
+          <ReactSVG src="https://s3.amazonaws.com/shaft-svg/47+Claremont+2.svg" 
+          onInjected={(error, svg) => this.styleSVG(error, svg)}
+          />
 
           <ReactTooltip 
             id='global' 
