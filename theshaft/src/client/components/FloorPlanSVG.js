@@ -99,7 +99,7 @@ export default class FloorPlanSVG extends Component {
         "Carlton Arms": "1A",
         "East Campus": "6",
         "Furnald": "1",
-        "Harmony": "mezz",
+        "Harmony": "1",
         "Hogan": "2",
         "McBain": "1",
         "600 West 113": "2",
