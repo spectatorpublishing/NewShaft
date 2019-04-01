@@ -65,20 +65,16 @@ let TooltipText = styled.span`
 
 export default class WhiteboardTable extends Component {
     constructor(props) {
-        super(props);
-
-        this.state = {
-            roomAvailability : this.props.roomAvailability
-        }
+        super(props); 
     }
 
     render() {
 
         let i = 0;
         let roomMap = []; 
-        if(this.state.roomAvailability){
-            for(i=0; i < this.state.roomAvailability.length; i++){
-                roomMap.push([this.state.roomAvailability[i]["ROOM"], this.state.roomAvailability[i]["NEW_PRIORITY"]+"/"+this.state.roomAvailability[i]["NEW_NUM"]]);
+        if(this.props.roomAvailability){
+            for(i=0; i < this.props.roomAvailability.length; i++){
+                roomMap.push([this.props.roomAvailability[i]["ROOM"], this.props.roomAvailability[i]["NEW_PRIORITY"]+"/"+this.props.roomAvailability[i]["NEW_NUM"]]);
             }
         }           
 
