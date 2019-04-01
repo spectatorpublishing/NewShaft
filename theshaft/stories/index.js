@@ -273,27 +273,27 @@ storiesOf('Maps', module)
 let floorplanData = [
   {
     "DORM": "47 Claremont",
-      "ROOM": "4",
-      "FLOOR": "1",
-      "ROOM_TYPE": "suite-3",
-      "NEW_PRIORITY": "30",
-      "NEW_NUM": "3000"
+    "ROOM": "4",
+    "FLOOR": "1",
+    "ROOM_TYPE": "suite-3",
+    "NEW_PRIORITY": "30",
+    "NEW_NUM": "3000"
   },
   {
     "DORM": "47 Claremont",
-      "ROOM": "3",
-      "FLOOR": "1",
-      "ROOM_TYPE": "suite-4",
-      "NEW_PRIORITY": "30",
-      "NEW_NUM": "3000"
+    "ROOM": "3",
+    "FLOOR": "1",
+    "ROOM_TYPE": "suite-4",
+    "NEW_PRIORITY": "30",
+    "NEW_NUM": "3000"
   },
   {
     "DORM": "47 Claremont",
-      "ROOM": "1",
-      "FLOOR": "1",
-      "ROOM_TYPE": "suite-6",
-      "NEW_PRIORITY": "30",
-      "NEW_NUM": "3000"
+    "ROOM": "1",
+    "FLOOR": "1",
+    "ROOM_TYPE": "suite-6",
+    "NEW_PRIORITY": "30",
+    "NEW_NUM": "3000"
   },
   {
     "DORM": "47 Claremont",
@@ -305,27 +305,27 @@ let floorplanData = [
   },
   {
     "DORM": "47 Claremont",
-      "ROOM": "24",
-      "FLOOR": "2",
-      "ROOM_TYPE": "suite-3",
-      "NEW_PRIORITY": "30",
-      "NEW_NUM": "3000"
+    "ROOM": "24",
+    "FLOOR": "2",
+    "ROOM_TYPE": "suite-3",
+    "NEW_PRIORITY": "30",
+    "NEW_NUM": "3000"
   },
   {
     "DORM": "47 Claremont",
-      "ROOM": "23",
-      "FLOOR": "2",
-      "ROOM_TYPE": "suite-4",
-      "NEW_PRIORITY": "30",
-      "NEW_NUM": "3000"
+    "ROOM": "23",
+    "FLOOR": "2",
+    "ROOM_TYPE": "suite-4",
+    "NEW_PRIORITY": "30",
+    "NEW_NUM": "3000"
   },
   {
     "DORM": "47 Claremont",
-      "ROOM": "21",
-      "FLOOR": "2",
-      "ROOM_TYPE": "suite-7",
-      "NEW_PRIORITY": "30",
-      "NEW_NUM": "3000"
+    "ROOM": "21",
+    "FLOOR": "2",
+    "ROOM_TYPE": "suite-7",
+    "NEW_PRIORITY": "30",
+    "NEW_NUM": "3000"
   },
   {
     "DORM": "47 Claremont",
@@ -358,7 +358,7 @@ let cutoffData = [
 ];
 
 storiesOf('FloorPlanSVG', module)
-  .add('47 Claremont 1 floorplan', () => <FloorPlanSVG name="River 6" data={floorplanData} cutoffs={cutoffData}></FloorPlanSVG>);
+  .add('47 Claremont 1 floorplan', () => <FloorPlanSVG dorm="River Hall" floor="6" data={floorplanData} cutoffs={cutoffData}></FloorPlanSVG>);
 
 
   let sampleRoomData = [
