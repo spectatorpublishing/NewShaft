@@ -19,8 +19,16 @@ let SidebarTitle = styled.div`
     border-color:${props => props.theme.columbiaBlue}; 
     border-width:2px;
     font-weight: bold;
+    @media only screen and (max-width: 992px){
+        color: 	${props => props.theme.white};
+        font-weight: bold;
+        padding-top: 1rem;
+        padding-bottom:0.5rem;
+        text-align: center;
+        border: none;
+        font-size: 1rem;
+    }
 `
-
 
 let DormListDesktop = styled.div`
     display:flex;
@@ -33,16 +41,17 @@ let DormListMobile = styled.div`
     align-items: center;
     &>select{
         border-radius: 10px;
+        border: none;
         background: ${props => props.theme.white};
-        border: 1px solid ${props => props.theme.lightGray};
-        padding: 10px;
+        height: 2.5rem;
         font-family: Raleway, sans-serif;
         font-size: 0.8rem;
         color: ${props => props.theme.darkGray};
-        width: 90%;
+        width: 95%;
+        margin: 0 2.5%;
     }
     &>select+img{
-        margin-left: -20px;
+        margin-left: -30px;
         pointer-events: none;
     }
 `
@@ -102,6 +111,7 @@ export default class WhiteboardSidebar extends React.Component {
         if (isMobile) {
             return (
                     <div>
+                    <SidebarTitle>Dorm</SidebarTitle>
                     <DormListMobile>
                         <select value={this.props.currDorm} onChange={e => this.onClick(e.target.value)}>
                         { 

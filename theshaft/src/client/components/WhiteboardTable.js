@@ -18,7 +18,9 @@ let Map = styled.div`
 `
 
 let Wrapper = styled.div`
-    width: 80%;`
+    width: 80%;
+    margin: 0 10%;
+`
 
 let TitleText = styled.div`
     display: flex;
@@ -27,6 +29,7 @@ let TitleText = styled.div`
     border-bottom: solid;
     border-width:  3px;
     border-color:${props => props.theme.lightGray};
+    margin-top: 1rem;
 `
 let LeftTitle = styled.h4`
     margin-bottom: .5rem;
