@@ -44,6 +44,9 @@ export default class FloorPlanSVG extends Component {
     let url = name.replace(/\ /g, "+");
     let jpgUrl = "https://s3.amazonaws.com/shaft-dorm-floorplans/" + url + ".jpg";
     let svgUrl = "https://s3.amazonaws.com/shaft-svg/"+ url +".svg";
+    console.log(jpgUrl);
+    console.log(svgUrl);
+
 
     // Turn data array passed in from endpoint into JSON for faster lookup
     let dic = {};
@@ -134,11 +137,66 @@ export default class FloorPlanSVG extends Component {
     if(xlinkHref) {
       baseImage.removeAttributeNode(xlinkHref);
       baseImage.setAttribute("href", this.state.floorplanJpg);
-    }
+    } 
   }
 
-  componentDidUpdate() {
-    ReactTooltip.rebuild();
+  componentDidUpdate(prevProps) {
+    console.log(prevProps)
+    if(this.props.dorm != prevProps.dorm || this.props.floor != prevProps.floor){
+      console.log("UPDATE")
+      let dorm = this.props.dorm.replace(" Hall", "");
+    let name = dorm + " " + this.props.floor;
+    
+    // Attach unique id to component to access SVG
+    let id = name.replace(/\ /g, "-");
+
+    // Generate AWS urls for JPG and SVG
+    let url = name.replace(/\ /g, "+");
+    let jpgUrl = "https://s3.amazonaws.com/shaft-dorm-floorplans/" + url + ".jpg";
+    let svgUrl = "https://s3.amazonaws.com/shaft-svg/"+ url +".svg";
+    console.log(jpgUrl);
+    console.log(svgUrl);
+
+
+    // Turn data array passed in from endpoint into JSON for faster lookup
+    let dic = {};
+    for (var i = 0; i  < this.props.data.length; i++) {
+      let dataFromDb = this.props.data[i];
+      dic[dataFromDb["ROOM"]] = {
+        "ROOM_TYPE": dataFromDb["ROOM_TYPE"],
+        "NEW_PRIORITY": dataFromDb["NEW_PRIORITY"],
+        "NEW_NUM" : dataFromDb["NEW_NUM"]
+      };
+    }
+
+    // Determine whether dorm type is suite-style or individual rooms
+    // Because lottery numbers reflect how suites/rooms are picked
+    let suitePickStyle = false;
+    // Harmony Floor 1 is suite-style picking but its other floors aren't
+    if (dorm == "Harmony") {
+      if (this.props.floor == "1") {
+        suitePickStyle = true;
+      }
+    }
+    else {
+      if (SUITE_PICK.has(dorm.toUpperCase())) {
+        suitePickStyle = true;
+      }
+    }
+
+    this.setState({
+      floorplanName: name,
+      floorplanDorm: dorm,
+      floorplanId: id,
+      floorplanJpg: jpgUrl,
+      floorplanSvg: svgUrl,
+      floorplanDic: dic,
+      suitePick: suitePickStyle
+    })
+    
+      ReactTooltip.rebuild();
+    }
+    
   }
 
   getDataFromSvg(el) {
