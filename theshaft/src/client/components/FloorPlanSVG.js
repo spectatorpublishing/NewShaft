@@ -5,6 +5,7 @@ import ReactTooltip from 'react-tooltip';
 import "../css/FloorPlanSVG.css"; // Because react-tooltip
 import { CUTOFFS, SUITE_PICK } from "../util/Cutoffs";
 import { MAPPING } from "../util/Mapping";
+import { update } from "immutable";
 
 let FloorPlanWrapper = styled.div`
   & rect {
@@ -87,6 +88,93 @@ export default class FloorPlanSVG extends Component {
     this.getStaticFloorplan = this.getStaticFloorplan.bind(this);
   }
 
+  
+
+  svgUpdate(dorm_change){
+
+    // When the dorm changes, make sure that the correct first floor is picked
+    const firstFloor = {
+        "47 Claremont": "1",
+        "Broadway": "3",
+        "Carlton Arms": "1A",
+        "East Campus": "6",
+        "Furnald": "1",
+        "Harmony": "mezz",
+        "Hogan": "2",
+        "McBain": "1",
+        "600 W 113th": "2",
+        "River": "1",
+        "Ruggles": "1",
+        "Schapiro": "2",
+        "Watt": "1",
+        "Wien": "2",
+        "Woodbridge": "1"
+    }
+
+    console.log("UPDATE")
+      let dorm = this.props.dorm.replace(" Hall", "");
+      
+      if(dorm_change == true){
+        var name = dorm + " " + firstFloor[dorm]
+      }
+      else{
+        var name = dorm + " " + this.props.floor;
+      }
+
+      console.log(name)
+     
+      
+      // Attach unique id to component to access SVG
+      let id = name.replace(/\ /g, "-");
+
+      // Generate AWS urls for JPG and SVG
+      let url = name.replace(/\ /g, "+");
+      let jpgUrl = "https://s3.amazonaws.com/shaft-dorm-floorplans/" + url + ".jpg";
+      let svgUrl = "https://s3.amazonaws.com/shaft-svg/"+ url +".svg";
+      console.log(jpgUrl);
+      console.log(svgUrl);
+      
+
+      // Turn data array passed in from endpoint into JSON for faster lookup
+      let dic = {};
+      for (var i = 0; i  < this.props.data.length; i++) {
+        let dataFromDb = this.props.data[i];
+        dic[dataFromDb["ROOM"]] = {
+          "ROOM_TYPE": dataFromDb["ROOM_TYPE"],
+          "NEW_PRIORITY": dataFromDb["NEW_PRIORITY"],
+          "NEW_NUM" : dataFromDb["NEW_NUM"]
+        };
+      }
+
+      // Determine whether dorm type is suite-style or individual rooms
+      // Because lottery numbers reflect how suites/rooms are picked
+      let suitePickStyle = false;
+      // Harmony Floor 1 is suite-style picking but its other floors aren't
+      if (dorm == "Harmony") {
+        if (this.props.floor == "1") {
+          suitePickStyle = true;
+        }
+      }
+      else {
+        if (SUITE_PICK.has(dorm.toUpperCase())) {
+          suitePickStyle = true;
+        }
+      }
+
+      this.setState({
+        floorplanName: name,
+        floorplanDorm: dorm,
+        floorplanId: id,
+        floorplanJpg: jpgUrl,
+        floorplanSvg: svgUrl,
+        floorplanDic: dic,
+        suitePick: suitePickStyle
+      })
+      
+      ReactTooltip.rebuild();
+
+  }
+
   styleSVG(error, svg) {
     let svgBoundingDivEl = svg;
     // Remove any SVG styling within the file
@@ -142,59 +230,12 @@ export default class FloorPlanSVG extends Component {
 
   componentDidUpdate(prevProps) {
     console.log(prevProps)
-    if(this.props.dorm != prevProps.dorm || this.props.floor != prevProps.floor){
-      console.log("UPDATE")
-      let dorm = this.props.dorm.replace(" Hall", "");
-    let name = dorm + " " + this.props.floor;
-    
-    // Attach unique id to component to access SVG
-    let id = name.replace(/\ /g, "-");
-
-    // Generate AWS urls for JPG and SVG
-    let url = name.replace(/\ /g, "+");
-    let jpgUrl = "https://s3.amazonaws.com/shaft-dorm-floorplans/" + url + ".jpg";
-    let svgUrl = "https://s3.amazonaws.com/shaft-svg/"+ url +".svg";
-    console.log(jpgUrl);
-    console.log(svgUrl);
-
-
-    // Turn data array passed in from endpoint into JSON for faster lookup
-    let dic = {};
-    for (var i = 0; i  < this.props.data.length; i++) {
-      let dataFromDb = this.props.data[i];
-      dic[dataFromDb["ROOM"]] = {
-        "ROOM_TYPE": dataFromDb["ROOM_TYPE"],
-        "NEW_PRIORITY": dataFromDb["NEW_PRIORITY"],
-        "NEW_NUM" : dataFromDb["NEW_NUM"]
-      };
-    }
-
-    // Determine whether dorm type is suite-style or individual rooms
-    // Because lottery numbers reflect how suites/rooms are picked
-    let suitePickStyle = false;
-    // Harmony Floor 1 is suite-style picking but its other floors aren't
-    if (dorm == "Harmony") {
-      if (this.props.floor == "1") {
-        suitePickStyle = true;
-      }
-    }
-    else {
-      if (SUITE_PICK.has(dorm.toUpperCase())) {
-        suitePickStyle = true;
-      }
-    }
-
-    this.setState({
-      floorplanName: name,
-      floorplanDorm: dorm,
-      floorplanId: id,
-      floorplanJpg: jpgUrl,
-      floorplanSvg: svgUrl,
-      floorplanDic: dic,
-      suitePick: suitePickStyle
-    })
-    
-      ReactTooltip.rebuild();
+    if(this.props.dorm != prevProps.dorm ){
+      let dorm_change = true;
+      this.svgUpdate(dorm_change)
+    }else if(this.props.floor != prevProps.floor){
+      let dorm_change = false;
+      this.svgUpdate(dorm_change)
     }
     
   }
