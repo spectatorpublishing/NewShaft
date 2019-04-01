@@ -34,10 +34,15 @@ import AdManager from "../src/client/components/AdManager";
 import WhiteboardSidebar from "../src/client/components/WhiteboardSidebar.js";
 import TestSVG from "../src/client/components/TestSVGs.js";
 import FloorButton from "../src/client/components/FloorButton.js";
+import LiveBlog from "../src/client/components/LiveBlog.js";
 
 storiesOf('FloorButton', module)
   .add('FloorButton', () =>
     <FloorButton dorm="Carman Hall" floorNums={[10]} />)
+
+storiesOf('LiveBlog', module)
+  .add('LiveBlog', () =>
+    <LiveBlog/>)
 
 storiesOf('TestSVG', module)
   .add('TestSVG', () => 
