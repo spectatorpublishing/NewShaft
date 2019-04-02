@@ -1,34 +1,39 @@
 import React, { Component } from "react";
 import styled from 'styled-components';
 
-let NumberBlue = styled.button`
+let NumberBtn = styled.button`
     width: 2.5rem;
     height: 2.5rem;
-    color: ${props => props.theme.columbiaBlue};
-    background-color: ${props => props.theme.white};
-    border: none;
-    font-size: 1rem;
-    @media only screen and (min-width: 992px){
-        border: 1px ${props => props.theme.columbiaBlue} solid;
-        border-radius: 3px;
-        color: ${props => props.theme.white};
-        background-color: ${props => props.theme.columbiaBlue};  
-    }
-    text-align: center;
-`
-let NumberBlack = styled.button`
-    width: 2.5rem;
-    height: 2.5rem;
+    margin-right: 2px;
     color: ${props => props.theme.black};
     background-color: ${props => props.theme.white};
     border: none;
     font-size: 1rem;
-    @media only screen and (min-width: 992px){
-        border: 1px ${props => props.theme.columbiaBlue} solid;
-        border-radius: 3px;
-        background-color: ${props => props.theme.white};
-    }
     text-align: center;
+
+    &:hover {
+        background-color: ${props => props.theme.lightGray};  
+    }
+
+    @media only screen and (min-width: 992px){
+        background-color: ${props => props.theme.white};
+        border: 1px ${props => props.theme.lightGray} solid;
+        border-radius: 4px;
+    }
+`
+let NumberSelected = styled(NumberBtn)`
+    color: ${props => props.theme.columbiaBlue};
+    
+    &:hover {
+        background-color: ${props => props.theme.columbiaBlue};  
+    }
+
+    @media only screen and (min-width: 992px){
+        background-color: ${props => props.theme.columbiaBlue};
+        border-color: ${props => props.theme.columbiaBlue};
+        color: ${props => props.theme.white};
+        text-shadow: ${props => props.theme.shadow};
+    }
 `
 let ButtonTopText= styled.div`
     color: 	${props => props.theme.white};
@@ -96,15 +101,15 @@ export default class FloorButton extends Component{
             buttons = this.state.floorNums.map((floor, idx) => {
                 let floorNum = floor["FLOOR"]
                 if(idx == this.state.currentFloorIndex){
-                    return <NumberBlue onClick={() => {
+                    return <NumberSelected onClick={() => {
                         this.state.handleChange(floorNum)
-                    }}>{floorNum}</NumberBlue>
+                    }}>{floorNum}</NumberSelected>
                 }
                 else{
-                    return <NumberBlack onClick={() => {
+                    return <NumberBtn onClick={() => {
                         this.setState({currentFloorIndex : idx})
                         this.state.handleChange(floorNum)
-                    }}>{floorNum}</NumberBlack>
+                    }}>{floorNum}</NumberBtn>
                 }
             })
 
