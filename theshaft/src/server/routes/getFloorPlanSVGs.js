@@ -6,9 +6,9 @@ function getFloorPlans(con, request, callback) {
 	con.connect(function(err) {
 		if (err) throw err;
 
-        var sqlStatement = `SELECT * FROM floor_plan_svgs 
+        var sqlStatement = `SELECT * FROM floor_plan_svgs
         WHERE DORM = "${request["DORM"]}";`
-		
+
 		con.query(sqlStatement, function(err, res) {
 			if (err) throw err;
 			callback(res)
@@ -25,7 +25,7 @@ router.post('/', function(req, res, next) {
 		password: "PASSWORD",
 		database: "dev"
 	  });
-	
+
 	getFloorPlans(con, req.body, (revInfo) => {
 		res.json(revInfo)
 	})
