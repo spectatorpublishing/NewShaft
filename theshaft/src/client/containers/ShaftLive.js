@@ -193,7 +193,7 @@ export default class ShaftLive extends Component {
             },
             body: JSON.stringify({DORM: dorm, FLOOR: floor})
             }).then(res => res.json())
-            .then(response => {this.setState({dorm : dorm, floor: floor, floorData : response, init: false, update: update})}
+            .then(response => {this.setState({dorm : dorm, dormRefresh: !this.state.dormRefresh, floor: floor, floorData : response, init: false, update: update})}
         ); 
     }
 
@@ -222,7 +222,7 @@ export default class ShaftLive extends Component {
         "Wien Hall": "2",
         "Woodbridge Hall": "1"
     }
-        this.setState({dorm : dorm, floor: firstFloor[dorm], init: false, update: false}, () => {this.fetchFloorNums(this.state.dorm)})
+        this.setState({dorm : dorm, floor: firstFloor[dorm], init: false}, () => {this.fetchFloorNums(this.state.dorm)})
     }
 
     
@@ -260,6 +260,7 @@ export default class ShaftLive extends Component {
                           cutoffs={[]}
                           init={this.state.init}
                           update={this.state.update}
+                          dormRefresh={this.state.dormRefresh}
                         />
                       </MobileFPWrapper>
                     : <WhiteboardTable
@@ -292,7 +293,7 @@ export default class ShaftLive extends Component {
                       <FloorPlanPrompt> — hover to explore!</FloorPlanPrompt>
                     </div>
                     <FloorPlanLegend><GreenBox/> Available <RedBox/> Taken </FloorPlanLegend>
-                    <FloorPlanSVG dorm={this.state.dorm} floor={this.state.floor} data={this.state.floorData} cutoffs={[]} init={this.state.init} update={this.state.update} ></FloorPlanSVG>
+                    <FloorPlanSVG dorm={this.state.dorm} floor={this.state.floor} data={this.state.floorData} cutoffs={[]} init={this.state.init} update={this.state.update} dormRefresh={this.state.dormRefresh} ></FloorPlanSVG>
                     </SVGContainer>
                 </ColThree>
             </ShaftLiveContainer>
