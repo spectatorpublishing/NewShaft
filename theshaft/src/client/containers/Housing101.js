@@ -35,26 +35,26 @@ let Housing101ContainerMobile = styled.div`
     align-items: center;
 `
 
-let ToggleMobileView = styled.div`
-    height: 50px;
-    display: flex;
-    position: relative;
-    z-index: 1;
-    align-items: center;
-    color: ${props => props.theme.black};
-    text-transform: uppercase;
-    font-weight: bold;
-    box-shadow: 0 10px 10px -10px rgba(0, 0, 0, 0.3);
-    &>div{
-      flex-grow: 1;
-      text-align: center;
-      margin: 0 10%;
-      padding: 10px 0;
-    }
-    &>div:nth-child(2n+${props => String(props.currActive)}){
-      border-bottom: 5px solid ${props => props.theme.columbiaBlue};
-    }
-`
+// let ToggleMobileView = styled.div`
+//     height: 50px;
+//     display: flex;
+//     position: relative;
+//     z-index: 1;
+//     align-items: center;
+//     color: ${props => props.theme.black};
+//     text-transform: uppercase;
+//     font-weight: bold;
+//     box-shadow: 0 10px 10px -10px rgba(0, 0, 0, 0.3);
+//     &>div{
+//       flex-grow: 1;
+//       text-align: center;
+//       margin: 0 10%;
+//       padding: 10px 0;
+//     }
+//     &>div:nth-child(2n+${props => String(props.currActive)}){
+//       border-bottom: 5px solid ${props => props.theme.columbiaBlue};
+//     }
+// `
 
 export default class Housing101 extends Component {
     constructor(props){

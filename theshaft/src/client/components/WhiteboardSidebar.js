@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import styled from 'styled-components';
 import ChrisV from '../assets/chrisv_blue.svg'
+import {theme} from '../util/GlobalStyles.js';
 
 
 let Sidebar = styled.div`
@@ -57,8 +58,9 @@ let DormListMobile = styled.div`
 `
 
 let Dorm = styled.button`
+    id:${props => props.id};
     padding: .5em;
-    background-color: #FFFFFF;
+    background-color: ${(props => props.selected) ? `#9a9c9e` : `white`};
     border: none;
     color: #000;
     font-size: 1rem;
@@ -75,6 +77,7 @@ export default class WhiteboardSidebar extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
+            dormId:-1,
             width: window.innerWidth,
         }
         this.onClick = this.onClick.bind(this)
@@ -97,10 +100,6 @@ export default class WhiteboardSidebar extends React.Component {
       }
 
     render() {
-
-       
-
-      
         const dormArray = ['47 Claremont', 'Broadway Hall', 'East Campus', 'Furnald Hall', 'Harmony Hall',
                         'Hogan Hall', 'McBain Hall', '600 W 113th', 'River Hall', 'Ruggles Hall', 
                        'Schapiro Hall', 'Watt Hall', 'Wien Hall', 'Woodbridge Hall'];
@@ -134,11 +133,15 @@ export default class WhiteboardSidebar extends React.Component {
                     <SidebarTitle>DORMS</SidebarTitle>
                         <DormListDesktop>
                             { 
-                                dormArray.map((dorm) =>
-                                    (<Dorm onClick = {() => this.onClick(dorm)}> 
-                                    {dorm}
-                                </Dorm>)
-                                )
+                                dormArray.map((dorm, id) => {
+                                    return (<Dorm selected={(id == this.state.dormId) ? true : false} onClick = {() => {
+                                        this.onClick(dorm)
+                                        if(this.state.dormId != id){
+                                            console.log(id)
+                                            this.setState({dormId:id})
+                                        }
+                                    }}>{dorm}</Dorm>);
+                                })
                             }
                         </DormListDesktop>
                      </Sidebar>
