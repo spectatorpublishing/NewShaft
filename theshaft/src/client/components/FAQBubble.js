@@ -58,12 +58,13 @@ let ToggleSize = styled.button`
   width: 10%;
 `
 
-let Subtitle = styled.div`
+let Subtitle = styled.h4`
+color: ${props => props.theme.columbiaBlue};
 
 `
 
 let Body = styled.div`
-
+margin-bottom: 1rem;
 `
 
 let Content = styled.div`
