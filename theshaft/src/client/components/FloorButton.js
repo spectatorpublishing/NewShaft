@@ -43,8 +43,6 @@ let ButtonTopText= styled.div`
     }
 `
 
-<<<<<<< HEAD
-=======
 let FloorButtonWrapper=styled.div`
     padding-bottom: 1rem;
     @media only screen and (min-width: 992px){
@@ -52,7 +50,6 @@ let FloorButtonWrapper=styled.div`
     }
 `
 
->>>>>>> e3016df32da9552f5c682a2828b2305495fbbcac
 let Buttons = styled.div`
     display: flex;
     flex-direction:row;
