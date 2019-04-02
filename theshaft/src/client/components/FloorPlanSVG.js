@@ -239,11 +239,17 @@ export default class FloorPlanSVG extends Component {
   }
 
   componentDidUpdate(prevProps) {
-    if(this.props.dorm != prevProps.dorm || this.props.init != prevProps.init){
+    if(this.props.init != prevProps.init){
       let dorm_change = true;
       this.svgUpdate(dorm_change)
     }else if(this.props.floor != prevProps.floor || this.props.update != prevProps.update){
       let dorm_change = false;
+      this.svgUpdate(dorm_change)
+    }
+    else if(this.props.dorm != prevProps.dorm || this.props.data != prevProps.data){
+      console.log(prevProps.dorm);
+      console.log(this.props.dorm);
+      let dorm_change = true;
       this.svgUpdate(dorm_change)
     }
     
@@ -259,11 +265,6 @@ export default class FloorPlanSVG extends Component {
     // Get dorm name and floor number through props
     // Have fun mapping Carlton Arms and Ruggles
     let dorm = this.props.dorm.replace(" Hall", "");
-    console.log("SUITE: " + suite)
-    console.log("ROOM: " + room)
-    console.log("DORM: " + dorm)
-    console.log("FLOOR: " + this.props.floor)
-   
     if (suite) {
       if (dorm == "Ruggles"){
         return this.props.floor + suite;

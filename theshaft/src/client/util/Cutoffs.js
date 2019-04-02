@@ -6,7 +6,7 @@ export const CUTOFFS = {
     "6-Person Suite on 1st Fl": "26.6667/2909",
     "7-Person Suite": "10/2645"
   },
-  "600 W 113th": {
+  "600 West 113": {
     Double: "10/2276",
     Single: "30/2975",
     "Walk-Through Double": "10/2388"
