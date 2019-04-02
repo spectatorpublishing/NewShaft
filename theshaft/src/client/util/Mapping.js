@@ -31,7 +31,8 @@ export const MAPPING = {
     "suite-6-townhouse-6s": "6-Person Townhouse Suite (all singles)",
     "suite-6-townhouse-4s-1d": "6-Person Townhouse Suite (4 Sgl / 1 Dbl)",
     "ra-4s-in-6s": "6 Person Highrise Suite (All Sgl)",
-    "ra-2s-in-4s": "4 Person Townhouse Suite (All Sgl)"
+    "ra-2s-in-4s": "4 Person Townhouse Suite (All Sgl)",
+    "double": "6th Floor Highrise Double"
   },
   Furnald: {
     double: "Double",
