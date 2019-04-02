@@ -177,6 +177,7 @@ export default class ShaftLive extends Component {
 
         this.state = {
             dorm: "Broadway Hall",
+            dormRefresh: false,
             floor: "3",
             floorNums: null,
             floorData: [],
@@ -194,7 +195,7 @@ export default class ShaftLive extends Component {
     }
 
     componentWillMount() {
-        this.interval = setInterval(() => this.fetchFloorData(this.state.dorm, this.state.floor, !this.state.update), 30000);
+        this.interval = setInterval(() => this.fetchFloorData(this.state.dorm, this.state.floor, !this.state.update), 15000);
         window.addEventListener("resize", this.handleWindowSizeChange);
       }
     
@@ -240,7 +241,7 @@ export default class ShaftLive extends Component {
             },
             body: JSON.stringify({DORM: dorm, FLOOR: floor})
             }).then(res => res.json())
-            .then(response => {this.setState({floor: floor, floorData : response, init: false, update: update})}
+            .then(response => {this.setState({dorm : dorm, floor: floor, floorData : response, init: false, update: update})}
         ); 
     }
 
@@ -254,7 +255,7 @@ export default class ShaftLive extends Component {
         this.setState({dorm : dorm, init: false, update: false}, () => {this.fetchFloorNums(this.state.dorm)})
     }
 
-    toggle
+    
 
     render() {
       const { width } = this.state;
