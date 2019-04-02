@@ -297,7 +297,7 @@ export default class ShaftLive extends Component {
                   <div onClick={()=>this.setState({mobileShowFloorPlan: true})}>Floor Plans</div>
                 </ToggleMobileView>
                 { this.state.mobileShowFloorPlan
-                    ? <FloorPlanSVG dorm={this.state.dorm} floor={this.state.floor} data={floorplanData} cutoffs={[]}/>
+                    ? <FloorPlanSVG  dorm={this.state.dorm} floor={this.state.floor} data={this.state.floorData} cutoffs={[]} init={this.state.init} update={this.state.update}/>
                     : <WhiteboardTable
                     roomAvailability={this.state.floorData} />
                 }
