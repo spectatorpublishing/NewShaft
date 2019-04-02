@@ -27,12 +27,9 @@ let BlueBGMobile = styled.div`
 let Housing101Container = styled.div`
     display: flex;
     width: 100vw;
-    height: 150vh;
     padding: 0 auto;
-    overflow: hidden;
     flex-direction: column;
     background-color: ${props => props.theme.lightGray}
-    overflow-y: scroll;
 `
 
 let Housing101ContainerMobile = styled.div`
@@ -41,36 +38,14 @@ let Housing101ContainerMobile = styled.div`
     align-items: center;
 `
 
-// let ToggleMobileView = styled.div`
-//     height: 50px;
-//     display: flex;
-//     position: relative;
-//     z-index: 1;
-//     align-items: center;
-//     color: ${props => props.theme.black};
-//     text-transform: uppercase;
-//     font-weight: bold;
-//     box-shadow: 0 10px 10px -10px rgba(0, 0, 0, 0.3);
-//     &>div{
-//       flex-grow: 1;
-//       text-align: center;
-//       margin: 0 10%;
-//       padding: 10px 0;
-//     }
-//     &>div:nth-child(2n+${props => String(props.currActive)}){
-//       border-bottom: 5px solid ${props => props.theme.columbiaBlue};
-//     }
-// `
-
 let PageBG = styled.div`
     background-color: ${props => props.theme.lightGray};
     width: 100%;
-    height: 100%;
+    min-height: 100vh;
 `
 
-let SomeText = styled.h5`
+let SomeText = styled.p`
     color: ${props => props.theme.darkGray};
-    font-size: 1.6em;
 `
 
 export default class Housing101 extends Component {
@@ -124,7 +99,9 @@ export default class Housing101 extends Component {
                     <BlueBGMobile>
                         <Title>Housing 101</Title>
                     </BlueBGMobile> 
+                    <PageBG>
                         {FAQBubbleMapped}
+                    </PageBG>
                     </Housing101ContainerMobile>
                 </div>
             );

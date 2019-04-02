@@ -3,14 +3,15 @@ import styled from 'styled-components';
 import chris_v from '../assets/chrisv_blue.svg';
 import { theme } from "../util/GlobalStyles";
 
-let Title = styled.h1`
-    margin-top: -0.3vw;
+let Title = styled.h3`
+    margin-top: 0vw;
     margin-bottom: 1vw;
-    margin-left: 0.6vw;
+    margin-left: 1vw;
     font-weight: 5000;
     width: 100%;
     @media only screen and (max-width: 767px) {
-        font-size: 1.8em;
+        margin-top: 1vw;
+        margin-left: 3vw;
     }
 `
 
@@ -22,11 +23,12 @@ let ExpanderBox = styled.div`
     margin: 0 8% 30px 8%;
     padding: 1.8vw;
     padding-bottom: 0.5vh;
-    border-radius: 20px;
+    border-radius: 10px;
+    cursor: pointer;
     @media only screen and (max-width: 767px) {
-        margin: 0 8% 50px 8%;
+        margin: 0 2% 25px 2%;
         min-height: 80px;
-        padding: 0.2vw;
+        padding: 10px;
     }
 `
 
@@ -89,12 +91,12 @@ export default class FAQBubble extends Component {
 
     render() {
         return(
-            <ExpanderBox>
+            <ExpanderBox onClick={this.toggleSize}>
                 <RowDisplay>
                 <Title>
                     {this.props.titleText}
                 </Title>
-                <ToggleSize onClick={this.toggleSize}>
+                <ToggleSize>
                     <ChrisV flip={this.state.expanded}><img src={chris_v}></img></ChrisV>
                 </ToggleSize>
                 </RowDisplay>
