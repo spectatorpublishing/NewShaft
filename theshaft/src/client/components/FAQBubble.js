@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import styled from 'styled-components';
+import crisV from '../assets/chrisv_blue.svg';
 
 let FAQBubbleContainer = styled.div`
     ${props => props.theme.grayBorder}
@@ -15,9 +16,12 @@ let Title = styled.h1`
 `
 
 let ExpanderBox = styled.div`
-  border: 1px ${({ color }) => color} solid;
-
   ${({ boxStyle }) => boxStyle}
+`
+
+let RowDisplay = styled.div`
+    display: flex;
+    flex-direction: row;
 `
 
 let ExpanderContent = styled.div`
@@ -34,16 +38,20 @@ let ExpanderList = styled.div`
 let ToggleSize = styled.button`
   background: none;
   border: none;
-  border-bottom-left-radius: ${props => props.theme.borderRadius};
-  border-bottom-right-radius: ${props => props.theme.borderRadius};
-  border-top: 1px ${({ color }) => color} solid;
+//   border-bottom-left-radius: ${props => props.theme.borderRadius};
+//   border-bottom-right-radius: ${props => props.theme.borderRadius};
+  border-radius: ${props => props.theme.borderRadius};
   display: flex;
   justify-content: center;
-  padding: 0.3rem;
-  width: 100%;
+  padding: 0.1rem;
+  width: 10%;
 
   :hover {
     background-color: ${({ color }) => color};
+  }
+
+  :hover>h3 {
+    color: white;
   }
 
   :active {
@@ -51,8 +59,23 @@ let ToggleSize = styled.button`
   }
 `
 
-let ButtonText = styled.h6`
-  color: ${({ textColor }) => textColor}
+let ButtonText = styled.h3`
+  //color: ${({ textColor }) => textColor}
+
+  :hover {
+    color: white;
+  }
+  :active {
+    color: ${({ color }) => color};
+  }
+`
+
+let ChrisV = styled.div`
+    display: inline-block;
+    & img {
+        transform: ${ props => props.flip ? "scaleY(-1)" : "none"};
+        margin: 2px 0;
+    }
 `
 
 
@@ -77,15 +100,22 @@ export default class FAQBubble extends Component {
     render() {
         return(
             <ExpanderBox boxStyle={this.state.boxStyle} color={this.state.color}>
+                <RowDisplay>
+                <Title>
+                    Hello World
+                </Title>
+                <ToggleSize color={this.state.color} onClick={this.toggleSize}>
+                    <ChrisV flip={this.state.expanded}/>
+                </ToggleSize>
+                </RowDisplay>
+
                 <ExpanderContent textColor={this.state.textColor}>
-                {this.props.children}
+                    {this.props.children}
                 <ExpanderList textColor={this.state.textColor}>
                     {this.state.expanded ? this.props.showAll : this.props.showSome}
                 </ExpanderList>
                 </ExpanderContent>
-                <ToggleSize color={this.state.color} onClick={this.toggleSize}>
-                <ButtonText textColor={this.state.textColor}>Show {this.state.expanded ? "Less" : "All"}</ButtonText>
-                </ToggleSize>
+                
             </ExpanderBox>
         );
     }
