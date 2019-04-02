@@ -1,11 +1,7 @@
 import React, { Component } from "react";
 import styled from 'styled-components';
-import crisV from '../assets/chrisv_blue.svg';
-
-let FAQBubbleContainer = styled.div`
-    ${props => props.theme.grayBorder}
-    padding: 3vw;
-`
+import chris_v from '../assets/chrisv_blue.svg';
+import { theme } from "../util/GlobalStyles";
 
 let Title = styled.h1`
     margin-top: -0.3vw;
@@ -13,10 +9,25 @@ let Title = styled.h1`
     margin-left: 0.6vw;
     font-weight: 5000;
     width: 100%;
+    @media only screen and (max-width: 767px) {
+        font-size: 1.8em;
+    }
 `
 
 let ExpanderBox = styled.div`
-  ${({ boxStyle }) => boxStyle}
+    background-color: white;
+    position: relative;
+    top: 50px;
+    min-height: 100px;
+    margin: 0 8% 30px 8%;
+    padding: 1.8vw;
+    padding-bottom: 0.5vh;
+    border-radius: 20px;
+    @media only screen and (max-width: 767px) {
+        margin: 0 8% 50px 8%;
+        min-height: 80px;
+        padding: 0.2vw;
+    }
 `
 
 let RowDisplay = styled.div`
@@ -38,43 +49,24 @@ let ExpanderList = styled.div`
 let ToggleSize = styled.button`
   background: none;
   border: none;
-//   border-bottom-left-radius: ${props => props.theme.borderRadius};
-//   border-bottom-right-radius: ${props => props.theme.borderRadius};
   border-radius: ${props => props.theme.borderRadius};
   display: flex;
   justify-content: center;
   padding: 0.1rem;
   width: 10%;
-
-  :hover {
-    background-color: ${({ color }) => color};
-  }
-
-  :hover>h3 {
-    color: white;
-  }
-
-  :active {
-    background-color: ${({ color }) => color};
-  }
-`
-
-let ButtonText = styled.h3`
-  //color: ${({ textColor }) => textColor}
-
-  :hover {
-    color: white;
-  }
-  :active {
-    color: ${({ color }) => color};
-  }
 `
 
 let ChrisV = styled.div`
-    display: inline-block;
     & img {
-        transform: ${ props => props.flip ? "scaleY(-1)" : "none"};
+        transform: ${ props => props.flip ? "scale(4,-3)" : "scale(4, 3) "};
         margin: 2px 0;
+    }
+
+    @media only screen and (max-width: 767px) {
+        & img {
+            transform: ${ props => props.flip ? "scale(2.5,-2)" : "scale(2.5, 2) "};
+            margin: 2px 0;
+        }
     }
 `
 
@@ -85,9 +77,7 @@ export default class FAQBubble extends Component {
 
         this.state = {
             expanded: false,
-            boxStyle: this.props.custom ? this.props.custom.boxStyle : "",
-            color: this.props.custom ? this.props.custom.color : theme.lightGray,
-            textColor: this.props.custom ? this.props.custom.textColor : theme.darkGray,
+            textColor: theme.darkGray,
           };
           this.toggleSize = this.toggleSize.bind(this);
         
@@ -99,13 +89,13 @@ export default class FAQBubble extends Component {
 
     render() {
         return(
-            <ExpanderBox boxStyle={this.state.boxStyle} color={this.state.color}>
+            <ExpanderBox>
                 <RowDisplay>
                 <Title>
-                    Hello World
+                    {this.props.titleText}
                 </Title>
-                <ToggleSize color={this.state.color} onClick={this.toggleSize}>
-                    <ChrisV flip={this.state.expanded}/>
+                <ToggleSize onClick={this.toggleSize}>
+                    <ChrisV flip={this.state.expanded}><img src={chris_v}></img></ChrisV>
                 </ToggleSize>
                 </RowDisplay>
 
@@ -120,9 +110,3 @@ export default class FAQBubble extends Component {
         );
     }
 }
-
-
-
-// <FAQBubbleContainer>
-//     <Title>Hello World</Title>
-// </FAQBubbleContainer>
