@@ -183,8 +183,6 @@ export default class ShaftLive extends Component {
             width: window.innerWidth,
             init: true,
             update: false,
-            // numFloors: this.state.numFloors,
-            //handleChange: null, //not sure what to type this as
             mobileShowFloorPlan: false
         }
 
@@ -253,8 +251,6 @@ export default class ShaftLive extends Component {
     handleDormChange(dorm){
         this.setState({dorm : dorm, init: false, update: false}, () => {this.fetchFloorNums(this.state.dorm)})
     }
-
-    toggle
 
     render() {
       const { width } = this.state;
