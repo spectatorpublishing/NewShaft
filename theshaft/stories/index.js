@@ -34,6 +34,16 @@ import WhiteboardSidebar from "../src/client/components/WhiteboardSidebar.js";
 import TestSVG from "../src/client/components/TestSVGs.js";
 import FloorButton from "../src/client/components/FloorButton.js";
 import LiveBlog from "../src/client/components/LiveBlog.js";
+import FAQBubble from '../src/client/components/FAQBubble.js';
+import FAKEfaqbubblecontainer from'../src/client/components/FAKEfaqbubblecontainer.js';
+
+storiesOf('FAKEfaqbubblecontainer', module)
+  .add('FAKEfaqbubblecontainer', () => 
+  <FAKEfaqbubblecontainer/>)
+
+storiesOf('FAQBubble', module)
+  .add('FAQBubble', () => 
+  <FAQBubble/>)
 
 storiesOf('FloorButton', module)
   .add('FloorButton', () =>
