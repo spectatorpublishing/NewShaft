@@ -37,7 +37,6 @@ let ButtonTopText= styled.div`
     margin-bottom:0.5rem;
     text-align: center;
     @media only screen and (min-width: 992px){
-        margin-top:3.5rem;
         color: 	${props => props.theme.columbiaBlue};
     }
 `

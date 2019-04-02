@@ -12,6 +12,10 @@ let FloorPlanWrapper = styled.div`
     opacity: 0.3;
     pointer-events: all;
   }
+
+  & rect:hover {
+    opacity: 0.5;
+  }
 `
 
 let TooltipBox = styled.div`

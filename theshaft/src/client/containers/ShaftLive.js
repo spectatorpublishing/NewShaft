@@ -24,7 +24,7 @@ let SVGContainer = styled.div`
     display:flex;
     flex-direction:column;
     height:auto;
-    margin-top:6vh;
+    margin-top:3.5rem;
     width: 40vw;
     height:auto;
     object-position:cover;
@@ -60,6 +60,9 @@ let ColTwo = styled.div`
         flex-direction: column;
         scroll-behavior: smooth;
         width:60vw;
+    }
+    &>h1 {
+      margin-top: 2.5rem;
     }
 `
 
@@ -343,6 +346,7 @@ export default class ShaftLive extends Component {
                       </SVGContainer>
                   </ColThree>)
                     }
+                    <h1>{this.state.dorm}</h1>
                     <FloorButton 
                         floorNums={this.state.floorNums} 
                         handleChange={this.handleFloorChange}/>
