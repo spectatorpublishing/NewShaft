@@ -68,6 +68,11 @@ export default class FloorPlanSVG extends Component {
         suitePickStyle = true;
       }
     }
+    else if (dorm == "East Campus") {
+      if (this.props.floor != "H" && this.props.floor != "6") {
+        suitePickStyle = true;
+      }
+    }
     else {
       if (SUITE_PICK.has(dorm.toUpperCase())) {
         suitePickStyle = true;
@@ -152,6 +157,11 @@ export default class FloorPlanSVG extends Component {
       // Harmony Floor 1 is suite-style picking but its other floors aren't
       if (dorm == "Harmony") {
         if (this.props.floor == "1") {
+          suitePickStyle = true;
+        }
+      }
+      else if (dorm == "East Campus") {
+        if (this.props.floor != "H" && this.props.floor != "6") {
           suitePickStyle = true;
         }
       }
@@ -269,9 +279,6 @@ export default class FloorPlanSVG extends Component {
         return this.props.floor + suite + room
       }
       else if (dorm == "East Campus") {
-        if (this.props.floor == "H" || this.props.floor == "6") {
-          return room
-        }
         return suite
       }
       return this.props.floor + suite;
@@ -280,6 +287,11 @@ export default class FloorPlanSVG extends Component {
       let floor = this.props.floor
       if (dorm == "Harmony" && this.props.floor == "Mezzanine"){
         floor = "1M"
+      }
+      else if (dorm == "East Campus") {
+        if (this.props.floor == "H" || this.props.floor == "6") {
+          return room
+        }
       }
       return floor + room;
     }
