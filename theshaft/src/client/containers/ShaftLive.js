@@ -191,7 +191,7 @@ export default class ShaftLive extends Component {
 
         this.handleFloorChange = this.handleFloorChange.bind(this)
         this.handleDormChange = this.handleDormChange.bind(this)
-        this.handleDormChange(this.state.dorm);
+        //this.handleDormChange(this.state.dorm);
     }
 
     componentWillMount() {
