@@ -60,6 +60,14 @@ let Subtitle = styled.div`
 
 `
 
+let Body = styled.div`
+
+`
+
+let Content = styled.div`
+
+`
+
 let ChrisV = styled.div`
     & img {
         transform: ${ props => props.flip ? "scale(4,-3)" : "scale(4, 3) "};
@@ -97,7 +105,7 @@ export default class FAQBubble extends Component {
         })
 
         const showAll = this.props.showAll.map((el,i) => {
-            return(<Subtitle>{el["body"]}</Subtitle>)
+            return(<Content><Subtitle>{el["subtitle"]}</Subtitle><Body>{el["body"]}</Body></Content>)
         })
         return(
             <ExpanderBox>
