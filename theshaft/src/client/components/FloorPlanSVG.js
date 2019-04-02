@@ -45,8 +45,7 @@ export default class FloorPlanSVG extends Component {
     let url = name.replace(/\ /g, "+");
     let jpgUrl = "https://s3.amazonaws.com/shaft-dorm-floorplans/" + url + ".jpg";
     let svgUrl = "https://s3.amazonaws.com/shaft-svg/"+ url +".svg";
-    console.log(jpgUrl);
-    console.log(svgUrl);
+  
 
 
     // Turn data array passed in from endpoint into JSON for faster lookup
@@ -135,11 +134,7 @@ export default class FloorPlanSVG extends Component {
       let jpgUrl = "https://s3.amazonaws.com/shaft-dorm-floorplans/" + url + ".jpg";
       let svgUrl = "https://s3.amazonaws.com/shaft-svg/"+ url +".svg";
       
-      
-      console.log(jpgUrl);
-      console.log(svgUrl);
-      
-
+    
       // Turn data array passed in from endpoint into JSON for faster lookup
       let dic = {};
       for (var i = 0; i  < this.props.data.length; i++) {
@@ -234,11 +229,10 @@ export default class FloorPlanSVG extends Component {
   }
 
   componentDidUpdate(prevProps) {
-    console.log(prevProps)
     if(this.props.dorm != prevProps.dorm || this.props.init != prevProps.init){
       let dorm_change = true;
       this.svgUpdate(dorm_change)
-    }else if(this.props.floor != prevProps.floor){
+    }else if(this.props.floor != prevProps.floor || this.props.update != prevProps.update){
       let dorm_change = false;
       this.svgUpdate(dorm_change)
     }
@@ -255,9 +249,7 @@ export default class FloorPlanSVG extends Component {
     // Get dorm name and floor number through props
     // Have fun mapping Carlton Arms and Ruggles
     let dorm = this.props.dorm.replace(" Hall", "");
-    console.log("SUITE: " + suite)
-    console.log("ROOM: " + room)
-    console.log("DORM: " + dorm)
+   
     if (suite) {
       if (dorm == "Ruggles"){
         return this.props.floor + suite;
