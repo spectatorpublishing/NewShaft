@@ -1,20 +1,21 @@
 import React, { Component } from "react";
 import styled from 'styled-components';
 import ChrisV from '../assets/chrisv_blue.svg'
+import {theme} from '../util/GlobalStyles.js';
 
 
 let Sidebar = styled.div`
-    width: auto;
+    width: 10vw;
     height: 100vh;
     margin-top:6vh;
-    margin-left:7vw;
+    margin-left:5vw;
     display:flex;
     flex-direction:column;
     
 `
 let SidebarTitle = styled.div`
     text-align:center;
-    font-size:1.5rem;
+    font-size:1.25rem;
     border-bottom:solid;
     border-color:${props => props.theme.columbiaBlue}; 
     border-width:2px;
@@ -58,15 +59,20 @@ let DormListMobile = styled.div`
 
 let Dorm = styled.button`
     padding: .5em;
-    background-color: #FFFFFF;
+    background-color: ${props => props.theme.white};
     border: none;
-    color: #000;
+    color: ${props => props.theme.black};
     font-size: 1rem;
     background: none;
-    text-align: center;
+    text-align: left;
 
     &:hover {
-        background-color: #9a9c9e;
+        background-color: ${props => props.theme.mediumGray};
+        border-radius: 25px;
+    }
+
+    &:focus {
+        background-color: ${props => props.theme.mediumGray};
         border-radius: 25px;
     }
 `
@@ -75,6 +81,7 @@ export default class WhiteboardSidebar extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
+            dormId:-1,
             width: window.innerWidth,
         }
         this.onClick = this.onClick.bind(this)
@@ -97,10 +104,6 @@ export default class WhiteboardSidebar extends React.Component {
       }
 
     render() {
-
-       
-
-      
         const dormArray = ['47 Claremont', 'Broadway Hall', 'East Campus', 'Furnald Hall', 'Harmony Hall',
                         'Hogan Hall', 'McBain Hall', '600 W 113th', 'River Hall', 'Ruggles Hall', 
                        'Schapiro Hall', 'Watt Hall', 'Wien Hall', 'Woodbridge Hall'];
@@ -131,14 +134,12 @@ export default class WhiteboardSidebar extends React.Component {
             return (
                 <div>
                     <Sidebar>
-                    <SidebarTitle>Dorms</SidebarTitle>
+                    <SidebarTitle>DORMS</SidebarTitle>
                         <DormListDesktop>
-                            { 
-                                dormArray.map((dorm) =>
-                                    (<Dorm onClick = {() => this.onClick(dorm)}> 
-                                    {dorm}
-                                </Dorm>)
-                                )
+                            {dormArray.map((dorm, id) => {
+                                return (<Dorm onClick = {() => {
+                                    this.onClick(dorm)
+                                }}>{dorm}</Dorm>);})
                             }
                         </DormListDesktop>
                      </Sidebar>

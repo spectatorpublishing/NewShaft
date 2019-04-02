@@ -54,6 +54,7 @@ let ColTwo = styled.div`
     flex-direction: column;
     scroll-behavior: smooth;
     padding-left: 5%;
+    margin-right:2rem;
     width: ${({ mobile }) => (mobile ? `100%` : `40%`)};
     @media(max-width: 991px){
         display: flex;
@@ -111,88 +112,7 @@ let FloorPlanLegend = styled.div`
     margin-bottom: 1rem;
 `
 
-let floorplanData = [
-    {
-      "DORM": "47 Claremont",
-        "ROOM": "4",
-        "FLOOR": "1",
-        "ROOM_TYPE": "suite-3",
-        "NEW_PRIORITY": "30",
-        "NEW_NUM": "3000"
-    },
-    {
-      "DORM": "47 Claremont",
-        "ROOM": "3",
-        "FLOOR": "1",
-        "ROOM_TYPE": "suite-4",
-        "NEW_PRIORITY": "30",
-        "NEW_NUM": "3000"
-    },
-    {
-      "DORM": "47 Claremont",
-        "ROOM": "1",
-        "FLOOR": "1",
-        "ROOM_TYPE": "suite-6",
-        "NEW_PRIORITY": "30",
-        "NEW_NUM": "3000"
-    },
-    {
-      "DORM": "47 Claremont",
-      "ROOM": "2",
-      "FLOOR": "1",
-      "ROOM_TYPE": "suite-5",
-      "NEW_PRIORITY": "30",
-      "NEW_NUM": "3000"
-    },
-    {
-      "DORM": "47 Claremont",
-        "ROOM": "24",
-        "FLOOR": "2",
-        "ROOM_TYPE": "suite-3",
-        "NEW_PRIORITY": "30",
-        "NEW_NUM": "3000"
-    },
-    {
-      "DORM": "47 Claremont",
-        "ROOM": "23",
-        "FLOOR": "2",
-        "ROOM_TYPE": "suite-4",
-        "NEW_PRIORITY": "30",
-        "NEW_NUM": "3000"
-    },
-    {
-      "DORM": "47 Claremont",
-        "ROOM": "21",
-        "FLOOR": "2",
-        "ROOM_TYPE": "suite-7",
-        "NEW_PRIORITY": "30",
-        "NEW_NUM": "3000"
-    },
-    {
-      "DORM": "47 Claremont",
-      "ROOM": "22",
-      "FLOOR": "2",
-      "ROOM_TYPE": "suite-7",
-      "NEW_PRIORITY": "30",
-      "NEW_NUM": "3000"
-    },
-    {
-      "DORM": "River Hall",
-      "ROOM": "606",
-      "FLOOR": "6",
-      "ROOM_TYPE": "single",
-      "NEW_PRIORITY": "",
-      "NEW_NUM": ""
-    },
-    {
-      "DORM": "River Hall",
-      "ROOM": "607",
-      "FLOOR": "6",
-      "ROOM_TYPE": "single",
-      "NEW_PRIORITY": "20",
-      "NEW_NUM": "1234"
-    }
-  ];
+
 
 
 export default class ShaftLive extends Component {
@@ -200,16 +120,14 @@ export default class ShaftLive extends Component {
         super(props);
 
         this.state = {
-            dorm: "Broadway Hall",
+            dorm: "47 Claremont",
             dormRefresh: false,
-            floor: "3",
+            floor: "1",
             floorNums: null,
             floorData: [],
             width: window.innerWidth,
             init: true,
             update: false,
-            // numFloors: this.state.numFloors,
-            //handleChange: null, //not sure what to type this as
             mobileShowFloorPlan: false
         }
 
@@ -341,7 +259,7 @@ export default class ShaftLive extends Component {
                     {width < 991 &&
                     (<ColThree>
                       <SVGContainer>
-                      <FloorPlanTitle>Interactive Floor Plans</FloorPlanTitle>
+                      <FloorPlanTitle>Interactive Floor Plan</FloorPlanTitle>
                       <FloorPlanSVG dorm={this.state.dorm} floor={this.state.floor} data={this.state.floorData} cutoffs={[]} init={this.state.init} update={this.state.update} ></FloorPlanSVG>
                       </SVGContainer>
                   </ColThree>)
@@ -356,6 +274,7 @@ export default class ShaftLive extends Component {
                 {width > 991 &&
                 (<ColThree>
                     <SVGContainer>
+
                     <FloorPlanTitle>Interactive Floor Plans</FloorPlanTitle>
                     <FloorPlanLegend><GreenBox/> Available <RedBox/> Taken </FloorPlanLegend>
                     <FloorPlanSVG dorm={this.state.dorm} floor={this.state.floor} data={this.state.floorData} cutoffs={[]} init={this.state.init} update={this.state.update} ></FloorPlanSVG>

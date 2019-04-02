@@ -35,8 +35,9 @@ let ButtonTopText= styled.div`
     font-weight: bold;
     margin-top: 1rem;
     margin-bottom:0.5rem;
-    text-align: center;
+    text-align: left;
     @media only screen and (min-width: 992px){
+        margin-top: 1.5rem;
         color: 	${props => props.theme.columbiaBlue};
     }
 `
@@ -116,10 +117,10 @@ export default class FloorButton extends Component{
             
         return(
             <div>
-                <FloorButtonWrapper>
-                    <ButtonTopText>Floor</ButtonTopText>
+                {/* <FloorButtonWrapper> */}
+                    <ButtonTopText>Jump to floor:</ButtonTopText>
                     <Buttons>{buttons}</Buttons>
-                </FloorButtonWrapper>
+                {/* </FloorButtonWrapper> */}
             </div>
         )
     }
