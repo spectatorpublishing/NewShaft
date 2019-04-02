@@ -36,12 +36,14 @@ let Housing101ContainerMobile = styled.div`
     overflow: hidden;
     flex-direction: column;
     align-items: center;
+    background-color: ${props => props.theme.lightGray};
 `
 
 let PageBG = styled.div`
     background-color: ${props => props.theme.lightGray};
     width: 100%;
     min-height: 100vh;
+    margin-bottom: 100px;
 `
 
 let SomeText = styled.p`
@@ -81,7 +83,7 @@ export default class Housing101 extends Component {
                     },
                     {
                         "subtitle": "Difference between in-person and online room selection",
-                        "body": "If you’re planning on living in a double or suite next semester, your group will be invited to John Jay Lounge (aka “The Cage”) sometime between April 2 and April 8 based on your lottery number. (Read this article to learn more about the room selection timeline.) All group members must be present or send proxies to select rooms; proxies must be made during the registration application before the appointment. The suites picked must match the size of your group, though during in-person selection, rising sophomores in groups have the additional option of pairing off and selecting doubles in corridor-style halls like McBain or Wien. &#10; If you’re in a group and can’t make your in-person appointment, you can also choose to drop to online selection. Although your group will retain its lottery number, be aware that some of the more popular rooms might be gone by the time online registration rolls around. &#10; If you’re applying as an individual or aren’t able to select a room with your group, you’ll be automatically given an online registration appointment sometime between April 15 and 30. During your appointment slot, you’ll be able to select singles, half-filled doubles, or full-doubles. If you were originally in a group that wasn’t able to secure a suite, online registration is a great opportunity to find rooms on the same floor so you can still be near your friends next semester."
+                        "body": "If you’re planning on living in a double or suite next semester, your group will be invited to John Jay Lounge (aka “The Cage”) sometime between April 2 and April 8 based on your lottery number. (Read this article to learn more about the room selection timeline.) All group members must be present or send proxies to select rooms; proxies must be made during the registration application before the appointment. The suites picked must match the size of your group, though during in-person selection, rising sophomores in groups have the additional option of pairing off and selecting doubles in corridor-style halls like McBain or Wien. <br/> If you’re in a group and can’t make your in-person appointment, you can also choose to drop to online selection. Although your group will retain its lottery number, be aware that some of the more popular rooms might be gone by the time online registration rolls around. <br/> If you’re applying as an individual or aren’t able to select a room with your group, you’ll be automatically given an online registration appointment sometime between April 15 and 30. During your appointment slot, you’ll be able to select singles, half-filled doubles, or full-doubles. If you were originally in a group that wasn’t able to secure a suite, online registration is a great opportunity to find rooms on the same floor so you can still be near your friends next semester."
                     }
                 ]
             },

@@ -60,7 +60,7 @@ let ToggleSize = styled.button`
 
 let Subtitle = styled.h4`
 color: ${props => props.theme.columbiaBlue};
-
+margin-right: 0.5rem;
 `
 
 let Body = styled.div`
@@ -108,7 +108,8 @@ export default class FAQBubble extends Component {
         })
 
         const showAll = this.props.showAll.map((el,i) => {
-            return(<Content><Subtitle>{el["subtitle"]}</Subtitle><Body>{el["body"]}</Body></Content>)
+            const showAllContent = el["body"].split('<br/>').map(text=><p>{text}</p>)
+            return(<Content><Subtitle>{el["subtitle"]}</Subtitle><Body>{showAllContent}</Body></Content>)
         })
         return(
             <ExpanderBox onClick={this.toggleSize}>
