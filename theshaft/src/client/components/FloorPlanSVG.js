@@ -322,13 +322,13 @@ export default class FloorPlanSVG extends Component {
       // Taken room (Red)
       if (fromDb["NEW_PRIORITY"]) {
         lotteryLabel = "Taken By";
-        lottery = fromDb["NEW_PRIORITY"] + " | " + fromDb["NEW_NUM"];
+        lottery = fromDb["NEW_PRIORITY"] + "/" + fromDb["NEW_NUM"];
       }
   
       return <TooltipBox>
         <TooltipText>{label}: <TooltipBold>{room}</TooltipBold></TooltipText>
         <TooltipText>
-          {lotteryLabel}: <TooltipBold>{lottery}</TooltipBold>
+          {lotteryLabel}: <TooltipBold>{lottery.replace('/', ' | ')}</TooltipBold>
         </TooltipText>
         <TooltipText>
         {roomTypeLabel}: <TooltipBold>{roomType}</TooltipBold>
