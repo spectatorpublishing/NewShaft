@@ -3,7 +3,6 @@ import styled from 'styled-components';
 import ChrisV from '../assets/chrisv_blue.svg'
 import {theme} from '../util/GlobalStyles.js';
 
-
 let Sidebar = styled.div`
     width: 10vw;
     height: 100vh;
@@ -36,8 +35,10 @@ let DormListDesktop = styled.div`
     justify-content:column;
     flex-direction: column;
     button:nth-child(${props => props.selectedId + 1}){
-        background-color: ${props => props.theme.mediumGray};
-        border-radius: 25px;
+        background-color: ${props => props.theme.columbiaBlue};
+        border-radius: ${props => props.theme.borderRadius};
+        color: ${props => props.theme.white};
+        text-shadow: ${props => props.theme.shadow};
     }
 `
 
@@ -63,6 +64,7 @@ let DormListMobile = styled.div`
 
 let Dorm = styled.button`
     padding: .5em;
+    margin: 2px 0;
     background-color: ${props => props.theme.white};
     border: none;
     color: ${props => props.theme.black};
@@ -71,8 +73,8 @@ let Dorm = styled.button`
     text-align: left;
     font-family: Raleway, sans-serif;
     &:hover {
-        background-color: ${props => props.theme.mediumGray};
-        border-radius: 25px;
+        background-color: ${props => props.theme.lightGray};
+        border-radius: ${props => props.theme.borderRadius};
     }
 `
 
