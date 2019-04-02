@@ -59,7 +59,8 @@ export default class FloorPlanSVG extends Component {
       dic[dataFromDb["ROOM"]] = {
         "ROOM_TYPE": dataFromDb["ROOM_TYPE"],
         "NEW_PRIORITY": dataFromDb["NEW_PRIORITY"],
-        "NEW_NUM" : dataFromDb["NEW_NUM"]
+        "NEW_NUM" : dataFromDb["NEW_NUM"],
+        "ROOM_TYPE": dataFromDb["ROOM_TYPE"]
       };
     }
 
@@ -315,6 +316,9 @@ export default class FloorPlanSVG extends Component {
       let lotteryLabel = "Last Year's Cutoff";
       let lottery = this.getCutoff(fromDb["ROOM_TYPE"]);
 
+      let roomTypeLabel = "Room Type:";
+      let roomType = fromDb["ROOM_TYPE"]
+
       // Taken room (Red)
       if (fromDb["NEW_PRIORITY"]) {
         lotteryLabel = "Taken By";
@@ -325,6 +329,9 @@ export default class FloorPlanSVG extends Component {
         <TooltipText>{label}: <TooltipBold>{room}</TooltipBold></TooltipText>
         <TooltipText>
           {lotteryLabel}: <TooltipBold>{lottery}</TooltipBold>
+        </TooltipText>
+        <TooltipText>
+        {roomTypeLabel}: <TooltipBold>{roomType}</TooltipBold>
         </TooltipText>
       </TooltipBox>;
     }
