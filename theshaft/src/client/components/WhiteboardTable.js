@@ -8,9 +8,7 @@ let Table = styled.div`
     flex: 2 50%;
 	justify-content: flex-start;
 	border-bottom: 1px solid ${props => props.theme.lightGray};
-	padding-bottom: 0.5rem;
-	margin-bottom: 0.5rem;
-    margin-right: 1.5rem;
+	padding: 0.5rem 0;
 `
 let Map = styled.div`
     overflow-y: scroll;
