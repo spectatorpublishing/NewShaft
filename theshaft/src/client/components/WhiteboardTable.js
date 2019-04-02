@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import styled from 'styled-components';
 import ReactToolTip from 'react-tooltip';
+import "../css/WhiteboardTable.css"; // Because react-tooltip
 
 let Table = styled.div`
     display: flex;
@@ -65,9 +66,8 @@ let Question = styled.div`
     margin-left: 0.4rem;
 `
 
-let TooltipText = styled.span`
-    font-size: 0.6rem;
-    width: 50%;
+let TooltipText = styled.h6`
+    color: ${props => props.theme.white};
 `
 
 export default class WhiteboardTable extends Component {
@@ -103,7 +103,7 @@ export default class WhiteboardTable extends Component {
                         <LeftTitle>Room Number</LeftTitle>
                         <RightTitle>Lottery Number</RightTitle>
                     <Question data-tip>?</Question>
-                    <ReactToolTip><TooltipText>shows this year's (if taken) or last year's (if available) lottery number for this room</TooltipText></ReactToolTip>
+                    <ReactToolTip className="whiteboard-tooltip"><TooltipText>Live update of room/suite availability and the lottery number if claimed.</TooltipText></ReactToolTip>
                 </TitleText>
                 <Map>
                     {AvailabilityMapped}
