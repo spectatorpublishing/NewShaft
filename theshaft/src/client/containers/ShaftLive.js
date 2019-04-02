@@ -36,8 +36,11 @@ let SVGContainer = styled.div`
 `
 let FloorPlanTitle = styled.h3`
     margin-bottom: 0.25rem;
+    display: inline;
   `
-
+let FloorPlanPrompt = styled.h5`
+  display: inline;
+`
 
 let ShaftLiveContainerMobile = styled.div`
     overflow: hidden;
@@ -284,7 +287,10 @@ export default class ShaftLive extends Component {
                 </ColTwo>
                 <ColThree>
                     <SVGContainer>
-                    <FloorPlanTitle>Interactive Floor Plans</FloorPlanTitle>
+                    <div>
+                      <FloorPlanTitle>Interactive Floor Plans</FloorPlanTitle>
+                      <FloorPlanPrompt> — hover to explore!</FloorPlanPrompt>
+                    </div>
                     <FloorPlanLegend><GreenBox/> Available <RedBox/> Taken </FloorPlanLegend>
                     <FloorPlanSVG dorm={this.state.dorm} floor={this.state.floor} data={this.state.floorData} cutoffs={[]} init={this.state.init} update={this.state.update} ></FloorPlanSVG>
                     </SVGContainer>
