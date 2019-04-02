@@ -252,7 +252,25 @@ export default class ShaftLive extends Component {
     }
 
     handleDormChange(dorm){
-        this.setState({dorm : dorm, init: false, update: false}, () => {this.fetchFloorNums(this.state.dorm)})
+
+      const firstFloor = {
+        "47 Claremont": "1",
+        "Broadway Hall": "3",
+        "Carlton Arms": "1A",
+        "East Campus": "6",
+        "Furnald Hall": "1",
+        "Harmony Hall": "1",
+        "Hogan Hall": "2",
+        "McBain Hall": "1",
+        "600 W 113th": "2",
+        "River Hall": "1",
+        "Ruggles Hall": "1",
+        "Schapiro Hall": "2",
+        "Watt Hall": "1",
+        "Wien Hall": "2",
+        "Woodbridge Hall": "1"
+    }
+        this.setState({dorm : dorm, floor: firstFloor[dorm], init: false, update: false}, () => {this.fetchFloorNums(this.state.dorm)})
     }
 
     
