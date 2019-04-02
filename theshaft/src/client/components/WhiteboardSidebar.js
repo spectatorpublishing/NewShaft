@@ -12,16 +12,13 @@ let Sidebar = styled.div`
     flex-direction:column;
     
 `
-let SidebarTitle = styled.div`
+let SidebarTitle = styled.h3`
     text-align:center;
-    font-size:1.25rem;
     border-bottom:solid;
     border-color:${props => props.theme.columbiaBlue}; 
     border-width:2px;
-    font-weight: bold;
     @media only screen and (max-width: 992px){
         color: 	${props => props.theme.white};
-        font-weight: bold;
         padding-top: 1rem;
         padding-bottom:0.5rem;
         text-align: center;
