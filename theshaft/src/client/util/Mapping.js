@@ -69,8 +69,10 @@ export const MAPPING = {
     "double-walkthrough": "Walk-Through Doubles (05/07 lines)"
   },
   Watt: {
-    double: "Double",
-    single: "Single"
+    "double-studio": "Studio Double",
+    "single-studio": "Studio Single",
+    "apartment-1br": "1-Bedroom Apartment",
+    "apartment-2br": "2-Bedroom Apartment"
   },
   Woodbridge: {
     "apartment-1br": "Low Demand (G + D + I lines)"
