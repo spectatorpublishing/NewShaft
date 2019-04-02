@@ -182,6 +182,7 @@ export default class ShaftLive extends Component {
             floorData: [],
             width: window.innerWidth,
             init: true,
+            update: false,
             // numFloors: this.state.numFloors,
             //handleChange: null, //not sure what to type this as
             mobileShowFloorPlan: false
@@ -193,10 +194,12 @@ export default class ShaftLive extends Component {
     }
 
     componentWillMount() {
+        this.interval = setInterval(() => this.fetchFloorData(this.state.dorm, this.state.floor, !this.state.update), 30000);
         window.addEventListener("resize", this.handleWindowSizeChange);
       }
     
       componentWillUnmount() {
+        clearInterval(this.interval)
         window.removeEventListener("resize", this.handleWindowSizeChange);
       }
     
@@ -228,7 +231,8 @@ export default class ShaftLive extends Component {
             });
     }
 
-    fetchFloorData(dorm, floor){
+    fetchFloorData(dorm, floor, update){
+        console.log("Fetch Floor Data");
         fetch('/api/getLotteryNum', {
             method: 'POST',
             headers: {
@@ -236,16 +240,18 @@ export default class ShaftLive extends Component {
             },
             body: JSON.stringify({DORM: dorm, FLOOR: floor})
             }).then(res => res.json())
-            .then(response => {console.log(response); this.setState({floor: floor, floorData : response, init: false})}
+            .then(response => {this.setState({floor: floor, floorData : response, init: false, update: update})}
         ); 
     }
 
+    
+
     handleFloorChange(floor){
-        this.fetchFloorData(this.state.dorm, floor)
+        this.fetchFloorData(this.state.dorm, floor, false)
     }
 
     handleDormChange(dorm){
-        this.setState({dorm : dorm, init: false}, () => {this.fetchFloorNums(this.state.dorm)})
+        this.setState({dorm : dorm, init: false, update: false}, () => {this.fetchFloorNums(this.state.dorm)})
     }
 
     toggle
@@ -289,6 +295,14 @@ export default class ShaftLive extends Component {
                 </ColOne>
 
                 <ColTwo>
+                    {width < 991 &&
+                    (<ColThree>
+                      <SVGContainer>
+                      <FloorPlanTitle>Interactive Floor Plans</FloorPlanTitle>
+                      <FloorPlanSVG dorm={this.state.dorm} floor={this.state.floor} data={this.state.floorData} cutoffs={[]} init={this.state.init} update={this.state.update} ></FloorPlanSVG>
+                      </SVGContainer>
+                  </ColThree>)
+                    }
                     <FloorButton 
                         floorNums={this.state.floorNums} 
                         handleChange={this.handleFloorChange}/>
@@ -299,7 +313,7 @@ export default class ShaftLive extends Component {
                 (<ColThree>
                     <SVGContainer>
                     <FloorPlanTitle>Interactive Floor Plans</FloorPlanTitle>
-                    <FloorPlanSVG dorm={this.state.dorm} floor={this.state.floor} data={this.state.floorData} cutoffs={[]} init={this.state.init} ></FloorPlanSVG>
+                    <FloorPlanSVG dorm={this.state.dorm} floor={this.state.floor} data={this.state.floorData} cutoffs={[]} init={this.state.init} update={this.state.update} ></FloorPlanSVG>
                     </SVGContainer>
                 </ColThree>)}
             </ShaftLiveContainer>
