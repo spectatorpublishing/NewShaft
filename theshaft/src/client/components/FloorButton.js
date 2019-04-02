@@ -42,13 +42,6 @@ let ButtonTopText= styled.div`
     }
 `
 
-
-
-
-let FloorButtonWrapper=styled.div`
-    padding-bottom: 1rem;
-`
-
 let Buttons = styled.div`
     display: flex;
     flex-direction:row;

@@ -35,6 +35,10 @@ let DormListDesktop = styled.div`
     display:flex;
     justify-content:column;
     flex-direction: column;
+    button:nth-child(${props => props.selectedId + 1}){
+        background-color: ${props => props.theme.mediumGray};
+        border-radius: 25px;
+    }
 `
 
 let DormListMobile = styled.div`
@@ -70,18 +74,13 @@ let Dorm = styled.button`
         background-color: ${props => props.theme.mediumGray};
         border-radius: 25px;
     }
-
-    &:focus {
-        background-color: ${props => props.theme.mediumGray};
-        border-radius: 25px;
-    }
 `
 
 export default class WhiteboardSidebar extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
-            dormId:-1,
+            dormId: 0,
             width: window.innerWidth,
         }
         this.onClick = this.onClick.bind(this)
@@ -135,11 +134,16 @@ export default class WhiteboardSidebar extends React.Component {
                 <div>
                     <Sidebar>
                     <SidebarTitle>DORMS</SidebarTitle>
-                        <DormListDesktop>
+                        <DormListDesktop selectedId={this.state.dormId}>
                             {dormArray.map((dorm, id) => {
-                                return (<Dorm onClick = {() => {
-                                    this.onClick(dorm)
-                                }}>{dorm}</Dorm>);})
+                                    return (<Dorm onClick = {() => {
+                                        this.onClick(dorm)
+                                        if(this.state.dormId != id){
+                                            this.setState({dormId:id})
+                                        }
+                                        
+                                    }}>{dorm}</Dorm>);
+                                })
                             }
                         </DormListDesktop>
                      </Sidebar>
