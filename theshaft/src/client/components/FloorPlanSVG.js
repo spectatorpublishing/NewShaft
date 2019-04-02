@@ -314,12 +314,16 @@ export default class FloorPlanSVG extends Component {
       return <TooltipBox><TooltipText>Not Available</TooltipText></TooltipBox>;
     }
     else {
+      // Get room type by mapping the type string as it appears in the db
+      // to the descriptive string as it appears on Housing's website
+      // (where we scraped the cutoff data from)
+      let roomTypeMapped = this.getRoomTypeMapped(fromDb["ROOM_TYPE"])
+      let roomTypeLabel = "Room Type";
+      let roomType = roomTypeMapped;
+
       // Not taken yet (Green)
       let lotteryLabel = "Last Year's Cutoff";
-      let lottery = this.getCutoff(fromDb["ROOM_TYPE"]);
-
-      let roomTypeLabel = "Room Type:";
-      let roomType = fromDb["ROOM_TYPE"]
+      let lottery = this.getCutoff(roomTypeMapped);
 
       // Taken room (Red)
       if (fromDb["NEW_PRIORITY"]) {
@@ -339,8 +343,11 @@ export default class FloorPlanSVG extends Component {
     }
   }
 
-  getCutoff(roomType) {
-    let roomTypeMapped = MAPPING[this.state.floorplanDorm][roomType];
+  getRoomTypeMapped(roomType) {
+    return MAPPING[this.state.floorplanDorm][roomType];
+  }
+
+  getCutoff(roomTypeMapped) {
     return CUTOFFS[this.state.floorplanDorm][roomTypeMapped];
   }
 
