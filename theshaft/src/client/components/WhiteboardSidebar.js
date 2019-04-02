@@ -81,7 +81,7 @@ export default class WhiteboardSidebar extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
-            dormId:-1,
+            dormId:0,
             width: window.innerWidth,
         }
         this.onClick = this.onClick.bind(this)
