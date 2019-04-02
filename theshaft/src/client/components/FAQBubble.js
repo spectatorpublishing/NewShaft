@@ -3,14 +3,14 @@ import styled from 'styled-components';
 import chris_v from '../assets/chrisv_blue.svg';
 import { theme } from "../util/GlobalStyles";
 
-let Title = styled.h1`
-    margin-top: -0.3vw;
-    margin-bottom: 1vw;
-    margin-left: 0.6vw;
+let Title = styled.h3`
+    margin-top: 0vw;
+    margin-left: 1vw;
     font-weight: 5000;
     width: 100%;
     @media only screen and (max-width: 767px) {
-        font-size: 1.8em;
+        margin-top: 1vw;
+        margin-left: 3vw;
     }
 `
 
@@ -22,11 +22,12 @@ let ExpanderBox = styled.div`
     margin: 0 8% 30px 8%;
     padding: 1.8vw;
     padding-bottom: 0.5vh;
-    border-radius: 20px;
+    border-radius: 10px;
+    cursor: pointer;
     @media only screen and (max-width: 767px) {
-        margin: 0 8% 50px 8%;
+        margin: 0 2% 25px 2%;
         min-height: 80px;
-        padding: 0.2vw;
+        padding: 10px;
     }
 `
 
@@ -36,13 +37,11 @@ let RowDisplay = styled.div`
 `
 
 let ExpanderContent = styled.div`
-  padding: 1rem;
+  padding: 0.5rem 1rem 1rem 1rem;
   color: ${({ textColor }) => textColor}
 `
 
 let ExpanderList = styled.div`
-  display: flex;
-  flex-wrap: wrap;
   color: ${({ textColor }) => textColor}
 `
 
@@ -54,6 +53,19 @@ let ToggleSize = styled.button`
   justify-content: center;
   padding: 0.1rem;
   width: 10%;
+`
+
+let Subtitle = styled.h4`
+color: ${props => props.theme.columbiaBlue};
+margin-right: 0.5rem;
+`
+
+let Body = styled.div`
+margin-bottom: 1rem;
+`
+
+let Content = styled.div`
+
 `
 
 let ChrisV = styled.div`
@@ -88,13 +100,21 @@ export default class FAQBubble extends Component {
     }
 
     render() {
+        const showSome = this.props.showSome.map((el, i) =>{
+            return (<Content><Subtitle>{el["subtitle"]}</Subtitle></Content>)
+        })
+
+        const showAll = this.props.showAll.map((el,i) => {
+            const showAllContent = el["body"].split('<br/>').map(text=><p>{text}</p>)
+            return(<Content><Subtitle>{el["subtitle"]}</Subtitle><Body>{showAllContent}</Body></Content>)
+        })
         return(
-            <ExpanderBox>
+            <ExpanderBox onClick={this.toggleSize}>
                 <RowDisplay>
                 <Title>
                     {this.props.titleText}
                 </Title>
-                <ToggleSize onClick={this.toggleSize}>
+                <ToggleSize>
                     <ChrisV flip={this.state.expanded}><img src={chris_v}></img></ChrisV>
                 </ToggleSize>
                 </RowDisplay>
@@ -102,7 +122,7 @@ export default class FAQBubble extends Component {
                 <ExpanderContent textColor={this.state.textColor}>
                     {this.props.children}
                 <ExpanderList textColor={this.state.textColor}>
-                    {this.state.expanded ? this.props.showAll : this.props.showSome}
+                    {this.state.expanded ? showAll : showSome}
                 </ExpanderList>
                 </ExpanderContent>
                 
