@@ -5,10 +5,10 @@ import {theme} from '../util/GlobalStyles.js';
 
 
 let Sidebar = styled.div`
-    width: auto;
+    width: 10vw;
     height: 100vh;
     margin-top:6vh;
-    margin-left:7vw;
+    margin-left:5vw;
     display:flex;
     flex-direction:column;
     
@@ -58,17 +58,21 @@ let DormListMobile = styled.div`
 `
 
 let Dorm = styled.button`
-    id:${props => props.id};
     padding: .5em;
-    background-color: ${(props => props.selected) ? `#9a9c9e` : `white`};
+    background-color: ${props => props.theme.white};
     border: none;
-    color: #000;
+    color: ${props => props.theme.black};
     font-size: 1rem;
     background: none;
-    text-align: center;
+    text-align: left;
 
     &:hover {
-        background-color: #9a9c9e;
+        background-color: ${props => props.theme.mediumGray};
+        border-radius: 25px;
+    }
+
+    &:focus {
+        background-color: ${props => props.theme.mediumGray};
         border-radius: 25px;
     }
 `
@@ -132,16 +136,10 @@ export default class WhiteboardSidebar extends React.Component {
                     <Sidebar>
                     <SidebarTitle>DORMS</SidebarTitle>
                         <DormListDesktop>
-                            { 
-                                dormArray.map((dorm, id) => {
-                                    return (<Dorm selected={(id == this.state.dormId) ? true : false} onClick = {() => {
-                                        this.onClick(dorm)
-                                        if(this.state.dormId != id){
-                                            console.log(id)
-                                            this.setState({dormId:id})
-                                        }
-                                    }}>{dorm}</Dorm>);
-                                })
+                            {dormArray.map((dorm, id) => {
+                                return (<Dorm onClick = {() => {
+                                    this.onClick(dorm)
+                                }}>{dorm}</Dorm>);})
                             }
                         </DormListDesktop>
                      </Sidebar>
