@@ -11,6 +11,10 @@ let BlueBGMobile = styled.div`
   background-color: ${props => props.theme.columbiaBlue};
 `
 
+let MobileFPWrapper = styled.div`
+  margin-top: 1rem;
+`
+
 let ShaftLiveContainer = styled.div`
     display: flex;
     width: 100%;
@@ -24,7 +28,7 @@ let SVGContainer = styled.div`
     display:flex;
     flex-direction:column;
     height:auto;
-    margin-top:6vh;
+    margin-top:3.5rem;
     width: 40vw;
     height:auto;
     object-position:cover;
@@ -61,6 +65,9 @@ let ColTwo = styled.div`
         flex-direction: column;
         scroll-behavior: smooth;
         width:60vw;
+    }
+    &>h1 {
+      margin-top: 2.5rem;
     }
 `
 
@@ -106,91 +113,13 @@ let RedBox = styled.div`
 `
 
 let FloorPlanLegend = styled.div`
+    @media only screen and (max-width: 992px){
+      text-align: center;
+    }
     margin-bottom: 1rem;
 `
 
-let floorplanData = [
-    {
-      "DORM": "47 Claremont",
-        "ROOM": "4",
-        "FLOOR": "1",
-        "ROOM_TYPE": "suite-3",
-        "NEW_PRIORITY": "30",
-        "NEW_NUM": "3000"
-    },
-    {
-      "DORM": "47 Claremont",
-        "ROOM": "3",
-        "FLOOR": "1",
-        "ROOM_TYPE": "suite-4",
-        "NEW_PRIORITY": "30",
-        "NEW_NUM": "3000"
-    },
-    {
-      "DORM": "47 Claremont",
-        "ROOM": "1",
-        "FLOOR": "1",
-        "ROOM_TYPE": "suite-6",
-        "NEW_PRIORITY": "30",
-        "NEW_NUM": "3000"
-    },
-    {
-      "DORM": "47 Claremont",
-      "ROOM": "2",
-      "FLOOR": "1",
-      "ROOM_TYPE": "suite-5",
-      "NEW_PRIORITY": "30",
-      "NEW_NUM": "3000"
-    },
-    {
-      "DORM": "47 Claremont",
-        "ROOM": "24",
-        "FLOOR": "2",
-        "ROOM_TYPE": "suite-3",
-        "NEW_PRIORITY": "30",
-        "NEW_NUM": "3000"
-    },
-    {
-      "DORM": "47 Claremont",
-        "ROOM": "23",
-        "FLOOR": "2",
-        "ROOM_TYPE": "suite-4",
-        "NEW_PRIORITY": "30",
-        "NEW_NUM": "3000"
-    },
-    {
-      "DORM": "47 Claremont",
-        "ROOM": "21",
-        "FLOOR": "2",
-        "ROOM_TYPE": "suite-7",
-        "NEW_PRIORITY": "30",
-        "NEW_NUM": "3000"
-    },
-    {
-      "DORM": "47 Claremont",
-      "ROOM": "22",
-      "FLOOR": "2",
-      "ROOM_TYPE": "suite-7",
-      "NEW_PRIORITY": "30",
-      "NEW_NUM": "3000"
-    },
-    {
-      "DORM": "River Hall",
-      "ROOM": "606",
-      "FLOOR": "6",
-      "ROOM_TYPE": "single",
-      "NEW_PRIORITY": "",
-      "NEW_NUM": ""
-    },
-    {
-      "DORM": "River Hall",
-      "ROOM": "607",
-      "FLOOR": "6",
-      "ROOM_TYPE": "single",
-      "NEW_PRIORITY": "20",
-      "NEW_NUM": "1234"
-    }
-  ];
+
 
 
 export default class ShaftLive extends Component {
@@ -198,9 +127,9 @@ export default class ShaftLive extends Component {
         super(props);
 
         this.state = {
-            dorm: "Broadway Hall",
+            dorm: "47 Claremont",
             dormRefresh: false,
-            floor: "3",
+            floor: "1",
             floorNums: null,
             floorData: [],
             width: window.innerWidth,
@@ -310,14 +239,26 @@ export default class ShaftLive extends Component {
                   />
                   <FloorButton 
                           floorNums={this.state.floorNums} 
-                          handleChange={this.handleFloorChange}/>
+                          handleChange={this.handleFloorChange}
+                          isMobile = {isMobile}
+                  />
                 </BlueBGMobile>
                 <ToggleMobileView currActive={this.state.mobileShowFloorPlan ? 0 : 1}>
                   <div onClick={()=>this.setState({mobileShowFloorPlan: false})}>Live Feed</div>
                   <div onClick={()=>this.setState({mobileShowFloorPlan: true})}>Floor Plans</div>
                 </ToggleMobileView>
                 { this.state.mobileShowFloorPlan
-                    ? <FloorPlanSVG  dorm={this.state.dorm} floor={this.state.floor} data={this.state.floorData} cutoffs={[]} init={this.state.init} update={this.state.update}/>
+                    ? <MobileFPWrapper>
+                        <FloorPlanLegend><GreenBox/> Available <RedBox/> Taken </FloorPlanLegend>
+                        <FloorPlanSVG
+                          dorm={this.state.dorm}
+                          floor={this.state.floor}
+                          data={this.state.floorData}
+                          cutoffs={[]}
+                          init={this.state.init}
+                          update={this.state.update}
+                        />
+                      </MobileFPWrapper>
                     : <WhiteboardTable
                     roomAvailability={this.state.floorData} />
                 }
@@ -334,28 +275,20 @@ export default class ShaftLive extends Component {
                 </ColOne>
 
                 <ColTwo>
-                    {width < 991 &&
-                    (<ColThree>
-                      <SVGContainer>
-                      <FloorPlanTitle>Interactive Floor Plan</FloorPlanTitle>
-                      <FloorPlanSVG dorm={this.state.dorm} floor={this.state.floor} data={this.state.floorData} cutoffs={[]} init={this.state.init} update={this.state.update} ></FloorPlanSVG>
-                      </SVGContainer>
-                  </ColThree>)
-                    }
+                    <h1>{this.state.dorm}</h1>
                     <FloorButton 
                         floorNums={this.state.floorNums} 
                         handleChange={this.handleFloorChange}/>
                     <WhiteboardTable
                         roomAvailability={this.state.floorData} />
                 </ColTwo>
-                {width > 991 &&
-                (<ColThree>
+                <ColThree>
                     <SVGContainer>
                     <FloorPlanTitle>Interactive Floor Plans</FloorPlanTitle>
                     <FloorPlanLegend><GreenBox/> Available <RedBox/> Taken </FloorPlanLegend>
                     <FloorPlanSVG dorm={this.state.dorm} floor={this.state.floor} data={this.state.floorData} cutoffs={[]} init={this.state.init} update={this.state.update} ></FloorPlanSVG>
                     </SVGContainer>
-                </ColThree>)}
+                </ColThree>
             </ShaftLiveContainer>
             </div>
 

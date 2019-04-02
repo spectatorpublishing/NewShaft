@@ -35,13 +35,24 @@ let ButtonTopText= styled.div`
     font-weight: bold;
     margin-top: 1rem;
     margin-bottom:0.5rem;
-    text-align: left;
+    text-align: center;
     @media only screen and (min-width: 992px){
-        margin-top:6vh;
+        text-align: left;
+        margin-top: 1.5rem;
         color: 	${props => props.theme.columbiaBlue};
     }
 `
 
+<<<<<<< HEAD
+=======
+let FloorButtonWrapper=styled.div`
+    padding-bottom: 1rem;
+    @media only screen and (min-width: 992px){
+        padding: 0;
+    }
+`
+
+>>>>>>> e3016df32da9552f5c682a2828b2305495fbbcac
 let Buttons = styled.div`
     display: flex;
     flex-direction:row;
@@ -110,10 +121,10 @@ export default class FloorButton extends Component{
             
         return(
             <div>
-                {/* <FloorButtonWrapper> */}
-                    <ButtonTopText>Jump to floor:</ButtonTopText>
+                <FloorButtonWrapper>
+                    <ButtonTopText>{this.props.isMobile ? "Floor" : "Jump to floor:"}</ButtonTopText>
                     <Buttons>{buttons}</Buttons>
-                {/* </FloorButtonWrapper> */}
+                </FloorButtonWrapper>
             </div>
         )
     }
