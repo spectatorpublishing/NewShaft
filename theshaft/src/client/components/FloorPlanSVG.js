@@ -265,6 +265,12 @@ export default class FloorPlanSVG extends Component {
       else if (dorm == "Harmony") {
         return this.props.floor + suite;
       }
+      else if (dorm == "East Campus") {
+        if (this.props.floor == "H" || this.props.floor == "6") {
+          return room
+        }
+        return suite
+      }
       return this.props.floor + suite;
     }
     else {
