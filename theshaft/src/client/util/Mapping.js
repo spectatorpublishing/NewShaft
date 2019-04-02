@@ -6,7 +6,7 @@ export const MAPPING = {
     "suite-6": "6-Person Suite",
     "suite-7": "7-Person Suite"
   },
-  "600 W 113th": {
+  "600 West 113": {
     double: "Double",
     single: "Single",
     "double-walkthrough": "Walk-Through Double"
