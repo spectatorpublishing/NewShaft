@@ -14,7 +14,7 @@ let Sidebar = styled.div`
 `
 let SidebarTitle = styled.div`
     text-align:center;
-    font-size:1.5rem;
+    font-size:1.25rem;
     border-bottom:solid;
     border-color:${props => props.theme.columbiaBlue}; 
     border-width:2px;
@@ -131,7 +131,7 @@ export default class WhiteboardSidebar extends React.Component {
             return (
                 <div>
                     <Sidebar>
-                    <SidebarTitle>Dorms</SidebarTitle>
+                    <SidebarTitle>DORMS</SidebarTitle>
                         <DormListDesktop>
                             { 
                                 dormArray.map((dorm) =>

@@ -18,8 +18,8 @@ let Map = styled.div`
 `
 
 let Wrapper = styled.div`
-    width: 80%;
-    margin: 0 10%;
+    width: 100%;
+    margin: 0 0;
 `
 
 let TitleText = styled.div`

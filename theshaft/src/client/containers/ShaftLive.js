@@ -53,6 +53,7 @@ let ColTwo = styled.div`
     flex-direction: column;
     scroll-behavior: smooth;
     padding-left: 5%;
+    margin-right:2rem;
     width: ${({ mobile }) => (mobile ? `100%` : `40%`)};
     @media(max-width: 991px){
         display: flex;
@@ -176,7 +177,7 @@ export default class ShaftLive extends Component {
         super(props);
 
         this.state = {
-            dorm: "Broadway Hall",
+            dorm: "47 Claremont",
             floor: "3",
             floorNums: null,
             floorData: [],
@@ -294,7 +295,7 @@ export default class ShaftLive extends Component {
                     {width < 991 &&
                     (<ColThree>
                       <SVGContainer>
-                      <FloorPlanTitle>Interactive Floor Plans</FloorPlanTitle>
+                      <FloorPlanTitle>Interactive Floor Plan</FloorPlanTitle>
                       <FloorPlanSVG dorm={this.state.dorm} floor={this.state.floor} data={this.state.floorData} cutoffs={[]} init={this.state.init} update={this.state.update} ></FloorPlanSVG>
                       </SVGContainer>
                   </ColThree>)
@@ -308,7 +309,7 @@ export default class ShaftLive extends Component {
                 {width > 991 &&
                 (<ColThree>
                     <SVGContainer>
-                    <FloorPlanTitle>Interactive Floor Plans</FloorPlanTitle>
+                    <FloorPlanTitle>Interactive Floor Plan</FloorPlanTitle>
                     <FloorPlanSVG dorm={this.state.dorm} floor={this.state.floor} data={this.state.floorData} cutoffs={[]} init={this.state.init} update={this.state.update} ></FloorPlanSVG>
                     </SVGContainer>
                 </ColThree>)}
