@@ -31,7 +31,8 @@ let SVGContainer = styled.div`
     padding-right:3vw;
 `
 let FloorPlanTitle = styled.h3`
-    margin-bottom: 20px;`
+    margin-bottom: 0.25rem;
+  `
 
 
 let ShaftLiveContainerMobile = styled.div`
@@ -85,6 +86,26 @@ let ToggleMobileView = styled.div`
     &>div:nth-child(2n+${props => String(props.currActive)}){
       border-bottom: 5px solid ${props => props.theme.columbiaBlue};
     }
+`
+
+let GreenBox = styled.div`
+    height: 1rem;
+    width: 2.5rem;
+    background: green;
+    opacity: 0.3;
+    display: inline-block;
+`
+
+let RedBox = styled.div`
+  height: 1rem;
+  width: 2.5rem;
+  background: red;
+  opacity: 0.3;
+  display: inline-block;
+`
+
+let FloorPlanLegend = styled.div`
+    margin-bottom: 1rem;
 `
 
 let floorplanData = [
@@ -313,6 +334,7 @@ export default class ShaftLive extends Component {
                 (<ColThree>
                     <SVGContainer>
                     <FloorPlanTitle>Interactive Floor Plans</FloorPlanTitle>
+                    <FloorPlanLegend><GreenBox/> Available <RedBox/> Taken </FloorPlanLegend>
                     <FloorPlanSVG dorm={this.state.dorm} floor={this.state.floor} data={this.state.floorData} cutoffs={[]} init={this.state.init} update={this.state.update} ></FloorPlanSVG>
                     </SVGContainer>
                 </ColThree>)}
