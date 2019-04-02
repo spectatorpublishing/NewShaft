@@ -18,8 +18,12 @@ let Map = styled.div`
 `
 
 let Wrapper = styled.div`
-    width: 100%;
-    margin: 0 0;
+    width: 95%;
+    margin: 0 2.5%;
+    @media only screen and (min-width: 992px){
+        width: 100%;
+        margin: 0 0;
+    }
 `
 
 let TitleText = styled.div`

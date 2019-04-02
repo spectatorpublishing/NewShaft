@@ -11,6 +11,10 @@ let BlueBGMobile = styled.div`
   background-color: ${props => props.theme.columbiaBlue};
 `
 
+let MobileFPWrapper = styled.div`
+  margin-top: 1rem;
+`
+
 let ShaftLiveContainer = styled.div`
     display: flex;
     width: 100%;
@@ -109,6 +113,9 @@ let RedBox = styled.div`
 `
 
 let FloorPlanLegend = styled.div`
+    @media only screen and (max-width: 992px){
+      text-align: center;
+    }
     margin-bottom: 1rem;
 `
 
@@ -232,14 +239,26 @@ export default class ShaftLive extends Component {
                   />
                   <FloorButton 
                           floorNums={this.state.floorNums} 
-                          handleChange={this.handleFloorChange}/>
+                          handleChange={this.handleFloorChange}
+                          isMobile = {isMobile}
+                  />
                 </BlueBGMobile>
                 <ToggleMobileView currActive={this.state.mobileShowFloorPlan ? 0 : 1}>
                   <div onClick={()=>this.setState({mobileShowFloorPlan: false})}>Live Feed</div>
                   <div onClick={()=>this.setState({mobileShowFloorPlan: true})}>Floor Plans</div>
                 </ToggleMobileView>
                 { this.state.mobileShowFloorPlan
-                    ? <FloorPlanSVG  dorm={this.state.dorm} floor={this.state.floor} data={this.state.floorData} cutoffs={[]} init={this.state.init} update={this.state.update}/>
+                    ? <MobileFPWrapper>
+                        <FloorPlanLegend><GreenBox/> Available <RedBox/> Taken </FloorPlanLegend>
+                        <FloorPlanSVG
+                          dorm={this.state.dorm}
+                          floor={this.state.floor}
+                          data={this.state.floorData}
+                          cutoffs={[]}
+                          init={this.state.init}
+                          update={this.state.update}
+                        />
+                      </MobileFPWrapper>
                     : <WhiteboardTable
                     roomAvailability={this.state.floorData} />
                 }
@@ -256,14 +275,6 @@ export default class ShaftLive extends Component {
                 </ColOne>
 
                 <ColTwo>
-                    {width < 991 &&
-                    (<ColThree>
-                      <SVGContainer>
-                      <FloorPlanTitle>Interactive Floor Plan</FloorPlanTitle>
-                      <FloorPlanSVG dorm={this.state.dorm} floor={this.state.floor} data={this.state.floorData} cutoffs={[]} init={this.state.init} update={this.state.update} ></FloorPlanSVG>
-                      </SVGContainer>
-                  </ColThree>)
-                    }
                     <h1>{this.state.dorm}</h1>
                     <FloorButton 
                         floorNums={this.state.floorNums} 
@@ -271,15 +282,13 @@ export default class ShaftLive extends Component {
                     <WhiteboardTable
                         roomAvailability={this.state.floorData} />
                 </ColTwo>
-                {width > 991 &&
-                (<ColThree>
+                <ColThree>
                     <SVGContainer>
-
                     <FloorPlanTitle>Interactive Floor Plans</FloorPlanTitle>
                     <FloorPlanLegend><GreenBox/> Available <RedBox/> Taken </FloorPlanLegend>
                     <FloorPlanSVG dorm={this.state.dorm} floor={this.state.floor} data={this.state.floorData} cutoffs={[]} init={this.state.init} update={this.state.update} ></FloorPlanSVG>
                     </SVGContainer>
-                </ColThree>)}
+                </ColThree>
             </ShaftLiveContainer>
             </div>
 
