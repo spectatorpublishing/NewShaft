@@ -69,7 +69,7 @@ let Dorm = styled.button`
     font-size: 1rem;
     background: none;
     text-align: left;
-
+    font-family: Raleway, sans-serif;
     &:hover {
         background-color: ${props => props.theme.mediumGray};
         border-radius: 25px;
