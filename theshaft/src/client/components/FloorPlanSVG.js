@@ -188,7 +188,7 @@ export default class FloorPlanSVG extends Component {
       let suiteEl = roomEl.parentElement;
       let suiteFromSvg = this.getDataFromSvg(suiteEl);
       // Nullify non-sensical suite value if not suite-style
-      if (!this.state.suitePick) {
+      if (!this.state.suitePick && this.props.dorm != "600 W 113th") {
         suiteFromSvg = "";
       }
       let roomFromSvg = this.getDataFromSvg(roomEl);
@@ -264,6 +264,15 @@ export default class FloorPlanSVG extends Component {
       }
       else if (dorm == "Harmony") {
         return this.props.floor + suite;
+      }
+      else if (dorm == "600 W 113th") {
+        return this.props.floor + suite + room
+      }
+      else if (dorm == "East Campus") {
+        if (this.props.floor == "H" || this.props.floor == "6") {
+          return room
+        }
+        return suite
       }
       return this.props.floor + suite;
     }
