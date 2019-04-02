@@ -5,7 +5,6 @@ import { theme } from "../util/GlobalStyles";
 
 let Title = styled.h3`
     margin-top: 0vw;
-    margin-bottom: 1vw;
     margin-left: 1vw;
     font-weight: 5000;
     width: 100%;
@@ -38,13 +37,11 @@ let RowDisplay = styled.div`
 `
 
 let ExpanderContent = styled.div`
-  padding: 1rem;
+  padding: 0.5rem 1rem 1rem 1rem;
   color: ${({ textColor }) => textColor}
 `
 
 let ExpanderList = styled.div`
-  display: flex;
-  flex-wrap: wrap;
   color: ${({ textColor }) => textColor}
 `
 
@@ -104,7 +101,7 @@ export default class FAQBubble extends Component {
 
     render() {
         const showSome = this.props.showSome.map((el, i) =>{
-            return (<Subtitle>{el["subtitle"]}</Subtitle>)
+            return (<Content><Subtitle>{el["subtitle"]}</Subtitle></Content>)
         })
 
         const showAll = this.props.showAll.map((el,i) => {
