@@ -177,7 +177,8 @@ export default class ShaftLive extends Component {
         super(props);
 
         this.state = {
-            dorm: "47 Claremont",
+            dorm: "Broadway Hall",
+            dormRefresh: false,
             floor: "3",
             floorNums: null,
             floorData: [],
@@ -189,11 +190,11 @@ export default class ShaftLive extends Component {
 
         this.handleFloorChange = this.handleFloorChange.bind(this)
         this.handleDormChange = this.handleDormChange.bind(this)
-        this.handleDormChange(this.state.dorm);
+        //this.handleDormChange(this.state.dorm);
     }
 
     componentWillMount() {
-        this.interval = setInterval(() => this.fetchFloorData(this.state.dorm, this.state.floor, !this.state.update), 30000);
+        this.interval = setInterval(() => this.fetchFloorData(this.state.dorm, this.state.floor, !this.state.update), 15000);
         window.addEventListener("resize", this.handleWindowSizeChange);
       }
     
@@ -239,7 +240,7 @@ export default class ShaftLive extends Component {
             },
             body: JSON.stringify({DORM: dorm, FLOOR: floor})
             }).then(res => res.json())
-            .then(response => {this.setState({floor: floor, floorData : response, init: false, update: update})}
+            .then(response => {this.setState({dorm : dorm, floor: floor, floorData : response, init: false, update: update})}
         ); 
     }
 
@@ -250,8 +251,28 @@ export default class ShaftLive extends Component {
     }
 
     handleDormChange(dorm){
-        this.setState({dorm : dorm, init: false, update: false}, () => {this.fetchFloorNums(this.state.dorm)})
+
+      const firstFloor = {
+        "47 Claremont": "1",
+        "Broadway Hall": "3",
+        "Carlton Arms": "1A",
+        "East Campus": "6",
+        "Furnald Hall": "1",
+        "Harmony Hall": "1",
+        "Hogan Hall": "2",
+        "McBain Hall": "1",
+        "600 W 113th": "2",
+        "River Hall": "1",
+        "Ruggles Hall": "1",
+        "Schapiro Hall": "2",
+        "Watt Hall": "1",
+        "Wien Hall": "2",
+        "Woodbridge Hall": "1"
     }
+        this.setState({dorm : dorm, floor: firstFloor[dorm], init: false, update: false}, () => {this.fetchFloorNums(this.state.dorm)})
+    }
+
+    
 
     render() {
       const { width } = this.state;
@@ -275,7 +296,7 @@ export default class ShaftLive extends Component {
                   <div onClick={()=>this.setState({mobileShowFloorPlan: true})}>Floor Plans</div>
                 </ToggleMobileView>
                 { this.state.mobileShowFloorPlan
-                    ? <FloorPlanSVG dorm={this.state.dorm} floor={this.state.floor} data={floorplanData} cutoffs={[]}/>
+                    ? <FloorPlanSVG  dorm={this.state.dorm} floor={this.state.floor} data={this.state.floorData} cutoffs={[]} init={this.state.init} update={this.state.update}/>
                     : <WhiteboardTable
                     roomAvailability={this.state.floorData} />
                 }

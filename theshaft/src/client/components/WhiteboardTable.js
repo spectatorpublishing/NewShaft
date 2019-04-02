@@ -86,7 +86,7 @@ export default class WhiteboardTable extends Component {
 				return (
 				<Table key={i}>
 					<Category>{el[0]}</Category> 
-					<Content>{el[1]}</Content>
+					<Content>{el[1] == '/' ? <span style={{color: "green"}}>AVAILABLE</span> : el[1]}</Content>
 				</Table>
 				)
 			}

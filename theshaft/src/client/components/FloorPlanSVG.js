@@ -68,6 +68,11 @@ export default class FloorPlanSVG extends Component {
         suitePickStyle = true;
       }
     }
+    else if (dorm == "East Campus") {
+      if (this.props.floor != "H" && this.props.floor != "6") {
+        suitePickStyle = true;
+      }
+    }
     else {
       if (SUITE_PICK.has(dorm.toUpperCase())) {
         suitePickStyle = true;
@@ -155,6 +160,11 @@ export default class FloorPlanSVG extends Component {
           suitePickStyle = true;
         }
       }
+      else if (dorm == "East Campus") {
+        if (this.props.floor != "H" && this.props.floor != "6") {
+          suitePickStyle = true;
+        }
+      }
       else {
         if (SUITE_PICK.has(dorm.toUpperCase())) {
           suitePickStyle = true;
@@ -188,7 +198,7 @@ export default class FloorPlanSVG extends Component {
       let suiteEl = roomEl.parentElement;
       let suiteFromSvg = this.getDataFromSvg(suiteEl);
       // Nullify non-sensical suite value if not suite-style
-      if (!this.state.suitePick) {
+      if (!this.state.suitePick && this.props.dorm != "600 W 113th") {
         suiteFromSvg = "";
       }
       let roomFromSvg = this.getDataFromSvg(roomEl);
@@ -229,11 +239,17 @@ export default class FloorPlanSVG extends Component {
   }
 
   componentDidUpdate(prevProps) {
-    if(this.props.dorm != prevProps.dorm || this.props.init != prevProps.init){
+    if(this.props.init != prevProps.init){
       let dorm_change = true;
       this.svgUpdate(dorm_change)
     }else if(this.props.floor != prevProps.floor || this.props.update != prevProps.update){
       let dorm_change = false;
+      this.svgUpdate(dorm_change)
+    }
+    else if(this.props.dorm != prevProps.dorm || this.props.data != prevProps.data){
+      console.log(prevProps.dorm);
+      console.log(this.props.dorm);
+      let dorm_change = true;
       this.svgUpdate(dorm_change)
     }
     
@@ -249,14 +265,36 @@ export default class FloorPlanSVG extends Component {
     // Get dorm name and floor number through props
     // Have fun mapping Carlton Arms and Ruggles
     let dorm = this.props.dorm.replace(" Hall", "");
-   
     if (suite) {
       if (dorm == "Ruggles"){
         return this.props.floor + suite;
       }
+      else if (dorm == "47 Claremont"){
+        let claremontFloor = this.props.floor == 1 ? "" : this.props.floor
+        return claremontFloor + suite;
+      }
+      else if (dorm == "Harmony") {
+        return this.props.floor + suite;
+      }
+      else if (dorm == "600 W 113th") {
+        return this.props.floor + suite + room
+      }
+      else if (dorm == "East Campus") {
+        return suite
+      }
+      return this.props.floor + suite;
     }
     else {
-      return this.props.floor + room;
+      let floor = this.props.floor
+      if (dorm == "Harmony" && this.props.floor == "Mezzanine"){
+        floor = "1M"
+      }
+      else if (dorm == "East Campus") {
+        if (this.props.floor == "H" || this.props.floor == "6") {
+          return room
+        }
+      }
+      return floor + room;
     }
   }
 
