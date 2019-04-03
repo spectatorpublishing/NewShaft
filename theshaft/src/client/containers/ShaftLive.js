@@ -253,6 +253,7 @@ export default class ShaftLive extends Component {
                 { this.state.mobileShowFloorPlan
                     ? <MobileFPWrapper>
                         <FloorPlanLegend><GreenBox/> Available <RedBox/> Taken </FloorPlanLegend>
+                        
                         <FloorPlanSVG
                           dorm={this.state.dorm}
                           floor={this.state.floor}

@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import styled from 'styled-components';
 import FAQBubble from "../components/FAQBubble.js";
 import { theme } from "../util/GlobalStyles";
+import AdManager from "../components/AdManager.js"
 
 
 
@@ -46,6 +47,13 @@ let PageBG = styled.div`
     margin-bottom: 100px;
 `
 
+let AdCenter = styled.div`
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+`
+
 let SomeText = styled.p`
     color: ${props => props.theme.darkGray};
 `
@@ -62,6 +70,7 @@ export default class Housing101 extends Component {
     render(){
         const { width } = this.state;
         const isMobile = width <= 700;
+        const isMedium = this.state.width <= 1400;
         const housing = [
             {
                 "title": "Welcome to theSHAFT",
@@ -165,6 +174,7 @@ export default class Housing101 extends Component {
                     <PageBG>
                         {FAQBubbleMapped}
                     </PageBG>
+                    <AdCenter><AdManager name = "shaftleader" mobile = {isMedium}/></AdCenter>
                 </Housing101Container>
             
             );
