@@ -71,54 +71,51 @@ let Buttons = styled.div`
 export default class FloorButton extends Component{
     constructor(props){
         super(props)
+        
+        if (this.props.floorNums) {
+            this.props.handleChange(this.props.floorNums[0]["FLOOR"]);
+        }
 
         this.state = {
-            floorNums : this.props.floorNums,
-            handleChange: this.props.handleChange,
-            currentFloorIndex: -1 
+            currentFloorIndex: 0 
         }
     }
     
-    componentDidUpdate(oldProps){
-        if(JSON.stringify(oldProps) != JSON.stringify(this.props)){
-            this.setState({
-                floorNums : this.props.floorNums,
-                currentFloorIndex : -1
-            })
+    componentDidUpdate(prevProps) {
+        if (JSON.stringify(prevProps) != JSON.stringify(this.props)) {
+            if (this.props.floorNums) {
+                this.props.handleChange(this.props.floorNums[0]["FLOOR"]);
+            }
+            this.setState({ currentFloorIndex: 0 });
         }
     }
 
-    render(){
-        let buttons = []
-        if (this.state.floorNums){
-            buttons = this.state.floorNums.map((floor, idx) => {
-                let floorNum = floor["FLOOR"]
-                if(idx == this.state.currentFloorIndex){
-                    return <NumberBlue onClick={() => {
-                        this.state.handleChange(floorNum)
-                    }}>{floorNum}</NumberBlue>
-                }
-                else{
-                    return <NumberBlack onClick={() => {
-                        this.setState({currentFloorIndex : idx})
-                        this.state.handleChange(floorNum)
-                    }}>{floorNum}</NumberBlack>
-                }
-            })
-
-            if(this.state.currentFloorIndex == -1){
-                this.state.handleChange(this.state.floorNums[0]["FLOOR"])
-                this.setState({currentFloorIndex : 0})
-                
+    getButtons() {
+        return this.props.floorNums.map((floor, id) => {
+            let floorNum = floor["FLOOR"];
+            if (id == this.state.currentFloorIndex) {
+                return <NumberBlue key={id} onClick={() => {
+                    this.props.handleChange(floorNum);
+                }}>{floorNum}</NumberBlue>
             }
-        }
-            
+            else { 
+                return <NumberBlack key={id} onClick={() => {
+                    this.setState({ currentFloorIndex: id });
+                    this.props.handleChange(floorNum);
+                }}>{floorNum}</NumberBlack>
+            }
+        });
+    }
+
+    render(){
         return(
             <div>
-                <FloorButtonWrapper>
+                {this.props.floorNums && 
+                (<FloorButtonWrapper>
                     <ButtonTopText>{this.props.isMobile ? "Floor" : "Jump to floor:"}</ButtonTopText>
-                    <Buttons>{buttons}</Buttons>
+                    <Buttons>{this.getButtons()}</Buttons>
                 </FloorButtonWrapper>
+                )}
             </div>
         )
     }

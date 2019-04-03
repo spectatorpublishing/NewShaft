@@ -180,7 +180,7 @@ export default class ShaftLive extends Component {
             })
             .then(res => res.json())
             .then(floorNums => {
-                this.setState({floorNums: floorNums})
+                this.setState({floorNums: floorNums});
             });
     }
 
@@ -192,14 +192,21 @@ export default class ShaftLive extends Component {
             },
             body: JSON.stringify({DORM: dorm, FLOOR: floor})
             }).then(res => res.json())
-            .then(response => {this.setState({dorm : dorm, dormRefresh: !this.state.dormRefresh, floor: floor, floorData : response})}
+            .then(response => {
+                this.setState({
+                    dorm: dorm, 
+                    dormRefresh: !this.state.dormRefresh, 
+                    floor: floor, 
+                    floorData : response
+                });
+            }
         ); 
     }
 
     
 
     handleFloorChange(floor){
-        this.fetchFloorData(this.state.dorm, floor)
+        this.fetchFloorData(this.state.dorm, floor);
     }
 
     handleDormChange(dorm){
@@ -221,7 +228,14 @@ export default class ShaftLive extends Component {
         "Wien Hall": "2",
         "Woodbridge Hall": "1"
     }
-        this.setState({dorm : dorm, floor: firstFloor[dorm], init: false}, () => {this.fetchFloorNums(this.state.dorm); this.fetchFloorData(dorm, firstFloor[dorm] )})
+        this.setState({
+            dorm : dorm, 
+            floor: firstFloor[dorm], 
+            init: false
+        }, () => {
+            this.fetchFloorNums(this.state.dorm); 
+            this.fetchFloorData(dorm, firstFloor[dorm]);
+        });
     }
 
     
