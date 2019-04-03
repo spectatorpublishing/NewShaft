@@ -27,9 +27,6 @@ function getUniqueFloorNumbers(con, request, callback) {
 
 		var sqlStatement = `SELECT DISTINCT FLOOR
         FROM ShaftLive WHERE DORM = "${request["DORM"]}";`
-
-        console.log(`sqlStatement: ${sqlStatement}`);
-		
 		
 		con.query(sqlStatement, function(err, res) {
 			if (err) throw err;

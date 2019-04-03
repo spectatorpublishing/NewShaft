@@ -120,7 +120,6 @@ export default class FloorPlanSVG extends Component {
         "Woodbridge": "1"
     }
 
-    console.log("UPDATE")
       let dorm = this.props.dorm.replace(" Hall", "");
       if(dorm == "600 W 113th"){
         dorm = "600 West 113";
@@ -218,10 +217,8 @@ export default class FloorPlanSVG extends Component {
         }
         // Check if lottery number exists for it (i.e. it's already taken)
         if (fromDb["NEW_PRIORITY"]) {
-          // console.log("TAKEN: " + roomOrSuiteName);
           selectableEl.setAttribute("fill", "red");
         } else {
-          // console.log("AVAILABLE: " + roomOrSuiteName);
           selectableEl.setAttribute("fill", "green");
         }
         
@@ -244,8 +241,6 @@ export default class FloorPlanSVG extends Component {
   }
 
   componentDidUpdate(prevProps) {
-    console.log(this.props.dormRefresh)
-    console.log(prevProps.dormRefresh)
     if(this.props.init != prevProps.init){
       let dorm_change = true;
       this.svgUpdate(dorm_change)
@@ -254,8 +249,6 @@ export default class FloorPlanSVG extends Component {
       this.svgUpdate(dorm_change)
     }
     else if(this.props.dorm != prevProps.dorm ){
-      console.log(prevProps.dorm);
-      console.log(this.props.dorm);
       let dorm_change = true;
       this.svgUpdate(dorm_change)
     }

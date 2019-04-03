@@ -279,9 +279,7 @@ export default class Dorm extends React.PureComponent {
         }
         dormInfo[0].LOTTERY_NUMS = tempLot;
         document.title = this.state.dormInfo.DORM;
-        this.setState({dormInfo: dormInfo[0]},() => {
-          console.log(this.state.dormInfo)
-        });
+        this.setState({dormInfo: dormInfo[0]});
       });
       
   }

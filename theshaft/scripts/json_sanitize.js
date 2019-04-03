@@ -7,9 +7,6 @@ function handleJSONs(err, files)
 {
     for (var i = 0; i < files.length; i++)
     {    
-        console.log(files.length);
-        console.log(i);
-        console.log(files[i]);
         var filePath = path + '/' + files[i];
         var data = fs.readFileSync(filePath, 'utf8');
         var finalObject = {};

@@ -33,7 +33,6 @@ function relevantKeys(){
 
 function cleanText(data){
     if(data){
-        console.log(data.replace(/“/g, '\"').replace(/'/g, "\'").replace(/"/g, '\"'))
         return data.replace(/“/g, '"').replace(/'/g, "''").replace(/"/g, '\"');
     } else {
         return "N/A"
@@ -42,7 +41,6 @@ function cleanText(data){
 
 function cleanify(fileName, dorm_data){
     var realName = fileName.replace('_data.json','').replace(/-/g,' ').replace(/\w\S*/g, function(txt){return txt.charAt(0).toUpperCase() + txt.substr(1).toLowerCase();});
-    console.log(realName);
     i = cutDorms.indexOf(fileName)
     var dorm = {
         DORM: realName,

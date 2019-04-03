@@ -43,7 +43,6 @@ var parser = parse({delimiter: ','}, function (err, data) {
       else {
         
           if (err) throw err;
-          console.log("Connected!");
           dorm = switcho(line[2])
           year = switcho(line[4])
           var sqlStatement = `INSERT INTO review (DORM, ADDRESS, NUM_STARS, REVIEW_TXT, ROOM_NUM, YEAR)`

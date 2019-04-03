@@ -6,7 +6,6 @@ import { DFPSlotsProvider, AdSlot } from 'react-dfp';
 export default class Example extends Component {
   render() {
     if(this.props.mobile){
-      console.log()
       return(
       <DFPSlotsProvider dfpNetworkId="59699124">
             <div className="desktop-ads">

@@ -45,7 +45,6 @@ function Inject(jsonArray,filePath,files){
         }
         content = data;
         var arr = content.split('\n')
-        console.log(arr)
         var newJsonArray=[];
         /*NOTE: FILES BEING READ IN HAVE _ALLDATA, _CUTOFFS.JSON PRESENT HERE ADDING LENGTH BY 2*/
         for( i =files.length-1;i>=0;i--)
@@ -56,7 +55,6 @@ function Inject(jsonArray,filePath,files){
             curr_json["Latitude"]=json_potentional[1];
             curr_json["Longitude"]=json_potentional[2];
             fs.writeFileSync(filePath,JSON.stringify(curr_json))
-            console.log("Succesfuly written to file " + filePath)
         }
 
 

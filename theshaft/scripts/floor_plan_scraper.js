@@ -32,7 +32,6 @@ rp(url)
   })
   .then((dorm_list) => {
     dorm_list.forEach((elem) => {
-      console.log(elem['attribs']['href'])
       grabFloorplans(elem['attribs']['href'])
     })
   })

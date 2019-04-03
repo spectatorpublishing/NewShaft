@@ -81,8 +81,6 @@ export default class FloorButton extends Component{
     
     componentDidUpdate(oldProps){
         if(JSON.stringify(oldProps) != JSON.stringify(this.props)){
-            console.log("old: " + JSON.stringify(oldProps))
-            console.log("new: " + JSON.stringify(this.props))
             this.setState({
                 floorNums : this.props.floorNums,
                 currentFloorIndex : -1
@@ -109,7 +107,6 @@ export default class FloorButton extends Component{
             })
 
             if(this.state.currentFloorIndex == -1){
-                console.log("initializing")
                 this.state.handleChange(this.state.floorNums[0]["FLOOR"])
                 this.setState({currentFloorIndex : 0})
                 
