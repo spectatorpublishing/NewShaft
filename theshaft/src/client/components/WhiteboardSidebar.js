@@ -76,6 +76,23 @@ let Dorm = styled.button`
     }
 `
 
+const DORM_ARRAY = [
+    '47 Claremont', 
+    'Broadway Hall', 
+    'East Campus', 
+    'Furnald Hall', 
+    'Harmony Hall', 
+    'Hogan Hall', 
+    'McBain Hall', 
+    '600 W 113th', 
+    'River Hall', 
+    'Ruggles Hall', 
+    'Schapiro Hall', 
+    'Watt Hall', 
+    'Wien Hall', 
+    'Woodbridge Hall'
+];
+
 export default class WhiteboardSidebar extends React.Component {
     constructor(props) {
         super(props);
@@ -83,29 +100,44 @@ export default class WhiteboardSidebar extends React.Component {
             dormId: 0,
             width: window.innerWidth,
         }
-        this.onClick = this.onClick.bind(this)
+        this.onClick = this.onClick.bind(this);
+        this.handleWindowSizeChange = this.handleWindowSizeChange.bind(this);
+        this.getDesktopDorms = this.getDesktopDorms.bind(this);
     }
 
     onClick(dorm) {
-        this.props.sidebarModification(dorm)
+        this.props.sidebarModification(dorm);
     }
 
     componentWillMount() {
         window.addEventListener("resize", this.handleWindowSizeChange);
-      }
-    
-      componentWillUnmount() {
+    }
+  
+    componentWillUnmount() {
         window.removeEventListener("resize", this.handleWindowSizeChange);
-      }
-    
-      handleWindowSizeChange = () => {
+    }
+  
+    handleWindowSizeChange() {
         this.setState({ width: window.innerWidth });
-      }
+    }
+
+    getMobileDorms() {
+        return DORM_ARRAY.map((dorm, id) => {
+            return <option key={id} value={dorm}>{dorm}</option>;
+        });
+    }
+
+    getDesktopDorms() {
+        return DORM_ARRAY.map((dorm, id) => {
+            return <Dorm key={id} onClick={() => {this.onClick(dorm);
+                if (this.state.dormId != id) {
+                    this.setState({dormId: id});
+                }
+            }}>{dorm}</Dorm>;
+        });   
+    }
 
     render() {
-        const dormArray = ['47 Claremont', 'Broadway Hall', 'East Campus', 'Furnald Hall', 'Harmony Hall',
-                        'Hogan Hall', 'McBain Hall', '600 W 113th', 'River Hall', 'Ruggles Hall', 
-                       'Schapiro Hall', 'Watt Hall', 'Wien Hall', 'Woodbridge Hall'];
         const { width } = this.state;
         const isMobile = width <= 700;
 
@@ -114,17 +146,13 @@ export default class WhiteboardSidebar extends React.Component {
                     <div>
                     <SidebarTitle>Dorm</SidebarTitle>
                     <DormListMobile>
-                        <select value={this.props.currDorm} onChange={e => this.onClick(e.target.value)}>
-                        { 
-                                dormArray.map((dorm) =>
-                                    (<option value={dorm}> 
-                                    {dorm}
-                                    </option>)
-                                )
-                        } 
+                        <select 
+                            value={this.props.currDorm} 
+                            onChange={e => this.onClick(e.target.value)}
+                        >
+                            {this.getMobileDorms()} 
                         </select>
                         <img src={ChrisV}/>
-
                     </DormListMobile>
                     </div>
             );
@@ -135,18 +163,9 @@ export default class WhiteboardSidebar extends React.Component {
                     <Sidebar>
                     <SidebarTitle>DORMS</SidebarTitle>
                         <DormListDesktop selectedId={this.state.dormId}>
-                            {dormArray.map((dorm, id) => {
-                                    return (<Dorm onClick = {() => {
-                                        this.onClick(dorm)
-                                        if(this.state.dormId != id){
-                                            this.setState({dormId:id})
-                                        }
-                                        
-                                    }}>{dorm}</Dorm>);
-                                })
-                            }
+                            {this.getDesktopDorms()}
                         </DormListDesktop>
-                     </Sidebar>
+                    </Sidebar>
                 </div>
              )
         }
