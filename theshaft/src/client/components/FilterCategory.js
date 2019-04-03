@@ -70,6 +70,8 @@ let FilterList = styled.ul`
 
 const ChrisV = styled.div`
     display: inline-block;
+    pointer-events: none;
+    
     & img {
         transform: ${ props=> props.flip ? "scaleY(-1)" : "none"};
         margin: ${ props=> props.flip ? "1px 0 3px 0" : "3px 0 1px 0"};
