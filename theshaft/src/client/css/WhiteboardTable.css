@@ -1,0 +1,20 @@
+.whiteboard-tooltip {
+  background-color: #555555 !important;
+  border-radius: 4px;
+  opacity: 1 !important;
+  padding: 0.5rem 0.8rem;
+  max-width: 165px;
+}
+
+.whiteboard-tooltip.place-left::after {
+  border-left-color: #555555 !important;
+}
+.whiteboard-tooltip.place-right::after {
+  border-right-color: #555555 !important;
+}
+.whiteboard-tooltip.place-top::after {
+  border-top-color: #555555 !important;
+}
+.whiteboard-tooltip.place-bottom::after {
+  border-bottom-color: #555555 !important;
+}

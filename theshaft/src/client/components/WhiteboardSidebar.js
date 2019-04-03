@@ -3,7 +3,6 @@ import styled from 'styled-components';
 import ChrisV from '../assets/chrisv_blue.svg'
 import {theme} from '../util/GlobalStyles.js';
 
-
 let Sidebar = styled.div`
     width: 10vw;
     height: 100vh;
@@ -13,16 +12,13 @@ let Sidebar = styled.div`
     flex-direction:column;
     
 `
-let SidebarTitle = styled.div`
+let SidebarTitle = styled.h3`
     text-align:center;
-    font-size:1.25rem;
     border-bottom:solid;
     border-color:${props => props.theme.columbiaBlue}; 
     border-width:2px;
-    font-weight: bold;
     @media only screen and (max-width: 992px){
         color: 	${props => props.theme.white};
-        font-weight: bold;
         padding-top: 1rem;
         padding-bottom:0.5rem;
         text-align: center;
@@ -36,8 +32,10 @@ let DormListDesktop = styled.div`
     justify-content:column;
     flex-direction: column;
     button:nth-child(${props => props.selectedId + 1}){
-        background-color: ${props => props.theme.mediumGray};
-        border-radius: 25px;
+        background-color: ${props => props.theme.columbiaBlue};
+        border-radius: ${props => props.theme.borderRadius};
+        color: ${props => props.theme.white};
+        text-shadow: ${props => props.theme.shadow};
     }
 `
 
@@ -63,6 +61,7 @@ let DormListMobile = styled.div`
 
 let Dorm = styled.button`
     padding: .5em;
+    margin: 2px 0;
     background-color: ${props => props.theme.white};
     border: none;
     color: ${props => props.theme.black};
@@ -71,8 +70,8 @@ let Dorm = styled.button`
     text-align: left;
     font-family: Raleway, sans-serif;
     &:hover {
-        background-color: ${props => props.theme.mediumGray};
-        border-radius: 25px;
+        background-color: ${props => props.theme.lightGray};
+        border-radius: ${props => props.theme.borderRadius};
     }
 `
 
