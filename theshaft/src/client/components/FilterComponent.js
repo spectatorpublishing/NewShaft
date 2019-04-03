@@ -70,8 +70,18 @@ export default class FilterComponent extends React.PureComponent {
 				type: this.props.type,
 				openFilters: 0,
 			};
-			this.setfilter = this.setfilter.bind(this)
+			this.setfilter = this.setfilter.bind(this);
+			this.closeAllFilters = this.closeAllFilters.bind(this);
+			this.handleClickChange = this.handleClickChange.bind(this);
 	}
+
+    componentDidMount() {
+        document.addEventListener("click", this.handleClickChange);
+    }
+
+    componentWillUnmount() {
+        document.removeEventListener("click");
+    }
 
 	// Sets the single active filter
 	setfilter(key, val){
@@ -83,6 +93,21 @@ export default class FilterComponent extends React.PureComponent {
 		// second filter is active. 
 		this.setState({openFilters: val<<key})
 	}
+
+	closeAllFilters() {
+		this.setState({openFilters: 0});
+	}
+
+    handleClickChange(e) {
+		let filterList = document.getElementById("filterList");
+		if (filterList) {
+			// Close filter list if we click outside of the filter list
+			// And we don't click a different filter header title
+			if (!filterList.contains(e.target) && !e.target.className.includes("DDHeaderTitle")) {
+				this.closeAllFilters();
+			}
+		}
+    }
 
 	render() {
 		// The open prop bitshifts this.state.open over i values. For example, if the 

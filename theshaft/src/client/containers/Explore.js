@@ -5,6 +5,7 @@ import Filter from '../components/FilterComponent.js'
 import Maps from "../components/Maps";
 import SearchBar from "../components/SearchBar"
 import CurrFilters from "../components/CurrFilters"
+import { FILTER_NAME_TO_KEY } from "../util/DormFilter.js";
 
 import _ from "lodash"
 
@@ -76,33 +77,6 @@ let ColTwo = styled.div`
   flex-direction: column;
   `
 
-// Converts name of filter in front-end
-// to name used in body payload
-const filterNameToKey = {
-    "Dorm":"DORM",
-    "Columbia":"COLUMBIA",
-		"Barnard":"BARNARD",
-		"Single":"SINGLE_",
-		"Double":"DOUBLE_",
-		"Triple":"TRIPLE_",
-		"2 Person":"TWO_SUITE",
-		"3 Person":"THREE_SUITE",
-		"4 Person":"FOUR_SUITE",
-		"5 Person":"FIVE_SUITE",
-		"6 Person":"SIX_SUITE",
-		"7 Person":"SEVEN_SUITE",
-		"8 Person":"EIGHT_SUITE",
-		"9 Person":"NINE_SUITE",
-		"First Year":"FRESHMAN",
-		"Sophomore":"SOPHOMORE",
-		"Junior":"JUNIOR",
-		"Senior":"SENIOR",
-		"A/C":"AC",
-		"Gym":"GYM",
-		"Single-Use Bathroom":"P_BATHROOM",
-		"Private Kitchen":"P_KITCHEN"
-}
-
 const initialPayload = {
   COLUMBIA: 0,
   BARNARD: 0,
@@ -165,7 +139,7 @@ export default class Explore extends Component {
 
   updatePayload(newValue, name){
     let payload = this.state.payload;
-		payload[filterNameToKey[name]] = newValue
+		payload[FILTER_NAME_TO_KEY[name]] = newValue
     this.setState({payload: payload}, () => this.filterDorms())
   }
 
@@ -182,7 +156,8 @@ export default class Explore extends Component {
         body: JSON.stringify(this.state.payload)
     }).then(res => res.json())
     .then(response => {
-        this.setState({dorms: response})
+        this.setState({dorms: response});
+        console.log(this.state);
     });      
   }
   
@@ -196,7 +171,7 @@ export default class Explore extends Component {
               <SearchBar handleChange={this.updatePayload}/>
               <Filter handleChange={this.updatePayload}/>
             </FilterSearchBG>
-            <CurrFilters filterNameToKey={filterNameToKey} filters={this.state.payload} removeFilter={(name)=>{this.updatePayload(0, name)}} removeAll={this.resetPayload}/>
+            <CurrFilters filterNameToKey={FILTER_NAME_TO_KEY} filters={this.state.payload} removeFilter={(name)=>{this.updatePayload(0, name)}} removeAll={this.resetPayload}/>
             <ExploreSidebar dorms={this.state.dorms}/>
           </SideBar>
         </ColOne>

@@ -10,6 +10,7 @@ let DDWrapper = styled.div`
 `
 
 let DDHeader = styled.div`
+    display: inline-block;
 `
 
 let DDHeaderTitle = styled.div`
@@ -79,17 +80,6 @@ const ChrisV = styled.div`
 export default class FilterComponent extends React.PureComponent {
     constructor(props) {
 	    super(props);
-
-	    // this.state = {
-		// 	type: this.props.type,
-		// 	handleChange: this.props.handleChange
-        // };
-        
-
-        this.state = {
-            headerTitle: this.props.title,
-            filters: this.props.filters
-        }
     }
 
     toggleList(){
@@ -97,8 +87,7 @@ export default class FilterComponent extends React.PureComponent {
     }
     
     render() {
-        const filters = this.state.filters
-        const listOpen = this.props.open
+        const listOpen = this.props.open;
         
         return(
             <DDWrapper>
@@ -107,8 +96,8 @@ export default class FilterComponent extends React.PureComponent {
                     <DDHeaderTitle shadow={this.props.open}>{this.props.headerTitle} <ChrisV flip={listOpen}><img src={chris_v}></img></ChrisV></DDHeaderTitle>
                 </DDHeader>
 
-                {listOpen && <FilterList>
-                    {filters.map((item, index) => (
+                {listOpen && <FilterList id="filterList">
+                    {this.props.filters.map((item, index) => (
                         <ListElement key={index++} > 
                         <FilterButton handleClick={this.props.handleChange} name={item}></FilterButton>
                         </ListElement>
