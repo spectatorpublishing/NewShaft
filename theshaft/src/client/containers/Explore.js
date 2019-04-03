@@ -157,7 +157,6 @@ export default class Explore extends Component {
     }).then(res => res.json())
     .then(response => {
         this.setState({dorms: response});
-        console.log(this.state);
     });      
   }
   
@@ -169,7 +168,7 @@ export default class Explore extends Component {
             <FilterSearchBG>
               {/* <h2>The Shaft</h2> */}
               <SearchBar handleChange={this.updatePayload}/>
-              <Filter handleChange={this.updatePayload}/>
+              <Filter handleChange={this.updatePayload} payload={this.state.payload}/>
             </FilterSearchBG>
             <CurrFilters filterNameToKey={FILTER_NAME_TO_KEY} filters={this.state.payload} removeFilter={(name)=>{this.updatePayload(0, name)}} removeAll={this.resetPayload}/>
             <ExploreSidebar dorms={this.state.dorms}/>

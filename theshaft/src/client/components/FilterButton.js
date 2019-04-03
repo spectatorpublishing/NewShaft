@@ -9,7 +9,7 @@ let Button = styled.button`
 	padding: 0 1em;
 	font-size: 9pt;
 
-	${({ clicked }) => clicked && `
+	${({ isActive }) => isActive && `
     	font-weight: bold;
   	`}
 `
@@ -19,26 +19,26 @@ export default class FilterButton extends React.PureComponent {
 	    super(props);
 
 	    this.state = {
-				clicked: false
+			isActive: this.props.isActive
 	    };
 
 	    this.onClick = this.onClick.bind(this);
 	}
 
 	componentDidUpdate(prevState) {
-		if (this.state.clicked != prevState.clicked) {
-			this.props.handleClick(Number(this.state.clicked), this.props.name)
+		if (this.state.isActive != prevState.isActive) {
+			this.props.handleClick(Number(this.state.isActive), this.props.name)
 		}
 	}
 
 	onClick() {
-		this.setState({clicked: !this.state.clicked})
+		this.setState({isActive: !this.state.isActive})
 	}
 
 	render() {
 		return (
 			<div>
-				<Button clicked={this.state.clicked} onClick={()=>this.onClick()}>{this.props.name}</Button>
+				<Button isActive={this.state.isActive} onClick={()=>this.onClick()}>{this.props.name}</Button>
 			</div>
 		)
 	}

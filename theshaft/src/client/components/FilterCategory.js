@@ -72,18 +72,38 @@ const ChrisV = styled.div`
     display: inline-block;
     & img {
         transform: ${ props=> props.flip ? "scaleY(-1)" : "none"};
-        margin: 2px 0;
+        margin: ${ props=> props.flip ? "1px 0 3px 0" : "3px 0 1px 0"};
     }
 `
 
 
 export default class FilterComponent extends React.PureComponent {
     constructor(props) {
-	    super(props);
+        super(props);
+        
+        this.toggleList = this.toggleList.bind(this);
+        this.isActive = this.isActive.bind(this);
+        this.getFilterList = this.getFilterList.bind(this);
     }
 
     toggleList(){
         this.props.setfilter(this.props.i, Number(!this.props.open))
+    }
+
+    isActive(name) {
+        return this.props.payload.includes(name);
+    }
+
+    getFilterList() {
+        return this.props.filters.map((item, index) => (
+            <ListElement key={index++}> 
+                <FilterButton 
+                    handleClick={this.props.handleChange} 
+                    name={item}
+                    isActive={this.isActive(item)}
+                />
+            </ListElement>
+        ))
     }
     
     render() {
@@ -92,16 +112,14 @@ export default class FilterComponent extends React.PureComponent {
         return(
             <DDWrapper>
 
-                <DDHeader onClick={() => this.toggleList()}>
-                    <DDHeaderTitle shadow={this.props.open}>{this.props.headerTitle} <ChrisV flip={listOpen}><img src={chris_v}></img></ChrisV></DDHeaderTitle>
+                <DDHeader onClick={this.toggleList}>
+                    <DDHeaderTitle shadow={this.props.open}>
+                        {this.props.headerTitle} <ChrisV flip={listOpen}> <img src={chris_v}/> </ChrisV>
+                    </DDHeaderTitle>
                 </DDHeader>
 
                 {listOpen && <FilterList id="filterList">
-                    {this.props.filters.map((item, index) => (
-                        <ListElement key={index++} > 
-                        <FilterButton handleClick={this.props.handleChange} name={item}></FilterButton>
-                        </ListElement>
-                    ))}
+                    {this.getFilterList()}
                 </FilterList>}
             </DDWrapper>
   )

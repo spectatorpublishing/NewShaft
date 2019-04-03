@@ -46,13 +46,13 @@ const DormName = styled.b`
 const Amenities = styled.p`
 `
 
-const Description = styled.p`
+const Description = styled.div`
   display: none;
   @media only screen and (min-width: 768px){
     display: inline;
   }
-  &>h6 {
-    font-weight: 400; // Normal
+  &>p {
+    font-size: 0.8rem;
   }
 `
 
@@ -110,7 +110,7 @@ export default class DormButton extends Component {
             }
             <DormName> {this.state.name} </DormName>
             <Amenities> {this.state.amenities} </Amenities>
-            <Description><h6>{truncatedDescription}</h6></Description>
+            <Description><p>{truncatedDescription}</p></Description>
             <SeeMore>see&nbsp;more&nbsp;></SeeMore>
         </div>
         <br />
