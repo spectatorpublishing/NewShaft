@@ -238,7 +238,7 @@ export default class FloorPlanSVG extends Component {
     // Override the xlink:href attribute (which is deprecated)
     // with an href that links to the corresponding floorplan JPG
     if(xlinkHref) {
-      baseImage.removeAttributeNode(xlinkHref);
+      baseImage.setAttribute("xlink:href", this.state.floorplanJpg);
       baseImage.setAttribute("href", this.state.floorplanJpg);
     } 
   }
