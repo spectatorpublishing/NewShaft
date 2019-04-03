@@ -18,7 +18,6 @@ describe("test the getUsername endpoint", () => {
 
     test('getUsername returns correct username', done => {
 		function onReceiveResponse(response) {
-			console.log("tester username: " + response.body.username);
 			expect(response.body.username).toBe(os.userInfo().username);
 			done();
 		}

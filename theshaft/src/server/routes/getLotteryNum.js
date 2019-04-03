@@ -22,8 +22,6 @@ function getLotteryNum(con, request, callback) {
 			"ADDRESS": "601 W 110th Street"
 		}
 		*/
-		console.log(request["DORM"])
-		console.log(request["FLOOR"])
 		var sqlStatement = `SELECT * FROM ShaftLive WHERE DORM="${request["DORM"]}" AND FLOOR="${request["FLOOR"]}";`
 		
 		con.query(sqlStatement, function(err, res) {

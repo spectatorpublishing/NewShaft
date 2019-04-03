@@ -11,7 +11,6 @@ for (var i = 0; i < keys.length; i++)
     if (!fs.existsSync(filename)) {
         continue;
     }
-    console.log(keys[i]);
     var dorm_data = JSON.parse(fs.readFileSync(filename));
     var dorm = {
         DORM: keys[i],

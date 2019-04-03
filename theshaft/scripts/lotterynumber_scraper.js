@@ -24,8 +24,4 @@ request('https://housing.columbia.edu/room-selection/tips-and-tools/resources', 
         allDorms[dorm][suiteType] = cutoff2;
     });
     var keys = Object.keys(allDorms);
-    for (var i = 0; i < keys.length; i++)
-    {
-        console.log(keys[i].toLowerCase().replace(/ /g, "-") + "_data.json");
-    }
 });

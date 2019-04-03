@@ -35,13 +35,8 @@ for (var i = 0; i < files.length; i++) {
 			floor_dict["Carlton Arms"] = [fn]
 		}
 	}
-
-	else {
-		console.log(fn)
-	}
 }
 
-// console.log(floor_dict)
 var con = mysql.createConnection({
 	    host: "157.230.66.55",
   		user: "root",

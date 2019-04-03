@@ -145,7 +145,6 @@ export default class Explore extends Component {
 
   preloadImages(dorms, callback){
     dorms.forEach((dorm) => {
-      console.log(dorm.DORM);
       var i = new Image()
       i.src = dorm.THUMBNAIL_IMAGE;
     })

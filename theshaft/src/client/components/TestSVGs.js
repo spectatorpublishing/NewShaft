@@ -21,7 +21,6 @@ export default class TestSVG extends Component{
             }
         }).then(res => res.json())
         .then(response => {
-            console.log(response)
             this.setState({floorInfo: response})
         });    
     }

@@ -99,31 +99,35 @@ let ToggleMobileView = styled.div`
     }
 `
 
-let GreenBox = styled.div`
-    height: 1rem;
-    width: 2.5rem;
-    background: green;
-    opacity: 0.3;
-    display: inline-block;
-`
-
-let RedBox = styled.div`
+let ColorBox = styled.div`
   height: 1rem;
   width: 2.5rem;
-  background: red;
   opacity: 0.3;
   display: inline-block;
+  margin-right: 0.3rem;
+`
+
+let GreenBox = styled(ColorBox)`
+  background: green;
+`
+
+let RedBox = styled(ColorBox)`
+  background: red;
 `
 
 let FloorPlanLegend = styled.div`
-    @media only screen and (max-width: 992px){
-      text-align: center;
-    }
-    margin-bottom: 1rem;
+  margin: 1rem 0;
+  display: flex;
+  justify-content: space-evenly;
+
+  @media only screen and (max-width: 992px){
+    text-align: center;
+  }
 `
 
-
-
+let LegendItem = styled.div`
+  display: flex;
+`
 
 export default class ShaftLive extends Component {
     constructor(props) {
@@ -180,12 +184,11 @@ export default class ShaftLive extends Component {
             })
             .then(res => res.json())
             .then(floorNums => {
-                this.setState({floorNums: floorNums})
+                this.setState({floorNums: floorNums});
             });
     }
 
     fetchFloorData(dorm, floor){
-        console.log("Fetch Floor Data");
         fetch('/api/getLotteryNum', {
             method: 'POST',
             headers: {
@@ -193,14 +196,21 @@ export default class ShaftLive extends Component {
             },
             body: JSON.stringify({DORM: dorm, FLOOR: floor})
             }).then(res => res.json())
-            .then(response => {this.setState({dorm : dorm, dormRefresh: !this.state.dormRefresh, floor: floor, floorData : response})}
+            .then(response => {
+                this.setState({
+                    dorm: dorm, 
+                    dormRefresh: !this.state.dormRefresh, 
+                    floor: floor, 
+                    floorData : response
+                });
+            }
         ); 
     }
 
     
 
     handleFloorChange(floor){
-        this.fetchFloorData(this.state.dorm, floor)
+        this.fetchFloorData(this.state.dorm, floor);
     }
 
     handleDormChange(dorm){
@@ -222,7 +232,14 @@ export default class ShaftLive extends Component {
         "Wien Hall": "2",
         "Woodbridge Hall": "1"
     }
-        this.setState({dorm : dorm, floor: firstFloor[dorm], init: false}, () => {this.fetchFloorNums(this.state.dorm); this.fetchFloorData(dorm, firstFloor[dorm] )})
+        this.setState({
+            dorm : dorm, 
+            floor: firstFloor[dorm], 
+            init: false
+        }, () => {
+            this.fetchFloorNums(this.state.dorm); 
+            this.fetchFloorData(dorm, firstFloor[dorm]);
+        });
     }
 
     
@@ -230,6 +247,14 @@ export default class ShaftLive extends Component {
     render() {
       const { width } = this.state;
       const isMobile = width <= 700;
+      const floorplanLegend = (<FloorPlanLegend>
+        <LegendItem>
+          <GreenBox/><h6>Available</h6>
+        </LegendItem>
+        <LegendItem>
+          <RedBox/><h6>Taken</h6>
+        </LegendItem>
+      </FloorPlanLegend>);
 
       if (isMobile) {
           return (
@@ -252,8 +277,7 @@ export default class ShaftLive extends Component {
                 </ToggleMobileView>
                 { this.state.mobileShowFloorPlan
                     ? <MobileFPWrapper>
-                        <FloorPlanLegend><GreenBox/> Available <RedBox/> Taken </FloorPlanLegend>
-                        
+                        {floorplanLegend}
                         <FloorPlanSVG
                           dorm={this.state.dorm}
                           floor={this.state.floor}
@@ -269,8 +293,8 @@ export default class ShaftLive extends Component {
                 </ShaftLiveContainerMobile>
             </div>
           );
-      }else{
-        return(
+      } else {
+        return (
             <div>
             <ShaftLiveContainer>
                 <ColOne>
@@ -292,15 +316,13 @@ export default class ShaftLive extends Component {
                       <FloorPlanTitle>Interactive Floor Plans</FloorPlanTitle>
                       <FloorPlanPrompt> — hover to explore!</FloorPlanPrompt>
                     </div>
-                    <FloorPlanLegend><GreenBox/> Available <RedBox/> Taken </FloorPlanLegend>
+                    {floorplanLegend}
                     <FloorPlanSVG dorm={this.state.dorm} floor={this.state.floor} data={this.state.floorData} cutoffs={[]} init={this.state.init}  dormRefresh={this.state.dormRefresh} ></FloorPlanSVG>
                     </SVGContainer>
                 </ColThree>
             </ShaftLiveContainer>
-            </div>
-
-       )
+          </div>
+        )
       }
-        
     }
   }

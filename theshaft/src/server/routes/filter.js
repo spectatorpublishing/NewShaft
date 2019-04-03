@@ -36,7 +36,6 @@ function filterDormInfo(con, request, callback) {
     }
 	}
   sqlStatement+=`;`
-  console.log(sqlStatement);
   
   con.query(sqlStatement, function(err, res) {
     if (err) throw err;

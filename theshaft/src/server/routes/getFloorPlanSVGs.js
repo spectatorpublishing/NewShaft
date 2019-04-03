@@ -9,7 +9,6 @@ function getFloorPlans(con, request, callback) {
         var sqlStatement = `SELECT * FROM ShaftDormSVGs 
         WHERE DORM = "${request["DORM"]}" AND FLOOR = "${request["FLOOR"]}";`
 
-				console.log(sqlStatement);
 		con.query(sqlStatement, function(err, res) {
 			if (err) throw err;
 			callback(res)
