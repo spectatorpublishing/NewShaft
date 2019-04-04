@@ -10,6 +10,7 @@ let DDWrapper = styled.div`
 `
 
 let DDHeader = styled.div`
+    display: inline-block;
 `
 
 let DDHeaderTitle = styled.div`
@@ -69,50 +70,58 @@ let FilterList = styled.ul`
 
 const ChrisV = styled.div`
     display: inline-block;
+    pointer-events: none;
+    
     & img {
         transform: ${ props=> props.flip ? "scaleY(-1)" : "none"};
-        margin: 2px 0;
+        margin: ${ props=> props.flip ? "1px 0 3px 0" : "3px 0 1px 0"};
     }
 `
 
 
 export default class FilterComponent extends React.PureComponent {
     constructor(props) {
-	    super(props);
-
-	    // this.state = {
-		// 	type: this.props.type,
-		// 	handleChange: this.props.handleChange
-        // };
+        super(props);
         
-
-        this.state = {
-            headerTitle: this.props.title,
-            filters: this.props.filters
-        }
+        this.toggleList = this.toggleList.bind(this);
+        this.isActive = this.isActive.bind(this);
+        this.getFilterList = this.getFilterList.bind(this);
     }
 
     toggleList(){
         this.props.setfilter(this.props.i, Number(!this.props.open))
     }
+
+    isActive(name) {
+        return this.props.payload.includes(name);
+    }
+
+    getFilterList() {
+        return this.props.filters.map((item, index) => (
+            <ListElement key={index++}> 
+                <FilterButton 
+                    handleClick={this.props.handleChange} 
+                    name={item}
+                    isActive={this.isActive(item)}
+                />
+            </ListElement>
+        ))
+    }
     
     render() {
-        const filters = this.state.filters
-        const listOpen = this.props.open
+        const listOpen = this.props.open;
         
         return(
             <DDWrapper>
 
-                <DDHeader onClick={() => this.toggleList()}>
-                    <DDHeaderTitle shadow={this.props.open}>{this.props.headerTitle} <ChrisV flip={listOpen}><img src={chris_v}></img></ChrisV></DDHeaderTitle>
+                <DDHeader onClick={this.toggleList}>
+                    <DDHeaderTitle shadow={this.props.open}>
+                        {this.props.headerTitle} <ChrisV flip={listOpen}> <img src={chris_v}/> </ChrisV>
+                    </DDHeaderTitle>
                 </DDHeader>
 
-                {listOpen && <FilterList>
-                    {filters.map((item, index) => (
-                        <ListElement key={index++} > 
-                        <FilterButton handleClick={this.props.handleChange} name={item}></FilterButton>
-                        </ListElement>
-                    ))}
+                {listOpen && <FilterList id="filterList">
+                    {this.getFilterList()}
                 </FilterList>}
             </DDWrapper>
   )
