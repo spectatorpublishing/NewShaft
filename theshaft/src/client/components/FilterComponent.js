@@ -79,7 +79,7 @@ export default class FilterComponent extends React.PureComponent {
     }
 
     componentWillUnmount() {
-        document.removeEventListener("click");
+        document.removeEventListener("click", this.handleClickChange);
     }
 
 	// Sets the single active filter
