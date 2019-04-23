@@ -1,4 +1,5 @@
 # The Shaft - 2018/19
+:weary:
 
 [![Build Status](https://travis-ci.com/spectatorpublishing/NewShaft.svg?token=XxNtw1WGDsHqpaWtGdoD&branch=develop)](https://travis-ci.com/spectatorpublishing/NewShaft)
 
