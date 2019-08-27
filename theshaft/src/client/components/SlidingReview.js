@@ -35,6 +35,39 @@ const years_map = {
 
 const reviews_per_page = 4
 
+let StyledContainer = styled.div`
+  .slick-slide {
+    display: block;
+    float: left;
+  }
+
+  .slick-slider.slick-initialized {
+      overflow: hidden;
+      position: relative;
+      /* display: block; */
+      padding-bottom: 3rem;
+  }
+
+  .slick-dots {
+    text-align: center;
+    bottom: 0;
+    list-style: none;
+    justify-content: center;
+    width: 100%;
+    padding: 0;
+    position: absolute;
+  }
+
+  .slick-dots li, .slick-dots li * {
+      display: inline-block;
+      min-width: 2rem;
+  }
+  .slick-dots li {
+      padding: 0 0.2rem;
+      cursor: pointer;
+  }
+`
+
 let NumberBlue = styled.p`
   border: 1px ${props => props.theme.columbiaBlue} solid;
   border-radius: 3px;
@@ -105,7 +138,7 @@ export default class SlidingReview extends Component {
         
         
         return (
-          <div>
+          <StyledContainer>
           
             <Slider {...settings}>
                 {reviewsByPage.map((reviews, i) => (
@@ -123,7 +156,7 @@ export default class SlidingReview extends Component {
                   </div>
                 ))}
             </Slider>
-          </div>
+          </StyledContainer>
         );
     }
 }
