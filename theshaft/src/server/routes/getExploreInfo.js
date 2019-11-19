@@ -13,7 +13,6 @@ function getExploreInfo(con, callback) {
 	con.connect(function(err) {
 		if (err) throw err;
 
-	
 		var sqlStatement = `SELECT DORM, DESCRIPTION, COLLEGE, THUMBNAIL_IMAGE, LATITUDE, LONGITUDE FROM dorm_static_info; `
 
 		
@@ -22,7 +21,7 @@ function getExploreInfo(con, callback) {
 			callback(res)
 		});
 
-		con.end(); // DO NOT REMOVE!
+		con.end(); 
 	});
 }
 
@@ -36,7 +35,6 @@ router.get('/', function(req, res, next) {
 	
 	getExploreInfo(con, (dormInfo) => {
 		res.json(dormInfo)
-		// lmao wtf why => res.send(JSON.stringify(res))
 	})
 
 })
