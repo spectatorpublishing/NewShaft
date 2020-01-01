@@ -111,7 +111,7 @@ let Button = styled.button`
 `
 
 let FloorArrow = styled.h3`
-    color: ${props => props.theme.columbiaBlue}
+    color: ${props => props.theme.columbiaBlue};
 `
 
 export default class FloorPlan extends React.PureComponent {

@@ -2,7 +2,7 @@ import React, { Component } from "react";
 import styled from 'styled-components';
 import { GlobalStyles } from "../util/GlobalStyles";
 
-let Table = styled.div`
+const Table = styled.div`
     display: flex;
     flex-direction: column;
     color: black;
@@ -15,21 +15,19 @@ let Table = styled.div`
     padding: 1.5vw 1.5vw 1.5vw 1.5vw;
 `
 
-let Span = styled.div`
+const Span = styled.div`
     font-size: 1.5em;
     font-weight: bold;
 `
 
 
-let Container = styled.div`
+const Container = styled.div`
   overflow: scroll;  
 `
 
-let Content = styled.span`
+const Content = styled.span`
     font-size: 1em;
 `
-
-
 
 export default class FAQSidebar extends Component {
   constructor(props) {

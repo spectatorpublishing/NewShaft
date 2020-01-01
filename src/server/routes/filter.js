@@ -1,12 +1,13 @@
 
+var pool = require('../database');
 var express = require("express");
 var router = express.Router();
-var mysql = require("mysql");
+
 
 
 function filterDormInfo(con, request, callback) {
 
-  var sqlStatement = `SELECT d.DORM as DORM, d.DESCRIPTION as DESCRIPTION, d.COLLEGE as COLLEGE, d.COLUMBIA as COLUMBIA, d.BARNARD as BARNARD, 
+  let sqlStatement = `SELECT d.DORM as DORM, d.DESCRIPTION as DESCRIPTION, d.COLLEGE as COLLEGE, d.COLUMBIA as COLUMBIA, d.BARNARD as BARNARD, 
   d.THUMBNAIL_IMAGE as THUMBNAIL_IMAGE, d.LATITUDE as LATITUDE, d.LONGITUDE as LONGITUDE, a.AC as AC, a.GYM as GYM,
   a.P_BATHROOM as BATHROOM, a.P_KITCHEN as P_KITCHEN, c.FRESHMAN as FRESHMAN, c.SOPHOMORE as SOPHOMORE, c.JUNIOR as JUNIOR, c.SENIOR as SENIOR, ifnull(s.TWO_SUITE, 0) as TWO_SUITE, ifnull(s.THREE_SUITE, 0) as THREE_SUITE, 
   ifnull(s.FOUR_SUITE, 0) as FOUR_SUITE, ifnull(s.FIVE_SUITE, 0) as FIVE_SUITE, ifnull(s.SIX_SUITE, 0) as SIX_SUITE,
@@ -46,13 +47,8 @@ function filterDormInfo(con, request, callback) {
 
 }
 
-router.post("/", function(req, res, next) {
-  var con = mysql.createConnection({
-    host: "192.34.62.10",
-    user: "USERNAME",
-    password: "PASSWORD",
-    database: "dev"
-  });
+router.post("/", function(req, res) {
+  
   filterDormInfo(con, req.body, dormInfo => {
     res.json(dormInfo);
   });

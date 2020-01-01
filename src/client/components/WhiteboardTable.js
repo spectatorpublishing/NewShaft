@@ -37,7 +37,7 @@ let TitleText = styled.div`
 let LeftTitle = styled.h4`
     margin-bottom: .5rem;
     width:50%;
-    color: ${props => props.theme.columbiaBlue}
+    color: ${props => props.theme.columbiaBlue};
 `
 let RightTitle = styled.h4`
     margin-bottom: 1rem;

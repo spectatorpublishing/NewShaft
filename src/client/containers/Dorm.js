@@ -260,26 +260,22 @@ export default class Dorm extends React.PureComponent {
 
   fetchDormInfo(name) {
     const dormName = dorm_name_map[name]
-    fetch('/api/getDormInfo', {
-      method: "POST",
-      body: JSON.stringify({ 
-        table: "dorm_static_info",
-        DORM: dormName
-      }),
+    fetch(`/api/getDormInfo/${dormName}`, {
+      method: "GET",
       headers: { "Content-Type": "application/json"},
     })
       .then(res => res.json())
       .then(dormInfo => {
-        dormInfo[0].PROS = dormInfo[0].PROS.substring(0, dormInfo[0].PROS.length - 1).split(',');
-        dormInfo[0].CONS = dormInfo[0].CONS.substring(0, dormInfo[0].CONS.length - 1).split(',');
-        let tempLot = dormInfo[0].LOTTERY_NUMS.split(',');
+        dormInfo.PROS = dormInfo.PROS.substring(0, dormInfo.PROS.length - 1).split(',');
+        dormInfo.CONS = dormInfo.CONS.substring(0, dormInfo.CONS.length - 1).split(',');
+        let tempLot = dormInfo.LOTTERY_NUMS.split(',');
         let i = 0;
         for(i = 0; i < tempLot.length; i++){
           tempLot[i] = tempLot[i].split(':');
         }
-        dormInfo[0].LOTTERY_NUMS = tempLot;
+        dormInfo.LOTTERY_NUMS = tempLot;
         document.title = this.state.dormInfo.DORM;
-        this.setState({dormInfo: dormInfo[0]});
+        this.setState({dormInfo: dormInfo});
       });
       
   }
@@ -296,7 +292,7 @@ export default class Dorm extends React.PureComponent {
     })
       .then(res => res.json())
       .then(amenitiesInfo => {
-        this.setState({amenities: amenitiesInfo[0]})
+        this.setState({amenities: amenitiesInfo})
       });
   }
 
@@ -376,7 +372,7 @@ export default class Dorm extends React.PureComponent {
     })
       .then(res => res.json())
       .then(floorPlans => {
-        let floorPlan = floorPlans[0];
+        let floorPlan = floorPlans;
         let floor_state = []
         let floor_name  = []
         let keys = Object.keys(floorPlan);

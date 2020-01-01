@@ -5,7 +5,6 @@ import ReactTooltip from 'react-tooltip';
 import "../css/FloorPlanSVG.css"; // Because react-tooltip
 import { CUTOFFS, SUITE_PICK } from "../util/Cutoffs";
 import { MAPPING } from "../util/Mapping";
-import { update } from "immutable";
 
 let FloorPlanWrapper = styled.div`
   & rect {

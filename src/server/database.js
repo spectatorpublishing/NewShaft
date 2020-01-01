@@ -1,11 +1,12 @@
+/** Handles all pooled connections to MySQL database */
 const util = require('util')
 const mysql = require('mysql')
 const pool = mysql.createPool({
   connectionLimit: 10,
-  host: 'localhost',
-  user: 'root',
-  password: 'password',
-  database: 'my_database'
+  host: process.env.SHAFTHOST,
+  user: process.env.SHAFTUSER,
+  password: process.env.SHAFTPASSWORD,
+  database: process.env.SHAFTDATABASE
 })
 
 // Ping database to check for common exception errors.

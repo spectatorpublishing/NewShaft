@@ -1,4 +1,5 @@
-# Super useful resource https://pynative.com/python-mysql-update-data/#Python_MySQL_update_Multiple_Rows_data_in_a_single_query
+# Script that updates MySQL database from Whiteoard spreadsheet
+# Resource https://pynative.com/python-mysql-update-data/#Python_MySQL_update_Multiple_Rows_data_in_a_single_query
 
 # pip install gspread
 import gspread
@@ -8,7 +9,6 @@ from oauth2client.service_account import ServiceAccountCredentials
 import mysql.connector
 from mysql.connector import Error
 from mysql.connector import errorcode
-
 
 try:
   # Authentication Steps
@@ -64,7 +64,6 @@ try:
   for s_row in sheet_list:
     records_to_update.append((s_row[2], s_row[3], s_row[0], s_row[1]))
 
-  
   cursor.executemany(update_query, records_to_update)
   cnx.commit()
   # print(records_to_update)
