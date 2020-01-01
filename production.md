@@ -81,7 +81,6 @@ https://stackoverflow.com/questions/1034243/how-to-get-a-unix-script-to-run-ever
 
 
 
-
 ## The React + Express Application
 
 This is the most obvious part. Typically we run our application by using yarn dev on

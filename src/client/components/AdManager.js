@@ -1,11 +1,11 @@
-import React, { Component } from 'react';
+/** Component that generates mobile and desktop ads */
+
+import React from 'react';
 import { DFPSlotsProvider, AdSlot } from 'react-dfp';
 
 
-
-export default class Example extends Component {
-  render() {
-    if(this.props.mobile){
+const AdManager = (props) => {
+  if(props.mobile){
       return(
       <DFPSlotsProvider dfpNetworkId="59699124">
             <div className="desktop-ads">
@@ -28,4 +28,5 @@ export default class Example extends Component {
     }
     
   }
-}
+
+export default AdManager;

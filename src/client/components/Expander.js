@@ -5,21 +5,21 @@ import { theme } from "../util/GlobalStyles";
 let ExpanderBox = styled.div`
   border: 1px ${({ color }) => color} solid;
 
-  ${({ boxStyle }) => boxStyle}
+  ${({ boxStyle }) => boxStyle};
 `
 
-let ExpanderContent = styled.div`
+const ExpanderContent = styled.div`
   padding: 1rem;
-  color: ${({ textColor }) => textColor}
+  color: ${({ textColor }) => textColor};
 `
 
-let ExpanderList = styled.div`
+const ExpanderList = styled.div`
   display: flex;
   flex-wrap: wrap;
-  color: ${({ textColor }) => textColor}
+  color: ${({ textColor }) => textColor};
 `
 
-let ToggleSize = styled.button`
+const ToggleSize = styled.button`
   background: none;
   border: none;
   border-bottom-left-radius: ${props => props.theme.borderRadius};
@@ -39,8 +39,8 @@ let ToggleSize = styled.button`
   }
 `
 
-let ButtonText = styled.h6`
-  color: ${({ textColor }) => textColor}
+const ButtonText = styled.h6`
+  color: ${({ textColor }) => textColor};
 `
 
 export default class Expander extends Component {

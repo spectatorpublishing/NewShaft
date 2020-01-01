@@ -57,7 +57,6 @@ router.post('/', function(req, res, next) {
 	
 	getDormInfo(con, req.body, (dormInfo) => {
 		res.json(dormInfo)
-		// lmao wtf why => res.send(JSON.stringify(res))
 	})
 
 })
