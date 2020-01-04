@@ -1,4 +1,3 @@
-"SELECT FLOOR FROM dorms.ShaftLive WHERE DORM = 'East Campus"
 
 var express = require('express');
 var router = express.Router();

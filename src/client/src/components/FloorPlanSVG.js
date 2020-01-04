@@ -46,8 +46,10 @@ export default class FloorPlanSVG extends Component {
 
     // Generate AWS urls for JPG and SVG
     let url = name.replace(/\ /g, "+");
-    let jpgUrl = "https://s3.amazonaws.com/shaft-dorm-floorplans/" + url + ".jpg";
-    let svgUrl = "https://s3.amazonaws.com/shaft-svg/"+ url +".svg";
+    let jpgUrl = "https://shaft-dorm-floorplans.s3.amazonaws.com/" + url + ".jpg";
+    console.log(jpgUrl)
+    let svgUrl = "https://shaft-svg.s3.amazonaws.com/"+ url +".svg";
+    console.log(svgUrl);
   
 
 
@@ -234,6 +236,7 @@ export default class FloorPlanSVG extends Component {
     // Override the xlink:href attribute (which is deprecated)
     // with an href that links to the corresponding floorplan JPG
     if(xlinkHref) {
+      console.log("SET XLINK")
       baseImage.setAttribute("xlink:href", this.state.floorplanJpg);
       baseImage.setAttribute("href", this.state.floorplanJpg);
     } 
@@ -352,7 +355,7 @@ export default class FloorPlanSVG extends Component {
         <FloorPlanWrapper id={this.state.floorplanId}>
           <ReactSVG 
             src={this.state.floorplanSvg} 
-            onInjected={(error, svg) => this.styleSVG(error, svg)}
+            afterInjection={(error, svg) => this.styleSVG(error, svg)}
             fallback={this.getStaticFloorplan}
           />
 

@@ -352,7 +352,6 @@ export default class Dorm extends React.PureComponent {
     })
       .then(res => res.json())
       .then(floorPlans => {
-        console.log("FLOOOOOOR PLAN")
         let floorPlan = floorPlans;
         let floor_state = []
         let floor_name  = []
