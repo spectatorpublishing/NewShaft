@@ -9,7 +9,7 @@ import { FILTER_NAME_TO_KEY } from "../util/DormFilter.js";
 
 import _ from "lodash"
 
-let ExploreContainer = styled.div`
+const ExploreContainer = styled.div`
   width: 100%;
   height: 100%;
   padding: 0 auto;
@@ -17,7 +17,7 @@ let ExploreContainer = styled.div`
   flex-direction: row;
 `
 
-let SideBar = styled.div`
+const SideBar = styled.div`
   width: 100%;
   padding: 0% 0% 0% 0%;
   overflow-y: scroll; 
@@ -30,7 +30,7 @@ let SideBar = styled.div`
   }
 `
 
-let MapView = styled.div`
+const MapView = styled.div`
 display: none;
 width: 0%;
 @media only screen and (min-width: 768px) {
@@ -45,7 +45,7 @@ width: 0%;
 }
 `
 
-let FilterSearchBG = styled.div`
+const FilterSearchBG = styled.div`
   background-color: ${props => props.theme.columbiaBlue};
   @media only screen and (min-width: 768px) {
     // display: inline;
@@ -61,12 +61,12 @@ let FilterSearchBG = styled.div`
   padding-top: 1%;
 `
 
-let ColOne = styled.div`
+const ColOne = styled.div`
   display: flex;
   width: 100%;
 `
 
-let ColTwo = styled.div`
+const ColTwo = styled.div`
   display: inline;
   position: fixed;
   padding-left: 1em;
@@ -127,9 +127,10 @@ export default class Explore extends Component {
   }
 
   fetchDorms(){
-    fetch('/api/getExploreInfo', {
+    fetch("/api/getExploreInfo", {
       method: "GET",
-      headers: {"Content-Type": "application/json"},
+      headers: {'Content-Type': 'application/json',
+      'Accept': 'application/json'},
     })
     .then(res => res.json())
     .then(dormInfo => {

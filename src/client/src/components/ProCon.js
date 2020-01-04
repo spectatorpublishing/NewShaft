@@ -2,57 +2,70 @@ import React, { Component } from 'react';
 import styled from 'styled-components';
 import sad from "../assets/Icons/sad.svg";
 import happy from "../assets/Icons/happy.svg";
+import icon from "../assets/marker.svg"; // to-do: import all actual icons
 
-let Section = styled.div`
+
+const Section = styled.div`
     display: flex;
-    flex-directin: row;
     ${props => props.theme.grayBorder}
     padding: 1rem;
 `
 
-let SectionMobile = styled(Section)`
+const SectionMobile = styled(Section)`
     flex-direction: column;
 `
 
-let ListBox = styled.div`
+const ListBox = styled.div`
     flex: 1;
 `
 
-let ListPoints = styled.ul`
+const ListPoints = styled.ul`
   padding-inline-start: 1.2rem;
 `
 
-let Divider = styled.div`
+const Divider = styled.div`
     width: 1px;
     margin: 0 2vw;
     background-color: ${props => props.theme.lightGray};
 `
 
-let DivideMobile = styled.div`
+const DivideMobile = styled.div`
     height: 1px;
     border-bottom: 1px ${props => props.theme.lightGray} solid;
     margin-bottom: 1rem;
 `
 
-let Head = styled.div`
+const Head = styled.div`
     text-align: center;
 `
 
-let Title = styled.h2`
+const Title = styled.h2`
 `
 
-let ProConIcon = styled.img`
+const ProConIcon = styled.img`
   height: 50px;
   width: 50px;
   object-fit: cover;
 `
 
-let HappyIcon = styled(ProConIcon)`
+const HappyIcon = styled(ProConIcon)`
   object-position: 0 100%;
 `
 
-let SadIcon = styled(ProConIcon)`
+const SadIcon = styled(ProConIcon)`
   object-position: 100% 0;
+`
+
+
+const AmenityIcon = styled.img`
+  opacity: 0.5;
+  height: 20px;
+`
+
+const Amenity = styled.div`
+  display: flex;
+  flex-direction: row;
+  margin-top: 15px;
 `
 
 

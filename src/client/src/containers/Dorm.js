@@ -243,17 +243,14 @@ export default class Dorm extends React.PureComponent {
 
   fetchDormPhotos(name){
     const dormName = dorm_name_map[name]
-    fetch('/api/getDormPhotos', {
-      method: "POST",
-      body: JSON.stringify({ 
-        table: "dorm_static_info",
-        DORM: dormName
-      }),
+    fetch(`/api/getDormPhotos/${dormName}`, {
+      method: "GET",
       headers: { "Content-Type": "application/json"},
     })
       .then(res => res.json())
       .then(dormPhotos => {
-        this.setState({dorm_photos: Object.values(dormPhotos[0])})
+        console.log(dormPhotos)
+        this.setState({dorm_photos: Object.values(dormPhotos)})
       });
 
   }
@@ -282,12 +279,8 @@ export default class Dorm extends React.PureComponent {
 
   fetchAmenities(name) {
     const dormName = dorm_name_map[name]
-    fetch('/api/getAmenities', {
-      method: "POST",
-      body: JSON.stringify({ 
-        table: "dorm_static_info",
-        DORM: dormName
-      }),
+    fetch(`/api/getAmenities/${dormName}`, {
+      method: "GET",
       headers: { "Content-Type": "application/json"},
     })
       .then(res => res.json())
@@ -298,12 +291,8 @@ export default class Dorm extends React.PureComponent {
 
   fetchReviews(name){
     const dormName = dorm_name_map[name]
-    fetch('/api/getReviews', {
-      method: "POST",
-      body: JSON.stringify({ 
-        table: "dorm_static_info",
-        DORM: dormName
-      }),
+    fetch(`/api/getReviews/${dormName}`, {
+      method: "GET",
       headers: { "Content-Type": "application/json"},
     })
       .then(res => res.json())
@@ -315,11 +304,8 @@ export default class Dorm extends React.PureComponent {
 
   fetchRelatedArticles(name){
     const dormName = dorm_name_map[name]
-    fetch('/api/getRelatedArticles', {
-      method: "POST",
-      body: JSON.stringify({ 
-        DORM: dormName
-      }),
+    fetch(`/api/getRelatedArticles/${dormName}`, {
+      method: "GET",
       headers: { "Content-Type": "application/json"},
     })
       .then(res => res.json())
@@ -341,11 +327,8 @@ export default class Dorm extends React.PureComponent {
 
   fetchRelatedDorms(name){
     const dormName = dorm_name_map[name]
-    fetch('/api/getRelatedDorms', {
-      method: "POST",
-      body: JSON.stringify({
-        DORM: dormName
-      }),
+    fetch(`/api/getRelatedDorms/${dormName}`, {
+      method: "GET",
       headers: { "Content-Type": "application/json"},
     }).then((res=>res.json()))
     .then(relatedDorms => {
@@ -363,15 +346,13 @@ export default class Dorm extends React.PureComponent {
 
   fetchFloorPlans(name){
     const dormName = dorm_name_map[name]
-    fetch('/api/getFloorPlans', {
-      method: "POST",
-      body: JSON.stringify({ 
-        DORM: dormName
-      }),
+    fetch(`/api/getFloorPlans/${dormName}`, {
+      method: "GET",
       headers: { "Content-Type": "application/json"},
     })
       .then(res => res.json())
       .then(floorPlans => {
+        console.log("FLOOOOOOR PLAN")
         let floorPlan = floorPlans;
         let floor_state = []
         let floor_name  = []
@@ -382,8 +363,10 @@ export default class Dorm extends React.PureComponent {
           if (floorPlan[floorNum] == null || keys[i] == "DORM") {
             continue;
           }          
-          floor_state[floorNum -1] = 'https://s3.amazonaws.com/shaft-dorm-floorplans/' + floorPlan[floorNum].replace(/ /g, '+')
+          floor_state[floorNum -1] = 'https://shaft-dorm-floorplans.s3.amazonaws.com/' + floorPlan[floorNum].replace(/ /g, '+')
           floor_name[floorNum -1]= floorPlan[floorNum].slice(0, -4).replace("_", " ");
+          console.log("FLOOR PLAN");
+          console.log(floor_state[floorNum -1]);
         }
         return [floor_state, floor_name]
       }).then(floor_vals => {

@@ -170,17 +170,11 @@ export default class ShaftLive extends Component {
     }
 
     fetchFloorNums(dormName){
-        // this should fetch data for the FloorButtons
-
-        // dormName is being supplied by Matt's sidebar.
-        fetch('/api/getUniqueFloorNumbers', {
-            method: 'POST',
+        fetch(`/api/getUniqueFloorNumbers/${dormName}`, {
+            method: 'GET',
             headers: {
                 'Content-Type': 'application/json'
             },
-            body: JSON.stringify({
-                DORM: dormName
-            })
             })
             .then(res => res.json())
             .then(floorNums => {
@@ -189,12 +183,11 @@ export default class ShaftLive extends Component {
     }
 
     fetchFloorData(dorm, floor){
-        fetch('/api/getLotteryNum', {
-            method: 'POST',
+        fetch(`/api/getLotteryNum/${dorm}/${floor}`, {
+            method: 'GET',
             headers: {
                 'Content-Type': 'application/json'
             },
-            body: JSON.stringify({DORM: dorm, FLOOR: floor})
             }).then(res => res.json())
             .then(response => {
                 this.setState({

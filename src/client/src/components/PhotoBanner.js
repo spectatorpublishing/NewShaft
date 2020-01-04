@@ -31,7 +31,6 @@ let Img = styled.img`
     transform: scale(1.1);
     -moz-transform: scale(1.1);
     -webkit-transform: scale(1.1);
-
   }
 `
 
@@ -58,7 +57,7 @@ let SidePics = styled.div`
 let TopRow = styled.div`
   display: flex;
   min-height: 50%;
-  min-width:100%
+  min-width: 100%;
 `
 
 let BottomRow = styled.div`
@@ -70,7 +69,7 @@ let BottomRow = styled.div`
 
 let PicMobile = styled.div`
   display: inline-block;
-  width: 100%
+  width: 100%;
   flex-wrap: nowrap;
   max-height: 30vh;
   overflow: hidden;
@@ -151,7 +150,7 @@ export default class PhotoBanner extends Component {
               onCloseRequest={() => this.setState({ isOpen: false })}
               onMovePrevRequest={() =>
                 this.setState({
-                  photoIndex: (photoIndex + images.length - 1) % this.state.images.length,
+                  photoIndex: (photoIndex + this.state.images.length - 1) % this.state.images.length,
                 })
               }
               onMoveNextRequest={() =>

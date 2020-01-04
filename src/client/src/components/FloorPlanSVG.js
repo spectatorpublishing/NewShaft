@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import styled from 'styled-components';
-import ReactSVG from 'react-svg'
+import { ReactSVG } from 'react-svg'
 import ReactTooltip from 'react-tooltip';
 import "../css/FloorPlanSVG.css"; // Because react-tooltip
 import { CUTOFFS, SUITE_PICK } from "../util/Cutoffs";

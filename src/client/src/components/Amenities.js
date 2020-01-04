@@ -18,7 +18,7 @@ const amenitiesMap = {
   MUSIC: "Music Room"
 }
 
-let AmenitiesTitle = styled.h2`
+const AmenitiesTitle = styled.h2`
   margin-top: -0.3vw;
   margin-bottom: 1vw;
   margin-left: 0.6vw;
@@ -26,23 +26,23 @@ let AmenitiesTitle = styled.h2`
   width: 100%;
 `
 
-let AmenityIcon = styled.img`
+const AmenityIcon = styled.img`
   opacity: 0.5;
   height: 20px;
 `
 
-let AllAmenities = styled.div`
+const AllAmenities = styled.div`
   display: grid;
   grid-template-columns: repeat(auto-fill,minmax(50%, 1fr));
   width: 100%;
 `
 
-let AmenitiesContainer = styled.div`
+const AmenitiesContainer = styled.div`
   ${props => props.theme.grayBorder}
   padding: 3vw;
 `
 
-let Amenity = styled.div`
+const Amenity = styled.div`
   display: flex;
   flex-direction: row;
   margin-top: 15px;
