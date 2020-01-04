@@ -4,13 +4,8 @@
   "description": "React verision of theshaft.info website",
   "main": "src/server/index.js",
   "scripts": {
-    "build": "react-scripts build",
-    "prod": "npm run build && node src/server/index.js",
-    "client": "react-scripts start",
-    "server": "nodemon src/server/index.js",
-    "start": "concurrently \"npm run server\" \"npm run client\"",
-    "storybook": "start-storybook -p 9001 -c .storybook",
-    "dump-db": "node scripts/dump_mysql.js"
+    "start": "node index.js",
+    "prod": "cd src/client && yarn install && yarn build && cd ../../ && yarn start"
   },
   "author": "Arsalaan Ansari",
   "license": "ISC",
