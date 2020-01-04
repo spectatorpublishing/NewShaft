@@ -6,7 +6,7 @@ var pool = require('../database');
 router.get('/:dorm/:floor', async (req, res) => {
 	let query = `SELECT * FROM ShaftLive WHERE DORM="${req.params.dorm}" AND FLOOR="${req.params.floor}";`
 	const result = await pool.query(query);
-	res.send(result[0])
+	res.send(result)
 })
 
 module.exports = router;

@@ -130,192 +130,196 @@ let LegendItem = styled.div`
 `
 
 export default class ShaftLive extends Component {
-    constructor(props) {
-        super(props);
+  constructor(props) {
+    super(props);
 
-        this.state = {
-            dorm: "47 Claremont",
-            dormRefresh: false,
-            floor: "1",
-            floorNums: null,
-            floorData: [],
-            width: window.innerWidth,
-            init: true,
-            //update: false,
-            mobileShowFloorPlan: false
-        }
-
-        this.handleFloorChange = this.handleFloorChange.bind(this)
-        this.handleDormChange = this.handleDormChange.bind(this)
+    this.state = {
+      dorm: "47 Claremont",
+      dormRefresh: false,
+      floor: "1",
+      floorNums: null,
+      floorData: [],
+      width: window.innerWidth,
+      init: true,
+      //update: false,
+      mobileShowFloorPlan: false
     }
 
-    componentWillMount() {
-        window.addEventListener("resize", this.handleWindowSizeChange);
-      }
-    
-      componentWillUnmount() {
-        clearInterval(this.interval)
-        window.removeEventListener("resize", this.handleWindowSizeChange);
-      }
-    
-      handleWindowSizeChange = () => {
-        this.setState({ width: window.innerWidth });
-      };
+    this.handleFloorChange = this.handleFloorChange.bind(this)
+    this.handleDormChange = this.handleDormChange.bind(this)
+  }
 
-    componentDidMount(){
-        document.title = "Shaft Live";
-        this.fetchFloorNums(this.state.dorm)     
-        this.interval = setInterval(() => this.fetchFloorData(this.state.dorm, this.state.floor), 15000);
-   
-    }
+  componentWillMount() {
+    window.addEventListener("resize", this.handleWindowSizeChange);
+  }
 
-    fetchFloorNums(dormName){
-        fetch(`/api/getUniqueFloorNumbers/${dormName}`, {
-            method: 'GET',
-            headers: {
-                'Content-Type': 'application/json'
-            },
-            })
-            .then(res => res.json())
-            .then(floorNums => {
-                this.setState({floorNums: floorNums});
-            });
-    }
+  componentWillUnmount() {
+    clearInterval(this.interval)
+    window.removeEventListener("resize", this.handleWindowSizeChange);
+  }
 
-    fetchFloorData(dorm, floor){
-        fetch(`/api/getLotteryNum/${dorm}/${floor}`, {
-            method: 'GET',
-            headers: {
-                'Content-Type': 'application/json'
-            },
-            }).then(res => res.json())
-            .then(response => {
-                this.setState({
-                    dorm: dorm, 
-                    dormRefresh: !this.state.dormRefresh, 
-                    floor: floor, 
-                    floorData : response
-                });
-            }
-        ); 
-    }
+  handleWindowSizeChange = () => {
+    this.setState({ width: window.innerWidth });
+  };
 
-    
+  componentDidMount() {
+    document.title = "Shaft Live";
+    this.fetchFloorNums(this.state.dorm)
+    this.interval = setInterval(() => this.fetchFloorData(this.state.dorm, this.state.floor), 15000);
 
-    handleFloorChange(floor){
-        this.fetchFloorData(this.state.dorm, floor);
-    }
+  }
 
-    handleDormChange(dorm){
+  fetchFloorNums(dormName) {
+    fetch(`/api/getUniqueFloorNumbers/${dormName}`, {
+      method: 'GET',
+      headers: {
+        'Content-Type': 'application/json'
+      },
+    })
+      .then(res => res.json())
+      .then(floorNums => {
+        console.log("FLOOR NUMS")
+        console.log(floorNums);
+        this.setState({ floorNums: floorNums });
+      });
+  }
 
-      const firstFloor = {
-        "47 Claremont": "1",
-        "Broadway Hall": "3",
-        "Carlton Arms": "1A",
-        "East Campus": "6",
-        "Furnald Hall": "1",
-        "Harmony Hall": "1",
-        "Hogan Hall": "2",
-        "McBain Hall": "1",
-        "600 W 113th": "2",
-        "River Hall": "1",
-        "Ruggles Hall": "1",
-        "Schapiro Hall": "2",
-        "Watt Hall": "1",
-        "Wien Hall": "2",
-        "Woodbridge Hall": "1"
-    }
+  fetchFloorData(dorm, floor) {
+    fetch(`/api/getLotteryNum/${dorm}/${floor}`, {
+      method: 'GET',
+      headers: {
+        'Content-Type': 'application/json'
+      },
+    }).then(res => res.json())
+      .then(response => {
+        console.log("FLOOR DATA")
+        console.log(response);
         this.setState({
-            dorm : dorm, 
-            floor: firstFloor[dorm], 
-            init: false
-        }, () => {
-            this.fetchFloorNums(this.state.dorm); 
-            this.fetchFloorData(dorm, firstFloor[dorm]);
+          dorm: dorm,
+          dormRefresh: !this.state.dormRefresh,
+          floor: floor,
+          floorData: response
         });
-    }
-
-    
-
-    render() {
-      const { width } = this.state;
-      const isMobile = width <= 700;
-      const floorplanLegend = (<FloorPlanLegend>
-        <LegendItem>
-          <GreenBox/><h6>Available</h6>
-        </LegendItem>
-        <LegendItem>
-          <RedBox/><h6>Taken</h6>
-        </LegendItem>
-      </FloorPlanLegend>);
-
-      if (isMobile) {
-          return (
-            <div>
-                <ShaftLiveContainerMobile>
-                  <BlueBGMobile>
-                  <WhiteboardSidebar
-                          sidebarModification={this.handleDormChange}
-                          currDorm = {this.state.dorm}
-                  />
-                  <FloorButton 
-                          floorNums={this.state.floorNums} 
-                          handleChange={this.handleFloorChange}
-                          isMobile = {isMobile}
-                  />
-                </BlueBGMobile>
-                <ToggleMobileView currActive={this.state.mobileShowFloorPlan ? 0 : 1}>
-                  <div onClick={()=>this.setState({mobileShowFloorPlan: false})}>Live Feed</div>
-                  <div onClick={()=>this.setState({mobileShowFloorPlan: true})}>Floor Plans</div>
-                </ToggleMobileView>
-                { this.state.mobileShowFloorPlan
-                    ? <MobileFPWrapper>
-                        {floorplanLegend}
-                        <FloorPlanSVG
-                          dorm={this.state.dorm}
-                          floor={this.state.floor}
-                          data={this.state.floorData}
-                          cutoffs={[]}
-                          init={this.state.init}
-                          dormRefresh={this.state.dormRefresh}
-                        />
-                      </MobileFPWrapper>
-                    : <WhiteboardTable
-                    roomAvailability={this.state.floorData} />
-                }
-                </ShaftLiveContainerMobile>
-            </div>
-          );
-      } else {
-        return (
-            <div>
-            <ShaftLiveContainer>
-                <ColOne>
-                    <WhiteboardSidebar
-                        sidebarModification={this.handleDormChange}/>
-                </ColOne>
-
-                <ColTwo>
-                    <h1>{this.state.dorm}</h1>
-                    <FloorButton 
-                        floorNums={this.state.floorNums} 
-                        handleChange={this.handleFloorChange}/>
-                    <WhiteboardTable
-                        roomAvailability={this.state.floorData} />
-                </ColTwo>
-                <ColThree>
-                    <SVGContainer>
-                    <div>
-                      <FloorPlanTitle>Interactive Floor Plans</FloorPlanTitle>
-                      <FloorPlanPrompt> — hover to explore!</FloorPlanPrompt>
-                    </div>
-                    {floorplanLegend}
-                    <FloorPlanSVG dorm={this.state.dorm} floor={this.state.floor} data={this.state.floorData} cutoffs={[]} init={this.state.init}  dormRefresh={this.state.dormRefresh} ></FloorPlanSVG>
-                    </SVGContainer>
-                </ColThree>
-            </ShaftLiveContainer>
-          </div>
-        )
       }
+      );
+  }
+
+
+
+  handleFloorChange(floor) {
+    this.fetchFloorData(this.state.dorm, floor);
+  }
+
+  handleDormChange(dorm) {
+
+    const firstFloor = {
+      "47 Claremont": "1",
+      "Broadway Hall": "3",
+      "Carlton Arms": "1A",
+      "East Campus": "6",
+      "Furnald Hall": "1",
+      "Harmony Hall": "1",
+      "Hogan Hall": "2",
+      "McBain Hall": "1",
+      "600 W 113th": "2",
+      "River Hall": "1",
+      "Ruggles Hall": "1",
+      "Schapiro Hall": "2",
+      "Watt Hall": "1",
+      "Wien Hall": "2",
+      "Woodbridge Hall": "1"
+    }
+    this.setState({
+      dorm: dorm,
+      floor: firstFloor[dorm],
+      init: false
+    }, () => {
+      this.fetchFloorNums(this.state.dorm);
+      this.fetchFloorData(dorm, firstFloor[dorm]);
+    });
+  }
+
+
+
+  render() {
+    const { width } = this.state;
+    const isMobile = width <= 700;
+    const floorplanLegend = (<FloorPlanLegend>
+      <LegendItem>
+        <GreenBox /><h6>Available</h6>
+      </LegendItem>
+      <LegendItem>
+        <RedBox /><h6>Taken</h6>
+      </LegendItem>
+    </FloorPlanLegend>);
+
+    if (isMobile) {
+      return (
+        <div>
+          <ShaftLiveContainerMobile>
+            <BlueBGMobile>
+              <WhiteboardSidebar
+                sidebarModification={this.handleDormChange}
+                currDorm={this.state.dorm}
+              />
+              <FloorButton
+                floorNums={this.state.floorNums}
+                handleChange={this.handleFloorChange}
+                isMobile={isMobile}
+              />
+            </BlueBGMobile>
+            <ToggleMobileView currActive={this.state.mobileShowFloorPlan ? 0 : 1}>
+              <div onClick={() => this.setState({ mobileShowFloorPlan: false })}>Live Feed</div>
+              <div onClick={() => this.setState({ mobileShowFloorPlan: true })}>Floor Plans</div>
+            </ToggleMobileView>
+            {this.state.mobileShowFloorPlan
+              ? <MobileFPWrapper>
+                {floorplanLegend}
+                <FloorPlanSVG
+                  dorm={this.state.dorm}
+                  floor={this.state.floor}
+                  data={this.state.floorData}
+                  cutoffs={[]}
+                  init={this.state.init}
+                  dormRefresh={this.state.dormRefresh}
+                />
+              </MobileFPWrapper>
+              : <WhiteboardTable
+                roomAvailability={this.state.floorData} />
+            }
+          </ShaftLiveContainerMobile>
+        </div>
+      );
+    } else {
+      return (
+        <div>
+          <ShaftLiveContainer>
+            <ColOne>
+              <WhiteboardSidebar
+                sidebarModification={this.handleDormChange} />
+            </ColOne>
+
+            <ColTwo>
+              <h1>{this.state.dorm}</h1>
+              <FloorButton
+                floorNums={this.state.floorNums}
+                handleChange={this.handleFloorChange} />
+              <WhiteboardTable
+                roomAvailability={this.state.floorData} />
+            </ColTwo>
+            <ColThree>
+              <SVGContainer>
+                <div>
+                  <FloorPlanTitle>Interactive Floor Plans</FloorPlanTitle>
+                  <FloorPlanPrompt> — hover to explore!</FloorPlanPrompt>
+                </div>
+                {floorplanLegend}
+                <FloorPlanSVG dorm={this.state.dorm} floor={this.state.floor} data={this.state.floorData} cutoffs={[]} init={this.state.init} dormRefresh={this.state.dormRefresh} ></FloorPlanSVG>
+              </SVGContainer>
+            </ColThree>
+          </ShaftLiveContainer>
+        </div>
+      )
     }
   }
+}
