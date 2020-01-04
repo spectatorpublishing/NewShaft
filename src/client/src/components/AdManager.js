@@ -19,7 +19,7 @@ const AdManager = (props) => {
         <div>
           <DFPSlotsProvider dfpNetworkId="59699124">
             <div className="desktop-ads">
-              <AdSlot sizes={[[728, 90]]} adUnit={this.props.name} />
+              <AdSlot sizes={[[728, 90]]} adUnit={props.name} />
             </div>
           </DFPSlotsProvider>
           </div>
