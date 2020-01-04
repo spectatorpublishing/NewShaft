@@ -13,7 +13,6 @@ function filterDormInfo(con, request, callback) {
 }
 
 router.post("/", async function (req, res) {
-  console.log("ENTER FILTER");
 
   let query = `SELECT d.DORM as DORM, d.DESCRIPTION as DESCRIPTION, d.COLLEGE as COLLEGE, 
   d.THUMBNAIL_IMAGE as THUMBNAIL_IMAGE, d.LATITUDE as LATITUDE, d.LONGITUDE as LONGITUDE, a.AC as AC, a.GYM as GYM,
