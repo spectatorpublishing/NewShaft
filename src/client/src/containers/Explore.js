@@ -139,6 +139,7 @@ export default class Explore extends Component {
   }
 
   updatePayload(newValue, name){
+    console.log("UPDATE PAYLOAD");
     let payload = this.state.payload;
 		payload[FILTER_NAME_TO_KEY[name]] = newValue
     this.setState({payload: payload}, () => this.filterDorms())
@@ -149,6 +150,8 @@ export default class Explore extends Component {
   }
 
   filterDorms(){
+    console.log("FILTER DORMS");
+    console.log(this.state.payload);
     fetch('/api/filterDorm', {
         method: 'POST',
         headers: {
