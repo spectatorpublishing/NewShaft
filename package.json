@@ -5,7 +5,7 @@
   "main": "src/server/index.js",
   "scripts": {
     "start": "node index.js",
-    "prod": "cd src/client && yarn install && yarn build && cd ../../ && yarn start"
+    "prod": "cd src/client && yarn install && yarn build && cd ../../ && npm install && yarn start"
   },
   "author": "Arsalaan Ansari",
   "license": "ISC",
