@@ -47,9 +47,7 @@ export default class FloorPlanSVG extends Component {
     // Generate AWS urls for JPG and SVG
     let url = name.replace(/\ /g, "+");
     let jpgUrl = "https://shaft-dorm-floorplans.s3.amazonaws.com/" + url + ".jpg";
-    console.log(jpgUrl)
     let svgUrl = "https://shaft-svg.s3.amazonaws.com/"+ url +".svg";
-    console.log(svgUrl);
   
 
 
@@ -236,7 +234,6 @@ export default class FloorPlanSVG extends Component {
     // Override the xlink:href attribute (which is deprecated)
     // with an href that links to the corresponding floorplan JPG
     if(xlinkHref) {
-      console.log("SET XLINK")
       baseImage.setAttribute("xlink:href", this.state.floorplanJpg);
       baseImage.setAttribute("href", this.state.floorplanJpg);
     } 

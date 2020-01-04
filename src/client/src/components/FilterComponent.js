@@ -7,7 +7,7 @@ let Filter = styled.div`
 	display: grid;
 	grid-template-columns: repeat(3, 33%);
 	@media(max-width: 768px){
-		position: relative; // So that the filter list will position itself relative to this div
+		position: relative; 
 	}
 	margin-top: 0;
 	padding: 2% 0 2% 2%;
@@ -84,13 +84,13 @@ export default class FilterComponent extends React.PureComponent {
 
 	// Sets the single active filter
 	setfilter(key, val){
-		this.setState({openFilters: 0})
+		// this.setState({openFilters: 0})
 		// val is the value we are setting (1 or 0) and
 		// key is the index of the filter we are setting. 
 		// If key is 2 and value is 1, we set openFilters 
 		// to 1<<2, which is 0100. We then know that the 
 		// second filter is active. 
-		this.setState({openFilters: val<<key})
+		this.setState({openFilters: val << key})
 	}
 
 	closeAllFilters() {
@@ -123,10 +123,11 @@ export default class FilterComponent extends React.PureComponent {
 			// twice which just casts 1 to true. 
 			// If i is not 1, then it is either bitshifted to 0000 or something greater than
 			// 1, which is then masked out by our AND 1 operation to 0. We then cast 0 to false. 
+			
 			return <FilterCategory 
 				key={i}
 				i={i}
-				open={!!(1 & this.state.openFilters>>i)}
+				open={!!(1 & this.state.openFilters >> i)}
 				setfilter={this.setfilter}
 				handleChange={this.props.handleChange}
 				headerTitle={filterName}

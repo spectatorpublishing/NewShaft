@@ -249,7 +249,6 @@ export default class Dorm extends React.PureComponent {
     })
       .then(res => res.json())
       .then(dormPhotos => {
-        console.log(dormPhotos)
         this.setState({dorm_photos: Object.values(dormPhotos)})
       });
 
@@ -364,8 +363,6 @@ export default class Dorm extends React.PureComponent {
           }          
           floor_state[floorNum -1] = 'https://shaft-dorm-floorplans.s3.amazonaws.com/' + floorPlan[floorNum].replace(/ /g, '+')
           floor_name[floorNum -1]= floorPlan[floorNum].slice(0, -4).replace("_", " ");
-          console.log("FLOOR PLAN");
-          console.log(floor_state[floorNum -1]);
         }
         return [floor_state, floor_name]
       }).then(floor_vals => {

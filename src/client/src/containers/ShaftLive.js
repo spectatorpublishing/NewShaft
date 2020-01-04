@@ -178,8 +178,6 @@ export default class ShaftLive extends Component {
     })
       .then(res => res.json())
       .then(floorNums => {
-        console.log("FLOOR NUMS")
-        console.log(floorNums);
         this.setState({ floorNums: floorNums });
       });
   }
@@ -192,8 +190,6 @@ export default class ShaftLive extends Component {
       },
     }).then(res => res.json())
       .then(response => {
-        console.log("FLOOR DATA")
-        console.log(response);
         this.setState({
           dorm: dorm,
           dormRefresh: !this.state.dormRefresh,
