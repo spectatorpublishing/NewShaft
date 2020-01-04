@@ -1,4 +1,10 @@
-# Production
+# Documentation
+
+Important information: 
+ADMIN ONLY HOE + HOP (Contains Passwords for Arcpublishing, Digital Ocean, Amazon S3, etc): https://docs.google.com/document/d/1sLjsWjUM4b_chSenM2E9T0GDWAJksEjUGdb1ezo-hU0/edit?folder=1avaXOBIAs5oCw3Y-fhXbY5G8vulr50ze#
+
+
+## Production
 
 This README provides all of the information about the Shaft Production infrastructure
 
