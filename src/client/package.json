@@ -13,6 +13,7 @@
   "license": "ISC",
   "dependencies": {
     "lodash": "^4.17.11",
+    "webpack": "4.42.0",
     "mapbox-gl": "^1.6.1",
     "mysql": "^2.16.0",
     "react": "^16.5.2",
@@ -30,6 +31,7 @@
   },
   "devDependencies": {
     "@storybook/addon-info": "^5.2.8",
+    "webpack": "4.42.0",
     "@storybook/react": "^5.2.8",
     "cheerio": "^1.0.0-rc.2",
     "concurrently": "^5.0.2",
