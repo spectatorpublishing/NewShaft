@@ -77,7 +77,7 @@ export default class FloorPlanSVG extends Component {
         suitePickStyle = true;
       }
     }
-    else {
+    else { 
       if (SUITE_PICK.has(dorm.toUpperCase())) {
         suitePickStyle = true;
       }
@@ -90,7 +90,7 @@ export default class FloorPlanSVG extends Component {
       floorplanJpg: jpgUrl,
       floorplanSvg: svgUrl,
       floorplanDic: dic,
-      suitePick: suitePickStyle
+      suitePick: suitePickStyle,
     };
 
     this.getStaticFloorplan = this.getStaticFloorplan.bind(this);

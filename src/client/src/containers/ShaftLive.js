@@ -129,6 +129,38 @@ let LegendItem = styled.div`
   display: flex;
 `
 
+let Converter = styled.div`
+  background-color: gray;
+  padding: 3rem 0rem 2rem 3rem;
+  font-size: 3.4rem;
+  display: flex;
+  flex-direction: column;
+  color: white;
+`
+let Input = styled.div`
+  color: white;
+`
+let StyleInput = styled.input`
+  background: none;
+  border: none;
+  border-bottom: solid 0.1rem white;
+  width: 20%;
+  color: white;
+  font-size: 3rem;
+`
+
+let Output = styled.div`
+  padding-top: 0.4rem;
+  color: white;
+  font-weight: bold;
+`
+
+let Desc = styled.div`
+  color: white;
+  font-size: 1.6rem;
+  padding-top: 0.45rem;
+`
+
 export default class ShaftLive extends Component {
   constructor(props) {
     super(props);
@@ -142,7 +174,12 @@ export default class ShaftLive extends Component {
       width: window.innerWidth,
       init: true,
       //update: false,
-      mobileShowFloorPlan: false
+      mobileShowFloorPlan: false,
+
+      convertedNumLow: null,
+      convertedNumHigh: null,
+      priority: null,
+      dash: " ",
     }
 
     this.handleFloorChange = this.handleFloorChange.bind(this)
@@ -200,7 +237,52 @@ export default class ShaftLive extends Component {
       );
   }
 
+  convertNumber() {
+    var num = document.getElementById("userNum").value;
 
+    console.log("in: ", num);
+    var thousands = (num - (num%1000))/1000
+    console.log("thousands: ", thousands);
+    if (thousands == 0) {
+      var priority = 30;
+    }
+    else if (thousands == 1){
+      var priority = 25;
+    }
+    else if (thousands == 2){
+      var priority = 20;
+    }
+    else if (thousands == 3){
+      var priority = 15;
+    }
+    else {
+      var priority = 10;
+    }
+    console.log("priority: ", priority)
+    var converted = (num - (thousands * 1000)) * (3000/1000)
+    console.log("converted num: ", converted)
+    var rounded = converted - (converted%10)
+    if (rounded < 40) {
+      var low = 0;
+    }
+    else {
+      var low = rounded - 50
+    }
+    if (rounded > 2950) {
+      var high = 3000;
+    }
+    else {
+      var high = rounded + 50
+    }
+    console.log("range: ", low, " - ", high)
+    this.setState({
+      convertedNumLow: low,
+      convertedNumHigh: high,
+      dash: " - ",
+      priority: priority,
+    })
+
+  }
 
   handleFloorChange(floor) {
     this.fetchFloorData(this.state.dorm, floor);
@@ -234,6 +316,7 @@ export default class ShaftLive extends Component {
       this.fetchFloorData(dorm, firstFloor[dorm]);
     });
   }
+
 
 
 
@@ -289,6 +372,19 @@ export default class ShaftLive extends Component {
     } else {
       return (
         <div>
+
+          <Converter>
+          <Input id = "form" onsubmit="return false;">
+            <label for="userNum">Enter Your Number:  </label>
+            <StyleInput type="number" id="userNum" onClick={() => this.convertNumber()}/>
+            {/*<input type="button" value="convert" onClick={() => this.convertNumber()}/>*/}
+          </Input>
+
+          <Output><bold>Old-System Equivalent: </bold><underline> {this.state.priority}  |  {this.state.convertedNumLow} {this.state.dash} {this.state.convertedNumHigh}</underline></Output>
+          <Desc>Check out our color-coded floor plans to see which rooms you are likely to get!</Desc>
+          </Converter>
+
+          {/*<button onClick={() => this.convertNumber(2322)}>Click me</button>*/}
           <ShaftLiveContainer>
             <ColOne>
               <WhiteboardSidebar
@@ -310,7 +406,7 @@ export default class ShaftLive extends Component {
                   <FloorPlanPrompt> — hover to explore!</FloorPlanPrompt>
                 </div>
                 {floorplanLegend}
-                <FloorPlanSVG dorm={this.state.dorm} floor={this.state.floor} data={this.state.floorData} cutoffs={[]} init={this.state.init} dormRefresh={this.state.dormRefresh} ></FloorPlanSVG>
+                <FloorPlanSVG priority={this.state.priority} low={this.state.convertedNumLow} high={this.state.convertedNumHigh} dorm={this.state.dorm} floor={this.state.floor} data={this.state.floorData} cutoffs={[]} init={this.state.init} dormRefresh={this.state.dormRefresh} ></FloorPlanSVG>
               </SVGContainer>
             </ColThree>
           </ShaftLiveContainer>
