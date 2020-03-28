@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import styled from "styled-components";
-import WhiteboardSidebar from "../components/WhiteboardSidebar"
+import WhiteboardSidebar from "../components/WhiteboardSidebar";
+import FakeVote from "../components/FakeVote";
 
 const ReviewsContainer = styled.div`
     display: flex;
@@ -131,6 +132,7 @@ export default class Reviews extends Component{
           </ColOne>
           <ColTwo>
             <h1>{this.state.dorm}</h1>
+            <FakeVote dorm = {this.state.dorm} roomNum = "51C" upvotes = "10" downvotes = "5" />
             {/* MoreDormInfo */}
             {/* QuickReview */}
           </ColTwo>
