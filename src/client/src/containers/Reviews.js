@@ -32,16 +32,20 @@ const GrayFooter = styled.div`
   align-items: center;
 `
 
-const MobileButton = styled.div`
+const MobileButton = styled.a`
   background-color: white;
-  font-color: gray;
-  font-size: 20px;
-  font-weight: 700;
-  text-align: center;
-  padding: 15px 5px;
   border-radius: 10px;
   width: 80%;
+  padding: 15px 5px;
   margin: 10px;
+  text-decoration: none;
+
+  &>div {
+    font-color: gray;
+    font-size: 20px;
+    font-weight: 700;
+    text-align: center;
+  }
 `
 
 const ReviewSummary = styled.div`
@@ -248,8 +252,9 @@ export default class Reviews extends Component{
             ))}
           </AllReviews>
           <GrayFooter>
-              <MobileButton>SUBMIT A REVIEW</MobileButton>
-              <MobileButton>COMPARE DORMS</MobileButton>
+              <MobileButton href = {"http://www.google.com"}><div>SUBMIT A REVIEW</div></MobileButton>
+              {/* TODO: update link here to point to actual comparison page */}
+              <MobileButton href = {"/compare-dorms"}><div>COMPARE DORMS</div></MobileButton>
           </GrayFooter>
         </ReviewsContainerMobile>
       )
