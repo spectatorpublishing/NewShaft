@@ -2,7 +2,6 @@ import React, { Component } from 'react';
 import styled from "styled-components";
 import WhiteboardSidebar from "../components/ReviewsWhiteboardSidebar"
 import Review from "../components/Review"
-import StickyFooter from 'react-sticky-footer';
 
 const Star = styled.span`
   color: white;
