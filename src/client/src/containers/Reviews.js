@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import styled from "styled-components";
-import WhiteboardSidebar from "../components/WhiteboardSidebar"
+import WhiteboardSidebar from "../components/WhiteboardSidebar";
+import ReviewsBox from "../components/ReviewsBox";
 
 const ReviewsContainer = styled.div`
     display: flex;
@@ -91,7 +92,7 @@ export default class Reviews extends Component{
   }
 
   /* fetch MoreDormInfo */
-  
+
   /* fetch QuickReview */
 
   handleDormChange(dorm) {
@@ -136,6 +137,9 @@ export default class Reviews extends Component{
           </ColTwo>
           <ColThree>
             {/* Reviews Slider */}
+            <ReviewsBox
+              reviews={this.state.reviews}>
+            </ReviewsBox>
           </ColThree>
         </ReviewsContainer>
       </div>
