@@ -1,6 +1,8 @@
 import React, { Component } from 'react';
 import styled from "styled-components";
 import WhiteboardSidebar from "../components/WhiteboardSidebar"
+import placeholder from "./placeholder.jpg"
+import QuickReview from "../components/QuickReview";
 
 const ReviewsContainer = styled.div`
     display: flex;
@@ -38,6 +40,7 @@ const ColTwo = styled.div`
       color: "64AFEC";
       font-weight: extra-bold;
     }
+
 `
 
 const ColThree = styled.div`
@@ -92,7 +95,7 @@ export default class Reviews extends Component{
 
   /* fetch MoreDormInfo */
   
-  /* fetch QuickReview */
+  /* fetch QuickReviews */
 
   handleDormChange(dorm) {
 
@@ -133,6 +136,9 @@ export default class Reviews extends Component{
             <h1>{this.state.dorm}</h1>
             {/* MoreDormInfo */}
             {/* QuickReview */}
+            <img src={placeholder} />
+            <h3>QUICK REVIEW</h3>
+            <h5><QuickReview quick={this.state.QuickReview}></QuickReview></h5>
           </ColTwo>
           <ColThree>
             {/* Reviews Slider */}
