@@ -21,12 +21,17 @@ let NumberBtn = styled.button`
     &:hover {
         background-color: ${props => props.theme.lightGray};
     }
+    @media only screen and (max-width: 992px){
+        text-align: left !Important;
+        padding-left: 0.8rem;
+    }
 
 `
 let NumberSelected = styled(NumberBtn)`
    font-family: Raleway, sans-serif;
    font-size: 0.8rem;
-   text-align: center;
+   padding-left: 0.3rem;
+   text-align: left;
    border: solid 1px ${props => props.theme.lightGray};
    color: ${props => props.theme.white};    
    background-color: ${props => props.theme.columbiaBlue};
@@ -34,6 +39,7 @@ let NumberSelected = styled(NumberBtn)`
         background-color: ${props => props.theme.columbiaBlue};
         color: ${props => props.theme.white};
         text-shadow: ${props => props.theme.shadow};
+        text-align: center;
     }
     &:hover {
         background-color: ${props => props.theme.lightGray};
@@ -62,7 +68,7 @@ let Buttons = styled.div`
     flex-direction: row;
     background: ${props => props.theme.white};
     max-width: 100%; 
-    text-align: center;
+    text-align: left;
     margin: 0 2.5%;
     overflow: hidden;
     @media only screen and (min-width: 992px){
@@ -77,7 +83,7 @@ let Buttons = styled.div`
 
 let StyledToggle = styled(Dropdown.Toggle)`
    background-color: white;
-   padding: 0.8rem 0.4rem 0.8rem 0.4rem;
+   padding: 0.8rem 0.0rem 0.8rem 0.4rem;
    width: 100%
    border: none;
    border-radius: 10px;

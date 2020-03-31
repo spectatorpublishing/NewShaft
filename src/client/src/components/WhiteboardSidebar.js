@@ -20,10 +20,11 @@ let SidebarTitle = styled.div`
     color: ${props => props.theme.darkGray} !Important;
     margin-bottom: 2px;
     @media only screen and (max-width: 992px){
-        color: 	${props => props.theme.white};
+        color: 	${props => props.theme.white} !Important;
         padding-top: 1rem;
         padding-bottom: 0.5rem;
         text-align: left;
+        border-bottom: none !Important;
         text-transform: uppercase;
         padding-left: 0.7rem;
         border: none;
@@ -98,6 +99,13 @@ let Compare = styled.a`
         background-color: ${props => props.theme.columbiaBlue};
         color: ${props => props.theme.white};
     }
+`;
+
+let V = styled.img`
+   display: flex;
+   margin-left: 2rem;
+   border-right: solid 6px white;
+   background-color: white;
 `;
 
 const DORM_ARRAY = [
@@ -176,7 +184,7 @@ export default class WhiteboardSidebar extends React.Component {
                         >
                             {this.getMobileDorms()} 
                         </select>
-                        <img src={ChrisV}/>
+                        <V src={ChrisV}/>
                     </DormListMobile>
                     </div>
             );

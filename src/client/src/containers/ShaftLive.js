@@ -10,6 +10,7 @@ let BlueBGMobile = styled.div`
   background-color: gray;
   padding-left: 0.5rem;
   padding-right: 0.8rem;
+  border-bottom: solid 0.75rem white;
 `
 
 let MobileFPWrapper = styled.div`
@@ -178,6 +179,7 @@ let Desc = styled.div`
   padding-bottom: 0.65rem;
   @media(max-width: 991px){
     font-size: 1.0rem;
+    padding-right:1rem
   }
 `
 
@@ -206,8 +208,7 @@ export default class ShaftLive extends Component {
       convertedNumLow: null,
       convertedNumHigh: null,
       priority: null,
-      dash: " ",
-      line: " ",
+      full: " "
     }
 
     this.handleFloorChange = this.handleFloorChange.bind(this)
@@ -308,17 +309,15 @@ export default class ShaftLive extends Component {
     this.setState({
       convertedNumLow: low,
       convertedNumHigh: high,
-      dash: " - ",
-      line: " | ",
       priority: priority,
+      full: priority + " | " + low + " - " + high,
     })
 
-    //e.preventDefault();
 
   }
 
-  handleSubmit(event) {
-    event.preventDefault();
+  handleSubmit(e) {
+    e.preventDefault();
   }
 
   handleFloorChange(floor) {
@@ -362,10 +361,10 @@ export default class ShaftLive extends Component {
     const isMobile = width <= 700;
     const floorplanLegend = (<FloorPlanLegend>
       <LegendItem>
-        <GreenBox /><h6>Available</h6>
+        <GreenBox /><h6>Likely</h6>
       </LegendItem>
       <LegendItem>
-        <RedBox /><h6>Taken</h6>
+        <RedBox /><h6>Unlikely</h6>
       </LegendItem>
     </FloorPlanLegend>);
 
@@ -380,7 +379,7 @@ export default class ShaftLive extends Component {
           </Input>
           
 
-          <Output>Old-System Equivalent: {this.state.priority}  {this.state.line}  {this.state.convertedNumLow} {this.state.dash} {this.state.convertedNumHigh}</Output>
+          <Output>Old-System Equivalent: {this.state.full}</Output>
           <Desc>Green rooms are ones that you are likely to get based off data that Spectator has collected from housing selection from previous years.</Desc>
           <Desc>To read more about how our converter and predictor works, check out this Spectrum article <a href="https://www.columbiaspectator.com/spectrum/2020/03/09/a-guide-to-the-redesigned-shaft/">here</a>.</Desc>
           </Converter>
@@ -420,7 +419,7 @@ export default class ShaftLive extends Component {
           </Input>
           
 
-          <Output>Old-System Equivalent: {this.state.priority}  {this.state.line}  {this.state.convertedNumLow} {this.state.dash} {this.state.convertedNumHigh}</Output>
+          <Output>Old-System Equivalent: {this.state.full}</Output>
           <Desc>Check out our color-coded floor plans to see which rooms you are likely to get!</Desc>
           </Converter>
 
