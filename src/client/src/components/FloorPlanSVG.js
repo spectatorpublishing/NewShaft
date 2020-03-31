@@ -6,7 +6,7 @@ import "../css/FloorPlanSVG.css"; // Because react-tooltip
 import { CUTOFFS, SUITE_PICK } from "../util/Cutoffs";
 import { MAPPING } from "../util/Mapping";
 
-let FloorPlanWrapper = styled.div`
+let FloorPlanWrapper = styled.div` 
   & rect {
     opacity: 0.3;
     pointer-events: all;
@@ -316,6 +316,7 @@ export default class FloorPlanSVG extends Component {
       // Not taken yet (Green)
       let lotteryLabel = "Last Year's Cutoff";
       let lottery = this.getCutoff(roomTypeMapped);
+      //console.log(lottery)
 
       // Taken room (Red)
       if (fromDb["NEW_PRIORITY"]) {

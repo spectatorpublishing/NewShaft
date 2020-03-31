@@ -1,14 +1,15 @@
 import React, { Component } from 'react';
 import styled from "styled-components";
 import FloorButton from "../components/FloorButton.js";
-import WhiteboardTable from "../components/WhiteboardTable.js";
 import FloorPlanSVG from "../components/FloorPlanSVG"
-
+import {theme} from '../util/GlobalStyles.js';
 import _ from "lodash"
 import WhiteboardSidebar from '../components/WhiteboardSidebar.js';
 
 let BlueBGMobile = styled.div`
-  background-color: ${props => props.theme.columbiaBlue};
+  background-color: gray;
+  padding-left: 0.5rem;
+  padding-right: 0.8rem;
 `
 
 let MobileFPWrapper = styled.div`
@@ -132,13 +133,20 @@ let LegendItem = styled.div`
 let Converter = styled.div`
   background-color: gray;
   padding: 3rem 0rem 2rem 3rem;
-  font-size: 3.4rem;
   display: flex;
   flex-direction: column;
   color: white;
+  @media(max-width: 991px){
+    padding: 1rem 0rem 0rem 1rem;
+}
 `
-let Input = styled.div`
+
+let Input = styled.form`
   color: white;
+  font-size: 3rem;
+  @media(max-width: 991px){
+    font-size: 1.8rem;
+  }
 `
 let StyleInput = styled.input`
   background: none;
@@ -146,20 +154,39 @@ let StyleInput = styled.input`
   border-bottom: solid 0.1rem white;
   width: 20%;
   color: white;
-  font-size: 3rem;
+  font-size: 2.5rem;
+  @media(max-width: 991px){
+    font-size: 1.8rem;
+  }
 `
 
 let Output = styled.div`
-  padding-top: 0.4rem;
+  padding-top: 0.8rem;
+  padding-bottom: 0.6rem;
   color: white;
+  font-size: 2.5rem;
   font-weight: bold;
+  @media(max-width: 991px){
+    font-size: 1.4rem;
+  }
 `
 
 let Desc = styled.div`
   color: white;
   font-size: 1.6rem;
-  padding-top: 0.45rem;
+  padding-top: 0.65rem;
+  padding-bottom: 0.65rem;
+  @media(max-width: 991px){
+    font-size: 1.0rem;
+  }
 `
+
+let About = styled.div`
+   padding-top: 1.0rem;
+   padding-left: 0.5rem;
+   text-decoration: none;
+`;
+
 
 export default class ShaftLive extends Component {
   constructor(props) {
@@ -180,11 +207,13 @@ export default class ShaftLive extends Component {
       convertedNumHigh: null,
       priority: null,
       dash: " ",
+      line: " ",
     }
 
     this.handleFloorChange = this.handleFloorChange.bind(this)
     this.handleDormChange = this.handleDormChange.bind(this)
   }
+  
 
   componentWillMount() {
     window.addEventListener("resize", this.handleWindowSizeChange);
@@ -235,9 +264,10 @@ export default class ShaftLive extends Component {
         });
       }
       );
+      console.log(this.state.dorm, this.state.floor, this.state.floorData)
   }
 
-  convertNumber() {
+  convertNumber(e) {
     var num = document.getElementById("userNum").value;
 
     console.log("in: ", num);
@@ -279,9 +309,16 @@ export default class ShaftLive extends Component {
       convertedNumLow: low,
       convertedNumHigh: high,
       dash: " - ",
+      line: " | ",
       priority: priority,
     })
 
+    //e.preventDefault();
+
+  }
+
+  handleSubmit(event) {
+    event.preventDefault();
   }
 
   handleFloorChange(floor) {
@@ -335,25 +372,31 @@ export default class ShaftLive extends Component {
     if (isMobile) {
       return (
         <div>
+
+        <Converter>
+        <Input id="form" onSubmit={() => this.handleSubmit()}>
+            <label for="userNum">Enter Your Number:  </label>
+            <StyleInput type="number" id="userNum" onChange={() => this.convertNumber()}/>
+          </Input>
+          
+
+          <Output>Old-System Equivalent: {this.state.priority}  {this.state.line}  {this.state.convertedNumLow} {this.state.dash} {this.state.convertedNumHigh}</Output>
+          <Desc>Green rooms are ones that you are likely to get based off data that Spectator has collected from housing selection from previous years.</Desc>
+          <Desc>To read more about how our converter and predictor works, check out this Spectrum article <a href="https://www.columbiaspectator.com/spectrum/2020/03/09/a-guide-to-the-redesigned-shaft/">here</a>.</Desc>
+          </Converter>
+
           <ShaftLiveContainerMobile>
             <BlueBGMobile>
               <WhiteboardSidebar
                 sidebarModification={this.handleDormChange}
                 currDorm={this.state.dorm}
-              />
+              /> 
               <FloorButton
                 floorNums={this.state.floorNums}
                 handleChange={this.handleFloorChange}
                 isMobile={isMobile}
               />
             </BlueBGMobile>
-            <ToggleMobileView currActive={this.state.mobileShowFloorPlan ? 0 : 1}>
-              <div onClick={() => this.setState({ mobileShowFloorPlan: false })}>Live Feed</div>
-              <div onClick={() => this.setState({ mobileShowFloorPlan: true })}>Floor Plans</div>
-            </ToggleMobileView>
-            {this.state.mobileShowFloorPlan
-              ? <MobileFPWrapper>
-                {floorplanLegend}
                 <FloorPlanSVG
                   dorm={this.state.dorm}
                   floor={this.state.floor}
@@ -362,10 +405,7 @@ export default class ShaftLive extends Component {
                   init={this.state.init}
                   dormRefresh={this.state.dormRefresh}
                 />
-              </MobileFPWrapper>
-              : <WhiteboardTable
-                roomAvailability={this.state.floorData} />
-            }
+
           </ShaftLiveContainerMobile>
         </div>
       );
@@ -374,17 +414,16 @@ export default class ShaftLive extends Component {
         <div>
 
           <Converter>
-          <Input id = "form" onsubmit="return false;">
+          <Input id="form" onSubmit={() => this.handleSubmit()}>
             <label for="userNum">Enter Your Number:  </label>
-            <StyleInput type="number" id="userNum" onClick={() => this.convertNumber()}/>
-            {/*<input type="button" value="convert" onClick={() => this.convertNumber()}/>*/}
+            <StyleInput type="number" id="userNum" onChange={() => this.convertNumber()}/>
           </Input>
+          
 
-          <Output><bold>Old-System Equivalent: </bold><underline> {this.state.priority}  |  {this.state.convertedNumLow} {this.state.dash} {this.state.convertedNumHigh}</underline></Output>
+          <Output>Old-System Equivalent: {this.state.priority}  {this.state.line}  {this.state.convertedNumLow} {this.state.dash} {this.state.convertedNumHigh}</Output>
           <Desc>Check out our color-coded floor plans to see which rooms you are likely to get!</Desc>
           </Converter>
 
-          {/*<button onClick={() => this.convertNumber(2322)}>Click me</button>*/}
           <ShaftLiveContainer>
             <ColOne>
               <WhiteboardSidebar
@@ -396,8 +435,8 @@ export default class ShaftLive extends Component {
               <FloorButton
                 floorNums={this.state.floorNums}
                 handleChange={this.handleFloorChange} />
-              <WhiteboardTable
-                roomAvailability={this.state.floorData} />
+                <About>Green rooms are ones that you are likely to get based off data that Spectator has collected from housing selection from previous years.</About>
+                <About>To read more about how our converter and predictor works, check out this Spectrum article <a href="https://www.columbiaspectator.com/spectrum/2020/03/09/a-guide-to-the-redesigned-shaft/">here</a>.</About>
             </ColTwo>
             <ColThree>
               <SVGContainer>
