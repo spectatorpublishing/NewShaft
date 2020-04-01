@@ -265,10 +265,10 @@ export default class ShaftLive extends Component {
         });
       }
       );
-      console.log(this.state.dorm, this.state.floor, this.state.floorData)
+      //console.log(this.state.dorm, this.state.floor, this.state.floorData)
   }
 
-  convertNumber(e) {
+  convertNumber() {
     var num = document.getElementById("userNum").value;
 
     console.log("in: ", num);
@@ -305,7 +305,8 @@ export default class ShaftLive extends Component {
     else {
       var high = rounded + 50
     }
-    console.log("range: ", low, " - ", high)
+    //console.log("range: ", low, " - ", high)
+    
     this.setState({
       convertedNumLow: low,
       convertedNumHigh: high,
@@ -373,7 +374,7 @@ export default class ShaftLive extends Component {
         <div>
 
         <Converter>
-        <Input id="form" onSubmit={() => this.handleSubmit()}>
+        <Input id="form">
             <label for="userNum">Enter Your Number:  </label>
             <StyleInput type="number" id="userNum" onChange={() => this.convertNumber()}/>
           </Input>
@@ -396,14 +397,16 @@ export default class ShaftLive extends Component {
                 isMobile={isMobile}
               />
             </BlueBGMobile>
-                <FloorPlanSVG
-                  dorm={this.state.dorm}
-                  floor={this.state.floor}
-                  data={this.state.floorData}
-                  cutoffs={[]}
-                  init={this.state.init}
-                  dormRefresh={this.state.dormRefresh}
-                />
+            <FloorPlanSVG 
+                  priority={this.state.priority} 
+                  low={this.state.convertedNumLow} 
+                  high={this.state.convertedNumHigh} 
+                  dorm={this.state.dorm} 
+                  floor={this.state.floor} 
+                  data={this.state.floorData} 
+                  cutoffs={[]} 
+                  init={this.state.init} 
+                  dormRefresh={this.state.dormRefresh} ></FloorPlanSVG>
 
           </ShaftLiveContainerMobile>
         </div>
@@ -413,7 +416,7 @@ export default class ShaftLive extends Component {
         <div>
 
           <Converter>
-          <Input id="form" onSubmit={() => this.handleSubmit()}>
+          <Input id="form">
             <label for="userNum">Enter Your Number:  </label>
             <StyleInput type="number" id="userNum" onChange={() => this.convertNumber()}/>
           </Input>
@@ -444,7 +447,16 @@ export default class ShaftLive extends Component {
                   <FloorPlanPrompt> — hover to explore!</FloorPlanPrompt>
                 </div>
                 {floorplanLegend}
-                <FloorPlanSVG priority={this.state.priority} low={this.state.convertedNumLow} high={this.state.convertedNumHigh} dorm={this.state.dorm} floor={this.state.floor} data={this.state.floorData} cutoffs={[]} init={this.state.init} dormRefresh={this.state.dormRefresh} ></FloorPlanSVG>
+                <FloorPlanSVG 
+                  priority={this.state.priority} 
+                  low={this.state.convertedNumLow} 
+                  high={this.state.convertedNumHigh} 
+                  dorm={this.state.dorm} 
+                  floor={this.state.floor} 
+                  data={this.state.floorData} 
+                  cutoffs={[]} 
+                  init={this.state.init} 
+                  dormRefresh={this.state.dormRefresh} ></FloorPlanSVG>
               </SVGContainer>
             </ColThree>
           </ShaftLiveContainer>

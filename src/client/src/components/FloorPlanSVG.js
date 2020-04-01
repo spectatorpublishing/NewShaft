@@ -208,12 +208,14 @@ export default class FloorPlanSVG extends Component {
       let roomOrSuiteName = this.getRoomOrSuite(suiteFromSvg, roomFromSvg);
 
       // Check if the room labeled on the SVG matches the name in the db
+      console.log("CONVERTED", this.props.high)
       let fromDb = this.state.floorplanDic[roomOrSuiteName];
       if (fromDb) {
         let selectableEl = roomEl;
         if (this.state.suitePick) {
           selectableEl = suiteEl;
         }
+
         // Check if lottery number exists for it (i.e. it's already taken)
         if (fromDb["NEW_PRIORITY"]) {
           selectableEl.setAttribute("fill", "red");
@@ -356,7 +358,7 @@ export default class FloorPlanSVG extends Component {
             afterInjection={(error, svg) => this.styleSVG(error, svg)}
             fallback={this.getStaticFloorplan}
           />
-
+          
           <ReactTooltip 
             id="global"
             aria-haspopup="true"
