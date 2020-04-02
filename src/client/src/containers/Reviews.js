@@ -43,6 +43,8 @@ const ColTwo = styled.div`
 
 const ColThree = styled.div`
     width: 50vw;
+    height: calc(98vh - 2rem);
+    overflow-y: scroll;
 `
 
 export default class Reviews extends Component{

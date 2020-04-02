@@ -1,11 +1,9 @@
 import styled from "styled-components";
 import React, { Component } from "react";
-import ReviewStat from "./ReviewStat";
-import SlidingReview from "./SlidingReview";
+import ScrollingReview from "./ScrollingReview";
 
 
 let Border = styled.div`
-    ${props => props.theme.grayBorder}
     padding: 2vw;
     padding-bottom: 6vh;
     display: flex;
@@ -67,7 +65,7 @@ export default class ReviewsBox extends Component {
                 <MobileBorder>
                     <MobileInfoBox>
                         <MobileSlidingBox>
-                            <SlidingReview reviews={this.props.reviews}/>
+                            <ScrollingReview reviews={this.props.reviews}/>
                         </MobileSlidingBox>
                     </MobileInfoBox>
                 </MobileBorder>
@@ -78,7 +76,7 @@ export default class ReviewsBox extends Component {
                 <Border>
                     <InfoBox>
                         <SlidingBox>
-                            <SlidingReview reviews={this.props.reviews}/>
+                            <ScrollingReview reviews={this.props.reviews}/>
                         </SlidingBox>
                     </InfoBox>
                 </Border>
