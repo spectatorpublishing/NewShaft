@@ -99,6 +99,7 @@ let Compare = styled.a`
         background-color: ${props => props.theme.columbiaBlue};
         color: ${props => props.theme.white};
     }
+    display: none;
 `;
 
 let V = styled.img`
@@ -196,7 +197,7 @@ export default class WhiteboardSidebar extends React.Component {
                     <SidebarTitle>DORMS</SidebarTitle>
                         <DormListDesktop selectedId={this.state.dormId}>
                             {this.getDesktopDorms()}
-                            <Compare href="/comparedorms">Compare Dorms</Compare>
+                            <Compare href="/compare/">Compare Dorms</Compare>
                         </DormListDesktop>
                     </Sidebar>
                 </div>

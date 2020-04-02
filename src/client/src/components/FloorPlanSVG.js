@@ -5,10 +5,11 @@ import ReactTooltip from 'react-tooltip';
 import "../css/FloorPlanSVG.css"; // Because react-tooltip
 import { CUTOFFS, SUITE_PICK } from "../util/Cutoffs";
 import { MAPPING } from "../util/Mapping";
+import { yellow } from "color-name";
 
 
 const RANGE = 150; //range above and below lottery num that is considered "within range"
-const RANGE_COLOR = "62A8E5";//Color for the dorms within the range of the lottery number
+const RANGE_COLOR = "yellow";//Color for the dorms within the range of the lottery number
 const ABOVE_COLOR = "gray";//Color for the dorms likely to be unavailable (above lottery #)
 const BELOW_COLOR = "green";//Color for dorms likely to be available but below range
 
@@ -214,27 +215,35 @@ export default class FloorPlanSVG extends Component {
       let roomOrSuiteName = this.getRoomOrSuite(suiteFromSvg, roomFromSvg);
 
       // Check if the room labeled on the SVG matches the name in the db
-      //console.log("CONVERTED", this.props.high)
+      
       let fromDb = this.state.floorplanDic[roomOrSuiteName];
-      if (fromDb) {
+      if (fromDb != undefined) {
         let selectableEl = roomEl;
         if (this.state.suitePick) {
           selectableEl = suiteEl;
         }
+
+        // recall: above_color = gray
+        // range_color = yellow
+        // below_color = green
 
         let priority = this.props.priority;
         let lowNum = this.props.low;
         let highNum = this.props.high;
         let upperBound = (highNum < 2850) ? highNum += RANGE : 3000;
         let lowerBound = (lowNum > 150) ? lowNum -= RANGE : 0;
+
+        console.log(fromDb)
+        
+
         if(parseInt(fromDb["NEW_PRIORITY"]) > priority){
           selectableEl.setAttribute("fill",  ABOVE_COLOR);
         } else if(parseInt(fromDb["NEW_PRIORITY"]) < priority){
           selectableEl.setAttribute("fill", BELOW_COLOR);
-        }else{//dorm and user have same priority number
-          if(parseInt(fromDb["NEW_NUM"]) > upperBound){
+        }else{ //dorm and user have same priority number
+          if(parseInt(fromDb["NEW_NUM"]) < upperBound){
             selectableEl.setAttribute("fill",  ABOVE_COLOR);
-          } else if(parseInt(fromDb["NEW_NUM"]) < lowerBoumd{
+          } else if(parseInt(fromDb["NEW_NUM"]) > lowerBound){
             selectableEl.setAttribute("fill", BELOW_COLOR);
           }else{
             selectableEl.setAttribute("fill", RANGE_COLOR);
@@ -332,15 +341,16 @@ export default class FloorPlanSVG extends Component {
       let roomTypeMapped = this.getRoomTypeMapped(fromDb["ROOM_TYPE"])
       let roomTypeLabel = "Room Type";
       let roomType = roomTypeMapped;
+      //console.log(roomType)
 
       // Not taken yet (Green)
       let lotteryLabel = "Last Year's Cutoff";
       let lottery = this.getCutoff(roomTypeMapped);
-      //console.log(lottery)
+      //console.log("CUTOFFS", lottery)
 
       // Taken room (Red)
-      if (fromDb["NEW_PRIORITY"]) {
-        lotteryLabel = "Taken By";
+      if (fromDb["NEW_NUM"]) {
+        lotteryLabel = "Last Year's Cutoff";
         lottery = fromDb["NEW_PRIORITY"] + " | " + fromDb["NEW_NUM"];
       }
 

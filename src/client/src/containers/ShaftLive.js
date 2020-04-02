@@ -113,8 +113,8 @@ let GreenBox = styled(ColorBox)`
   background: green;
 `
 
-let RedBox = styled(ColorBox)`
-  background: red;
+let YellowBox = styled(ColorBox)`
+  background: yellow;
 `
 
 let FloorPlanLegend = styled.div`
@@ -187,6 +187,7 @@ let About = styled.div`
    padding-top: 1.0rem;
    padding-left: 0.5rem;
    text-decoration: none;
+   font-size: 1.25rem;
 `;
 
 
@@ -362,10 +363,10 @@ export default class ShaftLive extends Component {
     const isMobile = width <= 700;
     const floorplanLegend = (<FloorPlanLegend>
       <LegendItem>
-        <GreenBox /><h6>Likely</h6>
+        <GreenBox /><h6>Very Likely</h6>
       </LegendItem>
       <LegendItem>
-        <RedBox /><h6>Unlikely</h6>
+        <YellowBox /><h6>Similar</h6>
       </LegendItem>
     </FloorPlanLegend>);
 
@@ -437,7 +438,8 @@ export default class ShaftLive extends Component {
               <FloorButton
                 floorNums={this.state.floorNums}
                 handleChange={this.handleFloorChange} />
-                <About>Green rooms are ones that you are likely to get based off data that Spectator has collected from housing selection from previous years.</About>
+                <About>Green rooms are ones that you are likely to get based off data that Spectator has collected from housing selection from previous years.  Lottery numbers or priorities significantly below yours took these rooms last year.</About>
+                <About>Yellow rooms were taken by lottery numbers and priorities similar to yours last year.  </About>
                 <About>To read more about how our converter and predictor works, check out this Spectrum article <a href="https://www.columbiaspectator.com/spectrum/2020/03/09/a-guide-to-the-redesigned-shaft/">here</a>.</About>
             </ColTwo>
             <ColThree>
