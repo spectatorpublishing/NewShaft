@@ -272,9 +272,9 @@ export default class ShaftLive extends Component {
   convertNumber() {
     var num = document.getElementById("userNum").value;
 
-    console.log("in: ", num);
+    //console.log("in: ", num);
     var thousands = (num - (num%1000))/1000
-    console.log("thousands: ", thousands);
+    //console.log("thousands: ", thousands);
     if (thousands == 0) {
       var priority = 30;
     }
@@ -290,9 +290,9 @@ export default class ShaftLive extends Component {
     else {
       var priority = 10;
     }
-    console.log("priority: ", priority)
+    //console.log("priority: ", priority)
     var converted = (num - (thousands * 1000)) * (3000/1000)
-    console.log("converted num: ", converted)
+    //console.log("converted num: ", converted)
     var rounded = converted - (converted%10)
     if (rounded < 40) {
       var low = 0;

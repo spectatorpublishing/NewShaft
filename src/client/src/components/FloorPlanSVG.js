@@ -5,7 +5,6 @@ import ReactTooltip from 'react-tooltip';
 import "../css/FloorPlanSVG.css"; // Because react-tooltip
 import { CUTOFFS, SUITE_PICK } from "../util/Cutoffs";
 import { MAPPING } from "../util/Mapping";
-import { yellow } from "color-name";
 
 
 const RANGE = 150; //range above and below lottery num that is considered "within range"
@@ -213,11 +212,22 @@ export default class FloorPlanSVG extends Component {
       }
       let roomFromSvg = this.getDataFromSvg(roomEl);
       let roomOrSuiteName = this.getRoomOrSuite(suiteFromSvg, roomFromSvg);
+      //console.log("type: ", roomFromSvg, roomOrSuiteName)
+
+      if (this.props.dorm == "Watt Hall") {
+        let temp = roomOrSuiteName.substring(0,1);
+        roomOrSuiteName = temp;
+      }
+
+      if (this.props.dorm == "Woodbridge Hall") {
+        let temp = roomOrSuiteName.substring(0,1);
+        roomOrSuiteName = temp;
+      }
 
       // Check if the room labeled on the SVG matches the name in the db
       
       let fromDb = this.state.floorplanDic[roomOrSuiteName];
-      if (fromDb != undefined) {
+      if (fromDb) {
         let selectableEl = roomEl;
         if (this.state.suitePick) {
           selectableEl = suiteEl;
@@ -232,25 +242,44 @@ export default class FloorPlanSVG extends Component {
         let highNum = this.props.high;
         let upperBound = (highNum < 2850) ? highNum += RANGE : 3000;
         let lowerBound = (lowNum > 150) ? lowNum -= RANGE : 0;
+        let priority_co, num_co = false;
 
-        console.log(fromDb)
-        
-
-        if(parseInt(fromDb["NEW_PRIORITY"]) > priority){
-          selectableEl.setAttribute("fill",  ABOVE_COLOR);
-        } else if(parseInt(fromDb["NEW_PRIORITY"]) < priority){
-          selectableEl.setAttribute("fill", BELOW_COLOR);
-        }else{ //dorm and user have same priority number
-          if(parseInt(fromDb["NEW_NUM"]) < upperBound){
-            selectableEl.setAttribute("fill",  ABOVE_COLOR);
-          } else if(parseInt(fromDb["NEW_NUM"]) > lowerBound){
-            selectableEl.setAttribute("fill", BELOW_COLOR);
-          }else{
-            selectableEl.setAttribute("fill", RANGE_COLOR);
-          }
+        if(!fromDb["NEW_PRIORITY"] ) {
+          let roomTypeMapped = this.getRoomTypeMapped(fromDb["ROOM_TYPE"])
+          let lottery = this.getCutoff(roomTypeMapped);
+          let split = lottery.indexOf("|");
+          priority_co = lottery.substring(0, split-1);
+          num_co = lottery.substring(split+1, lottery.length);
+          //console.log("cutoffs", priority_co, " | ", num_co)
         }
 
+        
+        if (priority != null) {
+          if((parseInt(fromDb["NEW_PRIORITY"]) > priority) || (priority_co && (priority_co > priority))){
+            selectableEl.setAttribute("fill",  ABOVE_COLOR);
+          } 
+          
+          else if((parseInt(fromDb["NEW_PRIORITY"]) < priority) || (priority_co && (priority_co < priority))){
+            selectableEl.setAttribute("fill", BELOW_COLOR);
+          }
+          
+          else if((parseInt(fromDb["NEW_PRIORITY"]) == priority) || priority_co == priority) {//dorm and user have same priority number
+            
+            if((parseInt(fromDb["NEW_NUM"]) < lowerBound) || (num_co && (num_co < lowerBound))){
+              selectableEl.setAttribute("fill",  ABOVE_COLOR);
+            } 
+            if((parseInt(fromDb["NEW_NUM"]) > lowerBound) || (num_co && (num_co > lowerBound))){
+              selectableEl.setAttribute("fill", RANGE_COLOR);
+            }
+            if((parseInt(fromDb["NEW_NUM"]) > upperBound) || (num_co && (num_co > upperBound))){
+              selectableEl.setAttribute("fill", BELOW_COLOR);
+            }
+          }
+          
+      }
+
         // Attach data attributes for react-tooltip
+
         selectableEl.setAttribute("data-tip", roomOrSuiteName);
         selectableEl.setAttribute("data-for", "global");
         ReactTooltip.rebuild();
@@ -327,9 +356,10 @@ export default class FloorPlanSVG extends Component {
   }
 
   getTooltipContent(room) {
+    //console.log("tooltip", room)
     let fromDb = this.state.floorplanDic[room];
     let label = this.state.suitePick ? "Suite" : "Room";
-
+    
     if (!fromDb) {
       // RA Room / not a part of room selection (Gray)
       return <TooltipBox><TooltipText>Not Available</TooltipText></TooltipBox>;
@@ -341,19 +371,30 @@ export default class FloorPlanSVG extends Component {
       let roomTypeMapped = this.getRoomTypeMapped(fromDb["ROOM_TYPE"])
       let roomTypeLabel = "Room Type";
       let roomType = roomTypeMapped;
-      //console.log(roomType)
+
+      // if (this.props.dorm == "Woodbridge Hall") {
+      //   let roomFromSvg = this.getDataFromSvg(room);
+      //   if (roomFromSvg == "H" || roomFromSvg == "K" || roomFromSvg == "C") {
+      //     roomType = "High Demand (H + K + C lines)";
+      //   }
+      //   else if (roomFromSvg == "G" || roomFromSvg == "D" || roomFromSvg == "I") {
+      //     roomType = "Low Demand (G + D + I lines)";
+      //   }
+      //   else {
+      //     roomType = "Medium Demand (all others)";
+      //   }
+      // }
 
       // Not taken yet (Green)
       let lotteryLabel = "Last Year's Cutoff";
       let lottery = this.getCutoff(roomTypeMapped);
-      //console.log("CUTOFFS", lottery)
 
       // Taken room (Red)
-      if (fromDb["NEW_NUM"]) {
-        lotteryLabel = "Last Year's Cutoff";
+      if (fromDb["NEW_PRIORITY"]) {
+        lotteryLabel = "Taken By";
         lottery = fromDb["NEW_PRIORITY"] + " | " + fromDb["NEW_NUM"];
       }
-
+  
       return <TooltipBox>
         <TooltipText>{label}: <TooltipBold>{room}</TooltipBold></TooltipText>
         <TooltipText>
