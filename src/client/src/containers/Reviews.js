@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import styled from "styled-components";
 import WhiteboardSidebar from "../components/ReviewsWhiteboardSidebar"
+import ReviewsBox from "../components/ReviewsBox"
 import Review from "../components/Review"
 
 const Star = styled.span`
@@ -121,6 +122,7 @@ const ColThree = styled.div`
     width: 50vw;
     height: calc(98vh - 2rem);
     overflow-y: scroll;
+    margin-top: 3em;
 `
 
 export default class Reviews extends Component{
@@ -275,9 +277,18 @@ export default class Reviews extends Component{
           </ColTwo>
           <ColThree>
             {/* Reviews Slider */}
-            <ReviewsBox
-              reviews={this.state.reviews}>
-            </ReviewsBox>
+            <AllReviews>
+              {this.state.reviews.map((review, j) => (
+                  <Review
+                    key={""+j}
+                    stars={review.NUM_STARS}
+                    review={review.REVIEW_TXT}
+                    room={review.ROOM_NUM}
+                    year={years_map[review.YEAR]}
+                    timestamp={review.TIMESTAMP}
+                  />
+              ))}
+            </AllReviews>
           </ColThree>
         </ReviewsContainer>
       </div>
