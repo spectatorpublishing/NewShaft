@@ -1,15 +1,91 @@
 import React, { Component } from 'react';
 import styled from "styled-components";
-import WhiteboardSidebar from "../components/WhiteboardSidebar";
-import ReviewsBox from "../components/ReviewsBox";
+import WhiteboardSidebar from "../components/ReviewsWhiteboardSidebar"
+import Review from "../components/Review"
+
+const Star = styled.span`
+  color: white;
+`
+
+const Space = styled.div`
+  width: 5px;
+`
+
+const AllReviews = styled.div`
+  width: 90%;
+  height: 65vh;
+  overflow-y: scroll;
+  padding: 1rem;
+  display: flex;
+  flex-direction: column;
+`
+
+const GrayFooter = styled.div`
+  postion: fixed;
+  bottom: 0;
+  background-color: gray;
+  height: 20vh;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+`
+
+const MobileButton = styled.a`
+  background-color: white;
+  border-radius: 10px;
+  width: 80%;
+  padding: 15px 5px;
+  margin: 10px;
+  text-decoration: none;
+
+  &>div {
+    font-color: gray;
+    font-size: 20px;
+    font-weight: 700;
+    text-align: center;
+  }
+`
+
+const ReviewSummary = styled.div`
+  height: 2rem;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  &>p{
+    color: white;
+  }
+`
 
 const ReviewsContainer = styled.div`
     display: flex;
-    width: 100%;
-    height: 100%;
-    padding: 0 auto;
     overflow: hidden;
     flex-direction: row;
+`
+
+const ReviewsContainerMobile = styled.div`
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+`
+
+const BlueHeader = styled.div`
+    background-color: ${props => props.theme.columbiaBlue};
+    padding: 2rem;
+    padding-bottom: 1rem;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+
+    &>h1 {
+      color: white;
+    }
 `
 
 const ColOne = styled.div`
@@ -54,13 +130,16 @@ export default class Reviews extends Component{
     this.state = {
       dorm: "47 Claremont",
       dormRefresh: false,
-      reviews: {},
+      reviews: [],
       width: window.innerWidth,
       init: true,
     }
 
     this.handleDormChange = this.handleDormChange.bind(this)
     this.fetchReviews = this.fetchReviews.bind(this)
+    this.createStars = this.createStars.bind(this)
+
+    this.fetchReviews(this.state.dorm);
   }
 
   componentWillMount() {
@@ -78,8 +157,23 @@ export default class Reviews extends Component{
 
   componentDidMount() {
     document.title = "Reviews";
+    this.fetchReviews(this.state.dorm);
     this.interval = setInterval(() => this.fetchReviews(this.state.dorm), 15000);
 
+  }
+
+  createStars(score) {
+    let wrapper = [];
+    let stars = [];
+    let k = 0
+    for(let i = 0; i < score; i++) {
+      stars.push(<Star key={k++}>&#x2605;</Star>);
+    }
+    for(let j = 0; j < 5 - score; j++) {
+      stars.push(<Star key={k++}>&#x2606;</Star>);
+    }
+    wrapper.push(<div key={k++}>{stars}</div>);
+    return wrapper;
   }
 
   fetchReviews(dormName){
@@ -125,6 +219,48 @@ export default class Reviews extends Component{
   }
 
   render(){
+    const isMobile = this.state.width <= 700
+    const years_map = {
+      "first-years": "Freshman",
+      "sophomores": "Sophomore",
+      "juniors": "Junior",
+      "seniors": "Senior"
+    }
+    // TODO: change the review component here to the updated one
+    if (isMobile){
+      let hasNoReviews = (this.state.reviews.length === 0)
+      console.log(this.state.reviews)
+      return (
+        <ReviewsContainerMobile>
+          <BlueHeader>
+            <h1>DORM REVIEWS</h1>
+            <WhiteboardSidebar isMobile = {isMobile}
+                               sidebarModification={this.handleDormChange}
+                               currDorm={this.state.dorm} />
+            <ReviewSummary>
+                {hasNoReviews ? "No review" : this.createStars(Math.round(Number(this.state.avg_rating)))}<Space /><p>{this.state.reccomend} Recommended</p>
+            </ReviewSummary>
+          </BlueHeader>
+          <AllReviews>
+            {this.state.reviews.map((review, j) => (
+                <Review
+                  key={""+j}
+                  stars={review.NUM_STARS}
+                  review={review.REVIEW_TXT}
+                  room={review.ROOM_NUM}
+                  year={years_map[review.YEAR]}
+                  timestamp={review.TIMESTAMP}
+                />
+            ))}
+          </AllReviews>
+          <GrayFooter>
+              <MobileButton href = {"http://www.google.com"}><div>SUBMIT A REVIEW</div></MobileButton>
+              {/* TODO: update link here to point to actual comparison page */}
+              <MobileButton href = {"/compare-dorms"}><div>COMPARE DORMS</div></MobileButton>
+          </GrayFooter>
+        </ReviewsContainerMobile>
+      )
+    }
     return(
       <div>
         <ReviewsContainer>

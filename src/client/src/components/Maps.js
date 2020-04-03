@@ -82,18 +82,18 @@ class MapItem extends Component {
 
   render(){
     return <div
-          onClick={this.setPopUp} 
-          onMouseEnter={this.trackMouse} 
-          onMouseLeave={this.untrackMouse} 
+          onClick={this.setPopUp}
+          onMouseEnter={this.trackMouse}
+          onMouseLeave={this.untrackMouse}
     >
       <Marker
         latitude={this.state.lat}
         longitude={this.state.long}
       >
-        <div 
+        <div
         >
           <MarkerIcon src={mark} alt="fireSpot"/>
-        </div>                
+        </div>
       </Marker>
       <PopupContainer style={{opacity:this.state.popUp, display:this.state.display}}>
         <Popup tipSize={5}
@@ -134,7 +134,7 @@ export default class Maps extends Component {
       //width and height are passed in from outside
       height: this.props.height,
       width: this.props.width
-    };    
+    };
     this.handleViewportChange = this.handleViewportChange.bind(this);
   }
 
@@ -168,13 +168,13 @@ export default class Maps extends Component {
     const view = this.state.viewport;
     const markers = [];
     let k = 0;
-    for (let i = 0; i < this.state.coordinates.latitudes.length; i++){ 
+    for (let i = 0; i < this.state.coordinates.latitudes.length; i++){
       const lat = this.state.coordinates.latitudes[i]
       const long = this.state.coordinates.longitudes[i];
       const popupInfo = this.state.popup.popupInfo[i];
       markers.push(<MapItem key={k++} lat={lat} long={long} popupInfo={popupInfo}/>);
     }
-    
+
     return (
       <div>
         <LocationTitle>Location</LocationTitle>
@@ -199,4 +199,3 @@ export default class Maps extends Component {
     );
   }
 }
-

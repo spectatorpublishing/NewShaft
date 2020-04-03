@@ -26,7 +26,7 @@ const menuItems = [
     "disabled": false,
   },
   {
-    "name": "Shaft Live",
+    "name": "Lottery Predictor",
     "link": "/shaftlive",
     "external": false,
     "disabled": false,

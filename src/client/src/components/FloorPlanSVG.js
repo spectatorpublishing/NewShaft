@@ -6,6 +6,12 @@ import "../css/FloorPlanSVG.css"; // Because react-tooltip
 import { CUTOFFS, SUITE_PICK } from "../util/Cutoffs";
 import { MAPPING } from "../util/Mapping";
 
+
+const RANGE = 150; //range above and below lottery num that is considered "within range"
+const RANGE_COLOR = "yellow";//Color for the dorms within the range of the lottery number
+const ABOVE_COLOR = "gray";//Color for the dorms likely to be unavailable (above lottery #)
+const BELOW_COLOR = "green";//Color for dorms likely to be available but below range
+
 let FloorPlanWrapper = styled.div`
   & rect {
     opacity: 0.3;
@@ -40,7 +46,7 @@ export default class FloorPlanSVG extends Component {
     // e.g. dorm: River Hall, floor: 6 -> River 6
     let dorm = props.dorm.replace(" Hall", "");
     let name = dorm + " " + props.floor;
-    
+
     // Attach unique id to component to access SVG
     let id = name.replace(/\ /g, "-");
 
@@ -48,7 +54,7 @@ export default class FloorPlanSVG extends Component {
     let url = name.replace(/\ /g, "+");
     let jpgUrl = "https://shaft-dorm-floorplans.s3.amazonaws.com/" + url + ".jpg";
     let svgUrl = "https://shaft-svg.s3.amazonaws.com/"+ url +".svg";
-  
+
 
 
     // Turn data array passed in from endpoint into JSON for faster lookup
@@ -90,13 +96,13 @@ export default class FloorPlanSVG extends Component {
       floorplanJpg: jpgUrl,
       floorplanSvg: svgUrl,
       floorplanDic: dic,
-      suitePick: suitePickStyle
+      suitePick: suitePickStyle,
     };
 
     this.getStaticFloorplan = this.getStaticFloorplan.bind(this);
   }
 
-  
+
 
   svgUpdate(dorm_change){
 
@@ -123,7 +129,7 @@ export default class FloorPlanSVG extends Component {
       if(dorm == "600 W 113th"){
         dorm = "600 West 113";
       }
-      
+
       if(dorm_change == true){
         var name = dorm + " " + firstFloor[dorm]
       }
@@ -131,18 +137,18 @@ export default class FloorPlanSVG extends Component {
         var name = dorm + " " + this.props.floor;
       }
 
-     
-      
+
+
       // Attach unique id to component to access SVG
       let id = name.replace(/\ /g, "-");
 
       // Generate AWS urls for JPG and SVG
       let url = name.replace(/\ /g, "+");
-      
+
       let jpgUrl = "https://s3.amazonaws.com/shaft-dorm-floorplans/" + url + ".jpg";
       let svgUrl = "https://s3.amazonaws.com/shaft-svg/"+ url +".svg";
-      
-    
+
+
       // Turn data array passed in from endpoint into JSON for faster lookup
       let dic = {};
       for (var i = 0; i  < this.props.data.length; i++) {
@@ -183,7 +189,7 @@ export default class FloorPlanSVG extends Component {
         floorplanDic: dic,
         suitePick: suitePickStyle
       })
-      
+
       ReactTooltip.rebuild();
 
   }
@@ -206,22 +212,74 @@ export default class FloorPlanSVG extends Component {
       }
       let roomFromSvg = this.getDataFromSvg(roomEl);
       let roomOrSuiteName = this.getRoomOrSuite(suiteFromSvg, roomFromSvg);
+      //console.log("type: ", roomFromSvg, roomOrSuiteName)
+
+      if (this.props.dorm == "Watt Hall") {
+        let temp = roomOrSuiteName.substring(0,1);
+        roomOrSuiteName = temp;
+      }
+
+      if (this.props.dorm == "Woodbridge Hall") {
+        let temp = roomOrSuiteName.substring(0,1);
+        roomOrSuiteName = temp;
+      }
 
       // Check if the room labeled on the SVG matches the name in the db
+      
       let fromDb = this.state.floorplanDic[roomOrSuiteName];
       if (fromDb) {
         let selectableEl = roomEl;
         if (this.state.suitePick) {
           selectableEl = suiteEl;
         }
-        // Check if lottery number exists for it (i.e. it's already taken)
-        if (fromDb["NEW_PRIORITY"]) {
-          selectableEl.setAttribute("fill", "red");
-        } else {
-          selectableEl.setAttribute("fill", "green");
+
+        // recall: above_color = gray
+        // range_color = yellow
+        // below_color = green
+
+        let priority = this.props.priority;
+        let lowNum = this.props.low;
+        let highNum = this.props.high;
+        let upperBound = (highNum < 2850) ? highNum += RANGE : 3000;
+        let lowerBound = (lowNum > 150) ? lowNum -= RANGE : 0;
+        let priority_co, num_co = false;
+
+        if(!fromDb["NEW_PRIORITY"] ) {
+          let roomTypeMapped = this.getRoomTypeMapped(fromDb["ROOM_TYPE"])
+          let lottery = this.getCutoff(roomTypeMapped);
+          let split = lottery.indexOf("|");
+          priority_co = lottery.substring(0, split-1);
+          num_co = lottery.substring(split+1, lottery.length);
+          //console.log("cutoffs", priority_co, " | ", num_co)
         }
+
         
+        if (priority != null) {
+          if((parseInt(fromDb["NEW_PRIORITY"]) > priority) || (priority_co && (priority_co > priority))){
+            selectableEl.setAttribute("fill",  ABOVE_COLOR);
+          } 
+          
+          else if((parseInt(fromDb["NEW_PRIORITY"]) < priority) || (priority_co && (priority_co < priority))){
+            selectableEl.setAttribute("fill", BELOW_COLOR);
+          }
+          
+          else if((parseInt(fromDb["NEW_PRIORITY"]) == priority) || priority_co == priority) {//dorm and user have same priority number
+            
+            if((parseInt(fromDb["NEW_NUM"]) < lowerBound) || (num_co && (num_co < lowerBound))){
+              selectableEl.setAttribute("fill",  ABOVE_COLOR);
+            } 
+            if((parseInt(fromDb["NEW_NUM"]) > lowerBound) || (num_co && (num_co > lowerBound))){
+              selectableEl.setAttribute("fill", RANGE_COLOR);
+            }
+            if((parseInt(fromDb["NEW_NUM"]) > upperBound) || (num_co && (num_co > upperBound))){
+              selectableEl.setAttribute("fill", BELOW_COLOR);
+            }
+          }
+          
+      }
+
         // Attach data attributes for react-tooltip
+
         selectableEl.setAttribute("data-tip", roomOrSuiteName);
         selectableEl.setAttribute("data-for", "global");
         ReactTooltip.rebuild();
@@ -236,7 +294,7 @@ export default class FloorPlanSVG extends Component {
     if(xlinkHref) {
       baseImage.setAttribute("xlink:href", this.state.floorplanJpg);
       baseImage.setAttribute("href", this.state.floorplanJpg);
-    } 
+    }
   }
 
   componentDidUpdate(prevProps) {
@@ -251,7 +309,7 @@ export default class FloorPlanSVG extends Component {
       let dorm_change = true;
       this.svgUpdate(dorm_change)
     }
-    
+
   }
 
   getDataFromSvg(el) {
@@ -298,6 +356,7 @@ export default class FloorPlanSVG extends Component {
   }
 
   getTooltipContent(room) {
+    //console.log("tooltip", room)
     let fromDb = this.state.floorplanDic[room];
     let label = this.state.suitePick ? "Suite" : "Room";
     
@@ -312,6 +371,19 @@ export default class FloorPlanSVG extends Component {
       let roomTypeMapped = this.getRoomTypeMapped(fromDb["ROOM_TYPE"])
       let roomTypeLabel = "Room Type";
       let roomType = roomTypeMapped;
+
+      // if (this.props.dorm == "Woodbridge Hall") {
+      //   let roomFromSvg = this.getDataFromSvg(room);
+      //   if (roomFromSvg == "H" || roomFromSvg == "K" || roomFromSvg == "C") {
+      //     roomType = "High Demand (H + K + C lines)";
+      //   }
+      //   else if (roomFromSvg == "G" || roomFromSvg == "D" || roomFromSvg == "I") {
+      //     roomType = "Low Demand (G + D + I lines)";
+      //   }
+      //   else {
+      //     roomType = "Medium Demand (all others)";
+      //   }
+      // }
 
       // Not taken yet (Green)
       let lotteryLabel = "Last Year's Cutoff";
@@ -350,13 +422,13 @@ export default class FloorPlanSVG extends Component {
   render() {
     return (
         <FloorPlanWrapper id={this.state.floorplanId}>
-          <ReactSVG 
-            src={this.state.floorplanSvg} 
+          <ReactSVG
+            src={this.state.floorplanSvg}
             afterInjection={(error, svg) => this.styleSVG(error, svg)}
             fallback={this.getStaticFloorplan}
           />
 
-          <ReactTooltip 
+          <ReactTooltip
             id="global"
             aria-haspopup="true"
             getContent={(dataTip) => this.getTooltipContent(dataTip)}
