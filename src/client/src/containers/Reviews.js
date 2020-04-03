@@ -58,6 +58,8 @@ export default class Reviews extends Component{
 
     this.handleDormChange = this.handleDormChange.bind(this)
     this.fetchReviews = this.fetchReviews.bind(this)
+    //added
+    this.fetchMoreDormInfo = this.fetchMoreDormInfo.bind(this)
   }
 
   componentWillMount() {
@@ -76,7 +78,7 @@ export default class Reviews extends Component{
   componentDidMount() {
     document.title = "Reviews";
     this.interval = setInterval(() => this.fetchReviews(this.state.dorm), 15000);
-
+    this.fetchMoreDormInfo(this.state.dorm);
   }
 
   fetchReviews(dormName){
@@ -91,6 +93,19 @@ export default class Reviews extends Component{
   }
 
   /* fetch MoreDormInfo */
+  /* makes calls to getMoreDormInfo.js (passing dorm name as argument). 
+  Store the result in this.state.moreDormInfo.*/ 
+  fetchMoreDormInfo(dormName){
+    fetch(`/api/getMoreDormInfo/${dormName}`, {
+      method: "GET",
+      headers: { "Content-Type": "application/json"},
+    })
+      .then(res => res.json())
+      .then(moreDormInfo => {
+        this.setState({moreDormInfo: moreDormInfo})
+    });
+  }
+
   
   /* fetch QuickReview */
 
