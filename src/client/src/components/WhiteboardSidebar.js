@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import styled from 'styled-components';
-import ChrisV from '../assets/chrisv_blue.svg'
+import ChrisV from '../assets/chrisv_blue.svg';
 import {theme} from '../util/GlobalStyles.js';
 
 let Sidebar = styled.div`
@@ -8,21 +8,25 @@ let Sidebar = styled.div`
     height: 100vh;
     margin-top:6vh;
     margin-left:5vw;
+    color: green;
     display:flex;
     flex-direction:column;
     
 `
-let SidebarTitle = styled.h3`
+let SidebarTitle = styled.div`
     text-align: center;
-    border-bottom: solid;
-    border-color: ${props => props.theme.lightGray}; 
-    border-width: 2px;
+    font-weight: bold;
+    border-bottom: solid 1px ${props => props.theme.lightGray} !Important;
+    color: ${props => props.theme.darkGray} !Important;
     margin-bottom: 2px;
     @media only screen and (max-width: 992px){
-        color: 	${props => props.theme.white};
+        color: 	${props => props.theme.white} !Important;
         padding-top: 1rem;
         padding-bottom: 0.5rem;
-        text-align: center;
+        text-align: left;
+        border-bottom: none !Important;
+        text-transform: uppercase;
+        padding-left: 0.7rem;
         border: none;
         font-size: 1rem;
     }
@@ -76,6 +80,34 @@ let Dorm = styled.button`
         border-radius: ${props => props.theme.borderRadius};
     }
 `
+
+let Compare = styled.a`
+    padding: .5em;
+    margin: 2px 0;
+    background-color: ${props => props.theme.white};
+    border: none;
+    color: ${props => props.theme.columbiaBlue};
+    border: solid 2px ${props => props.theme.columbiaBlue};
+    font-size: 1.2rem;
+    border-radius: 8px;
+    background: none;
+    text-align: left;
+    font-weight: bold;
+    text-decoration: none;
+    font-family: Raleway, sans-serif;
+    &:hover {
+        background-color: ${props => props.theme.columbiaBlue};
+        color: ${props => props.theme.white};
+    }
+    display: none;
+`;
+
+let V = styled.img`
+   display: flex;
+   margin-left: 2rem;
+   border-right: solid 6px white;
+   background-color: white;
+`;
 
 const DORM_ARRAY = [
     '47 Claremont', 
@@ -145,7 +177,7 @@ export default class WhiteboardSidebar extends React.Component {
         if (isMobile) {
             return (
                     <div>
-                    <SidebarTitle>Dorm</SidebarTitle>
+                    <SidebarTitle>Dorm and Floor</SidebarTitle>
                     <DormListMobile>
                         <select 
                             value={this.props.currDorm} 
@@ -153,7 +185,7 @@ export default class WhiteboardSidebar extends React.Component {
                         >
                             {this.getMobileDorms()} 
                         </select>
-                        <img src={ChrisV}/>
+                        <V src={ChrisV}/>
                     </DormListMobile>
                     </div>
             );
@@ -165,6 +197,7 @@ export default class WhiteboardSidebar extends React.Component {
                     <SidebarTitle>DORMS</SidebarTitle>
                         <DormListDesktop selectedId={this.state.dormId}>
                             {this.getDesktopDorms()}
+                            <Compare href="/compare/">Compare Dorms</Compare>
                         </DormListDesktop>
                     </Sidebar>
                 </div>
