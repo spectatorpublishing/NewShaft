@@ -1,14 +1,16 @@
 import React, { Component } from 'react';
 import styled from "styled-components";
 import FloorButton from "../components/FloorButton.js";
-import WhiteboardTable from "../components/WhiteboardTable.js";
 import FloorPlanSVG from "../components/FloorPlanSVG"
-
+import {theme} from '../util/GlobalStyles.js';
 import _ from "lodash"
 import WhiteboardSidebar from '../components/WhiteboardSidebar.js';
 
 let BlueBGMobile = styled.div`
-  background-color: ${props => props.theme.columbiaBlue};
+  background-color: gray;
+  padding-left: 0.5rem;
+  padding-right: 0.8rem;
+  border-bottom: solid 0.75rem white;
 `
 
 let MobileFPWrapper = styled.div`
@@ -111,8 +113,8 @@ let GreenBox = styled(ColorBox)`
   background: green;
 `
 
-let RedBox = styled(ColorBox)`
-  background: red;
+let YellowBox = styled(ColorBox)`
+  background: yellow;
 `
 
 let FloorPlanLegend = styled.div`
@@ -129,6 +131,66 @@ let LegendItem = styled.div`
   display: flex;
 `
 
+let Converter = styled.div`
+  background-color: gray;
+  padding: 3rem 0rem 2rem 3rem;
+  display: flex;
+  flex-direction: column;
+  color: white;
+  @media(max-width: 991px){
+    padding: 1rem 0rem 0rem 1rem;
+}
+`
+
+let Input = styled.form`
+  color: white;
+  font-size: 3rem;
+  @media(max-width: 991px){
+    font-size: 1.8rem;
+  }
+`
+let StyleInput = styled.input`
+  background: none;
+  border: none;
+  border-bottom: solid 0.1rem white;
+  width: 20%;
+  color: white;
+  font-size: 2.5rem;
+  @media(max-width: 991px){
+    font-size: 1.8rem;
+  }
+`
+
+let Output = styled.div`
+  padding-top: 0.8rem;
+  padding-bottom: 0.6rem;
+  color: white;
+  font-size: 2.5rem;
+  font-weight: bold;
+  @media(max-width: 991px){
+    font-size: 1.4rem;
+  }
+`
+
+let Desc = styled.div`
+  color: white;
+  font-size: 1.6rem;
+  padding-top: 0.65rem;
+  padding-bottom: 0.65rem;
+  @media(max-width: 991px){
+    font-size: 1.0rem;
+    padding-right:1rem
+  }
+`
+
+let About = styled.div`
+   padding-top: 1.0rem;
+   padding-left: 0.5rem;
+   text-decoration: none;
+   font-size: 1.25rem;
+`;
+
+
 export default class ShaftLive extends Component {
   constructor(props) {
     super(props);
@@ -142,12 +204,18 @@ export default class ShaftLive extends Component {
       width: window.innerWidth,
       init: true,
       //update: false,
-      mobileShowFloorPlan: false
+      mobileShowFloorPlan: false,
+
+      convertedNumLow: null,
+      convertedNumHigh: null,
+      priority: null,
+      full: " "
     }
 
     this.handleFloorChange = this.handleFloorChange.bind(this)
     this.handleDormChange = this.handleDormChange.bind(this)
   }
+  
 
   componentWillMount() {
     window.addEventListener("resize", this.handleWindowSizeChange);
@@ -198,9 +266,61 @@ export default class ShaftLive extends Component {
         });
       }
       );
+      //console.log(this.state.dorm, this.state.floor, this.state.floorData)
   }
 
+  convertNumber() {
+    var num = document.getElementById("userNum").value;
 
+    //console.log("in: ", num);
+    var thousands = (num - (num%1000))/1000
+    //console.log("thousands: ", thousands);
+    if (thousands == 0) {
+      var priority = 30;
+    }
+    else if (thousands == 1){
+      var priority = 25;
+    }
+    else if (thousands == 2){
+      var priority = 20;
+    }
+    else if (thousands == 3){
+      var priority = 15;
+    }
+    else {
+      var priority = 10;
+    }
+    //console.log("priority: ", priority)
+    var converted = (num - (thousands * 1000)) * (3000/1000)
+    //console.log("converted num: ", converted)
+    var rounded = converted - (converted%10)
+    if (rounded < 40) {
+      var low = 0;
+    }
+    else {
+      var low = rounded - 50
+    }
+    if (rounded > 2950) {
+      var high = 3000;
+    }
+    else {
+      var high = rounded + 50
+    }
+    //console.log("range: ", low, " - ", high)
+    
+    this.setState({
+      convertedNumLow: low,
+      convertedNumHigh: high,
+      priority: priority,
+      full: priority + " | " + low + " - " + high,
+    })
+
+
+  }
+
+  handleSubmit(e) {
+    e.preventDefault();
+  }
 
   handleFloorChange(floor) {
     this.fetchFloorData(this.state.dorm, floor);
@@ -237,58 +357,76 @@ export default class ShaftLive extends Component {
 
 
 
+
   render() {
     const { width } = this.state;
     const isMobile = width <= 700;
     const floorplanLegend = (<FloorPlanLegend>
       <LegendItem>
-        <GreenBox /><h6>Available</h6>
+        <GreenBox /><h6>Very Likely</h6>
       </LegendItem>
       <LegendItem>
-        <RedBox /><h6>Taken</h6>
+        <YellowBox /><h6>Similar</h6>
       </LegendItem>
     </FloorPlanLegend>);
 
     if (isMobile) {
       return (
         <div>
+
+        <Converter>
+        <Input id="form">
+            <label for="userNum">Enter Your Number:  </label>
+            <StyleInput type="number" id="userNum" onChange={() => this.convertNumber()}/>
+          </Input>
+          
+
+          <Output>Old-System Equivalent: {this.state.full}</Output>
+          <Desc>Green rooms are ones that you are likely to get based off data that Spectator has collected from housing selection from previous years.</Desc>
+          <Desc>To read more about how our converter and predictor works, check out this Spectrum article <a href="https://www.columbiaspectator.com/spectrum/2020/03/09/a-guide-to-the-redesigned-shaft/">here</a>.</Desc>
+          </Converter>
+
           <ShaftLiveContainerMobile>
             <BlueBGMobile>
               <WhiteboardSidebar
                 sidebarModification={this.handleDormChange}
                 currDorm={this.state.dorm}
-              />
+              /> 
               <FloorButton
                 floorNums={this.state.floorNums}
                 handleChange={this.handleFloorChange}
                 isMobile={isMobile}
               />
             </BlueBGMobile>
-            <ToggleMobileView currActive={this.state.mobileShowFloorPlan ? 0 : 1}>
-              <div onClick={() => this.setState({ mobileShowFloorPlan: false })}>Live Feed</div>
-              <div onClick={() => this.setState({ mobileShowFloorPlan: true })}>Floor Plans</div>
-            </ToggleMobileView>
-            {this.state.mobileShowFloorPlan
-              ? <MobileFPWrapper>
-                {floorplanLegend}
-                <FloorPlanSVG
-                  dorm={this.state.dorm}
-                  floor={this.state.floor}
-                  data={this.state.floorData}
-                  cutoffs={[]}
-                  init={this.state.init}
-                  dormRefresh={this.state.dormRefresh}
-                />
-              </MobileFPWrapper>
-              : <WhiteboardTable
-                roomAvailability={this.state.floorData} />
-            }
+            <FloorPlanSVG 
+                  priority={this.state.priority} 
+                  low={this.state.convertedNumLow} 
+                  high={this.state.convertedNumHigh} 
+                  dorm={this.state.dorm} 
+                  floor={this.state.floor} 
+                  data={this.state.floorData} 
+                  cutoffs={[]} 
+                  init={this.state.init} 
+                  dormRefresh={this.state.dormRefresh} ></FloorPlanSVG>
+
           </ShaftLiveContainerMobile>
         </div>
       );
     } else {
       return (
         <div>
+
+          <Converter>
+          <Input id="form">
+            <label for="userNum">Enter Your Number:  </label>
+            <StyleInput type="number" id="userNum" onChange={() => this.convertNumber()}/>
+          </Input>
+          
+
+          <Output>Old-System Equivalent: {this.state.full}</Output>
+          <Desc>Check out our color-coded floor plans to see which rooms you are likely to get!</Desc>
+          </Converter>
+
           <ShaftLiveContainer>
             <ColOne>
               <WhiteboardSidebar
@@ -300,8 +438,9 @@ export default class ShaftLive extends Component {
               <FloorButton
                 floorNums={this.state.floorNums}
                 handleChange={this.handleFloorChange} />
-              <WhiteboardTable
-                roomAvailability={this.state.floorData} />
+                <About>Green rooms are ones that you are likely to get based off data that Spectator has collected from housing selection from previous years.  Lottery numbers or priorities significantly below yours took these rooms last year.</About>
+                <About>Yellow rooms were taken by lottery numbers and priorities similar to yours last year.  </About>
+                <About>To read more about how our converter and predictor works, check out this Spectrum article <a href="https://www.columbiaspectator.com/spectrum/2020/03/09/a-guide-to-the-redesigned-shaft/">here</a>.</About>
             </ColTwo>
             <ColThree>
               <SVGContainer>
@@ -310,7 +449,16 @@ export default class ShaftLive extends Component {
                   <FloorPlanPrompt> — hover to explore!</FloorPlanPrompt>
                 </div>
                 {floorplanLegend}
-                <FloorPlanSVG dorm={this.state.dorm} floor={this.state.floor} data={this.state.floorData} cutoffs={[]} init={this.state.init} dormRefresh={this.state.dormRefresh} ></FloorPlanSVG>
+                <FloorPlanSVG 
+                  priority={this.state.priority} 
+                  low={this.state.convertedNumLow} 
+                  high={this.state.convertedNumHigh} 
+                  dorm={this.state.dorm} 
+                  floor={this.state.floor} 
+                  data={this.state.floorData} 
+                  cutoffs={[]} 
+                  init={this.state.init} 
+                  dormRefresh={this.state.dormRefresh} ></FloorPlanSVG>
               </SVGContainer>
             </ColThree>
           </ShaftLiveContainer>
