@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import styled from "styled-components";
-import WhiteboardSidebar from "../components/WhiteboardSidebar"
+import WhiteboardSidebar from "../components/WhiteboardSidebar";
+import MoreDormInfoBlock from "../components/MoreDormInfoBlock";
 
 const ReviewsContainer = styled.div`
     display: flex;
@@ -79,6 +80,7 @@ export default class Reviews extends Component{
     document.title = "Reviews";
     this.interval = setInterval(() => this.fetchReviews(this.state.dorm), 15000);
     this.fetchMoreDormInfo(this.state.dorm);
+    
   }
 
   fetchReviews(dormName){
@@ -88,6 +90,7 @@ export default class Reviews extends Component{
     })
       .then(res => res.json())
       .then(reviewsInfo => {
+        console.log(reviewsInfo)
         this.setState({reviews: reviewsInfo.reviews, avg_rating: reviewsInfo.avg_rating, reccomend: reviewsInfo.reccomended, ranking: reviewsInfo.ranking})
       });
   }
@@ -103,6 +106,7 @@ export default class Reviews extends Component{
       .then(res => res.json())
       .then(moreDormInfo => {
         this.setState({moreDormInfo: moreDormInfo})
+        
     });
   }
 
@@ -146,7 +150,7 @@ export default class Reviews extends Component{
           </ColOne>
           <ColTwo>
             <h1>{this.state.dorm}</h1>
-            {/* MoreDormInfo */}
+            {<MoreDormInfoBlock></MoreDormInfoBlock>}
             {/* QuickReview */}
           </ColTwo>
           <ColThree>
