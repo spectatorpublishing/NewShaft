@@ -31,6 +31,7 @@
   },
   "devDependencies": {
     "@storybook/addon-info": "^5.2.8",
+    "webpack": "4.42.0",
     "@storybook/react": "^5.2.8",
     "cheerio": "^1.0.0-rc.2",
     "concurrently": "^5.0.2",
