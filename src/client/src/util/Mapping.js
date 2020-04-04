@@ -59,7 +59,7 @@ export const MAPPING = {
   Ruggles: {
     "suite-4": "4-Person Suite",
     "suite-6": "6-Person Suite",
-    "suite-8-2s-3d": "8-Person Suite",
+    "suite-8": "8-Person Suite",
     "suite-8-4s-2d": "8-Person Suite",
     "ra-2s-in-4s": "2 in 4-person Suite w/RA"
   },

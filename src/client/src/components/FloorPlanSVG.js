@@ -116,7 +116,7 @@ export default class FloorPlanSVG extends Component {
         "Harmony": "1",
         "Hogan": "2",
         "McBain": "1",
-        "600 West 113": "2",
+        "600 West 113": "10",
         "River": "1",
         "Ruggles": "1",
         "Schapiro": "2",
@@ -126,7 +126,7 @@ export default class FloorPlanSVG extends Component {
     }
 
       let dorm = this.props.dorm.replace(" Hall", "");
-      if(dorm == "600 W 113th"){
+      if(dorm == "600 W 113th" || dorm == "600 West 113th" || dorm == "600 W 113"){
         dorm = "600 West 113";
       }
 
@@ -207,15 +207,25 @@ export default class FloorPlanSVG extends Component {
       let suiteEl = roomEl.parentElement;
       let suiteFromSvg = this.getDataFromSvg(suiteEl);
       // Nullify non-sensical suite value if not suite-style
-      if (!this.state.suitePick && this.props.dorm != "600 W 113th") {
+      if (!this.state.suitePick && (this.props.dorm != "600 West 113th" || this.props.dorm != "600 W 113th" || this.props.dorm != "600 W 113" || this.props.dorm != "600 West 113") ) {
         suiteFromSvg = "";
       }
       let roomFromSvg = this.getDataFromSvg(roomEl);
       let roomOrSuiteName = this.getRoomOrSuite(suiteFromSvg, roomFromSvg);
-      //console.log("type: ", roomFromSvg, roomOrSuiteName)
+      //console.log("type: ", roomOrSuiteName)
 
       if (this.props.dorm == "Watt Hall") {
         let temp = roomOrSuiteName.substring(0,1);
+        roomOrSuiteName = temp;
+      }
+
+      if (this.props.dorm == "600 West 113th" || this.props.dorm == "600 W 113th" || this.props.dorm == "600 W 113" || this.props.dorm == "600 West 113") {
+        // let temp = roomOrSuiteName.substring(0,1);
+        // roomOrSuiteName = temp;
+      }
+
+      if (this.props.dorm == "Ruggles Hall") {
+        let temp = roomOrSuiteName.substring(0,3);
         roomOrSuiteName = temp;
       }
 
@@ -244,13 +254,12 @@ export default class FloorPlanSVG extends Component {
         let lowerBound = (lowNum > 150) ? lowNum -= RANGE : 0;
         let priority_co, num_co = false;
 
-        if(!fromDb["NEW_PRIORITY"] ) {
+        if(!fromDb["NEW_PRIORITY"]) {
           let roomTypeMapped = this.getRoomTypeMapped(fromDb["ROOM_TYPE"])
           let lottery = this.getCutoff(roomTypeMapped);
           let split = lottery.indexOf("|");
           priority_co = lottery.substring(0, split-1);
           num_co = lottery.substring(split+1, lottery.length);
-          //console.log("cutoffs", priority_co, " | ", num_co)
         }
 
         
@@ -333,7 +342,7 @@ export default class FloorPlanSVG extends Component {
       else if (dorm == "Harmony") {
         return this.props.floor + suite;
       }
-      else if (dorm == "600 W 113th") {
+      else if (dorm == "600 West 113th" || dorm == "600 W 113th" || dorm == "600 W 113" || dorm == "600 West 113") {
         return this.props.floor + suite + room
       }
       else if (dorm == "East Campus") {
@@ -356,7 +365,6 @@ export default class FloorPlanSVG extends Component {
   }
 
   getTooltipContent(room) {
-    //console.log("tooltip", room)
     let fromDb = this.state.floorplanDic[room];
     let label = this.state.suitePick ? "Suite" : "Room";
     
@@ -371,19 +379,6 @@ export default class FloorPlanSVG extends Component {
       let roomTypeMapped = this.getRoomTypeMapped(fromDb["ROOM_TYPE"])
       let roomTypeLabel = "Room Type";
       let roomType = roomTypeMapped;
-
-      // if (this.props.dorm == "Woodbridge Hall") {
-      //   let roomFromSvg = this.getDataFromSvg(room);
-      //   if (roomFromSvg == "H" || roomFromSvg == "K" || roomFromSvg == "C") {
-      //     roomType = "High Demand (H + K + C lines)";
-      //   }
-      //   else if (roomFromSvg == "G" || roomFromSvg == "D" || roomFromSvg == "I") {
-      //     roomType = "Low Demand (G + D + I lines)";
-      //   }
-      //   else {
-      //     roomType = "Medium Demand (all others)";
-      //   }
-      // }
 
       // Not taken yet (Green)
       let lotteryLabel = "Last Year's Cutoff";
