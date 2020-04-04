@@ -3,35 +3,64 @@
 .footer {
   background-color: grey;
   z-index: 100px;
+  padding-bottom: 30px;
+  position: relative;
 }
 
 .footerTitle {
-  color:white;
+  color: transparent;
   font-family: 'Archivo Black';
-  font-size: 30px;
-  padding: 20px;
+  font-size: 55px;
+  padding-left: 30px;
+  padding-top: 70px;
+  padding-bottom: 0px;
+  margin-left: 3%;
+  -webkit-text-stroke-width: 2px;
+  -webkit-text-stroke-color: white;
+}
+
+.footerTitle_phone {
+  color: transparent;
+  font-family: 'Archivo Black';
+  font-size: 55px;
+  padding-left: 48px;
+  text-align: left;
+  padding-top: 70px;
+  padding-bottom: 0px;
+  -webkit-text-stroke-width: 2px;
+  -webkit-text-stroke-color: white;
 }
 
 .footerRow {
-  padding: 10px;
+  padding-left: 3%;
+  padding-right: 3%;
+  display: flex;
+  flex-direction: row;
+}
+
+.footerRow_phone {
+  padding-left: 3%;
+  padding-right: 3%;
   display: flex;
   flex-direction: row;
 }
 
 .secColumn {
   padding: 10px;
-  display: flex;
-  flex-direction: column;
+  padding-right: 30px;
+  padding-left: 30px;
 }
 
 .secTitle {
   color:white;
   font-family: 'Raleway';
-  font-size: 18px;
+  font-size: calc(16px + (27 - 16) * ((100vw - 300px) / (1600 - 300)));
+  padding-bottom: 30px;
+  padding-top: 30px;
 }
 
 .secBody{
   color:white;
   font-family: 'Raleway';
-  font-size: 16px;
+  font-size: calc(14px + (23 - 14) * ((100vw - 300px) / (1600 - 300)));
 }

@@ -39,7 +39,7 @@ export default class Footer extends React.Component{
         if (this.state.isMobile) {
             return (
                 <div class="footer">
-                    <div class="footerTitle">
+                    <div class="footerTitle_phone">
                         Page Credits
                     </div>
                     <div class="footerRow">
@@ -48,22 +48,20 @@ export default class Footer extends React.Component{
                                 <strong>Authorship</strong>
                             </div>
                             <div class="secBody">
-                                <strong>Jaz</strong><b></b>Deputy Editor Spectrum<b></b><b></b>
-                                <strong>Ariana</strong><b></b>Deputy Editor Spectrum<b></b><b></b>
+                                <strong>Jaz</strong><br></br>Deputy Editor Spectrum<br></br><br></br>
+                                <strong>Ariana</strong><br></br>Deputy Editor Spectrum<br></br><br></br>
                             </div> 
-                        </div>
-                        <div class="secColumn">
                             <div class="secTitle">
                                 <strong>Design</strong>
                             </div>
                             <div class="secBody">
-                                <strong>David Wang</strong><b></b>Head of Product<b></b><b></b>
-                                <strong>Cindy Espinosa</strong><b></b>Product Manager<b></b><b></b>
-                                <strong>Cecilia Orduña</strong><b></b>Product Manager<b></b><b></b>
-                                <strong>Mirah Shi</strong><b></b>Lead Product Designer<b></b><b></b>
-                                <strong>Trang Nyugen</strong><b></b>Product Designer<b></b><b></b>
-                                <strong>Rachel Bakke</strong><b></b>Product Designer<b></b><b></b>
-                                <strong>April Lin</strong><b></b>Product Designer<b></b><b></b>
+                                <strong>David Wang</strong><br></br>Head of Product<br></br><br></br>
+                                <strong>Cindy Espinosa</strong><br></br>Product Manager<br></br><br></br>
+                                <strong>Cecilia Orduña</strong><br></br>Product Manager<br></br><br></br>
+                                <strong>Mirah Shi</strong><br></br>Lead Product Designer<br></br><br></br>
+                                <strong>Trang Nyugen</strong><br></br>Product Designer<br></br><br></br>
+                                <strong>Rachel Bakke</strong><br></br>Product Designer<br></br><br></br>
+                                <strong>April Lin</strong><br></br>Product Designer<br></br><br></br>
                             </div> 
                         </div>
                         <div class="secColumn">
@@ -71,20 +69,18 @@ export default class Footer extends React.Component{
                                 <strong>Development</strong>
                             </div>
                             <div class="secBody">
-                                <strong>Karlo Dobrovic</strong><b></b>Head of Engineering<b></b><b></b>
-                                <strong>McKenna Gillard</strong><b></b>Engineering Manager<b></b><b></b>
-                                <strong>Amina Assal</strong><b></b>Engineering Manager<b></b><b></b>
-                                <strong>Caroline Hoang</strong><b></b>Engineering Manager<b></b><b></b>
-                                <strong>Elaine Wang</strong><b></b>Engineering Manager<b></b><b></b>
-                            </div> 
-                        </div>
-                        <div class="secColumn">
-                        <div class="secTitle">
+                                <strong>Karlo Dobrovic</strong><br></br>Head of Engineering<br></br><br></br>
+                                <strong>McKenna Gillard</strong><br></br>Engineering Manager<br></br><br></br>
+                                <strong>Amina Assal</strong><br></br>Engineering Manager<br></br><br></br>
+                                <strong>Caroline Hoang</strong><br></br>Engineering Manager<br></br><br></br>
+                                <strong>Elaine Wang</strong><br></br>Engineering Manager<br></br><br></br>
+                            </div>
+                            <div class="secTitle">
                                 <strong>Editing</strong>
                             </div>
                             <div class="secBody">
-                                <strong>Sarah Braka</strong><b></b>Head of Copy<b></b><b></b>
-                            </div> 
+                                <strong>Sarah Braka</strong><br></br>Head of Copy<br></br><br></br>
+                            </div>  
                         </div>
                     </div>
                 </div>
@@ -102,8 +98,8 @@ export default class Footer extends React.Component{
                                 <strong>Authorship</strong>
                             </div>
                             <div class="secBody">
-                                <strong>Jaz</strong><b></b>Deputy Editor Spectrum<b></b><b></b>
-                                <strong>Ariana</strong><b></b>Deputy Editor Spectrum<b></b><b></b>
+                                <strong>Jaz</strong><br></br>Deputy Editor Spectrum<br></br><br></br>
+                                <strong>Ariana</strong><br></br>Deputy Editor Spectrum<br></br><br></br>
                             </div> 
                         </div>
                         <div class="secColumn">
@@ -111,13 +107,13 @@ export default class Footer extends React.Component{
                                 <strong>Design</strong>
                             </div>
                             <div class="secBody">
-                                <strong>David Wang</strong><b></b>Head of Product<b></b><b></b>
-                                <strong>Cindy Espinosa</strong><b></b>Product Manager<b></b><b></b>
-                                <strong>Cecilia Orduña</strong><b></b>Product Manager<b></b><b></b>
-                                <strong>Mirah Shi</strong><b></b>Lead Product Designer<b></b><b></b>
-                                <strong>Trang Nyugen</strong><b></b>Product Designer<b></b><b></b>
-                                <strong>Rachel Bakke</strong><b></b>Product Designer<b></b><b></b>
-                                <strong>April Lin</strong><b></b>Product Designer<b></b><b></b>
+                                <strong>David Wang</strong><br></br>Head of Product<br></br><br></br>
+                                <strong>Cindy Espinosa</strong><br></br>Product Manager<br></br><br></br>
+                                <strong>Cecilia Orduña</strong><br></br>Product Manager<br></br><br></br>
+                                <strong>Mirah Shi</strong><br></br>Lead Product Designer<br></br><br></br>
+                                <strong>Trang Nyugen</strong><br></br>Product Designer<br></br><br></br>
+                                <strong>Rachel Bakke</strong><br></br>Product Designer<br></br><br></br>
+                                <strong>April Lin</strong><br></br>Product Designer<br></br><br></br>
                             </div> 
                         </div>
                         <div class="secColumn">
@@ -125,11 +121,11 @@ export default class Footer extends React.Component{
                                 <strong>Development</strong>
                             </div>
                             <div class="secBody">
-                                <strong>Karlo Dobrovic</strong><b></b>Head of Engineering<b></b><b></b>
-                                <strong>McKenna Gillard</strong><b></b>Engineering Manager<b></b><b></b>
-                                <strong>Amina Assal</strong><b></b>Engineering Manager<b></b><b></b>
-                                <strong>Caroline Hoang</strong><b></b>Engineering Manager<b></b><b></b>
-                                <strong>Elaine Wang</strong><b></b>Engineering Manager<b></b><b></b>
+                                <strong>Karlo Dobrovic</strong><br></br>Head of Engineering<br></br><br></br>
+                                <strong>McKenna Gillard</strong><br></br>Engineering Manager<br></br><br></br>
+                                <strong>Amina Assal</strong><br></br>Engineering Manager<br></br><br></br>
+                                <strong>Caroline Hoang</strong><br></br>Engineering Manager<br></br><br></br>
+                                <strong>Elaine Wang</strong><br></br>Engineering Manager<br></br><br></br>
                             </div> 
                         </div>
                         <div class="secColumn">
@@ -137,7 +133,7 @@ export default class Footer extends React.Component{
                                 <strong>Editing</strong>
                             </div>
                             <div class="secBody">
-                                <strong>Sarah Braka</strong><b></b>Head of Copy<b></b><b></b>
+                                <strong>Sarah Braka</strong><br></br>Head of Copy<br></br><br></br>
                             </div> 
                         </div>
                     </div>
