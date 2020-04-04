@@ -1,8 +1,7 @@
 import React, { Component } from 'react';
 import styled from "styled-components";
-import WhiteboardSidebar from "../components/ReviewsWhiteboardSidebar"
-import ReviewsBox from "../components/ReviewsBox"
-import Review from "../components/Review"
+import WhiteboardSidebar from "../components/ReviewsWhiteboardSidebar";
+import Review from "../components/Review";
 
 const Star = styled.span`
   color: white;
