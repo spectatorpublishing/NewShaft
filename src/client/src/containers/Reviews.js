@@ -125,6 +125,9 @@ const ColTwo = styled.div`
 
 const ColThree = styled.div`
     width: 50vw;
+    height: calc(98vh - 2rem);
+    overflow-y: scroll;
+    margin-top: 3em;
 `
 
 const QuickReviewDisplay = styled.div`
@@ -149,9 +152,11 @@ export default class Reviews extends Component{
 
     this.handleDormChange = this.handleDormChange.bind(this)
     this.fetchReviews = this.fetchReviews.bind(this)
+    this.fetchQuickReview = this.fetchQuickReview.bind(this)
     this.createStars = this.createStars.bind(this)
 
     this.fetchReviews(this.state.dorm);
+    this.fetchQuickReview(this.state.dorm);
   }
 
   componentWillMount() {
@@ -170,7 +175,9 @@ export default class Reviews extends Component{
   componentDidMount() {
     document.title = "Reviews";
     this.fetchReviews(this.state.dorm);
+    this.fetchQuickReview(this.state.dorm);
     this.interval = setInterval(() => this.fetchReviews(this.state.dorm), 15000);
+    this.interval = setInterval(() => this.fetchQuickReview(this.state.dorm), 15000);
 
   }
 
@@ -201,7 +208,16 @@ export default class Reviews extends Component{
 
   /* fetch MoreDormInfo */
 
-  /* fetch QuickReview */
+  fetchQuickReview(dormName){
+    fetch(`/api/getQuickReview/${dormName}`, {
+      method: "GET",
+      headers: { "Content-Type": "application/json"},
+    })
+      .then(res => res.json())
+      .then(reviewInfo => {
+        this.setState({clean: reviewInfo.clean, noise: reviewInfo.noise, community: reviewInfo.community, party: reviewInfo.party, amenities: reviewInfo.amenities})
+      });
+  }
 
   handleDormChange(dorm) {
 
@@ -227,6 +243,7 @@ export default class Reviews extends Component{
       init: false
     }, () => {
       this.fetchReviews(dorm);
+      this.fetchQuickReview(dorm);
     });
   }
 
@@ -303,6 +320,18 @@ export default class Reviews extends Component{
           </ColTwo>
           <ColThree>
             {/* Reviews Slider */}
+            <AllReviews>
+              {this.state.reviews.map((review, j) => (
+                  <Review
+                    key={""+j}
+                    stars={review.NUM_STARS}
+                    review={review.REVIEW_TXT}
+                    room={review.ROOM_NUM}
+                    year={years_map[review.YEAR]}
+                    timestamp={review.TIMESTAMP}
+                  />
+              ))}
+            </AllReviews>
           </ColThree>
         </ReviewsContainer>
       </div>
