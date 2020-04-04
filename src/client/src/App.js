@@ -11,6 +11,7 @@ import { GlobalStyles, theme } from "./util/GlobalStyles";
 import './css/App.css';
 import createHistory from 'history/createBrowserHistory'
 import ReactGA from 'react-ga'
+import Footer from './components/Footer.js';
 
 const history = createHistory()
 history.listen(location => {
@@ -65,6 +66,7 @@ const App = () => (
         <Route exact path="/housing101" component={Housing101} />
 				<Route exact path="/reviews" component={Reviews} />
       </Switch>
+      <Footer/>
     </main>
   </ThemeProvider>
 )

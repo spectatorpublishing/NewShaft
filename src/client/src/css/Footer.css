@@ -1,0 +1,37 @@
+@import url('https://fonts.googleapis.com/css?family=Archivo+Black');
+
+.footer {
+  background-color: grey;
+  z-index: 100px;
+}
+
+.footerTitle {
+  color:white;
+  font-family: 'Archivo Black';
+  font-size: 30px;
+  padding: 20px;
+}
+
+.footerRow {
+  padding: 10px;
+  display: flex;
+  flex-direction: row;
+}
+
+.secColumn {
+  padding: 10px;
+  display: flex;
+  flex-direction: column;
+}
+
+.secTitle {
+  color:white;
+  font-family: 'Raleway';
+  font-size: 18px;
+}
+
+.secBody{
+  color:white;
+  font-family: 'Raleway';
+  font-size: 16px;
+}
