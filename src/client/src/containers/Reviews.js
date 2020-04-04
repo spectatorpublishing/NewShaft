@@ -144,8 +144,8 @@ export default class Reviews extends Component{
     this.state = {
       dorm: "47 Claremont",
       dormRefresh: false,
-      reviews: {},
-      QuickReview: {dorm_name: "47 Claremont", cleanliness: 3, noise: 2, community: 2, party: 1, amenities: 3},
+      reviews: [],
+      QuickReview: {dorm_name: "47 Claremont", cleanliness: 4, noise: 1, community: 2, party: 1, amenities: 3},
       width: window.innerWidth,
       init: true,
     }
@@ -214,9 +214,9 @@ export default class Reviews extends Component{
       headers: { "Content-Type": "application/json"},
     })
       .then(res => res.json())
-      .then(reviewInfo => {
-        this.setState({clean: reviewInfo.clean, noise: reviewInfo.noise, community: reviewInfo.community, party: reviewInfo.party, amenities: reviewInfo.amenities})
-      });
+      .then(reviewsInfo => {
+        this.setState({QuickReview : {cleanliness: reviewsInfo.clean, noise: reviewsInfo.noise, community: reviewsInfo.community, party: reviewsInfo.party, amenities: reviewsInfo.amenities}});
+    });
   }
 
   handleDormChange(dorm) {
