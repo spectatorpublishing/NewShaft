@@ -3,37 +3,47 @@ import "../css/Reviews.css";
 import Review from "./Review.js";
 import styled from 'styled-components';
 
-let Face = styled.span`
+const Face = styled.span`
   align-self: left;
 `
 
-let Speaker = styled.span`
+const Speaker = styled.span`
   align-self: left;
 `
 
-let Shake = styled.span`
+const Shake = styled.span`
   align-self: left;
 `
 
-let Dancer = styled.span`
+const Dancer = styled.span`
   align-self: left;
 `
 
-let Thumb = styled.span`
+const Thumb = styled.span`
   align-self: left;
+`
+
+const QuickReviewDisplay = styled.div`
+  padding-bottom: 0.5rem;
+  padding-top: 0.5rem;
+  margin-left: 2.5rem;
+  margin-bottom: 0.5rem;
+  text-align: left;
+  font-size: 1.875rem;
+`
+
+const QuickReviewTitle = styled.div`
+  padding-top: 2.5rem;
+  padding-bottom: 0.5rem;
+  margin-left: 1.5rem;
+  text-align: left;
+  font-size: 2.1875rem;
+  font-weight: bold;
 `
 
 export default class QuickReview extends Component {
   constructor(props) {
     super(props);
-
-    this.state = { 
-      cleanliness: this.props.cleanliness,
-      noiseLevel: this.props.noiseLevel,
-      community: this.props.community,
-      partyScene: this.props.partyScene,
-      amenities: this.props.amenities
-    };
   }
 
   createClean(score) {
@@ -95,13 +105,24 @@ export default class QuickReview extends Component {
     return (
       <div id="parent">
         <div id="reviewQuickView">
-          <div>
-            <div id="criteriaQuickReview">Cleanliness {this.createClean(3)}</div>
-            <div id="criteriaQuickReview">Noise Level {this.createNoise(2)}</div>
-            <div id="criteriaQuickReview">Community {this.createComm(2)}</div>
-            <div id="criteriaQuickReview">Party Scene{this.createParty(1)}</div>
-            <div id="criteriaQuickReview">Amenities {this.createAmenities(3)}</div>
-          </div>
+          <QuickReviewTitle>
+            QUICK REVIEW
+          </QuickReviewTitle>
+          <QuickReviewDisplay>
+            <div id="criteriaQuickReview">Cleanliness {this.createClean(this.props.QuickReview.cleanliness)}</div>
+          </QuickReviewDisplay>
+          <QuickReviewDisplay>
+            <div id="criteriaQuickReview">Noise Level {this.createNoise(this.props.QuickReview.noise)}</div>
+          </QuickReviewDisplay>
+          <QuickReviewDisplay>
+            <div id="criteriaQuickReview">Community {this.createComm(this.props.QuickReview.community)}</div>
+          </QuickReviewDisplay>
+          <QuickReviewDisplay>
+            <div id="criteriaQuickReview">Party Scene{this.createParty(this.props.QuickReview.party)}</div>
+          </QuickReviewDisplay>
+          <QuickReviewDisplay>
+            <div id="criteriaQuickReview">Amenities {this.createAmenities(this.props.QuickReview.amenities)}</div>
+          </QuickReviewDisplay>
         </div>
       </div>
     );

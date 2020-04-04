@@ -1,9 +1,11 @@
 import React, { Component } from 'react';
 import styled from "styled-components";
 import WhiteboardSidebar from "../components/WhiteboardSidebar"
-import placeholder from "./placeholder.jpg"
+import carouselimg from "./carouselimg.jpg"
 import QuickReview from "../components/QuickReview";
-
+import "react-responsive-carousel/lib/styles/carousel.min.css";
+import { Carousel } from 'react-responsive-carousel';
+ 
 const ReviewsContainer = styled.div`
     display: flex;
     width: 100%;
@@ -47,6 +49,13 @@ const ColThree = styled.div`
     width: 50vw;
 `
 
+const QuickReviewDisplay = styled.div`
+    width: 30vw;
+`
+const QuickReviewBox = styled.div`
+    box-shadow: 3px -4px 7px 2px rgba(0,0,0,0.1);
+`
+
 export default class Reviews extends Component{
   constructor(props){
     super(props)
@@ -55,6 +64,7 @@ export default class Reviews extends Component{
       dorm: "47 Claremont",
       dormRefresh: false,
       reviews: {},
+      QuickReview: {dorm_name: "47 Claremont", cleanliness: 3, noise: 2, community: 2, party: 1, amenities: 3},
       width: window.innerWidth,
       init: true,
     }
@@ -136,9 +146,22 @@ export default class Reviews extends Component{
             <h1>{this.state.dorm}</h1>
             {/* MoreDormInfo */}
             {/* QuickReview */}
-            <img src={placeholder} />
-            <h3>QUICK REVIEW</h3>
-            <h5><QuickReview quick={this.state.QuickReview}></QuickReview></h5>
+            <QuickReviewDisplay>
+              <Carousel>
+                <div>
+                  <img src={carouselimg} width = "1px"/>
+                </div>
+                <div>
+                  <img src={carouselimg} width = "1px"/>
+                </div>
+                <div>
+                  <img src={carouselimg} width = "1px"/>
+                </div>
+              </Carousel>
+              <QuickReviewBox>
+                <QuickReview QuickReview={this.state.QuickReview}></QuickReview>
+              </QuickReviewBox>
+            </QuickReviewDisplay>
           </ColTwo>
           <ColThree>
             {/* Reviews Slider */}
@@ -148,3 +171,4 @@ export default class Reviews extends Component{
     )
   }
 }
+
