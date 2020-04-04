@@ -4,6 +4,10 @@ import shaftlogo from "../assets/shaft-logo-text.png"
 import { Link, NavLink } from 'react-router-dom';
 import styled from 'styled-components';
 
+let Wrap = styled.div`
+
+`;
+
 let NavContainer = styled.div `
   background-color: ${props => props.theme.black};
   display: flex;
@@ -15,8 +19,35 @@ let NavContainer = styled.div `
     left: 0;
     position: fixed;
     top: 0;
-    z-index: 2;
+    z-index: 5;
   `}
+`
+let Banner = styled.div `
+  color: white;
+  padding-left: 2vw;
+  padding-right: 2vw;
+  font-size: 1.15rem;
+  background-color: #D44942;
+  display: flex;
+  flex-direction: row;
+  height: 45px;
+  padding-top: 75px;
+  width: 100vw;
+
+  @media(max-width: 991px){
+    font-size: 0.75rem;
+    height: 50px;
+    padding-top: 70px;
+    width: 100%;
+}
+
+  ${({ fixed }) => fixed && `
+  left: 0;
+  position: fixed;
+  top: 0;
+  z-index: 2;
+  `}
+
 `
 
 let LogoContainer = styled.div`
@@ -83,7 +114,7 @@ let MenuLink = styled(NavLink)`
 `
 
 let NavBuffer = styled.div`
-  height: 60px;
+  height: 120px;
   width: 100%;
 `
 
@@ -304,7 +335,7 @@ export default class NavBar extends Component {
       </React.Fragment>
     );
     return (
-      <div>
+      <Wrap>
         <NavContainer fixed={this.props.fixed}>
           <LogoContainer>
             <Link to="/">
@@ -313,8 +344,9 @@ export default class NavBar extends Component {
           </LogoContainer>
           {isMobile ? mobileMenu : desktopMenu}
         </NavContainer>
+        <Banner fixed={this.props.fixed}>COMING SOON: We’re updating theShaft in the coming days and giving you all of the latest information on housing and dorms at Columbia. Stay tuned!</Banner>
         {this.props.fixed && <NavBuffer></NavBuffer>}
-      </div>
+      </Wrap>
     );
   }
 }
