@@ -138,9 +138,11 @@ export default class Reviews extends Component{
 
     this.handleDormChange = this.handleDormChange.bind(this)
     this.fetchReviews = this.fetchReviews.bind(this)
+    this.fetchQuickReview = this.fetchQuickReview.bind(this)
     this.createStars = this.createStars.bind(this)
 
     this.fetchReviews(this.state.dorm);
+    this.fetchQuickReview(this.state.dorm);
   }
 
   componentWillMount() {
@@ -159,7 +161,9 @@ export default class Reviews extends Component{
   componentDidMount() {
     document.title = "Reviews";
     this.fetchReviews(this.state.dorm);
+    this.fetchQuickReview(this.state.dorm);
     this.interval = setInterval(() => this.fetchReviews(this.state.dorm), 15000);
+    this.interval = setInterval(() => this.fetchQuickReview(this.state.dorm), 15000);
 
   }
 
@@ -190,7 +194,16 @@ export default class Reviews extends Component{
 
   /* fetch MoreDormInfo */
 
-  /* fetch QuickReview */
+  fetchQuickReview(dormName){
+    fetch(`/api/getQuickReview/${dormName}`, {
+      method: "GET",
+      headers: { "Content-Type": "application/json"},
+    })
+      .then(res => res.json())
+      .then(reviewInfo => {
+        this.setState({clean: reviewInfo.clean, noise: reviewInfo.noise, community: reviewInfo.community, party: reviewInfo.party, amenities: reviewInfo.amenities})
+      });
+  }
 
   handleDormChange(dorm) {
 
@@ -216,6 +229,7 @@ export default class Reviews extends Component{
       init: false
     }, () => {
       this.fetchReviews(dorm);
+      this.fetchQuickReview(dorm);
     });
   }
 
@@ -273,6 +287,14 @@ export default class Reviews extends Component{
             <h1>{this.state.dorm}</h1>
             {/* MoreDormInfo */}
             {/* QuickReview */}
+            {/* tester for quick review:
+              <div>
+              <p>Cleanliness {this.state.clean}</p>
+              <p>Noise Level {this.state.noise}</p>
+              <p>Community {this.state.community}</p>
+              <p>Party Scene {this.state.party}</p>
+              <p>Amenities {this.state.amenities}</p>
+            </div>*/}
           </ColTwo>
           <ColThree>
             {/* Reviews Slider */}
