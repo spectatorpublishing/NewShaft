@@ -1,7 +1,12 @@
 import React, { Component } from 'react';
 import styled from "styled-components";
-import WhiteboardSidebar from "../components/ReviewsWhiteboardSidebar";
-import Review from "../components/Review";
+import carouselimg from "./carouselimg.jpg"
+import QuickReview from "../components/QuickReview";
+import "react-responsive-carousel/lib/styles/carousel.min.css";
+import { Carousel } from 'react-responsive-carousel';
+
+import WhiteboardSidebar from "../components/ReviewsWhiteboardSidebar"
+import Review from "../components/Review"
 
 const Star = styled.span`
   color: white;
@@ -13,7 +18,7 @@ const Space = styled.div`
 
 const AllReviews = styled.div`
   width: 90%;
-  height: 65vh;
+  height: 100vh;
   overflow-y: scroll;
   padding: 1rem;
   display: flex;
@@ -91,37 +96,41 @@ const BlueHeader = styled.div`
 const ColOne = styled.div`
   display: flex;
   width: 20%;
-  @media(max-width: 991px){
-      display:flex;
-      width:50vw;
-  }
 `
 
 const ColTwo = styled.div`
     display: flex;
     flex-direction: column;
     scroll-behavior: smooth;
-    padding-left: 2%;
-    margin-right:2rem;
-    width: ${({ mobile }) => (mobile ? `100%` : `40%`)};
+    margin: 0 2rem;
+    width: ${({ mobile }) => (mobile ? `100%` : `25vw`)};
     @media(max-width: 991px){
-        display: flex;
-        flex-direction: column;
-        scroll-behavior: smooth;
-        width: 60vw;
+        width: 40vw;
+        margin: 0 1rem;
     }
     &>h1 {
       margin-top: 2.5rem;
       color: "64AFEC";
       font-weight: extra-bold;
     }
+
 `
 
 const ColThree = styled.div`
-    width: 50vw;
+    width: 60vw;
     height: calc(98vh - 2rem);
     overflow-y: scroll;
-    margin-top: 3em;
+    margin-top: 5em;
+`
+
+const QuickReviewDisplay = styled.div`
+    width: 100%;
+    padding-top: 1rem;
+`
+const QuickReviewBox = styled.div`
+    margin-top: 1rem;
+    box-shadow: 3px -4px 7px 2px rgba(0,0,0,0.1);
+    padding-right: 1rem;
 `
 
 export default class Reviews extends Component{
@@ -132,6 +141,7 @@ export default class Reviews extends Component{
       dorm: "47 Claremont",
       dormRefresh: false,
       reviews: [],
+      QuickReview: {dorm_name: "47 Claremont", cleanliness: 4, noise: 1, community: 2, party: 1, amenities: 3},
       width: window.innerWidth,
       init: true,
     }
@@ -200,9 +210,9 @@ export default class Reviews extends Component{
       headers: { "Content-Type": "application/json"},
     })
       .then(res => res.json())
-      .then(reviewInfo => {
-        this.setState({clean: reviewInfo.clean, noise: reviewInfo.noise, community: reviewInfo.community, party: reviewInfo.party, amenities: reviewInfo.amenities})
-      });
+      .then(reviewsInfo => {
+        this.setState({QuickReview : {cleanliness: reviewsInfo.clean, noise: reviewsInfo.noise, community: reviewsInfo.community, party: reviewsInfo.party, amenities: reviewsInfo.amenities}});
+    });
   }
 
   handleDormChange(dorm) {
@@ -287,14 +297,22 @@ export default class Reviews extends Component{
             <h1>{this.state.dorm}</h1>
             {/* MoreDormInfo */}
             {/* QuickReview */}
-            {/* tester for quick review:
-              <div>
-              <p>Cleanliness {this.state.clean}</p>
-              <p>Noise Level {this.state.noise}</p>
-              <p>Community {this.state.community}</p>
-              <p>Party Scene {this.state.party}</p>
-              <p>Amenities {this.state.amenities}</p>
-            </div>*/}
+            <QuickReviewDisplay>
+              <Carousel showThumbs={false}>
+                <div>
+                  <img src={carouselimg} width = "1px"/>
+                </div>
+                <div>
+                  <img src={carouselimg} width = "1px"/>
+                </div>
+                <div>
+                  <img src={carouselimg} width = "1px"/>
+                </div>
+              </Carousel>
+              <QuickReviewBox>
+                <QuickReview QuickReview={this.state.QuickReview}></QuickReview>
+              </QuickReviewBox>
+            </QuickReviewDisplay>
           </ColTwo>
           <ColThree>
             {/* Reviews Slider */}
