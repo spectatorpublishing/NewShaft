@@ -61,6 +61,7 @@ export default class Reviews extends Component{
     this.fetchReviews = this.fetchReviews.bind(this)
     //added
     this.fetchMoreDormInfo = this.fetchMoreDormInfo.bind(this)
+    //this.fetchMoreDormInfo(this.state.dorm);
   }
 
   componentWillMount() {
@@ -79,8 +80,8 @@ export default class Reviews extends Component{
   componentDidMount() {
     document.title = "Reviews";
     this.interval = setInterval(() => this.fetchReviews(this.state.dorm), 15000);
-    this.fetchMoreDormInfo(this.state.dorm);
     
+    this.fetchMoreDormInfo(this.state.dorm);
   }
 
   fetchReviews(dormName){
@@ -90,7 +91,6 @@ export default class Reviews extends Component{
     })
       .then(res => res.json())
       .then(reviewsInfo => {
-        console.log(reviewsInfo)
         this.setState({reviews: reviewsInfo.reviews, avg_rating: reviewsInfo.avg_rating, reccomend: reviewsInfo.reccomended, ranking: reviewsInfo.ranking})
       });
   }
@@ -106,7 +106,6 @@ export default class Reviews extends Component{
       .then(res => res.json())
       .then(moreDormInfo => {
         this.setState({moreDormInfo: moreDormInfo})
-        
     });
   }
 
@@ -114,7 +113,7 @@ export default class Reviews extends Component{
   /* fetch QuickReview */
 
   handleDormChange(dorm) {
-
+    
     const firstFloor = {
       "47 Claremont": "1",
       "Broadway Hall": "3",
@@ -136,11 +135,15 @@ export default class Reviews extends Component{
       dorm: dorm,
       init: false
     }, () => {
-      this.fetchReviews(dorm);
+      this.fetchReviews(dorm)
+      this.fetchMoreDormInfo(dorm)
     });
+
+    
   }
 
   render(){
+    
     return(
       <div>
         <ReviewsContainer>
@@ -150,7 +153,7 @@ export default class Reviews extends Component{
           </ColOne>
           <ColTwo>
             <h1>{this.state.dorm}</h1>
-            {<MoreDormInfoBlock></MoreDormInfoBlock>}
+            {this.state.moreDormInfo ? (<MoreDormInfoBlock dormInfo={this.state.moreDormInfo} ></MoreDormInfoBlock>) : (<div></div>)}
             {/* QuickReview */}
           </ColTwo>
           <ColThree>

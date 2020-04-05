@@ -25,7 +25,7 @@ const TitleBlock = styled.div`
     flex-direction: column;
     flex-wrap: wrap;
     margin-bottom: 1.5rem;
-    margin-right: 2rem;
+    width: 50%;
 
 	@media (min-width: 1000px) {
       width: 33%;
@@ -44,26 +44,66 @@ const TitleBlock = styled.div`
 export default class MoreDormInfoBlock extends Component {
     constructor(props) {
         super(props);
+
+        this.dormInfo = props.dormInfo;
+        this.formatList = this.formatList.bind(this);
+
+    }
+
+    formatList(string) {
+        let length = string.split(',').length;
+
+        if (length === 1) {
+            return string.charAt(0).toUpperCase() + string.slice(1)
+        }
+
+        let stringArr = string.split(',').map((word, index) => {
+            if (index === length - 1) {
+                return "& " + word.charAt(0).toUpperCase() + word.slice(1);
+            }
+            else if (index === length - 2) {
+                return word.charAt(0).toUpperCase() + word.slice(1)
+            } else {
+                return word.charAt(0).toUpperCase() + word.slice(1) + ","
+            }
+        })
+
+        return stringArr.join(" ");
+    }
+
+    formatRooms(single, double, triple) {
+        let string = "";
+
+        if (single) {
+            string += "singles"
+        } 
+        if (double) {
+            if (single) {
+                string += ","
+            }
+            string += "doubles"
+        }
+        if (triple) {
+            string += ",triples"
+        }
+        
+        return this.formatList(string);
     }
 
     render() {
+        
+        console.log(this.props.dormInfo)
+        console.log(this.formatList("freshmen"))
+
         return (
         <DormInfoBlock>
             <TitleBlock>
-                <Bold>{"Corridor"}</Bold>
-                <Regular>style</Regular>
-            </TitleBlock>
-            <TitleBlock>
-                <Bold>{"Single & Doubles"}</Bold>
+                <Bold>{this.formatRooms(this.dormInfo.SINGLE_, this.dormInfo.DOUBLE_, this.dormInfo.TRIPLE_ )}</Bold>
                 <Regular>dorms</Regular>
             </TitleBlock>
             <TitleBlock>
-                <Bold>{"Sophomore & Junior"}</Bold>
+                <Bold>{this.formatList(this.dormInfo.CLASS_MAKEUP)}</Bold>
                 <Regular>residents</Regular>
-            </TitleBlock>
-            <TitleBlock>
-                <Bold>Lottery #</Bold>
-                <Regular>{"1200-2312"}</Regular>
             </TitleBlock>
             <TitleBlock>
                 <Bold>Per Floor</Bold>
