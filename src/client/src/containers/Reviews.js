@@ -187,7 +187,8 @@ export default class Reviews extends Component{
     })
       .then(res => res.json())
       .then(reviewsInfo => {
-        this.setState({reviews: reviewsInfo.reviews, avg_rating: reviewsInfo.avg_rating, reccomend: reviewsInfo.reccomended, ranking: reviewsInfo.ranking})
+        console.log(reviewsInfo.reviews)
+        this.setState({reviews: reviewsInfo.reviews, avg_rating: reviewsInfo.avg_rating, recommend: reviewsInfo.recommended, ranking: reviewsInfo.ranking})
       });
   }
 
@@ -255,7 +256,7 @@ export default class Reviews extends Component{
                   year={years_map[review.YEAR]}
                   timestamp={review.TIMESTAMP}
                   dorm={this.state.dorm}
-                  reccomended = {review.reccomend}
+                  recommended = {review.RECOMMEND}
                 />
             ))}
           </AllReviews>
@@ -291,7 +292,7 @@ export default class Reviews extends Component{
                     year={years_map[review.YEAR]}
                     timestamp={review.TIMESTAMP}
                     dorm = {this.state.dorm}
-                    reccomend = {review.RECCOMENDED}
+                    recommended = {review.RECOMMEND}
                   />
               ))}
             </AllReviews>

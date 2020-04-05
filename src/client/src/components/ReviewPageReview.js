@@ -65,7 +65,7 @@ export default class ReviewPageReview extends Component {
     // parse year from MySQL timestamp
     let parsedTime = timestamp.split('/', 3)[2].substring(0, 4)
     console.log(reccomended);
-    let rec = Number(reccomended) ? "Recommended" : "Not Recommended"
+    let rec = Number(reccomended) == 1 ? "Recommended" : "Not Recommended"
     return (<ReviewerInfo>
               {"Room " + room + " • " + year  + " • " + parsedTime + " • " + rec}
             </ReviewerInfo>);
@@ -78,7 +78,7 @@ export default class ReviewPageReview extends Component {
       <Wrapper>
           <InfoWrapper>
             {hasNoReviews ? null : this.createStars(this.props.stars)} 
-            {hasNoReviews ? null : this.createReviewerInfo(this.props.room, this.props.year, this.props.timestamp, this.props.reccomended)}
+            {hasNoReviews ? null : this.createReviewerInfo(this.props.room, this.props.year, this.props.timestamp, this.props.recommended)}
           </InfoWrapper>
           <ReviewText>
             <p>{this.props.review}</p>
