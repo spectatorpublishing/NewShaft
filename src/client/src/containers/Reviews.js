@@ -4,7 +4,7 @@ import carouselimg from "./carouselimg.jpg"
 import QuickReview from "../components/QuickReview";
 import "react-responsive-carousel/lib/styles/carousel.min.css";
 import { Carousel } from 'react-responsive-carousel';
- 
+
 import WhiteboardSidebar from "../components/ReviewsWhiteboardSidebar"
 import Review from "../components/Review"
 
@@ -18,7 +18,7 @@ const Space = styled.div`
 
 const AllReviews = styled.div`
   width: 90%;
-  height: 65vh;
+  height: 100vh;
   overflow-y: scroll;
   padding: 1rem;
   display: flex;
@@ -96,24 +96,17 @@ const BlueHeader = styled.div`
 const ColOne = styled.div`
   display: flex;
   width: 20%;
-  @media(max-width: 991px){
-      display:flex;
-      width:50vw;
-  }
 `
 
 const ColTwo = styled.div`
     display: flex;
     flex-direction: column;
     scroll-behavior: smooth;
-    padding-left: 2%;
-    margin-right:2rem;
-    width: ${({ mobile }) => (mobile ? `100%` : `40%`)};
+    margin: 0 2rem;
+    width: ${({ mobile }) => (mobile ? `100%` : `25vw`)};
     @media(max-width: 991px){
-        display: flex;
-        flex-direction: column;
-        scroll-behavior: smooth;
-        width: 60vw;
+        width: 40vw;
+        margin: 0 1rem;
     }
     &>h1 {
       margin-top: 2.5rem;
@@ -124,17 +117,20 @@ const ColTwo = styled.div`
 `
 
 const ColThree = styled.div`
-    width: 50vw;
+    width: 60vw;
     height: calc(98vh - 2rem);
     overflow-y: scroll;
-    margin-top: 3em;
+    margin-top: 5em;
 `
 
 const QuickReviewDisplay = styled.div`
-    width: 30vw;
+    width: 100%;
+    padding-top: 1rem;
 `
 const QuickReviewBox = styled.div`
+    margin-top: 1rem;
     box-shadow: 3px -4px 7px 2px rgba(0,0,0,0.1);
+    padding-right: 1rem;
 `
 
 export default class Reviews extends Component{
@@ -302,7 +298,7 @@ export default class Reviews extends Component{
             {/* MoreDormInfo */}
             {/* QuickReview */}
             <QuickReviewDisplay>
-              <Carousel>
+              <Carousel showThumbs={false}>
                 <div>
                   <img src={carouselimg} width = "1px"/>
                 </div>
@@ -338,4 +334,3 @@ export default class Reviews extends Component{
     )
   }
 }
-
