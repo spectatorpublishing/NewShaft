@@ -1,10 +1,20 @@
 import React, { Component } from 'react';
 import styled from "styled-components";
+<<<<<<< HEAD
 import WhiteboardSidebar from "../components/ReviewsWhiteboardSidebar"
 import ReviewsBox from "../components/ReviewsBox"
 import Review from "../components/Review"
 import ReviewPageReview from "../components/ReviewPageReview"
 //import FakeVote from "../components/FakeVote"
+=======
+import carouselimg from "./carouselimg.jpg"
+import QuickReview from "../components/QuickReview";
+import "react-responsive-carousel/lib/styles/carousel.min.css";
+import { Carousel } from 'react-responsive-carousel';
+
+import WhiteboardSidebar from "../components/ReviewsWhiteboardSidebar"
+import Review from "../components/Review"
+>>>>>>> 3245627a5bc07468124f8573d245285c562292cd
 
 const Star = styled.span`
   color: white;
@@ -16,7 +26,11 @@ const Space = styled.div`
 
 const AllReviews = styled.div`
   width: 90%;
+<<<<<<< HEAD
   height: 65vh;
+=======
+  height: 100vh;
+>>>>>>> 3245627a5bc07468124f8573d245285c562292cd
   overflow-y: scroll;
   padding: 1rem;
   display: flex;
@@ -94,37 +108,48 @@ const BlueHeader = styled.div`
 const ColOne = styled.div`
   display: flex;
   width: 20%;
-  @media(max-width: 991px){
-      display:flex;
-      width:50vw;
-  }
 `
 
 const ColTwo = styled.div`
     display: flex;
     flex-direction: column;
     scroll-behavior: smooth;
-    padding-left: 2%;
-    margin-right:2rem;
-    width: ${({ mobile }) => (mobile ? `100%` : `40%`)};
+    margin: 0 2rem;
+    width: ${({ mobile }) => (mobile ? `100%` : `25vw`)};
     @media(max-width: 991px){
-        display: flex;
-        flex-direction: column;
-        scroll-behavior: smooth;
-        width: 60vw;
+        width: 40vw;
+        margin: 0 1rem;
     }
     &>h1 {
       margin-top: 2.5rem;
       color: "64AFEC";
       font-weight: extra-bold;
     }
+
 `
 
 const ColThree = styled.div`
+<<<<<<< HEAD
     width: 50vw;
     height: calc(98vh - 2rem);
     overflow-y: scroll;
     margin-top: 3em;
+=======
+    width: 60vw;
+    height: calc(98vh - 2rem);
+    overflow-y: scroll;
+    margin-top: 5em;
+`
+
+const QuickReviewDisplay = styled.div`
+    width: 100%;
+    padding-top: 1rem;
+`
+const QuickReviewBox = styled.div`
+    margin-top: 1rem;
+    box-shadow: 3px -4px 7px 2px rgba(0,0,0,0.1);
+    padding-right: 1rem;
+>>>>>>> 3245627a5bc07468124f8573d245285c562292cd
 `
 
 export default class Reviews extends Component{
@@ -135,15 +160,27 @@ export default class Reviews extends Component{
       dorm: "47 Claremont",
       dormRefresh: false,
       reviews: [],
+<<<<<<< HEAD
+=======
+      QuickReview: {dorm_name: "47 Claremont", cleanliness: 4, noise: 1, community: 2, party: 1, amenities: 3},
+>>>>>>> 3245627a5bc07468124f8573d245285c562292cd
       width: window.innerWidth,
       init: true,
     }
 
     this.handleDormChange = this.handleDormChange.bind(this)
     this.fetchReviews = this.fetchReviews.bind(this)
+<<<<<<< HEAD
     this.createStars = this.createStars.bind(this)
 
     this.fetchReviews(this.state.dorm);
+=======
+    this.fetchQuickReview = this.fetchQuickReview.bind(this)
+    this.createStars = this.createStars.bind(this)
+
+    this.fetchReviews(this.state.dorm);
+    this.fetchQuickReview(this.state.dorm);
+>>>>>>> 3245627a5bc07468124f8573d245285c562292cd
   }
 
   componentWillMount() {
@@ -162,7 +199,12 @@ export default class Reviews extends Component{
   componentDidMount() {
     document.title = "Reviews";
     this.fetchReviews(this.state.dorm);
+<<<<<<< HEAD
+=======
+    this.fetchQuickReview(this.state.dorm);
+>>>>>>> 3245627a5bc07468124f8573d245285c562292cd
     this.interval = setInterval(() => this.fetchReviews(this.state.dorm), 15000);
+    this.interval = setInterval(() => this.fetchQuickReview(this.state.dorm), 15000);
 
   }
 
@@ -194,7 +236,20 @@ export default class Reviews extends Component{
 
   /* fetch MoreDormInfo */
 
+<<<<<<< HEAD
   /* fetch QuickReview */
+=======
+  fetchQuickReview(dormName){
+    fetch(`/api/getQuickReview/${dormName}`, {
+      method: "GET",
+      headers: { "Content-Type": "application/json"},
+    })
+      .then(res => res.json())
+      .then(reviewsInfo => {
+        this.setState({QuickReview : {cleanliness: reviewsInfo.clean, noise: reviewsInfo.noise, community: reviewsInfo.community, party: reviewsInfo.party, amenities: reviewsInfo.amenities}});
+    });
+  }
+>>>>>>> 3245627a5bc07468124f8573d245285c562292cd
 
   handleDormChange(dorm) {
 
@@ -220,6 +275,7 @@ export default class Reviews extends Component{
       init: false
     }, () => {
       this.fetchReviews(dorm);
+      this.fetchQuickReview(dorm);
     });
   }
 
@@ -248,15 +304,22 @@ export default class Reviews extends Component{
           </BlueHeader>
           <AllReviews>
             {this.state.reviews.map((review, j) => (
+<<<<<<< HEAD
                 <ReviewPageReview
+=======
+                <Review
+>>>>>>> 3245627a5bc07468124f8573d245285c562292cd
                   key={""+j}
                   stars={review.NUM_STARS}
                   review={review.REVIEW_TXT}
                   room={review.ROOM_NUM}
                   year={years_map[review.YEAR]}
                   timestamp={review.TIMESTAMP}
+<<<<<<< HEAD
                   dorm={this.state.dorm}
                   recommended = {review.RECOMMEND}
+=======
+>>>>>>> 3245627a5bc07468124f8573d245285c562292cd
                 />
             ))}
           </AllReviews>
@@ -279,20 +342,43 @@ export default class Reviews extends Component{
             <h1>{this.state.dorm}</h1>
             {/* MoreDormInfo */}
             {/* QuickReview */}
+            <QuickReviewDisplay>
+              <Carousel showThumbs={false}>
+                <div>
+                  <img src={carouselimg} width = "1px"/>
+                </div>
+                <div>
+                  <img src={carouselimg} width = "1px"/>
+                </div>
+                <div>
+                  <img src={carouselimg} width = "1px"/>
+                </div>
+              </Carousel>
+              <QuickReviewBox>
+                <QuickReview QuickReview={this.state.QuickReview}></QuickReview>
+              </QuickReviewBox>
+            </QuickReviewDisplay>
           </ColTwo>
           <ColThree>
             {/* Reviews Slider */}
             <AllReviews>
               {this.state.reviews.map((review, j) => (
+<<<<<<< HEAD
                   <ReviewPageReview
+=======
+                  <Review
+>>>>>>> 3245627a5bc07468124f8573d245285c562292cd
                     key={""+j}
                     stars={review.NUM_STARS}
                     review={review.REVIEW_TXT}
                     room={review.ROOM_NUM}
                     year={years_map[review.YEAR]}
                     timestamp={review.TIMESTAMP}
+<<<<<<< HEAD
                     dorm = {this.state.dorm}
                     recommended = {review.RECOMMEND}
+=======
+>>>>>>> 3245627a5bc07468124f8573d245285c562292cd
                   />
               ))}
             </AllReviews>
