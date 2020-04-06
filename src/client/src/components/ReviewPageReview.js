@@ -67,7 +67,6 @@ export default class ReviewPageReview extends Component {
 
   render() {
     let hasNoReviews = (this.props.review === "No Reviews")
-    //console.log("ReviewsPage data is " + this.props.thumbs_up)
     return (
       <Wrapper>
           <InfoWrapper>
