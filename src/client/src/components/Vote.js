@@ -80,13 +80,13 @@ export default class Vote extends Component{
     }
 
     componentDidUpdate(prevProps) {
-        if(this.props.dorm !== prevProps.dorm) {
+        if(this.props !== prevProps) {
             this.setState({
                 upvotes: this.props.upvotes,
-                downvotes: this.props.downvotes
+                downvotes: this.props.downvotes,
+                upClicked: false,
+                downClicked:false
             })
-            console.log("updated")
-            console.log("after update it is upvotes: " + this.state.upvotes)
         }
     }
 
