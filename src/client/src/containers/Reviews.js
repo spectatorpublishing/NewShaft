@@ -1,20 +1,17 @@
 import React, { Component } from 'react';
 import styled from "styled-components";
-<<<<<<< HEAD
 import WhiteboardSidebar from "../components/ReviewsWhiteboardSidebar"
 import ReviewsBox from "../components/ReviewsBox"
 import Review from "../components/Review"
 import ReviewPageReview from "../components/ReviewPageReview"
 //import FakeVote from "../components/FakeVote"
-=======
 import carouselimg from "./carouselimg.jpg"
 import QuickReview from "../components/QuickReview";
 import "react-responsive-carousel/lib/styles/carousel.min.css";
 import { Carousel } from 'react-responsive-carousel';
 
-import WhiteboardSidebar from "../components/ReviewsWhiteboardSidebar"
-import Review from "../components/Review"
->>>>>>> 3245627a5bc07468124f8573d245285c562292cd
+//import WhiteboardSidebar from "../components/ReviewsWhiteboardSidebar"
+//import Review from "../components/Review"
 
 const Star = styled.span`
   color: white;
@@ -26,11 +23,8 @@ const Space = styled.div`
 
 const AllReviews = styled.div`
   width: 90%;
-<<<<<<< HEAD
   height: 65vh;
-=======
-  height: 100vh;
->>>>>>> 3245627a5bc07468124f8573d245285c562292cd
+  /* height: 100vh; */
   overflow-y: scroll;
   padding: 1rem;
   display: flex;
@@ -129,12 +123,6 @@ const ColTwo = styled.div`
 `
 
 const ColThree = styled.div`
-<<<<<<< HEAD
-    width: 50vw;
-    height: calc(98vh - 2rem);
-    overflow-y: scroll;
-    margin-top: 3em;
-=======
     width: 60vw;
     height: calc(98vh - 2rem);
     overflow-y: scroll;
@@ -149,7 +137,6 @@ const QuickReviewBox = styled.div`
     margin-top: 1rem;
     box-shadow: 3px -4px 7px 2px rgba(0,0,0,0.1);
     padding-right: 1rem;
->>>>>>> 3245627a5bc07468124f8573d245285c562292cd
 `
 
 export default class Reviews extends Component{
@@ -160,27 +147,18 @@ export default class Reviews extends Component{
       dorm: "47 Claremont",
       dormRefresh: false,
       reviews: [],
-<<<<<<< HEAD
-=======
       QuickReview: {dorm_name: "47 Claremont", cleanliness: 4, noise: 1, community: 2, party: 1, amenities: 3},
->>>>>>> 3245627a5bc07468124f8573d245285c562292cd
       width: window.innerWidth,
       init: true,
     }
 
     this.handleDormChange = this.handleDormChange.bind(this)
     this.fetchReviews = this.fetchReviews.bind(this)
-<<<<<<< HEAD
-    this.createStars = this.createStars.bind(this)
-
-    this.fetchReviews(this.state.dorm);
-=======
     this.fetchQuickReview = this.fetchQuickReview.bind(this)
     this.createStars = this.createStars.bind(this)
 
     this.fetchReviews(this.state.dorm);
     this.fetchQuickReview(this.state.dorm);
->>>>>>> 3245627a5bc07468124f8573d245285c562292cd
   }
 
   componentWillMount() {
@@ -199,10 +177,7 @@ export default class Reviews extends Component{
   componentDidMount() {
     document.title = "Reviews";
     this.fetchReviews(this.state.dorm);
-<<<<<<< HEAD
-=======
     this.fetchQuickReview(this.state.dorm);
->>>>>>> 3245627a5bc07468124f8573d245285c562292cd
     this.interval = setInterval(() => this.fetchReviews(this.state.dorm), 15000);
     this.interval = setInterval(() => this.fetchQuickReview(this.state.dorm), 15000);
 
@@ -229,16 +204,13 @@ export default class Reviews extends Component{
     })
       .then(res => res.json())
       .then(reviewsInfo => {
-        console.log(reviewsInfo.reviews)
+        //console.log("Reviews data is: " + reviewsInfo.reviews[0].THUMBS_UP)
         this.setState({reviews: reviewsInfo.reviews, avg_rating: reviewsInfo.avg_rating, recommend: reviewsInfo.recommended, ranking: reviewsInfo.ranking})
       });
   }
 
   /* fetch MoreDormInfo */
 
-<<<<<<< HEAD
-  /* fetch QuickReview */
-=======
   fetchQuickReview(dormName){
     fetch(`/api/getQuickReview/${dormName}`, {
       method: "GET",
@@ -249,7 +221,6 @@ export default class Reviews extends Component{
         this.setState({QuickReview : {cleanliness: reviewsInfo.clean, noise: reviewsInfo.noise, community: reviewsInfo.community, party: reviewsInfo.party, amenities: reviewsInfo.amenities}});
     });
   }
->>>>>>> 3245627a5bc07468124f8573d245285c562292cd
 
   handleDormChange(dorm) {
 
@@ -304,22 +275,17 @@ export default class Reviews extends Component{
           </BlueHeader>
           <AllReviews>
             {this.state.reviews.map((review, j) => (
-<<<<<<< HEAD
                 <ReviewPageReview
-=======
-                <Review
->>>>>>> 3245627a5bc07468124f8573d245285c562292cd
                   key={""+j}
                   stars={review.NUM_STARS}
                   review={review.REVIEW_TXT}
                   room={review.ROOM_NUM}
                   year={years_map[review.YEAR]}
                   timestamp={review.TIMESTAMP}
-<<<<<<< HEAD
                   dorm={this.state.dorm}
                   recommended = {review.RECOMMEND}
-=======
->>>>>>> 3245627a5bc07468124f8573d245285c562292cd
+                  thumbs_up = {review.THUMBS_UP}
+                  thumbs_down = {review.THUMBS_DOWN}
                 />
             ))}
           </AllReviews>
@@ -363,22 +329,17 @@ export default class Reviews extends Component{
             {/* Reviews Slider */}
             <AllReviews>
               {this.state.reviews.map((review, j) => (
-<<<<<<< HEAD
                   <ReviewPageReview
-=======
-                  <Review
->>>>>>> 3245627a5bc07468124f8573d245285c562292cd
                     key={""+j}
                     stars={review.NUM_STARS}
                     review={review.REVIEW_TXT}
                     room={review.ROOM_NUM}
                     year={years_map[review.YEAR]}
                     timestamp={review.TIMESTAMP}
-<<<<<<< HEAD
                     dorm = {this.state.dorm}
                     recommended = {review.RECOMMEND}
-=======
->>>>>>> 3245627a5bc07468124f8573d245285c562292cd
+                    thumbs_up = {review.THUMBS_UP}
+                    thumbs_down = {review.THUMBS_DOWN}
                   />
               ))}
             </AllReviews>

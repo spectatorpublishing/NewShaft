@@ -3,6 +3,8 @@ import styled from 'styled-components';
 import upvote from '../assets/Icons/up_arrow.svg';
 import downvote from '../assets/Icons/down_arrow.svg';
 
+//note so the page does not reset for each
+
 const Wrapper = styled.div`
     display: flex;
     justify-content: row;
@@ -77,6 +79,17 @@ export default class Vote extends Component{
         })
     }
 
+    componentDidUpdate(prevProps) {
+        if(this.props.dorm !== prevProps.dorm) {
+            this.setState({
+                upvotes: this.props.upvotes,
+                downvotes: this.props.downvotes
+            })
+            console.log("updated")
+            console.log("after update it is upvotes: " + this.state.upvotes)
+        }
+    }
+
     upvote() {
         if(!this.state.downClicked) {
         const action = this.state.upClicked ? "subtract" : "add";
@@ -91,7 +104,6 @@ export default class Vote extends Component{
                 upvotes: votes[0].thumbs_up,
                 upClicked: !this.state.upClicked
             })
-            console.log(votes);
           });
         }
     }
@@ -115,6 +127,8 @@ export default class Vote extends Component{
     }
 
     render() {
+        console.log("In votes it is " + this.props.upvotes);
+        console.log("In votes it is " + this.state.upvotes);
         return (
             <Wrapper>
                 <Upvotes>

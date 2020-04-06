@@ -40,11 +40,6 @@ let InfoWrapper = styled.div`
 export default class ReviewPageReview extends Component {
   constructor(props) {
     super(props);
-
-    this.state = {
-      thumbsDown: this.props.thumbsDown,
-      thumbsUp: this.props.thumbsUp
-    };
   }
 
   createStars(score) {
@@ -64,7 +59,6 @@ export default class ReviewPageReview extends Component {
   createReviewerInfo(room, year, timestamp, reccomended){
     // parse year from MySQL timestamp
     let parsedTime = timestamp.split('/', 3)[2].substring(0, 4)
-    console.log(reccomended);
     let rec = Number(reccomended) == 1 ? "Recommended" : "Not Recommended"
     return (<ReviewerInfo>
               {"Room " + room + " • " + year  + " • " + parsedTime + " • " + rec}
@@ -73,7 +67,7 @@ export default class ReviewPageReview extends Component {
 
   render() {
     let hasNoReviews = (this.props.review === "No Reviews")
-    console.log(this.props.dorm)
+    //console.log("ReviewsPage data is " + this.props.thumbs_up)
     return (
       <Wrapper>
           <InfoWrapper>
@@ -83,7 +77,7 @@ export default class ReviewPageReview extends Component {
           <ReviewText>
             <p>{this.props.review}</p>
           </ReviewText>
-          <Vote dorm = {this.props.dorm} roomNum = "51C" upvotes = "10" downvotes = "5" />
+          <Vote dorm = {this.props.dorm} roomNum = {this.props.room} upvotes = {this.props.thumbs_up} downvotes = {this.props.thumbs_down} />
       </Wrapper>
     );
   }

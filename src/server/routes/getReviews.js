@@ -32,7 +32,6 @@ function getReviews(con, dorm, callback) {
 				var avg_rating =  (avg_rating / res.length).toFixed(1);
 				con.query(sqlStatement2, function(err, res2) {	
 					var reccomended = Object.values(res2[0])[0];
-					console.log("recomended is", Object.values(res2[0])[0]);
 					con.query(sqlStatement3, function(err, res3) {
 						var ranking = "-"
 						for (var i = 0; i < res3.length; i++) {
