@@ -6,15 +6,9 @@
 
 #reviewQuickView {
 	display: flex;
-	flex-direction: column;
+	flex-direction: row;
 	justify-content: space-around;
-	padding-bottom: 0.5rem;
 	height: 100%;
-}
-
-#criteriaQuickReview {
-	padding-top:0.5rem;
-	padding-bottom: 0.5rem;
 }
 
 #readMore {
