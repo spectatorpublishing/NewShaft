@@ -1,11 +1,9 @@
 import styled from "styled-components";
 import React, { Component } from "react";
-import ReviewStat from "./ReviewStat";
-import SlidingReview from "./SlidingReview";
+import ScrollingReview from "./ScrollingReview";
 
 
 let Border = styled.div`
-    ${props => props.theme.grayBorder}
     padding: 2vw;
     padding-bottom: 6vh;
     display: flex;
@@ -17,12 +15,6 @@ let MobileBorder = styled.div`
     margin-bottom: 6vw;
 `
 
-let Reviews = styled.h2`
-    margin-top: 2vh;
-    margin-bottom: 2vh;
-    padding-left: 0.5vw;  
-`
-
 let InfoBox = styled.div`
     display: flex;
     flex-direction: row;
@@ -31,17 +23,6 @@ let InfoBox = styled.div`
 let MobileInfoBox = styled.div`
     display: flex;
     flex-direction: column;
-`
-
-let StatBox = styled.div`
-    // margin-top: 2vh;
-    margin-bottom: 1vh;
-`
-let MobileStatBox = styled.div`
-    margin-bottom: 1vh;
-    display: flex;
-    flex-direction: row;
-    width: 100%
 `
 
 let SlidingBox = styled.div`
@@ -67,11 +48,11 @@ export default class ReviewsBox extends Component {
     componentWillMount() {
         window.addEventListener("resize", this.handleWindowSizeChange);
       }
-    
+
       componentWillUnmount() {
         window.removeEventListener("resize", this.handleWindowSizeChange);
       }
-    
+
       handleWindowSizeChange = () => {
         this.setState({ width: window.innerWidth });
       };
@@ -82,31 +63,20 @@ export default class ReviewsBox extends Component {
         if(isMobile) {
             return(
                 <MobileBorder>
-                    <Reviews>Reviews</Reviews>
                     <MobileInfoBox>
-                        <MobileStatBox>
-                            <ReviewStat boldText={this.props.stars} subText="average stars" isMobile={isMobile}/>
-                            <ReviewStat boldText={this.props.ranking} subText="ranking" isMobile={isMobile}/>
-                        </MobileStatBox>
                         <MobileSlidingBox>
-                            <SlidingReview reviews={this.props.reviews}/>
+                            <ScrollingReview reviews={this.props.reviews}/>
                         </MobileSlidingBox>
-                    </MobileInfoBox> 
+                    </MobileInfoBox>
                 </MobileBorder>
             );
         }
         else {
             return(
                 <Border>
-                    <Reviews>Reviews</Reviews>
                     <InfoBox>
-                        <StatBox>
-                            <ReviewStat boldText={this.props.stars} subText="average stars" isMobile={isMobile}/>
-                            <ReviewStat boldText={this.props.recommend} subText="recommend" isMobile={isMobile}/>
-                            <ReviewStat boldText={this.props.ranking} subText="ranking" isMobile={isMobile}/>
-                        </StatBox>
                         <SlidingBox>
-                            <SlidingReview reviews={this.props.reviews}/>
+                            <ScrollingReview reviews={this.props.reviews}/>
                         </SlidingBox>
                     </InfoBox>
                 </Border>
@@ -114,8 +84,7 @@ export default class ReviewsBox extends Component {
         }
 
 
-        
+
     }
 
 }
-

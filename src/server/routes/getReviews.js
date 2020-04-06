@@ -31,7 +31,7 @@ function getReviews(con, dorm, callback) {
 				}
 				var avg_rating =  (avg_rating / res.length).toFixed(1);
 				con.query(sqlStatement2, function(err, res2) {	
-					var reccomended = Object.values(res2[0])[0].toFixed(1) * 100 + "%";
+					var reccomended = Object.values(res2[0])[0];
 					con.query(sqlStatement3, function(err, res3) {
 						var ranking = "-"
 						for (var i = 0; i < res3.length; i++) {
@@ -39,7 +39,7 @@ function getReviews(con, dorm, callback) {
 								var ranking = res3[i]["row_number"];
 							}
 						}
-						var to_return = {reccomended: reccomended, avg_rating: avg_rating, ranking: ranking, reviews: res};
+						var to_return = {recommended: reccomended, avg_rating: avg_rating, ranking: ranking, reviews: res};
 						callback(to_return);
 					});
 					con.end(); // DO NOT REMOVE!
