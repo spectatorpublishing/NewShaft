@@ -37,7 +37,7 @@ const GrayFooter = styled.div`
   postion: fixed;
   bottom: 0;
   background-color: gray;
-  height: 20vh;
+  height: 10vh;
   width: 100%;
   display: flex;
   flex-direction: column;
@@ -329,7 +329,7 @@ export default class Reviews extends Component{
           <GrayFooter>
               <MobileButton href = {"http://www.google.com"}><div>SUBMIT A REVIEW</div></MobileButton>
               {/* TODO: update link here to point to actual comparison page */}
-              <MobileButton href = {"/compare-dorms"}><div>COMPARE DORMS</div></MobileButton>
+              {/*<MobileButton href = {"/compare-dorms"}><div>COMPARE DORMS</div></MobileButton>*/}
           </GrayFooter>
         </ReviewsContainerMobile>
       )
@@ -342,12 +342,10 @@ export default class Reviews extends Component{
               sidebarModification={this.handleDormChange} />
             <DesktopButton href = {"http://www.google.com"}>Submit a Review</DesktopButton>
             {/* TODO: update link here to point to actual comparison page */}
-            <DesktopButton href = {"/compare-dorms"}>Compare Dorms</DesktopButton>
+            {/*<DesktopButton href = {"/compare-dorms"}>Compare Dorms</DesktopButton>*/}
           </ColOne>
           <ColTwo>
             <h1>{this.state.dorm}</h1>
-            {/* MoreDormInfo */}
-            {/* QuickReview */}
             <QuickReviewDisplay>
               <Carousel showThumbs={false} infiniteLoop={true}>
                 {this.state.dorm_photos.map((dorm_photo, j) => (

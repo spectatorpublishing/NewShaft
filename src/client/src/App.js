@@ -37,16 +37,16 @@ const menuItems = [
     "external": false,
     "disabled": false,
   },
-  {
-    "name": "Spectrum",
-    "link": "https://www.columbiaspectator.com/spectrum/shaft/",
-    "external": true,
-    "disabled": false,
-  },
 	{
     "name": "Reviews",
     "link": "/reviews",
     "external": false,
+    "disabled": false,
+  },
+  {
+    "name": "Spectrum",
+    "link": "https://www.columbiaspectator.com/spectrum/shaft/",
+    "external": true,
     "disabled": false,
   }
 ];
