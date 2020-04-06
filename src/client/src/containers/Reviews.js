@@ -53,6 +53,22 @@ const MobileButton = styled.a`
   }
 `
 
+const DesktopButton = styled.a`
+  background-color: white;
+  border-radius: 10px;
+  border: 3px solid ${props => props.theme.columbiaBlue};
+  width: 10vw;
+  padding: 15px 5px;
+  margin: 10px 30px;
+  margin-left:4vw;
+  text-decoration: none;
+  color: ${props => props.theme.columbiaBlue};
+  font-size: 20px;
+  font-weight: 700;
+  text-align: center;
+  padding: 10px;
+`
+
 const ReviewSummary = styled.div`
   height: 2rem;
   width: 100%;
@@ -96,6 +112,8 @@ const BlueHeader = styled.div`
 const ColOne = styled.div`
   display: flex;
   width: 20%;
+  flex-direction: column;
+  justify-content: flex-start;
 `
 
 const ColTwo = styled.div`
@@ -310,6 +328,9 @@ export default class Reviews extends Component{
           <ColOne>
             <WhiteboardSidebar
               sidebarModification={this.handleDormChange} />
+            <DesktopButton href = {"http://www.google.com"}>Submit a Review</DesktopButton>
+            {/* TODO: update link here to point to actual comparison page */}
+            <DesktopButton href = {"/compare-dorms"}>Compare Dorms</DesktopButton>
           </ColOne>
           <ColTwo>
             <h1>{this.state.dorm}</h1>
