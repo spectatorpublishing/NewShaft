@@ -59,6 +59,22 @@ const MobileButton = styled.a`
   }
 `
 
+const DesktopButton = styled.a`
+  background-color: white;
+  border-radius: 10px;
+  border: 3px solid ${props => props.theme.columbiaBlue};
+  width: 10vw;
+  padding: 15px 5px;
+  margin: 10px 30px;
+  margin-left:4vw;
+  text-decoration: none;
+  color: ${props => props.theme.columbiaBlue};
+  font-size: 20px;
+  font-weight: 700;
+  text-align: center;
+  padding: 10px;
+`
+
 const ReviewSummary = styled.div`
   height: 2rem;
   width: 100%;
@@ -102,6 +118,8 @@ const BlueHeader = styled.div`
 const ColOne = styled.div`
   display: flex;
   width: 20%;
+  flex-direction: column;
+  justify-content: flex-start;
 `
 
 const ColTwo = styled.div`
@@ -147,18 +165,21 @@ export default class Reviews extends Component{
       dorm: "47 Claremont",
       dormRefresh: false,
       reviews: [],
+      dorm_photos: [],
       QuickReview: {dorm_name: "47 Claremont", cleanliness: 4, noise: 1, community: 2, party: 1, amenities: 3},
       width: window.innerWidth,
       init: true,
-    }
+    };
 
-    this.handleDormChange = this.handleDormChange.bind(this)
-    this.fetchReviews = this.fetchReviews.bind(this)
-    this.fetchQuickReview = this.fetchQuickReview.bind(this)
-    this.createStars = this.createStars.bind(this)
+    this.handleDormChange = this.handleDormChange.bind(this);
+    this.fetchReviews = this.fetchReviews.bind(this);
+    this.fetchQuickReview = this.fetchQuickReview.bind(this);
+    this.createStars = this.createStars.bind(this);
+    this.fetchDormPhotos = this.fetchDormPhotos.bind(this);
 
     this.fetchReviews(this.state.dorm);
     this.fetchQuickReview(this.state.dorm);
+    this.fetchDormPhotos(this.state.dorm);
   }
 
   componentWillMount() {
@@ -178,8 +199,10 @@ export default class Reviews extends Component{
     document.title = "Reviews";
     this.fetchReviews(this.state.dorm);
     this.fetchQuickReview(this.state.dorm);
+    this.fetchDormPhotos(this.state.dorm);
     this.interval = setInterval(() => this.fetchReviews(this.state.dorm), 15000);
     this.interval = setInterval(() => this.fetchQuickReview(this.state.dorm), 15000);
+    this.interval = setInterval(() => this.fetchDormPhotos(this.state.dorm), 15000);
 
   }
 
@@ -222,6 +245,18 @@ export default class Reviews extends Component{
     });
   }
 
+  fetchDormPhotos(dormName){
+    fetch(`/api/getDormPhotos/${dormName}`, {
+      method: "GET",
+      headers: { "Content-Type": "application/json"},
+    })
+      .then(res => res.json())
+      .then(dormPhotos => {
+        this.setState({dorm_photos: Object.values(dormPhotos)})
+      });
+
+  }
+
   handleDormChange(dorm) {
 
     const firstFloor = {
@@ -247,6 +282,7 @@ export default class Reviews extends Component{
     }, () => {
       this.fetchReviews(dorm);
       this.fetchQuickReview(dorm);
+      this.fetchDormPhotos(dorm);
     });
   }
 
@@ -303,22 +339,21 @@ export default class Reviews extends Component{
           <ColOne>
             <WhiteboardSidebar
               sidebarModification={this.handleDormChange} />
+            <DesktopButton href = {"http://www.google.com"}>Submit a Review</DesktopButton>
+            {/* TODO: update link here to point to actual comparison page */}
+            <DesktopButton href = {"/compare-dorms"}>Compare Dorms</DesktopButton>
           </ColOne>
           <ColTwo>
             <h1>{this.state.dorm}</h1>
             {/* MoreDormInfo */}
             {/* QuickReview */}
             <QuickReviewDisplay>
-              <Carousel showThumbs={false}>
-                <div>
-                  <img src={carouselimg} width = "1px"/>
-                </div>
-                <div>
-                  <img src={carouselimg} width = "1px"/>
-                </div>
-                <div>
-                  <img src={carouselimg} width = "1px"/>
-                </div>
+              <Carousel showThumbs={false} infiniteLoop={true}>
+                {this.state.dorm_photos.map((dorm_photo, j) => (
+                  <div key={"div"+j}>
+                    <img src={dorm_photo} width = "1px" key={"img"+j}/>
+                  </div>
+                ))}
               </Carousel>
               <QuickReviewBox>
                 <QuickReview QuickReview={this.state.QuickReview}></QuickReview>

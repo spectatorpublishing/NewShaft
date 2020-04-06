@@ -10,7 +10,7 @@ let Container = styled.div`
 
 let Sidebar = styled.div`
     width: 10vw;
-    height: 100vh;
+    height: auto;
     margin-top:6vh;
     margin-left:5vw;
     display:flex;
