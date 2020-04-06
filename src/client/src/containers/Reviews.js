@@ -368,7 +368,7 @@ export default class Reviews extends Component{
           </ColOne>
           <ColTwo>
             <h1>{this.state.dorm}</h1>
-            {this.state.moreDormInfo ? (<MoreDormInfoBlock dormInfo={this.state.moreDormInfo} ></MoreDormInfoBlock>) : (<div></div>)}
+            {this.state.moreDormInfo ? (<MoreDormInfoBlock dorm={this.state.dorm} dormInfo={this.state.moreDormInfo} ></MoreDormInfoBlock>) : (<div></div>)}
             <QuickReviewDisplay>
               <Carousel showThumbs={false} infiniteLoop={true}>
                 {this.state.dorm_photos.filter(function (img) {

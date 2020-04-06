@@ -65,7 +65,7 @@ export default class MoreDormInfoBlock extends Component {
             return stringArr.join(" ");
         }
         return "";
-        
+
     }
 
     formatRooms(single, double, triple) {
@@ -73,7 +73,7 @@ export default class MoreDormInfoBlock extends Component {
 
         if (single) {
             string += "singles"
-        } 
+        }
         if (double) {
             if (single) {
                 string += ","
@@ -83,22 +83,22 @@ export default class MoreDormInfoBlock extends Component {
         if (triple) {
             string += ",triples"
         }
-        
+
         return this.formatList(string);
     }
 
-    
+
 
     render() {
 
         return (
         <DormInfoBlock>
             <TitleBlock>
-                <Bold>{this.formatRooms(this.props.dormInfo.SINGLE_, this.props.dormInfo.DOUBLE_, this.props.dormInfo.TRIPLE_ )}</Bold>
+                <Bold>{this.props.dorm === "Wien Hall" ? "Singles & Doubles" : this.formatRooms(this.props.dormInfo.SINGLE_, this.props.dormInfo.DOUBLE_, this.props.dormInfo.TRIPLE_ )}</Bold>
                 <Regular>dorms</Regular>
             </TitleBlock>
             <TitleBlock>
-                <Bold>{this.formatList(this.props.dormInfo.CLASS_MAKEUP)}</Bold>
+                <Bold>{this.props.dorm === "Wien Hall" ? "Sophomores, Juniors & Seniors" : this.formatList(this.props.dormInfo.CLASS_MAKEUP)}</Bold>
                 <Regular>residents</Regular>
             </TitleBlock>
             <TitleBlock>
@@ -113,4 +113,3 @@ export default class MoreDormInfoBlock extends Component {
         )
     }
 };
-
