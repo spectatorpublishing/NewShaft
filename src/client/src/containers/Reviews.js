@@ -1,10 +1,10 @@
 import React, { Component } from 'react';
 import styled from "styled-components";
+import MoreDormInfoBlock from "../components/MoreDormInfoBlock";
 import WhiteboardSidebar from "../components/ReviewsWhiteboardSidebar"
 import ReviewsBox from "../components/ReviewsBox"
 import Review from "../components/Review"
 import ReviewPageReview from "../components/ReviewPageReview"
-//import FakeVote from "../components/FakeVote"
 import carouselimg from "./carouselimg.jpg"
 import QuickReview from "../components/QuickReview";
 import "react-responsive-carousel/lib/styles/carousel.min.css";
@@ -23,7 +23,7 @@ const Space = styled.div`
 
 const AllReviews = styled.div`
   width: 90%;
-  height: 95vh;
+  height: 150vh;
   @media(max-width: 700px){
       height: 65vh;
   }
@@ -91,6 +91,9 @@ const ReviewSummary = styled.div`
 
 const ReviewsContainer = styled.div`
     display: flex;
+    width: 100%;
+    height: 100%;
+    padding: 0 auto;
     overflow: hidden;
     flex-direction: row;
 `
@@ -111,7 +114,6 @@ const BlueHeader = styled.div`
     flex-direction: column;
     justify-content: center;
     align-items: center;
-
     &>h1 {
       color: white;
     }
@@ -128,25 +130,28 @@ const ColTwo = styled.div`
     display: flex;
     flex-direction: column;
     scroll-behavior: smooth;
-    margin: 0 2rem;
-    width: ${({ mobile }) => (mobile ? `100%` : `25vw`)};
+    padding-left: 2%;
+    margin-right:2rem;
+    margin-bottom: 2rem;
+    width: ${({ mobile }) => (mobile ? `100%` : `40%`)};
     @media(max-width: 991px){
-        width: 40vw;
-        margin: 0 1rem;
+        display: flex;
+        flex-direction: column;
+        scroll-behavior: smooth;
+        width: 60vw;
     }
     &>h1 {
       margin-top: 2.5rem;
       color: "64AFEC";
       font-weight: extra-bold;
     }
-
 `
 
 const ColThree = styled.div`
     width: 60vw;
-    height: calc(98vh - 2rem);
+    height: 100%;
     overflow-y: scroll;
-    margin-top: 4em;
+    padding: 4rem 0 2rem 1rem;
 `
 
 const QuickReviewDisplay = styled.div`
@@ -173,6 +178,8 @@ export default class Reviews extends Component{
       init: true,
     };
 
+    this.handleDormChange = this.handleDormChange.bind(this)
+    this.fetchMoreDormInfo = this.fetchMoreDormInfo.bind(this)
     this.handleDormChange = this.handleDormChange.bind(this);
     this.fetchReviews = this.fetchReviews.bind(this);
     this.fetchQuickReview = this.fetchQuickReview.bind(this);
@@ -182,6 +189,7 @@ export default class Reviews extends Component{
     this.fetchReviews(this.state.dorm);
     this.fetchQuickReview(this.state.dorm);
     this.fetchDormPhotos(this.state.dorm);
+    this.fetchMoreDormInfo(this.state.dorm)
   }
 
   componentWillMount() {
@@ -202,9 +210,11 @@ export default class Reviews extends Component{
     this.fetchReviews(this.state.dorm);
     this.fetchQuickReview(this.state.dorm);
     this.fetchDormPhotos(this.state.dorm);
+    this.fetchMoreDormInfo(this.state.dorm);
     this.interval = setInterval(() => this.fetchReviews(this.state.dorm), 15000);
     this.interval = setInterval(() => this.fetchQuickReview(this.state.dorm), 15000);
     this.interval = setInterval(() => this.fetchDormPhotos(this.state.dorm), 15000);
+    this.interval = setInterval(() => this.fetchMoreDormInfo(this.state.dorm), 15000);
   }
 
   createStars(score) {
@@ -234,6 +244,18 @@ export default class Reviews extends Component{
   }
 
   /* fetch MoreDormInfo */
+  /* makes calls to getMoreDormInfo.js (passing dorm name as argument).
+  Store the result in this.state.moreDormInfo.*/
+  fetchMoreDormInfo(dormName){
+    fetch(`/api/getMoreDormInfo/${dormName}`, {
+      method: "GET",
+      headers: { "Content-Type": "application/json"},
+    })
+      .then(res => res.json())
+      .then(moreDormInfo => {
+        this.setState({moreDormInfo: moreDormInfo})
+    });
+  }
 
   fetchQuickReview(dormName){
     fetch(`/api/getQuickReview/${dormName}`, {
@@ -284,7 +306,10 @@ export default class Reviews extends Component{
       this.fetchReviews(dorm);
       this.fetchQuickReview(dorm);
       this.fetchDormPhotos(dorm);
+      this.fetchMoreDormInfo(dorm)
     });
+
+
   }
 
   render(){
@@ -346,6 +371,7 @@ export default class Reviews extends Component{
           </ColOne>
           <ColTwo>
             <h1>{this.state.dorm}</h1>
+            {this.state.moreDormInfo ? (<MoreDormInfoBlock dormInfo={this.state.moreDormInfo} ></MoreDormInfoBlock>) : (<div></div>)}
             <QuickReviewDisplay>
               <Carousel showThumbs={false} infiniteLoop={true}>
                 {this.state.dorm_photos.map((dorm_photo, j) => (
