@@ -350,8 +350,7 @@ export default class Reviews extends Component{
             ))}
           </AllReviews>
           <GrayFooter>
-              <MobileButton href = {"http://www.google.com"}><div>SUBMIT A REVIEW</div></MobileButton>
-              {/* TODO: update link here to point to actual comparison page */}
+              <MobileButton href = {"https://docs.google.com/forms/d/e/1FAIpQLSfLfk7KE8fHSh117X4AhVKU-KJkJsvWjbvlW5mcwwbx08es0w/viewform"}><div>SUBMIT A REVIEW</div></MobileButton>
               {/*<MobileButton href = {"/compare-dorms"}><div>COMPARE DORMS</div></MobileButton>*/}
           </GrayFooter>
         </ReviewsContainerMobile>
@@ -363,7 +362,7 @@ export default class Reviews extends Component{
           <ColOne>
             <WhiteboardSidebar
               sidebarModification={this.handleDormChange} />
-            <DesktopButton href = {"http://www.google.com"}>Submit a Review</DesktopButton>
+            <DesktopButton href = {"https://docs.google.com/forms/d/e/1FAIpQLSfLfk7KE8fHSh117X4AhVKU-KJkJsvWjbvlW5mcwwbx08es0w/viewform"}>Submit a Review</DesktopButton>
             {/* TODO: update link here to point to actual comparison page */}
             {/*<DesktopButton href = {"/compare-dorms"}>Compare Dorms</DesktopButton>*/}
           </ColOne>
