@@ -5,7 +5,6 @@ import WhiteboardSidebar from "../components/ReviewsWhiteboardSidebar"
 import ReviewsBox from "../components/ReviewsBox"
 import Review from "../components/Review"
 import ReviewPageReview from "../components/ReviewPageReview"
-//import FakeVote from "../components/FakeVote"
 import carouselimg from "./carouselimg.jpg"
 import QuickReview from "../components/QuickReview";
 import "react-responsive-carousel/lib/styles/carousel.min.css";
@@ -24,7 +23,7 @@ const Space = styled.div`
 
 const AllReviews = styled.div`
   width: 90%;
-  height: 95vh;
+  height: 150vh;
   @media(max-width: 700px){
       height: 65vh;
   }
@@ -99,13 +98,30 @@ const ReviewsContainer = styled.div`
     flex-direction: row;
 `
 
+const ReviewsContainerMobile = styled.div`
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+`
+
+const BlueHeader = styled.div`
+    background-color: ${props => props.theme.columbiaBlue};
+    padding: 2rem;
+    padding-bottom: 1rem;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    &>h1 {
+      color: white;
+    }
+`
+
 const ColOne = styled.div`
   display: flex;
   width: 20%;
-  @media(max-width: 991px){
-      display:flex;
-      width:50vw;
-  }
   flex-direction: column;
   justify-content: flex-start;
 `
@@ -116,6 +132,7 @@ const ColTwo = styled.div`
     scroll-behavior: smooth;
     padding-left: 2%;
     margin-right:2rem;
+    margin-bottom: 2rem;
     width: ${({ mobile }) => (mobile ? `100%` : `40%`)};
     @media(max-width: 991px){
         display: flex;
@@ -132,9 +149,9 @@ const ColTwo = styled.div`
 
 const ColThree = styled.div`
     width: 60vw;
-    height: calc(98vh - 2rem);
+    height: 100%;
     overflow-y: scroll;
-    margin-top: 4em;
+    padding: 4rem 0 2rem 1rem;
 `
 
 const QuickReviewDisplay = styled.div`
@@ -237,6 +254,17 @@ export default class Reviews extends Component{
       .then(res => res.json())
       .then(moreDormInfo => {
         this.setState({moreDormInfo: moreDormInfo})
+    });
+  }
+
+  fetchQuickReview(dormName){
+    fetch(`/api/getQuickReview/${dormName}`, {
+      method: "GET",
+      headers: { "Content-Type": "application/json"},
+    })
+      .then(res => res.json())
+      .then(reviewsInfo => {
+        this.setState({QuickReview : {cleanliness: reviewsInfo.clean, noise: reviewsInfo.noise, community: reviewsInfo.community, party: reviewsInfo.party, amenities: reviewsInfo.amenities}});
     });
   }
 
