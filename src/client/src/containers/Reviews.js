@@ -308,8 +308,6 @@ export default class Reviews extends Component{
       this.fetchDormPhotos(dorm);
       this.fetchMoreDormInfo(dorm)
     });
-
-
   }
 
   render(){
@@ -320,7 +318,7 @@ export default class Reviews extends Component{
       "juniors": "Junior",
       "seniors": "Senior"
     }
-    // TODO: change the review component here to the updated one
+
     if (isMobile){
       let hasNoReviews = (this.state.reviews.length === 0)
       console.log(this.state.reviews)
@@ -352,8 +350,7 @@ export default class Reviews extends Component{
             ))}
           </AllReviews>
           <GrayFooter>
-              <MobileButton href = {"http://www.google.com"}><div>SUBMIT A REVIEW</div></MobileButton>
-              {/* TODO: update link here to point to actual comparison page */}
+              <MobileButton href = {"https://docs.google.com/forms/d/e/1FAIpQLSfLfk7KE8fHSh117X4AhVKU-KJkJsvWjbvlW5mcwwbx08es0w/viewform"}><div>SUBMIT A REVIEW</div></MobileButton>
               {/*<MobileButton href = {"/compare-dorms"}><div>COMPARE DORMS</div></MobileButton>*/}
           </GrayFooter>
         </ReviewsContainerMobile>
@@ -365,7 +362,7 @@ export default class Reviews extends Component{
           <ColOne>
             <WhiteboardSidebar
               sidebarModification={this.handleDormChange} />
-            <DesktopButton href = {"http://www.google.com"}>Submit a Review</DesktopButton>
+            <DesktopButton href = {"https://docs.google.com/forms/d/e/1FAIpQLSfLfk7KE8fHSh117X4AhVKU-KJkJsvWjbvlW5mcwwbx08es0w/viewform"}>Submit a Review</DesktopButton>
             {/* TODO: update link here to point to actual comparison page */}
             {/*<DesktopButton href = {"/compare-dorms"}>Compare Dorms</DesktopButton>*/}
           </ColOne>
@@ -374,7 +371,10 @@ export default class Reviews extends Component{
             {this.state.moreDormInfo ? (<MoreDormInfoBlock dormInfo={this.state.moreDormInfo} ></MoreDormInfoBlock>) : (<div></div>)}
             <QuickReviewDisplay>
               <Carousel showThumbs={false} infiniteLoop={true}>
-                {this.state.dorm_photos.map((dorm_photo, j) => (
+                {this.state.dorm_photos.filter(function (img) {
+                  if (img == 'N/A'){ return false; }
+                  return true;
+                }).map((dorm_photo, j) => (
                   <div key={"div"+j}>
                     <img src={dorm_photo} width = "1px" key={"img"+j}/>
                   </div>
@@ -386,7 +386,6 @@ export default class Reviews extends Component{
             </QuickReviewDisplay>
           </ColTwo>
           <ColThree>
-            {/* Reviews Slider */}
             <AllReviews>
               {this.state.reviews.map((review, j) => (
                   <ReviewPageReview

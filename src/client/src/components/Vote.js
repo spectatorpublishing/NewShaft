@@ -25,30 +25,26 @@ const Downvotes = styled.div`
 
 const UpIMG = styled.img`
     cursor: pointer;
-    filter: ${props => props.clicked ? 
-            "invert(55%) sepia(86%) saturate(502%) hue-rotate(70deg) brightness(79%) contrast(85%)" : 
+    filter: ${props => props.clicked ?
+            "invert(55%) sepia(86%) saturate(502%) hue-rotate(70deg) brightness(79%) contrast(85%)" :
             "invert(90%) sepia(0%) saturate(1681%) hue-rotate(235deg) brightness(93%) contrast(108%)"};
     width: 28px;
     padding: .5rem;
 
-    :hover {
-        filter: ${props => props.clicked ? 
-        "invert(90%) sepia(0%) saturate(1681%) hue-rotate(235deg) brightness(93%) contrast(108%)" : 
-        "invert(55%) sepia(86%) saturate(502%) hue-rotate(70deg) brightness(79%) contrast(85%)"};
-    }
+
 `;
 
 const DownIMG = styled.img`
     cursor: pointer;
-    filter: ${props => props.clicked ? 
+    filter: ${props => props.clicked ?
             "invert(16%) sepia(92%) saturate(4089%) hue-rotate(352deg) brightness(87%) contrast(93%)" :
             "invert(90%) sepia(0%) saturate(1681%) hue-rotate(235deg) brightness(93%) contrast(108%)"};
     width: 28px;
     padding: .5rem;
 
     :hover {
-        filter: ${props => props.clicked ? 
-        "invert(90%) sepia(0%) saturate(1681%) hue-rotate(235deg) brightness(93%) contrast(108%)" : 
+        filter: ${props => props.clicked ?
+        "invert(90%) sepia(0%) saturate(1681%) hue-rotate(235deg) brightness(93%) contrast(108%)" :
         "invert(16%) sepia(92%) saturate(4089%) hue-rotate(352deg) brightness(87%) contrast(93%)"};
     }
 `;
@@ -64,80 +60,77 @@ export default class Vote extends Component{
         this.state = {
             upvotes: 0,
             downvotes: 0,
+            my_upvotes: 0,
+            my_downvotes: 0,
             upClicked: false,
             downClicked: false
         }
-      
+
         this.upvote= this.upvote.bind(this)
         this.downvote = this.downvote.bind(this)
+        this.updateVoteCount = this.updateVoteCount.bind(this)
     }
 
     componentDidMount() {
         this.setState({
-            upvotes: this.props.upvotes,
-            downvotes: this.props.downvotes
+            upvotes: Number(this.props.upvotes),
+            downvotes: Number(this.props.downvotes)
         })
     }
 
-    componentDidUpdate(prevProps) {
+    updateVoteCount(up, down, dorm, roomNum){
+        fetch(`/api/updateVoteCount/${dorm}/${roomNum}/${up}/${down}`, {
+          method: "GET",
+          headers: { "Content-Type": "application/json"},
+        })
+    }
+
+    componentDidUpdate(prevProps, prevState) {
         if(this.props !== prevProps) {
             this.setState({
-                upvotes: this.props.upvotes,
-                downvotes: this.props.downvotes,
-                upClicked: false,
-                downClicked:false
+                upvotes: Number(this.props.upvotes),
+                downvotes: Number(this.props.downvotes),
             })
+            if (this.props.dorm !== prevProps.dorm){
+              this.updateVoteCount(prevState.my_upvotes, prevState.my_downvotes, prevProps.dorm, prevProps.roomNum)
+              this.setState({
+                  my_upvotes: 0,
+                  my_downvotes: 0,
+                  upClicked: false,
+                  downClicked:false
+              })
+          }
         }
     }
 
     upvote() {
         if(!this.state.downClicked) {
-        const action = this.state.upClicked ? "subtract" : "add";
-        fetch(`/api/updateVoteCount/${this.props.dorm}/${this.props.roomNum}/up/${action}`, {
-          method: "GET",
-          headers: { "Content-Type": "application/json"},
-        })
-          .then(res => res.json())
-          .then(votes => {
-            console.log(votes);
-            this.setState({
-                upvotes: votes[0].thumbs_up,
-                upClicked: !this.state.upClicked
-            })
-          });
+          this.setState({
+              my_upvotes: this.state.upClicked ? this.state.my_upvotes - 1 : this.state.my_upvotes + 1,
+              upClicked: !this.state.upClicked
+          })
         }
     }
 
     downvote() {
         if(!this.state.upClicked) {
-        const action = this.state.downClicked ? "subtract" : "add";
-        fetch(`/api/updateVoteCount/${this.props.dorm}/${this.props.roomNum}/down/${action}`, {
-          method: "GET",
-          headers: { "Content-Type": "application/json"},
-        })
-          .then(res => res.json())
-          .then(votes => {
-            this.setState({
-                downvotes: votes[0].thumbs_down,
-                downClicked: !this.state.downClicked
-            })
-            console.log(votes);
-          });
+          this.setState({
+              my_downvotes: this.state.downClicked ? this.state.my_downvotes - 1 : this.state.my_downvotes + 1,
+              downClicked: !this.state.downClicked
+          })
         }
     }
 
     render() {
-        console.log("In votes it is " + this.props.upvotes);
-        console.log("In votes it is " + this.state.upvotes);
         return (
             <Wrapper>
                 <Upvotes>
-                    <UpIMG src = {upvote} alt = "upvote" onClick = {this.upvote} clicked = {this.state.upClicked}/> 
-                    <UpText>Agree {this.state.upvotes}</UpText>
+                    <UpIMG src = {upvote} alt = "upvote" onClick = {this.upvote} clicked = {this.state.upClicked}/>
+                    <UpText>Agree {this.state.upvotes + this.state.my_upvotes}</UpText>
                 </Upvotes>
                 <Downvotes>
-                    <DownIMG src = {downvote} alt = "downvote" onClick = {this.downvote} clicked = {this.state.downClicked}/> 
-                    <DownText>Disagree {this.state.downvotes}</DownText>
+                    <DownIMG src = {downvote} alt = "downvote" onClick = {this.downvote} clicked = {this.state.downClicked}/>
+                    <DownText>Disagree {this.state.downvotes + this.state.my_downvotes}</DownText>
                 </Downvotes>
             </Wrapper>
         )

@@ -6,28 +6,14 @@ var pool = require('../database');
 
 
 
-router.get('/:dorm/:roomNum/:type/:action', async (req, res) => {
-    if(req.params.type == "up" && req.params.action == "add") {
-        var query = `UPDATE review SET thumbs_up = thumbs_up + 1 
-        WHERE dorm = "${req.params.dorm}" and room_num = "${req.params.roomNum}";`
-    } else if(req.params.type == "up" && req.params.action == "subtract") {
-        var query = `UPDATE review SET thumbs_up = thumbs_up - 1 
-        WHERE dorm = "${req.params.dorm}" and room_num = "${req.params.roomNum}";`
-    } else if(req.params.type == "down" && req.params.action == "add") {
-        var query = `UPDATE review SET thumbs_down = thumbs_down + 1 
-        WHERE dorm = "${req.params.dorm}" and room_num = "${req.params.roomNum}";`
-    } else if(req.params.type == "down" && req.params.action == "subtract") {
-        var query = `UPDATE review SET thumbs_down = thumbs_down - 1 
-        WHERE dorm = "${req.params.dorm}" and room_num = "${req.params.roomNum}";`
-    }
-    
-    await pool.query(query);
-
-    var query = `SELECT thumbs_${req.params.type} FROM review WHERE dorm = "${req.params.dorm}" and room_num = "${req.params.roomNum}";`
-
+router.get('/:dorm/:roomNum/:up/:down', async (req, res) => {
+    var query = `UPDATE review_distinct
+                      SET thumbs_up = thumbs_up + (${Number(req.params.up)}),
+                          thumbs_down = thumbs_down + (${Number(req.params.down)})
+                      WHERE dorm = "${req.params.dorm}" and room_num = "${req.params.roomNum}";`
+    console.log(query)
     const result = await pool.query(query);
-    
-	res.send(result)
+	  res.send(result)
 })
 
 module.exports = router;
