@@ -23,8 +23,10 @@ const Space = styled.div`
 
 const AllReviews = styled.div`
   width: 90%;
-  height: 65vh;
-  /* height: 100vh; */
+  height: 95vh;
+  @media(max-width: 700px){
+      height: 65vh;
+  }
   overflow-y: scroll;
   padding: 1rem;
   display: flex;
@@ -144,7 +146,7 @@ const ColThree = styled.div`
     width: 60vw;
     height: calc(98vh - 2rem);
     overflow-y: scroll;
-    margin-top: 5em;
+    margin-top: 4em;
 `
 
 const QuickReviewDisplay = styled.div`
@@ -203,7 +205,6 @@ export default class Reviews extends Component{
     this.interval = setInterval(() => this.fetchReviews(this.state.dorm), 15000);
     this.interval = setInterval(() => this.fetchQuickReview(this.state.dorm), 15000);
     this.interval = setInterval(() => this.fetchDormPhotos(this.state.dorm), 15000);
-
   }
 
   createStars(score) {
