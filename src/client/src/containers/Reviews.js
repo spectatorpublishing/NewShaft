@@ -1,12 +1,17 @@
 import React, { Component } from 'react';
 import styled from "styled-components";
+import WhiteboardSidebar from "../components/ReviewsWhiteboardSidebar"
+import ReviewsBox from "../components/ReviewsBox"
+import Review from "../components/Review"
+import ReviewPageReview from "../components/ReviewPageReview"
+//import FakeVote from "../components/FakeVote"
 import carouselimg from "./carouselimg.jpg"
 import QuickReview from "../components/QuickReview";
 import "react-responsive-carousel/lib/styles/carousel.min.css";
 import { Carousel } from 'react-responsive-carousel';
 
-import WhiteboardSidebar from "../components/ReviewsWhiteboardSidebar"
-import Review from "../components/Review"
+//import WhiteboardSidebar from "../components/ReviewsWhiteboardSidebar"
+//import Review from "../components/Review"
 
 const Star = styled.span`
   color: white;
@@ -18,7 +23,10 @@ const Space = styled.div`
 
 const AllReviews = styled.div`
   width: 90%;
-  height: 100vh;
+  height: 95vh;
+  @media(max-width: 700px){
+      height: 65vh;
+  }
   overflow-y: scroll;
   padding: 1rem;
   display: flex;
@@ -138,7 +146,7 @@ const ColThree = styled.div`
     width: 60vw;
     height: calc(98vh - 2rem);
     overflow-y: scroll;
-    margin-top: 5em;
+    margin-top: 4em;
 `
 
 const QuickReviewDisplay = styled.div`
@@ -197,7 +205,6 @@ export default class Reviews extends Component{
     this.interval = setInterval(() => this.fetchReviews(this.state.dorm), 15000);
     this.interval = setInterval(() => this.fetchQuickReview(this.state.dorm), 15000);
     this.interval = setInterval(() => this.fetchDormPhotos(this.state.dorm), 15000);
-
   }
 
   createStars(score) {
@@ -221,7 +228,8 @@ export default class Reviews extends Component{
     })
       .then(res => res.json())
       .then(reviewsInfo => {
-        this.setState({reviews: reviewsInfo.reviews, avg_rating: reviewsInfo.avg_rating, reccomend: reviewsInfo.reccomended, ranking: reviewsInfo.ranking})
+        //console.log("Reviews data is: " + reviewsInfo.reviews[0].THUMBS_UP)
+        this.setState({reviews: reviewsInfo.reviews, avg_rating: reviewsInfo.avg_rating, recommend: reviewsInfo.recommended, ranking: reviewsInfo.ranking})
       });
   }
 
@@ -304,13 +312,17 @@ export default class Reviews extends Component{
           </BlueHeader>
           <AllReviews>
             {this.state.reviews.map((review, j) => (
-                <Review
+                <ReviewPageReview
                   key={""+j}
                   stars={review.NUM_STARS}
                   review={review.REVIEW_TXT}
                   room={review.ROOM_NUM}
                   year={years_map[review.YEAR]}
                   timestamp={review.TIMESTAMP}
+                  dorm={this.state.dorm}
+                  recommended = {review.RECOMMEND}
+                  thumbs_up = {review.THUMBS_UP}
+                  thumbs_down = {review.THUMBS_DOWN}
                 />
             ))}
           </AllReviews>
@@ -353,13 +365,17 @@ export default class Reviews extends Component{
             {/* Reviews Slider */}
             <AllReviews>
               {this.state.reviews.map((review, j) => (
-                  <Review
+                  <ReviewPageReview
                     key={""+j}
                     stars={review.NUM_STARS}
                     review={review.REVIEW_TXT}
                     room={review.ROOM_NUM}
                     year={years_map[review.YEAR]}
                     timestamp={review.TIMESTAMP}
+                    dorm = {this.state.dorm}
+                    recommended = {review.RECOMMEND}
+                    thumbs_up = {review.THUMBS_UP}
+                    thumbs_down = {review.THUMBS_DOWN}
                   />
               ))}
             </AllReviews>
