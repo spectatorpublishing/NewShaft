@@ -29,8 +29,3 @@ module.exports = app => {
 	app.use('/api/getUniqueFloorNumbers', (req, res) => getUniqueFloorNumbers(req, res));
 	app.use('/api/getMoreDormInfo', (req, res) => getMoreDormInfo(req, res));
 };
-
-
-
-
-

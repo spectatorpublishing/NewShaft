@@ -5,13 +5,11 @@ import { theme } from "../util/GlobalStyles";
 const DormInfoBlock = styled.div`
     display: flex;
     flex-wrap: wrap;
-    justify-content: space-between;
 
     border: 0.05rem solid ${theme.columbiaBlue};
     border-radius: 2%;
     padding: 2rem;
     margin-top: 1rem;
-
 `;
 
 const Bold = styled.div`
@@ -27,10 +25,8 @@ const TitleBlock = styled.div`
     margin-bottom: 1.5rem;
     width: 50%;
 
-	@media (min-width: 1000px) {
-      width: 33%;
-      max-width: 33%;
-      margin-right: 0em;
+    @media (max-width: 786px) {
+        font-size: 17px;
     }
 
     div {
@@ -45,30 +41,31 @@ export default class MoreDormInfoBlock extends Component {
     constructor(props) {
         super(props);
 
-        this.dormInfo = props.dormInfo;
-        this.formatList = this.formatList.bind(this);
-
     }
 
     formatList(string) {
-        let length = string.split(',').length;
+        if (string != null) {
+            let length = string.split(',').length;
 
-        if (length === 1) {
-            return string.charAt(0).toUpperCase() + string.slice(1)
+            if (length === 1) {
+                return string.charAt(0).toUpperCase() + string.slice(1)
+            }
+
+            let stringArr = string.split(',').map((word, index) => {
+                if (index === length - 1) {
+                    return "& " + word.charAt(0).toUpperCase() + word.slice(1);
+                }
+                else if (index === length - 2) {
+                    return word.charAt(0).toUpperCase() + word.slice(1)
+                } else {
+                    return word.charAt(0).toUpperCase() + word.slice(1) + ","
+                }
+            })
+
+            return stringArr.join(" ");
         }
-
-        let stringArr = string.split(',').map((word, index) => {
-            if (index === length - 1) {
-                return "& " + word.charAt(0).toUpperCase() + word.slice(1);
-            }
-            else if (index === length - 2) {
-                return word.charAt(0).toUpperCase() + word.slice(1)
-            } else {
-                return word.charAt(0).toUpperCase() + word.slice(1) + ","
-            }
-        })
-
-        return stringArr.join(" ");
+        return "";
+        
     }
 
     formatRooms(single, double, triple) {
@@ -90,28 +87,27 @@ export default class MoreDormInfoBlock extends Component {
         return this.formatList(string);
     }
 
+    
+
     render() {
-        
-        console.log(this.props.dormInfo)
-        console.log(this.formatList("freshmen"))
 
         return (
         <DormInfoBlock>
             <TitleBlock>
-                <Bold>{this.formatRooms(this.dormInfo.SINGLE_, this.dormInfo.DOUBLE_, this.dormInfo.TRIPLE_ )}</Bold>
+                <Bold>{this.formatRooms(this.props.dormInfo.SINGLE_, this.props.dormInfo.DOUBLE_, this.props.dormInfo.TRIPLE_ )}</Bold>
                 <Regular>dorms</Regular>
             </TitleBlock>
             <TitleBlock>
-                <Bold>{this.formatList(this.dormInfo.CLASS_MAKEUP)}</Bold>
+                <Bold>{this.formatList(this.props.dormInfo.CLASS_MAKEUP)}</Bold>
                 <Regular>residents</Regular>
             </TitleBlock>
             <TitleBlock>
                 <Bold>Per Floor</Bold>
-                <Regular>{"kitchen"}</Regular>
+                <Regular>{this.props.dormInfo.F_KITCHEN ? "kitchen" : "bathroom"}</Regular>
             </TitleBlock>
             <TitleBlock>
                 <Bold>Per Suite</Bold>
-                <Regular>{"bathroom"}</Regular>
+                <Regular>{this.props.dormInfo.P_KITCHEN ? "kitchen" : "bathroom"}</Regular>
             </TitleBlock>
         </DormInfoBlock>
         )

@@ -1,9 +1,9 @@
-export const CUTOFFS = {
+export const CUTOFFS = { 
   "47 Claremont": {
     "3-Person Suite": "30 | 2228",
     "4-Person Suite": "30 | 2370",
-    "5-Person Suite on 1st Fl": "20 | 2224",
-    "6-Person Suite on 1st Fl": "26.6667 | 2909",
+    "5-Person Suite": "20 | 2224",
+    "6-Person Suite": "26.6667 | 2909",
     "7-Person Suite": "10 | 2645"
   },
   "600 West 113": {
