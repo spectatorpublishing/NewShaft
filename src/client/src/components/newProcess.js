@@ -39,7 +39,6 @@ class newProcess extends React.Component {
         isMobile: false
       })
     }
-
   }
 
   render() {
