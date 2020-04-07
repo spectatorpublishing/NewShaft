@@ -1,7 +1,5 @@
 import React from "react";
-
 import '../css/Housing101.css';
-
 import newProcess from "../components/newProcess.js";
 import specialHousing from "../components/specialHousing.js";
 import usingtheSHAFT from "../components/usingtheSHAFT.js";
@@ -28,7 +26,6 @@ class Housing101 extends React.Component {
                     </div>
                 </div>
             </HashRouter>
-            
         )
     }
 }
