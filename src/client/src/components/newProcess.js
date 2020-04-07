@@ -44,7 +44,6 @@ class newProcess extends React.Component {
 
   render() {
     if (this.state.isMobile) {
-  
       return (
         <div class="page-wrapper_phone">
           <div class="row_phoneB rowPadTitleA">
@@ -156,7 +155,6 @@ class newProcess extends React.Component {
     } else {
       return (
         <div class="page-wrapper">
-
             <div class="row_phoneB rowPadTitleA">
                 <div class="title2">
                 The New Process
@@ -167,7 +165,6 @@ class newProcess extends React.Component {
                 <div class="subtitle">
                     What do these changes mean for <i>you</i>?
                 </div>
-                
                 <img src={arrow} class="arrow_style" alt="arrow down"></img>
             </div>
             <div class="row_phoneC">
