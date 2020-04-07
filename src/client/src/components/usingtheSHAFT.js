@@ -5,7 +5,6 @@ import two from '../assets/Housing101_images/two.png';
 import three from '../assets/Housing101_images/three.png';
 import four from '../assets/Housing101_images/four.png';
 import trophy from '../assets/Housing101_images/trophy.png';
-
 import '../css/Housing101.css';
 
 class usingtheSHAFT extends React.Component {
@@ -40,15 +39,12 @@ class usingtheSHAFT extends React.Component {
           isMobile: false
         })
       }
-  
     }
   
     render() {
       if (this.state.isMobile) {
         return (
-
           <div class="page-wrapper_phone">
-
             <div class="row_phoneB rowPadTitleA">
               <div class="title2_phone">
                 Using the<strong>SHAFT</strong>
@@ -60,8 +56,7 @@ class usingtheSHAFT extends React.Component {
                 tools and features that make housing <i>easy</i>.
               </div>
               <img src={arrow} class="arrow_style" alt="arrow down"></img>
-            </div>
-  
+            </div> 
             <div class="rowPad_phone">
               <div class="row_phone2">
                 <div class="number_phone">
@@ -81,7 +76,6 @@ class usingtheSHAFT extends React.Component {
                 <div class="button" href="https://www.theshaft.info/explore">go to Explore page</div>
               </div>
             </div>
-            
             <div class="rowPad_phone">
               <div class="row_phone2">
                 <div class="number_phone">
@@ -101,7 +95,6 @@ class usingtheSHAFT extends React.Component {
                 <div class="button2">go to Lottery Calculator</div>
               </div>
             </div>
-  
             <div class="rowPad_phone">
               <div class="row_phone2">
                 <div class="number_phone">
@@ -121,7 +114,6 @@ class usingtheSHAFT extends React.Component {
                 <div class="button2">go to Compare Dorms</div>
               </div>
             </div>
-  
             <div class="rowPad_phone">
               <div class="row_phone2">
                 <div class="number_phone">
@@ -141,7 +133,6 @@ class usingtheSHAFT extends React.Component {
                 <div class="button2">go to Reviews</div>
               </div>
             </div>
-  
             <div class="rowPad_phone">
               <div class="row_phone2">
                 <div class="number_phone">
@@ -159,16 +150,11 @@ class usingtheSHAFT extends React.Component {
                 <div class="button3">learn more here</div>
               </div>
             </div>
-
           </div>
-
         )
-  
       } else {
         return (
-
           <div class="page-wrapper">
-  
             <div class="row_phoneB rowPadTitleA">
               <div class="title2">
                 Using the<strong>SHAFT</strong>
@@ -181,7 +167,6 @@ class usingtheSHAFT extends React.Component {
               </div>    
               <img src={arrow} class="arrow_style" alt="arrow down"></img>
             </div>
-
             <div class="row_phoneC">
               <div class="column4">
                 <div class="row2">
@@ -195,8 +180,7 @@ class usingtheSHAFT extends React.Component {
                     <div class="textbox3">
                       Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Id leo in vitae turpis massa sed. In massa tempor nec feugiat nisl pretium.
                     </div>
-                    <div class="button"><a href="https://www.theshaft.info/explore">go to Explore Page</a></div>
-                    
+                    <div class="button"><a href="https://www.theshaft.info/explore">go to Explore Page</a></div>  
                   </div>
                 </div>
               </div>
@@ -204,12 +188,10 @@ class usingtheSHAFT extends React.Component {
                 <img src={one} class="img_style5" alt="Filters"></img>
               </div>
             </div>
-  
             <div class="row_phoneA">
               <div class="column_image">
                 <img src={two} class="img_style2" alt="Lottery Calculator Graphic"></img>
               </div>
-  
               <div class="column">
                 <div class="row2">
                   <div class="number4">
@@ -227,7 +209,6 @@ class usingtheSHAFT extends React.Component {
                 </div>
               </div>
             </div>
-  
             <div class="row_phoneA">
               <div class="column4">
                 <div class="row2">
@@ -249,7 +230,6 @@ class usingtheSHAFT extends React.Component {
                 <img src={three} class="img_style5" alt="Compare Dorms"></img>
               </div>
             </div>
-  
             <div class="row_phoneA">
               <div class="column_image">
                 <img src={four} class="img_style2" alt="Reviews Graphic"></img>
@@ -271,7 +251,6 @@ class usingtheSHAFT extends React.Component {
                 </div>
               </div>
             </div>
-  
             <div class="row_phoneA">
               <div class="column4">
                 <div class="row3">
@@ -295,7 +274,6 @@ class usingtheSHAFT extends React.Component {
                 <img src={trophy} class="img_style4" alt="trophy"></img>
               </div>
             </div>  
-
           </div>
         );
       }
