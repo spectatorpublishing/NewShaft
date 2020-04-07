@@ -5,7 +5,6 @@ import two from '../assets/Housing101_images/two.png';
 import three from '../assets/Housing101_images/three.png';
 import four from '../assets/Housing101_images/four.png';
 import trophy from '../assets/Housing101_images/trophy.png';
-
 import '../css/Housing101.css';
 
 class newProcess extends React.Component {
@@ -48,9 +47,6 @@ class newProcess extends React.Component {
   
       return (
         <div class="page-wrapper_phone">
-
-          
-
           <div class="row_phoneB rowPadTitleA">
             <div class="title2_phone">
               New Process
@@ -61,11 +57,8 @@ class newProcess extends React.Component {
             <div class="subtitle_phone">
               What do these changes mean for <i>you</i>?
             </div>
-            
-            <img src={arrow} class="arrow_style" alt="arrow down"></img>
-            
+            <img src={arrow} class="arrow_style" alt="arrow down"></img>    
           </div>
-
           <div class="rowPad_phone">
           <div class="row_phone2">
             <div class="number_phone">
@@ -82,11 +75,8 @@ class newProcess extends React.Component {
             <div class="textbox_phone">
               Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Id leo in vitae turpis massa sed. In massa tempor nec feugiat nisl pretium.
             </div>
-            
           </div>
           </div>
-          
-
           <div class="rowPad_phone">
           <div class="row_phone2">
             <div class="number_phone">
@@ -106,7 +96,6 @@ class newProcess extends React.Component {
             <div class="button2">go to Lottery Calculator</div>
           </div>
           </div>
-
           <div class="rowPad_phone">
           <div class="row_phone2">
             <div class="number_phone">
@@ -126,7 +115,6 @@ class newProcess extends React.Component {
             <div class="button2">go to Compare Dorms</div>
           </div>
           </div>
-
           <div class="rowPad_phone">
           <div class="row_phone2">
             <div class="number_phone">
@@ -146,7 +134,6 @@ class newProcess extends React.Component {
             <div class="button2">go to Reviews</div>
           </div>
           </div>
-
           <div class="rowPad_phone">
           <div class="row_phone2">
             <div class="number_phone">
@@ -166,7 +153,6 @@ class newProcess extends React.Component {
           </div>
         </div>
       )
-
     } else {
       return (
         <div class="page-wrapper">
@@ -183,10 +169,7 @@ class newProcess extends React.Component {
                 </div>
                 
                 <img src={arrow} class="arrow_style" alt="arrow down"></img>
-                
             </div>
-
-
             <div class="row_phoneC">
                 <div class="column4">
                     <div class="row2">
@@ -200,7 +183,6 @@ class newProcess extends React.Component {
                             <div class="textbox3">
                                 Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Id leo in vitae turpis massa sed. In massa tempor nec feugiat nisl pretium.
                             </div> 
-                            
                         </div>
                     </div>
                 </div>
@@ -208,12 +190,10 @@ class newProcess extends React.Component {
                     <img src={one} class="img_style5" alt="Filters Graphic"></img>
                 </div>
             </div>
-
             <div class="row_phoneA">
                 <div class="column_image">
                     <img src={two} class="img_style2" alt="Lottery Calculator Graphic"></img>
                 </div>
-
                 <div class="column">
                     <div class="row2">
                         <div class="number4">
@@ -222,8 +202,7 @@ class newProcess extends React.Component {
                         <div class="column3">
                             <div class="item_title">
                                 Responsibility of Group Leader
-                            </div>
-                    
+                            </div>          
                             <div class="textbox">
                                 Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Id leo in vitae turpis massa sed. In massa tempor nec feugiat nisl pretium.
                             </div>
@@ -232,7 +211,6 @@ class newProcess extends React.Component {
                     </div>
                 </div>
             </div>
-
             <div class="row_phoneA">
                 <div class="column4">
                     <div class="row2">
@@ -255,12 +233,10 @@ class newProcess extends React.Component {
                     <img src={three} class="img_style5" alt="Compare Dorms"></img>
                 </div>
             </div>
-
           <div class="row_phoneA">
             <div class="column_image">
               <img src={four} class="img_style2" alt="Reviews Graphic"></img>
             </div>
-
             <div class="column">
                 <div class="row2">
                     <div class="number4">
@@ -269,8 +245,7 @@ class newProcess extends React.Component {
                     <div class="column3">
                         <div class="item_title">
                             Set Realistic Expectations
-                        </div>
-                    
+                        </div>                    
                         <div class="textbox">
                             Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Id leo in vitae turpis massa sed. In massa tempor nec feugiat nisl pretium.
                         </div>
@@ -279,7 +254,6 @@ class newProcess extends React.Component {
                 </div>
             </div>
           </div>
-
           <div class="row_phoneA">
             <div class="column4">
                 <div class="row3">
@@ -290,8 +264,7 @@ class newProcess extends React.Component {
                 <div class="item_title2">
                     Be Informed:<br></br>Use the<strong>SHAFT</strong>
                 </div>
-                </div>
-                
+                </div>              
                 </div>
             </div>
             <div class="column5">
@@ -308,11 +281,6 @@ class newProcess extends React.Component {
       );
     }
   }
+}
   
-  
-  
-  
-  
-  }
-  
-  export default newProcess;
+export default newProcess;
