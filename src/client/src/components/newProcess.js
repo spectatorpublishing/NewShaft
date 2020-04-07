@@ -91,7 +91,7 @@ class newProcess extends React.Component {
             <div class="textbox_phone">
               Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Id leo in vitae turpis massa sed. In massa tempor nec feugiat nisl pretium.
             </div>
-            <div class="button2">go to Lottery Calculator</div>
+            <div class="button_phone"><a href="https://www.theshaft.info/shaftlive">go to Lottery Calculator</a></div>
           </div>
           </div>
           <div class="rowPad_phone">
@@ -110,7 +110,7 @@ class newProcess extends React.Component {
             <div class="textbox_phone">
               Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Id leo in vitae turpis massa sed. In massa tempor nec feugiat nisl pretium.
             </div>
-            <div class="button2">go to Compare Dorms</div>
+            <div class="button_phone"><a href="https://www.theshaft.info/compare">go to Compare Dorms</a></div>
           </div>
           </div>
           <div class="rowPad_phone">
@@ -129,7 +129,7 @@ class newProcess extends React.Component {
             <div class="textbox_phone">
               Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Id leo in vitae turpis massa sed. In massa tempor nec feugiat nisl pretium.
             </div>
-            <div class="button2">go to Reviews</div>
+            <div class="button_phone"><a href="https://www.theshaft.info/reviews">go to Reviews</a></div>
           </div>
           </div>
           <div class="rowPad_phone">
@@ -146,7 +146,7 @@ class newProcess extends React.Component {
             <div class="textbox2_phone">
             With a <i>new</i> housing system, the game has changed. Know how to play and shoot your best shot.
             </div>
-            <div class="button3">learn more here</div>
+            <div class="button_phone"><a href="https://www.columbiaspectator.com/spectrum/shaft/">learn more here</a></div>
           </div>
           </div>
         </div>
@@ -202,7 +202,7 @@ class newProcess extends React.Component {
                             <div class="textbox">
                                 Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Id leo in vitae turpis massa sed. In massa tempor nec feugiat nisl pretium.
                             </div>
-                            <div class="button2">go to Lottery Calculator</div>
+                           <div class="button2"><a href="https://www.theshaft.info/shaftlive">go to Lottery Calculator</a></div>
                         </div>
                     </div>
                 </div>
@@ -221,7 +221,7 @@ class newProcess extends React.Component {
                             <div class="textbox3">
                                 Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Id leo in vitae turpis massa sed. In massa tempor nec feugiat nisl pretium.
                             </div>
-                            <div class="button2">go to Compare Dorms</div>
+                            <div class="button2"><a href="https://www.theshaft.info/compare">go to Compare Dorms</a></div>
                         </div>
                     </div>
                 </div>
@@ -245,7 +245,7 @@ class newProcess extends React.Component {
                         <div class="textbox">
                             Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Id leo in vitae turpis massa sed. In massa tempor nec feugiat nisl pretium.
                         </div>
-                        <div class="button2">go to Reviews</div>
+                        <div class="button2"><a href="https://www.theshaft.info/reviews">go to Reviews</a></div>
                     </div>
                 </div>
             </div>
@@ -268,7 +268,7 @@ class newProcess extends React.Component {
               <div class="textbox2">
               With a <i>new</i> housing system, the game has changed. Know how to play and shoot your best shot.
               </div>
-              <div class="button3">learn more here</div>
+              <div class="button3"><a href="https://www.columbiaspectator.com/spectrum/shaft/">learn more here</a></div>
               </div>
               <img src={trophy} class="img_style4" alt="trophy"></img>
             </div>
