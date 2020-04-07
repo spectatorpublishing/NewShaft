@@ -3,6 +3,7 @@ import { Switch, Redirect, Route } from 'react-router-dom'
 import Explore from './containers/Explore';
 import ShaftLive from './containers/ShaftLive';
 import Dorm from './containers/Dorm';
+import Compare from './containers/Compare';
 import Housing101 from './containers/Housing101';
 import NavBar from './components/NavBar.js';
 import { ThemeProvider } from "styled-components";
@@ -21,6 +22,12 @@ const menuItems = [
   {
     "name": "Explore",
     "link": "/explore",
+    "external": false,
+    "disabled": false,
+  },
+  {
+    "name": "compare",
+    "link": "/compare",
     "external": false,
     "disabled": false,
   },
@@ -53,6 +60,7 @@ const App = () => (
       <Switch>
         <Route exact path="/" render={() => (<Redirect from='/' to='/explore'/>)}/>
         <Route exact path="/explore" component={Explore} />
+        <Route exact path="/compare" component={Compare} />
         <Route path="/explore/:dorm" component={Dorm} />
         <Route exact path="/shaftlive" component={ShaftLive} />
         <Route exact path="/housing101" component={Housing101} />
