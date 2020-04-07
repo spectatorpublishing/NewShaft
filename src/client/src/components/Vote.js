@@ -31,7 +31,11 @@ const UpIMG = styled.img`
     width: 28px;
     padding: .5rem;
 
-
+    :hover {
+        filter: ${props => props.clicked ?
+        "invert(90%) sepia(0%) saturate(1681%) hue-rotate(235deg) brightness(93%) contrast(108%)" :
+        "invert(55%) sepia(86%) saturate(502%) hue-rotate(70deg) brightness(79%) contrast(85%)"};
+    }
 `;
 
 const DownIMG = styled.img`
