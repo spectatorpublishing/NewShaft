@@ -29,7 +29,7 @@ const QuickReviewDisplay = styled.div`
   margin-left: 2.5rem;
   margin-bottom: 0.5rem;
   text-align: left;
-  font-size: 1.875rem;
+  font-size: 1.5rem;
 `
 
 const QuickReviewTitle = styled.div`
@@ -37,7 +37,7 @@ const QuickReviewTitle = styled.div`
   padding-bottom: 0.5rem;
   margin-left: 1.5rem;
   text-align: left;
-  font-size: 2.1875rem;
+  font-size: 2rem;
   font-weight: bold;
 `
 

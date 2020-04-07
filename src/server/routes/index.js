@@ -14,6 +14,7 @@ const getLotteryNum = require('./getLotteryNum.js');
 const getUniqueFloorNumbers = require('./getUniqueFloorNumbers.js');
 const updateVoteCount = require('./updateVoteCount.js');
 const getQuickReview = require('./getQuickReview.js');
+const getMoreDormInfo = require('./getMoreDormInfo');
 
 // Implement backend routes
 module.exports = app => {
@@ -28,6 +29,7 @@ module.exports = app => {
 	app.use('/api/getRelatedDorms', (req, res) => getRelatedDorms(req, res));
 	app.use('/api/getLotteryNum', (req, res) => getLotteryNum(req, res));
 	app.use('/api/getUniqueFloorNumbers', (req, res) => getUniqueFloorNumbers(req, res));
+	app.use('/api/getMoreDormInfo', (req, res) => getMoreDormInfo(req, res));
 	app.use('/api/updateVoteCount', (req, res) => updateVoteCount(req, res));
 	app.use('/api/getQuickReview', (req, res) => getQuickReview(req, res));
 };

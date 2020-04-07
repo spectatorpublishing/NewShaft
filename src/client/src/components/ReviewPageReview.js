@@ -5,7 +5,7 @@ import Vote from "./Vote";
 
 let Wrapper = styled.div`
     padding: 1rem;
-    margin-bottom: 1.15rem;
+    margin-bottom: 2rem;
     box-shadow: 5px 5px 10px ${props => props.theme.lightGray};
     border: 1px solid ${props => props.theme.lightGray};
 `;
@@ -67,11 +67,10 @@ export default class ReviewPageReview extends Component {
 
   render() {
     let hasNoReviews = (this.props.review === "No Reviews")
-    //console.log("ReviewsPage data is " + this.props.thumbs_up)
     return (
       <Wrapper>
           <InfoWrapper>
-            {hasNoReviews ? null : this.createStars(this.props.stars)} 
+            {hasNoReviews ? null : this.createStars(this.props.stars)}
             {hasNoReviews ? null : this.createReviewerInfo(this.props.room, this.props.year, this.props.timestamp, this.props.recommended)}
           </InfoWrapper>
           <ReviewText>
