@@ -6,6 +6,7 @@ import three from '../assets/Housing101_images/three.png';
 import four from '../assets/Housing101_images/four.png';
 import trophy from '../assets/Housing101_images/trophy.png';
 import '../css/Housing101.css';
+import { NavLink } from "react-router-dom";
 
 class usingtheSHAFT extends React.Component {
     constructor(props) {
@@ -71,9 +72,9 @@ class usingtheSHAFT extends React.Component {
               </div>
               <div class="row_phone">
                 <div class="textbox_phone">
-                  Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Id leo in vitae turpis massa sed. In massa tempor nec feugiat nisl pretium.
+                  With theShaft’s filters, it is easy to find and explore housing options that fit you or your group’s housing preferences. With our map, it is easy to see where you can or will be living in Morningside Heights!
                 </div>
-                <div class="button" href="https://www.theshaft.info/explore">go to Explore page</div>
+                <div class="button_phone"><a href="https://www.theshaft.info/explore">go to Explore Page</a></div>
               </div>
             </div>
             <div class="rowPad_phone">
@@ -90,9 +91,9 @@ class usingtheSHAFT extends React.Component {
               </div>
               <div class="row_phone">
                 <div class="textbox_phone">
-                  Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Id leo in vitae turpis massa sed. In massa tempor nec feugiat nisl pretium.
+                  Our staff has been collecting Columbia Housing data for years. With theShaft’s dynamic, color-coated floor plans, you can measure your chances for living in your favorite dorm next year and be ready for room selection.
                 </div>
-                <div class="button2">go to Lottery Calculator</div>
+                <div class="button_phone"><a href="https://www.theshaft.info/shaftlive">go to Lottery Calculator</a></div>
               </div>
             </div>
             <div class="rowPad_phone">
@@ -109,9 +110,9 @@ class usingtheSHAFT extends React.Component {
               </div>
               <div class="row_phone">
                 <div class="textbox_phone">
-                  Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Id leo in vitae turpis massa sed. In massa tempor nec feugiat nisl pretium.
+                  There are a myriad of housing options and dorm styles at Columbia. Having a hard time choosing? With theShaft’s compare feature, you can compare building amenities and student reviews for dorms.
                 </div>
-                <div class="button2">go to Compare Dorms</div>
+                <div class="button_phone"><a href="https://www.theshaft.info/compare">go to Compare Dorms</a></div>
               </div>
             </div>
             <div class="rowPad_phone">
@@ -124,13 +125,13 @@ class usingtheSHAFT extends React.Component {
                 </div>
               </div>
               <div class="row_phone">            
-                <img src={four} class="img_style_phone" alt="Cat on windowsill in front of snowy scene"></img>
+                <img src={four} class="img_style_phone" alt="four"></img>
               </div>
               <div class="row_phone">
                 <div class="textbox_phone">
-                  Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Id leo in vitae turpis massa sed. In massa tempor nec feugiat nisl pretium.
+                  With theShaft’s reviews page, read actual housing experiences of Columbia students before you. With up- and down-vote functionality, you can gauge how much other students resonate with their experiences.
                 </div>
-                <div class="button2">go to Reviews</div>
+                <div class="button_phone"><a href="https://www.theshaft.info/reviews">go to Reviews</a></div>
               </div>
             </div>
             <div class="rowPad_phone">
@@ -147,7 +148,7 @@ class usingtheSHAFT extends React.Component {
                 <div class="textbox2_phone">
                   With a <i>new</i> housing system, the game has changed. Know how to play and shoot your best shot.
                 </div>
-                <div class="button3">learn more here</div>
+                <div class="button_phone"><NavLink to="/newProcess">learn more here</NavLink></div>
               </div>
             </div>
           </div>
@@ -178,9 +179,9 @@ class usingtheSHAFT extends React.Component {
                       Toggle filters: <br></br><strong>Explore Page</strong>
                     </div>                  
                     <div class="textbox3">
-                      Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Id leo in vitae turpis massa sed. In massa tempor nec feugiat nisl pretium.
+                      With theShaft’s filters, it is easy to find and explore housing options that fit you or your group’s housing preferences. With our map, it is easy to see where you can or will be living in Morningside Heights!
                     </div>
-                    <div class="button"><a href="https://www.theshaft.info/explore">go to Explore Page</a></div>  
+                    <div class="button2"><a href="https://www.theshaft.info/explore">go to Explore Page</a></div>  
                   </div>
                 </div>
               </div>
@@ -202,9 +203,9 @@ class usingtheSHAFT extends React.Component {
                       Measure your luck: <br></br><strong>Lottery Calculator</strong>
                     </div>    
                     <div class="textbox">
-                      Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Id leo in vitae turpis massa sed. In massa tempor nec feugiat nisl pretium.
+                      Our staff has been collecting Columbia Housing data for years. With theShaft’s dynamic, color-coated floor plans, you can measure your chances for living in your favorite dorm next year and be ready for room selection.
                     </div>
-                    <div class="button2">go to Lottery Calculator</div>
+                    <div class="button2"><a href="https://www.theshaft.info/shaftlive">go to Lottery Calculator</a></div>
                   </div>
                 </div>
               </div>
@@ -220,9 +221,9 @@ class usingtheSHAFT extends React.Component {
                       Weigh options: <br></br><strong>Compare Dorms</strong>
                     </div>              
                     <div class="textbox3">
-                      Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Id leo in vitae turpis massa sed. In massa tempor nec feugiat nisl pretium.
+                      There are a myriad of housing options and dorm styles at Columbia. Having a hard time choosing? With theShaft’s compare feature, you can compare building amenities and student reviews for dorms.
                     </div>
-                    <div class="button2">go to Compare Dorms</div>
+                    <div class="button2"><a href="https://www.theshaft.info/compare">go to Compare Dorms</a></div>
                   </div>
                 </div>
               </div>
@@ -244,9 +245,9 @@ class usingtheSHAFT extends React.Component {
                       Be an insider: <br></br>Read <strong>Reviews</strong>
                     </div>            
                     <div class="textbox">
-                      Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Id leo in vitae turpis massa sed. In massa tempor nec feugiat nisl pretium.
+                      With theShaft’s reviews page, read actual housing experiences of Columbia students before you. With up- and down-vote functionality, you can gauge how much other students resonate with their experiences.
                     </div>
-                    <div class="button2">go to Reviews</div>
+                    <div class="button2"><a href="https://www.theshaft.info/reviews">go to Reviews</a></div>
                   </div>
                 </div>
               </div>
@@ -269,7 +270,7 @@ class usingtheSHAFT extends React.Component {
                   <div class="textbox2">
                     With a <i>new</i> housing system, the game has changed. Know how to play and shoot your best shot.
                   </div>
-                  <div class="button3">learn more here</div>
+                  <div class="button3"><NavLink to="/newProcess">learn more here</NavLink></div>
                 </div>
                 <img src={trophy} class="img_style4" alt="trophy"></img>
               </div>

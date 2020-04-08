@@ -6,6 +6,7 @@ import three from '../assets/Housing101_images/three.png';
 import four from '../assets/Housing101_images/four.png';
 import trophy from '../assets/Housing101_images/trophy.png';
 import '../css/Housing101.css';
+import { NavLink } from "react-router-dom";
 
 class newProcess extends React.Component {
   constructor(props) {
@@ -71,7 +72,7 @@ class newProcess extends React.Component {
           </div>
           <div class="row_phone">
             <div class="textbox_phone">
-              Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Id leo in vitae turpis massa sed. In massa tempor nec feugiat nisl pretium.
+              Without re-group, there is no longer risk of having a group that’s too big for the remaining available suites. This impacts <i>everyone</i>, since more desirable dorms and suites will be selected more quickly than before.
             </div>
           </div>
           </div>
@@ -89,9 +90,8 @@ class newProcess extends React.Component {
           </div>
           <div class="row_phone">
             <div class="textbox_phone">
-              Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Id leo in vitae turpis massa sed. In massa tempor nec feugiat nisl pretium.
+              For housing groups with more than one individual, one group member will be designated the group leader. This person is responsible for making the groups official housing selection during their appointment. Be sure your group leader knows everybody’s preferences and has a list of options ready to go.
             </div>
-            <div class="button2">go to Lottery Calculator</div>
           </div>
           </div>
           <div class="rowPad_phone">
@@ -108,9 +108,8 @@ class newProcess extends React.Component {
           </div>
           <div class="row_phone">
             <div class="textbox_phone">
-              Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Id leo in vitae turpis massa sed. In massa tempor nec feugiat nisl pretium.
+              For groups that may be split up due to all suites their size being taken, members should communicate what their living preferences are to each other and their group leader. Members should also settle on back-up plans, since housing selection can be unpredictable and ideal outcomes are not guaranteed. 
             </div>
-            <div class="button2">go to Compare Dorms</div>
           </div>
           </div>
           <div class="rowPad_phone">
@@ -127,9 +126,9 @@ class newProcess extends React.Component {
           </div>
           <div class="row_phone">
             <div class="textbox_phone">
-              Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Id leo in vitae turpis massa sed. In massa tempor nec feugiat nisl pretium.
+              Avoid disappointment the day of your housing selection appointment. Use theShaft’s Lottery Predictor feature to determine a list of satisfying safe, target, and dream housing choices before your appointment. 
             </div>
-            <div class="button2">go to Reviews</div>
+            <div class="button_phone"><a href="http://www.theshaft.info/shaftlive">go to Lottery Calculator</a></div>
           </div>
           </div>
           <div class="rowPad_phone">
@@ -144,9 +143,9 @@ class newProcess extends React.Component {
           </div>
           <div class="row_phone">
             <div class="textbox2_phone">
-            With a <i>new</i> housing system, the game has changed. Know how to play and shoot your best shot.
+            Learn how to use theShaft’s suite of new features to transform your housing experience.
             </div>
-            <div class="button3">learn more here</div>
+            <div class="button_phone"><NavLink exact to="/">learn more here</NavLink></div>
           </div>
           </div>
         </div>
@@ -177,7 +176,7 @@ class newProcess extends React.Component {
                                 No more<br></br>Re-Group
                             </div>
                             <div class="textbox3">
-                                Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Id leo in vitae turpis massa sed. In massa tempor nec feugiat nisl pretium.
+                                Without re-group, there is no longer risk of having a group that’s too big for the remaining available suites. This impacts everyone, since more desirable dorms and suites will be selected more quickly than before.
                             </div> 
                         </div>
                     </div>
@@ -200,9 +199,8 @@ class newProcess extends React.Component {
                                 Responsibility of Group Leader
                             </div>          
                             <div class="textbox">
-                                Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Id leo in vitae turpis massa sed. In massa tempor nec feugiat nisl pretium.
+                                For housing groups with more than one individual, one group member will be designated the group leader. This person is responsible for making the groups official housing selection during their appointment. Be sure your group leader knows everybody’s preferences and has a list of options ready to go.
                             </div>
-                            <div class="button2">go to Lottery Calculator</div>
                         </div>
                     </div>
                 </div>
@@ -217,11 +215,9 @@ class newProcess extends React.Component {
                             <div class="item_title">
                                 Avoid Chaos: <br></br>Communicate!
                             </div>
-                    
                             <div class="textbox3">
-                                Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Id leo in vitae turpis massa sed. In massa tempor nec feugiat nisl pretium.
+                                For groups that may be split up due to all suites their size being taken, members should communicate what their living preferences are to each other and their group leader. Members should also settle on back-up plans, since housing selection can be unpredictable and ideal outcomes are not guaranteed.
                             </div>
-                            <div class="button2">go to Compare Dorms</div>
                         </div>
                     </div>
                 </div>
@@ -243,9 +239,9 @@ class newProcess extends React.Component {
                             Set Realistic Expectations
                         </div>                    
                         <div class="textbox">
-                            Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Id leo in vitae turpis massa sed. In massa tempor nec feugiat nisl pretium.
+                            Avoid disappointment the day of your housing selection appointment. Use theShaft’s Lottery Predictor feature to determine a list of satisfying safe, target, and dream housing choices before your appointment.
                         </div>
-                        <div class="button2">go to Reviews</div>
+                        <div class="button2"><a href="http://www.theshaft.info/shaftlive">go to Lottery Calculator</a></div>
                     </div>
                 </div>
             </div>
@@ -266,9 +262,9 @@ class newProcess extends React.Component {
             <div class="column5">
               <div class="column">
               <div class="textbox2">
-              With a <i>new</i> housing system, the game has changed. Know how to play and shoot your best shot.
+              Learn how to use theShaft’s suite of new features to transform your housing experience.
               </div>
-              <div class="button3">learn more here</div>
+              <div class="button3"><NavLink exact to="/">learn more here</NavLink></div>
               </div>
               <img src={trophy} class="img_style4" alt="trophy"></img>
             </div>
