@@ -270,6 +270,11 @@ title{
   padding-right: 0%;
 }
 
+.img_style6{
+  max-width:30vw;
+  padding-right: 0%;
+}
+
 .row_phoneA{
   margin-left:10px;
   margin-right:10px;
@@ -507,7 +512,7 @@ title{
 }
 
 .textbox_phone{
-  font-size: calc(14px + (26 - 14) * ((100vw - 300px) / (1600 - 300)));
+  font-size: calc(20px + (30 - 20) * ((100vw - 300px) / (1600 - 300)));
   font-family: 'Raleway';
   text-align: center;
   padding: 20px;
@@ -561,7 +566,7 @@ title{
 }
 
 .img_style_phone{
-  max-width:75%;
+  max-width:60%;
   padding: 10px;
   padding-top:10px;
   display: flex;
