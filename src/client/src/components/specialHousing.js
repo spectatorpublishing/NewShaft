@@ -1,6 +1,6 @@
 import React from "react";
 import arrow from '../assets/Housing101_images/arrow.png';
-import one from '../assets/Housing101_images/one.png';
+import apartment from '../assets/Housing101_images/apartment.png';
 import two from '../assets/Housing101_images/two.png';
 import three from '../assets/Housing101_images/three.png';
 import four from '../assets/Housing101_images/four.png';
@@ -63,16 +63,17 @@ class specialHousing extends React.Component {
               1
             </div>
             <div class="item_title_phone">
-              CU/Barnard<br></br>Exchange
+              Barnard/Columbia<br></br>Housing Swap
             </div>
           </div>
           <div class="row_phone">            
-            <img src={one} class="img_style_phone" alt="Cat on windowsill in front of snowy scene"></img>
+            <img src={apartment} class="img_style_phone" alt="apartment"></img>
           </div>
           <div class="row_phone">
             <div class="textbox_phone">
-              Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Id leo in vitae turpis massa sed. In massa tempor nec feugiat nisl pretium.
-            </div>            
+              Is this possible? Yes! Are there risks? Yes. Know that only 30-40 students every year manage to live with their cross-college counterparts every year.
+            </div>
+          <div class="button_phone"><a href="https://www.columbiaspectator.com/spectrum/2019/03/05/what-is-the-bccu-housing-exchange/">read more here</a></div>
           </div>
           </div>
           <div class="rowPad_phone">
@@ -89,9 +90,9 @@ class specialHousing extends React.Component {
           </div>
           <div class="row_phone">
             <div class="textbox_phone">
-              Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Id leo in vitae turpis massa sed. In massa tempor nec feugiat nisl pretium.
+              Interested in living in a community with a shared-interest? Prefer to live in a brownstone over a traditional dormitory? Special Interest Communities (SICs) might be the move for you!
             </div>
-            <div class="button_phone"><a href="https://www.theshaft.info/shaftlive">go to Lottery Calculator</a></div>
+            <div class="button_phone"><a href="https://www.columbiaspectator.com/spectrum/2019/01/28/hack-housing-what-are-special-interest-communities/">read more on SICs</a></div>
           </div>
           </div>
           <div class="rowPad_phone">
@@ -108,9 +109,9 @@ class specialHousing extends React.Component {
           </div>
           <div class="row_phone">
             <div class="textbox_phone">
-              Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Id leo in vitae turpis massa sed. In massa tempor nec feugiat nisl pretium.
+              Looking for a coveted sophomore-single? Love the convenience of living on the Quad? Want to experience an active, robust residential community after freshman year? Check out the Living-Learning Center.
             </div>
-            <div class="button_phone"><a href="https://www.theshaft.info/compare">go to Compare Dorms</a></div>
+            <div class="button_phone"><a href="https://www.columbiaspectator.com/spectrum/2017/01/19/thinking-living-living-learning-center-heres-how-apply/">read more on LLC</a></div>
           </div>
           </div>
           <div class="rowPad_phone">
@@ -127,9 +128,9 @@ class specialHousing extends React.Component {
           </div>
           <div class="row_phone">
             <div class="textbox_phone">
-              Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Id leo in vitae turpis massa sed. In massa tempor nec feugiat nisl pretium.
+              Interested in making your residential community a warm, safe home for others? Attracted to free housing, a guaranteed single, and wonderful lively residential life staff? Consider being an RA.
             </div>
-            <div class="button_phone"><a href="https://www.theshaft.info/reviews">go to Reviews</a></div>
+            <div class="button_phone"><a href="https://www.cc-seas.columbia.edu/reslife/working/RA">learn more about the role</a></div>
           </div>
           </div>
           <div class="rowPad_phone">
@@ -146,9 +147,10 @@ class specialHousing extends React.Component {
           </div>
           <div class="row_phone">
             <div class="textbox_phone">
-              Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Id leo in vitae turpis massa sed. In massa tempor nec feugiat nisl pretium.
+             Columbia now offers fantastic housing benefits for students with disabilities, including the ability to choose a friend to live with (in a suite) or next door to (in a hall) you! Find out more below.
             </div>
-            <div class="button_phone"><a href="https://www.theshaft.info/compare">go to Compare Dorms</a></div>
+            <div class="button_phone"><a href="https://roomselection.housing.columbia.edu/content/disability-housing-accommodations">ODS housing accommodations</a></div>
+            <div class="button_phone"><a href="https://barnard.edu/disabilityservices/housing-accommodations">CARDS housing accommodations</a></div>
           </div>
           </div>
           <div class="rowPad_phone">
@@ -165,9 +167,9 @@ class specialHousing extends React.Component {
           </div>
           <div class="row_phone">
             <div class="textbox_phone">
-              Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Id leo in vitae turpis massa sed. In massa tempor nec feugiat nisl pretium.
+              Yes, you can study abroad and return with guaranteed housing! Make sure to take the right steps to ensure you do not lose your guaranteed-housing status.
             </div>
-            <div class="button_phone"><a href="https://www.theshaft.info/reviews">go to Reviews</a></div>
+            <div class="button_phone"><a href="https://roomselection.housing.columbia.edu/content/study-abroad">more information</a></div>
           </div>
           </div>
           <div class="rowPad_phone">
@@ -182,9 +184,9 @@ class specialHousing extends React.Component {
           </div>
           <div class="row_phone">
             <div class="textbox2_phone">
-            With a <i>new</i> housing system, the game has changed. Know how to play and shoot your best shot.
+            Ready to use theShaft’s suite of new features to transform your housing experience?
             </div>
-            <div class="button_phone"><a href="https://www.columbiaspectator.com/spectrum/shaft/">learn more here</a></div>
+            <div class="button_phone"><a href="https://www.theshaft.info/explore">learn more here</a></div>
           </div>
           </div>
         </div>
@@ -212,16 +214,17 @@ class specialHousing extends React.Component {
                         </div>
                         <div class="column3">
                             <div class="item_title">
-                                CU/Barnard<b></b> Exchange
+                                Barnard/Columbia<br></br>Housing Swap
                             </div>
                             <div class="textbox3">
-                                Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Id leo in vitae turpis massa sed. In massa tempor nec feugiat nisl pretium.
+                                Is this possible? Yes! Are there risks? Yes. Know that only 30-40 students every year manage to live with their cross-college counterparts every year.
                             </div>
+                            <div class="button2"><a href="https://www.columbiaspectator.com/spectrum/2019/03/05/what-is-the-bccu-housing-exchange/">read more here</a></div>
                         </div>
                     </div>
                 </div>
                 <div class="column_image2">
-                    <img src={one} class="img_style5"></img>
+                    <img src={apartment} class="img_style6"></img>
                 </div>
             </div>
             <div class="row_phoneA">
@@ -238,9 +241,9 @@ class specialHousing extends React.Component {
                                 Special Interest<br></br>Communities
                             </div>
                             <div class="textbox">
-                                Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Id leo in vitae turpis massa sed. In massa tempor nec feugiat nisl pretium.
+                                Interested in living in a community with a shared-interest? Prefer to live in a brownstone over a traditional dormitory? Special Interest Communities (SICs) might be the move for you!
                             </div>
-                            <div class="button2"><a href="https://www.theshaft.info/shaftlive">go to Lottery Calculator</a></div>
+                            <div class="button2"><a href="https://www.columbiaspectator.com/spectrum/2019/01/28/hack-housing-what-are-special-interest-communities/">read more on SICs</a></div>
                         </div>
                     </div>
                 </div>
@@ -256,9 +259,9 @@ class specialHousing extends React.Component {
                                 Living Learning<br></br>Center
                             </div>
                             <div class="textbox3">
-                                Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Id leo in vitae turpis massa sed. In massa tempor nec feugiat nisl pretium.
+                                Looking for a coveted sophomore-single? Love the convenience of living on the Quad? Want to experience an active, robust residential community after freshman year? Check out the Living-Learning Center.
                             </div>
-                            <div class="button2"><a href="https://www.theshaft.info/compare">go to Compare Dorms</a></div>
+                            <div class="button2"><a href="https://www.columbiaspectator.com/spectrum/2017/01/19/thinking-living-living-learning-center-heres-how-apply/">read more on LLC</a></div>
                         </div>
                     </div>
                 </div>
@@ -280,9 +283,9 @@ class specialHousing extends React.Component {
                             Become a<br></br>Resident Advisor
                         </div>        
                         <div class="textbox">
-                            Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Id leo in vitae turpis massa sed. In massa tempor nec feugiat nisl pretium.
+                            Interested in making your residential community a warm, safe home for others? Attracted to free housing, a guaranteed single, and wonderful lively residential life staff? Consider being an RA.
                         </div>
-                        <div class="button2"><a href="https://www.theshaft.info/reviews">go to Reviews</a></div>
+                        <div class="button2"><a href="https://www.cc-seas.columbia.edu/reslife/working/RA">learn more about the role</a></div>
                     </div>
                 </div>
             </div>
@@ -298,9 +301,10 @@ class specialHousing extends React.Component {
                                 Disability Services<br></br>and Housing
                             </div>
                             <div class="textbox3">
-                                Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Id leo in vitae turpis massa sed. In massa tempor nec feugiat nisl pretium.
+                                Columbia now offers fantastic housing benefits for students with disabilities, including the ability to choose a friend to live with (in a suite) or next door to (in a hall) you! Find out more below.
                             </div>
-                            <div class="button2"><a href="https://www.theshaft.info/compare">go to Compare Dorms</a></div>
+                            <div class="button2"><a href="https://roomselection.housing.columbia.edu/content/disability-housing-accommodations">ODS housing accommodations</a></div>
+                            <div class="button2"><a href="https://barnard.edu/disabilityservices/housing-accommodations">CARDS housing accommodations</a></div>
                         </div>
                     </div>
                 </div>
@@ -322,9 +326,9 @@ class specialHousing extends React.Component {
                             Studying Abroad
                         </div>
                         <div class="textbox">
-                            Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Id leo in vitae turpis massa sed. In massa tempor nec feugiat nisl pretium.
+                            Yes, you can study abroad and return with guaranteed housing! Make sure to take the right steps to ensure you do not lose your guaranteed-housing status.
                         </div>
-                        <div class="button2"><a href="https://www.theshaft.info/reviews">go to Reviews</a></div>
+                         <div class="button2"><a href="https://roomselection.housing.columbia.edu/content/study-abroad">more information</a></div>
                     </div>
                 </div>
             </div>
@@ -345,9 +349,9 @@ class specialHousing extends React.Component {
             <div class="column5">
               <div class="column">
               <div class="textbox2">
-              With a <i>new</i> housing system, the game has changed. Know how to play and shoot your best shot.
+               Ready to use theShaft’s suite of new features to transform your housing experience?
               </div>
-              <div class="button3"><a href="https://www.columbiaspectator.com/spectrum/shaft/">learn more here</a></div>
+              <div class="button3"><a href="http://www.theshaft.info">learn more here</a></div>
               </div>
               <img src={trophy} class="img_style4" alt="trophy"></img>
             </div>
