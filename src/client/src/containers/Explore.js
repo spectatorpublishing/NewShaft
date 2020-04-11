@@ -6,6 +6,7 @@ import Maps from "../components/Maps";
 import SearchBar from "../components/SearchBar"
 import CurrFilters from "../components/CurrFilters"
 import { FILTER_NAME_TO_KEY } from "../util/DormFilter.js";
+import DropDown from "../components/DropDown";
 
 import _ from "lodash"
 
@@ -177,6 +178,7 @@ export default class Explore extends Component {
         </ColOne>
         <ColTwo>
           <MapView>
+            {/*
             <Maps
               latitudes={this.state.dorms.map((dorm) => dorm.LATITUDE)} 
               longitudes={this.state.dorms.map((dorm) => dorm.LONGITUDE)} 
@@ -186,6 +188,7 @@ export default class Explore extends Component {
               width={"100%"}
               height={"900px"}
               />
+            */}
           </MapView>
         </ColTwo>
       </ExploreContainer>

@@ -2,6 +2,9 @@ import React, { Component } from 'react';
 import styled from 'styled-components';
 import FAQBubble from "../components/FAQBubble.js";
 import { theme } from "../util/GlobalStyles";
+import DropDown from '../components/DropDown.js';
+import CompareCarousel from '../components/CompareCarousel.js'
+import claremont from '../assets/47 Claremont 1.svg'
 
 let Title = styled.div`
     width:100%;
@@ -41,14 +44,73 @@ let SomeText = styled.p`
     color: ${props => props.theme.darkGray};
 `
 
+let DropDownContainer = styled.div`
+    display: flex;
+    flex-direction: row;
+    align items: center;
+    justify-content: center;
+    padding: 10px;
+    margin: 10px;
+    position: -webkit-sticky;
+    position: sticky;
+    top: 0;
+`
+let CarouselContainer = styled.div`
+    display: flex;
+    flex-direction: row;
+    align items: center;
+    justify-content: center;
+`
+const def = [claremont, claremont, claremont, claremont] /*claremont svg as a placeholder for testing carousel*/
+
+
 export default class Housing101 extends Component {
     constructor(props){
         super(props);
 
         this.state = {
-            width : window.innerWidth
+            width : window.innerWidth,
+            Dorm1 : "Select Dorm",
+            Dorm2 : "Select Dorm",
+            Dorm3 : "Select Dorm",
+            Dorm1urls : def, 
+            Dorm2urls : def,
+            Dorm3urls : def,
         }
+
+        this.handleDorm1Change = this.handleDorm1Change.bind(this);
+        this.handleDorm2Change = this.handleDorm2Change.bind(this);
+        this.handleDorm3Change = this.handleDorm3Change.bind(this);
+        this.handleUrlChange = this.handleUrlChange.bind(this);
     }
+
+    handleUrlChange(Name) {
+        /*URLS1-3 are a placeholder for arrays that hold a list of image files for the carousel*/
+            if (Name == '47 Claremont') {
+                return 'URLS1'
+            } else if (Name == 'Nussbaum') {
+                return 'URLS2'
+            } else if (Name == 'McBain') {
+                return 'URLS3'
+            } else {
+                return def
+            }
+            
+    }
+
+    handleDorm1Change(Name1) {
+        this.setState({Dorm1: Name1, Dorm1urls: this.handleUrlChange(Name1)})
+    }
+
+    handleDorm2Change(Name2) {
+        this.setState({Dorm2: Name2, Dorm2urls: this.handleUrlChange(Name2)})
+    }
+
+    handleDorm3Change(Name3) {
+        this.setState({Dorm3: Name3, Dorm3urls: this.handleUrlChange(Name3)})
+    }
+
+    
 
     render(){
         const { width } = this.state;
@@ -90,6 +152,26 @@ export default class Housing101 extends Component {
                     <ComparisonContainerMobile>
                     <BlueBGMobile>
                         <Title>Comparison Page</Title>
+                        
+                        <DropDownContainer>
+                        <DropDown 
+                            Name = {this.state.Dorm1}
+                            OnNameChange = {this.handleDorm1Change}
+                        />
+
+                        <DropDown 
+                            Name = {this.state.Dorm2}
+                            OnNameChange = {this.handleDorm2Change}
+                        />
+                    </DropDownContainer>
+                    <CarouselContainer> 
+                        <CompareCarousel
+                            imgUrls = {this.state.Dorm1urls}
+                        />
+                        <CompareCarousel
+                            imgUrls = {this.state.Dorm2urls}
+                        />
+                    </CarouselContainer>
                     </BlueBGMobile> 
                     </ComparisonContainerMobile>
                 </div>
@@ -100,6 +182,33 @@ export default class Housing101 extends Component {
             
                 <ComparisonContainer>
                     <Title>Comparison Page</Title>
+                    <DropDownContainer>
+                        <DropDown 
+                            Name = {this.state.Dorm1}
+                            OnNameChange = {this.handleDorm1Change}
+                        />
+
+                        <DropDown 
+                            Name = {this.state.Dorm2}
+                            OnNameChange = {this.handleDorm2Change}
+                        />
+
+                        <DropDown 
+                            Name = {this.state.Dorm3}
+                            OnNameChange = {this.handleDorm3Change}
+                        />
+                    </DropDownContainer>
+                    <CarouselContainer> 
+                        <CompareCarousel
+                            imgUrls = {this.state.Dorm1urls}
+                        />
+                        <CompareCarousel
+                            imgUrls = {this.state.Dorm2urls}
+                        />
+                        <CompareCarousel
+                            imgUrls = {this.state.Dorm3urls}
+                        />
+                    </CarouselContainer>
                 </ComparisonContainer>
             
             );
