@@ -1,10 +1,5 @@
 import React from "react";
 import arrow from '../assets/Housing101_images/arrow.png';
-import one from '../assets/Housing101_images/one.png';
-import two from '../assets/Housing101_images/two.png';
-import three from '../assets/Housing101_images/three.png';
-import four from '../assets/Housing101_images/four.png';
-import trophy from '../assets/Housing101_images/trophy.png';
 import '../css/Housing101.css';
 import { NavLink } from "react-router-dom";
 
@@ -68,7 +63,7 @@ class usingtheSHAFT extends React.Component {
                 </div>
               </div>
               <div class="row_phone">            
-                <img src={one} class="img_style_phone" alt="Filters"></img>
+                <img src="https://arc-anglerfish-arc2-prod-spectator.s3.amazonaws.com/public/MENVGJENTBERFBTX6FQ5KSBF2Q.png" class="img_style_phone" alt="Filters from explore page displayed"></img>
               </div>
               <div class="row_phone">
                 <div class="textbox_phone">
@@ -87,7 +82,7 @@ class usingtheSHAFT extends React.Component {
                 </div>
               </div>
               <div class="row_phone">            
-                <img src={two} class="img_style_phone" alt="Lottery Calculator Graphic"></img>
+                <img src="https://arc-anglerfish-arc2-prod-spectator.s3.amazonaws.com/public/FTG222DCMZB6DI5SKTMGMTRGCQ.png" class="img_style_phone" alt="Lottery Calculator Graphic"></img>
               </div>
               <div class="row_phone">
                 <div class="textbox_phone">
@@ -106,7 +101,7 @@ class usingtheSHAFT extends React.Component {
                 </div>
               </div>
               <div class="row_phone">            
-                <img src={three} class="img_style_phone" alt="Compare Dorms"></img>
+                <img src="https://arc-anglerfish-arc2-prod-spectator.s3.amazonaws.com/public/WDHCGRLWDVCX5HUHUAQZPWYCJA.png" class="img_style_phone" alt="Compare Dorms"></img>
               </div>
               <div class="row_phone">
                 <div class="textbox_phone">
@@ -125,7 +120,7 @@ class usingtheSHAFT extends React.Component {
                 </div>
               </div>
               <div class="row_phone">            
-                <img src={four} class="img_style_phone" alt="four"></img>
+                <img src="https://arc-anglerfish-arc2-prod-spectator.s3.amazonaws.com/public/BKUPQ4FO5NE6HJRSTYFB52FYT4.png" class="img_style_phone" alt="Reviews Function Example"></img>
               </div>
               <div class="row_phone">
                 <div class="textbox_phone">
@@ -142,7 +137,7 @@ class usingtheSHAFT extends React.Component {
                 <div class="item_title_phone">
                   Cheat sheet: <br></br><strong>Housing 101</strong>
                 </div>
-                <img src={trophy} class="img_style3_phone" alt="Cat on windowsill in front of snowy scene"></img>
+                <img src="https://arc-anglerfish-arc2-prod-spectator.s3.amazonaws.com/public/TYTGAIHE75DEFG4BIPLZBPTPMM.png" class="img_style3_phone" alt="Cat on windowsill in front of snowy scene"></img>
               </div>
               <div class="row_phone">
                 <div class="textbox2_phone">
@@ -186,12 +181,12 @@ class usingtheSHAFT extends React.Component {
                 </div>
               </div>
               <div class="column_image2">
-                <img src={one} class="img_style5" alt="Filters"></img>
+                <img src="https://arc-anglerfish-arc2-prod-spectator.s3.amazonaws.com/public/MENVGJENTBERFBTX6FQ5KSBF2Q.png" class="img_style7" alt="Filters from explore page displayed"></img>
               </div>
             </div>
             <div class="row_phoneA">
               <div class="column_image">
-                <img src={two} class="img_style2" alt="Lottery Calculator Graphic"></img>
+                <img src="https://arc-anglerfish-arc2-prod-spectator.s3.amazonaws.com/public/FTG222DCMZB6DI5SKTMGMTRGCQ.png" class="img_style8" alt="Lottery Calculator Graphic"></img>
               </div>
               <div class="column">
                 <div class="row2">
@@ -228,12 +223,12 @@ class usingtheSHAFT extends React.Component {
                 </div>
               </div>
               <div class="column_image2">
-                <img src={three} class="img_style5" alt="Compare Dorms"></img>
+                <img src="https://arc-anglerfish-arc2-prod-spectator.s3.amazonaws.com/public/WDHCGRLWDVCX5HUHUAQZPWYCJA.png" class="img_style5" alt="Compare Dorms"></img>
               </div>
             </div>
             <div class="row_phoneA">
               <div class="column_image">
-                <img src={four} class="img_style2" alt="Reviews Graphic"></img>
+                <img src="https://arc-anglerfish-arc2-prod-spectator.s3.amazonaws.com/public/BKUPQ4FO5NE6HJRSTYFB52FYT4.png" class="img_style2" alt="Reviews Function Example"></img>
               </div>
               <div class="column">
                 <div class="row2">
@@ -272,7 +267,7 @@ class usingtheSHAFT extends React.Component {
                   </div>
                   <div class="button3"><NavLink to="/newProcess">learn more here</NavLink></div>
                 </div>
-                <img src={trophy} class="img_style4" alt="trophy"></img>
+                <img src="https://arc-anglerfish-arc2-prod-spectator.s3.amazonaws.com/public/TYTGAIHE75DEFG4BIPLZBPTPMM.png" class="img_style4" alt="trophy"></img>
               </div>
             </div>  
           </div>

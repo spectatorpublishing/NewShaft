@@ -1,10 +1,5 @@
 import React from "react";
 import arrow from '../assets/Housing101_images/arrow.png';
-import one from '../assets/Housing101_images/one.png';
-import two from '../assets/Housing101_images/two.png';
-import three from '../assets/Housing101_images/three.png';
-import four from '../assets/Housing101_images/four.png';
-import trophy from '../assets/Housing101_images/trophy.png';
 import '../css/Housing101.css';
 import { NavLink } from "react-router-dom";
 
@@ -68,7 +63,7 @@ class newProcess extends React.Component {
             </div>
           </div>
           <div class="row_phone">            
-            <img src={one} class="img_style_phone" alt="Cat on windowsill in front of snowy scene"></img>
+            <img src="https://arc-anglerfish-arc2-prod-spectator.s3.amazonaws.com/public/BIFS2E7ESRDOPIKL7P4WZ3RRZQ.png" class="img_style_phone2" alt="No more x Person on Suites? No Problem! Just split your group and choose other options"></img>
           </div>
           <div class="row_phone">
             <div class="textbox_phone">
@@ -86,7 +81,7 @@ class newProcess extends React.Component {
             </div>
           </div>
           <div class="row_phone">            
-            <img src={two} class="img_style_phone" alt="Lottery Calculator Graphic"></img>
+            <img src="https://arc-anglerfish-arc2-prod-spectator.s3.amazonaws.com/public/SG6NPL2KPZDCJENW7W5VCP4ZYI.png" class="img_style_phone2" alt="In a group? Only one of you can make your housing selection. Make sure that person knows your preferences!"></img>
           </div>
           <div class="row_phone">
             <div class="textbox_phone">
@@ -104,7 +99,7 @@ class newProcess extends React.Component {
             </div>
           </div>
           <div class="row_phone">            
-            <img src={three} class="img_style_phone" alt="Compare Dorms"></img>
+            <img src="https://arc-anglerfish-arc2-prod-spectator.s3.amazonaws.com/public/3C7BMAXUSBCSHCDYNZIDRKNWZE.png" class="img_style_phone2" alt="People have different preferences. If you are in a group, communicate your wants and plan together!"></img>
           </div>
           <div class="row_phone">
             <div class="textbox_phone">
@@ -122,7 +117,7 @@ class newProcess extends React.Component {
             </div>
           </div>
           <div class="row_phone">            
-            <img src={four} class="img_style_phone" alt="Reviews Graphic"></img>
+            <img src="https://arc-anglerfish-arc2-prod-spectator.s3.amazonaws.com/public/QMQCH2L25JCEZPWKJCR6UZVO6M.png" class="img_style_phone2" alt="Be informed and minimize regret: Use theShaft's tools and consult friends to set realistic but satisfactory expectations!"></img>
           </div>
           <div class="row_phone">
             <div class="textbox_phone">
@@ -139,7 +134,7 @@ class newProcess extends React.Component {
             <div class="item_title_phone">
               Be Informed: <br></br>Use the<strong>SHAFT</strong>
             </div>
-            <img src={trophy} class="img_style3_phone" alt="Cat on windowsill in front of snowy scene"></img>
+            <img src="https://arc-anglerfish-arc2-prod-spectator.s3.amazonaws.com/public/TYTGAIHE75DEFG4BIPLZBPTPMM.png" class="img_style3_phone" alt="Grey trophy"></img>
           </div>
           <div class="row_phone">
             <div class="textbox2_phone">
@@ -165,7 +160,7 @@ class newProcess extends React.Component {
                 </div>
                 <img src={arrow} class="arrow_style" alt="arrow down"></img>
             </div>
-            <div class="row_phoneC">
+            <div class="row_phoneF">
                 <div class="column4">
                     <div class="row2">
                         <div class="number5">
@@ -181,13 +176,13 @@ class newProcess extends React.Component {
                         </div>
                     </div>
                 </div>
-                <div class="column_image2">
-                    <img src={one} class="img_style5" alt="Filters Graphic"></img>
+                <div class="column_image4">
+                    <img src="https://arc-anglerfish-arc2-prod-spectator.s3.amazonaws.com/public/BIFS2E7ESRDOPIKL7P4WZ3RRZQ.png" class="img_style5" alt="No more x Person on Suites? No Problem! Just split your group and choose other options"></img>
                 </div>
             </div>
-            <div class="row_phoneA">
+            <div class="row_phoneD">
                 <div class="column_image">
-                    <img src={two} class="img_style2" alt="Lottery Calculator Graphic"></img>
+                    <img src="https://arc-anglerfish-arc2-prod-spectator.s3.amazonaws.com/public/SG6NPL2KPZDCJENW7W5VCP4ZYI.png" class="img_style2" alt="In a group? Only one of you can make your housing selection. Make sure that person knows your preferences!"></img>
                 </div>
                 <div class="column">
                     <div class="row2">
@@ -205,7 +200,7 @@ class newProcess extends React.Component {
                     </div>
                 </div>
             </div>
-            <div class="row_phoneA">
+            <div class="row_phoneD">
                 <div class="column4">
                     <div class="row2">
                         <div class="number5">
@@ -222,12 +217,12 @@ class newProcess extends React.Component {
                     </div>
                 </div>
                 <div class="column_image2">
-                    <img src={three} class="img_style5" alt="Compare Dorms"></img>
+                    <img src="https://arc-anglerfish-arc2-prod-spectator.s3.amazonaws.com/public/3C7BMAXUSBCSHCDYNZIDRKNWZE.png" class="img_style5" alt="People have different preferences. If you are in a group, communicate your wants and plan together!"></img>
                 </div>
             </div>
           <div class="row_phoneA">
             <div class="column_image">
-              <img src={four} class="img_style2" alt="Reviews Graphic"></img>
+              <img src="https://arc-anglerfish-arc2-prod-spectator.s3.amazonaws.com/public/QMQCH2L25JCEZPWKJCR6UZVO6M.png" class="img_style2" alt="Be informed and minimize regret: Use theShaft's tools and consult friends to set realistic but satisfactory expectations!"></img>
             </div>
             <div class="column">
                 <div class="row2">
@@ -266,7 +261,7 @@ class newProcess extends React.Component {
               </div>
               <div class="button3"><NavLink exact to="/">learn more here</NavLink></div>
               </div>
-              <img src={trophy} class="img_style4" alt="trophy"></img>
+              <img src="https://arc-anglerfish-arc2-prod-spectator.s3.amazonaws.com/public/TYTGAIHE75DEFG4BIPLZBPTPMM.png" class="img_style4" alt="Grey trophy"></img>
             </div>
           </div>  
         </div>

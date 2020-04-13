@@ -254,25 +254,46 @@ title{
 }
 
 .img_style2{
-  max-width:39vw;
+  max-width:45vw;
   padding-left: 8%;
 }
 
 .img_style4{
-  width: 7vw;
-  height: 7vw;
+  width: 11vw;
+  height: 10vw;
   padding-right: 50px;
-  padding-left: 50px;
+  padding-left: 10px;
 }
 
 .img_style5{
-  max-width:40vw;
+  max-width:45vw;
   padding-right: 0%;
 }
 
 .img_style6{
   max-width:30vw;
   padding-right: 0%;
+}
+
+.img_style7{
+  max-width:40vw;
+  padding-right: 0%;
+}
+
+.img_style8{
+  max-width:40vw;
+  padding-left: 8%;
+}
+
+.img_style9{
+  max-width:43vw;
+  padding-left: 5%;
+  margin-right: 5%;
+}
+
+.img_style1{
+  max-width:43vw;
+  padding-left: 8%;
 }
 
 .row_phoneA{
@@ -312,7 +333,46 @@ title{
   flex-direction: row;
   position: relative;
   align-items: top;
-  }
+}
+
+.row_phoneD{
+  margin-left:10px;
+  margin-right:10px;
+  padding-top: 0px;
+  padding-bottom: 10px;
+  padding-left:10px;
+  padding-right:10px;
+  display: flex;
+  flex-direction: row;
+  position: relative;
+  align-items: center;
+}
+
+.row_phoneE{
+  margin-left:10px;
+  margin-right:10px;
+  padding-top: 0px;
+  padding-bottom: 10px;
+  padding-left:10px;
+  padding-right:10px;
+  display: flex;
+  flex-direction: row;
+  position: relative;
+  align-items: center;
+}
+
+.row_phoneF{
+  margin-left:10px;
+  margin-right:10px;
+  padding-top: 0px;
+  padding-bottom: 10px;
+  padding-left:10px;
+  padding-right:10px;
+  display: flex;
+  flex-direction: row;
+  position: relative;
+  align-items: top;
+}
 
 .rowPadTitleA{
   padding-top: 20px;
@@ -374,6 +434,32 @@ title{
   align-items: center;
   padding-right:10px;
   padding-top: 50px;
+}
+
+.column_image3 {
+  display: flex;
+  flex-direction: column;
+  flex-basis: 100%;
+  width: auto;
+  height: auto;
+  position: relative;
+  flex: 1;
+  align-items: top;
+  padding-right:10px;
+  padding-top: 0px;
+}
+
+.column_image4 {
+  display: flex;
+  flex-direction: column;
+  flex-basis: 100%;
+  width: auto;
+  height: auto;
+  position: relative;
+  flex: 1;
+  align-items: center;
+  padding-right:10px;
+  padding-top: 10px;
 }
 
 .column3 {
@@ -566,9 +652,18 @@ title{
 }
 
 .img_style_phone{
-  max-width:60%;
+  max-width:90%;
   padding: 10px;
   padding-top:10px;
+  display: flex;
+  flex-direction: column;
+  align-content: center;
+}
+
+.img_style_phone2{
+  max-width:100%;
+  padding: 0px;
+  padding-top:0px;
   display: flex;
   flex-direction: column;
   align-content: center;

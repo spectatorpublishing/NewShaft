@@ -1,10 +1,5 @@
 import React from "react";
 import arrow from '../assets/Housing101_images/arrow.png';
-import apartment from '../assets/Housing101_images/apartment.png';
-import two from '../assets/Housing101_images/two.png';
-import three from '../assets/Housing101_images/three.png';
-import four from '../assets/Housing101_images/four.png';
-import trophy from '../assets/Housing101_images/trophy.png';
 import '../css/Housing101.css';
 
 class specialHousing extends React.Component {
@@ -67,7 +62,7 @@ class specialHousing extends React.Component {
             </div>
           </div>
           <div class="row_phone">            
-            <img src={apartment} class="img_style_phone" alt="apartment"></img>
+            <img src="https://arc-anglerfish-arc2-prod-spectator.s3.amazonaws.com/public/A52GXZNKARCNTPOFZFWM2QOEPI.jpg" class="img_style_phone" alt="East Campus Front View Courtyard"></img>
           </div>
           <div class="row_phone">
             <div class="textbox_phone">
@@ -86,7 +81,7 @@ class specialHousing extends React.Component {
             </div>
           </div>
           <div class="row_phone">            
-            <img src={two} class="img_style_phone" alt="Lottery Calculator Graphic"></img>
+            <img src="https://arc-anglerfish-arc2-prod-spectator.s3.amazonaws.com/public/UZE2LRR3NNHDVONKASVKFVYHFA.jpg" class="img_style_phone" alt="Front view of SIC building"></img>
           </div>
           <div class="row_phone">
             <div class="textbox_phone">
@@ -105,7 +100,7 @@ class specialHousing extends React.Component {
             </div>
           </div>
           <div class="row_phone">            
-            <img src={three} class="img_style_phone" alt="Compare Dorms"></img>
+            <img src="https://arc-anglerfish-arc2-prod-spectator.s3.amazonaws.com/public/EDTWETP7TRHHPFY6NC3ZX22A5I.jpg" class="img_style_phone" alt="Wallach Building Front"></img>
           </div>
           <div class="row_phone">
             <div class="textbox_phone">
@@ -124,7 +119,7 @@ class specialHousing extends React.Component {
             </div>
           </div>
           <div class="row_phone">            
-            <img src={four} class="img_style_phone" alt="Reviews Graphic"></img>
+            <img src="https://arc-anglerfish-arc2-prod-spectator.s3.amazonaws.com/public/K6EDUXGRDNC5NDI3PPI7M7AEHE.jpg" class="img_style_phone" alt="Group of RAs"></img>
           </div>
           <div class="row_phone">
             <div class="textbox_phone">
@@ -143,7 +138,7 @@ class specialHousing extends React.Component {
             </div>
           </div>
           <div class="row_phone">            
-            <img src={three} class="img_style_phone" alt="Compare Dorms"></img>
+            <img src="https://arc-anglerfish-arc2-prod-spectator.s3.amazonaws.com/public/DT7CPFKRK5ASFERKEGIMYK5TVM.jpg" class="img_style_phone" alt="Wien Hall Front of Building"></img>
           </div>
           <div class="row_phone">
             <div class="textbox_phone">
@@ -163,7 +158,7 @@ class specialHousing extends React.Component {
             </div>
           </div>
           <div class="row_phone">            
-            <img src={four} class="img_style_phone" alt="Reviews Graphic"></img>
+            <img src="https://arc-anglerfish-arc2-prod-spectator.s3.amazonaws.com/public/KXP4LGCJFJFHTBR3I5EUMA4GP4.jpg" class="img_style_phone" alt="Flags in front of Low Library"></img>
           </div>
           <div class="row_phone">
             <div class="textbox_phone">
@@ -180,7 +175,7 @@ class specialHousing extends React.Component {
             <div class="item_title_phone">
               Explore<br></br>Housing<b></b>On the<strong>SHAFT</strong>
             </div>
-            <img src={trophy} class="img_style3_phone" alt="Cat on windowsill in front of snowy scene"></img>
+            <img src="https://arc-anglerfish-arc2-prod-spectator.s3.amazonaws.com/public/TYTGAIHE75DEFG4BIPLZBPTPMM.png" class="img_style3_phone" alt="Cat on windowsill in front of snowy scene"></img>
           </div>
           <div class="row_phone">
             <div class="textbox2_phone">
@@ -224,12 +219,12 @@ class specialHousing extends React.Component {
                     </div>
                 </div>
                 <div class="column_image2">
-                    <img src={apartment} class="img_style6"></img>
+                    <img src="https://arc-anglerfish-arc2-prod-spectator.s3.amazonaws.com/public/A52GXZNKARCNTPOFZFWM2QOEPI.jpg" class="img_style9" alt="East Campus Front View Courtyard"></img>
                 </div>
             </div>
             <div class="row_phoneA">
                 <div class="column_image">
-                    <img src={two} class="img_style2" alt="Lottery Calculator Graphic"></img>
+                    <img src="https://arc-anglerfish-arc2-prod-spectator.s3.amazonaws.com/public/UZE2LRR3NNHDVONKASVKFVYHFA.jpg" class="img_style1" alt="Front view of SIC building"></img>
                 </div>
                 <div class="column">
                     <div class="row2">
@@ -266,12 +261,12 @@ class specialHousing extends React.Component {
                     </div>
                 </div>
                 <div class="column_image2">
-                    <img src={three} class="img_style5" alt="Compare Dorms"></img>
+                    <img src="https://arc-anglerfish-arc2-prod-spectator.s3.amazonaws.com/public/EDTWETP7TRHHPFY6NC3ZX22A5I.jpg" class="img_style9" alt="Wallach Building Front"></img>
                 </div>
             </div>
           <div class="row_phoneA">
             <div class="column_image">
-              <img src={four} class="img_style2" alt="Reviews Graphic"></img>
+              <img src="https://arc-anglerfish-arc2-prod-spectator.s3.amazonaws.com/public/K6EDUXGRDNC5NDI3PPI7M7AEHE.jpg" class="img_style1" alt="Group of RAs"></img>
             </div>
             <div class="column">
                 <div class="row2">
@@ -309,12 +304,12 @@ class specialHousing extends React.Component {
                     </div>
                 </div>
                 <div class="column_image2">
-                    <img src={three} class="img_style5" alt="Compare Dorms"></img>
+                    <img src="https://arc-anglerfish-arc2-prod-spectator.s3.amazonaws.com/public/DT7CPFKRK5ASFERKEGIMYK5TVM.jpg" class="img_style9" alt="Wien Hall Front of Building"></img>
                 </div>
             </div>
           <div class="row_phoneA">
             <div class="column_image">
-              <img src={four} class="img_style2" alt="Reviews Graphic"></img>
+              <img src="https://arc-anglerfish-arc2-prod-spectator.s3.amazonaws.com/public/KXP4LGCJFJFHTBR3I5EUMA4GP4.jpg" class="img_style1" alt="Flags in front of Low Library"></img>
             </div>
             <div class="column">
                 <div class="row2">
@@ -353,7 +348,7 @@ class specialHousing extends React.Component {
               </div>
               <div class="button3"><a href="http://www.theshaft.info">learn more here</a></div>
               </div>
-              <img src={trophy} class="img_style4" alt="trophy"></img>
+              <img src="https://arc-anglerfish-arc2-prod-spectator.s3.amazonaws.com/public/TYTGAIHE75DEFG4BIPLZBPTPMM.png" class="img_style4" alt="trophy"></img>
             </div>
           </div>  
         </div>
