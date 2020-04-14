@@ -1,10 +1,10 @@
 import React, { Component } from 'react';
 import styled from 'styled-components';
-import FAQBubble from "../components/FAQBubble.js";
 import { theme } from "../util/GlobalStyles";
 import DropDown from '../components/DropDown.js';
 import CompareCarousel from '../components/CompareCarousel.js'
 import claremont from '../assets/47 Claremont 1.svg'
+import kitchen from '../assets/Icons/laundry black_1@10x.svg'
 
 let Title = styled.div`
     width:100%;
@@ -30,7 +30,7 @@ let ComparisonContainer = styled.div`
     width: 100vw;
     padding: 0 auto;
     flex-direction: column;
-    background-color: ${props => props.theme.lightGray}
+    background-color: ${props => props.theme.lightGray};
 `
 
 let ComparisonContainerMobile = styled.div`
@@ -40,14 +40,10 @@ let ComparisonContainerMobile = styled.div`
     background-color: ${props => props.theme.lightGray};
 `
 
-let SomeText = styled.p`
-    color: ${props => props.theme.darkGray};
-`
-
 let DropDownContainer = styled.div`
     display: flex;
     flex-direction: row;
-    align items: center;
+    align-items: center;
     justify-content: center;
     padding: 10px;
     margin: 10px;
@@ -58,96 +54,126 @@ let DropDownContainer = styled.div`
 let CarouselContainer = styled.div`
     display: flex;
     flex-direction: row;
-    align items: center;
+    align-items: center;
     justify-content: center;
 `
 const def = [claremont, claremont, claremont, claremont] /*claremont svg as a placeholder for testing carousel*/
+const noRatings = {
+    clean: 'N/A',
+    noise: 'N/A',
+    community: 'N/A',
+    party: 'N/A',
+    amenities: 'N/A',
+}
 
-
-export default class Housing101 extends Component {
+export default class Comparison extends Component {
     constructor(props){
         super(props);
 
         this.state = {
             width : window.innerWidth,
-            Dorm1 : "Select Dorm",
-            Dorm2 : "Select Dorm",
-            Dorm3 : "Select Dorm",
-            Dorm1urls : def, 
-            Dorm2urls : def,
-            Dorm3urls : def,
+            dorm_1 : "Select Dorm",
+            dorm_2 : "Select Dorm",
+            dorm_3 : "Select Dorm",
+            dorm_1_photos: def,
+            dorm_2_photos: def,
+            dorm_3_photos: def,
+            dorm_1_ratings: {
+                clean: 0,
+                noise: 0,
+                community: 0,
+                party: 0,
+                amenities: 0, 
+            },
+            dorm_2_ratings: {
+                clean: 0,
+                noise: 0,
+                community: 0,
+                party: 0,
+                amenities: 0,  
+            },
+            dorm_3_ratings: {
+                clean: 0,
+                noise: 0,
+                community: 0,
+                party: 0,
+                amenities: 0, 
+            }
         }
 
-        this.handleDorm1Change = this.handleDorm1Change.bind(this);
-        this.handleDorm2Change = this.handleDorm2Change.bind(this);
-        this.handleDorm3Change = this.handleDorm3Change.bind(this);
-        this.handleUrlChange = this.handleUrlChange.bind(this);
+        this.handleDormChange = this.handleDormChange.bind(this);
     }
 
-    handleUrlChange(Name) {
-        /*URLS1-3 are a placeholder for arrays that hold a list of image files for the carousel*/
-            if (Name == '47 Claremont') {
-                return 'URLS1'
-            } else if (Name == 'Nussbaum') {
-                return 'URLS2'
-            } else if (Name == 'McBain') {
-                return 'URLS3'
-            } else {
-                return def
-            }
-            
+    componentDidMount(){
+        console.log(this)
     }
 
-    handleDorm1Change(Name1) {
-        this.setState({Dorm1: Name1, Dorm1urls: this.handleUrlChange(Name1)})
+    componentDidUpdate(_, prevState) {
+        if (this.state.dorm_1 != prevState.dorm_1){
+            this.fetchDormPhotos(1, this.state.dorm_1);
+            this.fetchDormRatings(1, this.state.dorm_1)
+        }
+
+        if (this.state.dorm_2 != prevState.dorm_2){
+            this.fetchDormPhotos(2, this.state.dorm_2)
+            this.fetchDormRatings(2, this.state.dorm_2)
+        }
+
+        if (this.state.dorm_3 != prevState.dorm_3){
+            this.fetchDormPhotos(3, this.state.dorm_3)
+            this.fetchDormRatings(3, this.state.dorm_3)
+        }
     }
 
-    handleDorm2Change(Name2) {
-        this.setState({Dorm2: Name2, Dorm2urls: this.handleUrlChange(Name2)})
+    fetchDormPhotos(dorm_num, dorm){
+        fetch(`/api/getDormPhotos/${dorm}`, {
+          method: "GET",
+          headers: { "Content-Type": "application/json"},
+        })
+          .then(res => res.json())
+          .then(dormPhotos => {
+              dorm_num === 1 ? this.setState({dorm_1_photos: Object.values(dormPhotos)}) :
+              dorm_num === 2 ? this.setState({dorm_2_photos: Object.values(dormPhotos)}) :
+                               this.setState({dorm_3_photos: Object.values(dormPhotos)})
+          })
     }
 
-    handleDorm3Change(Name3) {
-        this.setState({Dorm3: Name3, Dorm3urls: this.handleUrlChange(Name3)})
+    fetchDormRatings(dorm_num, dorm){
+        fetch(`/api/getDormRatings/${dorm}`, {
+            method: "GET",
+            headers: { "Content-Type": "application/json"},
+        })
+            // .then(res => console.log(res))
+          .then(res => res.json())
+          .then(dormRatings => {
+                console.log(dormRatings)
+                if (dormRatings != null){
+                    dorm_num === 1 ? this.setState({dorm_1_ratings: dormRatings}) :
+                    dorm_num === 2 ? this.setState({dorm_2_ratings: dormRatings}) :
+                                     this.setState({dorm_3_ratings: dormRatings})
+                }else{
+                    dorm_num === 1 ? this.setState({dorm_1_ratings: noRatings}) :
+                    dorm_num === 2 ? this.setState({dorm_2_ratings: noRatings}) :
+                                     this.setState({dorm_3_ratings: noRatings})
+                }
+            })
     }
 
-    
+
+    handleDormChange(dorm_num, name) {
+        dorm_num === 1 ? this.setState({dorm_1: name}) :
+        dorm_num === 2 ? this.setState({dorm_2: name}) :
+                         this.setState({dorm_3: name})
+    }
 
     render(){
         const { width } = this.state;
         const isMobile = width <= 700;
         const isMedium = this.state.width <= 1400;
-        const housing = [
-            {
-                "title": "Welcome to theSHAFT",
-                "content": [
-                    {
-                        "subtitle": "What is 'the shaft'",
-                        "body": "We’re not sure that the McBain shaft exists for any purpose other than to remind you every time you enter your room that you lost the housing lottery. Located within the vertical passages in and between buildings, shafted rooms, which can be found in McBain, Broadway, Woodbridge, and 47 Claremont, are usually hot, noisy and dark, although one perk is that they usually have air conditioning, which can be a game changer."
-        
-                    }
-                   
-                ]
-            },
-    
-        ]
-
-        let end = isMobile ? 80 : 200;
-
-        const FAQBubbleMapped = housing.map((el, i) => {
-                return(
-                    <FAQBubble 
-                        titleText={el["title"]}
-                        showAll={el["content"]}
-                        
-                        showSome={el["content"]}
-                    />
-                );
-            }
-        );
-
 
         if (isMobile) {
             return (
+                
                 <div>
                     <ComparisonContainerMobile>
                     <BlueBGMobile>
@@ -155,22 +181,18 @@ export default class Housing101 extends Component {
                         
                         <DropDownContainer>
                         <DropDown 
-                            Name = {this.state.Dorm1}
-                            OnNameChange = {this.handleDorm1Change}
+                            Name = {this.state.dorm_1}
+                            OnNameChange = {this.handleDormChange}
                         />
 
                         <DropDown 
-                            Name = {this.state.Dorm2}
-                            OnNameChange = {this.handleDorm2Change}
+                            Name = {this.state.dorm_2}
+                            OnNameChange = {this.handleDormChange}
                         />
                     </DropDownContainer>
                     <CarouselContainer> 
-                        <CompareCarousel
-                            imgUrls = {this.state.Dorm1urls}
-                        />
-                        <CompareCarousel
-                            imgUrls = {this.state.Dorm2urls}
-                        />
+                        <CompareCarousel img = {this.state.dorm_1_photos}/>
+                        <CompareCarousel img = {this.state.dorm_2_photos}/>
                     </CarouselContainer>
                     </BlueBGMobile> 
                     </ComparisonContainerMobile>
@@ -182,35 +204,33 @@ export default class Housing101 extends Component {
             
                 <ComparisonContainer>
                     <Title>Comparison Page</Title>
+                    {/* <img src={kitchen}/> */}
                     <DropDownContainer>
                         <DropDown 
                             Name = {this.state.Dorm1}
-                            OnNameChange = {this.handleDorm1Change}
+                            onNameChange = {this.handleDormChange}
                         />
 
                         <DropDown 
                             Name = {this.state.Dorm2}
-                            OnNameChange = {this.handleDorm2Change}
+                            onNameChange = {this.handleDormChange}
                         />
 
                         <DropDown 
                             Name = {this.state.Dorm3}
-                            OnNameChange = {this.handleDorm3Change}
+                            onNameChange = {this.handleDormChange}
                         />
                     </DropDownContainer>
                     <CarouselContainer> 
-                        <CompareCarousel
-                            imgUrls = {this.state.Dorm1urls}
-                        />
-                        <CompareCarousel
-                            imgUrls = {this.state.Dorm2urls}
-                        />
-                        <CompareCarousel
-                            imgUrls = {this.state.Dorm3urls}
-                        />
+                        <CompareCarousel img = {this.state.dorm_1_photos}/>
+                        <CompareCarousel img = {this.state.dorm_2_photos}/>
+                        <CompareCarousel img = {this.state.dorm_3_photos}/>
                     </CarouselContainer>
+                    <div>
+                        {this.state.dorm_1_ratings.amenities}
+                    </div>
                 </ComparisonContainer>
-            
+                
             );
         }
     }

@@ -20,7 +20,7 @@ const Arrow = ({ direction, clickFunction, glyph }) => (
 let Carousel = styled.div`
     display: flex;
     flex-direction: row;
-    justify-contents: center;
+    justify-content: center;
     align-items:center; 
 `
 
@@ -39,14 +39,14 @@ export default class CompareCarousel extends Component {
 
     previousSlide () {
         if (this.state.currentImageIndex == 0) {
-            this.setState({ currentImageIndex: this.props.imgUrls.length - 1 });
+            this.setState({ currentImageIndex: this.props.img.length - 1 });
         } else {
             this.setState({ currentImageIndex: this.state.currentImageIndex - 1 });
         }
     }
     
     nextSlide () {
-        if (this.state.currentImageIndex == this.props.imgUrls.length - 1) {
+        if (this.state.currentImageIndex == this.props.img.length - 1) {
             this.setState({ currentImageIndex: 0 });
         } else {
             this.setState({ currentImageIndex: this.state.currentImageIndex + 1 });
@@ -61,7 +61,7 @@ export default class CompareCarousel extends Component {
                     clickFunction={ this.previousSlide }
                     glyph="&#9664;" />
 
-                <ImageSlide url={ this.props.imgUrls[this.state.currentImageIndex] } />
+                <ImageSlide url={this.props.img[this.state.currentImageIndex]} />
 
                 <Arrow
                     direction="right"
