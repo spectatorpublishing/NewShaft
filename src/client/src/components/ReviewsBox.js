@@ -20,7 +20,7 @@ let MobileBorder = styled.div`
 let Reviews = styled.h2`
     margin-top: 2vh;
     margin-bottom: 2vh;
-    padding-left: 0.5vw;  
+    padding-left: 0.5vw;
 `
 
 let InfoBox = styled.div`
@@ -67,11 +67,11 @@ export default class ReviewsBox extends Component {
     componentWillMount() {
         window.addEventListener("resize", this.handleWindowSizeChange);
       }
-    
+
       componentWillUnmount() {
         window.removeEventListener("resize", this.handleWindowSizeChange);
       }
-    
+
       handleWindowSizeChange = () => {
         this.setState({ width: window.innerWidth });
       };
@@ -91,7 +91,7 @@ export default class ReviewsBox extends Component {
                         <MobileSlidingBox>
                             <SlidingReview reviews={this.props.reviews}/>
                         </MobileSlidingBox>
-                    </MobileInfoBox> 
+                    </MobileInfoBox>
                 </MobileBorder>
             );
         }
@@ -114,8 +114,7 @@ export default class ReviewsBox extends Component {
         }
 
 
-        
+
     }
 
 }
-

@@ -75,7 +75,7 @@ export const MAPPING = {
     "apartment-2br": "2-Bedroom Apartment"
   },
   Woodbridge: {
-    "apartment-1br": "Low Demand (G + D + I lines)"
+    "apartment-1br": "Apartment"
   },
   Wien:{
     "double": "Double",

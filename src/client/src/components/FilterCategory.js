@@ -4,6 +4,7 @@ import styled from 'styled-components';
 import chris_v from '../assets/chrisv.svg'
 
 let DDWrapper = styled.div`
+    /* display: ${props => props.show ? "" : "none"}; */
     @media(min-width: 768px){
         position: relative; // So that the filter list will position itself relative to this div
     }
@@ -82,6 +83,10 @@ const ChrisV = styled.div`
 export default class FilterComponent extends React.PureComponent {
     constructor(props) {
         super(props);
+
+        this.state = {
+            show: false
+        }
         
         this.toggleList = this.toggleList.bind(this);
         this.isActive = this.isActive.bind(this);
@@ -112,7 +117,7 @@ export default class FilterComponent extends React.PureComponent {
         const listOpen = this.props.open;
         
         return(
-            <DDWrapper>
+            <DDWrapper show = {this.state.show}>
 
                 <DDHeader onClick={this.toggleList}>
                     <DDHeaderTitle shadow={this.props.open}>

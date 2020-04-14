@@ -61,7 +61,6 @@ const filterElements = {
 }
 
 export default class FilterComponent extends React.PureComponent {
-
 	constructor(props) {
 	    super(props);
 

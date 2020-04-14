@@ -4,6 +4,7 @@ import Explore from './containers/Explore';
 import ShaftLive from './containers/ShaftLive';
 import Dorm from './containers/Dorm';
 import Housing101 from './containers/Housing101';
+import Reviews from './containers/Reviews'
 import NavBar from './components/NavBar.js';
 import { ThemeProvider } from "styled-components";
 import { GlobalStyles, theme } from "./util/GlobalStyles";
@@ -25,7 +26,7 @@ const menuItems = [
     "disabled": false,
   },
   {
-    "name": "Shaft Live",
+    "name": "Lottery Predictor",
     "link": "/shaftlive",
     "external": false,
     "disabled": false,
@@ -33,6 +34,12 @@ const menuItems = [
   {
     "name": "Housing 101",
     "link": "/housing101",
+    "external": false,
+    "disabled": false,
+  },
+	{
+    "name": "Reviews",
+    "link": "/reviews",
     "external": false,
     "disabled": false,
   },
@@ -56,6 +63,7 @@ const App = () => (
         <Route path="/explore/:dorm" component={Dorm} />
         <Route exact path="/shaftlive" component={ShaftLive} />
         <Route exact path="/housing101" component={Housing101} />
+				<Route exact path="/reviews" component={Reviews} />
       </Switch>
     </main>
   </ThemeProvider>

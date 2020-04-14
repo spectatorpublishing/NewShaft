@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import styled from "styled-components";
 import ExploreSidebar from "../components/ExploreSidebar";
 import Filter from '../components/FilterComponent.js'
+import Filters2020 from '../components/exploreFilters'
 import Maps from "../components/Maps";
 import SearchBar from "../components/SearchBar"
 import CurrFilters from "../components/CurrFilters"
@@ -83,6 +84,7 @@ const initialPayload = {
   SINGLE_: 0,
   DOUBLE_: 0,
   TRIPLE_: 0,
+  SUITE_: 0,
   TWO_SUITE: 0,
   THREE_SUITE: 0,
   FOUR_SUITE: 0,
@@ -91,14 +93,7 @@ const initialPayload = {
   SEVEN_SUITE: 0,
   EIGHT_SUITE: 0,
   NINE_SUITE: 0,
-  FRESHMAN: 0,
-  SOPHOMORE: 0,
-  JUNIOR: 0,
-  SENIOR: 0,
-  AC: 0,
-  GYM: 0,
-  P_BATHROOM: 0,
-  P_KITCHEN: 0
+  DORM: ""
 }
   
 export default class Explore extends Component {
@@ -106,10 +101,10 @@ export default class Explore extends Component {
     super(props);
     this.state = {
       payload: _.clone(initialPayload),
-      dorms: [],
-    }
+      dorms: []
+    };
     this.updatePayload = this.updatePayload.bind(this)
-    this.resetPayload = this.resetPayload.bind(this)
+    //this.resetPayload = this.resetPayload.bind(this)
     }
   
   componentDidMount(){
@@ -138,18 +133,24 @@ export default class Explore extends Component {
     })
   }
 
-  updatePayload(newValue, name){
+  updatePayload(newValue, name, filters){
     let payload = this.state.payload;
-		payload[FILTER_NAME_TO_KEY[name]] = newValue
-    this.setState({payload: payload}, () => this.filterDorms())
+    if(filters != undefined) {
+      for(var prop in filters) {
+        payload[prop] = filters[prop];
+      }
+    } else {
+      payload[FILTER_NAME_TO_KEY[name]] = newValue;
+    }
+    this.setState({payload: payload}, () => this.filterDorms());
   }
 
-  resetPayload(){
-    this.setState({payload: _.clone(initialPayload)}, this.filterDorms)
-  }
+  // resetPayload(){
+  //   this.setState({payload: _.clone(initialPayload)}, this.filterDorms)
+  // }
 
   filterDorms(){
-    fetch('/api/filterDorm', {
+    fetch('/api/getFilteredDorms', {
         method: 'POST',
         headers: {
             'Content-Type': 'application/json'
@@ -169,9 +170,10 @@ export default class Explore extends Component {
             <FilterSearchBG>
               {/* <h2>The Shaft</h2> */}
               <SearchBar handleChange={this.updatePayload}/>
-              <Filter handleChange={this.updatePayload} payload={this.state.payload}/>
+              {/* <Filter handleChange={this.updatePayload} payload={this.state.payload}/> */}
+              <Filters2020 submit = {this.updatePayload} search = {this.state.payload.DORM}></Filters2020>
             </FilterSearchBG>
-            <CurrFilters filterNameToKey={FILTER_NAME_TO_KEY} filters={this.state.payload} removeFilter={(name)=>{this.updatePayload(0, name)}} removeAll={this.resetPayload}/>
+            {/* <CurrFilters filterNameToKey={FILTER_NAME_TO_KEY} filters={this.state.payload} removeFilter={(name)=>{this.updatePayload(0, name)}} removeAll={this.resetPayload}/> */}
             <ExploreSidebar dorms={this.state.dorms}/>
           </SideBar>
         </ColOne>
