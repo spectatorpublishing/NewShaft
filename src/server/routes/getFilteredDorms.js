@@ -55,10 +55,10 @@ router.post('/', async (req, res) => {
         roomQ += `(`
         for(var i = 0; i < trueFilters.length; i += 1) {
             if(trueFilters[i].endsWith('_')) {
-                roomQ += trueFilters[i] + ` = 1 OR `
+                roomQ += trueFilters[i] + ` = 1 AND `
             }
         }
-        if(roomQ.endsWith("OR ")) roomQ = roomQ.slice(0, -3)
+        if(roomQ.endsWith("AND ")) roomQ = roomQ.slice(0, -4)
         roomQ += `)`
     }
 

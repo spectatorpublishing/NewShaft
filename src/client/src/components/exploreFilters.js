@@ -72,9 +72,19 @@ let DropdownContent = styled.div`
   display: ${props => props.show ? '' : 'none'};
   position: absolute;
   background-color: #f9f9f9;
-  min-width: 160px;
+  min-width: 130px;
   box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
   z-index: 1;
+`;
+
+let ClearButton = styled.a`
+    cursor: pointer;
+    font-family: 'Raleway';
+    margin-left:8px;
+    margin-right:8px;
+    font-size:18px;
+    color: black;
+    text-decoration: underline;
 `;
 
 export default class FilterBar extends React.Component{
@@ -95,9 +105,7 @@ export default class FilterBar extends React.Component{
 	    };
 
         this.onChange = this.onChange.bind(this);
-        //this.onGroupSizeChange = this.onGroupSizeChange.bind(this);
         this.toggle= this.toggle.bind(this);
-        this.submit= this.submit.bind(this);
         this.clear= this.clear.bind(this);
     }
 
@@ -107,19 +115,19 @@ export default class FilterBar extends React.Component{
         if(target === "+") {
             this.setState({
                 GroupSize: this.state.GroupSize + 1
-            })
+            }, () => this.props.submit("", "", this.createPayload()))
         } else if(target === "-") {
             this.setState({
                 GroupSize: this.state.GroupSize - 1
-            })
+            }, () => this.props.submit("", "", this.createPayload()))
         } else if(String(target).startsWith("GroupSize")) {
             this.setState({
                 GroupSize: 1
-            })
+            }, () => this.props.submit("", "", this.createPayload()))
         } else { 
             this.setState({
                 [target]: !this.state[target]
-            })
+            }, () => this.props.submit("", "", this.createPayload()))
         }
     }
     
@@ -163,31 +171,19 @@ export default class FilterBar extends React.Component{
         return payload;
     }
 
-    submit() {
-        this.props.submit("", "", this.createPayload());
-    }
-
-    clear(e) {
-        let type = e.target.id
-        if(type === "school") {
-            this.setState({
-                Columbia: false,
-                Barnard: false
-            }, () => this.props.submit("", "", this.createPayload()))
-        }
-        if(type === "group") {
-            this.setState({
-                GroupSize: 1
-            }, () => this.props.submit("", "", this.createPayload()))
-        }
-        if(type === "room") {
-            this.setState({
-                Suite: false,
-                Single: false,
-                Double: false,
-                Triple: false
-            }, () => this.props.submit("", "", this.createPayload()))
-        }
+    clear() {
+        this.setState({
+            showSchool: false,
+            showGroup: false,
+            showRoom: false,
+            Columbia: false,
+            Barnard: false,
+            GroupSize: 1,
+            Suite: false,
+            Single: false,
+            Double: false,
+            Triple: false
+	    }, () => this.props.submit("", "", this.createPayload()))
     }
 
     render() {
@@ -229,9 +225,7 @@ export default class FilterBar extends React.Component{
                                 type="checkbox" 
                                 onChange = {this.onChange} 
                                 checked = {this.state.Barnard} /> 
-                            <label>Barnard</label>  <br />
-                            <button onClick={this.submit} id = "school">Submit</button>
-                            <button onClick={this.clear} id = "school">Clear</button>
+                            <label>Barnard</label>
                         </DropdownContent>
                     </Dropdown>
                     <Dropdown>
@@ -241,9 +235,7 @@ export default class FilterBar extends React.Component{
                                 <button id = "-" onClick={this.onChange}>-</button>
                                 <div>{this.state.GroupSize}</div>
                                 <button id = "+" onClick={this.onChange}>+</button>
-                            </div>  <br />
-                            <button onClick={this.submit} id = "group">Submit</button>
-                            <button onClick={this.clear} id = "group">Clear</button>
+                            </div> 
                         </DropdownContent>
                     </Dropdown>
                     <Dropdown>
@@ -272,11 +264,10 @@ export default class FilterBar extends React.Component{
                                 onChange = {this.onChange} 
                                 type="checkbox" 
                                 checked = {this.state.Triple} /> 
-                            <label>Triple</label>  <br />
-                            <button onClick={this.submit} id = "room">Submit</button>
-                            <button onClick={this.clear} id = "room">Clear</button>
+                            <label>Triple</label>
                         </DropdownContent>
                     </Dropdown>
+                    <ClearButton onClick={this.clear}>Clear</ClearButton>
             </FilterRow>
         </div>
         );
