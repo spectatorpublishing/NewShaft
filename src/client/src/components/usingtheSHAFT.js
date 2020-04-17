@@ -107,7 +107,7 @@ class usingtheSHAFT extends React.Component {
                 <div class="textbox_phone">
                   There are a myriad of housing options and dorm styles at Columbia. Having a hard time choosing? With theShaft’s compare feature, you can compare building amenities and student reviews for dorms.
                 </div>
-                <div class="button_phone"><a href="https://www.theshaft.info/compare">go to Compare Dorms</a></div>
+                <div class="disabled_phone">go to Compare Dorms</div>               
               </div>
             </div>
             <div class="rowPad_phone">
@@ -218,7 +218,7 @@ class usingtheSHAFT extends React.Component {
                     <div class="textbox3">
                       There are a myriad of housing options and dorm styles at Columbia. Having a hard time choosing? With theShaft’s compare feature, you can compare building amenities and student reviews for dorms.
                     </div>
-                    <div class="button2"><a href="https://www.theshaft.info/compare">go to Compare Dorms</a></div>
+                    <div class="disabled">go to Compare Dorms</div>
                   </div>
                 </div>
               </div>

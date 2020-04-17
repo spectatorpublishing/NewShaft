@@ -119,7 +119,7 @@ class specialHousing extends React.Component {
             </div>
           </div>
           <div class="row_phone">            
-            <img src="https://arc-anglerfish-arc2-prod-spectator.s3.amazonaws.com/public/K6EDUXGRDNC5NDI3PPI7M7AEHE.jpg" class="img_style_phone" alt="Group of RAs"></img>
+            <img src="https://arc-anglerfish-arc2-prod-spectator.s3.amazonaws.com/public/73F4GONETRCNHP3HBMI6IRFPGQ.jpg" class="img_style_phone" alt="Group of RAs"></img>
           </div>
           <div class="row_phone">
             <div class="textbox_phone">
@@ -266,7 +266,7 @@ class specialHousing extends React.Component {
             </div>
           <div class="row_phoneA">
             <div class="column_image">
-              <img src="https://arc-anglerfish-arc2-prod-spectator.s3.amazonaws.com/public/K6EDUXGRDNC5NDI3PPI7M7AEHE.jpg" class="img_style1" alt="Group of RAs"></img>
+              <img src="https://arc-anglerfish-arc2-prod-spectator.s3.amazonaws.com/public/73F4GONETRCNHP3HBMI6IRFPGQ.jpg" class="img_style1" alt="Group of RAs"></img>
             </div>
             <div class="column">
                 <div class="row2">

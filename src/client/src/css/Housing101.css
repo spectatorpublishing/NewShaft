@@ -130,6 +130,47 @@ a {
   font-size: calc(20px + (35 - 20) * ((100vw - 300px) / (1600 - 300)));
 }
 
+.disabled_phone{
+  border: 1.5px solid lightgray;
+  color: lightgray;
+  border-radius: 7px;
+  margin-top: 10px;
+  padding-top: 13px;
+  padding-bottom: 13px;
+  padding-left:30px;
+  padding-right:30px;
+  height: fit-content;
+  width: fit-content;
+  font-family: 'Raleway';
+  font-size: calc(20px + (35 - 20) * ((100vw - 300px) / (1600 - 300)));
+  font-weight: 400;
+  text-decoration: none;
+  display: inline-block;
+  text-align: center;
+  justify-content: center;
+}
+.disabled{
+  border: 1.5px solid lightgray;
+  color: lightgray;
+  border-radius: 7px;
+  margin-top: 15px;
+  padding-top: 13px;
+  padding-bottom: 13px;
+  padding-left:30px;
+  padding-right:30px;
+  height: fit-content;
+  width: fit-content;
+  font-family: 'Raleway';
+  font-size: calc(14px + (25 - 14) * ((100vw - 300px) / (1600 - 300)));
+  text-align: center;
+  margin-left:1%;
+  font-weight: 400;
+  text-decoration: none;
+  display: inline-block;
+  text-align: center;
+  justify-content: center;
+}
+
 p{
   font-weight: 800;
 }
