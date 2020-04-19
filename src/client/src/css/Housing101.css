@@ -31,8 +31,25 @@ h1, h2, p, ul, li {
   font-family: 'Raleway';
   margin-left:1rem;
   margin-right:1rem;
-  font-size:calc(16px + (25 - 16) * ((100vw - 300px) / (1600 - 300)));
+  font-size:1.6rem;
   text-align: center;
+}
+
+@media (max-width:768px) {
+  .li {
+    text-decoration: none;
+    border-radius: 7px;
+    border: 1.5px solid rgb(82, 150, 210); 
+    margin-top: 1rem;  
+    height: fit-content;
+    width: fit-content;
+    color:rgb(82, 150, 210);
+    font-family: 'Raleway';
+    margin-left:1rem;
+    margin-right:1rem;
+    font-size:2.6vw;
+    text-align: center;
+  }
 }
 
 a {
@@ -84,9 +101,28 @@ a {
   width: fit-content;
   color:rgb(82, 150, 210);
   font-family: 'Raleway';
-  font-size: calc(14px + (25 - 14) * ((100vw - 300px) / (1600 - 300)));
+  font-size: 1.6rem;
   text-align: center;
   margin-left:1%;
+}
+
+@media (max-width:980px) {
+  .button2 {
+    border-radius: 7px;
+    border: 1.5px solid rgb(82, 150, 210);
+    margin-top: 1rem;
+    padding-top: 0.3rem;
+    padding-bottom: 0.3rem;
+    padding-left:1rem;
+    padding-right:1rem;
+    height: fit-content;
+    width: fit-content;
+    color:rgb(82, 150, 210);
+    font-family: 'Raleway';
+    font-size: 1rem;
+    text-align: center;
+    margin-left:1%;
+  }
 }
 
 .button3 {
@@ -101,7 +137,7 @@ a {
   width: fit-content;
   color:rgb(82, 150, 210);
   font-family: 'Raleway';
-  font-size: calc(20px + (30 - 20) * ((100vw - 300px) / (1600 - 300)));
+  font-size: 2vw;
   text-align: center;
   justify-content: center;
 }
@@ -118,7 +154,7 @@ a {
   width: fit-content;
   color:rgb(82, 150, 210);
   font-family: 'Raleway';
-  font-size: calc(20px + (35 - 20) * ((100vw - 300px) / (1600 - 300)));
+  font-size: 4.5vw;
 }
 
 .disabled_phone{
@@ -133,28 +169,7 @@ a {
   height: fit-content;
   width: fit-content;
   font-family: 'Raleway';
-  font-size: calc(20px + (35 - 20) * ((100vw - 300px) / (1600 - 300)));
-  font-weight: 400;
-  text-decoration: none;
-  display: inline-block;
-  text-align: center;
-  justify-content: center;
-}
-.disabled{
-  border: 1.5px solid lightgray;
-  color: lightgray;
-  border-radius: 7px;
-  margin-top: 1rem;
-  padding-top: 1rem;
-  padding-bottom: 1rem;
-  padding-left:2rem;
-  padding-right:2rem;
-  height: fit-content;
-  width: fit-content;
-  font-family: 'Raleway';
-  font-size: calc(14px + (25 - 14) * ((100vw - 300px) / (1600 - 300)));
-  text-align: center;
-  margin-left:1%;
+  font-size: 4.5vw;
   font-weight: 400;
   text-decoration: none;
   display: inline-block;
@@ -173,7 +188,7 @@ title{
 .title2 {
   color: white;
   font-size: 3rem;
-  font-weight: 400; /* regular */
+  font-weight: 400; 
   font-family: 'Raleway';
   text-align: center;
   padding-top: 1.2rem;
@@ -192,25 +207,49 @@ title{
 .line {
   color: rgb(82, 150, 210);
   font-size: 2rem;
-  font-weight: 400; /* medium */
+  font-weight: 400;
   font-family: 'Times New Roman';
 }
 
 .item_title{
   padding-left: 1%;
   padding-top: 3.3rem;
-  font-size: calc(14px + (57 - 14) * ((100vw - 300px) / (1600 - 300)));
+  font-size: 2.8rem;
   font-family: 'Raleway';
   color: rgb(82, 150, 210);
   text-align: left;
   font-weight: 500;
 }
 
+@media (max-width:1000px) {
+  .item_title{
+    padding-left: 1%;
+    padding-top: 3.3rem;
+    font-size: 2rem;
+    font-family: 'Raleway';
+    color: rgb(82, 150, 210);
+    text-align: left;
+    font-weight: 500;
+  }
+}
+
+@media (max-width:980px) {
+  .item_title2{
+    padding-left: 1%;
+    padding-top: 3.3rem;
+    font-size: 1.6rem;
+    font-family: 'Raleway';
+    color: rgb(82, 150, 210);
+    text-align: left;
+    font-weight: 500;
+  }
+}
+
 .item_title2 {
   padding-left: 3%;
   padding-right: 3vw;
   padding-top: 3.3rem;
-  font-size: calc(14px + (57 - 14) * ((100vw - 300px) / (1600 - 300)));
+  font-size: 2.8rem;
   font-family: 'Raleway';
   color: rgb(82, 150, 210);
   text-align: left;
@@ -218,7 +257,7 @@ title{
 }
 
 .textbox{
-  font-size: calc(14px + (25 - 14) * ((100vw - 300px) / (1600 - 300)));
+  font-size: 1.4rem;
   font-family: 'Raleway';
   text-align: left;
   padding-top: 1.2rem;
@@ -228,7 +267,7 @@ title{
 }
 
 .textbox2{
-  font-size: calc(20px + (30 - 20) * ((100vw - 300px) / (1600 - 300)));
+  font-size: 1.8rem;
   font-family: 'Raleway';
   text-align: left;
   vertical-align: middle;
@@ -236,8 +275,7 @@ title{
 }
 
 .textbox3{
-  font-size: calc(14px + (25 - 14) * ((100vw - 300px) / (1600 - 300)));
-  font-family: 'Raleway';
+  font-size: 1.4rem;
   text-align: left;
   padding-top: 1.2rem;
   padding-left: 1%;
@@ -245,7 +283,7 @@ title{
 }
 
 .textbox81{
-  font-size: calc(20px + (30 - 20) * ((100vw - 300px) / (1600 - 300)));
+  font-size: 1.8rem;
   font-family: 'Raleway';
   text-align: left;
   vertical-align: middle;
@@ -450,7 +488,7 @@ title{
   position: relative;
   flex: 1;
   align-items: left;
-  padding-left: calc(0px + (30 - 0) * ((100vw - 300px) / (1600 - 300)));
+  padding-left: 2vw;
 }
 
 .column82 {
@@ -655,7 +693,7 @@ title{
 }
 
 .item_title_phone{
-  font-size: calc(20px + (100 - 20) * ((100vw - 300px) / (1600 - 300)));
+  font-size: 2.6rem;
   font-family: 'Raleway';
   color: rgb(73, 144, 206);
   text-align: left;
@@ -663,14 +701,14 @@ title{
 }
 
 .textbox_phone{
-  font-size: calc(20px + (30 - 20) * ((100vw - 300px) / (1600 - 300)));
+  font-size: 1.5rem;
   font-family: 'Raleway';
   text-align: center;
   padding: 1.5rem;
 }
 
 .textbox2_phone{
-  font-size: calc(20px + (20 - 14) * ((100vw - 300px) / (1600 - 300)));
+  font-size: 1.6rem;
   font-family: 'Raleway';
   text-align: center;
   padding-top: 0.6rem;
@@ -680,13 +718,13 @@ title{
 }
 
 .number_phone{
-  font-size: calc(140px + (200 - 140) * ((100vw - 300px) / (1600 - 300)));
+  font-size: 10rem;
   z-index:1rem;
   color: white;
   -webkit-text-stroke-width: 4px;
   -webkit-text-stroke-color: rgb(58, 144, 218);
   font-family: 'Archivo Black';
-  padding-left: 0.6rem;
+  padding-left: 1.3rem;
   padding-right: 0.6rem;
 }
 

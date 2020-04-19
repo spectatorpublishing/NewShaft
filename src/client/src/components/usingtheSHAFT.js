@@ -209,7 +209,6 @@ class usingtheSHAFT extends React.Component {
               </div>
             </div>
             <div class="row_phoneA">
-            
                 <div class="row">
                   <img src="https://arc-anglerfish-arc2-prod-spectator.s3.amazonaws.com/public/TYTGAIHE75DEFG4BIPLZBPTPMM.png" class="img_style81" alt="trophy"></img>
                   <div class="column81">
@@ -226,11 +225,8 @@ class usingtheSHAFT extends React.Component {
                       Cheat sheet:<br></br><strong>Housing 101</strong>
                     </div>
                   </div>
-                 
                 </div>
               </div>
-                
-             
           </div>
         );
       }
