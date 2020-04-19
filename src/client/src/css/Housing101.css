@@ -3,8 +3,6 @@
 
 body {
   background-color: white;
-  padding: 0px;
-  margin: 0;
 }
 
 h1, h2, p, ul, li {
@@ -19,20 +17,20 @@ h1, h2, p, ul, li {
   margin-right:auto;
   display: flex;
   flex-direction: row;
-  padding-top:20px;
+  padding-top:1.3rem;
 }
 
 .li {
   text-decoration: none;
   border-radius: 7px;
   border: 1.5px solid rgb(82, 150, 210); 
-  margin-top: 15px;  
+  margin-top: 1rem;  
   height: fit-content;
   width: fit-content;
   color:rgb(82, 150, 210);
   font-family: 'Raleway';
-  margin-left:15px;
-  margin-right:15px;
+  margin-left:1rem;
+  margin-right:1rem;
   font-size:calc(16px + (25 - 16) * ((100vw - 300px) / (1600 - 300)));
   text-align: center;
 }
@@ -44,23 +42,16 @@ a {
   display: inline-block;
   text-align: center;
   justify-content: center;
-  padding-top: 8px;
-  padding-bottom: 8px;
-  padding-left:10px;
-  padding-right:10px;
+  padding-top: 0.5rem;
+  padding-bottom: 0.5rem;
+  padding-left:0.6rem;
+  padding-right:0.6rem;
 }
 
 .content {
   background-color: #FFF;
-  padding: 0px;
 }
-.content h2 {
-  padding: 0;
-  margin: 0;
-}
-.content li {
-  margin-bottom: 0px;
-}
+
 .active{
   color: #fff;
   background-color:rgb(82, 150, 210);
@@ -70,11 +61,11 @@ a {
 .button {
   border-radius: 7px;
   border: 1.5px solid rgb(82, 150, 210); 
-  margin-top: 15px;
-  padding-top: 10px;
-  padding-bottom: 10px;
-  padding-left:15px;
-  padding-right:15px;
+  margin-top: 1rem;
+  padding-top: 0.6rem;
+  padding-bottom: 0.6rem;
+  padding-left:1rem;
+  padding-right:1rem;
   height: fit-content;
   width: fit-content;
   color:rgb(82, 150, 210);
@@ -84,11 +75,11 @@ a {
 .button2 {
   border-radius: 7px;
   border: 1.5px solid rgb(82, 150, 210);
-  margin-top: 15px;
-  padding-top: 5px;
-  padding-bottom: 5px;
-  padding-left:20px;
-  padding-right:20px;
+  margin-top: 1rem;
+  padding-top: 0.3rem;
+  padding-bottom: 0.3rem;
+  padding-left:1.2rem;
+  padding-right:1.2rem;
   height: fit-content;
   width: fit-content;
   color:rgb(82, 150, 210);
@@ -101,11 +92,11 @@ a {
 .button3 {
   border-radius: 7px;
   border: 1.5px solid rgb(82, 150, 210); 
-  margin-top: 15px;
-  padding-top: 5px;
-  padding-bottom: 5px;
-  padding-left:20px;
-  padding-right:20px;
+  margin-top: 1rem;
+  padding-top: 0.3rem;
+  padding-bottom: 0.3rem;
+  padding-left:1.2rem;
+  padding-right:1.2rem;
   height: fit-content;
   width: fit-content;
   color:rgb(82, 150, 210);
@@ -118,11 +109,11 @@ a {
 .button_phone {
   border-radius: 7px;
   border: 1.5px solid rgb(82, 150, 210); 
-  margin-top: 10px;
-  padding-top: 5px;
-  padding-bottom: 5px;
-  padding-left:20px;
-  padding-right:20px;
+  margin-top: 1rem;
+  padding-top: 0.3rem;
+  padding-bottom: 0.3rem;
+  padding-left:1.2rem;
+  padding-right:1.2rem;
   height: fit-content;
   width: fit-content;
   color:rgb(82, 150, 210);
@@ -134,11 +125,11 @@ a {
   border: 1.5px solid lightgray;
   color: lightgray;
   border-radius: 7px;
-  margin-top: 10px;
-  padding-top: 13px;
-  padding-bottom: 13px;
-  padding-left:30px;
-  padding-right:30px;
+  margin-top: 1rem;
+  padding-top: 1rem;
+  padding-bottom: 1rem;
+  padding-left:2rem;
+  padding-right:2rem;
   height: fit-content;
   width: fit-content;
   font-family: 'Raleway';
@@ -153,11 +144,11 @@ a {
   border: 1.5px solid lightgray;
   color: lightgray;
   border-radius: 7px;
-  margin-top: 15px;
-  padding-top: 13px;
-  padding-bottom: 13px;
-  padding-left:30px;
-  padding-right:30px;
+  margin-top: 1rem;
+  padding-top: 1rem;
+  padding-bottom: 1rem;
+  padding-left:2rem;
+  padding-right:2rem;
   height: fit-content;
   width: fit-content;
   font-family: 'Raleway';
@@ -181,33 +172,33 @@ title{
 
 .title2 {
   color: white;
-  font-size: 55px;
+  font-size: 3rem;
   font-weight: 400; /* regular */
   font-family: 'Raleway';
   text-align: center;
-  padding-top: 20px;
+  padding-top: 1.2rem;
   margin: auto;
 }
 
 .subtitle {
   color: white;
-  font-size: 26px;
+  font-size: 1.7rem;
   font-family: 'Raleway';
   text-align: center;
-  padding: 20px;
+  padding: 1.2rem;
   margin: auto;
 }
 
 .line {
   color: rgb(82, 150, 210);
-  font-size: 20pt;
+  font-size: 2rem;
   font-weight: 400; /* medium */
   font-family: 'Times New Roman';
 }
 
 .item_title{
   padding-left: 1%;
-  padding-top: 50px;
+  padding-top: 3.3rem;
   font-size: calc(14px + (57 - 14) * ((100vw - 300px) / (1600 - 300)));
   font-family: 'Raleway';
   color: rgb(82, 150, 210);
@@ -218,7 +209,7 @@ title{
 .item_title2 {
   padding-left: 3%;
   padding-right: 3vw;
-  padding-top: 50px;
+  padding-top: 3.3rem;
   font-size: calc(14px + (57 - 14) * ((100vw - 300px) / (1600 - 300)));
   font-family: 'Raleway';
   color: rgb(82, 150, 210);
@@ -230,7 +221,7 @@ title{
   font-size: calc(14px + (25 - 14) * ((100vw - 300px) / (1600 - 300)));
   font-family: 'Raleway';
   text-align: left;
-  padding-top: 20px;
+  padding-top: 1.2rem;
   padding-left: 1%;
   padding-right: 10%;
   color: rgb(114, 113, 113);
@@ -240,7 +231,6 @@ title{
   font-size: calc(20px + (30 - 20) * ((100vw - 300px) / (1600 - 300)));
   font-family: 'Raleway';
   text-align: left;
-  padding: 0px;
   vertical-align: middle;
   width: 30vw;
 }
@@ -249,9 +239,8 @@ title{
   font-size: calc(14px + (25 - 14) * ((100vw - 300px) / (1600 - 300)));
   font-family: 'Raleway';
   text-align: left;
-  padding-top: 20px;
+  padding-top: 1.2rem;
   padding-left: 1%;
-  padding-right: 0%;
   color: rgb(114, 113, 113);
 }
 
@@ -259,46 +248,41 @@ title{
   font-size: calc(20px + (30 - 20) * ((100vw - 300px) / (1600 - 300)));
   font-family: 'Raleway';
   text-align: left;
-  padding: 0px;
   vertical-align: middle;
   width: 30vw;
-  padding-left: 0px;
 }
 
 .number4{
-  font-size: 224px;
-  z-index:50px;
+  font-size: 14rem;
+  z-index:1rem;
   color: white;
   -webkit-text-stroke-width: 4px;
   -webkit-text-stroke-color: rgb(82, 150, 210);
   font-family: 'Archivo Black';
-  padding-bottom: 140px;
+  padding-bottom: 10rem;
 }
 .number5{
-  font-size: 224px;
-  z-index:50px;
+  font-size: 14rem;
+  z-index:1rem;
   color: white;
   -webkit-text-stroke-width: 4px;
   -webkit-text-stroke-color: rgb(82, 150, 210);
   font-family: 'Archivo Black';
-  padding-bottom: 20px;
-  padding-left: 0%;
+  padding-bottom: 1.2rem;
 }
 
 .number6{
-  font-size: 224px;
-  z-index:50px;
+  font-size: 14rem;
+  z-index:1rem;
   color: white;
   -webkit-text-stroke-width: 4px;
   -webkit-text-stroke-color: rgb(82, 150, 210);
   font-family: 'Archivo Black';
-  padding-bottom: 0px;
-  padding-left: 0;
 }
 
 .arrow_style{
   max-width:10%;
-  padding: 10px;
+  padding: 1rem;
   align-items: center;
   display: flex;
   flex-direction: column;
@@ -313,7 +297,7 @@ title{
   width: 11vw;
   height: 10vw;
   padding-right: 13%;
-  padding-left: 5px;
+  padding-left: 0.3rem;
 }
 
 .img_style81{
@@ -321,22 +305,19 @@ title{
   height: 10vw;
   padding-right: 4%;
   padding-left: 6vw;
-  padding-top: 60px;
+  padding-top: 3.5rem;
 }
 
 .img_style5{
   max-width:45vw;
-  padding-right: 0%;
 }
 
 .img_style6{
   max-width:30vw;
-  padding-right: 0%;
 }
 
 .img_style7{
   max-width:40vw;
-  padding-right: 0%;
 }
 
 .img_style8{
@@ -356,12 +337,11 @@ title{
 }
 
 .row_phoneA{
-  margin-left:10px;
-  margin-right:10px;
-  padding-top: 0px;
-  padding-bottom: 70px;
-  padding-left:10px;
-  padding-right:10px;
+  margin-left:0.7rem;
+  margin-right:0.7rem;
+  padding-bottom: 4.2rem;
+  padding-left:0.7rem;
+  padding-right:0.6rem;
   display: flex;
   flex-direction: row;
   position: relative;
@@ -369,11 +349,7 @@ title{
 }
 
 .row_phoneB{
-  margin-left:0px;
-  margin-right:0px;
-  margin-top: 0px;
-  margin-bottom: 0px;
-  padding:10px;
+  padding:0.6rem;
   display: flex;
   flex-direction: row;
   position: relative;
@@ -382,12 +358,11 @@ title{
 }
 
 .row_phoneC{
-  margin-left:10px;
-  margin-right:10px;
-  padding-top: 0px;
-  padding-bottom: 70px;
-  padding-left:10px;
-  padding-right:10px;
+  margin-left:0.6rem;
+  margin-right:0.6rem;
+  padding-bottom: 4.2rem;
+  padding-left:0.6rem;
+  padding-right:0.6rem;
   display: flex;
   flex-direction: row;
   position: relative;
@@ -395,12 +370,11 @@ title{
 }
 
 .row_phoneD{
-  margin-left:10px;
-  margin-right:10px;
-  padding-top: 0px;
-  padding-bottom: 10px;
-  padding-left:10px;
-  padding-right:10px;
+  margin-left:0.6rem;
+  margin-right:0.6rem;
+  padding-bottom: 0.6rem;
+  padding-left:0.6rem;
+  padding-right:0.6rem;
   display: flex;
   flex-direction: row;
   position: relative;
@@ -408,12 +382,11 @@ title{
 }
 
 .row_phoneE{
-  margin-left:10px;
-  margin-right:10px;
-  padding-top: 0px;
-  padding-bottom: 10px;
-  padding-left:10px;
-  padding-right:10px;
+  margin-left:0.6rem;
+  margin-right:0.6rem;
+  padding-bottom: 0.6rem;
+  padding-left:0.6rem;
+  padding-right:0.6rem;
   display: flex;
   flex-direction: row;
   position: relative;
@@ -421,12 +394,11 @@ title{
 }
 
 .row_phoneF{
-  margin-left:10px;
-  margin-right:10px;
-  padding-top: 0px;
-  padding-bottom: 10px;
-  padding-left:10px;
-  padding-right:10px;
+  margin-left:0.6rem;
+  margin-right:0.6rem;
+  padding-bottom: 0.6rem;
+  padding-left:0.6rem;
+  padding-right:0.6rem;
   display: flex;
   flex-direction: row;
   position: relative;
@@ -434,13 +406,12 @@ title{
 }
 
 .rowPadTitleA{
-  padding-top: 20px;
-  padding-bottom: 10px;
+  padding-top: 1.2rem;
+  padding-bottom: 0.6rem;
   flex-direction: column;
 }
 
 .page-wrapper{
-  margin: 0px;
   width: auto;
   background-size: contain;
 }
@@ -454,7 +425,7 @@ title{
   position: relative;
   flex: 1;
   align-items: left;
-  padding-right: 30px;
+  padding-right: 1.8rem;
 }
 
 .column81 {
@@ -466,8 +437,7 @@ title{
   position: relative;
   flex: 1;
   align-items: right;
-  padding-right: 10px;
-  padding-top: 0px;
+  padding-right: 0.6rem;
   justify-content: center;
 }
 
@@ -492,10 +462,8 @@ title{
   position: relative;
   flex: 1;
   align-items: left;
-  padding-left: 10px;
+  padding-left: 0.6rem;
 }
-
-
 
 .column_image {
   display: flex;
@@ -506,7 +474,7 @@ title{
   position: relative;
   flex: 1;
   align-items: center;
-  padding-top: 50px;
+  padding-top: 3rem;
 }
 
 .column_image2 {
@@ -518,8 +486,8 @@ title{
   position: relative;
   flex: 1;
   align-items: center;
-  padding-right:10px;
-  padding-top: 50px;
+  padding-right:0.6rem;
+  padding-top: 3rem;
 }
 
 .column_image3 {
@@ -531,8 +499,7 @@ title{
   position: relative;
   flex: 1;
   align-items: top;
-  padding-right:10px;
-  padding-top: 0px;
+  padding-right:0.6rem;
 }
 
 .column_image4 {
@@ -544,8 +511,8 @@ title{
   position: relative;
   flex: 1;
   align-items: center;
-  padding-right:10px;
-  padding-top: 10px;
+  padding-right:0.6rem;
+  padding-top: 0.6rem;
 }
 
 .column3 {
@@ -575,7 +542,7 @@ title{
   flex: 1;
   position: relative;
   justify-content: left;
-  padding-left: 10px;
+  padding-left: 0.6rem;
 }
 
 .column6 {
@@ -597,7 +564,7 @@ title{
   flex: 1;
   align-items: top;
   position: relative;
-  padding-left:30px;
+  padding-left:2rem;
 
 }
 
@@ -621,59 +588,59 @@ title{
   flex: 1;
   align-items: center;
   position: relative;
-  margin-left: 10px;
+  margin-left: 0.6rem;
 }
 
 .page-wrapper_phone{
-  padding-bottom: 40px;
+  padding-bottom: 4rem;
 }
 
 .row_phone{
-  margin-left:10px;
-  margin-right:10px;
+  margin-left:0.6rem;
+  margin-right:0.6rem;
   display: flex;
   flex-direction: column;
   position: relative;
   align-items: center;
-  padding-right: 10px;
-  padding-left: 10px;
+  padding-right: 0.6rem;
+  padding-left: 0.6rem;
 }
 
 .row_phone2{
-  margin-left:10px;
-  margin-right:10px;
+  margin-left:0.6rem;
+  margin-right:0.6rem;
   display: flex;
   flex-direction: row;
   position: relative;
   align-items: center;
-  padding-right: 10px;
-  padding-left: 10px;
+  padding-right: 0.6rem;
+  padding-left: 0.6rem;
 }
 
 .rowPadTitle_phone{
-  margin-top: 100px;
-  margin-bottom: 10px;
+  margin-top: 5rem;
+  margin-bottom: 0.6rem;
   flex-direction: column;
 }
 
 .rowPad_phone{
-  margin-bottom: 10px;
-  padding-top: 10px;
+  margin-bottom: 0.6rem;
+  padding-top: 0.6rem;
 }
 
 .title2_phone {
   color: white;
-  font-size: 40px;
+  font-size: 2.7rem;
   font-weight: 400; /* regular */
   font-family: 'Raleway';
   text-align: center;
-  padding: 10px;
+  padding: 0.6rem;
   margin: auto;
 }
 
 .subtitle_phone {
   color: white;
-  font-size: 18px;
+  font-size: 1.2rem;
   font-family: 'Raleway';
   text-align: center;
   padding: 10px;
@@ -682,7 +649,7 @@ title{
 
 .line_phone {
   color: #62A8E5;
-  font-size: 10pt;
+  font-size: 0.8rem;
   font-weight: 400; /* medium */
   font-family: 'Times New Roman';
 }
@@ -692,67 +659,67 @@ title{
   font-family: 'Raleway';
   color: rgb(73, 144, 206);
   text-align: left;
-  padding: 10px;
+  padding: 0.6rem;
 }
 
 .textbox_phone{
   font-size: calc(20px + (30 - 20) * ((100vw - 300px) / (1600 - 300)));
   font-family: 'Raleway';
   text-align: center;
-  padding: 20px;
+  padding: 1.5rem;
 }
 
 .textbox2_phone{
   font-size: calc(20px + (20 - 14) * ((100vw - 300px) / (1600 - 300)));
   font-family: 'Raleway';
   text-align: center;
-  padding-top: 10px;
-  padding-bottom: 10px;
-  padding-left: 20px;
-  padding-right: 20px;
+  padding-top: 0.6rem;
+  padding-bottom: 0.6rem;
+  padding-left: 1.5rem;
+  padding-right: 1.5rem;
 }
 
 .number_phone{
   font-size: calc(140px + (200 - 140) * ((100vw - 300px) / (1600 - 300)));
-  z-index:1px;
+  z-index:1rem;
   color: white;
   -webkit-text-stroke-width: 4px;
   -webkit-text-stroke-color: rgb(58, 144, 218);
   font-family: 'Archivo Black';
-  padding-left: 10px;
-  padding-right: 10px;
+  padding-left: 0.6rem;
+  padding-right: 0.6rem;
 }
 
 .number2_phone{
   position: absolute;
-  top: -50px;
-  left: -40px;
-  font-size: 150px;
-  z-index:50px;
+  top: -2rem;
+  left: -2rem;
+  font-size: 10rem;
+  z-index:1rem;
   color: white;
   -webkit-text-stroke-width: 4px;
   -webkit-text-stroke-color: rgb(58, 144, 218);
   font-family: 'Archivo Black';
-  padding: 10px;
+  padding: 0.6rem;
 }
 
 .number3_phone{
   position: absolute;
-  top: -60px;
-  left: -40px;
-  font-size: 200px;
-  z-index:50px;
+  top: -3rem;
+  left: -2rem;
+  font-size: 15rem;
+  z-index:2rem;
   color: white;
   -webkit-text-stroke-width: 4px;
   -webkit-text-stroke-color: rgb(58, 144, 218);
   font-family: 'Archivo Black';
-  padding: 10px;
+  padding: 0.6rem;
 }
 
 .img_style_phone{
   max-width:90%;
-  padding: 10px;
-  padding-top:10px;
+  padding: 0.6rem;
+  padding-top:0.6rem;
   display: flex;
   flex-direction: column;
   align-content: center;
@@ -760,8 +727,6 @@ title{
 
 .img_style_phone2{
   max-width:100%;
-  padding: 0px;
-  padding-top:0px;
   display: flex;
   flex-direction: column;
   align-content: center;
@@ -830,7 +795,7 @@ to {
 }
 
 .container{
-  margin: 15px;
+  margin: 1rem;
   background-color: white;
 }
 
@@ -852,28 +817,28 @@ to {
   align-items: center;
   flex: 1;
   width: 85% !important;
-  font-size: 40px;
+  font-size: 2rem;
   font-family: 'Archivo Black';
   margin-left: 5%;
   height:auto !important;
-  margin-bottom: 50px;
+  margin-bottom: 3rem;
 }
 }
 
 @media screen and (max-width: 768px) {
 .rowPad{
-  margin-bottom: 90px;
-  padding-left: 40px;
-  padding-right: 40px;
-  padding-bottom: 70px;
+  margin-bottom: 5rem;
+  padding-left: 2rem;
+  padding-right: 3rem;
+  padding-bottom: 4rem;
 }
 }
 
 @media screen and (max-width: 768px) {
 .number{
   position: absolute;
-  font-size: 160px;
-  z-index:50px;
+  font-size: 9rem;
+  z-index:3rem;
   color: #6E5CFF;
   font-family: 'Archivo Black';
   opacity:0.2;
