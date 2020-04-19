@@ -90,7 +90,7 @@ let DropButton = styled.button`
 `;
 
 let DropdownContent = styled.div`
-    display: //${props => props.show ? '' : 'none'};
+    display: ${props => props.show ? '' : 'none'};
     position: absolute;
     flex-direction: row;
     background-color: white;
