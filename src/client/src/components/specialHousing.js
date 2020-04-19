@@ -201,7 +201,7 @@ class specialHousing extends React.Component {
                 </div>               
                 <img src={arrow} class="arrow_style" alt="arrow down"></img>                
             </div>
-            <div class="row_phoneC">
+            <div class="row_phoneA">
                 <div class="column4">
                     <div class="row2">
                         <div class="number5">

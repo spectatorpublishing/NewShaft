@@ -160,7 +160,7 @@ class newProcess extends React.Component {
                 </div>
                 <img src={arrow} class="arrow_style" alt="arrow down"></img>
             </div>
-            <div class="row_phoneF">
+            <div class="row_phoneD">
                 <div class="column4">
                     <div class="row2">
                         <div class="number5">
