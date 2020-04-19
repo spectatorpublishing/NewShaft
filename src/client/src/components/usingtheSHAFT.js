@@ -98,7 +98,7 @@ class usingtheSHAFT extends React.Component {
                   3
                 </div>
                 <div class="item_title_phone">
-                Be an insider: <br></br><strong>Read Reviews</strong>
+                  Weigh options: <br></br><strong>Compare Dorms</strong>
                 </div>
               </div>
               <div class="row_phone">            
@@ -106,15 +106,33 @@ class usingtheSHAFT extends React.Component {
               </div>
               <div class="row_phone">
                 <div class="textbox_phone">
-                With theShaft’s reviews page, read actual housing experiences of Columbia students before you. With up- and down-vote functionality, you can gauge how much other students resonate with their experiences.
+                  There are a myriad of housing options and dorm styles at Columbia. Having a hard time choosing? With theShaft’s compare feature, you can compare building amenities and student reviews for dorms.
                 </div>
-                <div class="button_phone"><a href="https://www.theshaft.info/reviews">go to Reviews</a></div>               
               </div>
             </div>
             <div class="rowPad_phone">
               <div class="row_phone2">
                 <div class="number_phone">
                   4
+                </div>
+                <div class="item_title_phone">
+                  Be an insider: <br></br><strong>Read Reviews</strong>
+                </div>
+              </div>
+              <div class="row_phone">            
+                <img src="https://arc-anglerfish-arc2-prod-spectator.s3.amazonaws.com/public/BKUPQ4FO5NE6HJRSTYFB52FYT4.png" class="img_style_phone" alt="Reviews Function Example"></img>
+              </div>
+              <div class="row_phone">
+                <div class="textbox_phone">
+                  With theShaft’s reviews page, read actual housing experiences of Columbia students before you. With up- and down-vote functionality, you can gauge how much other students resonate with their experiences.
+                </div>
+                <div class="button_phone"><a href="https://www.theshaft.info/reviews">go to Reviews</a></div>
+              </div>
+            </div>
+            <div class="rowPad_phone">
+              <div class="row_phone2">
+                <div class="number_phone">
+                  5
                 </div>
                 <div class="item_title_phone">
                   Cheat sheet: <br></br><strong>Housing 101</strong>
@@ -187,7 +205,7 @@ class usingtheSHAFT extends React.Component {
                 </div>
               </div>
             </div>
-            <div class="row_phoneA">
+            <div class="row_phoneD">
               <div class="column4">
                 <div class="row2">
                   <div class="number5">
@@ -195,38 +213,62 @@ class usingtheSHAFT extends React.Component {
                   </div>
                   <div class="column3">
                     <div class="item_title">
-                    Be an insider: <br></br>Read <strong>Reviews</strong>
+                      Weigh options: <br></br><strong>Compare Dorms</strong>
                     </div>              
                     <div class="textbox3">
-                    With theShaft’s reviews page, read actual housing experiences of Columbia students before you. With up- and down-vote functionality, you can gauge how much other students resonate with their experiences.
+                      There are a myriad of housing options and dorm styles at Columbia. Having a hard time choosing? With theShaft’s compare feature, you can compare building amenities and student reviews for dorms.
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="column_image2">
+                <img src="https://arc-anglerfish-arc2-prod-spectator.s3.amazonaws.com/public/WDHCGRLWDVCX5HUHUAQZPWYCJA.png" class="img_style5" alt="Compare Dorms"></img>
+              </div>
+            </div>
+            <div class="row_phoneA">
+              <div class="column_image">
+                <img src="https://arc-anglerfish-arc2-prod-spectator.s3.amazonaws.com/public/BKUPQ4FO5NE6HJRSTYFB52FYT4.png" class="img_style2" alt="Reviews Function Example"></img>
+              </div>
+              <div class="column">
+                <div class="row2">
+                  <div class="number4">
+                    4
+                  </div>
+                  <div class="column3">
+                    <div class="item_title">
+                      Be an insider: <br></br>Read <strong>Reviews</strong>
+                    </div>            
+                    <div class="textbox">
+                      With theShaft’s reviews page, read actual housing experiences of Columbia students before you. With up- and down-vote functionality, you can gauge how much other students resonate with their experiences.
                     </div>
                     <div class="button2"><a href="https://www.theshaft.info/reviews">go to Reviews</a></div>
                   </div>
                 </div>
               </div>
-              <div class="column_image2">
-              <img src="https://arc-anglerfish-arc2-prod-spectator.s3.amazonaws.com/public/BKUPQ4FO5NE6HJRSTYFB52FYT4.png" class="img_style2" alt="Reviews Function Example"></img>
-              </div>
             </div>
             <div class="row_phoneA">
-                <div class="row">
-                  <img src="https://arc-anglerfish-arc2-prod-spectator.s3.amazonaws.com/public/TYTGAIHE75DEFG4BIPLZBPTPMM.png" class="img_style81" alt="trophy"></img>
-                  <div class="column81">
-                  <div class="textbox81">
-                    With a <i>new</i> housing system, the game has changed. Know how to play and shoot your best shot.
-                  </div>
-                  <div class="button3"><NavLink to="/newProcess">learn more here</NavLink></div>
-                </div>    
+              <div class="column4">
+                <div class="row3">
                   <div class="number6">
-                    4
+                    5
                   </div>
                   <div class="column6">
                     <div class="item_title2">
                       Cheat sheet:<br></br><strong>Housing 101</strong>
                     </div>
-                  </div>
+                  </div>    
                 </div>
               </div>
+              <div class="column5">
+                <div class="column">
+                  <div class="textbox2">
+                    With a <i>new</i> housing system, the game has changed. Know how to play and shoot your best shot.
+                  </div>
+                  <div class="button3"><NavLink to="/newProcess">learn more here</NavLink></div>
+                </div>
+                <img src="https://arc-anglerfish-arc2-prod-spectator.s3.amazonaws.com/public/TYTGAIHE75DEFG4BIPLZBPTPMM.png" class="img_style4" alt="trophy"></img>
+              </div>
+            </div>  
           </div>
         );
       }
