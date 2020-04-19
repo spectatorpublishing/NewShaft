@@ -1,11 +1,9 @@
 import React, { Component } from 'react';
 import styled from "styled-components";
 import ExploreSidebar from "../components/ExploreSidebar";
-import Filter from '../components/FilterComponent.js'
 import Filters2020 from '../components/exploreFilters'
 import Maps from "../components/Maps";
 import SearchBar from "../components/SearchBar"
-import CurrFilters from "../components/CurrFilters"
 import { FILTER_NAME_TO_KEY } from "../util/DormFilter.js";
 
 import _ from "lodash"
@@ -104,7 +102,6 @@ export default class Explore extends Component {
       dorms: []
     };
     this.updatePayload = this.updatePayload.bind(this)
-    //this.resetPayload = this.resetPayload.bind(this)
     }
   
   componentDidMount(){
@@ -145,10 +142,6 @@ export default class Explore extends Component {
     this.setState({payload: payload}, () => this.filterDorms());
   }
 
-  // resetPayload(){
-  //   this.setState({payload: _.clone(initialPayload)}, this.filterDorms)
-  // }
-
   filterDorms(){
     fetch('/api/getFilteredDorms', {
         method: 'POST',
@@ -168,12 +161,9 @@ export default class Explore extends Component {
         <ColOne>
           <SideBar>
             <FilterSearchBG>
-              {/* <h2>The Shaft</h2> */}
               <SearchBar handleChange={this.updatePayload}/>
-              {/* <Filter handleChange={this.updatePayload} payload={this.state.payload}/> */}
               <Filters2020 submit = {this.updatePayload} search = {this.state.payload.DORM}></Filters2020>
             </FilterSearchBG>
-            {/* <CurrFilters filterNameToKey={FILTER_NAME_TO_KEY} filters={this.state.payload} removeFilter={(name)=>{this.updatePayload(0, name)}} removeAll={this.resetPayload}/> */}
             <ExploreSidebar dorms={this.state.dorms}/>
           </SideBar>
         </ColOne>
