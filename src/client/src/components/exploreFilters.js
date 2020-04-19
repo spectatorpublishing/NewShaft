@@ -3,8 +3,8 @@ import styled from 'styled-components';
 
 let FilterRow = styled.div`
     background-color: rgb(98, 168, 229);
-    padding: 0px 20px 10px 0px;
-    margin: 0px 0 0 1.5%;
+    padding: 0rem 1.2rem 0.6rem 0rem;
+    margin: 0rem 0 0 1.5%;
     display: flex;
     flex-direction: row;
     align-items: center;
@@ -24,8 +24,8 @@ let SelectedWrapper = styled.div`
     flex-direction: row;
     align-items: center;
     font-family: 'Raleway';
-    padding-top: 10px;
-    padding-left: 10px;
+    padding-top: 0.6rem;
+    padding-left: 0.6rem;
 `;
 
 let RowGZ = styled.div`
@@ -33,7 +33,6 @@ let RowGZ = styled.div`
     flex-direction: row;
     align-items: center;
     font-family: 'Raleway';
-    padding:0px 0px 0px 0px;
     justify-content: center;
 `;
 
@@ -44,7 +43,7 @@ let Tag = styled.div`
     color: white;
     padding: .5rem;
     font-weight: 200;
-    font-size: 18px;
+    font-size: 1.2rem;
 `;
 
 let Cancel = styled.div`
@@ -52,7 +51,7 @@ let Cancel = styled.div`
     color: white;
     padding-right: .5rem;
     font-weight: 200;
-    font-size: 12px;
+    font-size: 0.8rem;
 `;
 
 let Dropdown = styled.div`
@@ -62,11 +61,10 @@ let Dropdown = styled.div`
 
 let Textbox = styled.div`
     font-family: 'Raleway';
-    font-size: 25px;
+    font-size: 1.5rem;
     color: white;
-    padding: 10px 0px 10px 5px;
-    margin-right: 20px;
-    margin-left: 0px;
+    padding: 0.6rem 0rem 0.6rem 0.3rem;
+    margin-right: 1.2rem;
 `;
 
 let DropButton = styled.button`
@@ -78,42 +76,42 @@ let DropButton = styled.button`
     width: fit-content;
     color:white;
     font-family: 'Raleway';
-    margin-left:8px;
-    margin-right:8px;
-    font-size:18px;
+    margin-left:0.5rem;
+    margin-right:0.5rem;
+    font-size:1.2rem;
     text-align: center;
-    padding-top: 5px;
-    padding-bottom: 5px;
-    padding-right: 15px;
-    padding-left: 15px;
+    padding-top: 0.3rem;
+    padding-bottom: 0.3rem;
+    padding-right: 1rem;
+    padding-left: 1rem;
     background-color: rgb(98, 168, 229);
     outline: none;
   }
 `;
 
 let DropdownContent = styled.div`
-    display: ${props => props.show ? '' : 'none'};
+    display: //${props => props.show ? '' : 'none'};
     position: absolute;
     flex-direction: row;
     background-color: white;
-    min-width: 130px;
+    min-width: 8rem;
     font-family: 'Raleway';
-    box-shadow: 8px 0px 16px 0px rgba(0,0,0,0.2);
+    box-shadow: 0.5rem 0rem 1rem 0rem rgba(0,0,0,0.2);
     z-index: 1;
     border-radius: 8px;
     border: 1.5px solid rgb(98, 168, 229);
-    padding: 10px 20px 10px 20px;  
-    margin-left: 8px;
-    margin-right: 8px;
-    margin-top: 5px;
+    padding: 0.6rem 1.2rem 0.6rem 1.2rem;  
+    margin-left: 0.5rem;
+    margin-right: 0.5rem;
+    margin-top: 0.3rem;
 `;
 
 let ClearButton = styled.a`
     cursor: pointer;
     font-family: 'Raleway';
-    margin-left:8px;
-    margin-right:8px;
-    font-size:18px;
+    margin-left:0.5rem;
+    margin-right:0.5rem;
+    font-size:1.2rem;
     color: white;
     text-decoration: underline;
 `;
@@ -121,16 +119,13 @@ let ClearButton = styled.a`
 const ButtonGZ = styled.div`
     cursor: pointer;
     font-family: 'Raleway';
-    margin-left:0px;
-    margin-right:0px;
-    font-size:20px;
+    font-size:1.2rem;
     color: black;
     justify-contents: center;
-    font-size: 20px;
     border-radius: 100%;
     border: 1px solid rgb(98, 168, 229);
     align-text: center;
-    padding: 0px 8.25px 0px 8.25px;
+    padding: 0rem 0.45rem 0rem 0.45rem;
     vertical-align: center;
     color: rgb(98, 168, 229);
     &:hover {
@@ -142,18 +137,18 @@ const ButtonGZ = styled.div`
 let Number = styled.div`
     font-family: 'Raleway';
     align-text: center;
-    font-size: 25px;
+    font-size: 1.5rem;
     vertical-align: middle;
     margin: auto;
 `;
 
 let Label = styled.div`
     font-family: 'Raleway';
-    padding-left: 10px;
-    padding-top: 4px;
-    padding-right: 10px;
+    padding-left: 0.6rem;
+    padding-top: 0.2rem;
+    padding-right: 0.6rem;
     color: rgb(98, 168, 229);
-    font-size: 20px;
+    font-size: 1.3rem;
     background: white;
     font-weight: normal;
 `;
@@ -163,20 +158,20 @@ let Row = styled.div`
     flex-direction: row;
     vertical-align: middle;
     justify-contents: center;
-    padding: 5px 0px 5px 0px;
+    padding: 0.3rem 0rem 0.3rem 0rem;
 `;
 
 let Input = styled.div`
     border: 2px solid rgb(98, 168, 229);
     border-radius: 6px;
-    width: 20px;
-    height: 15px;
+    width: 1.2rem;
+    height: 0.9rem;
     cursor: pointer;
-    margin: 3px;
+    margin: 0.2rem;
     color: white;
-    font-size: 18px;
+    font-size: 1.1rem;
     align-text: top;
-    padding: 1px 0px 6px 4px;
+    padding: 0.1rem 0rem 0.4rem 0.2rem;
     background-color: transparent
     vertical-align: center;
     &:active{
@@ -188,14 +183,14 @@ let CheckBox = styled.div`
     display: ${props => props.show ? '' : 'none'};
     border: 2px solid rgb(98, 168, 229);
     border-radius: 6px;
-    width: 20px;
-    height: 15px;
+    width: 1.2rem;
+    height: 0.9rem;
     cursor: pointer;
-    margin: 3px;
+    margin: 0.2rem;
     color: white;
-    font-size: 18px;
+    font-size: 1.1rem
     align-text: top;
-    padding: 1px 0px 6px 4px;;
+    padding: 0.1rem 0rem 0.4rem 0.2rem;
     background-color: rgb(98, 168, 229);
     position: absolute;
 `;
