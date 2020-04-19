@@ -1,5 +1,6 @@
 import React from "react";
 import arrow from '../assets/Housing101_images/arrow.png';
+import newFilters from '../assets/Housing101_images/newFilters.png';
 import '../css/Housing101.css';
 import { NavLink } from "react-router-dom";
 
@@ -63,7 +64,7 @@ class usingtheSHAFT extends React.Component {
                 </div>
               </div>
               <div class="row_phone">            
-                <img src="https://arc-anglerfish-arc2-prod-spectator.s3.amazonaws.com/public/MENVGJENTBERFBTX6FQ5KSBF2Q.png" class="img_style_phone" alt="Filters from explore page displayed"></img>
+                <img src={newFilters} class="img_style_phone" alt="Filters from explore page displayed"></img>
               </div>
               <div class="row_phone">
                 <div class="textbox_phone">
@@ -162,7 +163,7 @@ class usingtheSHAFT extends React.Component {
                 </div>
               </div>
               <div class="column_image2">
-                <img src="https://arc-anglerfish-arc2-prod-spectator.s3.amazonaws.com/public/MENVGJENTBERFBTX6FQ5KSBF2Q.png" class="img_style7" alt="Filters from explore page displayed"></img>
+                <img src={newFilters} class="img_style7" alt="Filters from explore page displayed"></img>
               </div>
             </div>
             <div class="row_phoneA">
