@@ -41,7 +41,7 @@ let MobileStatBox = styled.div`
     margin-bottom: 1vh;
     display: flex;
     flex-direction: row;
-    width: 100%
+    width: 100%;
 `
 
 let SlidingBox = styled.div`
@@ -51,7 +51,7 @@ let SlidingBox = styled.div`
 
 let MobileSlidingBox = styled.div`
     margin-top: 1vh;
-    width: 100%
+    width: 100%;
 `
 
 
