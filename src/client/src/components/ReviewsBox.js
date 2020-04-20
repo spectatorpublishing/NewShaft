@@ -85,8 +85,8 @@ export default class ReviewsBox extends Component {
                     <Reviews>Reviews</Reviews>
                     <MobileInfoBox>
                         <MobileStatBox>
-                            {/* <ReviewStat boldText={this.props.stars} subText="average stars" isMobile={isMobile}/> */}
-                            {/* <ReviewStat boldText={this.props.ranking} subText="ranking" isMobile={isMobile}/> */}
+                            <ReviewStat boldText={this.props.stars} subText="average stars" isMobile={isMobile}/>
+                            <ReviewStat boldText={this.props.ranking} subText="ranking" isMobile={isMobile}/>
                         </MobileStatBox>
                         <MobileSlidingBox>
                             <SlidingReview reviews={this.props.reviews}/>
@@ -102,8 +102,8 @@ export default class ReviewsBox extends Component {
                     <InfoBox>
                         <StatBox>
                             <ReviewStat boldText={this.props.stars} subText="average stars" isMobile={isMobile}/>
-                            {/* <ReviewStat boldText={this.props.recommend} subText="recommend" isMobile={isMobile}/> */}
-                            {/* <ReviewStat boldText={this.props.ranking} subText="ranking" isMobile={isMobile}/> */}
+                            <ReviewStat boldText={this.props.recommend} subText="recommend" isMobile={isMobile}/>
+                            <ReviewStat boldText={this.props.ranking} subText="ranking" isMobile={isMobile}/>
                         </StatBox>
                         <SlidingBox>
                             <SlidingReview reviews={this.props.reviews}/>
