@@ -20,7 +20,7 @@ let MobileBorder = styled.div`
 let Reviews = styled.h2`
     margin-top: 2vh;
     margin-bottom: 2vh;
-    padding-left: 0.5vw;  
+    padding-left: 0.5vw;
 `
 
 let InfoBox = styled.div`
@@ -67,11 +67,11 @@ export default class ReviewsBox extends Component {
     componentWillMount() {
         window.addEventListener("resize", this.handleWindowSizeChange);
       }
-    
+
       componentWillUnmount() {
         window.removeEventListener("resize", this.handleWindowSizeChange);
       }
-    
+
       handleWindowSizeChange = () => {
         this.setState({ width: window.innerWidth });
       };
@@ -85,13 +85,13 @@ export default class ReviewsBox extends Component {
                     <Reviews>Reviews</Reviews>
                     <MobileInfoBox>
                         <MobileStatBox>
-                            <ReviewStat boldText={this.props.stars} subText="average stars" isMobile={isMobile}/>
-                            <ReviewStat boldText={this.props.ranking} subText="ranking" isMobile={isMobile}/>
+                            {/* <ReviewStat boldText={this.props.stars} subText="average stars" isMobile={isMobile}/> */}
+                            {/* <ReviewStat boldText={this.props.ranking} subText="ranking" isMobile={isMobile}/> */}
                         </MobileStatBox>
                         <MobileSlidingBox>
                             <SlidingReview reviews={this.props.reviews}/>
                         </MobileSlidingBox>
-                    </MobileInfoBox> 
+                    </MobileInfoBox>
                 </MobileBorder>
             );
         }
@@ -102,8 +102,8 @@ export default class ReviewsBox extends Component {
                     <InfoBox>
                         <StatBox>
                             <ReviewStat boldText={this.props.stars} subText="average stars" isMobile={isMobile}/>
-                            <ReviewStat boldText={this.props.recommend} subText="recommend" isMobile={isMobile}/>
-                            <ReviewStat boldText={this.props.ranking} subText="ranking" isMobile={isMobile}/>
+                            {/* <ReviewStat boldText={this.props.recommend} subText="recommend" isMobile={isMobile}/> */}
+                            {/* <ReviewStat boldText={this.props.ranking} subText="ranking" isMobile={isMobile}/> */}
                         </StatBox>
                         <SlidingBox>
                             <SlidingReview reviews={this.props.reviews}/>
@@ -114,8 +114,7 @@ export default class ReviewsBox extends Component {
         }
 
 
-        
+
     }
 
 }
-

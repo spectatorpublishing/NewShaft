@@ -1,32 +1,33 @@
 import React, { Component } from "react";
 import styled from 'styled-components';
-import ChrisV from '../assets/chrisv_blue.svg';
+import ChrisV from '../assets/chrisv_blue.svg'
 import {theme} from '../util/GlobalStyles.js';
+
+let Container = styled.div`
+    margin: 1rem;
+    width: 85vw;
+`
 
 let Sidebar = styled.div`
     width: 10vw;
-    height: 100vh;
+    height: auto;
     margin-top:6vh;
     margin-left:5vw;
-    color: green;
     display:flex;
     flex-direction:column;
-    
+
 `
-let SidebarTitle = styled.div`
+let SidebarTitle = styled.h3`
     text-align: center;
-    font-weight: bold;
-    border-bottom: solid 1px ${props => props.theme.lightGray} !Important;
-    color: ${props => props.theme.darkGray} !Important;
+    border-bottom: solid;
+    border-color: ${props => props.theme.lightGray};
+    border-width: 2px;
     margin-bottom: 2px;
     @media only screen and (max-width: 992px){
-        color: 	${props => props.theme.white} !Important;
+        color: 	${props => props.theme.white};
         padding-top: 1rem;
         padding-bottom: 0.5rem;
-        text-align: left;
-        border-bottom: none !Important;
-        text-transform: uppercase;
-        padding-left: 0.7rem;
+        text-align: center;
         border: none;
         font-size: 1rem;
     }
@@ -49,12 +50,11 @@ let DormListMobile = styled.div`
     align-items: center;
     &>select{
         border-radius: 10px;
-        border: none;
         background: ${props => props.theme.white};
-        height: 2.5rem;
-        font-family: Raleway, sans-serif;
-        font-size: 0.8rem;
-        color: ${props => props.theme.darkGray};
+        height: 4rem;
+        font-size: 20px;
+        font-weight: semi-bold;
+        color: ${props => props.theme.columbiaBlue};
         width: 95%;
         margin: 0 2.5%;
         padding: 0 5px;
@@ -81,48 +81,20 @@ let Dorm = styled.button`
     }
 `
 
-let Compare = styled.a`
-    padding: .5em;
-    margin: 2px 0;
-    background-color: ${props => props.theme.white};
-    border: none;
-    color: ${props => props.theme.columbiaBlue};
-    border: solid 2px ${props => props.theme.columbiaBlue};
-    font-size: 1.2rem;
-    border-radius: 8px;
-    background: none;
-    text-align: left;
-    font-weight: bold;
-    text-decoration: none;
-    font-family: Raleway, sans-serif;
-    &:hover {
-        background-color: ${props => props.theme.columbiaBlue};
-        color: ${props => props.theme.white};
-    }
-    display: none;
-`;
-
-let V = styled.img`
-   display: flex;
-   margin-left: 2rem;
-   border-right: solid 6px white;
-   background-color: white;
-`;
-
 const DORM_ARRAY = [
-    '47 Claremont', 
-    'Broadway Hall', 
-    'East Campus', 
-    'Furnald Hall', 
-    'Harmony Hall', 
-    'Hogan Hall', 
-    'McBain Hall', 
-    '600 W 113th', 
-    'River Hall', 
-    'Ruggles Hall', 
-    'Schapiro Hall', 
-    'Watt Hall', 
-    'Wien Hall', 
+    '47 Claremont',
+    'Broadway Hall',
+    'East Campus',
+    'Furnald Hall',
+    'Harmony Hall',
+    'Hogan Hall',
+    'McBain Hall',
+    '600 W 113th',
+    'River Hall',
+    'Ruggles Hall',
+    'Schapiro Hall',
+    'Watt Hall',
+    'Wien Hall',
     'Woodbridge Hall'
 ];
 
@@ -145,11 +117,11 @@ export default class WhiteboardSidebar extends React.Component {
     componentWillMount() {
         window.addEventListener("resize", this.handleWindowSizeChange);
     }
-  
+
     componentWillUnmount() {
         window.removeEventListener("resize", this.handleWindowSizeChange);
     }
-  
+
     handleWindowSizeChange() {
         this.setState({ width: window.innerWidth });
     }
@@ -167,7 +139,7 @@ export default class WhiteboardSidebar extends React.Component {
                     this.setState({dormId: id});
                 }
             }}>{dorm}</Dorm>;
-        });   
+        });
     }
 
     render() {
@@ -176,18 +148,17 @@ export default class WhiteboardSidebar extends React.Component {
 
         if (isMobile) {
             return (
-                    <div>
-                    <SidebarTitle>Dorm and Floor</SidebarTitle>
+                    <Container>
                     <DormListMobile>
-                        <select 
-                            value={this.props.currDorm} 
+                        <select
+                            value={this.props.currDorm}
                             onChange={e => this.onClick(e.target.value)}
+                            components={{ DropdownIndicator: null}}
                         >
-                            {this.getMobileDorms()} 
+                            {this.getMobileDorms()}
                         </select>
-                        <V src={ChrisV}/>
                     </DormListMobile>
-                    </div>
+                    </Container>
             );
         }
         else {
@@ -197,7 +168,6 @@ export default class WhiteboardSidebar extends React.Component {
                     <SidebarTitle>DORMS</SidebarTitle>
                         <DormListDesktop selectedId={this.state.dormId}>
                             {this.getDesktopDorms()}
-                            <Compare href="/compare/">Compare Dorms</Compare>
                         </DormListDesktop>
                     </Sidebar>
                 </div>
