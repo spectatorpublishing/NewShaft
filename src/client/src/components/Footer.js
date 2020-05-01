@@ -1,5 +1,4 @@
 import React from "react";
-import '../css/Footer.css';
 import styled from 'styled-components';
 
 let FooterWrapper = styled.div`
