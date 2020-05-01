@@ -3,6 +3,7 @@ import styled from 'styled-components';
 
 let FooterWrapper = styled.div`
   background-color: grey;
+  margin-top: 1rem;
   z-index: 1rem;
   padding-bottom: 2rem;
   position: relative;
