@@ -27,13 +27,11 @@ const filterElements = {
 		"Columbia",
 		"Barnard"
 	],
-
 	"Room Type": [
 		"Single",
 		"Double",
 		"Triple",
 	],
-
 	"Suite Size": [
 		"2 Person",
 		"3 Person",
@@ -44,14 +42,12 @@ const filterElements = {
 		"8 Person",
 		"9 Person"
 	],
-
 	"Year": [
 		"First Year",
 		"Sophomore",
 		"Junior",
 		"Senior"
 	],
-
 	"Amenities": [
 		"A/C",
 		"Private Kitchen",
@@ -63,7 +59,6 @@ const filterElements = {
 export default class FilterComponent extends React.PureComponent {
 	constructor(props) {
 	    super(props);
-
 	    this.state = {
 				type: this.props.type,
 				openFilters: 0,
@@ -137,7 +132,6 @@ export default class FilterComponent extends React.PureComponent {
 	}
 
 	render() {
-
 		return(
 			<Filter>
 				<FilterLabel><FilterTitle>Filters</FilterTitle></FilterLabel>
@@ -145,5 +139,4 @@ export default class FilterComponent extends React.PureComponent {
 			</Filter>
 		)
 		}
-		
 	}
