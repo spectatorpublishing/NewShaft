@@ -9,25 +9,21 @@ let DDWrapper = styled.div`
         position: relative; // So that the filter list will position itself relative to this div
     }
 `
-
 let DDHeader = styled.div`
     display: inline-block;
 `
-
 let DDHeaderTitle = styled.div`
     text-shadow: ${props => props.shadow ? props.theme.shadow : "none"};
     cursor: pointer;
     user-select: none;
     color: white;
 `
-
 let Bolded = styled.b`
     text-shadow: ${props => props.shadow ? props.theme.shadow : "none"};
     cursor: pointer;
     user-select: none;
     color: ${props => props.theme.white};
 `
-
 let ListElement = styled.li`
     list-style-type:none;
     display: inline-block;
@@ -44,7 +40,6 @@ let ListElement = styled.li`
         width: 100%;
     }
 `
-
 let FilterList = styled.ul`
     position: absolute;
     margin: 0;
@@ -54,7 +49,6 @@ let FilterList = styled.ul`
     width: 100%;
     overflow: hidden;
     background: ${props => props.theme.white};
-    
     @media (min-width: 650px) {
         position: absolute;
         margin: 5px 0 0 0;
@@ -68,7 +62,6 @@ let FilterList = styled.ul`
         z-index: 1;
     }
 `
-
 const ChrisV = styled.div`
     display: inline-block;
     pointer-events: none;
@@ -79,15 +72,12 @@ const ChrisV = styled.div`
     }
 `
 
-
 export default class FilterComponent extends React.PureComponent {
     constructor(props) {
         super(props);
-
         this.state = {
             show: false
         }
-        
         this.toggleList = this.toggleList.bind(this);
         this.isActive = this.isActive.bind(this);
         this.getFilterList = this.getFilterList.bind(this);
@@ -115,20 +105,17 @@ export default class FilterComponent extends React.PureComponent {
     
     render() {
         const listOpen = this.props.open;
-        
         return(
             <DDWrapper show = {this.state.show}>
-
                 <DDHeader onClick={this.toggleList}>
                     <DDHeaderTitle shadow={this.props.open}>
                         {this.props.headerTitle} <ChrisV flip={listOpen}> <img src={chris_v}/> </ChrisV>
                     </DDHeaderTitle>
                 </DDHeader>
-
                 {listOpen && <FilterList id="filterList">
                     {this.getFilterList()}
                 </FilterList>}
             </DDWrapper>
-  )
+        )
     }
 }
