@@ -1,6 +1,7 @@
 import styled from "styled-components";
 import React, { Component } from "react";
 import ReactMapGL, { Marker, Popup} from "react-map-gl";
+import { fromJS } from "immutable";
 import "mapbox-gl/src/css/mapbox-gl.css";
 import mark from "../assets/marker2.svg";
 import { Route, Link, BrowserRouter as Router } from 'react-router-dom';
