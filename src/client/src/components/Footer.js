@@ -108,7 +108,7 @@ export default class Footer extends React.Component{
                             <SecTitle><strong>Authorship</strong></SecTitle>
                             <SecBody>
                                 <strong>Jaz Salam</strong><br></br>Deputy Editor Spectrum<br></br><br></br>
-                                <strong>Ariana</strong><br></br>Deputy Editor Spectrum<br></br><br></br>
+                                <strong>Ariana Novo</strong><br></br>Deputy Editor Spectrum<br></br><br></br>
                             </SecBody> 
                             <SecTitle><strong>Design</strong></SecTitle>
                             <SecBody>
@@ -149,7 +149,7 @@ export default class Footer extends React.Component{
                             <SecTitle><strong>Authorship</strong></SecTitle>
                             <SecBody>
                                 <strong>Jaz Salam</strong><br></br>Spectrum Deputy Editor<br></br><br></br>
-                                <strong>Ariana</strong><br></br>Spectrum Deputy Editor<br></br><br></br>
+                                <strong>Ariana Novo</strong><br></br>Spectrum Deputy Editor<br></br><br></br>
                             </SecBody> 
                         </SecColumn>
                         <SecColumn>
