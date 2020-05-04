@@ -33,9 +33,7 @@ let BG = styled.div`
   background-color: ${props => props.theme.columbiaBlue};
 `
 
-
 export default class SearchBar extends Component {
-
 	constructor(props){
 		super(props)
 		this.searchChange = this.searchChange.bind(this)
@@ -47,13 +45,13 @@ export default class SearchBar extends Component {
 	  
 	render(){
 		return (
-      <BG>
-        <Input
-          type="text"
-          onChange={this.searchChange}
-          placeholder="Search for your new home..."
-        />
-    </BG>
-    );
+      			<BG>
+        		<Input
+          			type="text"
+          			onChange={this.searchChange}
+          			placeholder="Search for your new home..."
+        		/>
+    			</BG>
+    		);
 	}
 }
