@@ -15,7 +15,7 @@ let FooterTitle = styled.div`
   font-size: 3.5rem;
   padding-left: 1.9rem;
   padding-top: 3.5rem;
-  margin-left: 3%;
+  margin-left: 2.5rem;;
   -webkit-text-stroke-width: 2px;
   -webkit-text-stroke-color: white;
 `;
@@ -32,15 +32,15 @@ let FooterTitlePhone = styled.div`
 `;
 
 let FooterRow = styled.div`
-  padding-left: 3%;
-  padding-right: 3%;
+  padding-left: 2.5rem;
+  padding-right: 2.5rem;
   display: flex;
   flex-direction: row;
 `;
 
 let FooterRowPhone = styled.div`
-  padding-left: 3%;
-  padding-right: 3%;
+  padding-left: 2.5rem;
+  padding-right: 2.5rem;;
   display: flex;
   flex-direction: row;
 `;
