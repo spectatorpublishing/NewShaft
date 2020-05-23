@@ -15,6 +15,7 @@ let Input = styled.input`
   padding: 0 5%;
   box-sizing: border-box;
   width:100%;
+  /* height: 100%; */
   @media only screen and (min-width: 768px) {
 	  border-radius: 0;
     border-radius: 15px;
@@ -33,6 +34,7 @@ let Input = styled.input`
 let BG = styled.div`
   background-color: ${props => props.theme.columbiaBlue};
   width:100%;
+  /* height:100%; */
 `
 
 export default class SearchBar extends Component {

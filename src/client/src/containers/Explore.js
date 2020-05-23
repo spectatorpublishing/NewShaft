@@ -22,7 +22,7 @@ const SideBar = styled.div`
   overflow-y: scroll; 
   min-height: 200px;
   @media only screen and (min-width: 768px) {
-    width: 60%;
+    width: calc( 60% - 5% );
     padding: 0 0% 0% 0%;
     min-height: 100vh;
     z-index: 1;
@@ -104,16 +104,18 @@ const FilterColumn = styled.div`
 const SearchWrapper = styled.div`
 max-width:50vw;
 width:100%;
+/* height: 2rem; */
   /* width:120%; */
   /* width:75%; */
   @media only screen and (max-width: 768px) {
     max-width:90vw;
     width: 90vw;
+
     /* width:90%; */
   }
 `;
 const FilterWrapper = styled.div`
-  width: 100%;
+  width: 90%;
   /* margin: .7rem 0 0 0; */
   margin: .7rem 0;
   @media only screen and (max-width: 768px) {
@@ -161,6 +163,10 @@ const initialPayload = {
   DORM: ""
 }
   
+
+
+const MAX_GROUP = 9;
+
 export default class Explore extends Component {
   constructor(props){
     super(props);
@@ -245,7 +251,7 @@ export default class Explore extends Component {
                 <FilterRow id="row">
                   <FilterColumn id="column" >
                     <SearchWrapper><SearchBar handleChange={this.updatePayload}/></SearchWrapper>
-                    <FilterWrapper><Filters2020 submit = {this.updatePayload} search = {this.state.payload.DORM} ></Filters2020></FilterWrapper>
+                    <FilterWrapper><Filters2020 submit = {this.updatePayload} search = {this.state.payload.DORM} MAX_GROUP= {MAX_GROUP} ></Filters2020></FilterWrapper>
                   </FilterColumn>
                   {/* <div>test</div> */}
                 </FilterRow>

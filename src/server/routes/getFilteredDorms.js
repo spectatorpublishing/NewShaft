@@ -1,20 +1,8 @@
 var express = require('express');
 var router = express.Router();
 var pool = require('../database');
-var pool2 = require('../database');
-var strNum = {
-    'ONE': 1,
-    'TWO': 2,
-    'THREE': 3,
-    'FOUR': 4,
-    'FIVR': 5,
-    'SIX': 6,
-    'SEVEN': 7,
-    'EIGHT': 8,
-    'NINE': 9,
-};
 
-var strNumArr = [ 'ONE','TWO','THREE','FOUR', 'FIVE', 'SIX', 'SEVEN', 'EIGHT', 'NINE']
+
 router.post('/', async (req, res) => {
     var query = `SELECT DORM, DESCRIPTION, COLLEGE, THUMBNAIL_IMAGE, LATITUDE, LONGITUDE FROM dorm_static_info `
     var baseQ =``
@@ -22,11 +10,8 @@ router.post('/', async (req, res) => {
     var collegeQ = ``
     var searchQ = ``
 
-    
     let filters = req.body
     var trueFilters = []
-
-    console.log("filters", filters)
 
     for(var prop in filters) {
         console.log(prop)
@@ -36,9 +21,12 @@ router.post('/', async (req, res) => {
     }
 
 
-    //build suite 
+    //build suite and non-suite base options ---> baseQ
     var starterQ = ``
-    var selectText = ` Select DORM from suites where `
+    var selectText = ` Select DORM from suites where ` //for use on line [] to detect out-of-range group values
+
+    //the following SQL requests were written explicitly so to to be most clear
+
     //if the incremented number is 1-3
     if (filters[`ONE_SUITE`] || filters[`TWO_SUITE`] || filters[`THREE_SUITE`]  ){
         var starterQS=``;
@@ -82,29 +70,25 @@ router.post('/', async (req, res) => {
     }
     else{
         //select from suits 4-9'
-        //select dorm from dorm_static_info where ___SUIT_ =1
         var starterQS2 = selectText;
-        for(var i = 3; i < strNumArr.length; i += 1) {
-            console.log (strNumArr[i]+`_SUITE`)
-            if (filters[strNumArr[i]+`_SUITE`]){
-                starterQS2 += strNumArr[i]+`_SUITE = 1 ` 
-            }
-        } 
-        starterQ+=starterQS2
 
+        for(var i=0; i< trueFilters.length; i+=1){
+            if (trueFilters[i].endsWith("_SUITE") && !(trueFilters[i]==`ONE_SUITE` || trueFilters[i]==`TWO_SUITE` || trueFilters[i]==`THREE_SUITE` ) ){
+                starterQS2 += trueFilters[i]+` = 1 ` 
+            }
+        }
+        starterQ+=starterQS2
     } 
     starterQ+= `;`
 
     if (starterQS2 != selectText){
-        //if it's not 0
-        
-        console.log("starterQ: " , starterQ)
+        //if groupsize is not 0 or out of range (for some reason)
+    
+        // console.log("starterQ: " , starterQ) //to test print the baseQ query
         //make query call to get the values 
         const sDorms = await pool.query(starterQ);
-        // console.log("sDorms: " , sDorms, sDorms[0], sDorms[0].DORM )
 
         //loop to fit values into a list
-
         baseQ += `( `
         if (sDorms[0]!=undefined && sDorms[0]!=null){
             var sClause = `("` + sDorms[0].DORM + `"`
@@ -117,8 +101,7 @@ router.post('/', async (req, res) => {
         else{
             baseQ =``;
         }
-        console.log("baseQ: " , baseQ)
-
+        // console.log("baseQ: " , baseQ)  //to test print baseQ values
     }
 
     //build general room-type (might retread, but because we're using ANDs only, it should be fine)
@@ -133,8 +116,6 @@ router.post('/', async (req, res) => {
         roomQ += ` TRIPLE_ = 1 `
     }
     if(roomQ.endsWith("AND ")) roomQ = roomQ.slice(0, -4)
-
-
 
 
     //build for colleges

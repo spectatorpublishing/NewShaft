@@ -369,7 +369,7 @@ export default class FilterBar extends React.Component{
 
         if(target === "+") {
             this.setState({
-                GroupSize: this.state.GroupSize + 1
+                GroupSize:  ((this.state.GroupSize + 1) <= this.props.MAX_GROUP ) ? this.state.GroupSize + 1 : this.props.MAX_GROUP
             }, () => this.props.submit("", "", this.createPayload()))
         } else if(target === "-") {
             // switch (decVal):
