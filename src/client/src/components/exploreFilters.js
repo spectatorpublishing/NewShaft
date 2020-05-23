@@ -1,19 +1,26 @@
 import React from "react";
 import styled from 'styled-components';
 
+
+
+let FilterContainer = styled.div`
+    width:100%;
+`;
+
 let FilterRow = styled.div`
+    width:100%;
     background-color: rgb(98, 168, 229);
-    padding: 0rem 1.2rem 0.6rem 0rem;
-    margin: 0rem 0 0 1.5%;
+    /* padding: 0rem 1.2rem 0.6rem 0rem; */
+    /* margin: 0rem 0 0 1.5%; */
     display: flex;
     flex-direction: row;
-    align-items: center;
+    align-items: flex-start;
     @media only screen and (max-width: 770px) {
-        justify-content: center;
+        justify-content: flex-start;
         display: inline-block;
         vertical-align: middle;
         text-align: center;
-        margin-left: 5%;
+        /* margin-left: 5%; */
         display: flex;
         flex-direction: row;
     }
@@ -24,8 +31,10 @@ let SelectedWrapper = styled.div`
     flex-direction: row;
     align-items: center;
     font-family: 'Raleway';
-    padding-top: 0.6rem;
-    padding-left: 0.6rem;
+    width:100%;
+    flex-wrap: wrap;
+    /* padding-top: 0.6rem;
+    padding-left: 0.6rem; */
 `;
 
 let RowGZ = styled.div`
@@ -41,15 +50,22 @@ let Tag = styled.div`
     flex-direction: row;
     align-items: center;
     color: white;
-    padding: .5rem;
+    /* margin-right: 1rem; */
+    margin: 0 1rem .7rem 0;
+    /* padding: .5rem; */
     font-weight: 200;
     font-size: 1.2rem;
+    @media only screen and (max-width: 770px) {
+        margin: 0 1rem .5rem 0;
+        font-size: 1rem;
+    }
 `;
 
 let Cancel = styled.div`
     cursor: pointer;
     color: white;
-    padding-right: .5rem;
+    /* padding-right: .5rem; */
+    /* I'm replacing this with a space character instead */
     font-weight: 200;
     font-size: 0.8rem;
 `;
@@ -57,36 +73,148 @@ let Cancel = styled.div`
 let Dropdown = styled.div`
     float: left;
     overflow: hidden;
+    width:100%;
+    height:100%;
+    /* flex:1;
+    display: flex;
+    align-items:center; */
+    
+    /* display: flex;
+    flex-direction: column;
+    align-items:center; */
+`;
+
+let DropdownWrapper = styled.div`
+    flex:1;
+    display: flex;
+    align-items:center;
+    justify-content:center;
+    
+    /* display: flex;
+    flex-direction: column;
+    align-items:center; */
+`;
+let FilterTextWrapper = styled.div`
+    flex:1;
+    display: flex;
+    align-items:center;
+    justify-content:flex-start;
+    
+    /* display: flex;
+    flex-direction: column;
+    align-items:center; */
+`;
+let ClearWrapper = styled.div`
+    flex:1;
+    display: flex;
+    align-items:center;
+    justify-content:flex-end;
+    /* justify-content:center; */
+    
+    /* display: flex;
+    flex-direction: column;
+    align-items:center; */
+`;
+
+// let FilterTextWrapper = styled.div`
+//     flex:1;
+//     display: flex;
+//     align-items:center;
+//     justify-content:center;
+    
+//     /* display: flex;
+//     flex-direction: column;
+//     align-items:center; */
+// `;
+let DropTableColumn = styled.td`
+    flex: 1.5;
+    
+    display: flex;
+    flex-direction: column;
+    margin: 0 .4rem;
+    @media only screen and (max-width: 770px) {
+        margin: 0 .2rem;
+    }
+    border: none;
+    :first-child{
+        flex: 1;
+        /* margin: 0 0 0 -2px; */
+        margin: 0 .2rem 0 0;
+        padding:0;
+    }
+    :last-child{
+        flex: 1;
+        /* margin: 0 0 0 -2px; */
+        margin: 0;
+        padding:0;
+    }
+
+`;
+let DropTable = styled.table`
+    width: 100%;
+    padding:0;
+    margin:0 0;
+    border: 0;
+    /* Necessary to get rid of defailt 2px table offsets!: */
+    -webkit-border-vertical-spacing: 0;
+    -webkit-border-horizontal-spacing: 0;
+    /* table-layout: fixed; */
+`;
+let DropTableRow = styled.tr`
+    display: flex;
+    border: none;
+    min-height: 2.5rem;
+    /* margin: 1rem 0 0 0; */
+    /* margin: 0 0 1rem 0; */
+    @media only screen and (max-width: 770px) {
+        /* margin: .5rem 0 0 0; */
+        /* margin: 0 0 .5rem 0; */
+    }
+    /* height: 2.5rem; */
+
 `;
 
 let Textbox = styled.div`
     font-family: 'Raleway';
     font-size: 1.5rem;
+    @media only screen and (max-width: 770px) {
+        font-size: 1rem;
+    }
+    
     color: white;
-    padding: 0.6rem 0rem 0.6rem 0.3rem;
-    margin-right: 1.2rem;
+    /* padding: 0.6rem 0rem 0.6rem 0.3rem;
+    margin-right: 1.2rem; */
 `;
 
 let DropButton = styled.button`
+    /* flex:1; */
+    width:100%;
+    height:100%;
     cursor: pointer;
     text-decoration: none;
     border-radius: 10px;
     border: 1.5px solid white;  
-    height: fit-content;
-    width: fit-content;
+    /* width: 100%; */
+    /* height: fit-content; */
+    /* width: fit-content; */
     color:white;
     font-family: 'Raleway';
-    margin-left:0.5rem;
-    margin-right:0.5rem;
+    /* margin-left:0.5rem;
+    margin-right:0.5rem; */
+    /* padding: 1rem 3rem; */
     font-size:1.2rem;
+    @media only screen and (max-width: 770px) {
+        font-size: 1rem;
+        /* padding: 0; */
+    }
     text-align: center;
-    padding-top: 0.3rem;
-    padding-bottom: 0.3rem;
-    padding-right: 1rem;
-    padding-left: 1rem;
+    /* padding-top: 0.3rem;
+    padding-bottom: 0.3rem; */
+    /* padding-right: 1rem;
+    padding-left: 1rem; */
+    padding:0;
     background-color: rgb(98, 168, 229);
     outline: none;
-  }
 `;
 
 let DropdownContent = styled.div`
@@ -101,17 +229,24 @@ let DropdownContent = styled.div`
     border-radius: 8px;
     border: 1.5px solid rgb(98, 168, 229);
     padding: 0.6rem 1.2rem 0.6rem 1.2rem;  
-    margin-left: 0.5rem;
+    /* margin-left: 0.5rem; */
     margin-right: 0.5rem;
     margin-top: 0.3rem;
+    @media only screen and (max-width: 770px) {
+        font-size: 1rem;
+        min-width: 7rem;
+    }
 `;
 
 let ClearButton = styled.a`
     cursor: pointer;
     font-family: 'Raleway';
-    margin-left:0.5rem;
-    margin-right:0.5rem;
+    /* margin-left:0.5rem;
+    margin-right:0.5rem; */
     font-size:1.2rem;
+    @media only screen and (max-width: 770px) {
+        font-size: 1rem;
+    }
     color: white;
     text-decoration: underline;
 `;
@@ -146,18 +281,25 @@ let Label = styled.div`
     font-family: 'Raleway';
     padding-left: 0.6rem;
     padding-top: 0.2rem;
-    padding-right: 0.6rem;
+    /* padding-right: 0.6rem; */
     color: rgb(98, 168, 229);
     font-size: 1.3rem;
     background: white;
     font-weight: normal;
+    display: flex;
+    align-items:center;
+    text-align: initial;
+    @media only screen and (max-width: 770px) {
+        font-size: 1rem;
+    }
 `;
 
 let Row = styled.div`
     display: flex;
     flex-direction: row;
-    vertical-align: middle;
-    justify-contents: center;
+    align-items:center;
+    /* vertical-align: middle; */
+    /* justify-content: center; */
     padding: 0.3rem 0rem 0.3rem 0rem;
 `;
 
@@ -167,10 +309,10 @@ let Input = styled.div`
     width: 1.2rem;
     height: 0.9rem;
     cursor: pointer;
-    margin: 0.2rem;
+    /* margin: 0.2rem; */
     color: white;
     font-size: 1.1rem;
-    align-text: top;
+    /* align-text: top; */
     padding: 0.1rem 0rem 0.4rem 0.2rem;
     background-color: transparent
     vertical-align: center;
@@ -186,10 +328,10 @@ let CheckBox = styled.div`
     width: 1.2rem;
     height: 0.9rem;
     cursor: pointer;
-    margin: 0.2rem;
+    /* margin: 0.2rem; */
     color: white;
-    font-size: 1.1rem
-    align-text: top;
+    font-size: 1.1rem;
+    /* align-text: top; */
     padding: 0.1rem 0rem 0.4rem 0.2rem;
     background-color: rgb(98, 168, 229);
     position: absolute;
@@ -231,7 +373,7 @@ export default class FilterBar extends React.Component{
             }, () => this.props.submit("", "", this.createPayload()))
         } else if(target === "-") {
             this.setState({
-                GroupSize: this.state.GroupSize - 1
+                GroupSize: ((this.state.GroupSize - 1) >= 1 ) ? this.state.GroupSize - 1 : 1
             }, () => this.props.submit("", "", this.createPayload()))
         } else if(String(target).startsWith("GroupSize")) {
             this.setState({
@@ -335,38 +477,45 @@ export default class FilterBar extends React.Component{
         }
     }
 
-    unCheck(e){
-        let action = e.target.id
-        if(action === "checkColumbia"){
-            this.setState({
-                Columbia: !this.state.Columbia
-            })
-        }
-        if(action === "checkBarnard"){
-            this.setState({
-                Barnard: !this.state.Barnard
-            })
-        }
-        if(action === "checkSuite"){
-            this.setState({
-                Suite: !this.state.Suite
-            })
-        }
-        if(action === "checkSingle"){
-            this.setState({
-                Single: !this.state.Single
-            })
-        }
-        if(action === "checkDouble"){
-            this.setState({
-                Double: !this.state.Double
-            })
-        }
-        else if(action === "checkTriple"){
-            this.setState({
-                Triple: !this.state.Triple
-            })
-        }
+    unCheck(value, e){
+        let action = value;
+        console.log("Val= ")
+        console.log("Val= "+ action)
+        console.log(action)
+        this.setState({
+            [action]: !this.state[action]
+        }, () => this.props.submit("", "", this.createPayload()))
+
+        // if(action === "checkColumbia"){
+        //     this.setState({
+        //         Columbia: !this.state.Columbia
+        //     })
+        // }
+        // if(action === "checkBarnard"){
+        //     this.setState({
+        //         Barnard: !this.state.Barnard
+        //     })
+        // }
+        // if(action === "checkSuite"){
+        //     this.setState({
+        //         Suite: !this.state.Suite
+        //     })
+        // }
+        // if(action === "checkSingle"){
+        //     this.setState({
+        //         Single: !this.state.Single
+        //     })
+        // }
+        // if(action === "checkDouble"){
+        //     this.setState({
+        //         Double: !this.state.Double
+        //     })
+        // }
+        // else if(action === "checkTriple"){
+        //     this.setState({
+        //         Triple: !this.state.Triple
+        //     })
+        // }
     }
 
     createPayload() {
@@ -436,94 +585,130 @@ export default class FilterBar extends React.Component{
 
         console.log(selectedFilters)
         return(
-            <div>
+            <FilterContainer id= "filterContainer">
                 <SelectedWrapper>
                     {selectedFilters.map(prop => (
-                        <Tag><Cancel onClick={this.onChange} id={String(prop)}>X</Cancel>{prop}</Tag>
+                        <Tag><Cancel onClick={this.onChange} id={String(prop)}>X&nbsp;</Cancel>{prop}</Tag>
                     ))}
                 </SelectedWrapper>
+                
                 <FilterRow>
-                    <Textbox>
-                        Filters:
-                    </Textbox>
-                    <Dropdown>
-                        <DropButton onClick={this.toggle} id = "school">School</DropButton>
-                        <DropdownContent show={this.state.showSchool}>
-                            <Row>
-                                <CheckBox id = "checkColumbia" show={this.state.Columbia} onClick ={this.unCheck}>✓</CheckBox>
-                                <Input 
-                                    id = "Columbia"  
-                                    type = "checkbox"
-                                    onClick = {this.onChange} 
-                                    checked = {this.state.Columbia} >✓</Input> 
-                                <Label>Columbia</Label>                
-                            </Row>
-                            <Row>
-                                <CheckBox id = "checkBarnard" show={this.state.Barnard} onClick ={this.unCheck}>✓</CheckBox>
-                                <Input 
-                                    id = "Barnard"  
-                                    type = "checkbox"
-                                    onClick = {this.onChange} 
-                                    checked = {this.state.Barnard}>✓</Input> 
-                                <Label>Barnard</Label>
-                            </Row>
-                        </DropdownContent>
-                    </Dropdown>
-                    <Dropdown>
-                        <DropButton onClick={this.toggle} id="group">Group Size</DropButton>
-                        <DropdownContent show={this.state.showGroup}>
-                            <RowGZ>
-                                <ButtonGZ id = "-" onClick={this.onChange}>-</ButtonGZ>
-                                <Number>{this.state.GroupSize}</Number>
-                                <ButtonGZ class="button" id = "+" onClick={this.onChange}>+</ButtonGZ>
-                            </RowGZ> 
-                        </DropdownContent>
-                    </Dropdown>
-                    <Dropdown>
-                        <DropButton onClick={this.toggle} id="room">Room Type</DropButton>
-                        <DropdownContent show={this.state.showRoom}>
-                            <Row>
-                                <CheckBox id = "checkSuite" show={this.state.Suite} onClick ={this.unCheck}>✓</CheckBox>
-                                <Input 
-                                    id="Suite" 
-                                    onClick = {this.onChange} 
-                                    type="checkbox"
-                                    checked = {this.state.Suite}
-                                    onChange = {this.checkBox} >✓</Input>
-                                <Label>Suite Style</Label>
-                            </Row>
-                            <Row>
-                                <CheckBox id = "checkSingle" show={this.state.Single} onClick ={this.unCheck}>✓</CheckBox>
-                                <Input 
-                                    id="Single" 
-                                    onClick = {this.onChange} 
-                                    type="checkbox"
-                                    checked = {this.state.Single}>✓</Input> 
-                                <Label>Single</Label>
-                            </Row>
-                            <Row>
-                                <CheckBox id = "checkDouble" show={this.state.Double} onClick ={this.unCheck}>✓</CheckBox>
-                                <Input 
-                                    id="Double" 
-                                    onClick = {this.onChange} 
-                                    type="checkbox" 
-                                   checked = {this.state.Double}>✓</Input> 
-                                <Label>Double</Label>
-                            </Row>
-                            <Row>
-                                <CheckBox id = "checkTriple" show={this.state.Triple} onClick ={this.unCheck}>✓</CheckBox>
-                                <Input 
-                                    id="Triple" 
-                                    onClick = {this.onChange} 
-                                    type="checkbox" 
-                                    checked = {this.state.Triple}>✓</Input> 
-                                <Label>Triple</Label>
-                            </Row>
-                        </DropdownContent>
-                    </Dropdown>
-                    <ClearButton show = {this.state} onClick={this.clear}>Clear</ClearButton>
+                    {/* <DropTable>
+                        <DropTableRow>
+                            <DropTableColumn>
+                                <DropdownWrapper>
+                                    <Textbox>
+                                        Filters:
+                                    </Textbox>
+                                </DropdownWrapper>
+                            </DropTableColumn>
+                        </DropTableRow>
+                    </DropTable> */}
+                    <DropTable>
+                        <DropTableRow>
+                            <DropTableColumn>
+                                <FilterTextWrapper>
+                                    <Textbox>
+                                        Filters:
+                                    </Textbox>
+                                </FilterTextWrapper>
+                            </DropTableColumn>
+                            <DropTableColumn>
+                                <DropdownWrapper>
+                                    <Dropdown id= "schoolD">
+                                        <DropButton onClick={this.toggle} id = "school">School</DropButton>
+                                        <DropdownContent show={this.state.showSchool}>
+                                        <Row>
+                                            <CheckBox id = "checkColumbia" val="Columbia" show={this.state.Columbia} onClick ={(e)=>this.unCheck("Columbia",e)}>✓</CheckBox>
+                                            <Input 
+                                                id = "Columbia"  
+                                                type = "checkbox"
+                                                onClick = {this.onChange} 
+                                                checked = {this.state.Columbia} >✓</Input> 
+                                            <Label>Columbia</Label>                
+                                        </Row>
+                                        <Row>
+                                            <CheckBox id = "checkBarnard" val="Barnard" show={this.state.Barnard} onClick ={(e)=>this.unCheck("Barnard",e)}>✓</CheckBox>
+                                            <Input 
+                                                id = "Barnard"  
+                                                type = "checkbox"
+                                                onClick = {this.onChange} 
+                                                checked = {this.state.Barnard}>✓</Input> 
+                                            <Label>Barnard</Label>
+                                        </Row>
+                                    </DropdownContent>
+                                    </Dropdown>
+                                </DropdownWrapper>
+                            </DropTableColumn>
+                            <DropTableColumn>
+                                <DropdownWrapper>
+                                    <Dropdown>
+                            <DropButton onClick={this.toggle} id="group">Group Size</DropButton>
+                            <DropdownContent show={this.state.showGroup}>
+                                <RowGZ>
+                                    <ButtonGZ id = "-" onClick={this.onChange}>-</ButtonGZ>
+                                    <Number>{this.state.GroupSize}</Number>
+                                    <ButtonGZ class="button" id = "+" onClick={this.onChange}>+</ButtonGZ>
+                                </RowGZ> 
+                            </DropdownContent>
+                        </Dropdown>
+                                </DropdownWrapper>
+                            </DropTableColumn>
+                            <DropTableColumn>
+                                <DropdownWrapper>
+                                    <Dropdown>
+                                <DropButton onClick={this.toggle} id="room">Room Type</DropButton>
+                                <DropdownContent show={this.state.showRoom}>
+                                    <Row>
+                                        <CheckBox id = "checkSuite" show={this.state.Suite} val="Suite" onClick ={(e)=>this.unCheck("Suite",e)}>✓</CheckBox>
+                                        <Input 
+                                            id="Suite" 
+                                            onClick = {this.onChange} 
+                                            type="checkbox"
+                                            checked = {this.state.Suite}
+                                            onChange = {this.checkBox} >✓</Input>
+                                        <Label>Suite Style</Label>
+                                    </Row>
+                                    <Row>
+                                        <CheckBox id = "checkSingle" show={this.state.Single} val="Single" onClick ={(e)=>this.unCheck("Single",e)}>✓</CheckBox>
+                                        <Input 
+                                            id="Single" 
+                                            onClick = {this.onChange} 
+                                            type="checkbox"
+                                            checked = {this.state.Single}>✓</Input> 
+                                        <Label>Single</Label>
+                                    </Row>
+                                    <Row>
+                                        <CheckBox id = "checkDouble" show={this.state.Double} val="Double" onClick ={(e)=>this.unCheck("Double",e)}>✓</CheckBox>
+                                        <Input 
+                                            id="Double" 
+                                            onClick = {this.onChange} 
+                                            type="checkbox" 
+                                        checked = {this.state.Double}>✓</Input> 
+                                        <Label>Double</Label>
+                                    </Row>
+                                    <Row>
+                                        <CheckBox id = "checkTriple" show={this.state.Triple} val="Triple" onClick ={(e)=>this.unCheck("Triple",e)}>✓</CheckBox>
+                                        <Input 
+                                            id="Triple" 
+                                            onClick = {this.onChange} 
+                                            type="checkbox" 
+                                            checked = {this.state.Triple}>✓</Input> 
+                                        <Label>Triple</Label>
+                                    </Row>
+                                </DropdownContent>
+                            </Dropdown>
+                                </DropdownWrapper>
+                            </DropTableColumn>
+                            <DropTableColumn>
+                                <ClearWrapper>
+                                    <ClearButton show = {this.state} onClick={this.clear}>Clear</ClearButton>
+                                </ClearWrapper>
+                            </DropTableColumn>
+                        </DropTableRow>
+                    </DropTable>
                 </FilterRow>
-            </div>
+            </FilterContainer>
         );
     }
 }
