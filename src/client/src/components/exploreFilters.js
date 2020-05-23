@@ -351,7 +351,7 @@ export default class FilterBar extends React.Component{
             showRoom: false,
             Columbia: false,
             Barnard: false,
-            GroupSize: 1,
+            GroupSize: 0,
             Suite: false,
             Single: false,
             Double: false,
@@ -372,12 +372,15 @@ export default class FilterBar extends React.Component{
                 GroupSize: this.state.GroupSize + 1
             }, () => this.props.submit("", "", this.createPayload()))
         } else if(target === "-") {
+            // switch (decVal):
+            // case
+
             this.setState({
-                GroupSize: ((this.state.GroupSize - 1) >= 1 ) ? this.state.GroupSize - 1 : 1
+                GroupSize: ((this.state.GroupSize - 1) >= 0 ) ? this.state.GroupSize - 1 : 0
             }, () => this.props.submit("", "", this.createPayload()))
         } else if(String(target).startsWith("GroupSize")) {
             this.setState({
-                GroupSize: 1
+                GroupSize: 0
             }, () => this.props.submit("", "", this.createPayload()))
         } else { 
             this.setState({
@@ -522,10 +525,11 @@ export default class FilterBar extends React.Component{
         let payload = {
             COLUMBIA: this.state.Columbia,
             BARNARD: this.state.Barnard,
-            SINGLE_: this.state.Single,
-            DOUBLE_: this.state.Double,
-            TRIPLE_: this.state.Triple,
+            SINGLE_: this.state.Single || this.state.GroupSize == 1,
+            DOUBLE_: this.state.Double || this.state.GroupSize == 2,
+            TRIPLE_: this.state.Triple || this.state.GroupSize == 3,
             SUITE_: this.state.Suite,
+            ONE_SUITE: this.state.GroupSize == 1,
             TWO_SUITE: this.state.GroupSize == 2,
             THREE_SUITE: this.state.GroupSize == 3,
             FOUR_SUITE: this.state.GroupSize == 4,
@@ -546,7 +550,7 @@ export default class FilterBar extends React.Component{
             showRoom: false,
             Columbia: false,
             Barnard: false,
-            GroupSize: 1,
+            GroupSize: 0,
             Suite: false,
             Single: false,
             Double: false,
@@ -576,7 +580,7 @@ export default class FilterBar extends React.Component{
             if(this.state[prop] && !String(prop).startsWith("show")) {
                 console.log(prop)
                 if(prop == "GroupSize") {
-                    if(this.state[prop] > 1) selectedFilters.push(String(prop) + ": " + String(this.state[prop]))
+                    if(this.state[prop] > 0) selectedFilters.push(String(prop) + ": " + String(this.state[prop]))
                 } else{
                     selectedFilters.push(String(prop))
                 }
