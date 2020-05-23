@@ -48,29 +48,20 @@ const FilterSearchBG = styled.div`
   background-color: ${props => props.theme.columbiaBlue};
   width:60%;
   position:fixed;
-  /* height: rem; */
-  @media only screen and (max-width: 768px) {
-    width:100%;
-    /* // display: inline; */
-    /* // position: fixed; */
-    /* padding-left: 1em; */
-    /* // float: right; */
-    /* // width: 40%; */
-    /* // right: 0; */
-    /* // top: 0; */
-    /* // z-index:1; */
-  }
   margin-top: 0px;
   padding-top: 1%;
-  /* display: flex;
-  justify-content: center; */
-`
+  @media only screen and (max-width: 768px) {
+    width:100%;
+  }
+`;
+
 const FilterSearchWrapper = styled.div`
   height:calc( 9rem  + ${props => props.addHeight} );
   @media only screen and (max-width: 768px) {
     height:calc( 8rem + ${props => props.addHeight} );
   }  
-`
+`;
+
 const FilterRow = styled.div`
   /* width:60vw; */
   width:calc(100% -5%) ;
@@ -79,15 +70,12 @@ const FilterRow = styled.div`
   justify-content: flex-start;
   /* 5% to match the layout of the results below */
   margin: 1rem 0 0 5%;
-  /* top:0;
-  /* left:0; */
-  /* position:fixed;  */
- @media only screen and (max-width: 768px) {
-  /* width:100vw; */
-  margin: 1.2rem 0 0 0;
-  display: flex;
-  flex-direction:row;
-  justify-content: center;
+  @media only screen and (max-width: 768px) {
+    /* width:100vw; */
+    margin: 1.2rem 0 0 0;
+    display: flex;
+    flex-direction:row;
+    justify-content: center;
  }
 `;
 
@@ -97,59 +85,46 @@ const FilterColumn = styled.div`
   flex-direction:column;
   max-width:100%;
   min-width:75%;
-  /* justify-content: flex-start; */
-  /* align-items: center; */
 `;
 
 const SearchWrapper = styled.div`
-max-width:50vw;
-width:100%;
-height: 1.5rem;
-  /* width:120%; */
-  /* width:75%; */
+  max-width:50vw;
+  width:100%;
+  height: 1.5rem;
   @media only screen and (max-width: 768px) {
     height: 2rem;
     max-width:90vw;
     width: 90vw;
-
-    /* width:90%; */
   }
 `;
+
 const FilterWrapper = styled.div`
   /* width: 95%; */
   max-width:50vw;
   width:100%;
-  /* margin: .7rem 0 0 0; */
   margin: 1.6rem 0 1rem 0;
-
   @media only screen and (max-width: 768px) {
     max-width:90vw;
     width: 90vw;
-    /* margin: 1.6rem 0 1rem 0; */
     margin: .8rem 0;
-    /* width:90%; */
   }
-  /* width:75%;
-  @media only screen and (max-width: 768px) {
-    width: 100%; */
-    /* width:90%; */
-  /* } */
 `;
+
 const ColOne = styled.div`
   display: flex;
   width: 100%;
-`
+`;
 
 const ColTwo = styled.div`
   display: inline;
   position: fixed;
   padding-left: 1em;
-  float: right;
-  height: 100%;
+  /* float: right;
+  height: 100%; */
   right: 0;
   top: 0;
   flex-direction: column;
-  `
+`;
 
 const initialPayload = {
   COLUMBIA: 0,
@@ -216,7 +191,7 @@ export default class Explore extends Component {
     if(filters != undefined) {
       var pageIsShort = false;
       for(var prop in filters) {
-        console.log(prop, filters[prop])
+        // to resize the placeholder div that simulates the position absolute searchfields
         if (filters[prop] && prop!= "DORM"){
           pageIsShort = true;
         }
@@ -259,12 +234,7 @@ export default class Explore extends Component {
                     <SearchWrapper><SearchBar handleChange={this.updatePayload}/></SearchWrapper>
                     <FilterWrapper><Filters2020 submit = {this.updatePayload} search = {this.state.payload.DORM} MAX_GROUP= {MAX_GROUP} ></Filters2020></FilterWrapper>
                   </FilterColumn>
-                  {/* <div>test</div> */}
                 </FilterRow>
-                
-                {/* <FilterRow>
-                  <Filters2020 submit = {this.updatePayload} search = {this.state.payload.DORM}></Filters2020>
-                </FilterRow> */}
               </FilterSearchBG>
             </FilterSearchWrapper>
             <ExploreSidebar dorms={this.state.dorms}/>
