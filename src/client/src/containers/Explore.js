@@ -68,23 +68,23 @@ const FilterSearchBG = styled.div`
 const FilterSearchWrapper = styled.div`
   height:calc( 9rem  + ${props => props.addHeight} );
   @media only screen and (max-width: 768px) {
-    height:calc( 7.5rem + ${props => props.addHeight} );
+    height:calc( 8rem + ${props => props.addHeight} );
   }  
 `
 const FilterRow = styled.div`
   /* width:60vw; */
-  width:100%;
+  width:calc(100% -5%) ;
   display: flex;
   flex-direction:row;
   justify-content: flex-start;
   /* 5% to match the layout of the results below */
-  margin: 1.5rem 0 0 5%;
+  margin: 1rem 0 0 5%;
   /* top:0;
   /* left:0; */
   /* position:fixed;  */
  @media only screen and (max-width: 768px) {
   /* width:100vw; */
-  margin: 1.5rem 0 0 0;
+  margin: 1.2rem 0 0 0;
   display: flex;
   flex-direction:row;
   justify-content: center;
@@ -104,10 +104,11 @@ const FilterColumn = styled.div`
 const SearchWrapper = styled.div`
 max-width:50vw;
 width:100%;
-/* height: 2rem; */
+height: 1.5rem;
   /* width:120%; */
   /* width:75%; */
   @media only screen and (max-width: 768px) {
+    height: 2rem;
     max-width:90vw;
     width: 90vw;
 
@@ -115,12 +116,17 @@ width:100%;
   }
 `;
 const FilterWrapper = styled.div`
-  width: 90%;
+  /* width: 95%; */
+  max-width:50vw;
+  width:100%;
   /* margin: .7rem 0 0 0; */
-  margin: .7rem 0;
+  margin: 1.6rem 0 1rem 0;
+
   @media only screen and (max-width: 768px) {
+    max-width:90vw;
     width: 90vw;
-    margin: .5rem 0;
+    /* margin: 1.6rem 0 1rem 0; */
+    margin: .8rem 0;
     /* width:90%; */
   }
   /* width:75%;
@@ -214,7 +220,7 @@ export default class Explore extends Component {
         if (filters[prop] && prop!= "DORM"){
           pageIsShort = true;
         }
-        pageIsShort ? this.extendPageTop("2.6rem") : this.extendPageTop("0rem");
+        pageIsShort ? this.extendPageTop("2.7rem") : this.extendPageTop("0rem");
         payload[prop] = filters[prop];
       }
     } else {

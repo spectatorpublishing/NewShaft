@@ -54,7 +54,7 @@ let Tag = styled.div`
     margin: 0 1rem .7rem 0;
     /* padding: .5rem; */
     font-weight: 200;
-    font-size: 1.2rem;
+    font-size: 1.1rem;
     @media only screen and (max-width: 770px) {
         margin: 0 1rem .5rem 0;
         font-size: 1rem;
