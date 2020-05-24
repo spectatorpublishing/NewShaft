@@ -13,9 +13,8 @@ let FooterTitle = styled.div`
   color: transparent;
   font-family: 'Archivo Black';
   font-size: 3.5rem;
-  padding-left: 1.9rem;
+  margin: 0 5vw;
   padding-top: 3.5rem;
-  margin-left: 3%;
   -webkit-text-stroke-width: 2px;
   -webkit-text-stroke-color: white;
 `;
@@ -24,7 +23,7 @@ let FooterTitlePhone = styled.div`
   color: transparent;
   font-family: 'Archivo Black';
   font-size: 3.5rem;
-  padding-left: 3rem;
+  margin: 0 5vw;
   text-align: left;
   padding-top: 3.5rem;
   -webkit-text-stroke-width: 2px;
@@ -32,23 +31,25 @@ let FooterTitlePhone = styled.div`
 `;
 
 let FooterRow = styled.div`
-  padding-left: 3%;
-  padding-right: 3%;
+  margin: 0 5vw;
   display: flex;
   flex-direction: row;
 `;
 
 let FooterRowPhone = styled.div`
-  padding-left: 3%;
-  padding-right: 3%;
+  margin: 0 5vw;
   display: flex;
   flex-direction: row;
 `;
 
 let SecColumn = styled.div`
-  padding: 0.6rem;
-  padding-right: 2rem;
-  padding-left: 2rem;
+  margin-right: 3vw;
+  @media (max-width: 768px){
+    margin-right: 6vw;
+  }
+  :last-child{
+    margin-right:0;
+  }
 `;
 
 let SecTitle = styled.div`
@@ -121,21 +122,21 @@ export default class Footer extends React.Component{
                                 <strong>April Lin</strong><br></br>Product Designer<br></br><br></br>
                             </SecBody> 
                         </SecColumn>
-                        <SecColumn>
-                            <SecTitle><strong>Development</strong></SecTitle>
-                            <SecBody>
-                                <strong>Karlo Dobrovic</strong><br></br>Head of Engineering<br></br><br></br>
-                                <strong>McKenna Gillard</strong><br></br>Engineering Manager<br></br><br></br>
-                                <strong>Amina Assal</strong><br></br>Engineering Manager<br></br><br></br>
-                                <strong>Caroline Hoang</strong><br></br>Engineering Manager<br></br><br></br>
-                                <strong>Elaine Wang</strong><br></br>Engineering Manager<br></br><br></br>
-                            </SecBody>
-                            <SecTitle><strong>Editing</strong></SecTitle>
-                            <SecBody>
-                                <strong>Sarah Braka</strong><br></br>Head of Copy<br></br><br></br>
-                                <strong>Joyce Liu</strong><br></br>Deputy Copy Editor<br></br><br></br>
-                            </SecBody>  
-                        </SecColumn>
+                            <SecColumn>
+                                <SecTitle><strong>Development</strong></SecTitle>
+                                <SecBody>
+                                    <strong>Karlo Dobrovic</strong><br></br>Head of Engineering<br></br><br></br>
+                                    <strong>McKenna Gillard</strong><br></br>Engineering Manager<br></br><br></br>
+                                    <strong>Amina Assal</strong><br></br>Engineering Manager<br></br><br></br>
+                                    <strong>Caroline Hoang</strong><br></br>Engineering Manager<br></br><br></br>
+                                    <strong>Elaine Wang</strong><br></br>Engineering Manager<br></br><br></br>
+                                </SecBody>
+                                <SecTitle><strong>Editing</strong></SecTitle>
+                                <SecBody>
+                                    <strong>Sarah Braka</strong><br></br>Head of Copy<br></br><br></br>
+                                    <strong>Joyce Liu</strong><br></br>Deputy Copy Editor<br></br><br></br>
+                                </SecBody>  
+                            </SecColumn>
                     </FooterRowPhone>
                 </FooterWrapper>
             );
