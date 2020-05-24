@@ -248,7 +248,6 @@ title{
 .item_title2 {
   padding-top: 3vw;
   padding-left: 3%;
-  /* padding-top: 3.3rem; */
   font-size: 2.8rem;
   font-family: 'Raleway';
   color: rgb(82, 150, 210);
@@ -257,13 +256,11 @@ title{
 }
 
 .textbox{
-  /* max-width: 30vw; */
   width:100%;
   font-size: 1.4rem;
   font-family: 'Raleway';
   text-align: left;
   padding-top: 1.2rem;
-  /* padding-right: 10%; */
   color: rgb(114, 113, 113);
 }
 
@@ -336,7 +333,6 @@ title{
 .img_style4{
   width: 11vw;
   height: 10vw;
-  /* padding-right: 13%; */
   padding-left: 10%;
 }
 
@@ -374,7 +370,6 @@ title{
   max-width:45vw;
   padding-left: 5%;
   width: 95%;
-  /* margin-right: 5%; */
 }
 
 .img_style1{
@@ -387,8 +382,6 @@ title{
   margin-left:5vw;
   margin-right:5vw;
   padding-bottom: 4.2rem;
-  /* padding-left:0.7rem;
-  padding-right:0.6rem; */
   display: flex;
   flex-direction: row;
   position: relative;
@@ -472,7 +465,6 @@ title{
   position: relative;
   flex: 1;
   align-items: left;
-  /* padding-right: 0 1.8rem; */
 }
 
 .column81 {
@@ -497,7 +489,6 @@ title{
   position: relative;
   flex: 1;
   align-items: left;
-  /* padding-left: 2vw; */
 }
 
 .column82 {
@@ -521,7 +512,6 @@ title{
   position: relative;
   flex: 1;
   align-items: flex-start;
-  /* padding-top: 3rem; */
 }
 
 .column_image2 {
@@ -533,8 +523,6 @@ title{
   position: relative;
   flex: 1;
   align-items: flex-end;
-  /* padding-right:0.6rem; */
-  /* padding-top: 3rem; */
 }
 
 .column_image3 {
@@ -613,7 +601,6 @@ title{
   flex: 1;
   align-items: top;
   position: relative;
-  /* padding-left:2rem; */
 
 }
 
@@ -625,7 +612,6 @@ title{
   flex: 1;
   align-items: center;
   position: relative;
-  /* margin-left: auto; */
 }
 
 .row81 {
@@ -656,19 +642,12 @@ title{
 }
 
 .row_phone2{
-  /* margin: auto; */
-  /* margin-left:0.6rem;
-  margin-right:0.6rem; */
-  /* margin: 0;
-  padding: 0; */
   width:100%;
   display: flex;
   flex-direction: row;
   position: relative;
   justify-content: center;
   align-items: center;
-  /* padding-right: 0.6rem;
-  padding-left: 0.6rem; */
 }
 
 .rowPadTitle_phone{
@@ -716,8 +695,6 @@ title{
   font-size: 1.9rem;
   font-family: 'Raleway';
   color: rgb(73, 144, 206);
-  /* text-align: left; */
-  /* padding: 0.6rem; */
 }
 @media(max-width:550px){
   .item_title_phone{
@@ -749,10 +726,6 @@ title{
   -webkit-text-stroke-width: 4px;
   -webkit-text-stroke-color: rgb(58, 144, 218);
   font-family: 'Archivo Black';
-  /* margin-left: 2%; */
-  /* width:33%; */
-  /* padding-left: 1.3rem; */
-  /* padding-right: 0.6rem; */
 }
 
 .number2_phone{
@@ -831,9 +804,9 @@ title{
 }
 
 @media (prefers-reduced-motion: no-preference) {
-.App-logo {
-  animation: App-logo-spin infinite 20s linear;
-}
+  .App-logo {
+    animation: App-logo-spin infinite 20s linear;
+  }
 }
 
 .App-header {
@@ -852,12 +825,12 @@ title{
 }
 
 @keyframes App-logo-spin {
-from {
-  transform: rotate(0deg);
-}
-to {
-  transform: rotate(360deg);
-}
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
 }
 
 .container{
@@ -875,38 +848,38 @@ to {
   width: 100%;
 }
 @media screen and (max-width: 768px) {
-.row_title {
-  display: flex;
-  flex-direction: row;
-  position: relative;
-  height: auto;
-  align-items: center;
-  flex: 1;
-  width: 85% !important;
-  font-size: 2rem;
-  font-family: 'Archivo Black';
-  margin-left: 5%;
-  height:auto !important;
-  margin-bottom: 3rem;
-}
-}
-
-@media screen and (max-width: 768px) {
-.rowPad{
-  margin-bottom: 5rem;
-  padding-left: 2rem;
-  padding-right: 3rem;
-  padding-bottom: 4rem;
-}
+  .row_title {
+    display: flex;
+    flex-direction: row;
+    position: relative;
+    height: auto;
+    align-items: center;
+    flex: 1;
+    width: 85% !important;
+    font-size: 2rem;
+    font-family: 'Archivo Black';
+    margin-left: 5%;
+    height:auto !important;
+    margin-bottom: 3rem;
+  }
 }
 
 @media screen and (max-width: 768px) {
-.number{
-  position: absolute;
-  font-size: 9rem;
-  z-index:3rem;
-  color: #6E5CFF;
-  font-family: 'Archivo Black';
-  opacity:0.2;
+  .rowPad{
+    margin-bottom: 5rem;
+    padding-left: 2rem;
+    padding-right: 3rem;
+    padding-bottom: 4rem;
+  }
 }
+
+@media screen and (max-width: 768px) {
+  .number{
+    position: absolute;
+    font-size: 9rem;
+    z-index:3rem;
+    color: #6E5CFF;
+    font-family: 'Archivo Black';
+    opacity:0.2;
+  }
 }

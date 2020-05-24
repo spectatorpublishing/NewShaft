@@ -137,7 +137,6 @@ class newProcess extends React.Component {
             </div>
             {/* <img src="https://arc-anglerfish-arc2-prod-spectator.s3.amazonaws.com/public/TYTGAIHE75DEFG4BIPLZBPTPMM.png" class="img_style3_phone" alt="Grey trophy"></img> */}
           </div>
-          {/* <img src="https://arc-anglerfish-arc2-prod-spectator.s3.amazonaws.com/public/TYTGAIHE75DEFG4BIPLZBPTPMM.png" class="img_style3_phone" alt="Grey trophy"></img> */}
           <div class="row_phone">
             <div class="textbox2_phone">
             Learn how to use theShaft’s suite of new features to transform your housing experience.
