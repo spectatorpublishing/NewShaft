@@ -58,7 +58,7 @@ class specialHousing extends React.Component {
               1
             </div>
             <div class="item_title_phone">
-              Barnard/Columbia<br></br>Housing Swap
+              Barnard<wbr></wbr>/Columbia<br></br>Housing Swap
             </div>
           </div>
           <div class="row_phone">            
@@ -173,9 +173,9 @@ class specialHousing extends React.Component {
               7
             </div>
             <div class="item_title_phone">
-              Explore<br></br>Housing<b></b>On the<strong>SHAFT</strong>
+              Explore<br></br>Housing <br></br>On the<strong>SHAFT</strong>
             </div>
-            <img src="https://arc-anglerfish-arc2-prod-spectator.s3.amazonaws.com/public/TYTGAIHE75DEFG4BIPLZBPTPMM.png" class="img_style3_phone" alt="Cat on windowsill in front of snowy scene"></img>
+            {/* <img src="https://arc-anglerfish-arc2-prod-spectator.s3.amazonaws.com/public/TYTGAIHE75DEFG4BIPLZBPTPMM.png" class="img_style3_phone" alt="Cat on windowsill in front of snowy scene"></img> */}
           </div>
           <div class="row_phone">
             <div class="textbox2_phone">
@@ -209,7 +209,7 @@ class specialHousing extends React.Component {
                         </div>
                         <div class="column3">
                             <div class="item_title">
-                                Barnard/Columbia<br></br>Housing Swap
+                                Barnard<wbr></wbr>/Columbia<br></br>Housing Swap
                             </div>
                             <div class="textbox3">
                                 Is this possible? Yes! Are there risks? Yes. Know that only 30-40 students every year manage to live with their cross-college counterparts every year.

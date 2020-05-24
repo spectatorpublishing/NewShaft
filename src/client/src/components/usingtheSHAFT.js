@@ -50,7 +50,7 @@ class usingtheSHAFT extends React.Component {
                 __________________________________________________
               </div>
               <div class="subtitle_phone">
-                tools and features that make housing <i>easy</i>.
+                tools and features that make <wbr></wbr><span class= "no_line_break">housing <i>easy</i>.</span>
               </div>
               <img src={arrow} class="arrow_style" alt="arrow down"></img>
             </div> 
@@ -60,7 +60,7 @@ class usingtheSHAFT extends React.Component {
                   1
                 </div>
                 <div class="item_title_phone">
-                  Toggle Filters: <br></br><strong>Explore Page</strong>
+                  Toggle Filters: <br></br><strong><span class="no_line_break">Explore Page</span></strong>
                 </div>
               </div>
               <div class="row_phone">            
@@ -98,7 +98,7 @@ class usingtheSHAFT extends React.Component {
                   3
                 </div>
                 <div class="item_title_phone">
-                Be an insider: <br></br><strong>Read Reviews</strong>
+                Be an insider: <br></br><strong><span class="no_line_break">Read Reviews</span></strong>
                 </div>
               </div>
               <div class="row_phone">            
@@ -117,9 +117,9 @@ class usingtheSHAFT extends React.Component {
                   4
                 </div>
                 <div class="item_title_phone">
-                  Cheat sheet: <br></br><strong>Housing 101</strong>
+                  Cheat sheet: <br></br><strong><span class="no_line_break">Housing 101</span></strong>
                 </div>
-                <img src="https://arc-anglerfish-arc2-prod-spectator.s3.amazonaws.com/public/TYTGAIHE75DEFG4BIPLZBPTPMM.png" class="img_style3_phone" alt="Cat on windowsill in front of snowy scene"></img>
+                {/* <img src="https://arc-anglerfish-arc2-prod-spectator.s3.amazonaws.com/public/TYTGAIHE75DEFG4BIPLZBPTPMM.png" class="img_style3_phone" alt="Cat on windowsill in front of snowy scene"></img> */}
               </div>
               <div class="row_phone">
                 <div class="textbox2_phone">

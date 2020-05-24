@@ -3,6 +3,7 @@ import arrow from '../assets/Housing101_images/arrow.png';
 import '../css/Housing101.css';
 import { NavLink } from "react-router-dom";
 
+
 class newProcess extends React.Component {
   constructor(props) {
     super(props);
@@ -59,7 +60,7 @@ class newProcess extends React.Component {
               1
             </div>
             <div class="item_title_phone">
-              No more <br></br>Re-Group
+              No more <br></br><span class="no_line_break">Re-Group</span>
             </div>
           </div>
           <div class="row_phone">            
@@ -134,8 +135,9 @@ class newProcess extends React.Component {
             <div class="item_title_phone">
               Be Informed: <br></br>Use the<strong>SHAFT</strong>
             </div>
-            <img src="https://arc-anglerfish-arc2-prod-spectator.s3.amazonaws.com/public/TYTGAIHE75DEFG4BIPLZBPTPMM.png" class="img_style3_phone" alt="Grey trophy"></img>
+            {/* <img src="https://arc-anglerfish-arc2-prod-spectator.s3.amazonaws.com/public/TYTGAIHE75DEFG4BIPLZBPTPMM.png" class="img_style3_phone" alt="Grey trophy"></img> */}
           </div>
+          {/* <img src="https://arc-anglerfish-arc2-prod-spectator.s3.amazonaws.com/public/TYTGAIHE75DEFG4BIPLZBPTPMM.png" class="img_style3_phone" alt="Grey trophy"></img> */}
           <div class="row_phone">
             <div class="textbox2_phone">
             Learn how to use theShaft’s suite of new features to transform your housing experience.
@@ -160,7 +162,7 @@ class newProcess extends React.Component {
                 </div>
                 <img src={arrow} class="arrow_style" alt="arrow down"></img>
             </div>
-            <div class="row_phoneD">
+            <div class="row_phoneA">
                 <div class="column4">
                     <div class="row2">
                         <div class="number5">
@@ -180,7 +182,7 @@ class newProcess extends React.Component {
                     <img src="https://arc-anglerfish-arc2-prod-spectator.s3.amazonaws.com/public/BIFS2E7ESRDOPIKL7P4WZ3RRZQ.png" class="img_style5" alt="No more x Person on Suites? No Problem! Just split your group and choose other options"></img>
                 </div>
             </div>
-            <div class="row_phoneD">
+            <div class="row_phoneA">
                 <div class="column_image">
                     <img src="https://arc-anglerfish-arc2-prod-spectator.s3.amazonaws.com/public/SG6NPL2KPZDCJENW7W5VCP4ZYI.png" class="img_style2" alt="In a group? Only one of you can make your housing selection. Make sure that person knows your preferences!"></img>
                 </div>
@@ -200,7 +202,7 @@ class newProcess extends React.Component {
                     </div>
                 </div>
             </div>
-            <div class="row_phoneD">
+            <div class="row_phoneA">
                 <div class="column4">
                     <div class="row2">
                         <div class="number5">
