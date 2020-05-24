@@ -336,7 +336,7 @@ class specialHousing extends React.Component {
                 </div>
                 <div class="column6">
                 <div class="item_title2">
-                    Explore Housing<br></br>On the<strong>SHAFT</strong>
+                    Explore Housing <br></br>On the<strong>SHAFT</strong>
                 </div>
                 </div>
                 </div>

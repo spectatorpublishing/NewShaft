@@ -1,3 +1,26 @@
+/* This css file is for the Housing 101 Page */
+
+/* 
+The page uses this rather than style components because it's based on a 
+preexisting SBS article so a lot of code came from a css stylesheet, like this. 
+*/
+
+/* 
+A NOTE to any future maintainers: 
+There are a lot of repeated classes in here because the three pages 
+(four including Housing101.js) that correspond to this code keep using pretty 
+much the same class but call it by different names.
+
+I did not remove repeats when updating this code or remove their use in the js:
+specialHousing.js, Footer.js and newProcess.js
+
+If you want to remove repeats, but are using these, make sure to go back and 
+replace the classes for the one you wish to keep on the other pages. 
+
+--------------------------------------------------------------------------------
+*/
+
+
 @import url('https://fonts.googleapis.com/css?family=Archivo+Black');
 @import url('https://fonts.googleapis.com/css?family=Raleway:400,500,800');
 
@@ -26,11 +49,11 @@ h1, h2, p, ul, li {
 .li {
   text-decoration: none;
   border-radius: 7px;
-  border: 1.5px solid rgb(82, 150, 210); 
+  border: 1.5px solid #62A8E5; 
   margin-top: 1rem;  
   height: fit-content;
   width: fit-content;
-  color:rgb(82, 150, 210);
+  color:#62A8E5;
   font-family: 'Raleway';
   margin-left:1rem;
   margin-right:1rem;
@@ -42,11 +65,11 @@ h1, h2, p, ul, li {
   .li {
     text-decoration: none;
     border-radius: 7px;
-    border: 1.5px solid rgb(82, 150, 210); 
+    border: 1.5px solid #62A8E5; 
     margin-top: 1rem;  
     height: fit-content;
     width: fit-content;
-    color:rgb(82, 150, 210);
+    color:#62A8E5;
     font-family: 'Raleway';
     margin-left:.5rem;
     margin-right:.5rem;
@@ -62,7 +85,7 @@ h1, h2, p, ul, li {
 }
 
 a {
-  color: rgb(82, 150, 210);
+  color: #62A8E5;
   font-weight: 400;
   text-decoration: none;
   display: inline-block;
@@ -80,13 +103,13 @@ a {
 
 .active{
   color: #fff;
-  background-color:rgb(82, 150, 210);
+  background-color:#62A8E5;
   border-radius: 4px;
 }
 
 .button {
   border-radius: 7px;
-  border: 1.5px solid rgb(82, 150, 210); 
+  border: 1.5px solid #62A8E5; 
   margin-top: 1rem;
   padding-top: 0.6rem;
   padding-bottom: 0.6rem;
@@ -94,13 +117,13 @@ a {
   padding-right:1rem;
   height: fit-content;
   width: fit-content;
-  color:rgb(82, 150, 210);
+  color:#62A8E5;
   font-family: 'Raleway';
 }
 
 .button2 {
   border-radius: 7px;
-  border: 1.5px solid rgb(82, 150, 210);
+  border: 1.5px solid #62A8E5;
   margin-top: 1rem;
   padding-top: 0.3rem;
   padding-bottom: 0.3rem;
@@ -108,7 +131,7 @@ a {
   padding-right:1.2rem;
   height: fit-content;
   width: fit-content;
-  color:rgb(82, 150, 210);
+  color:#62A8E5;
   font-family: 'Raleway';
   font-size: 1.6rem;
   text-align: center;
@@ -118,7 +141,7 @@ a {
 @media (max-width:980px) {
   .button2 {
     border-radius: 7px;
-    border: 1.5px solid rgb(82, 150, 210);
+    border: 1.5px solid #62A8E5;
     margin-top: 1rem;
     padding-top: 0.3rem;
     padding-bottom: 0.3rem;
@@ -126,7 +149,7 @@ a {
     padding-right:1rem;
     height: fit-content;
     width: fit-content;
-    color:rgb(82, 150, 210);
+    color:#62A8E5;
     font-family: 'Raleway';
     font-size: 1rem;
     text-align: center;
@@ -136,7 +159,7 @@ a {
 
 .button3 {
   border-radius: 7px;
-  border: 1.5px solid rgb(82, 150, 210); 
+  border: 1.5px solid #62A8E5; 
   margin-top: 1rem;
   padding-top: 0.3rem;
   padding-bottom: 0.3rem;
@@ -144,7 +167,7 @@ a {
   padding-right:1.2rem;
   height: fit-content;
   width: fit-content;
-  color:rgb(82, 150, 210);
+  color:#62A8E5;
   font-family: 'Raleway';
   font-size: 2vw;
   text-align: center;
@@ -153,7 +176,7 @@ a {
 
 .button_phone {
   border-radius: 7px;
-  border: 1.5px solid rgb(82, 150, 210); 
+  border: 1.5px solid #62A8E5; 
   margin-top: 1rem;
   padding-top: 0.3rem;
   padding-bottom: 0.3rem;
@@ -161,7 +184,7 @@ a {
   padding-right:1.2rem;
   height: fit-content;
   width: fit-content;
-  color:rgb(82, 150, 210);
+  color:#62A8E5;
   font-family: 'Raleway';
   font-size: 4.5vw;
 }
@@ -214,7 +237,7 @@ title{
 }
 
 .line {
-  color: rgb(82, 150, 210);
+  color: #62A8E5;
   font-size: 2rem;
   font-weight: 400;
   font-family: 'Times New Roman';
@@ -224,7 +247,7 @@ title{
   padding-top: 3.3rem;
   font-size: 2.8rem;
   font-family: 'Raleway';
-  color: rgb(82, 150, 210);
+  color: #62A8E5;
   text-align: left;
   font-weight: 500;
 }
@@ -233,7 +256,7 @@ title{
   .item_title{
     font-size: 2rem;
     font-family: 'Raleway';
-    color: rgb(82, 150, 210);
+    color: #62A8E5;
     text-align: left;
     font-weight: 500;
   }
@@ -250,7 +273,7 @@ title{
   padding-left: 3%;
   font-size: 2.8rem;
   font-family: 'Raleway';
-  color: rgb(82, 150, 210);
+  color: #62A8E5;
   text-align: left;
   width: 100%;
 }
@@ -270,6 +293,7 @@ title{
   text-align: left;
   vertical-align: middle;
   width:100%;
+  color: rgb(114, 113, 113);
 }
 
 .textbox3{
@@ -286,6 +310,7 @@ title{
   text-align: left;
   vertical-align: middle;
   width: 30vw;
+  color: rgb(114, 113, 113);
 }
 
 .number4{
@@ -293,7 +318,7 @@ title{
   z-index:1rem;
   color: white;
   -webkit-text-stroke-width: 4px;
-  -webkit-text-stroke-color: rgb(82, 150, 210);
+  -webkit-text-stroke-color: #62A8E5;
   font-family: 'Archivo Black';
   padding-bottom: 10rem;
 }
@@ -302,7 +327,7 @@ title{
   z-index:1rem;
   color: white;
   -webkit-text-stroke-width: 4px;
-  -webkit-text-stroke-color: rgb(82, 150, 210);
+  -webkit-text-stroke-color: #62A8E5;
   font-family: 'Archivo Black';
   padding-bottom: 1.2rem;
 }
@@ -312,7 +337,7 @@ title{
   z-index:1rem;
   color: white;
   -webkit-text-stroke-width: 4px;
-  -webkit-text-stroke-color: rgb(82, 150, 210);
+  -webkit-text-stroke-color: #62A8E5;
   font-family: 'Archivo Black';
 }
 
@@ -694,7 +719,7 @@ title{
   max-width: 60%;
   font-size: 1.9rem;
   font-family: 'Raleway';
-  color: rgb(73, 144, 206);
+  color: #62A8E5;
 }
 @media(max-width:550px){
   .item_title_phone{
@@ -707,6 +732,7 @@ title{
   font-family: 'Raleway';
   text-align: center;
   padding: 1.5rem;
+  color: rgb(114, 113, 113);
 }
 
 .textbox2_phone{
@@ -717,6 +743,7 @@ title{
   padding-bottom: 0.6rem;
   padding-left: 1.5rem;
   padding-right: 1.5rem;
+  color: rgb(114, 113, 113);
 }
 
 .number_phone{
@@ -724,7 +751,7 @@ title{
   z-index:1rem;
   color: white;
   -webkit-text-stroke-width: 4px;
-  -webkit-text-stroke-color: rgb(58, 144, 218);
+  -webkit-text-stroke-color: #62A8E5;
   font-family: 'Archivo Black';
 }
 
@@ -736,7 +763,7 @@ title{
   z-index:1rem;
   color: white;
   -webkit-text-stroke-width: 4px;
-  -webkit-text-stroke-color: rgb(58, 144, 218);
+  -webkit-text-stroke-color: #62A8E5;
   font-family: 'Archivo Black';
   padding: 0.6rem;
 }
@@ -749,7 +776,7 @@ title{
   z-index:2rem;
   color: white;
   -webkit-text-stroke-width: 4px;
-  -webkit-text-stroke-color: rgb(58, 144, 218);
+  -webkit-text-stroke-color: #62A8E5;
   font-family: 'Archivo Black';
   padding: 0.6rem;
 }
