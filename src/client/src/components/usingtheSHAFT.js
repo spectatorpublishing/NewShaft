@@ -205,7 +205,7 @@ class usingtheSHAFT extends React.Component {
                 </div>
               </div>
               <div class="column_image2">
-              <img src="https://arc-anglerfish-arc2-prod-spectator.s3.amazonaws.com/public/BKUPQ4FO5NE6HJRSTYFB52FYT4.png" class="img_style2" alt="Reviews Function Example"></img>
+              <img src="https://arc-anglerfish-arc2-prod-spectator.s3.amazonaws.com/public/BKUPQ4FO5NE6HJRSTYFB52FYT4.png" class="img_style7" alt="Reviews Function Example"></img>
               </div>
             </div>
             <div class="row_phoneA">
