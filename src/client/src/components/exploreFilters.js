@@ -343,9 +343,9 @@ export default class FilterBar extends React.Component{
         let payload = {
             COLUMBIA: this.state.Columbia,
             BARNARD: this.state.Barnard,
-            SINGLE_: this.state.Single || this.state.GroupSize == 1,
-            DOUBLE_: this.state.Double || this.state.GroupSize == 2,
-            TRIPLE_: this.state.Triple || this.state.GroupSize == 3,
+            SINGLE_: this.state.Single, // || this.state.GroupSize == 1,
+            DOUBLE_: this.state.Double, // || this.state.GroupSize == 2,
+            TRIPLE_: this.state.Triple, // || this.state.GroupSize == 3,
             SUITE_: this.state.Suite,
             ONE_SUITE: this.state.GroupSize == 1,
             TWO_SUITE: this.state.GroupSize == 2,
@@ -356,6 +356,15 @@ export default class FilterBar extends React.Component{
             SEVEN_SUITE: this.state.GroupSize == 7,
             EIGHT_SUITE: this.state.GroupSize == 8,
             NINE_SUITE: this.state.GroupSize == 9,
+            GROUP_SIZE_1: this.state.GroupSize == 1,
+            GROUP_SIZE_2: this.state.GroupSize == 2,
+            GROUP_SIZE_3: this.state.GroupSize == 3,
+            GROUP_SIZE_4: this.state.GroupSize == 4,
+            GROUP_SIZE_5: this.state.GroupSize == 5,
+            GROUP_SIZE_6: this.state.GroupSize == 6,
+            GROUP_SIZE_7: this.state.GroupSize == 7,
+            GROUP_SIZE_8: this.state.GroupSize == 8,
+            GROUP_SIZE_9: this.state.GroupSize == 9,
             DORM: this.props.search
         }
         return payload;

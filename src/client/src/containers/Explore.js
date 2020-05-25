@@ -141,6 +141,15 @@ const initialPayload = {
   SEVEN_SUITE: 0,
   EIGHT_SUITE: 0,
   NINE_SUITE: 0,
+  GROUP_SIZE_1: 0,
+  GROUP_SIZE_2: 0,
+  GROUP_SIZE_3: 0,
+  GROUP_SIZE_4: 0,
+  GROUP_SIZE_5: 0,
+  GROUP_SIZE_6: 0,
+  GROUP_SIZE_7: 0,
+  GROUP_SIZE_8: 0,
+  GROUP_SIZE_9: 0,
   DORM: ""
 }
   
