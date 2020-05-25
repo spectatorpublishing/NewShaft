@@ -67,6 +67,7 @@ let Dropdown = styled.div`
     overflow: hidden;
     width:100%;
     height:100%;
+    z-index:300;
 `;
 
 let DropdownWrapper = styled.div`
@@ -126,6 +127,7 @@ let DropTableRow = styled.tr`
     display: flex;
     border: none;
     min-height: 2.5rem;
+    position:relative;
 `;
 
 let Textbox = styled.div`
@@ -182,6 +184,7 @@ let ClearButton = styled.a`
     font-size:1.2rem;
     color: ${theme.white};
     text-decoration: underline;
+    z-index:20;
     @media only screen and (max-width: 770px) {
         font-size: 1rem;
     }
@@ -307,8 +310,9 @@ export default class FilterBar extends React.Component{
         }    
     }
     
-    toggle(e) {
-        let action = e.target.id
+    toggle(action,e) {
+        // let action = e.target.id
+        // console.log("action:" , action)
         if(action === "school") {
             this.setState({
                 showSchool: !this.state.showSchool,
@@ -316,16 +320,23 @@ export default class FilterBar extends React.Component{
                 showGroup: false
             })
         }
-        if(action === "room") {
+        else if(action === "room") {
             this.setState({
                 showRoom: !this.state.showRoom,
                 showGroup: false,
                 showSchool: false
             })
         }
-        if(action === "group") {
+        else if(action === "group") {
             this.setState({
                 showGroup: !this.state.showGroup,
+                showRoom: false,
+                showSchool: false
+            })
+        }
+        else{
+            this.setState({
+                showGroup: false,
                 showRoom: false,
                 showSchool: false
             })
@@ -396,7 +407,7 @@ export default class FilterBar extends React.Component{
                 </SelectedWrapper>
                 <FilterRow>
                     <DropTable>
-                        <DropTableRow>
+                        <DropTableRow >
                             <DropTableColumn>
                                 <FilterTextWrapper>
                                     <Textbox>
@@ -407,7 +418,7 @@ export default class FilterBar extends React.Component{
                             <DropTableColumn>
                                 <DropdownWrapper>
                                     <Dropdown>
-                                        <DropButton onClick={this.toggle} id = "school" active = {this.state.showSchool} >School</DropButton>
+                                        <DropButton onClick={(e)=>this.toggle("school",e)} active = {this.state.showSchool} >School</DropButton>
                                         <DropdownContent show={this.state.showSchool}>
                                         <Row>
                                             <CheckBox show={this.state.Columbia} onClick ={(e)=>this.unCheck("Columbia",e)}>✓</CheckBox>
@@ -434,7 +445,7 @@ export default class FilterBar extends React.Component{
                             <DropTableColumn>
                                 <DropdownWrapper>
                                     <Dropdown>
-                            <DropButton onClick={this.toggle} id="group" active={this.state.showGroup}>Group Size</DropButton>
+                            <DropButton onClick={(e)=>this.toggle("group",e)} id="group" active={this.state.showGroup}>Group Size</DropButton>
                             <DropdownContent show={this.state.showGroup}>
                                 <RowGZ>
                                     <ButtonGZ id = "-" onClick={this.onChange} active={this.state.GroupSize -1 >=0} >-</ButtonGZ>
@@ -448,7 +459,7 @@ export default class FilterBar extends React.Component{
                             <DropTableColumn>
                                 <DropdownWrapper>
                                     <Dropdown>
-                                <DropButton onClick={this.toggle} id="room" active ={this.state.showRoom} >Room Type</DropButton>
+                                <DropButton onClick={(e)=>this.toggle("room",e)} id="room" active ={this.state.showRoom} >Room Type</DropButton>
                                 <DropdownContent show={this.state.showRoom}>
                                     <Row>
                                         <CheckBox show={this.state.Suite} onClick ={(e)=>this.unCheck("Suite",e)}>✓</CheckBox>

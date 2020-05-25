@@ -14,7 +14,7 @@ const ExploreContainer = styled.div`
   padding: 0 auto;
   overflow: hidden;
   flex-direction: row;
-`
+`;
 
 const SideBar = styled.div`
   width: 100%;
@@ -42,7 +42,7 @@ width: 0%;
   top: 0;
   z-index:1;
 }
-`
+`;
 
 const FilterSearchBG = styled.div`
   background-color: ${props => props.theme.columbiaBlue};
@@ -56,14 +56,13 @@ const FilterSearchBG = styled.div`
 `;
 
 const FilterSearchWrapper = styled.div`
+  /*  if the currSearchBarHeight is not 0 
+      (=page first loaded, and component hasn't rendered before making size 0), 
+      then set to default height                                              */
   height: ${props => props.currSearchBarHeight > 0 ? props.currSearchBarHeight+"px" : "9rem"};
   @media only screen and (max-width: 768px) {
     height: ${props => props.currSearchBarHeight > 0 ? props.currSearchBarHeight+"px" : "8rem"};
   }
-  /* height:calc( 9rem  + ${props => props.addHeight} );
-  @media only screen and (max-width: 768px) {
-    height:calc( 8rem + ${props => props.addHeight} );
-  }   */
 `;
 
 const FilterRow = styled.div`
@@ -123,8 +122,6 @@ const ColTwo = styled.div`
   display: inline;
   position: fixed;
   padding-left: 1em;
-  /* float: right;
-  height: 100%; */
   right: 0;
   top: 0;
   flex-direction: column;
@@ -149,9 +146,8 @@ const initialPayload = {
   DORM: ""
 }
   
-
-
-const MAX_GROUP = 9;
+const MAX_GROUP = 9;  //the max number of people possible in a group 
+                      //where everyone fits in a space unsplit
 
 export default class Explore extends Component {
   constructor(props){
@@ -160,11 +156,12 @@ export default class Explore extends Component {
       payload: _.clone(initialPayload),
       dorms: [],
       currSearchBarHeight: this.searchBarHeight,
-      additionalPageHeight: "0rem"
+      additionalPageHeight: "0rem",
+      closingToggles: false
+
     };
     this.updatePayload = this.updatePayload.bind(this)
     this.extendPageTop = this.extendPageTop.bind(this)
-    // this.searchBarHeight = React.createRef();
   }
   
   componentDidMount(){
@@ -178,7 +175,6 @@ export default class Explore extends Component {
       var i = new Image()
       i.src = dorm.THUMBNAIL_IMAGE;
     })
-
     callback();
   }
 
@@ -197,17 +193,17 @@ export default class Explore extends Component {
   updatePayload(newValue, name, filters){
     let payload = this.state.payload;
     if(filters != undefined) {
-      var pageIsShort = false;
+      var isDefaultQuery = false;
       for(var prop in filters) {
         // to resize the placeholder div that simulates the position absolute searchfields
         if (filters[prop] && prop!= "DORM"){
-          pageIsShort = true;
-        }
-        if (pageIsShort) {
           this.extendPageTop()
-          console.log(this.searchBarHeight.clientHeight)
-        };
+          isDefaultQuery = true
+        }
         payload[prop] = filters[prop];
+      }
+      if (!isDefaultQuery){ //don't rerender for searchbar changes but do on clear
+        this.extendPageTop()
       }
     } else {
       payload[FILTER_NAME_TO_KEY[name]] = newValue;
@@ -229,28 +225,23 @@ export default class Explore extends Component {
   }
 
   extendPageTop(){
-    console.log(this.searchBarHeight.clientHeight, this.state.currSearchBarHeight)
-    this.setState({currSearchBarHeight: this.searchBarHeight.clientHeight});
-    // this.setState({additionalPageHeight: addHeight});
-    // return addHeight;
+    // console.log(this.searchBarHeight.clientHeight, this.state.currSearchBarHeight)
+    if (this.searchBarHeight != null && this.searchBarHeight != undefined){
+      this.setState({currSearchBarHeight: this.searchBarHeight.clientHeight});
+    }
   }
 
-  // componentDidMount() {
-  //   // console.log(this.searchBarHeight.clientHeight)
-  // }
-
-  
   render() {
     return (
       <ExploreContainer>
         <ColOne>
           <SideBar>
-            <FilterSearchWrapper addHeight={this.state.additionalPageHeight}  currSearchBarHeight={this.state.currSearchBarHeight} >
+            <FilterSearchWrapper currSearchBarHeight={this.state.currSearchBarHeight} >
               <FilterSearchBG ref={(searchBarHeight)=>{this.searchBarHeight =searchBarHeight} }  >
                 <FilterRow id="row">
                   <FilterColumn id="column" >
                     <SearchWrapper><SearchBar handleChange={this.updatePayload}/></SearchWrapper>
-                    <FilterWrapper><Filters2020 submit = {this.updatePayload} search = {this.state.payload.DORM} MAX_GROUP= {MAX_GROUP} ></Filters2020></FilterWrapper>
+                    <FilterWrapper><Filters2020 submit = {this.updatePayload} search = {this.state.payload.DORM} MAX_GROUP= {MAX_GROUP}></Filters2020></FilterWrapper>
                   </FilterColumn>
                 </FilterRow>
               </FilterSearchBG>
@@ -259,7 +250,7 @@ export default class Explore extends Component {
           </SideBar>
         </ColOne>
         <ColTwo>
-          <MapView>
+          <MapView  >
             <Maps
               latitudes={this.state.dorms.map((dorm) => dorm.LATITUDE)} 
               longitudes={this.state.dorms.map((dorm) => dorm.LONGITUDE)} 
