@@ -56,10 +56,14 @@ const FilterSearchBG = styled.div`
 `;
 
 const FilterSearchWrapper = styled.div`
-  height:calc( 9rem  + ${props => props.addHeight} );
+  height: ${props => props.currSearchBarHeight > 0 ? props.currSearchBarHeight+"px" : "9rem"};
+  @media only screen and (max-width: 768px) {
+    height: ${props => props.currSearchBarHeight > 0 ? props.currSearchBarHeight+"px" : "8rem"};
+  }
+  /* height:calc( 9rem  + ${props => props.addHeight} );
   @media only screen and (max-width: 768px) {
     height:calc( 8rem + ${props => props.addHeight} );
-  }  
+  }   */
 `;
 
 const FilterRow = styled.div`
@@ -133,14 +137,6 @@ const initialPayload = {
   DOUBLE_: 0,
   TRIPLE_: 0,
   SUITE_: 0,
-  TWO_SUITE: 0,
-  THREE_SUITE: 0,
-  FOUR_SUITE: 0,
-  FIVE_SUITE: 0,
-  SIX_SUITE: 0,
-  SEVEN_SUITE: 0,
-  EIGHT_SUITE: 0,
-  NINE_SUITE: 0,
   GROUP_SIZE_1: 0,
   GROUP_SIZE_2: 0,
   GROUP_SIZE_3: 0,
@@ -163,15 +159,18 @@ export default class Explore extends Component {
     this.state = {
       payload: _.clone(initialPayload),
       dorms: [],
+      currSearchBarHeight: this.searchBarHeight,
       additionalPageHeight: "0rem"
     };
     this.updatePayload = this.updatePayload.bind(this)
     this.extendPageTop = this.extendPageTop.bind(this)
-    }
+    // this.searchBarHeight = React.createRef();
+  }
   
   componentDidMount(){
     document.title = "The Shaft";
     this.fetchDorms();
+    window.addEventListener('resize', this.extendPageTop);
   }
 
   preloadImages(dorms, callback){
@@ -194,7 +193,7 @@ export default class Explore extends Component {
       this.preloadImages(dormInfo, () => this.setState({dorms: dormInfo}));      
     })
   }
-
+  
   updatePayload(newValue, name, filters){
     let payload = this.state.payload;
     if(filters != undefined) {
@@ -204,7 +203,10 @@ export default class Explore extends Component {
         if (filters[prop] && prop!= "DORM"){
           pageIsShort = true;
         }
-        pageIsShort ? this.extendPageTop("2.7rem") : this.extendPageTop("0rem");
+        if (pageIsShort) {
+          this.extendPageTop()
+          console.log(this.searchBarHeight.clientHeight)
+        };
         payload[prop] = filters[prop];
       }
     } else {
@@ -226,18 +228,25 @@ export default class Explore extends Component {
     });      
   }
 
-  extendPageTop(addHeight){
-    this.setState({additionalPageHeight: addHeight});
-    return addHeight;
+  extendPageTop(){
+    console.log(this.searchBarHeight.clientHeight, this.state.currSearchBarHeight)
+    this.setState({currSearchBarHeight: this.searchBarHeight.clientHeight});
+    // this.setState({additionalPageHeight: addHeight});
+    // return addHeight;
   }
+
+  // componentDidMount() {
+  //   // console.log(this.searchBarHeight.clientHeight)
+  // }
+
   
   render() {
     return (
       <ExploreContainer>
         <ColOne>
           <SideBar>
-            <FilterSearchWrapper addHeight={this.state.additionalPageHeight} >
-              <FilterSearchBG>
+            <FilterSearchWrapper addHeight={this.state.additionalPageHeight}  currSearchBarHeight={this.state.currSearchBarHeight} >
+              <FilterSearchBG ref={(searchBarHeight)=>{this.searchBarHeight =searchBarHeight} }  >
                 <FilterRow id="row">
                   <FilterColumn id="column" >
                     <SearchWrapper><SearchBar handleChange={this.updatePayload}/></SearchWrapper>

@@ -5,27 +5,26 @@ var pool = require('../database');
 
 router.post('/', async (req, res) => {
     var query = `SELECT DORM, DESCRIPTION, COLLEGE, THUMBNAIL_IMAGE, LATITUDE, LONGITUDE FROM dorm_static_info `
-    var baseQ =``
-    var suiteQ=``
-    var roomQ = ``
-    var collegeQ = ``
-    var searchQ = ``
+    var groupSize =``       //group size toggle
+    var suiteQ=``           //suite checkbox
+    var roomQ = ``          //single, double, triple checkboxes 
+    var collegeQ = ``       //Columbia and Barnard checkboxes
+    var searchQ = ``        //search box query
 
     let filters = req.body
     var trueFilters = []
 
     for(var prop in filters) {
-        console.log(prop)
+        // console.log(prop)
         if(filters[prop]) {
             trueFilters.push(prop)
         }
     }
 
-
     //build based on group size
     var starterQ = ``
     var selectTextPart1 = ` SELECT DORM from group_size_options where ` //for use on line [] to detect out-of-range group values
-    var selectTextPart2 = ``;
+    var selectTextPart2 = ``; //the column from group_size_options to use as a query condition
     var selectTextPart3 = ` = 1;`
 
     for(var i=0; i< trueFilters.length; i+=1){
@@ -34,102 +33,35 @@ router.post('/', async (req, res) => {
             break //unneccessary because there is only one number, but just in case...
         }
     }
-    selectTextPart1 += selectTextPart2 + selectTextPart3 
-    starterQ = selectTextPart1
-
-    // var selectText = ` Select DORM from suites where ` //for use on line [] to detect out-of-range group values
-
-    // //the following SQL requests were written explicitly so to to be most clear
-
-    // //if the incremented number is 1-3
-    // if (filters[`ONE_SUITE`] || filters[`TWO_SUITE`] || filters[`THREE_SUITE`]  ){
-    //     var starterQS=``;
-    //     if (filters[`ONE_SUITE`] && filters[`SINGLE_`]){
-    //         //...ONE_SUITE
-    //         starterQS =`  
-    //                         Select n.DORM from 
-    //                         dorm_static_info n inner join suites  on  n.dorm = suites.dorm where ONE_SUITE = 1 `;
-    //     }
-    //     else if (filters[`TWO_SUITE`] && filters[`DOUBLE_`]){
-    //          //...TWO_SUITE
-    //          starterQS =`  
-    //                         Select n.DORM from 
-    //                         dorm_static_info n inner join suites  on  n.dorm = suites.dorm where TWO_SUITE = 1 `;
-    //     }
-    //     else if (filters[`THREE_SUITE`] && filters[`TRIPLE_`]){
-    //          //...THREE_SUITE
-    //          starterQS =`  
-    //                         Select n.DORM from 
-    //                         dorm_static_info n inner join suites  on  n.dorm = suites.dorm where THREE_SUITE = 1 `;
-    //     }
-    //     starterQ += starterQS
-    //     if (!filters["SUITE_"]){
-    //         // add UNION here
-    //         starterQ += ` UNION `
-    //         var starterQNonS=``;
-    //         if ( filters[`ONE_SUITE`] && filters[`SINGLE_`] ){
-    //             //...SINGLE_ = 1
-    //             starterQNonS = ` Select dorm from dorm_static_info where SINGLE_ = 1 and SUITE_ = 0 `
-    //         }
-    //         else if ( filters[`TWO_SUITE`] && filters[`DOUBLE_`] ){
-    //             //...DOUBLE_ =1
-    //             starterQNonS = ` Select dorm from dorm_static_info where DOUBLE_ = 1 and SUITE_ = 0 `
-    //         }
-    //         else if ( filters[`THREE_SUITE`] && filters[`TRIPLE_`] ){
-    //             //...TRIPLE_ =1
-    //             starterQNonS = ` Select dorm from dorm_static_info where TRIPLE_ = 1 and SUITE_ = 0 `
-    //         }
-    //         starterQ += starterQNonS
-    //     }
-    // }
-    // else{
-    //     //select from suits 4-9'
-    //     var starterQS2 = selectText;
-
-    //     for(var i=0; i< trueFilters.length; i+=1){
-    //         if (trueFilters[i].endsWith("_SUITE") && !(trueFilters[i]==`ONE_SUITE` || trueFilters[i]==`TWO_SUITE` || trueFilters[i]==`THREE_SUITE` ) ){
-    //             starterQS2 += trueFilters[i]+` = 1 ` 
-    //         }
-    //     }
-    //     starterQ+=starterQS2
-    // } 
-    // starterQ+= `;`
-    
+    starterQ = selectTextPart1 + selectTextPart2 + selectTextPart3 
+    // console.log( "starterQ: ",  starterQ ) //to test the query
 
     if (selectTextPart2 != ``){
         //if groupsize is not 0 or out of range (for some reason)
-    
-        // console.log("starterQ: " , starterQ) //to test print the baseQ query
-        //make query call to get the values 
-        // starterQ = ` Select DORM from group_size_options where GROUP_SIZE_1 = 1; `
-        console.log("starterQ" , starterQ)
-        const sDorms = await pool.query(starterQ);
-        console.log(sDorms)
 
+        const sDorms = await pool.query(starterQ);
+        // console.log("sDorms: ", sDorms)  //to test what the printed dorm objects are
 
         //loop to fit values into a list
-        baseQ += `( `
+        groupSize += `( `
         if (sDorms[0]!=undefined && sDorms[0]!=null){
             var sClause = `("` + sDorms[0].DORM + `"`
             for(var i = 1; i < sDorms.length; i += 1) {
                 sClause += ' , "' + sDorms[i].DORM+ `" `
             }
             sClause += `) `
-            baseQ = `dorm in ` + sClause 
+            groupSize = `dorm in ` + sClause 
         }
         else{
-            baseQ =``;
+            groupSize =``;
         }
-        // console.log("baseQ: " , baseQ)  //to test print baseQ values
+        // console.log("groupSize: ", groupSize)  //to test print groupSize values
     }
 
     //build suites only
     if ( filters[`SUITE_`] ){
         suiteQ += ` SUITE_ = 1 `
     }
-
-
-
 
     //build general room-type (might retread, but because we're using ANDs only, it should be fine)
 
@@ -155,16 +87,15 @@ router.post('/', async (req, res) => {
         }
     }
 
-
     //build search query
     if(filters.DORM !== '') {
         searchQ = `DORM LIKE '%` + filters.DORM + `%' `
     }
 
     // put the final Query together
-    if(baseQ !== '' || roomQ !== `` || collegeQ !== '' ||  searchQ !== '') {
+    if(groupSize !== '' || roomQ !== `` || collegeQ !== '' ||  searchQ !== '') {
         query += `WHERE `
-        if(baseQ !== '') query += baseQ + `AND `
+        if(groupSize !== '') query += groupSize + `AND `
         if(suiteQ !== '') query += suiteQ + `AND `
         if(roomQ !== '') query += roomQ + `AND `
         if(collegeQ !== '') query += collegeQ + `AND `
@@ -173,7 +104,7 @@ router.post('/', async (req, res) => {
     while(query.endsWith("AND ") || query.endsWith("AND")) query = query.slice(0, -4)
 
     query += ";"
-    console.log(query)
+    // console.log(query)   //print the final query
 
 	const result = await pool.query(query);
 	res.send(result)
