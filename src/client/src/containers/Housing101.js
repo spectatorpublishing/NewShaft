@@ -4,8 +4,6 @@ import FAQBubble from "../components/FAQBubble.js";
 import { theme } from "../util/GlobalStyles";
 import AdManager from "../components/AdManager.js"
 
-
-
 let Title = styled.div`
     width:100%;
     text-align:center;
@@ -13,8 +11,8 @@ let Title = styled.div`
     background-color:${props => props.theme.columbiaBlue}; 
     color: 	${props => props.theme.white};
     border:none;
-    padding-top:1rem;
-    padding-bottom:1rem;
+    padding-top:5.5rem;
+    padding-bottom:2rem;
     font-weight: bold;
     @media only screen and (max-width: 992px){
         font-size:1.5rem;
@@ -30,7 +28,7 @@ let Housing101Container = styled.div`
     width: 100vw;
     padding: 0 auto;
     flex-direction: column;
-    background-color: ${props => props.theme.lightGray}
+    background-color: ${props => props.theme.lightGray};
 `
 
 let Housing101ContainerMobile = styled.div`
