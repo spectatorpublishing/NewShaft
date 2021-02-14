@@ -12,6 +12,7 @@ const ExploreContainer = styled.div`
   width: 100%;
   height: 100%;
   padding: 0 auto;
+  padding-top: 3.75rem;
   overflow: hidden;
   flex-direction: row;
 `
