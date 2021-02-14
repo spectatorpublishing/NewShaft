@@ -133,12 +133,12 @@ let LegendItem = styled.div`
 
 let Converter = styled.div`
   background-color: gray;
-  padding: 3rem 0rem 2rem 3rem;
+  padding: 7rem 0rem 2rem 3rem;
   display: flex;
   flex-direction: column;
   color: white;
   @media(max-width: 991px){
-    padding: 1rem 0rem 0rem 1rem;
+    padding: 7rem 0rem 0rem 1rem;
 }
 `
 

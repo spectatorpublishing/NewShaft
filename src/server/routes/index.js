@@ -15,6 +15,7 @@ const getUniqueFloorNumbers = require('./getUniqueFloorNumbers.js');
 const updateVoteCount = require('./updateVoteCount.js');
 const getQuickReview = require('./getQuickReview.js');
 const getMoreDormInfo = require('./getMoreDormInfo');
+const getFilteredDorms = require('./getFilteredDorms')
 
 // Implement backend routes
 module.exports = app => {
@@ -32,4 +33,5 @@ module.exports = app => {
 	app.use('/api/getMoreDormInfo', (req, res) => getMoreDormInfo(req, res));
 	app.use('/api/updateVoteCount', (req, res) => updateVoteCount(req, res));
 	app.use('/api/getQuickReview', (req, res) => getQuickReview(req, res));
+	app.use('/api/getFilteredDorms', (req, res) => getFilteredDorms(req, res));
 };
