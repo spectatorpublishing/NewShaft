@@ -43,7 +43,7 @@ h1, h2, p, ul, li {
   margin-right:auto;
   display: flex;
   flex-direction: row;
-  padding-top:1.3rem;
+  padding-top:5rem;
 }
 
 .li {
