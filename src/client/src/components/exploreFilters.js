@@ -8,14 +8,14 @@ let FilterRow = styled.div`
     display: flex;
     flex-direction: row;
     align-items: center;
-    @media only screen and (max-width: 770px) {
+    @media only screen and (max-width: 769px) {
+        //flex-direction: column;
         justify-content: center;
         display: inline-block;
         vertical-align: middle;
         text-align: center;
         margin-left: 5%;
         display: flex;
-        flex-direction: row;
     }
 `;
 
@@ -54,6 +54,17 @@ let Cancel = styled.div`
     font-size: 0.8rem;
 `;
 
+let DropdownBox = styled.div`
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: center;
+
+    @media only screen and (max-width: 769px) {
+        //flex-direction: column;
+    }
+`;
+
 let Dropdown = styled.div`
     float: left;
     overflow: hidden;
@@ -65,6 +76,10 @@ let Textbox = styled.div`
     color: white;
     padding: 0.6rem 0rem 0.6rem 0.3rem;
     margin-right: 1.2rem;
+
+    @media only screen and (max-width: 769px) {
+        //display: none;
+    }
 `;
 
 let DropButton = styled.button`
@@ -86,7 +101,13 @@ let DropButton = styled.button`
     padding-left: 1rem;
     background-color: rgb(98, 168, 229);
     outline: none;
-  }
+
+    margin: .3rem;
+
+    @media only screen and (max-width: 769px) {
+        margin: .3rem;
+        //line-height: 2.8rem;
+    }
 `;
 
 let DropdownContent = styled.div`
@@ -446,6 +467,7 @@ export default class FilterBar extends React.Component{
                     <Textbox>
                         Filters:
                     </Textbox>
+                    <DropdownBox>
                     <Dropdown>
                         <DropButton onClick={this.toggle} id = "school">School</DropButton>
                         <DropdownContent show={this.state.showSchool}>
@@ -521,6 +543,7 @@ export default class FilterBar extends React.Component{
                             </Row>
                         </DropdownContent>
                     </Dropdown>
+                    </DropdownBox>
                     <ClearButton show = {this.state} onClick={this.clear}>Clear</ClearButton>
                 </FilterRow>
             </div>
