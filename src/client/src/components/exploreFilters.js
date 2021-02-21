@@ -9,7 +9,6 @@ let FilterRow = styled.div`
     flex-direction: row;
     align-items: center;
     @media only screen and (max-width: 769px) {
-        //flex-direction: column;
         justify-content: center;
         display: inline-block;
         vertical-align: middle;
@@ -26,6 +25,7 @@ let SelectedWrapper = styled.div`
     font-family: 'Raleway';
     padding-top: 0.6rem;
     padding-left: 0.6rem;
+    flex-wrap: wrap;
 `;
 
 let RowGZ = styled.div`
@@ -57,12 +57,8 @@ let Cancel = styled.div`
 let DropdownBox = styled.div`
     display: flex;
     flex-direction: row;
-    flex-wrap: wrap;
     justify-content: center;
-
-    @media only screen and (max-width: 769px) {
-        //flex-direction: column;
-    }
+    align-items: center;
 `;
 
 let Dropdown = styled.div`
@@ -76,10 +72,6 @@ let Textbox = styled.div`
     color: white;
     padding: 0.6rem 0rem 0.6rem 0.3rem;
     margin-right: 1.2rem;
-
-    @media only screen and (max-width: 769px) {
-        //display: none;
-    }
 `;
 
 let DropButton = styled.button`
@@ -104,10 +96,13 @@ let DropButton = styled.button`
 
     margin: .3rem;
 
-    @media only screen and (max-width: 769px) {
-        margin: .3rem;
-        //line-height: 2.8rem;
+    @media only screen and (max-width: 1024px) {
+        height: 3rem;
+        width: 5rem;
+        padding: 0 .3rem;
     }
+
+    
 `;
 
 let DropdownContent = styled.div`
@@ -142,10 +137,10 @@ const ButtonGZ = styled.div`
     font-family: 'Raleway';
     font-size:1.2rem;
     color: black;
-    justify-contents: center;
+    justify-content: center;
     border-radius: 100%;
     border: 1px solid rgb(98, 168, 229);
-    align-text: center;
+    text-align: center;
     padding: 0rem 0.45rem 0rem 0.45rem;
     vertical-align: center;
     color: rgb(98, 168, 229);
@@ -157,7 +152,7 @@ const ButtonGZ = styled.div`
 
 let Number = styled.div`
     font-family: 'Raleway';
-    align-text: center;
+    text-align: center;
     font-size: 1.5rem;
     vertical-align: middle;
     margin: auto;
@@ -178,7 +173,7 @@ let Row = styled.div`
     display: flex;
     flex-direction: row;
     vertical-align: middle;
-    justify-contents: center;
+    justify-content: center;
     padding: 0.3rem 0rem 0.3rem 0rem;
 `;
 
@@ -191,9 +186,9 @@ let Input = styled.div`
     margin: 0.2rem;
     color: white;
     font-size: 1.1rem;
-    align-text: top;
+    text-align: top;
     padding: 0.1rem 0rem 0.4rem 0.2rem;
-    background-color: transparent
+    background-color: transparent;
     vertical-align: center;
     &:active{
         background-color: rgb(98, 168, 229);
@@ -209,8 +204,8 @@ let CheckBox = styled.div`
     cursor: pointer;
     margin: 0.2rem;
     color: white;
-    font-size: 1.1rem
-    align-text: top;
+    font-size: 1.1rem;
+    text-align: top;
     padding: 0.1rem 0rem 0.4rem 0.2rem;
     background-color: rgb(98, 168, 229);
     position: absolute;
