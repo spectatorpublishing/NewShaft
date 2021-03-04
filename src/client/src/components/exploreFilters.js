@@ -34,6 +34,7 @@ let RowGZ = styled.div`
     align-items: center;
     font-family: 'Raleway';
     justify-content: center;
+    margin: auto;
 `;
 
 let Tag = styled.div`
@@ -59,6 +60,7 @@ let DropdownBox = styled.div`
     flex-direction: row;
     justify-content: center;
     align-items: center;
+    flex-wrap: wrap;
 `;
 
 let Dropdown = styled.div`
@@ -106,9 +108,11 @@ let DropButton = styled.button`
 `;
 
 let DropdownContent = styled.div`
-    display: ${props => props.show ? '' : 'none'};
+    display: ${props => props.show ? 'flex' : 'none'};
     position: absolute;
-    flex-direction: row;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: flex-start;
     background-color: white;
     min-width: 8rem;
     font-family: 'Raleway';
@@ -155,18 +159,26 @@ let Number = styled.div`
     text-align: center;
     font-size: 1.5rem;
     vertical-align: middle;
-    margin: auto;
+    margin: 0rem 1rem;
 `;
 
-let Label = styled.div`
+let Label = styled.label`
     font-family: 'Raleway';
-    padding-left: 0.6rem;
-    padding-top: 0.2rem;
-    padding-right: 0.6rem;
+    /* padding-left: 0.6rem; */
+    /* padding-top: 0.2rem; */
+    /* padding-right: 0.6rem; */
     color: rgb(98, 168, 229);
     font-size: 1.3rem;
     background: white;
     font-weight: normal;
+
+    display: inline-block;
+    padding-right: 10px;
+    white-space: nowrap;
+
+    span {
+        vertical-align: middle;
+    }
 `;
 
 let Row = styled.div`
@@ -177,19 +189,19 @@ let Row = styled.div`
     padding: 0.3rem 0rem 0.3rem 0rem;
 `;
 
-let Input = styled.div`
+let Input = styled.input`
     border: 2px solid rgb(98, 168, 229);
     border-radius: 6px;
     width: 1.2rem;
     height: 0.9rem;
     cursor: pointer;
-    margin: 0.2rem;
+    /* margin: 0.2rem; */
     color: white;
     font-size: 1.1rem;
-    text-align: top;
+    /* text-align: top; */
     padding: 0.1rem 0rem 0.4rem 0.2rem;
     background-color: transparent;
-    vertical-align: center;
+    vertical-align: middle;
     &:active{
         background-color: rgb(98, 168, 229);
     }
@@ -202,7 +214,7 @@ let CheckBox = styled.div`
     width: 1.2rem;
     height: 0.9rem;
     cursor: pointer;
-    margin: 0.2rem;
+    /* margin: 0.2rem; */
     color: white;
     font-size: 1.1rem;
     text-align: top;
@@ -463,81 +475,93 @@ export default class FilterBar extends React.Component{
                         Filters:
                     </Textbox>
                     <DropdownBox>
-                    <Dropdown>
-                        <DropButton onClick={this.toggle} id = "school">School</DropButton>
-                        <DropdownContent show={this.state.showSchool}>
-                            <Row>
-                                <CheckBox id = "checkColumbia" show={this.state.Columbia} onClick ={this.unCheck}>✓</CheckBox>
-                                <Input 
-                                    id = "Columbia"  
-                                    type = "checkbox"
-                                    onClick = {this.onChange} 
-                                    checked = {this.state.Columbia} >✓</Input> 
-                                <Label>Columbia</Label>                
-                            </Row>
-                            <Row>
-                                <CheckBox id = "checkBarnard" show={this.state.Barnard} onClick ={this.unCheck}>✓</CheckBox>
-                                <Input 
-                                    id = "Barnard"  
-                                    type = "checkbox"
-                                    onClick = {this.onChange} 
-                                    checked = {this.state.Barnard}>✓</Input> 
-                                <Label>Barnard</Label>
-                            </Row>
-                        </DropdownContent>
-                    </Dropdown>
-                    <Dropdown>
-                        <DropButton onClick={this.toggle} id="group">Group Size</DropButton>
-                        <DropdownContent show={this.state.showGroup}>
-                            <RowGZ>
-                                <ButtonGZ id = "-" onClick={this.onChange}>-</ButtonGZ>
-                                <Number>{this.state.GroupSize}</Number>
-                                <ButtonGZ class="button" id = "+" onClick={this.onChange}>+</ButtonGZ>
-                            </RowGZ> 
-                        </DropdownContent>
-                    </Dropdown>
-                    <Dropdown>
-                        <DropButton onClick={this.toggle} id="room">Room Type</DropButton>
-                        <DropdownContent show={this.state.showRoom}>
-                            <Row>
-                                <CheckBox id = "checkSuite" show={this.state.Suite} onClick ={this.unCheck}>✓</CheckBox>
-                                <Input 
-                                    id="Suite" 
-                                    onClick = {this.onChange} 
-                                    type="checkbox"
-                                    checked = {this.state.Suite}
-                                    onChange = {this.checkBox} >✓</Input>
-                                <Label>Suite Style</Label>
-                            </Row>
-                            <Row>
-                                <CheckBox id = "checkSingle" show={this.state.Single} onClick ={this.unCheck}>✓</CheckBox>
-                                <Input 
-                                    id="Single" 
-                                    onClick = {this.onChange} 
-                                    type="checkbox"
-                                    checked = {this.state.Single}>✓</Input> 
-                                <Label>Single</Label>
-                            </Row>
-                            <Row>
-                                <CheckBox id = "checkDouble" show={this.state.Double} onClick ={this.unCheck}>✓</CheckBox>
-                                <Input 
-                                    id="Double" 
-                                    onClick = {this.onChange} 
-                                    type="checkbox" 
-                                   checked = {this.state.Double}>✓</Input> 
-                                <Label>Double</Label>
-                            </Row>
-                            <Row>
-                                <CheckBox id = "checkTriple" show={this.state.Triple} onClick ={this.unCheck}>✓</CheckBox>
-                                <Input 
-                                    id="Triple" 
-                                    onClick = {this.onChange} 
-                                    type="checkbox" 
-                                    checked = {this.state.Triple}>✓</Input> 
-                                <Label>Triple</Label>
-                            </Row>
-                        </DropdownContent>
-                    </Dropdown>
+                        <Dropdown>
+                            <DropButton onClick={this.toggle} id = "school">School</DropButton>
+                            <DropdownContent show={this.state.showSchool}>
+                                <Row>
+                                    {/* <CheckBox id = "checkColumbia" show={this.state.Columbia} onClick ={this.unCheck}>✓</CheckBox> */}
+                                    <Label>
+                                        <Input 
+                                            id = "Columbia"  
+                                            type = "checkbox"
+                                            onClick = {this.onChange} 
+                                            checked = {this.state.Columbia} />
+                                        <span>Columbia </span>
+                                    </Label>                
+                                </Row>
+                                <Row>
+                                    {/* <CheckBox id = "checkBarnard" show={this.state.Barnard} onClick ={this.unCheck}>✓</CheckBox> */}
+                                    <Label>
+                                        <Input 
+                                            id = "Barnard"  
+                                            type = "checkbox"
+                                            onClick = {this.onChange} 
+                                            checked = {this.state.Barnard} />
+                                        <span>Barnard</span>
+                                    </Label>
+                                </Row>
+                            </DropdownContent>
+                        </Dropdown>
+                        <Dropdown>
+                            <DropButton onClick={this.toggle} id="group">Group Size</DropButton>
+                            <DropdownContent show={this.state.showGroup}>
+                                <RowGZ>
+                                    <ButtonGZ id = "-" onClick={this.onChange}>-</ButtonGZ>
+                                    <Number>{this.state.GroupSize}</Number>
+                                    <ButtonGZ class="button" id = "+" onClick={this.onChange}>+</ButtonGZ>
+                                </RowGZ> 
+                            </DropdownContent>
+                        </Dropdown>
+                        <Dropdown>
+                            <DropButton onClick={this.toggle} id="room">Room Type</DropButton>
+                            <DropdownContent show={this.state.showRoom}>
+                                <Row>
+                                    {/* <CheckBox id = "checkSuite" show={this.state.Suite} onClick ={this.unCheck}>✓</CheckBox> */}
+                                    <Label>
+                                        <Input 
+                                            id="Suite" 
+                                            onClick = {this.onChange} 
+                                            type="checkbox"
+                                            checked = {this.state.Suite}
+                                            onChange = {this.checkBox} />
+                                        <span>Suite Style</span>
+                                    </Label>
+                                </Row>
+                                <Row>
+                                    {/* <CheckBox id = "checkSingle" show={this.state.Single} onClick ={this.unCheck}>✓</CheckBox> */}
+                                    <Label>
+                                        <Input 
+                                            id="Single" 
+                                            onClick = {this.onChange} 
+                                            type="checkbox"
+                                            checked = {this.state.Single} />
+                                        <span>Single</span>
+                                    </Label>
+                                </Row>
+                                <Row>
+                                    {/* <CheckBox id = "checkDouble" show={this.state.Double} onClick ={this.unCheck}>✓</CheckBox> */}
+                                    <Label>
+                                        <Input 
+                                            id="Double" 
+                                            onClick = {this.onChange} 
+                                            type="checkbox" 
+                                            checked = {this.state.Double} />
+                                        <span>Double</span>
+                                    </Label>
+                                </Row>
+                                <Row>
+                                    {/* <CheckBox id = "checkTriple" show={this.state.Triple} onClick ={this.unCheck}>✓</CheckBox> */}
+                                    <Label>
+                                        <Input 
+                                            id="Triple" 
+                                            onClick = {this.onChange} 
+                                            type="checkbox" 
+                                            checked = {this.state.Triple} /> 
+                                        <span>Triple</span>
+                                    </Label>
+                                </Row>
+                            </DropdownContent>
+                        </Dropdown>
                     </DropdownBox>
                     <ClearButton show = {this.state} onClick={this.clear}>Clear</ClearButton>
                 </FilterRow>
