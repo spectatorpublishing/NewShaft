@@ -90,7 +90,7 @@ class specialHousing extends React.Component {
             <div class="button_phone"><a href="https://www.columbiaspectator.com/spectrum/2019/01/28/hack-housing-what-are-special-interest-communities/">read more on SICs</a></div>
           </div>
           </div>
-          <div class="rowPad_phone">
+          {/* <div class="rowPad_phone">
           <div class="row_phone2">
             <div class="number_phone">
               3
@@ -108,11 +108,11 @@ class specialHousing extends React.Component {
             </div>
             <div class="button_phone"><a href="https://www.columbiaspectator.com/spectrum/2017/01/19/thinking-living-living-learning-center-heres-how-apply/">read more on LLC</a></div>
           </div>
-          </div>
+          </div> */}
           <div class="rowPad_phone">
           <div class="row_phone2">
             <div class="number_phone">
-              4
+              3
             </div>
             <div class="item_title_phone">
               Become a<br></br>Resident Advisor
@@ -131,7 +131,7 @@ class specialHousing extends React.Component {
           <div class="rowPad_phone">
           <div class="row_phone2">
             <div class="number_phone">
-              5
+              4
             </div>
             <div class="item_title_phone">
               Disability Services<br></br>and Housing
@@ -151,7 +151,7 @@ class specialHousing extends React.Component {
           <div class="rowPad_phone">
           <div class="row_phone2">
             <div class="number_phone">
-              6
+              5
             </div>
             <div class="item_title_phone">
               Studying Abroad
@@ -170,7 +170,7 @@ class specialHousing extends React.Component {
           <div class="rowPad_phone">
           <div class="row_phone2">
             <div class="number_phone">
-              7
+              6
             </div>
             <div class="item_title_phone">
               Explore<br></br>Housing <br></br>On the<strong>SHAFT</strong>
@@ -202,6 +202,9 @@ class specialHousing extends React.Component {
                 <img src={arrow} class="arrow_style" alt="arrow down"></img>                
             </div>
             <div class="row_phoneA">
+                <div class="column_image2">
+                    <img src="https://arc-anglerfish-arc2-prod-spectator.s3.amazonaws.com/public/A52GXZNKARCNTPOFZFWM2QOEPI.jpg" class="img_style9" alt="East Campus Front View Courtyard"></img>
+                </div>
                 <div class="column4">
                     <div class="row2">
                         <div class="number5">
@@ -218,14 +221,8 @@ class specialHousing extends React.Component {
                         </div>
                     </div>
                 </div>
-                <div class="column_image2">
-                    <img src="https://arc-anglerfish-arc2-prod-spectator.s3.amazonaws.com/public/A52GXZNKARCNTPOFZFWM2QOEPI.jpg" class="img_style9" alt="East Campus Front View Courtyard"></img>
-                </div>
             </div>
             <div class="row_phoneA">
-                <div class="column_image">
-                    <img src="https://arc-anglerfish-arc2-prod-spectator.s3.amazonaws.com/public/UZE2LRR3NNHDVONKASVKFVYHFA.jpg" class="img_style1" alt="Front view of SIC building"></img>
-                </div>
                 <div class="column">
                     <div class="row2">
                         <div class="number4">
@@ -242,8 +239,11 @@ class specialHousing extends React.Component {
                         </div>
                     </div>
                 </div>
+                <div class="column_image">
+                    <img src="https://arc-anglerfish-arc2-prod-spectator.s3.amazonaws.com/public/UZE2LRR3NNHDVONKASVKFVYHFA.jpg" class="img_style1" alt="Front view of SIC building"></img>
+                </div>
             </div>
-            <div class="row_phoneA">
+            {/* <div class="row_phoneA">
                 <div class="column4">
                     <div class="row2">
                         <div class="number5">
@@ -263,7 +263,7 @@ class specialHousing extends React.Component {
                 <div class="column_image2">
                     <img src="https://arc-anglerfish-arc2-prod-spectator.s3.amazonaws.com/public/EDTWETP7TRHHPFY6NC3ZX22A5I.jpg" class="img_style9" alt="Wallach Building Front"></img>
                 </div>
-            </div>
+            </div> */}
           <div class="row_phoneA">
             <div class="column_image">
               <img src="https://arc-anglerfish-arc2-prod-spectator.s3.amazonaws.com/public/73F4GONETRCNHP3HBMI6IRFPGQ.jpg" class="img_style1" alt="Group of RAs"></img>
@@ -271,7 +271,7 @@ class specialHousing extends React.Component {
             <div class="column">
                 <div class="row2">
                     <div class="number4">
-                        4
+                        3
                     </div>
                     <div class="column3">
                         <div class="item_title">
@@ -289,7 +289,7 @@ class specialHousing extends React.Component {
                 <div class="column4">
                     <div class="row2">
                         <div class="number5">
-                            5
+                            4
                         </div>
                         <div class="column3">
                             <div class="item_title">
@@ -314,7 +314,7 @@ class specialHousing extends React.Component {
             <div class="column">
                 <div class="row2">
                     <div class="number4">
-                        6
+                        5
                     </div>
                     <div class="column3">
                         <div class="item_title">
@@ -332,7 +332,7 @@ class specialHousing extends React.Component {
             <div class="column4">
                 <div class="row3">
                 <div class="number6">
-                    7
+                    6
                 </div>
                 <div class="column6">
                 <div class="item_title2">
