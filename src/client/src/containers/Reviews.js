@@ -5,6 +5,7 @@ import WhiteboardSidebar from "../components/ReviewsWhiteboardSidebar"
 import ReviewsBox from "../components/ReviewsBox"
 import Review from "../components/Review"
 import ReviewPageReview from "../components/ReviewPageReview"
+import NewReviewPageReview from "../components/NewReviewPageReview"
 import carouselimg from "./carouselimg.jpg"
 import QuickReview from "../components/QuickReview";
 import "react-responsive-carousel/lib/styles/carousel.min.css";
@@ -439,17 +440,17 @@ export default class Reviews extends Component{
                 <FilterCheckbox></FilterCheckbox><FilterText>Sort by date from latest to earliest</FilterText>
               </Filter>
               <Filter>
-                <FilterCheckbox></FilterCheckbox><FilterText>Sort by date from latest to earliest</FilterText>
+                <FilterCheckbox></FilterCheckbox><FilterText>Sort by date from earliest to latest</FilterText>
               </Filter>
               <Filter>
-                <FilterCheckbox></FilterCheckbox><FilterText>Sort by date from latest to earliest</FilterText>
+                <FilterCheckbox></FilterCheckbox><FilterText>Sort by agree to disagree ratio</FilterText>
               </Filter>
             </FilterDisplay>
           </ColTwo>
           <ColThree>
             <AllReviews>
               {this.state.reviews.map((review, j) => (
-                  <ReviewPageReview
+                  <NewReviewPageReview
                     key={""+j}
                     stars={review.NUM_STARS}
                     review={review.REVIEW_TXT}

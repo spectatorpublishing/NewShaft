@@ -53,9 +53,12 @@ const DownIMG = styled.img`
     }
 `;
 
-const UpText = styled.div``;
-
+const UpText = styled.div`
+`;
 const DownText = styled.div``;
+
+let agree = "agree ".toUpperCase();
+let disagree = "disagree ".toUpperCase();
 
 export default class Vote extends Component{
     constructor(props) {
@@ -130,11 +133,11 @@ export default class Vote extends Component{
             <Wrapper>
                 <Upvotes>
                     <UpIMG src = {upvote} alt = "upvote" onClick = {this.upvote} clicked = {this.state.upClicked}/>
-                    <UpText>Agree {this.state.upvotes + this.state.my_upvotes}</UpText>
+                    <UpText>{agree}{this.state.upvotes + this.state.my_upvotes}</UpText>
                 </Upvotes>
                 <Downvotes>
                     <DownIMG src = {downvote} alt = "downvote" onClick = {this.downvote} clicked = {this.state.downClicked}/>
-                    <DownText>Disagree {this.state.downvotes + this.state.my_downvotes}</DownText>
+                    <DownText>{disagree}{this.state.downvotes + this.state.my_downvotes}</DownText>
                 </Downvotes>
             </Wrapper>
         )
