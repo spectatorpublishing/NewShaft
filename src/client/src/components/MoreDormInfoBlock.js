@@ -4,26 +4,36 @@ import { theme } from "../util/GlobalStyles";
 
 const DormInfoBlock = styled.div`
     display: flex;
-    flex-wrap: wrap;
+    flex-direction: column;
 
     border: 0.05rem solid ${theme.columbiaBlue};
     border-radius: 2%;
-    padding: 2rem;
+    padding: .5rem 2rem;
     margin-top: 1rem;
 `;
 
-const Bold = styled.div`
+const Bold = styled.p`
     font-weight: 800;
+    margin-right: .2rem;
+    font-size: inherit;
 `;
 
-const Regular = styled.div``;
+const Italic = styled.p`
+    font-style: italic;
+    margin-right: .2rem;
+    font-size: inherit;
+`;
+
+const Regular = styled.p`
+    margin-right: .2rem;
+    font-size: inherit;
+`;
 
 const TitleBlock = styled.div`
     display: flex;
-    flex-direction: column;
-    flex-wrap: wrap;
-    margin-bottom: 1.5rem;
-    width: 50%;
+    flex-direction: row;
+    justify-content: flex-start;
+    margin: .75rem 0;
 
     @media (max-width: 786px) {
         font-size: 17px;
@@ -48,17 +58,17 @@ export default class MoreDormInfoBlock extends Component {
             let length = string.split(',').length;
 
             if (length === 1) {
-                return string.charAt(0).toUpperCase() + string.slice(1)
+                return string.charAt(0).toUpperCase() + string.slice(1, -1)
             }
 
             let stringArr = string.split(',').map((word, index) => {
                 if (index === length - 1) {
-                    return "& " + word.charAt(0).toUpperCase() + word.slice(1);
+                    return "& " + word.charAt(0).toUpperCase() + word.slice(1, -1);
                 }
                 else if (index === length - 2) {
-                    return word.charAt(0).toUpperCase() + word.slice(1)
+                    return word.charAt(0).toUpperCase() + word.slice(1, -1)
                 } else {
-                    return word.charAt(0).toUpperCase() + word.slice(1) + ","
+                    return word.charAt(0).toUpperCase() + word.slice(1, -1) + ","
                 }
             })
 
@@ -72,16 +82,16 @@ export default class MoreDormInfoBlock extends Component {
         let string = "";
 
         if (single) {
-            string += "singles"
+            string += "Singles"
         }
         if (double) {
             if (single) {
-                string += ","
+                string += " & "
             }
-            string += "doubles"
+            string += "Doubles"
         }
         if (triple) {
-            string += ",triples"
+            string += " & Triples"
         }
 
         return this.formatList(string);
@@ -94,20 +104,28 @@ export default class MoreDormInfoBlock extends Component {
         return (
         <DormInfoBlock>
             <TitleBlock>
-                <Bold>{this.props.dorm === "Wien Hall" ? "Singles & Doubles" : this.formatRooms(this.props.dormInfo.SINGLE_, this.props.dormInfo.DOUBLE_, this.props.dormInfo.TRIPLE_ )}</Bold>
-                <Regular>dorms</Regular>
+                <Regular>{this.props.dormInfo.SUITE ? "Suite" : "Corridor"}</Regular>
+                <Italic>style</Italic>
             </TitleBlock>
             <TitleBlock>
-                <Bold>{this.props.dorm === "Wien Hall" ? "Sophomores, Juniors & Seniors" : this.formatList(this.props.dormInfo.CLASS_MAKEUP)}</Bold>
-                <Regular>residents</Regular>
+                <Bold>{this.formatRooms(this.props.dormInfo.SINGLE_, this.props.dormInfo.DOUBLE_, this.props.dormInfo.TRIPLE_ )}</Bold>
+                <Italic><Bold>dorms</Bold></Italic>
             </TitleBlock>
             <TitleBlock>
-                <Bold>Per Floor</Bold>
-                <Regular>{this.props.dormInfo.F_KITCHEN ? "kitchen" : "bathroom"}</Regular>
+                <Regular>Lottery</Regular>
+                <Italic>####</Italic>
             </TitleBlock>
             <TitleBlock>
-                <Bold>Per Suite</Bold>
-                <Regular>{this.props.dormInfo.P_KITCHEN ? "kitchen" : "bathroom"}</Regular>
+                <Regular>{this.props.dormInfo.F_KITCHEN ? "Per floor" : this.props.dormInfo.P_KITCHEN ? "Per suite" : "No"}</Regular>
+                <Italic>kitchen</Italic>
+            </TitleBlock>
+            <TitleBlock>
+            <Regular>{this.props.dormInfo.P_BATHROOM ? "Per suite" : "Shared"}</Regular>
+                <Italic>bathroom</Italic>
+            </TitleBlock>
+            <TitleBlock>
+                <Bold>{this.formatList(this.props.dormInfo.CLASS_MAKEUP)}</Bold>
+                <Italic><Bold>residents</Bold></Italic>
             </TitleBlock>
         </DormInfoBlock>
         )
