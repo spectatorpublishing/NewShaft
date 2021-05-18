@@ -440,7 +440,7 @@ export default class Dorm extends React.PureComponent {
     let truncatedDescription = (fullDescription.length > 100) ? fullDescription.substring(0,100) + '...' : null;
     return (
       <ScrollToTop>
-        <PhotoBanner bannerImages={this.state.dorm_photos} />
+        <PhotoBanner bannerImages={this.state.dorm_photos} path={this.props.match.params.dorm}/>
         <Header>
           <DormName>{this.state.dormInfo.DORM}</DormName>
         </Header>

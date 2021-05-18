@@ -110,6 +110,7 @@ export default class PhotoBanner extends Component {
       photoIndex: 0,
       isOpen: false,
       images: this.props.bannerImages,
+      path: this.props.path
     };
   }
 
@@ -197,9 +198,15 @@ export default class PhotoBanner extends Component {
           //     })
           //   }
           // />
-            <PhotoGallery updateModal={updateModal} images={this.state.images}/>
+            <PhotoGallery 
+              updateModal={updateModal} 
+              images={this.state.images} 
+              path = {this.state.path}
+            />
         )}
+   
         </PhotosContainer>
+        
       );
     }
   }
