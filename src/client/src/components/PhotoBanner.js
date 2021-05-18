@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import Lightbox from 'react-image-lightbox';
 import 'react-image-lightbox/style.css'; 
 import styled from "styled-components";
+import PhotoGallery from "./PhotoGallery";
 
 
 let PhotosContainer = styled.div`
@@ -100,7 +101,6 @@ let ViewButton = styled.button`
     background: ${props => props.theme.lightGray};
   }
 `
-
 export default class PhotoBanner extends Component {
   constructor(props) {
     super(props);
@@ -132,7 +132,9 @@ export default class PhotoBanner extends Component {
   render() {
     const { width, photoIndex, isOpen } = this.state;
     const isMobile = width <= 700;
-
+    const updateModal = () =>{
+      this.setState({ isOpen: false})
+    }
     if (isMobile) {
       return (
         <PhotosContainer>
@@ -165,63 +167,37 @@ export default class PhotoBanner extends Component {
     } else {
       return (
         <PhotosContainer>
-          <MainPic>
-            <Button type="button" onClick={() => this.setState({ isOpen: true, photoIndex:0 })}>
-              <Img src={this.state.images[0]}/>
-            </Button>
-          </MainPic>
-        
-         {/*<SidePics>
-            <TopRow>
-              <LeftPic>
-                <Button type="button" onClick={() => this.setState({ isOpen: true, photoIndex:1 })}>
-                  <Img src={this.props.bannerImages[1]} />
+          { !isOpen && ( 
+            <>
+              <MainPic>
+                <Button type="button" onClick={() => this.setState({ isOpen: true, photoIndex:0 })}>
+                  <Img src={this.state.images[0]}/>
                 </Button>
-              </LeftPic>
-
-              <RightPic>
-                <Button type="button" onClick={() => this.setState({ isOpen: true, photoIndex:2 })}>
-                  <Img src={this.props.bannerImages[2]} />
-                </Button>
-              </RightPic>
-            </TopRow>
-
-            <BottomRow>
-              <LeftPic>
-                <Button type="button" onClick={() => this.setState({ isOpen: true, photoIndex:3 })}>
-                  <Img src={this.props.bannerImages[3]} />
-                </Button>
-              </LeftPic>
-
-              <RightPic>
-                <Button type="button" onClick={() => this.setState({ isOpen: true, photoIndex:4 })}>
-                  <Img src={this.props.bannerImages[4]} />
-                </Button>
-              </RightPic>
-            </BottomRow>
-          </SidePics>   
-         */}      
-          <ViewButton type="button" onClick={() => this.setState({ isOpen: true, photoIndex:0 })}>
-            <h6>View Photos</h6>
-          </ViewButton>
-
+              </MainPic>
+              
+              <ViewButton type="button" onClick={() => this.setState({ isOpen: true, photoIndex:0 })}>
+                <h6>View Photos</h6>
+              </ViewButton>
+            </>
+          )}
           {isOpen && (
-          <Lightbox
-            mainSrc={this.state.images[photoIndex]}
-            nextSrc={this.state.images[(photoIndex + 1) % this.state.images.length]}
-            prevSrc={this.state.images[(photoIndex + this.state.images.length - 1) % this.state.images.length]}
-            onCloseRequest={() => this.setState({ isOpen: false })}
-            onMovePrevRequest={() =>
-              this.setState({
-                photoIndex: (photoIndex + this.state.images.length - 1) % this.state.images.length,
-              })
-            }
-            onMoveNextRequest={() =>
-              this.setState({
-                photoIndex: (photoIndex + 1) % this.state.images.length,
-              })
-            }
-          />
+          // <Lightbox
+          //   mainSrc={this.state.images[photoIndex]}
+          //   nextSrc={this.state.images[(photoIndex + 1) % this.state.images.length]}
+          //   prevSrc={this.state.images[(photoIndex + this.state.images.length - 1) % this.state.images.length]}
+          //   onCloseRequest={() => this.setState({ isOpen: false })}
+          //   onMovePrevRequest={() =>
+          //     this.setState({
+          //       photoIndex: (photoIndex + this.state.images.length - 1) % this.state.images.length,
+          //     })
+          //   }
+          //   onMoveNextRequest={() =>
+          //     this.setState({
+          //       photoIndex: (photoIndex + 1) % this.state.images.length,
+          //     })
+          //   }
+          // />
+            <PhotoGallery updateModal={updateModal} images={this.state.images}/>
         )}
         </PhotosContainer>
       );
