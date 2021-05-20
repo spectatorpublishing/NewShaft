@@ -1,8 +1,6 @@
 import React, { Component } from "react";
 import styled from 'styled-components';
-//import RangeSlider from 'react-dual-rangeslider';
-//npm i react-dual-rangeslider
-//import RangeSlider from './RangeSlider';
+import RangeSlider from './RangeSlider';
 
 let Input = styled.input`
     border: 2px solid rgb(98, 168, 229);
@@ -38,7 +36,7 @@ const Section = styled.div`
 const Subsection = styled.div`
     color: ${props => props.theme.columbiaBlue};
     font-size: 1.125rem;
-    margin-top: 0.5rem;
+    margin-top: 1rem;
     font-weight: 400;
 `
 
@@ -109,10 +107,18 @@ let DropButton = styled.button`
     
 `;
 
+const Slider = styled.div`
+    margin-top: 0.5rem;
+`
+
 export default class AdvancedFilters extends Component{
 
+    
     render () {
         return(
+
+            
+
             <Box>  
 
                 <Section> <Row> BATHROOMS <Exit> X </Exit> </Row>
@@ -126,11 +132,14 @@ export default class AdvancedFilters extends Component{
                                 <Input id="Suite"  onClick = {null}  type="checkbox" checked = {null} onChange = {null} /> </Filter>
                         </Column>
                     </Subsection>
-                    <Subsection> Average number of people per bathroom </Subsection>
+                    <Subsection> Average number of people per bathroom 
+                        <Slider><RangeSlider/></Slider>
+                    </Subsection>
                 </Section>
 
                 <Section> LAUNDRY 
                     <Subsection> Average number of people per machine </Subsection>
+                        <Slider><RangeSlider/></Slider>
                 </Section>
 
                 <Section> OTHER AMENITIES 
