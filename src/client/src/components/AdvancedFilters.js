@@ -71,6 +71,7 @@ const Column = styled.div`
 
 let Exit = styled.div`
     color: ${props => props.theme.columbiaBlue};
+    cursor: pointer;
 `
 
 let Search = styled.div`
@@ -108,28 +109,56 @@ let DropButton = styled.button`
 `;
 
 const Slider = styled.div`
-    margin-top: 0.5rem;
+    margin: 0.5rem 0 0 0.15rem;
 `
 
 export default class AdvancedFilters extends Component{
-
     
+    constructor(props) {
+	    super(props);
+
+	    this.state = {
+            Private: false,
+            HallwaySingle: false,
+            HallwayMultiple: false,
+            KitchenPrivate: false,
+            KitchenShared: false,
+            Fitness: false,
+            FloorLounge: false,
+            Print: false,
+            BuildingLounge: false,
+            NoCarpet: false
+	    };
+
+    }
+
     render () {
         return(
-
-            
-
             <Box>  
-
                 <Section> <Row> BATHROOMS <Exit> X </Exit> </Row>
                     <Subsection> Bathroom Style 
                         <Column>
                             <Filter> Private 
-                                <Input id="Suite"  onClick = {null}  type="checkbox" checked = {null} onChange = {null} /> </Filter>
+                                <Input id="Private"   
+                                       onClick = {null}  
+                                       type="checkbox" 
+                                       checked = {null} 
+                                       onChange = {null} /> 
+                                </Filter>
                             <Filter> Hallway, single use 
-                                <Input id="Suite"  onClick = {null}  type="checkbox" checked = {null} onChange = {null} /> </Filter>
+                                <Input id="HallwaySingle"  
+                                       onClick = {null}  
+                                       type="checkbox" 
+                                       checked = {null} 
+                                       onChange = {null} /> 
+                                </Filter>
                             <Filter> Hallway, multiple use 
-                                <Input id="Suite"  onClick = {null}  type="checkbox" checked = {null} onChange = {null} /> </Filter>
+                                <Input id="HallwayMultiple"  
+                                       onClick = {null}  
+                                       type="checkbox" 
+                                       checked = {null} 
+                                       onChange = {null} /> 
+                                </Filter>
                         </Column>
                     </Subsection>
                     <Subsection> Average number of people per bathroom 
@@ -146,23 +175,63 @@ export default class AdvancedFilters extends Component{
                     <Amenities> 
                         <Column>
                             <Filter> Kitchen, private 
-                                <Input id="Suite"  onClick = {null}  type="checkbox" checked = {null} onChange = {null} /> </Filter>
+                                <Input id="KitchenPrivate"  
+                                       onClick = {null}  
+                                       type="checkbox" 
+                                       checked = {null} 
+                                       onChange = {null} /> 
+                                </Filter>
                             <Filter> Practice room 
-                                <Input id="Suite"  onClick = {null}  type="checkbox" checked = {null} onChange = {null} /> </Filter>
+                                <Input id="Practice"  
+                                       onClick = {null}  
+                                       type="checkbox" 
+                                       checked = {null} 
+                                       onChange = {null} /> 
+                                </Filter>
                             <Filter> Kitchen, shared 
-                                <Input id="Suite"  onClick = {null}  type="checkbox" checked = {null} onChange = {null} /> </Filter>
+                                <Input id="KitchenShared"  
+                                       onClick = {null}  
+                                       type="checkbox" 
+                                       checked = {null} 
+                                       onChange = {null} /> 
+                                </Filter>
                             <Filter> Fitness room 
-                                <Input id="Suite"  onClick = {null}  type="checkbox" checked = {null} onChange = {null} /> </Filter>
+                                <Input id="Fitness"  
+                                       onClick = {null}  
+                                       type="checkbox" 
+                                       checked = {null} 
+                                       onChange = {null} /> 
+                                </Filter>
                         </Column>
                         <Column>
                             <Filter> Floor lounge 
-                                <Input id="Suite"  onClick = {null}  type="checkbox" checked = {null} onChange = {null} /> </Filter>
+                                <Input id="FloorLounge"   
+                                       onClick = {null}  
+                                       type="checkbox" 
+                                       checked = {null} 
+                                       onChange = {null} /> 
+                                </Filter>
                             <Filter> Print station 
-                                <Input id="Suite"  onClick = {null}  type="checkbox" checked = {null} onChange = {null} /> </Filter>
+                                <Input id="Print"  
+                                       onClick = {null}  
+                                       type="checkbox" 
+                                       checked = {null} 
+                                       onChange = {null} /> 
+                                </Filter>
                             <Filter> Building lounge 
-                                <Input id="Suite"  onClick = {null}  type="checkbox" checked = {null} onChange = {null} /> </Filter>
+                                <Input id="BuildingLounge"  
+                                       onClick = {null}  
+                                       type="checkbox" 
+                                       checked = {null} 
+                                       onChange = {null} /> 
+                                </Filter>
                             <Filter> No carpet 
-                                <Input id="Suite"  onClick = {null}  type="checkbox" checked = {null} onChange = {null} /> </Filter>
+                                <Input id="NoCarpet"   
+                                       onClick = {null}  
+                                       type="checkbox" 
+                                       checked = {null} 
+                                       onChange = {null} /> 
+                                </Filter>
                         </Column>
                     </Amenities>
                 </Section>
