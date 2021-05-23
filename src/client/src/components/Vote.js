@@ -89,20 +89,19 @@ export default class Vote extends Component{
         })
     }
 
-    componentDidUpdate(prevProps, prevState) {
+    componentDidUpdate(prevProps, prevState) { 
         if(this.props !== prevProps) {
             this.setState({
                 upvotes: Number(this.props.upvotes),
                 downvotes: Number(this.props.downvotes),
             })
             if (this.props.dorm !== prevProps.dorm){
-              this.updateVoteCount(prevState.my_upvotes, prevState.my_downvotes, prevProps.dorm, prevProps.roomNum)
               this.setState({
                   my_upvotes: 0,
                   my_downvotes: 0,
                   upClicked: false,
                   downClicked:false
-              })
+              })          
           }
         }
     }
@@ -113,7 +112,10 @@ export default class Vote extends Component{
               my_upvotes: this.state.upClicked ? this.state.my_upvotes - 1 : this.state.my_upvotes + 1,
               upClicked: !this.state.upClicked
           })
+          if(this.state.my_upvotes===0){
+            this.updateVoteCount(1, 0, this.props.dorm, this.props.roomNum)
         }
+        }    
     }
 
     downvote() {
@@ -122,7 +124,10 @@ export default class Vote extends Component{
               my_downvotes: this.state.downClicked ? this.state.my_downvotes - 1 : this.state.my_downvotes + 1,
               downClicked: !this.state.downClicked
           })
+          if(this.state.my_downvotes===0){
+            this.updateVoteCount(0, 1, this.props.dorm, this.props.roomNum)
         }
+        } 
     }
 
     render() {
