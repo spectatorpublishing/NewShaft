@@ -4,7 +4,7 @@ import styled from 'styled-components';
 import Vote from "./Vote";
 
 let Wrapper = styled.div`
-    padding: 1.2rem 1rem 1rem 1rem;
+    padding: 1.2rem 2rem;
     margin-bottom: 2rem;
     box-shadow: 5px 5px 10px ${props => props.theme.lightGray};
     border: 1px solid ${props => props.theme.lightGray};
