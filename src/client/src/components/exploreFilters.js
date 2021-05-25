@@ -1,5 +1,6 @@
 import React from "react";
 import styled from 'styled-components';
+import AdvancedFilters from "./AdvancedFilters";
 
 let FilterRow = styled.div`
     background-color: rgb(98, 168, 229);
@@ -223,6 +224,10 @@ let CheckBox = styled.div`
     position: absolute;
 `;
 
+let Advanced = styled.div`
+    display: ${props => props.show ? 'flex' : 'none'};
+`
+
 const white = 'white';
 const blue = 'rgb(98, 168, 229)';
 
@@ -235,6 +240,7 @@ export default class FilterBar extends React.Component{
             showSchool: false,
             showGroup: false,
             showRoom: false,
+            showAdvanced: false,
             Columbia: false,
             Barnard: false,
             GroupSize: 1,
@@ -348,6 +354,12 @@ export default class FilterBar extends React.Component{
                     document.getElementById("room").style.color = white;
                 }
             }
+        }
+        if(action === "advanced") {
+            this.setState({
+                showAdvanced: !this.state.showAdvanced
+            })
+            /*console.log(this.state.showAdvanced)*/
         }
         this.changeColor(action)
     }
@@ -561,10 +573,16 @@ export default class FilterBar extends React.Component{
                                     </Label>
                                 </Row>
                             </DropdownContent>
-                        </Dropdown>
-                    </DropdownBox>
+                        </Dropdown>                    
+                        <Dropdown>
+                            <DropButton onClick={this.toggle} id="advanced">Advanced</DropButton>
+                        </Dropdown>                    
+                        </DropdownBox>
                     <ClearButton show = {this.state} onClick={this.clear}>Clear</ClearButton>
                 </FilterRow>
+                <Advanced show={this.state.showAdvanced}>
+                    <AdvancedFilters/>    
+                </Advanced>                    
             </div>
         );
     }
