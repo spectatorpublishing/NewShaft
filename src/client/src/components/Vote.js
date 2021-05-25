@@ -22,7 +22,7 @@ const Upvotes = styled.div`
         }
 
         ${Text} {
-            color: green;
+            color: #28A528;
         }
     `}
 `;
@@ -38,7 +38,7 @@ const Downvotes = styled.div`
         }
 
         ${Text} {
-            color: red;
+            color: #D11E1E;
         }
     `}
 `;
@@ -47,7 +47,7 @@ const UpIMG = styled.img`
     cursor: pointer;
     width: 28px;
     padding: .5rem;
-    filter: invert(90%) sepia(0%) saturate(1681%) hue-rotate(235deg) brightness(93%) contrast(100%);
+    filter: invert(90%) sepia(0%) saturate(1681%) hue-rotate(235deg) brightness(93%) contrast(108%);
 
     :hover {
         filter: invert(55%) sepia(86%) saturate(502%) hue-rotate(70deg) brightness(79%) contrast(85%);
@@ -67,7 +67,7 @@ const DownIMG = styled.img`
 `;
 
 const Text = styled.div`
-    color: gray;
+    color: #707070;
 `;
 
 let agree = "agree ".toUpperCase();
