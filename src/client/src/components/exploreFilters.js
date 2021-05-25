@@ -1,6 +1,5 @@
 import React from "react";
 import styled from 'styled-components';
-import AdvancedFilters from "./AdvancedFilters";
 
 let FilterRow = styled.div`
     background-color: rgb(98, 168, 229);
@@ -224,8 +223,58 @@ let CheckBox = styled.div`
     position: absolute;
 `;
 
+/* ADVANCED FILTERS */
+
 let Advanced = styled.div`
     display: ${props => props.show ? 'flex' : 'none'};
+`
+
+const Box = styled.div`
+    display: flex;
+    padding-bottom: 1rem;
+`
+
+const Column = styled.div`
+    display: flex;
+    flex-direction: column;
+`
+
+const Filter = styled.div`
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+    color: ${props => props.theme.black};
+    font-size: 1.125rem;
+    margin: 0.5rem;
+    font-weight: 400;
+`
+
+const Section = styled.div`
+    max-width: ${props => props.large ? "50%" : "25%" };
+    color: ${props => props.theme.white};
+    font-size: 1.25rem;
+    margin: 1rem;
+    font-weight: 400;
+    justify-content: space-between;
+`
+
+const Subsection = styled.div`
+    color: ${props => props.theme.black};
+    font-size: 1.125rem;
+    margin-top: 1rem;
+    font-weight: 400;
+    border: 1px solid ${props => props.theme.white};
+    background-color: ${props => props.theme.white};
+    border-radius: 6px;
+    padding: 0.5rem;
+`
+
+const Amenities = styled.div`
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: space-between;
 `
 
 const white = 'white';
@@ -247,7 +296,21 @@ export default class FilterBar extends React.Component{
             Suite: false,
             Single: false,
             Double: false,
-            Triple: false
+            Triple: false,
+
+            /* ADVANCED */
+            Private: false,
+            HallwaySingle: false,
+            HallwayMultiple: false,
+            KitchenPrivate: false,
+            KitchenShared: false,
+            Practice: false,
+            Fitness: false,
+            FloorLounge: false,
+            Print: false,
+            BuildingLounge: false,
+            NoCarpet: false,
+            PerLaundry: 1
 	    };
 
         this.onChange = this.onChange.bind(this);
@@ -271,11 +334,24 @@ export default class FilterBar extends React.Component{
             this.setState({
                 GroupSize: 1
             }, () => this.props.submit("", "", this.createPayload()))
+        } else if(target === "++") {
+            this.setState({
+                PerLaundry: this.state.PerLaundry + 1
+            }, () => this.props.submit("", "", this.createPayload()))
+        } else if(target === "--") {
+            this.setState({
+                PerLaundry: this.state.PerLaundry - 1
+            }, () => this.props.submit("", "", this.createPayload()))
+        } else if(String(target).startsWith("PerLaundry")) {
+            this.setState({
+                PerLaundry: 1
+            }, () => this.props.submit("", "", this.createPayload()))
         } else { 
             this.setState({
                 [target]: !this.state[target]
             }, () => this.props.submit("", "", this.createPayload()))
         }    
+
     }
     
     toggle(e) {
@@ -402,9 +478,64 @@ export default class FilterBar extends React.Component{
                 Double: !this.state.Double
             })
         }
-        else if(action === "checkTriple"){
+        if(action === "checkTriple"){
             this.setState({
                 Triple: !this.state.Triple
+            })
+        }
+        if(action === "checkPrivate"){
+            this.setState({
+                Private: !this.state.Private
+            })
+        }
+        if(action === "checkSingleUse"){
+            this.setState({
+                HallwaySingle: !this.state.HallwaySingle
+            })
+        }
+        if(action === "checkMultipleUse"){
+            this.setState({
+                HallwaySingle: !this.state.HallwaySingle
+            })
+        }
+        if(action === "checkKitchenPrivate"){
+            this.setState({
+                KitchenPrivate: !this.state.KitchenPrivate
+            })
+        }
+        if(action === "checkKitchenShared"){
+            this.setState({
+                KitchenShared: !this.state.KitchenShared
+            })
+        }
+        if(action === "checkFloorLounge"){
+            this.setState({
+                FloorLounge: !this.state.FloorLounge
+            })
+        }
+        if(action === "checkBuildingLounge"){
+            this.setState({
+                BuildingLounge: !this.state.BuildingLounge
+            })
+        }
+        if(action === "checkPrint"){
+            this.setState({
+                Print: !this.state.Print
+            })
+        }
+        if(action === "checkNoCarpet"){
+            this.setState({
+                NoCarpet: !this.state.NoCarpet
+            })
+        }
+        if(action === "checkFitness"){
+            this.setState({
+                Fitness: !this.state.Fitness
+            })
+        }
+        else if(action === "checkPractice"){
+            this.setState({
+                Practice: !this.state.Practice
             })
         }
     }
@@ -425,7 +556,31 @@ export default class FilterBar extends React.Component{
             SEVEN_SUITE: this.state.GroupSize == 7,
             EIGHT_SUITE: this.state.GroupSize == 8,
             NINE_SUITE: this.state.GroupSize == 9,
-            DORM: this.props.search
+            DORM: this.props.search,
+
+            /* ADVANCED */
+            PRIVATE_BATHROOM: this.state.Private,
+            SINGLE_USE: this.state.HallwaySingle,
+            MULTIPLE_USE: this.state.HallwayMultiple,
+            PRIVATE_KITCHEN: this.state.KitchenPrivate,
+            SHARED_KITCHEN: this.state.KitchenShared,
+            FLOOR_LOUNGE: this.state.FloorLounge,
+            BUILDING_LOUNGE: this.state.BuildingLounge,
+            PRINT: this.state.Print,
+            NO_CARPET: this.state.NoCarpet,
+            FITNESS: this.state.Fitness,
+            PRACTICE: this.state.Practice,
+
+            ONE_LAUNDRY: this.state.PerLaundry == 1,
+            TWO_LAUNDRY: this.state.PerLaundry == 2,
+            THREE_LAUNDRY: this.state.PerLaundry == 3,
+            FOUR_LAUNDRY: this.state.PerLaundry == 4,
+            FIVE_LAUNDRY: this.state.PerLaundry == 5,
+            SIX_LAUNDRY: this.state.PerLaundry == 6,
+            SEVEN_LAUNDRY: this.state.PerLaundry == 7,
+            EIGHT_LAUNDRY: this.state.PerLaundry == 8,
+            NINE_LAUNDRY: this.state.PerLaundry == 9,
+            TEN_LAUNDRY: this.state.PerLaundry == 10,
         }
         return payload;
     }
@@ -441,7 +596,19 @@ export default class FilterBar extends React.Component{
             Suite: false,
             Single: false,
             Double: false,
-            Triple: false
+            Triple: false,
+            Private: false,
+            HallwaySingle: false,
+            HallwayMultiple: false,
+            KitchenPrivate: false,
+            KitchenShared: false,
+            Practice: false,
+            Fitness: false,
+            FloorLounge: false,
+            Print: false,
+            BuildingLounge: false,
+            NoCarpet: false,
+            PerLaundry: 1
         }, () => this.props.submit("", "", this.createPayload()))
         
         let background1 = document.getElementById("school").style.backgroundColor;
@@ -581,8 +748,117 @@ export default class FilterBar extends React.Component{
                     <ClearButton show = {this.state} onClick={this.clear}>Clear</ClearButton>
                 </FilterRow>
                 <Advanced show={this.state.showAdvanced}>
-                    <AdvancedFilters/>    
-                </Advanced>                    
+                <Box>  
+                <Section> BATHROOMS 
+                    <Subsection> 
+                            <Filter> Private 
+                                <Input id="Private"   
+                                       onClick = {this.onChange}  
+                                       type="checkbox" 
+                                       checked = {this.state.Private} 
+                                       onChange = {null} /> 
+                                </Filter>
+                            <Filter> Single use 
+                                <Input id="HallwaySingle"  
+                                       onClick = {this.onChange}  
+                                       type="checkbox" 
+                                       checked = {this.state.HallwaySingle} 
+                                       onChange = {null} /> 
+                                </Filter>
+                            <Filter> Multiple use 
+                                <Input id="HallwayMultiple"  
+                                       onClick = {this.onChange}  
+                                       type="checkbox" 
+                                       checked = {this.state.HallwayMultiple} 
+                                       onChange = {null} /> 
+                                </Filter>
+                    </Subsection>
+                </Section>
+
+                <Section large> AMENITIES 
+                <Subsection>
+                    <Amenities> 
+                        <Column>
+                            <Filter> Kitchen, private 
+                                <Input id="KitchenPrivate"  
+                                       onClick = {this.onChange}  
+                                       type="checkbox" 
+                                       checked = {this.state.KitchenPrivate} 
+                                       onChange = {this.checkBox} /> 
+                                </Filter>
+
+                            <Filter> Kitchen, shared 
+                                <Input id="KitchenShared"  
+                                       onClick = {this.onChange}  
+                                       type="checkbox" 
+                                       checked = {this.state.KitchenShared} 
+                                       onChange = {this.checkBox} /> 
+                                </Filter>
+                            <Filter> Floor lounge 
+                                <Input id="FloorLounge"   
+                                       onClick = {this.onChange}  
+                                       type="checkbox" 
+                                       checked = {this.state.FloorLounge} 
+                                       onChange = {this.checkBox} /> 
+                                </Filter>
+                            <Filter> Building lounge 
+                                <Input id="BuildingLounge"  
+                                       onClick = {this.onChange}  
+                                       type="checkbox" 
+                                       checked = {this.state.BuildingLounge} 
+                                       onChange = {this.checkBox} /> 
+                                </Filter>
+
+                        </Column>
+                        <Column>
+                            <Filter> Practice room 
+                                <Input id="Practice"  
+                                       onClick = {this.onChange}  
+                                       type="checkbox" 
+                                       checked = {this.state.Practice} 
+                                       onChange = {this.checkBox} /> 
+                                </Filter>
+                            <Filter> Fitness room 
+                                <Input id="Fitness"  
+                                       onClick = {this.onChange}  
+                                       type="checkbox" 
+                                       checked = {this.state.Fitness} 
+                                       onChange = {this.checkBox} /> 
+                                </Filter>
+
+                            <Filter> Print station 
+                                <Input id="Print"  
+                                       onClick = {this.onChange}  
+                                       type="checkbox" 
+                                       checked = {this.state.Print} 
+                                       onChange = {this.checkBox} /> 
+                                </Filter>
+
+                            <Filter> No carpet 
+                                <Input id="NoCarpet"   
+                                       onClick = {this.onChange}  
+                                       type="checkbox" 
+                                       checked = {this.state.NoCarpet} 
+                                       onChange = {this.checkBox} /> 
+                                </Filter>
+                        </Column>
+                    </Amenities>
+                </Subsection>
+                </Section>
+
+                <Section> LAUNDRY 
+                    <Subsection> 
+                            <Filter>Average number of people per machine </Filter> 
+                                <RowGZ>
+                                    <ButtonGZ id = "--" onClick={this.onChange}>-</ButtonGZ>
+                                    <Number>{this.state.PerLaundry}</Number>
+                                    <ButtonGZ class="button" id = "++" onClick={this.onChange}>+</ButtonGZ>
+                                </RowGZ> 
+                    </Subsection>
+                </Section>
+
+            </Box>
+            </Advanced>                    
             </div>
         );
     }
