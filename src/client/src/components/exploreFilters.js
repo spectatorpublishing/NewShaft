@@ -100,16 +100,7 @@ let DropButton = styled.button`
     padding-left: 1rem;
     background-color: rgb(98, 168, 229);
     outline: none;
-
     margin: .3rem;
-
-    @media only screen and (max-width: 1024px) {
-        height: 3rem;
-        width: 5rem;
-        padding: 0 .3rem;
-    }
-
-    
 `;
 
 let DropdownContent = styled.div`
@@ -161,6 +152,7 @@ const ButtonGZ = styled.div`
 
 let Number = styled.div`
     font-family: 'Raleway';
+    color: black;
     text-align: center;
     font-size: 1.5rem;
     vertical-align: middle;
@@ -199,6 +191,7 @@ let Row = styled.div`
     @media only screen and (max-width: 770px) {
         color: white;
     }
+    flex-wrap: ${props => props.wrap ? "wrap" : "nowrap" };
 `;
 
 let Input = styled.input`
@@ -240,16 +233,20 @@ let CheckBox = styled.div`
 
 let Advanced = styled.div`
     display: ${props => props.show ? 'flex' : 'none'};
+    width: 100%;
+    justify-content: center;
     @media only screen and (max-width: 770px) {
-        padding: 0.5rem;
+        padding: 0 0.5rem 0.5rem 1rem;
     }
 `
 
 const Box = styled.div`
     display: flex;
-    padding-bottom: 1rem;
+    width: 100%;
+\    padding-bottom: 1rem;
     @media only screen and (max-width: 770px) {
         padding-bottom: 0rem;
+        padding-top: 1rem;
     }
 `
 
@@ -270,6 +267,7 @@ const Filter = styled.div`
         color: white;
         font-size: 1rem;
     }
+    max-width: ${props => props.half ? "50%" : "100%" };
     
 `
 
@@ -309,7 +307,6 @@ const Amenities = styled.div`
     display: flex;
     flex-direction: row;
     flex-wrap: wrap;
-    justify-content: space-between;
 `
 
 const white = 'white';
@@ -696,28 +693,24 @@ export default class FilterBar extends React.Component{
                         <Dropdown>
                             <DropButton onClick={this.toggle} id = "school">School</DropButton>
                             <DropdownContent show={this.state.showSchool}>
-                                <Row>
                                     {/* <CheckBox id = "checkColumbia" show={this.state.Columbia} onClick ={this.unCheck}>✓</CheckBox> */}
-                                    <Label>
+                                    <Filter>
                                         <Input 
                                             id = "Columbia"  
                                             type = "checkbox"
                                             onClick = {this.onChange} 
                                             checked = {this.state.Columbia} />
-                                        <span>Columbia </span>
-                                    </Label>                
-                                </Row>
-                                <Row>
+                                        Columbia 
+                                    </Filter>                
                                     {/* <CheckBox id = "checkBarnard" show={this.state.Barnard} onClick ={this.unCheck}>✓</CheckBox> */}
-                                    <Label>
+                                    <Filter>
                                         <Input 
                                             id = "Barnard"  
                                             type = "checkbox"
                                             onClick = {this.onChange} 
                                             checked = {this.state.Barnard} />
-                                        <span>Barnard</span>
-                                    </Label>
-                                </Row>
+                                        Barnard
+                                    </Filter>
                             </DropdownContent>
                         </Dropdown>
                         <Dropdown>
@@ -733,51 +726,43 @@ export default class FilterBar extends React.Component{
                         <Dropdown>
                             <DropButton onClick={this.toggle} id="room">Room Type</DropButton>
                             <DropdownContent show={this.state.showRoom}>
-                                <Row>
                                     {/* <CheckBox id = "checkSuite" show={this.state.Suite} onClick ={this.unCheck}>✓</CheckBox> */}
-                                    <Label>
+                                    <Filter>
                                         <Input 
                                             id="Suite" 
                                             onClick = {this.onChange} 
                                             type="checkbox"
                                             checked = {this.state.Suite}
                                             onChange = {this.checkBox} />
-                                        <span>Suite Style</span>
-                                    </Label>
-                                </Row>
-                                <Row>
+                                        Suite Style
+                                    </Filter>
                                     {/* <CheckBox id = "checkSingle" show={this.state.Single} onClick ={this.unCheck}>✓</CheckBox> */}
-                                    <Label>
+                                    <Filter>
                                         <Input 
                                             id="Single" 
                                             onClick = {this.onChange} 
                                             type="checkbox"
                                             checked = {this.state.Single} />
-                                        <span>Single</span>
-                                    </Label>
-                                </Row>
-                                <Row>
+                                        Single
+                                    </Filter>
                                     {/* <CheckBox id = "checkDouble" show={this.state.Double} onClick ={this.unCheck}>✓</CheckBox> */}
-                                    <Label>
+                                    <Filter>
                                         <Input 
                                             id="Double" 
                                             onClick = {this.onChange} 
                                             type="checkbox" 
                                             checked = {this.state.Double} />
-                                        <span>Double</span>
-                                    </Label>
-                                </Row>
-                                <Row>
+                                        Double
+                                    </Filter>
                                     {/* <CheckBox id = "checkTriple" show={this.state.Triple} onClick ={this.unCheck}>✓</CheckBox> */}
-                                    <Label>
+                                    <Filter>
                                         <Input 
                                             id="Triple" 
                                             onClick = {this.onChange} 
                                             type="checkbox" 
                                             checked = {this.state.Triple} /> 
-                                        <span>Triple</span>
-                                    </Label>
-                                </Row>
+                                        Triple
+                                    </Filter>
                             </DropdownContent>
                         </Dropdown>                    
                         <Dropdown>
@@ -789,7 +774,7 @@ export default class FilterBar extends React.Component{
                 <Advanced show={this.state.showAdvanced}>
                 <Box>  
                 <Section> BATHROOMS 
-                    <Subsection> 
+                    <Subsection> <Column>
                             <Filter> 
                                 <Input id="Private"   
                                        onClick = {this.onChange}  
@@ -814,7 +799,7 @@ export default class FilterBar extends React.Component{
                                        onChange = {this.checkBox} /> 
                                 Multiple use 
                                 </Filter>
-                    </Subsection>
+                    </Column></Subsection>
                 </Section>
 
                 <Section large> AMENITIES 
@@ -906,17 +891,15 @@ export default class FilterBar extends React.Component{
                                 </RowGZ> 
                     </Subsection>
                 </Section>
-
             </Box>
             </Advanced>                    
             </div>
         );}
 
-
         return(
             <div>
                 <FilterRow>
-                    <Column>
+                <MobileSection top>
                         <Filter>
                             <Input 
                                 id = "Columbia"  
@@ -933,8 +916,8 @@ export default class FilterBar extends React.Component{
                                 checked = {this.state.Barnard} />
                             Barnard
                         </Filter>
-                    </Column>
-                    <DropButton onClick={this.toggle} id="advanced">More</DropButton>
+                        </MobileSection>
+                    <DropButton onClick={this.toggle} id="advanced">More Filters</DropButton>
                 </FilterRow>
                 <Advanced show={this.state.showAdvanced}>
                     <Column>
@@ -1077,7 +1060,7 @@ export default class FilterBar extends React.Component{
                     
                     <MobileSection> Laundry
                             <Row>
-                                <Filter>Average number of people per machine</Filter>
+                                <Filter half>Average number of people per machine</Filter>
                                 <RowGZ>
                                     <ButtonGZ id = "--" onClick={this.onChange}>-</ButtonGZ>
                                     <Number>{this.state.AverageLaundry}</Number>
