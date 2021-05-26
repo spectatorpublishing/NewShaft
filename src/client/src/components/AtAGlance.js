@@ -1,7 +1,9 @@
 import React, { Component } from "react";
 import styled from "styled-components";
 
-let Wrapper = styled.div``;
+let Wrapper = styled.div`
+  margin-top: -4vw;
+`;
 
 let Table = styled.div`
   display: flex;

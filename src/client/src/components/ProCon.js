@@ -5,18 +5,31 @@ import happy from "../assets/Icons/happy.svg";
 import icon from "../assets/marker.svg"; // to-do: import all actual icons
 
 
+const ProConTitle = styled.h2`
+  margin-top: 2vw;
+  margin-bottom: 1vw;
+  font-weight: 900;
+  width: 100%;
+`
 const Section = styled.div`
     display: flex;
-    ${props => props.theme.grayBorder}
-    padding: 1rem;
+    padding: 3vw;
+    margin-top: 1rem;
+    box-shadow: 5px 5px 10px ${props => props.theme.lightGray};
+    border: 1px solid ${props => props.theme.lightGray};
 `
 
 const SectionMobile = styled(Section)`
     flex-direction: column;
+    margin-top: 1rem;
+    box-shadow: 3px -4px 7px 2px rgba(0,0,0,0.1);
+    padding-right: 1rem;
+    
 `
 
 const ListBox = styled.div`
     flex: 1;
+    
 `
 
 const ListPoints = styled.ul`
@@ -39,8 +52,6 @@ const Head = styled.div`
     text-align: center;
 `
 
-const Title = styled.h2`
-`
 
 const ProConIcon = styled.img`
   height: 50px;
@@ -109,7 +120,7 @@ export default class ProCon extends Component {
         let k = 0;
         return (
           <div>
-            <Title>Pros and Cons</Title>
+            <ProConTitle>Pros and Cons</ProConTitle>
             <SectionMobile>
             <ListBox>
               <Head>
@@ -139,6 +150,7 @@ export default class ProCon extends Component {
       let k = 0;
         return (
         <div>
+          <ProConTitle>Pros and Cons</ProConTitle>
           <Section>
             <ListBox>
               <Head>

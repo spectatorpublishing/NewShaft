@@ -18,7 +18,10 @@ let MarkerIcon = styled.img`
 `
 
 let LocationTitle = styled.h2`
-  margin-bottom: 20px;
+  margin-top: 1vw;
+  margin-bottom: 1vw;
+  font-weight: 900;
+  width: 100%;
 `
 
 class MapItem extends Component {

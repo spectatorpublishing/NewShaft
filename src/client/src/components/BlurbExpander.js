@@ -3,13 +3,15 @@ import styled from 'styled-components';
 import { theme } from "../util/GlobalStyles";
 
 let ExpanderBox = styled.div`
-  border: 1px ${({ color }) => color} solid;
-  box-shadow: 5px 5px 10px ${props => props.theme.lightGray};
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
   ${({ boxStyle }) => boxStyle};
 `
 
 const ExpanderContent = styled.div`
-  padding: 1rem;
+  padding-left: 1rem;
+  padding-right: 1rem;
   color: ${({ textColor }) => textColor};
 `
 
@@ -24,10 +26,10 @@ const ToggleSize = styled.button`
   border: none;
   border-bottom-left-radius: ${props => props.theme.borderRadius};
   border-bottom-right-radius: ${props => props.theme.borderRadius};
-  border-top: 1px ${({ color }) => color} solid;
+  
   display: flex;
-  justify-content: center;
-  padding: 0.3rem;
+  justify-content: flex-start;
+  padding: 1rem;
   width: 100%;
 
   :hover {
@@ -41,9 +43,10 @@ const ToggleSize = styled.button`
 
 const ButtonText = styled.h6`
   color: ${({ textColor }) => textColor};
+  font-style: italic;
 `
 
-export default class Expander extends Component {
+export default class BlurbExpander extends Component {
   constructor(props) {
     super(props);
 
@@ -71,7 +74,7 @@ export default class Expander extends Component {
           </ExpanderList>
         </ExpanderContent>
         <ToggleSize color={this.state.color} onClick={this.toggleSize}>
-          <ButtonText textColor={this.state.textColor}>Show {this.state.expanded ? "Less" : "All"}</ButtonText>
+          <ButtonText textColor={this.state.textColor} >Show {this.state.expanded ? "Less" : "All"}</ButtonText>
         </ToggleSize>
       </ExpanderBox>
     );
