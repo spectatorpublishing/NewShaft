@@ -112,10 +112,9 @@ let DropdownContent = styled.div`
     background-color: white;
     min-width: 8rem;
     font-family: 'Raleway';
-    box-shadow: 0.5rem 0rem 1rem 0rem rgba(0,0,0,0.2);
+    box-shadow: 0rem 0rem 1rem  rgba(0,0,0,0.2);
     z-index: 1;
     border-radius: 8px;
-    border: 1.5px solid rgb(98, 168, 229);
     padding: 0.6rem 1.2rem 0.6rem 1.2rem;  
     margin-left: 0.5rem;
     margin-right: 0.5rem;
@@ -163,25 +162,6 @@ let Number = styled.div`
     }
 `;
 
-let Label = styled.label`
-    font-family: 'Raleway';
-    /* padding-left: 0.6rem; */
-    /* padding-top: 0.2rem; */
-    /* padding-right: 0.6rem; */
-    color: rgb(98, 168, 229);
-    font-size: 1.3rem;
-    background: white;
-    font-weight: normal;
-
-    display: inline-block;
-    padding-right: 10px;
-    white-space: nowrap;
-
-    span {
-        vertical-align: middle;
-    }
-`;
-
 let Row = styled.div`
     display: flex;
     flex-direction: row;
@@ -190,12 +170,14 @@ let Row = styled.div`
     padding: 0.3rem 0rem 0.3rem 0rem;
     @media only screen and (max-width: 770px) {
         color: white;
+        justify-content: left;
     }
     flex-wrap: ${props => props.wrap ? "wrap" : "nowrap" };
+    align-items: ${props => props.center ? 'center' : ''};
 `;
 
 let Input = styled.input`
-    margin-right: 0.3rem;
+    margin-right: 0.5rem;
     border: 2px solid rgb(98, 168, 229);
     border-radius: 6px;
     width: 1.2rem;
@@ -213,22 +195,6 @@ let Input = styled.input`
     }
 `;
 
-let CheckBox = styled.div`
-    display: ${props => props.show ? '' : 'none'};
-    border: 2px solid rgb(98, 168, 229);
-    border-radius: 6px;
-    width: 1.2rem;
-    height: 0.9rem;
-    cursor: pointer;
-    /* margin: 0.2rem; */
-    color: white;
-    font-size: 1.1rem;
-    text-align: top;
-    padding: 0.1rem 0rem 0.4rem 0.2rem;
-    background-color: rgb(98, 168, 229);
-    position: absolute;
-`;
-
 /* ADVANCED FILTERS */
 
 let Advanced = styled.div`
@@ -236,7 +202,7 @@ let Advanced = styled.div`
     width: 100%;
     justify-content: center;
     @media only screen and (max-width: 770px) {
-        padding: 0 0.5rem 0.5rem 1rem;
+        padding: 0 1rem 0.5rem 1rem;
     }
 `
 
@@ -256,9 +222,11 @@ const Column = styled.div`
 `
 
 const Filter = styled.div`
+    width: 100%;
     display: flex;
     flex-direction: row;
     align-items: center;
+    justify-content: space-between;
     color: black;
     font-size: 1.125rem;
     margin: 0.5rem 0.5rem 0.5rem 0.25rem;
@@ -267,7 +235,7 @@ const Filter = styled.div`
         color: white;
         font-size: 1rem;
     }
-    max-width: ${props => props.half ? "50%" : "100%" };
+    max-width: ${props => props.half ? "45%" : "100%" };
     
 `
 
@@ -695,21 +663,21 @@ export default class FilterBar extends React.Component{
                             <DropdownContent show={this.state.showSchool}>
                                     {/* <CheckBox id = "checkColumbia" show={this.state.Columbia} onClick ={this.unCheck}>✓</CheckBox> */}
                                     <Filter>
+                                        Columbia
                                         <Input 
                                             id = "Columbia"  
                                             type = "checkbox"
                                             onClick = {this.onChange} 
                                             checked = {this.state.Columbia} />
-                                        Columbia 
                                     </Filter>                
                                     {/* <CheckBox id = "checkBarnard" show={this.state.Barnard} onClick ={this.unCheck}>✓</CheckBox> */}
                                     <Filter>
+                                        Barnard                                        
                                         <Input 
                                             id = "Barnard"  
                                             type = "checkbox"
                                             onClick = {this.onChange} 
                                             checked = {this.state.Barnard} />
-                                        Barnard
                                     </Filter>
                             </DropdownContent>
                         </Dropdown>
@@ -728,40 +696,40 @@ export default class FilterBar extends React.Component{
                             <DropdownContent show={this.state.showRoom}>
                                     {/* <CheckBox id = "checkSuite" show={this.state.Suite} onClick ={this.unCheck}>✓</CheckBox> */}
                                     <Filter>
+                                        Suite Style
                                         <Input 
                                             id="Suite" 
                                             onClick = {this.onChange} 
                                             type="checkbox"
                                             checked = {this.state.Suite}
                                             onChange = {this.checkBox} />
-                                        Suite Style
                                     </Filter>
                                     {/* <CheckBox id = "checkSingle" show={this.state.Single} onClick ={this.unCheck}>✓</CheckBox> */}
                                     <Filter>
+                                        Single
                                         <Input 
                                             id="Single" 
                                             onClick = {this.onChange} 
                                             type="checkbox"
                                             checked = {this.state.Single} />
-                                        Single
                                     </Filter>
                                     {/* <CheckBox id = "checkDouble" show={this.state.Double} onClick ={this.unCheck}>✓</CheckBox> */}
                                     <Filter>
+                                        Double
                                         <Input 
                                             id="Double" 
                                             onClick = {this.onChange} 
                                             type="checkbox" 
                                             checked = {this.state.Double} />
-                                        Double
                                     </Filter>
                                     {/* <CheckBox id = "checkTriple" show={this.state.Triple} onClick ={this.unCheck}>✓</CheckBox> */}
                                     <Filter>
+                                        Triple
                                         <Input 
                                             id="Triple" 
                                             onClick = {this.onChange} 
                                             type="checkbox" 
                                             checked = {this.state.Triple} /> 
-                                        Triple
                                     </Filter>
                             </DropdownContent>
                         </Dropdown>                    
@@ -776,28 +744,28 @@ export default class FilterBar extends React.Component{
                 <Section> BATHROOMS 
                     <Subsection> <Column>
                             <Filter> 
+                                Private 
                                 <Input id="Private"   
                                        onClick = {this.onChange}  
                                        type="checkbox" 
                                        checked = {this.state.Private} 
                                        onChange = {this.checkBox} /> 
-                                Private 
                                 </Filter>
                             <Filter> 
+                                Single use 
                                 <Input id="HallwaySingle"  
                                        onClick = {this.onChange}  
                                        type="checkbox" 
                                        checked = {this.state.HallwaySingle} 
                                        onChange = {this.checkBox} /> 
-                                Single use 
                                 </Filter>
                             <Filter> 
+                                Multiple use 
                                 <Input id="HallwayMultiple"  
                                        onClick = {this.onChange}  
                                        type="checkbox" 
                                        checked = {this.state.HallwayMultiple} 
                                        onChange = {this.checkBox} /> 
-                                Multiple use 
                                 </Filter>
                     </Column></Subsection>
                 </Section>
@@ -807,74 +775,74 @@ export default class FilterBar extends React.Component{
                     <Amenities> 
                         <Column>
                             <Filter> 
+                                Kitchen, private 
                                 <Input id="KitchenPrivate"  
                                        onClick = {this.onChange}  
                                        type="checkbox" 
                                        checked = {this.state.KitchenPrivate} 
                                        onChange = {this.checkBox} /> 
-                                Kitchen, private 
                                 </Filter>
 
                             <Filter> 
+                                Kitchen, shared 
                                 <Input id="KitchenShared"  
                                        onClick = {this.onChange}  
                                        type="checkbox" 
                                        checked = {this.state.KitchenShared} 
                                        onChange = {this.checkBox} /> 
-                                Kitchen, shared 
                                 </Filter>
                             <Filter> 
+                                Floor lounge 
                                 <Input id="FloorLounge"   
                                        onClick = {this.onChange}  
                                        type="checkbox" 
                                        checked = {this.state.FloorLounge} 
                                        onChange = {this.checkBox} /> 
-                                Floor lounge 
                                 </Filter>
                             <Filter>  
+                                Building lounge
                                 <Input id="BuildingLounge"  
                                        onClick = {this.onChange}  
                                        type="checkbox" 
                                        checked = {this.state.BuildingLounge} 
                                        onChange = {this.checkBox} /> 
-                                Building lounge
                                 </Filter>
 
                         </Column>
                         <Column>
                             <Filter>  
+                                Practice room
                                 <Input id="Practice"  
                                        onClick = {this.onChange}  
                                        type="checkbox" 
                                        checked = {this.state.Practice} 
                                        onChange = {this.checkBox} /> 
-                                Practice room
                                 </Filter>
                             <Filter> 
+                                Fitness room 
                                 <Input id="Fitness"  
                                        onClick = {this.onChange}  
                                        type="checkbox" 
                                        checked = {this.state.Fitness} 
                                        onChange = {this.checkBox} /> 
-                                Fitness room 
                                 </Filter>
 
                             <Filter> 
+                                Print station 
                                 <Input id="Print"  
                                        onClick = {this.onChange}  
                                        type="checkbox" 
                                        checked = {this.state.Print} 
                                        onChange = {this.checkBox} /> 
-                                Print station 
                                 </Filter>
 
                             <Filter> 
+                                No carpet 
                                 <Input id="NoCarpet"   
                                        onClick = {this.onChange}  
                                        type="checkbox" 
                                        checked = {this.state.NoCarpet} 
                                        onChange = {this.checkBox} /> 
-                                No carpet 
                             </Filter>
                         </Column>
                     </Amenities>
@@ -922,7 +890,7 @@ export default class FilterBar extends React.Component{
                 <Advanced show={this.state.showAdvanced}>
                     <Column>
                     <MobileSection>
-                        <Row>
+                        <Row center>
                             Group Size
                             <RowGZ>
                             <ButtonGZ id = "-" onClick={this.onChange}>-</ButtonGZ>
@@ -1060,7 +1028,7 @@ export default class FilterBar extends React.Component{
                     
                     <MobileSection> Laundry
                             <Row>
-                                <Filter half>Average number of people per machine</Filter>
+                                <Filter half >Average number of people per machine</Filter>
                                 <RowGZ>
                                     <ButtonGZ id = "--" onClick={this.onChange}>-</ButtonGZ>
                                     <Number>{this.state.AverageLaundry}</Number>
