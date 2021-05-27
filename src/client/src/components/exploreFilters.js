@@ -1,6 +1,77 @@
-import React from "react";
+import React, { useState, useRef } from 'react';
 import styled from 'styled-components';
+import { motion } from 'framer-motion';
 
+const Checkbox = ({
+    checked,
+    onClick
+  }) => {
+    const [clicked, setClicked] = useState(checked);
+    const checkbox = useRef(null);
+    const boxVariants = {
+      checked: {
+        background: blue,
+      },
+      unchecked: { background: white },
+    };
+  
+    const checkVariants = {
+      checked: { pathLength: 1 },
+      unchecked: { pathLength: 0 },
+    };
+  
+    const handleClick = () => {
+      setClicked(!clicked);
+    };
+  
+    return (
+        <StyledCheckbox
+          tabIndex={0}
+          ref={checkbox}
+          variants={boxVariants}
+          clicked={clicked}
+          initial='unchecked'
+          animate={clicked ? 'checked' : 'unchecked'}
+          transition={{ type: 'spring', stiffness: 300, damping: 20 }}
+          onClick={handleClick}
+        >
+  
+  <svg
+              xmlns='http://www.w3.org/2000/svg'
+              width='25'
+              height='25'
+              viewBox=' 0 0 150 150'
+            >
+              <motion.path
+                d='M38 74.707l24.647 24.646L116.5 45.5'
+                fill='transparent'
+                strokeWidth='15'
+                stroke='white'
+                strokeLinecap='round'
+                variants={checkVariants}
+                animate={clicked ? 'checked' : 'unchecked'}
+              />
+            </svg>
+        </StyledCheckbox>
+    );
+  };
+  
+  const StyledCheckbox = styled(motion.div)`
+    width: 1rem;
+    height: 1rem;
+    border-radius: 0.3125rem;
+    border: 2px solid
+      ${(props) =>
+        props.clicked
+          ? blue
+          : blue};
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+    margin: 0 0.75rem;
+  `;
+  
 let FilterRow = styled.div`
     background-color: rgb(98, 168, 229);
     padding: 0rem 1.2rem 0.6rem 0rem;
@@ -231,24 +302,24 @@ const Filter = styled.div`
     font-size: 1.125rem;
     margin: 0.5rem 0.5rem 0.5rem 0.25rem;
     font-weight: 400;
+    max-width: ${props => props.half ? "45%" : "100%" };
     @media only screen and (max-width: 770px) {
         color: white;
         font-size: 1rem;
+        justify-content: left;
     }
-    max-width: ${props => props.half ? "45%" : "100%" };
-    
 `
 
 const Section = styled.div`
     max-width: ${props => props.large ? "50%" : "25%" };
-    @media only screen and (max-width: 1363px) {
-        max-width: 30%;
-    }
     color: white;
     font-size: 1.25rem;
     margin: 1rem;
     font-weight: 400;
     justify-content: space-between;
+    @media only screen and (max-width: 1363px) {
+        max-width: 30%;
+    }
 `
 const MobileSection = styled.div`
     font-size: 1.25rem;
