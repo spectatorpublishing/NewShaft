@@ -1,6 +1,9 @@
-import React, { useState, useRef } from 'react';
+import React from 'react';
 import styled from 'styled-components';
+
+/*
 import { motion } from 'framer-motion';
+import { useState, useRef } from 'react';
 
 const Checkbox = ({
     checked,
@@ -71,6 +74,7 @@ const Checkbox = ({
     cursor: pointer;
     margin: 0 0.75rem;
   `;
+*/
   
 let FilterRow = styled.div`
     background-color: rgb(98, 168, 229);
