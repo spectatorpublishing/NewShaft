@@ -1,80 +1,28 @@
 import React from 'react';
 import styled from 'styled-components';
+import { withStyles } from '@material-ui/core/styles';
+import Checkbox from '@material-ui/core/Checkbox';
 
-/*
-import { motion } from 'framer-motion';
-import { useState, useRef } from 'react';
+const checkBoxStyles = theme => ({
+    root: {
+        height: "1rem",
+        boxSizing: "border-box",
+        color: blue,
+        '&:hover': {
+            backgroundColor: 'transparent',
+        },
+        '&$checked': {
+            color: blue,
+            '&:hover': {
+                backgroundColor: 'transparent',
+            },
+        },
+    },
+    checked: {
+    },
+   })
 
-const Checkbox = ({
-    checked,
-    onClick
-  }) => {
-    const [clicked, setClicked] = useState(checked);
-    const checkbox = useRef(null);
-    const boxVariants = {
-      checked: {
-        background: blue,
-      },
-      unchecked: { background: white },
-    };
-  
-    const checkVariants = {
-      checked: { pathLength: 1 },
-      unchecked: { pathLength: 0 },
-    };
-  
-    const handleClick = () => {
-      setClicked(!clicked);
-    };
-  
-    return (
-        <StyledCheckbox
-          tabIndex={0}
-          ref={checkbox}
-          variants={boxVariants}
-          clicked={clicked}
-          initial='unchecked'
-          animate={clicked ? 'checked' : 'unchecked'}
-          transition={{ type: 'spring', stiffness: 300, damping: 20 }}
-          onClick={handleClick}
-        >
-  
-  <svg
-              xmlns='http://www.w3.org/2000/svg'
-              width='25'
-              height='25'
-              viewBox=' 0 0 150 150'
-            >
-              <motion.path
-                d='M38 74.707l24.647 24.646L116.5 45.5'
-                fill='transparent'
-                strokeWidth='15'
-                stroke='white'
-                strokeLinecap='round'
-                variants={checkVariants}
-                animate={clicked ? 'checked' : 'unchecked'}
-              />
-            </svg>
-        </StyledCheckbox>
-    );
-  };
-  
-  const StyledCheckbox = styled(motion.div)`
-    width: 1rem;
-    height: 1rem;
-    border-radius: 0.3125rem;
-    border: 2px solid
-      ${(props) =>
-        props.clicked
-          ? blue
-          : blue};
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    cursor: pointer;
-    margin: 0 0.75rem;
-  `;
-*/
+const CustomCheckbox = withStyles(checkBoxStyles)(Checkbox);
   
 let FilterRow = styled.div`
     background-color: rgb(98, 168, 229);
@@ -251,25 +199,6 @@ let Row = styled.div`
     align-items: ${props => props.center ? 'center' : ''};
 `;
 
-let Input = styled.input`
-    margin-right: 0.5rem;
-    border: 2px solid rgb(98, 168, 229);
-    border-radius: 6px;
-    width: 1.2rem;
-    height: 0.9rem;
-    cursor: pointer;
-    /* margin: 0.2rem; */
-    color: white;
-    font-size: 1.1rem;
-    /* text-align: top; */
-    padding: 0.1rem 0rem 0.4rem 0.2rem;
-    background-color: transparent;
-    vertical-align: middle;
-    &:active{
-        background-color: rgb(98, 168, 229);
-    }
-`;
-
 /* ADVANCED FILTERS */
 
 let Advanced = styled.div`
@@ -294,6 +223,9 @@ const Box = styled.div`
 const Column = styled.div`
     display: flex;
     flex-direction: column;
+    @media only screen and (max-width: 1363px) {
+        width: ${props => props.single ? '100%' : ''};
+    }
 `
 
 const Filter = styled.div`
@@ -318,7 +250,7 @@ const Section = styled.div`
     max-width: ${props => props.large ? "50%" : "25%" };
     color: white;
     font-size: 1.25rem;
-    margin: 1rem;
+    margin: 1rem 0rem 1rem 1rem;
     font-weight: 400;
     justify-content: space-between;
     @media only screen and (max-width: 1363px) {
@@ -739,7 +671,7 @@ export default class FilterBar extends React.Component{
                                     {/* <CheckBox id = "checkColumbia" show={this.state.Columbia} onClick ={this.unCheck}>✓</CheckBox> */}
                                     <Filter>
                                         Columbia
-                                        <Input 
+                                        <CustomCheckbox 
                                             id = "Columbia"  
                                             type = "checkbox"
                                             onClick = {this.onChange} 
@@ -748,7 +680,7 @@ export default class FilterBar extends React.Component{
                                     {/* <CheckBox id = "checkBarnard" show={this.state.Barnard} onClick ={this.unCheck}>✓</CheckBox> */}
                                     <Filter>
                                         Barnard                                        
-                                        <Input 
+                                        <CustomCheckbox 
                                             id = "Barnard"  
                                             type = "checkbox"
                                             onClick = {this.onChange} 
@@ -772,7 +704,7 @@ export default class FilterBar extends React.Component{
                                     {/* <CheckBox id = "checkSuite" show={this.state.Suite} onClick ={this.unCheck}>✓</CheckBox> */}
                                     <Filter>
                                         Suite Style
-                                        <Input 
+                                        <CustomCheckbox 
                                             id="Suite" 
                                             onClick = {this.onChange} 
                                             type="checkbox"
@@ -782,7 +714,7 @@ export default class FilterBar extends React.Component{
                                     {/* <CheckBox id = "checkSingle" show={this.state.Single} onClick ={this.unCheck}>✓</CheckBox> */}
                                     <Filter>
                                         Single
-                                        <Input 
+                                        <CustomCheckbox 
                                             id="Single" 
                                             onClick = {this.onChange} 
                                             type="checkbox"
@@ -791,7 +723,7 @@ export default class FilterBar extends React.Component{
                                     {/* <CheckBox id = "checkDouble" show={this.state.Double} onClick ={this.unCheck}>✓</CheckBox> */}
                                     <Filter>
                                         Double
-                                        <Input 
+                                        <CustomCheckbox 
                                             id="Double" 
                                             onClick = {this.onChange} 
                                             type="checkbox" 
@@ -800,7 +732,7 @@ export default class FilterBar extends React.Component{
                                     {/* <CheckBox id = "checkTriple" show={this.state.Triple} onClick ={this.unCheck}>✓</CheckBox> */}
                                     <Filter>
                                         Triple
-                                        <Input 
+                                        <CustomCheckbox 
                                             id="Triple" 
                                             onClick = {this.onChange} 
                                             type="checkbox" 
@@ -820,7 +752,7 @@ export default class FilterBar extends React.Component{
                     <Subsection> <Column>
                             <Filter> 
                                 Private 
-                                <Input id="Private"   
+                                <CustomCheckbox id="Private"   
                                        onClick = {this.onChange}  
                                        type="checkbox" 
                                        checked = {this.state.Private} 
@@ -828,7 +760,7 @@ export default class FilterBar extends React.Component{
                                 </Filter>
                             <Filter> 
                                 Single use 
-                                <Input id="HallwaySingle"  
+                                <CustomCheckbox id="HallwaySingle"  
                                        onClick = {this.onChange}  
                                        type="checkbox" 
                                        checked = {this.state.HallwaySingle} 
@@ -836,7 +768,7 @@ export default class FilterBar extends React.Component{
                                 </Filter>
                             <Filter> 
                                 Multiple use 
-                                <Input id="HallwayMultiple"  
+                                <CustomCheckbox id="HallwayMultiple"  
                                        onClick = {this.onChange}  
                                        type="checkbox" 
                                        checked = {this.state.HallwayMultiple} 
@@ -848,10 +780,10 @@ export default class FilterBar extends React.Component{
                 <Section large> AMENITIES 
                 <Subsection>
                     <Amenities> 
-                        <Column>
+                        <Column single>
                             <Filter> 
                                 Kitchen, private 
-                                <Input id="KitchenPrivate"  
+                                <CustomCheckbox id="KitchenPrivate"  
                                        onClick = {this.onChange}  
                                        type="checkbox" 
                                        checked = {this.state.KitchenPrivate} 
@@ -860,7 +792,7 @@ export default class FilterBar extends React.Component{
 
                             <Filter> 
                                 Kitchen, shared 
-                                <Input id="KitchenShared"  
+                                <CustomCheckbox id="KitchenShared"  
                                        onClick = {this.onChange}  
                                        type="checkbox" 
                                        checked = {this.state.KitchenShared} 
@@ -868,7 +800,7 @@ export default class FilterBar extends React.Component{
                                 </Filter>
                             <Filter> 
                                 Floor lounge 
-                                <Input id="FloorLounge"   
+                                <CustomCheckbox id="FloorLounge"   
                                        onClick = {this.onChange}  
                                        type="checkbox" 
                                        checked = {this.state.FloorLounge} 
@@ -876,18 +808,17 @@ export default class FilterBar extends React.Component{
                                 </Filter>
                             <Filter>  
                                 Building lounge
-                                <Input id="BuildingLounge"  
+                                <CustomCheckbox id="BuildingLounge"  
                                        onClick = {this.onChange}  
                                        type="checkbox" 
                                        checked = {this.state.BuildingLounge} 
                                        onChange = {this.checkBox} /> 
                                 </Filter>
-
                         </Column>
-                        <Column>
+                        <Column single>
                             <Filter>  
                                 Practice room
-                                <Input id="Practice"  
+                                <CustomCheckbox id="Practice"  
                                        onClick = {this.onChange}  
                                        type="checkbox" 
                                        checked = {this.state.Practice} 
@@ -895,7 +826,7 @@ export default class FilterBar extends React.Component{
                                 </Filter>
                             <Filter> 
                                 Fitness room 
-                                <Input id="Fitness"  
+                                <CustomCheckbox id="Fitness"  
                                        onClick = {this.onChange}  
                                        type="checkbox" 
                                        checked = {this.state.Fitness} 
@@ -904,7 +835,7 @@ export default class FilterBar extends React.Component{
 
                             <Filter> 
                                 Print station 
-                                <Input id="Print"  
+                                <CustomCheckbox id="Print"  
                                        onClick = {this.onChange}  
                                        type="checkbox" 
                                        checked = {this.state.Print} 
@@ -913,7 +844,7 @@ export default class FilterBar extends React.Component{
 
                             <Filter> 
                                 No carpet 
-                                <Input id="NoCarpet"   
+                                <CustomCheckbox id="NoCarpet"   
                                        onClick = {this.onChange}  
                                        type="checkbox" 
                                        checked = {this.state.NoCarpet} 
@@ -944,7 +875,7 @@ export default class FilterBar extends React.Component{
                 <FilterRow>
                 <MobileSection top>
                         <Filter>
-                            <Input 
+                            <CustomCheckbox 
                                 id = "Columbia"  
                                 type = "checkbox"
                                 onClick = {this.onChange} 
@@ -952,7 +883,7 @@ export default class FilterBar extends React.Component{
                             Columbia 
                         </Filter> 
                         <Filter>
-                            <Input 
+                            <CustomCheckbox 
                                 id = "Barnard"  
                                 type = "checkbox"
                                 onClick = {this.onChange} 
@@ -978,7 +909,7 @@ export default class FilterBar extends React.Component{
                         <Column>
                         <MobileSection> Room Type 
                                     <Filter> 
-                                        <Input id="Private"   
+                                        <CustomCheckbox id="Private"   
                                             onClick = {this.onChange}  
                                             type="checkbox" 
                                             checked = {this.state.Private} 
@@ -986,7 +917,7 @@ export default class FilterBar extends React.Component{
                                         Private 
                                         </Filter>
                                     <Filter> 
-                                        <Input id="HallwaySingle"  
+                                        <CustomCheckbox id="HallwaySingle"  
                                             onClick = {this.onChange}  
                                             type="checkbox" 
                                             checked = {this.state.HallwaySingle} 
@@ -994,7 +925,7 @@ export default class FilterBar extends React.Component{
                                         Single use 
                                         </Filter>
                                     <Filter> 
-                                        <Input id="HallwayMultiple"  
+                                        <CustomCheckbox id="HallwayMultiple"  
                                             onClick = {this.onChange}  
                                             type="checkbox" 
                                             checked = {this.state.HallwayMultiple} 
@@ -1004,7 +935,7 @@ export default class FilterBar extends React.Component{
                             </MobileSection>
                             <MobileSection> Bathroom 
                                     <Filter> 
-                                        <Input id="Private"   
+                                        <CustomCheckbox id="Private"   
                                             onClick = {this.onChange}  
                                             type="checkbox" 
                                             checked = {this.state.Private} 
@@ -1012,7 +943,7 @@ export default class FilterBar extends React.Component{
                                         Private 
                                         </Filter>
                                     <Filter> 
-                                        <Input id="HallwaySingle"  
+                                        <CustomCheckbox id="HallwaySingle"  
                                             onClick = {this.onChange}  
                                             type="checkbox" 
                                             checked = {this.state.HallwaySingle} 
@@ -1020,7 +951,7 @@ export default class FilterBar extends React.Component{
                                         Single use 
                                         </Filter>
                                     <Filter> 
-                                        <Input id="HallwayMultiple"  
+                                        <CustomCheckbox id="HallwayMultiple"  
                                             onClick = {this.onChange}  
                                             type="checkbox" 
                                             checked = {this.state.HallwayMultiple} 
@@ -1032,7 +963,7 @@ export default class FilterBar extends React.Component{
 
                         <MobileSection> Amenities
                             <Filter> 
-                                <Input id="KitchenPrivate"  
+                                <CustomCheckbox id="KitchenPrivate"  
                                        onClick = {this.onChange}  
                                        type="checkbox" 
                                        checked = {this.state.KitchenPrivate} 
@@ -1041,7 +972,7 @@ export default class FilterBar extends React.Component{
                                 </Filter>
 
                             <Filter> 
-                                <Input id="KitchenShared"  
+                                <CustomCheckbox id="KitchenShared"  
                                        onClick = {this.onChange}  
                                        type="checkbox" 
                                        checked = {this.state.KitchenShared} 
@@ -1049,7 +980,7 @@ export default class FilterBar extends React.Component{
                                 Kitchen, shared 
                                 </Filter>
                             <Filter> 
-                                <Input id="FloorLounge"   
+                                <CustomCheckbox id="FloorLounge"   
                                        onClick = {this.onChange}  
                                        type="checkbox" 
                                        checked = {this.state.FloorLounge} 
@@ -1057,7 +988,7 @@ export default class FilterBar extends React.Component{
                                 Floor lounge 
                                 </Filter>
                             <Filter>  
-                                <Input id="BuildingLounge"  
+                                <CustomCheckbox id="BuildingLounge"  
                                        onClick = {this.onChange}  
                                        type="checkbox" 
                                        checked = {this.state.BuildingLounge} 
@@ -1065,7 +996,7 @@ export default class FilterBar extends React.Component{
                                 Building lounge
                                 </Filter>
                             <Filter>  
-                                <Input id="Practice"  
+                                <CustomCheckbox id="Practice"  
                                        onClick = {this.onChange}  
                                        type="checkbox" 
                                        checked = {this.state.Practice} 
@@ -1073,7 +1004,7 @@ export default class FilterBar extends React.Component{
                                 Practice room
                                 </Filter>
                             <Filter> 
-                                <Input id="Fitness"  
+                                <CustomCheckbox id="Fitness"  
                                        onClick = {this.onChange}  
                                        type="checkbox" 
                                        checked = {this.state.Fitness} 
@@ -1082,7 +1013,7 @@ export default class FilterBar extends React.Component{
                                 </Filter>
 
                             <Filter> 
-                                <Input id="Print"  
+                                <CustomCheckbox id="Print"  
                                        onClick = {this.onChange}  
                                        type="checkbox" 
                                        checked = {this.state.Print} 
@@ -1091,7 +1022,7 @@ export default class FilterBar extends React.Component{
                                 </Filter>
 
                             <Filter> 
-                                <Input id="NoCarpet"   
+                                <CustomCheckbox id="NoCarpet"   
                                        onClick = {this.onChange}  
                                        type="checkbox" 
                                        checked = {this.state.NoCarpet} 
