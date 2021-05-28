@@ -23,6 +23,27 @@ const checkBoxStyles = theme => ({
    })
 
 const CustomCheckbox = withStyles(checkBoxStyles)(Checkbox);
+
+const checkBoxStylesMobile = theme => ({
+    root: {
+        height: "1rem",
+        boxSizing: "border-box",
+        color: white,
+        '&:hover': {
+            backgroundColor: 'transparent',
+        },
+        '&$checked': {
+            color: white,
+            '&:hover': {
+                backgroundColor: 'transparent',
+            },
+        },
+    },
+    checked: {
+    },
+   })
+
+const CustomCheckboxMobile = withStyles(checkBoxStylesMobile)(Checkbox);
   
 let FilterRow = styled.div`
     background-color: rgb(98, 168, 229);
@@ -32,7 +53,7 @@ let FilterRow = styled.div`
     flex-direction: row;
     align-items: center;
     @media only screen and (max-width: 769px) {
-        justify-content: center;
+        justify-content: space-between;
         display: inline-block;
         vertical-align: middle;
         text-align: center;
@@ -57,12 +78,12 @@ let RowGZ = styled.div`
     align-items: center;
     font-family: 'Raleway';
     justify-content: center;
-    margin: auto;
     @media only screen and (max-width: 770px) {
         background-color: white;
         padding: 0.5rem;
         border-radius: 10px;
     }
+    height: 1.5rem;
 `;
 
 let Tag = styled.div`
@@ -193,7 +214,9 @@ let Row = styled.div`
     padding: 0.3rem 0rem 0.3rem 0rem;
     @media only screen and (max-width: 770px) {
         color: white;
-        justify-content: left;
+        justify-content: space-between;
+        padding-right: 2rem;
+        align-content: center;
     }
     flex-wrap: ${props => props.wrap ? "wrap" : "nowrap" };
     align-items: ${props => props.center ? 'center' : ''};
@@ -238,11 +261,11 @@ const Filter = styled.div`
     font-size: 1.125rem;
     margin: 0.5rem 0.5rem 0.5rem 0.25rem;
     font-weight: 400;
-    max-width: ${props => props.half ? "45%" : "100%" };
+    max-width: ${props => props.half ? "50%" : "100%" };
     @media only screen and (max-width: 770px) {
         color: white;
         font-size: 1rem;
-        justify-content: left;
+        margin: 0.5rem 0.5rem 0.5rem 0rem;
     }
 `
 
@@ -260,7 +283,7 @@ const Section = styled.div`
 const MobileSection = styled.div`
     font-size: 1.25rem;
     display: flex column;
-    margin: 0 0.5rem;
+    margin: ${props => props.topmargin ? '0.9rem 0.5rem 0 0.5rem' : '0 0.5rem'};
     color: white;
 `
 
@@ -564,7 +587,7 @@ export default class FilterBar extends React.Component{
             NINE_SUITE: this.state.GroupSize == 9,
             DORM: this.props.search,
 
-            /* ADVANCED */
+            /* ADVANCED 
             PRIVATE_BATHROOM: this.state.Private,
             SINGLE_USE: this.state.HallwaySingle,
             MULTIPLE_USE: this.state.HallwayMultiple,
@@ -587,6 +610,7 @@ export default class FilterBar extends React.Component{
             EIGHT_LAUNDRY: this.state.AverageLaundry == 8,
             NINE_LAUNDRY: this.state.AverageLaundry == 9,
             TEN_LAUNDRY: this.state.AverageLaundry == 10,
+            */
         }
         return payload;
     }
@@ -875,20 +899,20 @@ export default class FilterBar extends React.Component{
                 <FilterRow>
                 <MobileSection top>
                         <Filter>
-                            <CustomCheckbox 
+                            Columbia
+                            <CustomCheckboxMobile 
                                 id = "Columbia"  
                                 type = "checkbox"
                                 onClick = {this.onChange} 
                                 checked = {this.state.Columbia} />
-                            Columbia 
                         </Filter> 
                         <Filter>
-                            <CustomCheckbox 
+                            Barnard
+                            <CustomCheckboxMobile 
                                 id = "Barnard"  
                                 type = "checkbox"
                                 onClick = {this.onChange} 
                                 checked = {this.state.Barnard} />
-                            Barnard
                         </Filter>
                         </MobileSection>
                     <DropButton onClick={this.toggle} id="advanced">More Filters</DropButton>
@@ -909,125 +933,124 @@ export default class FilterBar extends React.Component{
                         <Column>
                         <MobileSection> Room Type 
                                     <Filter> 
-                                        <CustomCheckbox id="Private"   
+                                        Single 
+                                        <CustomCheckboxMobile id="Single"   
                                             onClick = {this.onChange}  
                                             type="checkbox" 
-                                            checked = {this.state.Private} 
+                                            checked = {this.state.Single} 
                                             onChange = {this.checkBox} /> 
-                                        Private 
                                         </Filter>
                                     <Filter> 
-                                        <CustomCheckbox id="HallwaySingle"  
+                                        Double
+                                        <CustomCheckboxMobile id="Double"  
                                             onClick = {this.onChange}  
                                             type="checkbox" 
-                                            checked = {this.state.HallwaySingle} 
+                                            checked = {this.state.Double} 
                                             onChange = {this.checkBox} /> 
-                                        Single use 
                                         </Filter>
                                     <Filter> 
-                                        <CustomCheckbox id="HallwayMultiple"  
+                                        Triple
+                                        <CustomCheckboxMobile id="Triple"  
                                             onClick = {this.onChange}  
                                             type="checkbox" 
-                                            checked = {this.state.HallwayMultiple} 
+                                            checked = {this.state.Triple} 
                                             onChange = {this.checkBox} /> 
-                                        Multiple use 
                                         </Filter>
                             </MobileSection>
-                            <MobileSection> Bathroom 
+                            <MobileSection topmargin> Bathroom 
                                     <Filter> 
-                                        <CustomCheckbox id="Private"   
+                                        Private
+                                        <CustomCheckboxMobile id="Private"   
                                             onClick = {this.onChange}  
                                             type="checkbox" 
                                             checked = {this.state.Private} 
                                             onChange = {this.checkBox} /> 
-                                        Private 
                                         </Filter>
                                     <Filter> 
-                                        <CustomCheckbox id="HallwaySingle"  
+                                        Single use 
+                                        <CustomCheckboxMobile id="HallwaySingle"  
                                             onClick = {this.onChange}  
                                             type="checkbox" 
                                             checked = {this.state.HallwaySingle} 
                                             onChange = {this.checkBox} /> 
-                                        Single use 
                                         </Filter>
                                     <Filter> 
-                                        <CustomCheckbox id="HallwayMultiple"  
+                                        Multiple use 
+                                        <CustomCheckboxMobile id="HallwayMultiple"  
                                             onClick = {this.onChange}  
                                             type="checkbox" 
                                             checked = {this.state.HallwayMultiple} 
                                             onChange = {this.checkBox} /> 
-                                        Multiple use 
+                                        
                                         </Filter>
                             </MobileSection>                        
                             </Column>
 
                         <MobileSection> Amenities
                             <Filter> 
-                                <CustomCheckbox id="KitchenPrivate"  
+                                Kitchen, private
+                                <CustomCheckboxMobile id="KitchenPrivate"  
                                        onClick = {this.onChange}  
                                        type="checkbox" 
                                        checked = {this.state.KitchenPrivate} 
                                        onChange = {this.checkBox} /> 
-                                Kitchen, private 
                                 </Filter>
 
                             <Filter> 
-                                <CustomCheckbox id="KitchenShared"  
+                                Kitchen, shared 
+                                <CustomCheckboxMobile id="KitchenShared"  
                                        onClick = {this.onChange}  
                                        type="checkbox" 
                                        checked = {this.state.KitchenShared} 
                                        onChange = {this.checkBox} /> 
-                                Kitchen, shared 
                                 </Filter>
                             <Filter> 
-                                <CustomCheckbox id="FloorLounge"   
+                                Floor lounge 
+                                <CustomCheckboxMobile id="FloorLounge"   
                                        onClick = {this.onChange}  
                                        type="checkbox" 
                                        checked = {this.state.FloorLounge} 
                                        onChange = {this.checkBox} /> 
-                                Floor lounge 
                                 </Filter>
                             <Filter>  
-                                <CustomCheckbox id="BuildingLounge"  
+                                Building lounge
+                                <CustomCheckboxMobile id="BuildingLounge"  
                                        onClick = {this.onChange}  
                                        type="checkbox" 
                                        checked = {this.state.BuildingLounge} 
                                        onChange = {this.checkBox} /> 
-                                Building lounge
                                 </Filter>
                             <Filter>  
-                                <CustomCheckbox id="Practice"  
+                                Practice room
+                                <CustomCheckboxMobile id="Practice"  
                                        onClick = {this.onChange}  
                                        type="checkbox" 
                                        checked = {this.state.Practice} 
                                        onChange = {this.checkBox} /> 
-                                Practice room
                                 </Filter>
                             <Filter> 
-                                <CustomCheckbox id="Fitness"  
+                                Fitness room 
+                                <CustomCheckboxMobile id="Fitness"  
                                        onClick = {this.onChange}  
                                        type="checkbox" 
                                        checked = {this.state.Fitness} 
                                        onChange = {this.checkBox} /> 
-                                Fitness room 
                                 </Filter>
-
                             <Filter> 
-                                <CustomCheckbox id="Print"  
+                                Print station
+                                <CustomCheckboxMobile id="Print"  
                                        onClick = {this.onChange}  
                                        type="checkbox" 
                                        checked = {this.state.Print} 
                                        onChange = {this.checkBox} /> 
-                                Print station 
                                 </Filter>
-
                             <Filter> 
-                                <CustomCheckbox id="NoCarpet"   
+                                No carpet
+                                <CustomCheckboxMobile id="NoCarpet"   
                                        onClick = {this.onChange}  
                                        type="checkbox" 
                                        checked = {this.state.NoCarpet} 
                                        onChange = {this.checkBox} /> 
-                                No carpet 
                             </Filter>
                         </MobileSection>
                     </Box>
