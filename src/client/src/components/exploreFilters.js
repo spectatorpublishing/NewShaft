@@ -78,6 +78,7 @@ let RowGZ = styled.div`
     align-items: center;
     font-family: 'Raleway';
     justify-content: center;
+    width: ${props => props.full ? "100%" : "" };
     @media only screen and (max-width: 770px) {
         background-color: white;
         padding: 0.5rem;
@@ -715,7 +716,7 @@ export default class FilterBar extends React.Component{
                         <Dropdown>
                             <DropButton onClick={this.toggle} id="group">Group Size</DropButton>
                             <DropdownContent show={this.state.showGroup}>
-                                <RowGZ>
+                                <RowGZ full >
                                     <ButtonGZ id = "-" onClick={this.onChange}>-</ButtonGZ>
                                     <Number>{this.state.GroupSize}</Number>
                                     <ButtonGZ class="button" id = "+" onClick={this.onChange}>+</ButtonGZ>
