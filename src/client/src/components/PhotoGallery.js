@@ -3,6 +3,7 @@ import styled from "styled-components";
 import Container from "react-bootstrap/Container";
 import Row from "react-bootstrap/Row";
 import Col from "react-bootstrap/Col";
+import "../css/PhotoGallery.css";
 
 const dorm_name_map = {
     "CarmanHall": "Carman Hall",
@@ -165,7 +166,7 @@ export default class PhotoGallery extends Component {
                                     
                                     {this.state.images.map((image, index)=>{
                                         return(
-                                            <div>
+                                            <div className={index === this.state.photoIndex ? "slide active": "slide"}>
                                                 {index === this.state.photoIndex && (
                                                     <CarouselImg key={index} src={image} alt={`${this.state.dormInfo.DORM}-img`}/>
                                                 )}
@@ -207,7 +208,9 @@ export default class PhotoGallery extends Component {
                                     </Col>
                                     <Col xl={9} className="d-flex justify-content-end">
                                         <div>
-                                            <Button onClick={()=>this.state.updateModal()}>X Close</Button>
+                                            <Button onClick={()=>this.state.updateModal()} className="d-flex">
+                                                X Close
+                                            </Button>
                                         </div>   
                                     </Col>
                                 </Row>
