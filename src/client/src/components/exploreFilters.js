@@ -410,6 +410,16 @@ export default class FilterBar extends React.Component{
                     document.getElementById("group").style.color = white;
                 }
             }
+            if(this.state.showAdvanced){
+                this.setState({
+                    showAdvanced: !this.state.showAdvanced
+                })
+                let background3 = document.getElementById("advanced").style.backgroundColor;
+                if (background3 == white) {
+                    document.getElementById("advanced").style.background = blue;
+                    document.getElementById("advanced").style.color = white;
+                }
+            }
         }
         if(action === "room") {
             this.setState({
@@ -433,6 +443,16 @@ export default class FilterBar extends React.Component{
                 if (background4 == white) {
                     document.getElementById("group").style.background = blue;
                     document.getElementById("group").style.color = white;
+                }
+            }
+            if(this.state.showAdvanced){
+                this.setState({
+                    showAdvanced: !this.state.showAdvanced
+                })
+                let background3 = document.getElementById("advanced").style.backgroundColor;
+                if (background3 == white) {
+                    document.getElementById("advanced").style.background = blue;
+                    document.getElementById("advanced").style.color = white;
                 }
             }
         }
@@ -460,11 +480,51 @@ export default class FilterBar extends React.Component{
                     document.getElementById("room").style.color = white;
                 }
             }
+            if(this.state.showAdvanced){
+                this.setState({
+                    showAdvanced: !this.state.showAdvanced
+                })
+                let background3 = document.getElementById("advanced").style.backgroundColor;
+                if (background3 == white) {
+                    document.getElementById("advanced").style.background = blue;
+                    document.getElementById("advanced").style.color = white;
+                }
+            }
         }
         if(action === "advanced") {
             this.setState({
                 showAdvanced: !this.state.showAdvanced
             })
+            if(this.state.showSchool){
+                this.setState({
+                    showSchool: !this.state.showSchool
+                })
+                let background3 = document.getElementById("school").style.backgroundColor;
+                if (background3 == white) {
+                    document.getElementById("school").style.background = blue;
+                    document.getElementById("school").style.color = white;
+                }
+            }
+            if(this.state.showRoom){
+                this.setState({
+                    showRoom: !this.state.showRoom
+                })
+                let background6 = document.getElementById("room").style.backgroundColor;
+                if (background6 == white) {
+                    document.getElementById("room").style.background = blue;
+                    document.getElementById("room").style.color = white;
+                }
+            }
+            if(this.state.showGroup){
+                this.setState({
+                    showGroup: !this.state.showGroup
+                })
+                let background4 = document.getElementById("group").style.backgroundColor;
+                if (background4 == white) {
+                    document.getElementById("group").style.background = blue;
+                    document.getElementById("group").style.color = white;
+                }
+            }
             /*console.log(this.state.showAdvanced)*/
         }
         this.changeColor(action)
