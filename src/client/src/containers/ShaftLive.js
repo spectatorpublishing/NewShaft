@@ -2,6 +2,8 @@ import React, { Component } from 'react';
 import styled from "styled-components";
 import FloorButton from "../components/FloorButton.js";
 import FloorPlanSVG from "../components/FloorPlanSVG"
+import ReactTooltip from 'react-tooltip';
+import "../css/ShaftLive.css";
 import {theme} from '../util/GlobalStyles.js';
 import _ from "lodash"
 import WhiteboardSidebar from '../components/WhiteboardSidebar.js';
@@ -75,11 +77,37 @@ let ColTwo = styled.div`
       margin-top: 2.5rem;
     }
 `
+let LikelyColor = styled.div`
+    display: inline-block;
+    width: 36px;
+    margin-left: 3rem;
+    margin-right: 0.5rem;
+    height: 12px;
+    background: #A9DF97;
+    border-radius: 5px;
+`
+let PossibleColor = styled(LikelyColor)`
+    background: #F8BA82;
+`
+let UnlikelyColor = styled(LikelyColor)`
+    background: #E7E7E7;
 
+`
 let ColThree = styled.div`
     width:50vw;
 `
-
+let DormName = styled.h1`
+  background-color: ${props => props.theme.columbiaBlue};
+  color: ${props => props.theme.white};
+  text-shadow: ${props => props.theme.shadow};
+  align-self:flex-start;
+  border-radius: 0px 20px 20px 0px;
+  pointer-events: initial;
+  margin-top: 1rem;
+  max-width: 90vw;
+  padding: 2vw;
+  padding-left: 5vw;
+`;
 let ToggleMobileView = styled.div`
     height: 50px;
     display: flex;
@@ -132,39 +160,50 @@ let LegendItem = styled.div`
 `
 
 let Converter = styled.div`
-  background-color: gray;
-  padding: 7rem 0rem 2rem 3rem;
+  padding: 6rem 0rem 1rem 3rem;
   display: flex;
+  position: relative;
   flex-direction: column;
-  color: white;
+  color: #3E3E3E;
   @media(max-width: 991px){
     padding: 7rem 0rem 0rem 1rem;
 }
 `
 
 let Input = styled.form`
-  color: white;
+  color: #3E3E3E;
   font-size: 3rem;
   @media(max-width: 991px){
     font-size: 1.8rem;
   }
 `
 let StyleInput = styled.input`
-  background: none;
-  border: none;
-  border-bottom: solid 0.1rem white;
-  width: 20%;
-  color: white;
-  font-size: 2.5rem;
+  border: solid 0.1rem #D0D0D0;
+  width: 5%;
+  border-radius: 3px;
+  color: #3E3E3E;
+  font-size: 1rem;
   @media(max-width: 991px){
     font-size: 1.8rem;
   }
+  margin-right: 1rem;
 `
+let MobileStyleInput = styled.input`
+  width: 20%;
 
+`
+let InputLabel = styled.label`
+    font-family: Raleway;
+    font-style: normal;
+    font-weight: bold;
+    font-size: 20px;
+    line-height: 23px;
+    color: #3E3E3E;
+`
 let Output = styled.div`
   padding-top: 0.8rem;
   padding-bottom: 0.6rem;
-  color: white;
+  color: #3E3E3E;
   font-size: 2.5rem;
   font-weight: bold;
   @media(max-width: 991px){
@@ -173,9 +212,11 @@ let Output = styled.div`
 `
 
 let Desc = styled.div`
-  color: white;
-  font-size: 1.6rem;
+  color: #3E3E3E;
+  display: inline;
+  font-size: 1.1rem;
   padding-top: 0.65rem;
+  
   padding-bottom: 0.65rem;
   @media(max-width: 991px){
     font-size: 1.0rem;
@@ -190,6 +231,54 @@ let About = styled.div`
    font-size: 1.25rem;
 `;
 
+let Info= styled.div`
+  line-height: 20px;
+  margin-left: 0.75rem;
+  color: white;
+  text-align: center;
+  font-weight: bold;
+  font-family: Raleway;
+  height: 20px;
+  width: 20px;
+  background: #9F9F9F;
+  border-radius: 50%;
+  display: inline-block;
+  
+  &:hover {
+
+  }
+`
+let Blurb = styled(ReactTooltip)`
+  max-width: 26vw;
+  min-width: 20vw;
+  border-radius: 5px;
+
+`
+let MobileBlurb = styled(Blurb)`
+  align-self: center;
+  min-width: 70vw;
+
+`
+let InfoText= styled.div`
+  font-size: 18px;
+  font-family: Raleway;
+  color:white;
+  margin-bottom: 10px;
+`
+let Hover = styled.div`
+  display: inline;
+  position: relative;
+  flex-direction: column;
+  align-items: center;
+`
+let Arrow = styled.div`
+  width: 0; 
+  height: 0; 
+  border-left: 5px solid transparent;
+  border-right: 5px solid transparent;
+
+  border-bottom: 5px solid black;
+`
 
 export default class ShaftLive extends Component {
   constructor(props) {
@@ -267,6 +356,18 @@ export default class ShaftLive extends Component {
       }
       );
       //console.log(this.state.dorm, this.state.floor, this.state.floorData)
+  }
+
+  isHovering(){
+    return {
+      hover: false
+    };
+  }
+  mouseEnter = () => {
+    this.setState({ hover: true });
+  }
+  mouseLeave = () => {
+    this.setState({ hover: false });
   }
 
   convertNumber() {
@@ -375,16 +476,26 @@ export default class ShaftLive extends Component {
         <div>
 
         <Converter>
-        <Input id="form">
-            <label for="userNum">Enter Your Number:  </label>
-            <StyleInput type="number" id="userNum" onChange={() => this.convertNumber()}/>
-          </Input>
-          
-
-          <Output>Old-System Equivalent: {this.state.full}</Output>
-          <Desc>Green rooms are ones that you are likely to get based off data that Spectator has collected from housing selection from previous years.</Desc>
-          <Desc>To read more about how our converter and predictor works, check out this Spectrum article <a href="https://www.columbiaspectator.com/spectrum/2020/03/09/a-guide-to-the-redesigned-shaft/">here</a>.</Desc>
+            <Input id="form">
+              <InputLabel for="userNum">ENTER YOUR NUMBER:  </InputLabel>
+              <MobileStyleInput type="number" id="userNum" onChange={() => this.convertNumber()}/><br></br>
+              <InputLabel for="groupSize">GROUP SIZE: </InputLabel>
+              <MobileStyleInput type="number" id="groupSize"/>
+            </Input>
+            {/*<Output>Old-System Equivalent: {this.state.full}</Output>*/}
+            <Desc>Check out our color-coded floor plans to see which rooms you are likely to get!
+            <Hover><Info data-tip data-for="info">?</Info>
+              <MobileBlurb className = "info-tooltip"id="info" effect="solid" type="info" place="bottom" backgroundColor="#62A8E5" >
+                <InfoText>Green rooms are ones that you are likely to get based off data that Spectator has collected from housing selection from previous years. Lottery numbers or priorities significantly below yours took these rooms last year.</InfoText>
+                <InfoText>Yellow rooms were taken by lottery numbers and priorities similar to yours last year. </InfoText>
+                <InfoText>To read more about how our converter and predictor works, check out this Spectrum article here.</InfoText>
+              </MobileBlurb>
+            </Hover><br></br>
+              <LikelyColor></LikelyColor> Likely <PossibleColor></PossibleColor> Possible <UnlikelyColor></UnlikelyColor> Not likely or unavailable 
+            </Desc>
           </Converter>
+          <hr style={{width: "95%",color:"#707070"}} />
+
 
           <ShaftLiveContainerMobile>
             <BlueBGMobile>
@@ -392,12 +503,11 @@ export default class ShaftLive extends Component {
                 sidebarModification={this.handleDormChange}
                 currDorm={this.state.dorm}
               /> 
-              <FloorButton
-                floorNums={this.state.floorNums}
-                handleChange={this.handleFloorChange}
-                isMobile={isMobile}
-              />
             </BlueBGMobile>
+            <DormName>{this.state.dorm}</DormName>
+            <FloorButton
+                    floorNums={this.state.floorNums}
+                    handleChange={this.handleFloorChange} />
             <FloorPlanSVG 
                   priority={this.state.priority} 
                   low={this.state.convertedNumLow} 
@@ -418,14 +528,24 @@ export default class ShaftLive extends Component {
 
           <Converter>
           <Input id="form">
-            <label for="userNum">Enter Your Number:  </label>
+            <InputLabel for="userNum">ENTER YOUR NUMBER:  </InputLabel>
             <StyleInput type="number" id="userNum" onChange={() => this.convertNumber()}/>
+            <InputLabel for="groupSize">GROUP SIZE: </InputLabel>
+            <StyleInput type="number" id="groupSize"/>
           </Input>
-          
-
-          <Output>Old-System Equivalent: {this.state.full}</Output>
-          <Desc>Check out our color-coded floor plans to see which rooms you are likely to get!</Desc>
+          {/*<Output>Old-System Equivalent: {this.state.full}</Output>*/}
+          <Desc>Check out our color-coded floor plans to see which rooms you are likely to get!
+          <Hover><Info data-tip data-for="info">?</Info>
+          <Blurb className = "info-tooltip"id="info" effect="solid" type="info" place="bottom" backgroundColor="#62A8E5" >
+              <InfoText>Green rooms are ones that you are likely to get based off data that Spectator has collected from housing selection from previous years. Lottery numbers or priorities significantly below yours took these rooms last year.</InfoText>
+              <InfoText>Yellow rooms were taken by lottery numbers and priorities similar to yours last year. </InfoText>
+              <InfoText>To read more about how our converter and predictor works, check out this Spectrum article here.</InfoText>
+            </Blurb>
+          </Hover>
+          <LikelyColor></LikelyColor> Likely <PossibleColor></PossibleColor> Possible <UnlikelyColor></UnlikelyColor> Not likely or unavailable 
+          </Desc>
           </Converter>
+          <hr style={{width: "95%",color:"#707070"}} />
 
           <ShaftLiveContainer>
             <ColOne>
@@ -434,17 +554,15 @@ export default class ShaftLive extends Component {
             </ColOne>
 
             <ColTwo>
-              <h1>{this.state.dorm}</h1>
-              <FloorButton
-                floorNums={this.state.floorNums}
-                handleChange={this.handleFloorChange} />
-                <About>Green rooms are ones that you are likely to get based off data that Spectator has collected from housing selection from previous years.  Lottery numbers or priorities significantly below yours took these rooms last year.</About>
-                <About>Yellow rooms were taken by lottery numbers and priorities similar to yours last year.  </About>
-                <About>To read more about how our converter and predictor works, check out this Spectrum article <a href="https://www.columbiaspectator.com/spectrum/2020/03/09/a-guide-to-the-redesigned-shaft/">here</a>.</About>
+                
             </ColTwo>
             <ColThree>
               <SVGContainer>
                 <div>
+                  <h1>{this.state.dorm}</h1>
+                  <FloorButton
+                    floorNums={this.state.floorNums}
+                    handleChange={this.handleFloorChange} />
                   <FloorPlanTitle>Interactive Floor Plans</FloorPlanTitle>
                   <FloorPlanPrompt> — hover to explore!</FloorPlanPrompt>
                 </div>

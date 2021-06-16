@@ -12,7 +12,7 @@ let NumberBtn = styled.button`
     border-radius: 5px;
     font-family: Raleway, sans-serif;
     font-size: 0.8rem;
-    color: ${props => props.theme.black};
+    color: #676767;
     background-color: ${props => props.theme.white};
     border: solid 1px ${props => props.theme.lightGray};    
     width: 100%;
@@ -47,7 +47,6 @@ let NumberSelected = styled(NumberBtn)`
 `
 let ButtonTopText= styled.p`
     color: 	${props => props.theme.columbiaBlue};
-    font-weight: bold;
     margin-top: 1rem;
     margin-bottom:0.5rem;
     text-align: left;
@@ -175,32 +174,6 @@ export default class FloorButton extends Component{
     render(){
         const { width } = this.state;
         const isMobile = width <= 700;
-
-        if(isMobile) {
-
-        return( //HAVE IF MOBILE STATEMENT
-            <div>
-                {this.props.floorNums && (
-
-                <FloorButtonWrapper>  
-              
-                <StyledDropdown>
-                <StyledToggle variant="success" id="dropdown-basic">
-                    <Buttons>{this.state.currentFloorIndex + 1}<V src={ChrisV}/></Buttons>
-                </StyledToggle>
-
-                <Menu>
-                    <Items>{this.getButtons()}</Items>
-                </Menu>
-                </StyledDropdown>                
-                
-                </FloorButtonWrapper>
-             )}
-            </div>
-        );
-        }
-
-        else {
             return (
                 <div>
                 {this.props.floorNums && 
@@ -213,5 +186,5 @@ export default class FloorButton extends Component{
             );
         }
 
-    }
+    
 }

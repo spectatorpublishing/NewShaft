@@ -1,0 +1,18 @@
+.info-tooltip {
+    background-color: #62A8E5 !important;
+    border-radius: 5px;
+    opacity: 1 !important;
+  }
+  
+  .info-tooltip.place-left::after {
+    border-left-color: #62A8E5 !important;
+  }
+  .info-tooltip.place-right::after {
+    border-right-color: #62A8E5 !important;
+  }
+  .info-tooltip.place-top::after {
+    border-top-color: #62A8E5 !important;
+  }
+  .info-tooltip.place-bottom::after {
+    border-bottom-color: #62A8E5 !important;
+  }
