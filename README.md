@@ -91,6 +91,3 @@ https://stackoverflow.com/questions/1034243/how-to-get-a-unix-script-to-run-ever
 
 This is the most obvious part. Typically we run our application by using yarn dev on
 localhost, but this doesn't work for production environments. It will need to be more involved.
-
-
-

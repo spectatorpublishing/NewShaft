@@ -1,13 +1,16 @@
 /** Handles all pooled connections to MySQL database */
 const util = require('util')
 const mysql = require('mysql')
+
+require('dotenv').config();
+
 const pool = mysql.createPool({
   connectionLimit: 10,
-  host: process.env.SHAFTHOST,
-  user: process.env.SHAFTUSER,
-  password: process.env.SHAFTPASSWORD,
-  database: process.env.SHAFTDATABASE
-})
+  host: "192.34.62.10",
+  user: "columbiaspectatordev",
+  password: "Columbiaspectatorspectech1877",
+  database: "dev"
+});
 
 // Ping database to check for common exception errors.
 pool.getConnection((err, connection) => {
@@ -25,10 +28,10 @@ pool.getConnection((err, connection) => {
 
   if (connection) connection.release()
 
-  return
-})
+  return;
+});
 
 // Promisify for Node.js async/await.
-pool.query = util.promisify(pool.query)
+pool.query = util.promisify(pool.query);
 
-module.exports = pool
+module.exports = pool;
