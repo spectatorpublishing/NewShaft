@@ -52,9 +52,10 @@ Steps:
 3. All of the pm2 processes and relevant folders are in the `erin` account, not the `root` account. Switch to that account: `su erin`
 4. Make sure that when you run `pm2 list`, you see:
 <img width="1235" alt="Screen Shot 2022-01-09 at 3 39 19 PM" src="https://user-images.githubusercontent.com/16248113/148699912-1079821a-adfb-4ac0-813b-a1e2c7850d2c.png">
+
 6. Make sure that you are in `/home/erin/`: `cd ~`
 7. Here, we have `NewShaft/NewShaft` (sorry about the nesting) and `NewShaft1`-- I like to move the files from my personal laptop to `NewShaft1`, poke around in that directory to make sure everything looks about right, and then copy those files into `NewShaft/NewShaft`, just as an added security measure. When checking that everything is good on your personal laptop, check on `localhost:8080`-- if stuff there looks off, you forgot to run `npm build`.
-8. Sync your personal Shaft to the server's Shaft: `rsync -a ~/programming/NewShaft/ erin@104.131.121.94:NewShaft1`, where `~/programming/NewShaft/` is the path to your Shaft directory.
+8. Sync your personal Shaft to the server's Shaft: `rsync -a ~/programming/NewShaft/ erin@104.131.121.94:NewShaft1`, where `~/programming/NewShaft/` is the path to your Shaft directory. The password it is asking for is the droplet password on the admin doc.
 9. This will hang for a bit-- it just means it is working
 10. When that is done, `cd NewShaft1` and poke around to make sure that your changes are there, and that everything looks how you expected it to.
 11. Now copy the `NewShaft1` stuff into the actual, deployed directory: `sudo cp -a /home/erin/NewShaft1/. /home/erin/NewShaft/NewShaft/`
