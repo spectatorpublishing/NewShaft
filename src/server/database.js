@@ -6,10 +6,10 @@ require('dotenv').config();
 
 const pool = mysql.createPool({
   connectionLimit: 10,
-  host: "192.34.62.10",
-  user: "columbiaspectatordev",
-  password: "Columbiaspectatorspectech1877",
-  database: "dev"
+  host: process.env.SHAFTHOST,
+  user: process.env.SHAFTUSER,
+  password: process.env.SHAFTPASSWORD,
+  database: process.env.SHAFTDATABASE
 });
 
 // Ping database to check for common exception errors.
