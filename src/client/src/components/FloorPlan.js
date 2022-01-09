@@ -5,7 +5,10 @@ import 'react-image-lightbox/style.css';
 import Lightbox from 'react-image-lightbox';
 
 let FloorPlanTitle = styled.h2`
-    margin-bottom: 20px;
+    margin-top: 0.5vw;
+    margin-bottom: 1vw;
+    font-weight: 900;
+    width: 100%;
 `
 
 let FloorPlanTitleMobile = styled.h2`
@@ -15,10 +18,13 @@ let FloorPlanTitleMobile = styled.h2`
 `
 
 let FloorPlanBox = styled.div` 
-    ${props => props.theme.grayBorder}
     display: flex;
     flex-direction: row;
     overflow: hidden;
+    padding: 3vw;
+    margin-top: 1rem;
+    box-shadow: 5px 5px 10px ${props => props.theme.lightGray};
+    border: 1px solid ${props => props.theme.lightGray};
 `
 
 let FloorList = styled.div`
@@ -65,7 +71,8 @@ let PlanDisplay = styled.div`
 let FloorPlanNavMobile = styled.div`
     display: flex;
     flex-direction: row;
-    justify-content: space-between;
+    align-items: center;
+    justify-content: space-around;
     padding: 1px 5px 1px 5px;
 `
 // mobile removes box border
@@ -78,6 +85,8 @@ let FloorPlanBoxMobile = styled.div`
 
 let FloorListMobile = styled.div`
     display: flex;
+    align-items: center;
+    justify-content: space-around;
     flex-direction: row;
     text-align: center;
 `
@@ -209,10 +218,10 @@ export default class FloorPlan extends React.PureComponent {
                     <FloorPlanBoxMobile>
                         <PlanDisplayMobile>
                             <CurrentPlanMobile src={this.state.currentPlan} />
-                            <FloorPlanNavMobile>
-                                <FloorNumberMobile> {this.props.planNames[this.state.currentFloor -1]}</FloorNumberMobile>
+                            <FloorPlanNavMobile>                                
                                 <FloorListMobile>
                                     <FloorButton onClick = {() => this.floorDown()}><FloorArrow>&#8249;</FloorArrow></FloorButton>
+                                    <FloorNumberMobile> {this.props.planNames[this.state.currentFloor -1]}</FloorNumberMobile>
                                     <FloorButton onClick = {() => this.floorUp()} ><FloorArrow>&#8250;</FloorArrow></FloorButton>
                                 </FloorListMobile>
                             </FloorPlanNavMobile>

@@ -19,7 +19,21 @@ const ImageContainer = styled.div`
 		margin-right: 0px;
 	}
 `
-
+let SpectrumContainer = styled.div`
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	align-items: center;
+`
+let LinkButton = styled.a`
+      font-size: 15; 
+      text-align: center;
+      background: #73A6E0;
+      color: white;
+      border-radius: 7px; 
+      justify-content:center; align-self: center;
+	  padding-top: 10px; padding-bottom: 10px; padding-left: 35px; padding-right: 35px;
+`
 const Image = styled.img`
 	width: 100%;
 	height: auto;
@@ -32,9 +46,6 @@ const Title = styled.h3`
 const AuthorLine = styled.p`
 `
 
-const Wrapper = styled.div`
-	width: 100%;
-`
 
 const Hr = styled.hr`
 	border-color: ${props => props.theme.lightGray};
@@ -53,20 +64,13 @@ const Hr = styled.hr`
 //   padding-left: 10px;
 // `
 
-const Logo = styled.img `
-	display: block;
-  	margin: 20px auto;
-  	width: 55%;
-
-  	@media only screen and (max-width: 767px) {
-  		width: 80%;
-			margin-bottom: 20px;
-			margin-top: 0;
-  	}
+const Wrapper = styled.div`
+	margin-bottom: 1.5rem;
+	padding: 3vw;
+	margin-top: 1rem;
+	box-shadow: 5px 5px 10px ${props => props.theme.lightGray};
+	border: 1px solid ${props => props.theme.lightGray};
 `
-
-let LogoLink = styled.a``
-
 const TextDiv = styled.div `
 	width: 70%;
 
@@ -74,6 +78,7 @@ const TextDiv = styled.div `
 		width: 100%;
 		margin-top: 5px;
 	}
+	text-align: left; 
 `
 
 const LinkDiv = styled.a`
@@ -122,12 +127,12 @@ class SpectrumSidebar extends Component {
 
     render(){
         return(
-	        <Wrapper >
-				<LogoLink href="https://www.columbiaspectator.com/spectrum/shaft/" target="_blank">
-					<Logo src="https://www.columbiaspectator.com/pb/resources/img/spectrum-logo-NEW.png"/>
-				</LogoLink>
-				{this.articleMap()}
-			</Wrapper>
+			<SpectrumContainer>
+				<Wrapper>
+					{this.articleMap()[0]}
+				</Wrapper>
+				<LinkButton href="https://www.columbiaspectator.com/spectrum/shaft/">Read More</LinkButton>
+			</SpectrumContainer> 
 		);
 	}
 }
