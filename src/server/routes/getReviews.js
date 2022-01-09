@@ -53,10 +53,10 @@ function getReviews(con, dorm, callback) {
 
 router.get('/:dorm', function(req, res) {
 	var con = mysql.createConnection({
-	    host: process.env.SHAFTHOST,
-  		user: process.env.SHAFTUSER,
-  		password: process.env.SHAFTPASSWORD,
-  		database: process.env.SHAFTDATABASE
+		host: process.env.SHAFTHOST,
+		user: process.env.SHAFTUSER,
+		password: process.env.SHAFTPASSWORD,
+		database: process.env.SHAFTDATABASE
 	});
 
 	getReviews(con, req.params.dorm, (revInfo) => {

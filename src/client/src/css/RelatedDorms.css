@@ -15,10 +15,10 @@
     }
 
     .relatedDormName {
-        width: 80vw;
+        width: 70vw;
         height: 3rem;
         border: solid gray 1px;
-        border-radius: 10px;
+        border-radius: 5px;
         display: flex;
         justify-content: center;
         align-items: center;
@@ -52,6 +52,10 @@
 /* might need px modification  */
 .relatedDormsTitle {
     margin: 20px 0 20px 5px;
+    margin-top: 1vw;
+    margin-bottom: 1vw;
+    font-weight: 900;
+    width: 100%;
 }
 
 /*  Display flex allows the CSS

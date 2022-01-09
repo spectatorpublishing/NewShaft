@@ -12,8 +12,11 @@ import Scroller from "../components/Scroller";
 import SpectrumSidebar from "../components/SpectrumSidebar";
 import ScrollToTop from "../components/ScrollToTop";
 import AdManager from "../components/AdManager";
-import Expander from "../components/Expander";
+import BlurbExpander from "../components/BlurbExpander";
 import { theme } from "../util/GlobalStyles";
+import {NavLink} from "react-router-dom";
+import ReviewPageReview from "../components/ReviewPageReview"
+
 
 var recommend="28%" 
 var ranking="#7" 
@@ -32,34 +35,92 @@ let relatedDorms = [
 let Header = styled.div`
   display: flex;
   position: relative;
-  top: -100px;
-  margin: 0 15%;
-  pointer-events: none;
+  flex-direction: row; 
+  justify-content: space-between; 
+  align-items: flex-end;
+  top: -75px;
   @media only screen and (max-width: 767px) {
-    top: -220px;
+    top: -130px;
   }
 `;
+
+let HeaderMenu = styled.div`
+  display: flex; 
+  top: -125px;
+  margin-right: 30px;
+  flex-direction: column;
+  position: relative;
+`;
+let ScrollHeaderMenu = styled(HeaderMenu)`
+  margin-bottom: -50px;
+  margin-right: 10px; 
+  align-items: flex-end;
+`
+
 let DormName = styled.h1`
+  background-color: ${props => props.theme.columbiaBlue};
   color: ${props => props.theme.white};
-  text-shadow: ${props => props.theme.shadow};
+  padding: 2vw;
+  align-self:flex-start;
+  border-radius: 0px 20px 20px 0px;
+  pointer-events: initial;
+  padding-left: 25vw;
+  padding-right: 10vw;
+`;
+
+let LinkButton = styled(NavLink)`
+      font-size: 15; 
+      text-align: center;
+      background: #73A6E0;
+      color: white;
+      border-radius: 7px; 
+      justify-content:center; align-self: center;
+      padding-top: 10px; padding-bottom: 10px; padding-left: 35px; padding-right: 35px;
+`
+let MobileDormName = styled(DormName)`
+  padding-left: 10vw;
+  padding-right: 10vw;
+`;
+let ScrollDormName = styled.h2`
+  background-color: ${props => props.theme.columbiaBlue};
+  color: ${props => props.theme.white};
+  padding: 1.8vw;
+  margin-bottom: 2vw;
+  border-radius: 0px 20px 20px 0px;
   pointer-events: initial;
 `;
 
 let Blurb = styled.div`
-  background-color: ${props => props.theme.columbiaBlue};
-  color: ${props => props.theme.white};
+  background-color: ${props => props.theme.white};
   position: relative;
-  top: -100px;
+  top: -110px;
   min-height: 40px;
-  margin: 0 15% -100px 15%;
-  padding: 1.8vw;
   border-radius: 20px;
   @media only screen and (max-width: 767px) {
     top: -220px;
     margin-bottom: -220px;
     min-height: 80px;
   }
+  color:  #707070;
 `;
+
+let Title = styled.h2`
+    margin-top: 2vw;
+    margin-bottom: 1vw;
+    font-weight: 900;
+    width: 100%;
+`
+let ReviewContainer = styled.div`
+  justify-content: center;
+  width: 90%;
+    @media(max-width: 700px){
+        max-height: 90vh;
+    }
+  overflow-y: scroll;
+  padding: 1rem;
+  display: flex;
+  flex-direction: column;
+`
 
 let Body = styled.div`
   display: flex;
@@ -74,10 +135,10 @@ let AdCenter = styled.div`
   justify-content: center;
 
 `
-
 let ColOne = styled.div`
   display: flex;
   width: 15%;
+  margin-top: -3.5vw;
 `;
 
 let ColTwo = styled.div`
@@ -94,12 +155,13 @@ let ScrollMenu = styled(ColOne)`
 
   // 60px matches the value added in handleScroll())
   ${({ isFixed }) => isFixed && `
-    top: calc(60px + 20%);
+    top: calc(40px + 30%);
   `};
 `
 
 let ScrollAAG = styled(ScrollMenu)`
   display: flex;
+  justify-content: center;
   padding-right: 20px;
   left: initial;
   right: 0;
@@ -192,7 +254,7 @@ export default class Dorm extends React.PureComponent {
         AC: 0,
         MUSIC: 0
       },
-      reviews: {},
+      reviews: [],
       dorm_photos: [],
       relatedArticles: [],
       floorPlans: [],
@@ -202,9 +264,12 @@ export default class Dorm extends React.PureComponent {
       scrollMenuOffset: null,
       width: screen_width
     };
+    
     this.handleWindowSizeChange = this.handleWindowSizeChange.bind(this);
     this.handleScroll = this.handleScroll.bind(this);
     this.isFixed = this.isFixed.bind(this);
+
+    
   }
 
   componentDidMount() {
@@ -415,10 +480,23 @@ export default class Dorm extends React.PureComponent {
       <div ref={ref}>
         {props.children}
       </div>
-    ));
+    )); 
     const isMobile = this.state.width <= 768;
     const isMedium = this.state.width <= 1400;
-
+    const headerButtons = {
+      fontSize: 15,textAlign: "center",
+      background: "#707070BF",color: "white",
+      borderRadius: 7,paddingTop: 10, paddingBottom: 10,paddingLeft: 5,paddingRight: 5,
+      justifyContent:'center',alignItems: 'center',marginBottom: 15, minWidth: '160px', border: 'none',
+    }
+    const years_map = {
+      "first-years": "Freshman",
+      "sophomores": "Sophomore",
+      "juniors": "Junior",
+      "seniors": "Senior"
+    }
+    let useReview = this.state.reviews.slice(0,3);
+    if (isMobile){useReview = useReview.slice(0,2);}
     let roomtype = "";
     if (this.state.dormInfo.SUITE.length != 0) {
       roomtype += "Suite-style";
@@ -443,66 +521,118 @@ export default class Dorm extends React.PureComponent {
         <PhotoBanner bannerImages={this.state.dorm_photos} path={this.props.match.params.dorm}/>
         <Header>
           <DormName>{this.state.dormInfo.DORM}</DormName>
-        </Header>
+          <HeaderMenu>           
+            <NavLink style = {headerButtons} to="/explore">See Photos</NavLink>
+            <NavLink style = {headerButtons} to="/reviews">Read More Reviews</NavLink>
+            <a href="https://docs.google.com/forms/d/e/1FAIpQLSfLfk7KE8fHSh117X4AhVKU-KJkJsvWjbvlW5mcwwbx08es0w/viewform" style={headerButtons}>Submit a Review</a>
+          </HeaderMenu>
+        </Header>:<Header><MobileDormName>{this.state.dormInfo.DORM}</MobileDormName></Header>}
         {(isMobile && truncatedDescription) ? 
-          <Expander 
+          <BlurbExpander 
             custom={{
               boxStyle: `
-                background-color: ${theme.columbiaBlue};
+                background-color: ${theme.white};
                 position: relative;
                 top: -100px;
                 min-height: 40px;
-                margin: 0 15% -100px 15%;
+                margin: 10 5% -15px 30%;
                 padding: 1.8vw;
-                border-radius: 20px;
+                border: none;
                 @media only screen and (max-width: 767px) {
-                  top: -220px;
-                  margin-bottom: -220px;
+                  top: -100px;
+                  margin-bottom: -125px;
                   min-height: 80px;
                 }
               `,
-              color: theme.columbiaBlue,
-              textColor: theme.white,
+              textColor: "#707070",
             }} 
             showAll={fullDescription}
             showSome={truncatedDescription}
           />
         :
-          <Blurb>{fullDescription}</Blurb>
+          null
         }
-
         <Body>
           {!isMobile && <ColOne>
             <ScrollMenu 
               ref={this.scrollMenuRef} 
               isFixed={this.state.scrollMenuFixed}
             >
+              {(this.state.scrollMenuFixed)?<ScrollDormName>{this.state.dormInfo.DORM}</ScrollDormName>:null}
               <Scroller compRef={this.amenitiesRef} label={"Amenities"} />
-              <Scroller compRef={this.locationRef} label={"Location"} />
               <Scroller compRef={this.proconRef} label={"Pros and Cons"} />
               <Scroller compRef={this.floorplansRef} label={"Floor Plans"} />
               <Scroller compRef={this.reviewsRef} label={"Reviews"} />
-              <Scroller compRef={this.spectrumRef} label={"Spectrum"} />
-              <Scroller compRef={this.suggestionsRef} label={"Related Dorms"} />
+              <Scroller compRef={this.locationRef} label={"Location"} />
+              <Scroller compRef={this.suggestionsRef} label={"Related Dorms"} />            
+              <Scroller compRef={this.spectrumRef} label={"Spectrum"} />            
             </ScrollMenu>
           </ColOne>
           }
 
           <ColTwo mobile={isMobile}>
+          {(!isMobile)?<Blurb>{fullDescription}</Blurb>:null}
             {isMobile && (
+              <Margin>
               <AtAGlance
                 location={this.state.dormInfo.ADDRESS}
                 roomtype={roomtype}
                 classmakeup={this.state.dormInfo.CLASS_MAKEUP}
                 lottery={this.state.dormInfo.LOTTERY_NUMS}
               />
+              </Margin>
             )}
+            
             <ScrollerTarget ref={this.amenitiesRef}>
               <Margin>
                 <Amenities amenities={this.state.amenities}/>
               </Margin>
             </ScrollerTarget>
             
+            <ScrollerTarget ref={this.proconRef}>
+              <Margin>
+                <ProCon
+                  pros={this.state.dormInfo.PROS}
+                  cons={this.state.dormInfo.CONS}
+                />
+              </Margin>
+            </ScrollerTarget>
+
+            <AdCenter style = {{marginBottom: 25,marginTop: 25 }}><AdManager name = "shaftleader" mobile = {isMedium}/></AdCenter>
+            
+            <ScrollerTarget ref={this.floorplansRef}>
+              <Margin>
+                <FloorPlan
+                  floorOffset={0}
+                  planArray={this.state.floorPlans}
+                  planNames={this.state.floorNames}
+                />
+              </Margin>
+            </ScrollerTarget>
+
+            <ScrollerTarget ref={this.reviewsRef}>
+              <Margin>
+              <Title>Reviews</Title>
+              <ReviewContainer>
+                  {useReview.map((review, j) => (
+                      <ReviewPageReview
+                        key={""+j}
+                        stars={review.NUM_STARS}
+                        review={review.REVIEW_TXT}
+                        room={review.ROOM_NUM}
+                        year={years_map[review.YEAR]}
+                        timestamp={review.TIMESTAMP}
+                        dorm = {this.state.dorm}
+                        recommended = {review.RECOMMEND}
+                        thumbs_up = {review.THUMBS_UP}
+                        thumbs_down = {review.THUMBS_DOWN}
+                      />
+                  ))}
+                  <LinkButton to="/reviews">Read More Reviews</LinkButton>
+              </ReviewContainer>   
+              </Margin>
+              
+            </ScrollerTarget>
             <ScrollerTarget ref={this.locationRef}>
               <Margin>
                 <Maps
@@ -518,60 +648,40 @@ export default class Dorm extends React.PureComponent {
               </Margin>
             </ScrollerTarget>
 
-            <AdCenter><AdManager name = "shaftleader" mobile = {isMedium}/></AdCenter>
-
-
-            <ScrollerTarget ref={this.proconRef}>
-              <Margin>
-                <ProCon
-                  pros={this.state.dormInfo.PROS}
-                  cons={this.state.dormInfo.CONS}
-                />
-              </Margin>
-            </ScrollerTarget>
+            <AdCenter style = {{marginBottom: 25,marginTop: 25 }}><AdManager name = "cds_leaderboard" mobile = {isMedium}/></AdCenter>
             
-            <ScrollerTarget ref={this.floorplansRef}>
-              <Margin>
-                <FloorPlan
-                  floorOffset={0}
-                  planArray={this.state.floorPlans}
-                  planNames={this.state.floorNames}
-                />
-              </Margin>
-            </ScrollerTarget>
-
-            <ScrollerTarget ref={this.reviewsRef}>
-              <Margin>
-                <ReviewsBox
-                  stars={this.state.avg_rating}
-                  recommend={this.state.reccomend}
-                  ranking={this.state.ranking}
-                  reviews={this.state.reviews}>
-                </ReviewsBox>
-              </Margin>
-            </ScrollerTarget>
-
-            <AdCenter><AdManager name = "cds_leaderboard" mobile = {isMedium}/></AdCenter>
-
-            <ScrollerTarget ref={this.spectrumRef}>
-              <Margin>
-                 <SpectrumSidebar spectrumSidebarData = {this.state.relatedArticles}/>
-              </Margin>
-            </ScrollerTarget>
-
             <ScrollerTarget ref={this.suggestionsRef}>
               <Margin>
+                <Title>Related Dorms</Title>
+                {(this.state.relatedDorms.length == 0)? null : 
                 <RelatedDorms
                   name={this.state.dormInfo.DORM}
                   relatedDorms={this.state.relatedDorms}
-                />
+                />}
               </Margin>
             </ScrollerTarget>
+
+            <ScrollerTarget ref={this.spectrumRef}>
+              <Margin>
+                <Title>Spectrum on Housing</Title>
+                {(this.state.relatedArticles.length == 0)? null : <SpectrumSidebar spectrumSidebarData = {this.state.relatedArticles}/>}  
+              </Margin>
+              
+            </ScrollerTarget>
+
+            
           
           </ColTwo>
 
           {!isMobile && (
             <ScrollAAG isFixed={this.state.scrollMenuFixed}>
+              {(this.state.scrollMenuFixed)?
+                <ScrollHeaderMenu>           
+                  <NavLink style = {headerButtons} to="/explore">See Photos</NavLink>
+                  <NavLink style = {headerButtons} to="/reviews">Read More Reviews</NavLink>
+                  <a href="https://docs.google.com/forms/d/e/1FAIpQLSfLfk7KE8fHSh117X4AhVKU-KJkJsvWjbvlW5mcwwbx08es0w/viewform" style={headerButtons}>Submit a Review</a>
+              </ScrollHeaderMenu>
+              :null}
               <AtAGlance
                 location={this.state.dormInfo.ADDRESS}
                 roomtype={roomtype}

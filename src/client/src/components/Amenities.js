@@ -19,10 +19,9 @@ const amenitiesMap = {
 }
 
 const AmenitiesTitle = styled.h2`
-  margin-top: -0.3vw;
+  margin-top: -5vw;
   margin-bottom: 1vw;
-  margin-left: 0.6vw;
-  font-weight: 5000;
+  font-weight: 900;
   width: 100%;
 `
 
@@ -35,17 +34,22 @@ const AllAmenities = styled.div`
   display: grid;
   grid-template-columns: repeat(auto-fill,minmax(50%, 1fr));
   width: 100%;
+  
 `
 
 const AmenitiesContainer = styled.div`
-  ${props => props.theme.grayBorder}
   padding: 3vw;
+  margin-top: 1rem;
+  padding-right: 1rem;
+  box-shadow: 5px 5px 10px ${props => props.theme.lightGray};
+  border: 1px solid ${props => props.theme.lightGray};
 `
 
 const Amenity = styled.div`
   display: flex;
   flex-direction: row;
   margin-top: 15px;
+  
 `
 
 export default class Amenities extends Component {
