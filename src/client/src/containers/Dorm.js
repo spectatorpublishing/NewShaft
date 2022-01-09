@@ -205,7 +205,6 @@ const dorm_name_map = {
   "WienHall": "Wien Hall",
   "WoodbridgeHall": "Woodbridge Hall",
   "PlimptonHall" : "Plimpton Hall"
-
 }
 
 export default class Dorm extends React.PureComponent {
@@ -519,14 +518,16 @@ export default class Dorm extends React.PureComponent {
     return (
       <ScrollToTop>
         <PhotoBanner bannerImages={this.state.dorm_photos} path={this.props.match.params.dorm}/>
+        {!isMobile ? (
         <Header>
           <DormName>{this.state.dormInfo.DORM}</DormName>
           <HeaderMenu>           
-            <NavLink style = {headerButtons} to="/explore">See Photos</NavLink>
+            <NavLink style = {headerButtons} to={`/explore/${Object.keys(dorm_name_map).find(key => dorm_name_map[key] === this.state.dormInfo.DORM)}`}>See Photos</NavLink>
             <NavLink style = {headerButtons} to="/reviews">Read More Reviews</NavLink>
             <a href="https://docs.google.com/forms/d/e/1FAIpQLSfLfk7KE8fHSh117X4AhVKU-KJkJsvWjbvlW5mcwwbx08es0w/viewform" style={headerButtons}>Submit a Review</a>
           </HeaderMenu>
-        </Header>:<Header><MobileDormName>{this.state.dormInfo.DORM}</MobileDormName></Header>}
+        </Header>) : (
+        <Header><MobileDormName>{this.state.dormInfo.DORM}</MobileDormName></Header>)}
         {(isMobile && truncatedDescription) ? 
           <BlurbExpander 
             custom={{
