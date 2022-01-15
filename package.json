@@ -5,7 +5,9 @@
   "main": "src/server/index.js",
   "scripts": {
     "start": "node index.js",
-    "prod": "cd src/client && yarn install && yarn build && cd ../../ && npm install && yarn start"
+    "prod": "cd src/client && yarn install && yarn build && cd ../../ && npm install && yarn start",
+    "storybook": "start-storybook -p 6006",
+    "build-storybook": "build-storybook"
   },
   "author": "Arsalaan Ansari",
   "license": "ISC",
@@ -17,10 +19,18 @@
     "react-bootstrap": "^1.0.0"
   },
   "devDependencies": {
+    "@babel/core": "^7.16.7",
+    "@storybook/addon-actions": "^6.4.12",
+    "@storybook/addon-essentials": "^6.4.12",
+    "@storybook/addon-links": "^6.4.12",
+    "@storybook/react": "^6.4.12",
+    "babel-loader": "^8.2.3",
     "cheerio": "^1.0.0-rc.2",
     "concurrently": "^5.0.2",
     "fs": "^0.0.1-security",
     "mysqldump": "^3.1.0",
-    "nodemon": "^2.0.2"
+    "nodemon": "^2.0.2",
+    "react": "^17.0.2",
+    "react-dom": "^17.0.2"
   }
 }
