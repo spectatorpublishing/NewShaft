@@ -1,41 +1,41 @@
 import React from 'react';
 import { storiesOf } from '@storybook/react';
 import { Button } from '@storybook/react/demo';
-import SearchBar from '../src/client/components/SearchBar.js';
-import PhotoBanner from '../src/client/components/PhotoBanner.js';
-import DormButton from '../src/client/components/DormButton.js';
-import Explore from '../src/client/containers/Explore.js';
-import ProCon from '../src/client/components/ProCon.js';
-import QuickReview from '../src/client/components/QuickReview.js';
-import Review from '../src/client/components/Review.js';
-import FloorPlan from '../src/client/components/FloorPlan.js';
-import FilterButton from '../src/client/components/FilterButton.js';
-import FilterComponent from '../src/client/components/FilterComponent.js';
-import Expander from '../src/client/components/Expander.js';
-import Amenities from '../src/client/components/Amenities.js';
-import AtAGlance from '../src/client/components/AtAGlance.js';
-import FullReview from '../src/client/components/FullReview.js';
-import ReviewList from '../src/client/components/ReviewList.js';
-import RelatedDorms from '../src/client/components/RelatedDorms';
-import ExploreSidebar from '../src/client/components/ExploreSidebar';
+import SearchBar from '../src/components/SearchBar.js';
+import PhotoBanner from '../src/components/PhotoBanner.js';
+import DormButton from '../src/components/DormButton.js';
+import Explore from '../src/containers/Explore.js';
+import ProCon from '../src/components/ProCon.js';
+import QuickReview from '../src/components/QuickReview.js';
+import Review from '../src/components/Review.js';
+import FloorPlan from '../src/components/FloorPlan.js';
+import FilterButton from '../src/components/FilterButton.js';
+import FilterComponent from '../src/components/FilterComponent.js';
+import Expander from '../src/components/Expander.js';
+import Amenities from '../src/components/Amenities.js';
+import AtAGlance from '../src/components/AtAGlance.js';
+import FullReview from '../src/components/FullReview.js';
+import ReviewList from '../src/components/ReviewList.js';
+import RelatedDorms from '../src/components/RelatedDorms';
+import ExploreSidebar from '../src/components/ExploreSidebar';
 import { MemoryRouter } from 'react-router';
-//import RelatedDormsList from '../src/client/components/RelatedDormsList'
-import NavBar from '../src/client/components/NavBar.js'
-import FullScreen from '../src/client/components/FullScreen.js';
-import Maps from '../src/client/components/Maps.js'
-import FloorPlanSVG from '../src/client/components/FloorPlanSVG.js'
-// import ReviewSlider from "../src/client/components/ReviewSlider.js";
-import SlidingReview from "../src/client/components/SlidingReview.js";
-import SpectrumSidebar from "../src/client/components/SpectrumSidebar.js";
-import RoomAvailability from '../src/client/components/RoomAvailability.js';
-import WhiteboardTable from '../src/client/components/WhiteboardTable.js';
-import AdManager from "../src/client/components/AdManager";
-import WhiteboardSidebar from "../src/client/components/WhiteboardSidebar.js";
-import TestSVG from "../src/client/components/TestSVGs.js";
-import FloorButton from "../src/client/components/FloorButton.js";
-import LiveBlog from "../src/client/components/LiveBlog.js";
-import FAQBubble from '../src/client/components/FAQBubble.js';
-import FAKEfaqbubblecontainer from'../src/client/components/FAKEfaqbubblecontainer.js';
+//import RelatedDormsList from '../src/components/RelatedDormsList'
+import NavBar from '../src/components/NavBar.js'
+// import FullScreen from '../src/components/FullScreen.js';
+import Maps from '../src/components/Maps.js'
+import FloorPlanSVG from '../src/components/FloorPlanSVG.js'
+// import ReviewSlider from "../src/components/ReviewSlider.js";
+import SlidingReview from "../src/components/SlidingReview.js";
+import SpectrumSidebar from "../src/components/SpectrumSidebar.js";
+import RoomAvailability from '../src/components/RoomAvailability.js';
+import WhiteboardTable from '../src/components/WhiteboardTable.js';
+import AdManager from "../src/components/AdManager";
+import WhiteboardSidebar from "../src/components/WhiteboardSidebar.js";
+// import TestSVG from "../src/components/TestSVGs.js";
+import FloorButton from "../src/components/FloorButton.js";
+import LiveBlog from "../src/components/LiveBlog.js";
+import FAQBubble from '../src/components/FAQBubble.js';
+import FAKEfaqbubblecontainer from'../src/components/FAKEfaqbubblecontainer.js';
 
 storiesOf('FAKEfaqbubblecontainer', module)
   .add('FAKEfaqbubblecontainer', () => 
@@ -53,10 +53,10 @@ storiesOf('LiveBlog', module)
   .add('LiveBlog', () =>
     <LiveBlog/>)
 
-storiesOf('TestSVG', module)
-  .add('TestSVG', () => 
-    <TestSVG dorm="Carman Hall"/>
-  );
+// storiesOf('TestSVG', module)
+//   .add('TestSVG', () => 
+//     <TestSVG dorm="Carman Hall"/>
+//   );
 // import WhiteboardSidebar from "../src/client/components/WhiteboardSidebar.js";
 
 storiesOf('SpectrumSidebar', module)
@@ -282,8 +282,8 @@ storiesOf('NavBar', module)
   .add('navbar', () => <NavBar menuItems={sampleMenuItems} />)
   .add('fixed navbar', () => <NavBar menuItems={sampleMenuItems} fixed />);
 
-  storiesOf('FullScreen', module)
-  .add('full screen', () => <FullScreen/>);
+  // storiesOf('/* F */ullScreen', module)
+  // .add('full screen', () => <FullScreen/>);
 
 storiesOf('Maps', module)
   .add('map', () => <Maps latitudes={[40.7128, 40.7129, 40.7128]} longitudes={[-74.006, -74.007, -74.008]} popupInfo={["carman", "mcbain", "JJ"]}/>);
