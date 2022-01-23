@@ -1,41 +1,35 @@
 import React from 'react';
 import { storiesOf } from '@storybook/react';
 import { Button } from '@storybook/react/demo';
-import SearchBar from '../src/components/SearchBar.js';
-import PhotoBanner from '../src/components/PhotoBanner.js';
-import DormButton from '../src/components/DormButton.js';
-import Explore from '../src/containers/Explore.js';
-import ProCon from '../src/components/ProCon.js';
-import QuickReview from '../src/components/QuickReview.js';
-import Review from '../src/components/Review.js';
-import FloorPlan from '../src/components/FloorPlan.js';
-import FilterButton from '../src/components/FilterButton.js';
-import FilterComponent from '../src/components/FilterComponent.js';
-import Expander from '../src/components/Expander.js';
-import Amenities from '../src/components/Amenities.js';
-import AtAGlance from '../src/components/AtAGlance.js';
-import FullReview from '../src/components/FullReview.js';
-import ReviewList from '../src/components/ReviewList.js';
-import RelatedDorms from '../src/components/RelatedDorms';
-import ExploreSidebar from '../src/components/ExploreSidebar';
+import PhotoBanner from '../../src/components/PhotoBanner.js';
+import DormButton from '../../src/components/DormButton.js';
+import Explore from '../../src/containers/Explore.js';
+import ProCon from '../../src/components/ProCon.js';
+import QuickReview from '../../src/components/QuickReview.js';
+import Review from '../../src/components/Review.js';
+import FloorPlan from '../../src/components/FloorPlan.js';
+import FilterButton from '../../src/components/FilterButton.js';
+import FilterComponent from '../../src/components/FilterComponent.js';
+import Expander from '../../src/components/Expander.js';
+import Amenities from '../../src/components/Amenities.js';
+import AtAGlance from '../../src/components/AtAGlance.js';
+import FullReview from '../../src/components/FullReview.js';
+import ReviewList from '../../src/components/ReviewList.js';
+import RelatedDorms from '../../src/components/RelatedDorms';
+import ExploreSidebar from '../../src/components/ExploreSidebar';
 import { MemoryRouter } from 'react-router';
-//import RelatedDormsList from '../src/components/RelatedDormsList'
-import NavBar from '../src/components/NavBar.js'
-// import FullScreen from '../src/components/FullScreen.js';
-import Maps from '../src/components/Maps.js'
-import FloorPlanSVG from '../src/components/FloorPlanSVG.js'
-// import ReviewSlider from "../src/components/ReviewSlider.js";
-import SlidingReview from "../src/components/SlidingReview.js";
-import SpectrumSidebar from "../src/components/SpectrumSidebar.js";
-import RoomAvailability from '../src/components/RoomAvailability.js';
-import WhiteboardTable from '../src/components/WhiteboardTable.js';
-import AdManager from "../src/components/AdManager";
-import WhiteboardSidebar from "../src/components/WhiteboardSidebar.js";
-// import TestSVG from "../src/components/TestSVGs.js";
-import FloorButton from "../src/components/FloorButton.js";
-import LiveBlog from "../src/components/LiveBlog.js";
-import FAQBubble from '../src/components/FAQBubble.js';
-import FAKEfaqbubblecontainer from'../src/components/FAKEfaqbubblecontainer.js';
+import NavBar from '../../src/components/NavBar.js'
+import Maps from '../../src/components/Maps.js'
+import FloorPlanSVG from '../../src/components/FloorPlanSVG.js'
+import SlidingReview from "../../src/components/SlidingReview.js";
+import SpectrumSidebar from "../../src/components/SpectrumSidebar.js";
+import RoomAvailability from '../../src/components/RoomAvailability.js';
+import WhiteboardTable from '../../src/components/WhiteboardTable.js';
+import WhiteboardSidebar from "../../src/components/WhiteboardSidebar.js";
+import FloorButton from "../../src/components/FloorButton.js";
+import LiveBlog from "../../src/components/LiveBlog.js";
+import FAQBubble from '../../src/components/FAQBubble.js';
+import FAKEfaqbubblecontainer from'../../src/components/FAKEfaqbubblecontainer.js';
 
 storiesOf('FAKEfaqbubblecontainer', module)
   .add('FAKEfaqbubblecontainer', () => 
@@ -52,12 +46,6 @@ storiesOf('FloorButton', module)
 storiesOf('LiveBlog', module)
   .add('LiveBlog', () =>
     <LiveBlog/>)
-
-// storiesOf('TestSVG', module)
-//   .add('TestSVG', () => 
-//     <TestSVG dorm="Carman Hall"/>
-//   );
-// import WhiteboardSidebar from "../src/client/components/WhiteboardSidebar.js";
 
 storiesOf('SpectrumSidebar', module)
   .add('SpectrumSidebar', () =>
@@ -79,8 +67,6 @@ storiesOf('SpectrumSidebar', module)
     />
     );
 
-// storiesOf('ReviewSlider', module)
-//   .add('test', () => <ReviewSlider />);
 storiesOf('Sidebar', module)
   .add('whiteboard', () => <WhiteboardSidebar sidebarModification={(dorm) => console.log(dorm)}/>)
 
@@ -130,16 +116,6 @@ storiesOf('Review', module)
 storiesOf('ReviewList', module)
   .add('ReviewList', () => <ReviewList />);
 
-// storiesOf('AdManager', module)
-//   .add('AdManager', () => <AdManager/>);
-
-// let planArray = [
-//   sampleFloor,"https://housing.columbia.edu/files/housing/Wien%208_2018.jpg",
-//     "https://housing.columbia.edu/files/housing/600%209_2016_0.jpg",
-//     "https://housing.columbia.edu/files/housing/Woodbridge%204_2018.jpg", 
-//     "https://i.kym-cdn.com/entries/icons/original/000/026/642/kot1.jpg"
-// ]
-
 storiesOf('FloorPlan', module)
   .add('keikaku means plan', () => <FloorPlan floorOffset={1} planArray={planArray}/>);
 
@@ -173,16 +149,6 @@ storiesOf('Amenities', module)
 
 storiesOf('AtAGlance', module)
   .add('at a glance', () => <AtAGlance location="545 W. 114th St." roomtype="Suite-style doubles" classmakeup="First-Years" numfloors="13"/>);
-
-// Related Dorms Content
-// let sampleRelatedDorms = [
-//   ["Carman", "https://memegenerator.net/img/images/17438601/dat-sad-fat-cat.jpg", "link!"],
-//   ["Furnald", "https://memegenerator.net/img/images/17438601/dat-sad-fat-cat.jpg", "link!"],
-//   ["John Jay", "https://memegenerator.net/img/images/17438601/dat-sad-fat-cat.jpg", "link!"],
-//   ["John Jay", "https://memegenerator.net/img/images/17438601/dat-sad-fat-cat.jpg", "link!"],
-//   ["John Jay", "https://memegenerator.net/img/images/17438601/dat-sad-fat-cat.jpg", "link!"],
-//   ["John Jay", "https://memegenerator.net/img/images/17438601/dat-sad-fat-cat.jpg", "link!"]
-// ];
 
 storiesOf('SlidingReview', module)
   .add('sliding review', () => <SlidingReview />);
@@ -422,4 +388,3 @@ storiesOf('FloorPlanSVG', module)
 
   storiesOf('RoomAvailability', module)
   .add('table component', () => <WhiteboardTable roomAvailability={sampleRoomData}/>);
-
