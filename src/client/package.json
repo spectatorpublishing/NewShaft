@@ -6,7 +6,7 @@
   "scripts": {
     "build": "react-scripts build",
     "start": "react-scripts start",
-    "storybook": "start-storybook -p 9001 -c .storybook",
+    "storybook": "start-storybook -p 9001 -c ./doc/.storybook",
     "dump-db": "node scripts/dump_mysql.js"
   },
   "author": "Arsalaan Ansari",
