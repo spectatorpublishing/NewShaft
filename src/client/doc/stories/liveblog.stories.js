@@ -1,7 +1,12 @@
 import React from 'react';
-import { storiesOf } from '@storybook/react';
-import LiveBlog from "../../src/components/LiveBlog.js";
+import LiveBlog from '../../src/components/LiveBlog.js';
 
-storiesOf('LiveBlog', module)
-  .add('LiveBlog', () =>
-    <LiveBlog/>)
+export default {
+  title: 'LiveBlog',
+};
+
+export const _LiveBlog = () => <LiveBlog />;
+
+_LiveBlog.story = {
+  name: 'LiveBlog',
+};

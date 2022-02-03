@@ -1,13 +1,24 @@
 import React from 'react';
-import { storiesOf } from '@storybook/react';
 import { Button } from '@storybook/react/demo';
 
-storiesOf('Button', module)
-  .add('with text', () => <Button>Hello Button</Button>)
-  .add('with some emoji', () => (
-    <Button>
-      <span role="img" aria-label="so cool">
-        😀 😎 👍 💯
-      </span>
-    </Button>
-  ));
+export default {
+  title: 'Button',
+};
+
+export const WithText = () => <Button>Hello Button</Button>;
+
+WithText.story = {
+  name: 'with text',
+};
+
+export const WithSomeEmoji = () => (
+  <Button>
+    <span role="img" aria-label="so cool">
+      😀 😎 👍 💯
+    </span>
+  </Button>
+);
+
+WithSomeEmoji.story = {
+  name: 'with some emoji',
+};
