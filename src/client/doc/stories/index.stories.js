@@ -2,46 +2,19 @@ import React from 'react';
 import { storiesOf } from '@storybook/react';
 import { Button } from '@storybook/react/demo';
 import PhotoBanner from '../../src/components/PhotoBanner.js';
-import DormButton from '../../src/components/DormButton.js';
 import Explore from '../../src/containers/Explore.js';
 import ProCon from '../../src/components/ProCon.js';
-import QuickReview from '../../src/components/QuickReview.js';
-import Review from '../../src/components/Review.js';
-import FloorPlan from '../../src/components/FloorPlan.js';
-import FilterButton from '../../src/components/FilterButton.js';
-import FilterComponent from '../../src/components/FilterComponent.js';
 import Expander from '../../src/components/Expander.js';
 import Amenities from '../../src/components/Amenities.js';
-import AtAGlance from '../../src/components/AtAGlance.js';
-import FullReview from '../../src/components/FullReview.js';
-import ReviewList from '../../src/components/ReviewList.js';
-import RelatedDorms from '../../src/components/RelatedDorms';
-import ExploreSidebar from '../../src/components/ExploreSidebar';
 import { MemoryRouter } from 'react-router';
 import NavBar from '../../src/components/NavBar.js'
 import Maps from '../../src/components/Maps.js'
 import FloorPlanSVG from '../../src/components/FloorPlanSVG.js'
-import SlidingReview from "../../src/components/SlidingReview.js";
 import SpectrumSidebar from "../../src/components/SpectrumSidebar.js";
 import RoomAvailability from '../../src/components/RoomAvailability.js';
 import WhiteboardTable from '../../src/components/WhiteboardTable.js';
 import WhiteboardSidebar from "../../src/components/WhiteboardSidebar.js";
-import FloorButton from "../../src/components/FloorButton.js";
 import LiveBlog from "../../src/components/LiveBlog.js";
-import FAQBubble from '../../src/components/FAQBubble.js';
-import FAKEfaqbubblecontainer from'../../src/components/FAKEfaqbubblecontainer.js';
-
-storiesOf('FAKEfaqbubblecontainer', module)
-  .add('FAKEfaqbubblecontainer', () => 
-  <FAKEfaqbubblecontainer/>)
-
-storiesOf('FAQBubble', module)
-  .add('FAQBubble', () => 
-  <FAQBubble/>)
-
-storiesOf('FloorButton', module)
-  .add('FloorButton', () =>
-    <FloorButton dorm="Carman Hall" floorNums={[10]} />)
 
 storiesOf('LiveBlog', module)
   .add('LiveBlog', () =>
@@ -52,14 +25,14 @@ storiesOf('SpectrumSidebar', module)
     <SpectrumSidebar
                 spectrumSidebarData = {[
                   {
-                    title: "How Have Local Hiring Targets Shaped Columbia’s Manhattanville Construction Site?", 
-                    img_src: "https://www.gstatic.com/webp/gallery/1.jpg", 
+                    title: "How Have Local Hiring Targets Shaped Columbia’s Manhattanville Construction Site?",
+                    img_src: "https://www.gstatic.com/webp/gallery/1.jpg",
                     author: "BY YULONG LI",
                     date: "APRIL 8, 2018"
                   },
                   {
-                    title: "Newly proposed committee for Barnard calls for increased transparency", 
-                    img_src: "https://www.gstatic.com/webp/gallery/3.jpg", 
+                    title: "Newly proposed committee for Barnard calls for increased transparency",
+                    img_src: "https://www.gstatic.com/webp/gallery/3.jpg",
                     author: "BY ROUNAK",
                     date: "APRIL 7, 2018"
                   }
@@ -80,10 +53,10 @@ storiesOf('Button', module)
     </Button>
   ));
 
-  let bannerImages = ["https://arc-anglerfish-arc2-prod-spectator.s3.amazonaws.com/public/52FBXLYM2RGO3FJGK3SPD2KUEE.png", 
-  "https://memegenerator.net/img/images/17438601/dat-sad-fat-cat.jpg", 
-  "https://i.imgflip.com/1yt82g.jpg", 
-  "https://i.imgflip.com/26a82h.jpg", 
+  let bannerImages = ["https://arc-anglerfish-arc2-prod-spectator.s3.amazonaws.com/public/52FBXLYM2RGO3FJGK3SPD2KUEE.png",
+  "https://memegenerator.net/img/images/17438601/dat-sad-fat-cat.jpg",
+  "https://i.imgflip.com/1yt82g.jpg",
+  "https://i.imgflip.com/26a82h.jpg",
   "https://i.imgflip.com/1eg7jb.jpg"];
 
 storiesOf('PhotoBanner', module)
@@ -92,9 +65,6 @@ storiesOf('PhotoBanner', module)
 
 storiesOf('WhiteboardTable', module)
   .add('Whiteboard Table', () => <WhiteboardTable roomAvailability={sampleRoomData}/>)
-
-storiesOf('DormButton', module)
-  .add('dorm button', () => <DormButton name="ADI House" address="21 Savage St." sundial_distance="12 minutes" description="It's lit"/>);
 
 storiesOf('Explore', module)
   .addDecorator(story => (
@@ -107,31 +77,8 @@ let testCons = ["con1", "con2", "con3"];
 storiesOf('ProCon', module)
   .add('pros and cons', () => <ProCon pros={testPros} cons={testCons}></ProCon>);
 
-storiesOf('QuickReview', module)
-  .add('reviews', () => <QuickReview />);
-
-storiesOf('Review', module)
-  .add('review', () => <Review stars="3" review="I hate this place" thumbsUp="100" thumbsDown="1" />);
-
-storiesOf('ReviewList', module)
-  .add('ReviewList', () => <ReviewList />);
-
-storiesOf('FloorPlan', module)
-  .add('keikaku means plan', () => <FloorPlan floorOffset={1} planArray={planArray}/>);
-
-storiesOf('Filter', module)
-  .add('filter', () => <FilterButton name="barnard"/>);
-storiesOf('Filter', module)
-  .add('filter_full', () => <FilterComponent type="school"/>);
-
 storiesOf('Expander', module)
   .add('expander', () => <Expander showAll="Here's all of the text shown. It should be longer than the preview." showSome="Here's a preview shown."><h1>Some Static Heading</h1></Expander>);
-
-storiesOf('FullReview', module)
-  .add('fullreview', () => <FullReview />);
-
-storiesOf('test', module)
-  .add('test', () => <Expander custom={null} showAll={<QuickReview/>} showSome="Here's a preview shown."><h1>Some Static Heading</h1></Expander>);
 
 let sampleAmenities = [
   ["bathroom", "Semi-private"],
@@ -146,70 +93,6 @@ let sampleAmenities = [
 
 storiesOf('Amenities', module)
   .add('amenities', () => <Amenities amenities={sampleAmenities} />);
-
-storiesOf('AtAGlance', module)
-  .add('at a glance', () => <AtAGlance location="545 W. 114th St." roomtype="Suite-style doubles" classmakeup="First-Years" numfloors="13"/>);
-
-storiesOf('SlidingReview', module)
-  .add('sliding review', () => <SlidingReview />);
-
-let sampleRelatedDorms = [
-  {
-    id: "McBain",
-    school: "Columbia",
-    name: "McBain Hall",
-    image: "https://housing.columbia.edu/files/housing/McBain.jpg",
-    description:
-      "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla nulla nulla, condimentum a mattis in, faucibus id sapien. Sed rhoncus.",
-    amenities: "No AC"
-  },
-  {
-    id: "Carman",
-    school: "Columbia",
-    name: "Carman Hall",
-    image: "https://housing.columbia.edu/files/housing/Carman.jpg",
-    description:
-      "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla nulla nulla, condimentum a mattis in, faucibus id sapien. Sed rhoncus.",
-    amenities: "No AC"
-  },
-  {
-    id: "Sulzberger",
-    school: "Barnard",
-    name: "Sulzberger Tower",
-    image: "https://housing.columbia.edu/files/housing/McBain.jpg",
-    description:
-      "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla nulla nulla, condimentum a mattis in, faucibus id sapien. Sed rhoncus.",
-    amenities: "No AC"
-  },
-  {
-    id: "mcbain",
-    school: "Columbia",
-    name: "McBain Hall",
-    image: "https://housing.columbia.edu/files/housing/McBain.jpg",
-    description:
-      "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla nulla nulla, condimentum a mattis in, faucibus id sapien. Sed rhoncus.",
-    amenities: "No AC"
-  },
-  {
-    id: "mcbain",
-    school: "Columbia",
-    name: "McBain Hall",
-    image: "https://housing.columbia.edu/files/housing/McBain.jpg",
-    description:
-      "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla nulla nulla, condimentum a mattis in, faucibus id sapien. Sed rhoncus.",
-    amenities: "No AC"
-  }
-];
-
-
-storiesOf('RelatedDorms', module)
-  .add('related dorms', () => <RelatedDorms relatedDorms={sampleRelatedDorms}/>);
-
-storiesOf('ExploreSidebar', module)
-  .addDecorator(story => (
-    <MemoryRouter initialEntries={['/']}>{story()}</MemoryRouter>
-  ))
-  .add('explore sidebar', () => <ExploreSidebar/>);
 
 let sampleMenuItems = [
   {
