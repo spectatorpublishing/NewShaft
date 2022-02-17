@@ -17,6 +17,8 @@ import { theme } from "../util/GlobalStyles";
 import {NavLink} from "react-router-dom";
 import ReviewPageReview from "../components/ReviewPageReview"
 
+import PhotoGallery from "../components/PhotoGallery";
+
 
 var recommend="28%" 
 var ranking="#7" 
@@ -261,7 +263,8 @@ export default class Dorm extends React.PureComponent {
       relatedDorms : [],
       scrollMenuFixed: false,
       scrollMenuOffset: null,
-      width: screen_width
+      width: screen_width,
+      isOpen: false
     };
     
     this.handleWindowSizeChange = this.handleWindowSizeChange.bind(this);
@@ -515,14 +518,27 @@ export default class Dorm extends React.PureComponent {
     
     let fullDescription = this.state.dormInfo.DESCRIPTION.substring(0, this.state.dormInfo.DESCRIPTION.length - 1);
     let truncatedDescription = (fullDescription.length > 100) ? fullDescription.substring(0,100) + '...' : null;
+    
+    const { isOpen } = this.state;
+    const updateModal = () =>{
+      this.setState({ isOpen: false})
+    }
     return (
       <ScrollToTop>
+        {isOpen ? 
+          <PhotoGallery 
+                updateModal={updateModal} 
+                images={this.state.dorm_photos} 
+                path = {this.props.match.params.dorm}
+          /> : <></>
+        }
         <PhotoBanner bannerImages={this.state.dorm_photos} path={this.props.match.params.dorm}/>
         {!isMobile ? (
         <Header>
           <DormName>{this.state.dormInfo.DORM}</DormName>
           <HeaderMenu>           
-            <NavLink style = {headerButtons} to={`/explore/${Object.keys(dorm_name_map).find(key => dorm_name_map[key] === this.state.dormInfo.DORM)}`}>See Photos</NavLink>
+            <NavLink style = {headerButtons}  onClick={() => this.setState({ isOpen: true, photoIndex:0 })} to={`/explore/${Object.keys(dorm_name_map).find(key => dorm_name_map[key] === this.state.dormInfo.DORM)}`}>See Photos</NavLink>
+            
             <NavLink style = {headerButtons} to="/reviews">Read More Reviews</NavLink>
             <a href="https://docs.google.com/forms/d/e/1FAIpQLSfLfk7KE8fHSh117X4AhVKU-KJkJsvWjbvlW5mcwwbx08es0w/viewform" style={headerButtons}>Submit a Review</a>
           </HeaderMenu>
