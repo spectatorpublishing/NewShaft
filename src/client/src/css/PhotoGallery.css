@@ -1,9 +1,9 @@
-.slide{
-    opacity: 0;
-    transition-duration: 1s ease;
+.slide {
+	opacity: 1;
+	transition-duration: 1s ease;
 }
-.slide.active{
-    opacity: 1;
-    transition-duration: 1s;
-    transform: scale(1.00);
+.slide.active {
+	opacity: 1;
+	transition-duration: 1s;
+	transform: scale(1);
 }
