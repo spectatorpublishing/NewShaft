@@ -16,21 +16,30 @@ import BlurbExpander from "../components/BlurbExpander";
 import { theme } from "../util/GlobalStyles";
 import {NavLink} from "react-router-dom";
 import ReviewPageReview from "../components/ReviewPageReview"
-
 import PhotoGallery from "../components/PhotoGallery";
 
 let DormName = styled.h1`
-  color: ${props => props.theme.black};
-  margin-top: 10vh;
-  margin-left: 10vw;
-  justify-self: center;
+  display: flex;
+  color: ${props => props.theme.darkGray};
+  margin: 4rem 0 2rem 0;
+  align-self: center;
+`;
+
+let DormImage = styled.div`
+  display: flex;
+  align-self: center;
 `;
 
 let Page = styled.div`
   display: flex;
-  flex-direction: row;
-  background-color: blue;
+  flex-direction: column;
+  color: ${props => props.theme.darkGray};
   padding: 2rem;
+`
+
+let Info = styled.div`
+  display: flex;
+  flex-direction: row;
 `
 
 let ColumnLeft = styled.div`
@@ -44,26 +53,64 @@ let ColumnLeft = styled.div`
 let ColumnRight = styled.div`
   display: flex;
   flex-direction: column;
-  background-color: lightblue;
   padding: 2rem;
   width: 20%;
+`
+let Sticky = styled.div`
+  display: flex;
+  padding: 2rem;
+  border: 1px solid ${props => props.theme.lightGray};
+  margin-bottom: 2rem;
+`
+
+let InfoSection = styled.div`
+  display: flex;
+  padding: 2rem;
+  border-bottom: 1px solid ${props => props.theme.lightGray};
 `
 
 export default class Dorm extends React.PureComponent {
   render() {
     return (
-      <div>
-        <DormName> DORM NAME HERE </DormName>
-        <img src="https://housing.columbia.edu/sites/default/files/content/img/Buildings/Furnald/FurnaldHall.jpg"></img>
-        <Page>
+      <Page>
+        <DormName> DORM NAME </DormName>
+        <DormImage>
+          <img src="https://housing.columbia.edu/sites/default/files/content/img/Buildings/Furnald/FurnaldHall.jpg"></img>
+        </DormImage>
+        <Info>
           <ColumnLeft> 
-            INFO HERE
+            <InfoSection>
+              INTRO 
+            </InfoSection>
+            <InfoSection>
+              AMENITIES 
+            </InfoSection>
+            <InfoSection>
+              PROS & CONS
+            </InfoSection>
+            <InfoSection>
+              FLOOR PLANS
+            </InfoSection>
+            <InfoSection>
+              LOCATION
+            </InfoSection>
+            <InfoSection>
+              PHOTO GALLERY
+            </InfoSection>
+            <InfoSection>
+              SPECTRUM ON HOUSING
+            </InfoSection>
           </ColumnLeft>
           <ColumnRight> 
-            INFO HERE
+            <Sticky>
+              AT-A-GLANCE
+            </Sticky>
+            <Sticky>
+              QUICK REVIEW
+            </Sticky>
           </ColumnRight>
-        </Page>
-      </div>
+        </Info>
+      </Page>
     );
   }
 }
