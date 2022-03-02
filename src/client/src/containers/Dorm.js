@@ -47,14 +47,14 @@ let ColumnLeft = styled.div`
   flex-direction: column;
   background-color: white;
   padding: 2rem;
-  width: 80%;
+  width: 75%;
 `
 
 let ColumnRight = styled.div`
   display: flex;
   flex-direction: column;
   padding: 2rem;
-  width: 20%;
+  width: 25%;
 `
 let Sticky = styled.div`
   display: flex;
