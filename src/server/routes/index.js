@@ -2,6 +2,7 @@
 
 // Initialize backend routes
 const getDormInfo = require('./getDormInfo');
+const getDorms = require('./getDorms');
 const filterDormInfo = require('./filter');
 const getExploreInfo = require('./getExploreInfo');
 const getAmenities = require('./getAmenities');
@@ -20,6 +21,7 @@ const getFilteredDorms = require('./getFilteredDorms')
 // Implement backend routes
 module.exports = app => {
 	app.use('/api/getAmenities', (req, res) => getAmenities(req, res));
+	app.use('/api/getDorms', (req, res) => getDorms(req, res));
 	app.use('/api/getDormInfo', (req, res) => getDormInfo(req, res));
 	app.use('/api/getReviews', (req, res) => getReviews(req, res));
 	app.use('/api/filterDorm', (req, res) => filterDormInfo(req, res));

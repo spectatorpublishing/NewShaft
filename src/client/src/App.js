@@ -6,6 +6,7 @@ import Dorm from './containers/Dorm';
 import Housing101 from './containers/Housing101';
 import Reviews from './containers/Reviews'
 import NavBar from './components/NavBar.js';
+import DormPlanList from './components/DormPlanList.js';
 import { ThemeProvider } from "styled-components";
 import { GlobalStyles, theme } from "./util/GlobalStyles";
 import './css/App.css';
@@ -64,6 +65,7 @@ const App = () => (
         <Route exact path="/shaftlive" component={ShaftLive} />
         <Route exact path="/housing101" component={Housing101} />
 				<Route exact path="/reviews" component={Reviews} />
+        <Route exact path="/NewPredictor" component={DormPlanList} />
       </Switch>
     </main>
   </ThemeProvider>
