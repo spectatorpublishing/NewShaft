@@ -65,12 +65,14 @@ let Sticky = styled.div`
 
 let InfoSection = styled.div`
   display: flex;
+  flex-direction: column;
   padding: 2rem;
   border-bottom: 1px solid ${props => props.theme.lightGray};
 `
 
 let SectionTitle = styled.h2`
   font-size: 2rem;
+  margin-bottom: 2rem;
 `;
 
 let StickyTitle = styled.h3`
@@ -406,7 +408,17 @@ export default class Dorm extends React.PureComponent {
               <SectionTitle>FLOOR PLANS</SectionTitle>
             </InfoSection>
             <InfoSection>
-              <SectionTitle>LOCATION</SectionTitle>
+              <SectionTitle>Location</SectionTitle>
+              <Maps
+                  latitudes={[this.state.dormInfo.LATITUDE]}
+                  longitudes={[this.state.dormInfo.LONGITUDE]}
+                  popupInfo={[this.state.dormInfo.DORM]}
+                  popupId={[this.state.dormInfo.DORM]}
+                  centerLatitude={this.state.dormInfo.LATITUDE}
+                  centerLongitude={this.state.dormInfo.LONGITUDE}
+                  width={"100%"}
+                  height={"300px"}
+                />
             </InfoSection>
             <InfoSection>
               <SectionTitle>PHOTO GALLERY</SectionTitle>
