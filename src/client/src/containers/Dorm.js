@@ -72,7 +72,9 @@ let InfoSection = styled.div`
 
 let SectionTitle = styled.h2`
   font-size: 2rem;
+  font-weight: 48;
   margin-bottom: 2rem;
+  color: #707070;
 `;
 
 let StickyTitle = styled.h3`
@@ -424,7 +426,8 @@ export default class Dorm extends React.PureComponent {
               <SectionTitle>PHOTO GALLERY</SectionTitle>
             </InfoSection>
             <InfoSection>
-              <SectionTitle>SPECTRUM ON HOUSING</SectionTitle>
+              <SectionTitle>Spectrum on Housing</SectionTitle>
+              {(this.state.relatedArticles.length == 0)? null : <SpectrumSidebar spectrumSidebarData = {this.state.relatedArticles}/>}
             </InfoSection>
           </ColumnLeft>
           <ColumnRight> 
