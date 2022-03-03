@@ -73,6 +73,9 @@ let SectionTitle = styled.h2`
   font-size: 2rem;
 `;
 
+let StickyTitle = styled.h3`
+`
+
 let relatedDorms = [
   {
     DORM: "McBain Hall",
@@ -414,10 +417,10 @@ export default class Dorm extends React.PureComponent {
           </ColumnLeft>
           <ColumnRight> 
             <Sticky>
-              AT-A-GLANCE
+              <StickyTitle>AT-A-GLANCE</StickyTitle>
             </Sticky>
             <Sticky>
-              QUICK REVIEW
+              <StickyTitle>QUICK REVIEW</StickyTitle>
             </Sticky>
           </ColumnRight>
         </Info>
