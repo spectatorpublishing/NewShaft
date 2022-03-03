@@ -217,7 +217,6 @@ export default class Dorm extends React.PureComponent {
       .then(dormPhotos => {
         this.setState({dorm_photos: Object.values(dormPhotos)})
       });
-
   }
 
   fetchDormInfo(name) {
@@ -239,7 +238,6 @@ export default class Dorm extends React.PureComponent {
         document.title = this.state.dormInfo.DORM;
         this.setState({dormInfo: dormInfo});
       });
-      
   }
 
   fetchAmenities(name) {
@@ -265,7 +263,6 @@ export default class Dorm extends React.PureComponent {
         this.setState({reviews: reviewsInfo.reviews, avg_rating: reviewsInfo.avg_rating, reccomend: reviewsInfo.reccomended, ranking: reviewsInfo.ranking})
       });
   }
-
 
   fetchRelatedArticles(name){
     const dormName = dorm_name_map[name]
@@ -396,7 +393,8 @@ export default class Dorm extends React.PureComponent {
         <Info>
           <ColumnLeft> 
             <InfoSection>
-              <SectionTitle>INTRO</SectionTitle>
+              <SectionTitle>Description</SectionTitle>
+              {fullDescription}
             </InfoSection>
             <InfoSection>
               <SectionTitle>AMENITIES</SectionTitle>
