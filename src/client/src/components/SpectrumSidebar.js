@@ -2,7 +2,7 @@ import React, { Component } from 'react'
 import styled from 'styled-components'
 
 const SmallWrapper = styled.div`
-	width: 100%;
+	width: 80%;
 	display: flex;
 	margin-bottom: 15px;
 
@@ -11,8 +11,8 @@ const SmallWrapper = styled.div`
 	}
 `
 const ImageContainer = styled.div`
-	width: 40%;
-	margin-right: 15px;
+	width: 37%;
+	margin-right: 2rem;
 	
 	@media only screen and (max-width: 767px) {
 		width: 100%;
@@ -41,38 +41,28 @@ const Image = styled.img`
 `
 const Title = styled.h3`
 	margin-top: -3px;
+	margin-bottom: -10px;
+	color: #707070;
 `
-
 const AuthorLine = styled.p`
+	color: #707070;
+	margin-top: -10px;
+	margin-bottom: 5px;
 `
-
 
 const Hr = styled.hr`
-	border-color: ${props => props.theme.lightGray};
+	border-color: ${props => props.theme.black};
+	border-width: 1px;
 `
-
-// const SectionHeader = styled.div `
-//   border-radius: 3px;
-//   background: #00BFFF;
-//   text-align: center;
-//   font-size: 20px;
-//   color: white;
-//   vertical-align: middle;
-//   padding-top: 5px;
-//   padding-bottom: 5px;
-//   padding-right: 10px;
-//   padding-left: 10px;
-// `
 
 const Wrapper = styled.div`
-	margin-bottom: 1.5rem;
-	padding: 3vw;
-	margin-top: 1rem;
-	box-shadow: 5px 5px 10px ${props => props.theme.lightGray};
-	border: 1px solid ${props => props.theme.lightGray};
+	//padding: 2rem;
+	margin-left: 1rem;
+	//box-shadow: 5px 5px 10px ${props => props.theme.lightGray};
+	//border: 1px solid ${props => props.theme.lightGray};
 `
 const TextDiv = styled.div `
-	width: 70%;
+	width: 100%;
 
 	@media only screen and (max-width: 767px) {
 		width: 100%;
@@ -131,7 +121,7 @@ class SpectrumSidebar extends Component {
 				<Wrapper>
 					{this.articleMap()[0]}
 				</Wrapper>
-				<LinkButton href="https://www.columbiaspectator.com/spectrum/shaft/">Read More</LinkButton>
+				{/*<LinkButton href="https://www.columbiaspectator.com/spectrum/shaft/">Read More</LinkButton>*/}
 			</SpectrumContainer> 
 		);
 	}

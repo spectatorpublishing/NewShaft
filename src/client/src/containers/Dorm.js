@@ -18,12 +18,44 @@ import {NavLink} from "react-router-dom";
 import ReviewPageReview from "../components/ReviewPageReview"
 import PhotoGallery from "../components/PhotoGallery";
 
-let DormName = styled.h1`
+let DormHeader = styled.div`
   display: flex;
-  color: ${props => props.theme.darkGray};
-  margin: 4rem 0 2rem 0;
+  flex-direction: column;
+  padding: 1.5rem 0 1.5rem 0;
+  margin: 4rem 0 0 0;
+`
+
+let DormName = styled.h1`
+  font-family: 'Georgia', sans-serif;
+  font-style: regular;
+  font-weight: 42;
+  display: flex;
+  color: #404040;
   align-self: center;
 `;
+
+let UnderlineWrapper = styled.div`
+  width: 20%;
+  display: flex;
+  flex-direction: row;
+  align-self: center;
+  margin-top: -.5rem;
+`
+
+let Underline = styled.hr`
+  width: 45%;
+  border: .01rem solid #404040;
+  align-self: center;
+`
+
+let Dot = styled.span`
+  height: 6px;
+  width: 6px;
+  background-color: #404040;
+  border-radius: 50%;
+  align-self: center;
+  margin: .5rem;
+`
 
 let DormImage = styled.div`
   display: flex;
@@ -72,7 +104,9 @@ let InfoSection = styled.div`
 
 let SectionTitle = styled.h2`
   font-size: 2rem;
+  font-weight: 48;
   margin-bottom: 2rem;
+  color: #707070;
 `;
 
 let StickyTitle = styled.h3`
@@ -386,7 +420,15 @@ export default class Dorm extends React.PureComponent {
 
     return (
       <Page>
-        <DormName> {this.state.dormInfo.DORM} </DormName>
+        <DormHeader>
+          <DormName> {this.state.dormInfo.DORM} </DormName>
+          <UnderlineWrapper>
+            <Underline></Underline>
+            <Dot></Dot>
+            <Underline></Underline>
+          </UnderlineWrapper>
+        </DormHeader>
+        
         <DormImage>
           <img src="https://housing.columbia.edu/sites/default/files/content/img/Buildings/Furnald/FurnaldHall.jpg"></img>
         </DormImage>
@@ -422,7 +464,8 @@ export default class Dorm extends React.PureComponent {
               <SectionTitle>PHOTO GALLERY</SectionTitle>
             </InfoSection>
             <InfoSection>
-              <SectionTitle>SPECTRUM ON HOUSING</SectionTitle>
+              <SectionTitle>Spectrum on Housing</SectionTitle>
+              {(this.state.relatedArticles.length == 0)? null : <SpectrumSidebar spectrumSidebarData = {this.state.relatedArticles}/>}
             </InfoSection>
           </ColumnLeft>
           <ColumnRight> 
