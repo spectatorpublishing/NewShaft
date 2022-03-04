@@ -12,8 +12,16 @@
 
 import React, { Component } from "react";
 import "../css/RelatedDorms.css";
+import styled from 'styled-components';
 import { Route, Link, BrowserRouter as Router } from 'react-router-dom';
 
+const Wrapper = styled.div`
+    padding: 3vw;
+    margin-top: 1rem;
+    box-shadow: 5px 5px 10px ${props => props.theme.lightGray};
+    border: 1px solid ${props => props.theme.lightGray};
+    
+`
 
 export default class RelatedDorms extends Component {
     constructor(props) {
@@ -47,14 +55,17 @@ export default class RelatedDorms extends Component {
 
     render() {
         return (
-            <div className="relatedDormsList">
-                {/* ===> The title component's text prop needs to be passed in here! <=== */}
-                <h2 className="relatedDormsTitle"> If you're interested in {this.state.name} </h2>
-                <div className="relatedDormsHorizontalView">
-                    {this.getRelatedDormsList(this.state.relatedDorms)}
-                    {/* {this.showRelatedDorms(dorms)} */}
+            
+                <Wrapper>
+                <div className="relatedDormsList">
+                    {/* ===> The title component's text prop needs to be passed in here! <=== */}
+                    <div className="relatedDormsHorizontalView">
+                        {this.getRelatedDormsList(this.state.relatedDorms)}
+                        {/* {this.showRelatedDorms(dorms)} */}
+                    </div>
                 </div>
-            </div>
+                </Wrapper>
+
         );
 
     }

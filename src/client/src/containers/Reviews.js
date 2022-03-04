@@ -1,7 +1,17 @@
 import React, { Component } from 'react';
 import styled from "styled-components";
+import MoreDormInfoBlock from "../components/MoreDormInfoBlock";
 import WhiteboardSidebar from "../components/ReviewsWhiteboardSidebar"
+import ReviewsBox from "../components/ReviewsBox"
 import Review from "../components/Review"
+import ReviewPageReview from "../components/ReviewPageReview"
+import carouselimg from "./carouselimg.jpg"
+import QuickReview from "../components/QuickReview";
+import "react-responsive-carousel/lib/styles/carousel.min.css";
+import { Carousel } from 'react-responsive-carousel';
+
+//import WhiteboardSidebar from "../components/ReviewsWhiteboardSidebar"
+//import Review from "../components/Review"
 
 const Star = styled.span`
   color: white;
@@ -13,7 +23,10 @@ const Space = styled.div`
 
 const AllReviews = styled.div`
   width: 90%;
-  height: 65vh;
+  height: 150vh;
+  @media(max-width: 700px){
+      height: 65vh;
+  }
   overflow-y: scroll;
   padding: 1rem;
   display: flex;
@@ -21,10 +34,10 @@ const AllReviews = styled.div`
 `
 
 const GrayFooter = styled.div`
-  postion: fixed;
+  position: fixed;
   bottom: 0;
   background-color: gray;
-  height: 20vh;
+  height: 10vh;
   width: 100%;
   display: flex;
   flex-direction: column;
@@ -48,6 +61,22 @@ const MobileButton = styled.a`
   }
 `
 
+const DesktopButton = styled.a`
+  background-color: white;
+  border-radius: 10px;
+  border: 3px solid ${props => props.theme.columbiaBlue};
+  width: 10vw;
+  padding: 15px 5px;
+  margin: 10px 30px;
+  margin-left:4vw;
+  text-decoration: none;
+  color: ${props => props.theme.columbiaBlue};
+  font-size: 20px;
+  font-weight: 700;
+  text-align: center;
+  padding: 10px;
+`
+
 const ReviewSummary = styled.div`
   height: 2rem;
   width: 100%;
@@ -62,6 +91,10 @@ const ReviewSummary = styled.div`
 
 const ReviewsContainer = styled.div`
     display: flex;
+    width: 100%;
+    height: 100%;
+    padding: 0 auto;
+    padding-top: 4rem;
     overflow: hidden;
     flex-direction: row;
 `
@@ -71,6 +104,7 @@ const ReviewsContainerMobile = styled.div`
     display: flex;
     flex-direction: column;
     align-items: center;
+    padding-top: 3rem;
 `
 
 const BlueHeader = styled.div`
@@ -82,7 +116,6 @@ const BlueHeader = styled.div`
     flex-direction: column;
     justify-content: center;
     align-items: center;
-
     &>h1 {
       color: white;
     }
@@ -91,10 +124,8 @@ const BlueHeader = styled.div`
 const ColOne = styled.div`
   display: flex;
   width: 20%;
-  @media(max-width: 991px){
-      display:flex;
-      width:50vw;
-  }
+  flex-direction: column;
+  justify-content: flex-start;
 `
 
 const ColTwo = styled.div`
@@ -103,6 +134,7 @@ const ColTwo = styled.div`
     scroll-behavior: smooth;
     padding-left: 2%;
     margin-right:2rem;
+    margin-bottom: 2rem;
     width: ${({ mobile }) => (mobile ? `100%` : `40%`)};
     @media(max-width: 991px){
         display: flex;
@@ -118,7 +150,20 @@ const ColTwo = styled.div`
 `
 
 const ColThree = styled.div`
-    width: 50vw;
+    width: 60vw;
+    height: 100%;
+    overflow-y: scroll;
+    padding: 4rem 0 2rem 1rem;
+`
+
+const QuickReviewDisplay = styled.div`
+    width: 100%;
+    padding-top: 1rem;
+`
+const QuickReviewBox = styled.div`
+    margin-top: 1rem;
+    box-shadow: 3px -4px 7px 2px rgba(0,0,0,0.1);
+    padding-right: 1rem;
 `
 
 export default class Reviews extends Component{
@@ -129,15 +174,24 @@ export default class Reviews extends Component{
       dorm: "47 Claremont",
       dormRefresh: false,
       reviews: [],
+      dorm_photos: [],
+      QuickReview: {dorm_name: "47 Claremont", cleanliness: 4, noise: 1, community: 2, party: 1, amenities: 3},
       width: window.innerWidth,
       init: true,
-    }
+    };
 
     this.handleDormChange = this.handleDormChange.bind(this)
-    this.fetchReviews = this.fetchReviews.bind(this)
-    this.createStars = this.createStars.bind(this)
+    this.fetchMoreDormInfo = this.fetchMoreDormInfo.bind(this)
+    this.handleDormChange = this.handleDormChange.bind(this);
+    this.fetchReviews = this.fetchReviews.bind(this);
+    this.fetchQuickReview = this.fetchQuickReview.bind(this);
+    this.createStars = this.createStars.bind(this);
+    this.fetchDormPhotos = this.fetchDormPhotos.bind(this);
 
     this.fetchReviews(this.state.dorm);
+    this.fetchQuickReview(this.state.dorm);
+    this.fetchDormPhotos(this.state.dorm);
+    this.fetchMoreDormInfo(this.state.dorm)
   }
 
   componentWillMount() {
@@ -156,8 +210,13 @@ export default class Reviews extends Component{
   componentDidMount() {
     document.title = "Reviews";
     this.fetchReviews(this.state.dorm);
+    this.fetchQuickReview(this.state.dorm);
+    this.fetchDormPhotos(this.state.dorm);
+    this.fetchMoreDormInfo(this.state.dorm);
     this.interval = setInterval(() => this.fetchReviews(this.state.dorm), 15000);
-
+    this.interval = setInterval(() => this.fetchQuickReview(this.state.dorm), 15000);
+    this.interval = setInterval(() => this.fetchDormPhotos(this.state.dorm), 15000);
+    this.interval = setInterval(() => this.fetchMoreDormInfo(this.state.dorm), 15000);
   }
 
   createStars(score) {
@@ -181,13 +240,47 @@ export default class Reviews extends Component{
     })
       .then(res => res.json())
       .then(reviewsInfo => {
-        this.setState({reviews: reviewsInfo.reviews, avg_rating: reviewsInfo.avg_rating, reccomend: reviewsInfo.reccomended, ranking: reviewsInfo.ranking})
+        //console.log("Reviews data is: " + reviewsInfo.reviews[0].THUMBS_UP)
+        this.setState({reviews: reviewsInfo.reviews, avg_rating: reviewsInfo.avg_rating, recommend: reviewsInfo.recommended, ranking: reviewsInfo.ranking})
       });
   }
 
   /* fetch MoreDormInfo */
+  /* makes calls to getMoreDormInfo.js (passing dorm name as argument).
+  Store the result in this.state.moreDormInfo.*/
+  fetchMoreDormInfo(dormName){
+    fetch(`/api/getMoreDormInfo/${dormName}`, {
+      method: "GET",
+      headers: { "Content-Type": "application/json"},
+    })
+      .then(res => res.json())
+      .then(moreDormInfo => {
+        this.setState({moreDormInfo: moreDormInfo})
+    });
+  }
 
-  /* fetch QuickReview */
+  fetchQuickReview(dormName){
+    fetch(`/api/getQuickReview/${dormName}`, {
+      method: "GET",
+      headers: { "Content-Type": "application/json"},
+    })
+      .then(res => res.json())
+      .then(reviewsInfo => {
+        this.setState({QuickReview : {cleanliness: reviewsInfo.clean, noise: reviewsInfo.noise, community: reviewsInfo.community, party: reviewsInfo.party, amenities: reviewsInfo.amenities}});
+    });
+  }
+
+  fetchDormPhotos(dormName){
+    fetch(`/api/getDormPhotos/${dormName}`, {
+      method: "GET",
+      headers: { "Content-Type": "application/json"},
+    })
+      .then(res => res.json())
+      .then(dormPhotos => {
+        this.setState({dorm_photos: Object.values(dormPhotos)})
+      });
+
+  }
 
   handleDormChange(dorm) {
 
@@ -213,6 +306,9 @@ export default class Reviews extends Component{
       init: false
     }, () => {
       this.fetchReviews(dorm);
+      this.fetchQuickReview(dorm);
+      this.fetchDormPhotos(dorm);
+      this.fetchMoreDormInfo(dorm)
     });
   }
 
@@ -224,7 +320,7 @@ export default class Reviews extends Component{
       "juniors": "Junior",
       "seniors": "Senior"
     }
-    // TODO: change the review component here to the updated one
+
     if (isMobile){
       let hasNoReviews = (this.state.reviews.length === 0)
       console.log(this.state.reviews)
@@ -241,20 +337,23 @@ export default class Reviews extends Component{
           </BlueHeader>
           <AllReviews>
             {this.state.reviews.map((review, j) => (
-                <Review
+                <ReviewPageReview
                   key={""+j}
                   stars={review.NUM_STARS}
                   review={review.REVIEW_TXT}
                   room={review.ROOM_NUM}
                   year={years_map[review.YEAR]}
                   timestamp={review.TIMESTAMP}
+                  dorm={this.state.dorm}
+                  recommended = {review.RECOMMEND}
+                  thumbs_up = {review.THUMBS_UP}
+                  thumbs_down = {review.THUMBS_DOWN}
                 />
             ))}
           </AllReviews>
           <GrayFooter>
-              <MobileButton href = {"http://www.google.com"}><div>SUBMIT A REVIEW</div></MobileButton>
-              {/* TODO: update link here to point to actual comparison page */}
-              <MobileButton href = {"/compare-dorms"}><div>COMPARE DORMS</div></MobileButton>
+              <MobileButton href = {"https://docs.google.com/forms/d/e/1FAIpQLSfLfk7KE8fHSh117X4AhVKU-KJkJsvWjbvlW5mcwwbx08es0w/viewform"}><div>SUBMIT A REVIEW</div></MobileButton>
+              {/*<MobileButton href = {"/compare-dorms"}><div>COMPARE DORMS</div></MobileButton>*/}
           </GrayFooter>
         </ReviewsContainerMobile>
       )
@@ -265,14 +364,46 @@ export default class Reviews extends Component{
           <ColOne>
             <WhiteboardSidebar
               sidebarModification={this.handleDormChange} />
+            <DesktopButton href = {"https://docs.google.com/forms/d/e/1FAIpQLSfLfk7KE8fHSh117X4AhVKU-KJkJsvWjbvlW5mcwwbx08es0w/viewform"}>Submit a Review</DesktopButton>
+            {/* TODO: update link here to point to actual comparison page */}
+            {/*<DesktopButton href = {"/compare-dorms"}>Compare Dorms</DesktopButton>*/}
           </ColOne>
           <ColTwo>
             <h1>{this.state.dorm}</h1>
-            {/* MoreDormInfo */}
-            {/* QuickReview */}
+            {this.state.moreDormInfo ? (<MoreDormInfoBlock dorm={this.state.dorm} dormInfo={this.state.moreDormInfo} ></MoreDormInfoBlock>) : (<div></div>)}
+            <QuickReviewDisplay>
+              <Carousel showThumbs={false} infiniteLoop={true}>
+                {this.state.dorm_photos.filter(function (img) {
+                  if (img == 'N/A'){ return false; }
+                  return true;
+                }).map((dorm_photo, j) => (
+                  <div key={"div"+j}>
+                    <img src={dorm_photo} width = "1px" key={"img"+j}/>
+                  </div>
+                ))}
+              </Carousel>
+              <QuickReviewBox>
+                <QuickReview QuickReview={this.state.QuickReview}></QuickReview>
+              </QuickReviewBox>
+            </QuickReviewDisplay>
           </ColTwo>
           <ColThree>
-            {/* Reviews Slider */}
+            <AllReviews>
+              {this.state.reviews.map((review, j) => (
+                  <ReviewPageReview
+                    key={""+j}
+                    stars={review.NUM_STARS}
+                    review={review.REVIEW_TXT}
+                    room={review.ROOM_NUM}
+                    year={years_map[review.YEAR]}
+                    timestamp={review.TIMESTAMP}
+                    dorm = {this.state.dorm}
+                    recommended = {review.RECOMMEND}
+                    thumbs_up = {review.THUMBS_UP}
+                    thumbs_down = {review.THUMBS_DOWN}
+                  />
+              ))}
+            </AllReviews>
           </ColThree>
         </ReviewsContainer>
       </div>

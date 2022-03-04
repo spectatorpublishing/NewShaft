@@ -30,14 +30,15 @@ let Banner = styled.div `
   background-color: #D44942;
   display: flex;
   flex-direction: row;
-  height: 45px;
-  padding-top: 75px;
+  margin-top: 3.76rem;
   width: 100vw;
+  padding-top: 1rem;
+  padding-bottom: 1rem;
 
   @media(max-width: 991px){
     font-size: 0.75rem;
     height: 50px;
-    padding-top: 70px;
+    margin-top: 3.7rem;
     width: 100%;
 }
 
@@ -205,8 +206,8 @@ let Soon = styled.h6`
   font-size: 0.7rem;
 
   ${({ mobile }) => !mobile && `
-    position: absolute;
-    margin-top: -3px;
+    //position: absolute;
+    margin-top: 0px;
   `}
 `
 
@@ -268,6 +269,7 @@ export default class NavBar extends Component {
           mobile={isMobile ? 1 : 0} // work around for react-router link not playing nice with non-standard attributes
           to={""}
           onClick={this.negateClick}
+          style={{backgroundColor: '#555555'}}
         >
           {isMobile ? <MobileItem>{item["name"]}</MobileItem> : <DesktopItem>{item["name"]}</DesktopItem>}
           <Soon mobile={isMobile}>Coming Soon!</Soon>
@@ -344,7 +346,7 @@ export default class NavBar extends Component {
           </LogoContainer>
           {isMobile ? mobileMenu : desktopMenu}
         </NavContainer>
-        <Banner fixed={this.props.fixed}>COMING SOON: We’re updating theShaft in the coming days and giving you all of the latest information on housing and dorms at Columbia. Stay tuned!</Banner>
+        <Banner fixed={this.props.fixed}>COMING SOON: We’re updating theShaft in the coming days to give you all of the latest information on housing and dorms at Columbia. Stay tuned!</Banner>
         {this.props.fixed && <NavBuffer></NavBuffer>}
       </Wrap>
     );

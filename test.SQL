@@ -1,0 +1,3 @@
+UPDATE dorm_static_info
+SET description='600 W. 113th St., located on 113th Street and Broadway, is the perfect place for you if you want to live in a large suite with your friends. The dorm is commonly known as Nuss due to its location above restaurant Wu and Nussbaum. Nuss is just a block away from the main campus, but it also has close access to Community Food & Juice, Tom''s Restaurant, Junzi Kitchen, Westside Market, and Duane Reade. The dorm is made up of apartment-style suites with a shared kitchen and two private bathrooms in each suite. There is a mix of singles and doubles within suites. Nuss is quiet, cozy, convenient, and perfect for anyone who is looking for a more residential feel.'
+WHERE dorm='600 W 113th';

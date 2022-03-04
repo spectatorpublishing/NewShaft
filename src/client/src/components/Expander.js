@@ -4,7 +4,7 @@ import { theme } from "../util/GlobalStyles";
 
 let ExpanderBox = styled.div`
   border: 1px ${({ color }) => color} solid;
-
+  box-shadow: 5px 5px 10px ${props => props.theme.lightGray};
   ${({ boxStyle }) => boxStyle};
 `
 

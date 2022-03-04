@@ -30,7 +30,7 @@ const menuItems = [
     "name": "Lottery Predictor",
     "link": "/shaftlive",
     "external": false,
-    "disabled": false,
+    "disabled": true,
   },
   {
     "name": "Housing 101",
@@ -38,16 +38,16 @@ const menuItems = [
     "external": false,
     "disabled": false,
   },
+	/* {
+    "name": "Reviews",
+    "link": "/reviews",
+    "external": false,
+    "disabled": false,
+  }, */
   {
     "name": "Spectrum",
     "link": "https://www.columbiaspectator.com/spectrum/shaft/",
     "external": true,
-    "disabled": false,
-  },
-	{
-    "name": "Reviews",
-    "link": "/reviews",
-    "external": false,
     "disabled": false,
   }
 ];
@@ -64,7 +64,7 @@ const App = () => (
         <Route path="/explore/:dorm" component={Dorm} />
         <Route exact path="/shaftlive" component={ShaftLive} />
         <Route exact path="/housing101" component={Housing101} />
-				<Route exact path="/reviews" component={Reviews} />
+				{/* <Route exact path="/reviews" component={Reviews} /> */}
       </Switch>
       <Footer/>
     </main>
