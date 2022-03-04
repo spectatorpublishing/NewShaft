@@ -93,6 +93,8 @@ let MenuLink = styled(NavLink)`
   text-align: center;
   text-decoration: none;
   text-transform: uppercase;
+  height: fit-content;
+  margin: auto 0;
 
     :hover {
       color: ${props => props.theme.lightGray};
@@ -201,17 +203,19 @@ let DisabledMenuLink = styled(MenuLink)`
 `
 
 let Soon = styled.h6`
-  color: ${props => props.theme.mediumGray};
+  color: ${props => props.theme.lightGray};
   font-size: 0.7rem;
+  text-align: center; 
 
   ${({ mobile }) => !mobile && `
-    position: absolute;
-    margin-top: -3px;
+    //position: absolute;
+    margin-top: 0px;
   `}
 `
 
 let DesktopItem = styled.h4`
   color: inherit;
+  margin: auto 0;
 `
 
 let MobileItem = styled.h3`
@@ -268,6 +272,7 @@ export default class NavBar extends Component {
           mobile={isMobile ? 1 : 0} // work around for react-router link not playing nice with non-standard attributes
           to={""}
           onClick={this.negateClick}
+          style={{backgroundColor: '#555555'}}
         >
           {isMobile ? <MobileItem>{item["name"]}</MobileItem> : <DesktopItem>{item["name"]}</DesktopItem>}
           <Soon mobile={isMobile}>Coming Soon!</Soon>
@@ -344,8 +349,8 @@ export default class NavBar extends Component {
           </LogoContainer>
           {isMobile ? mobileMenu : desktopMenu}
         </NavContainer>
-        {/* <Banner fixed={this.props.fixed}>COMING SOON: We’re updating theShaft in the coming days and giving you all of the latest information on housing and dorms at Columbia. Stay tuned!</Banner> */}
-        {/* {this.props.fixed && <NavBuffer></NavBuffer>} */}
+        <Banner fixed={this.props.fixed}>COMING SOON: We’re updating theShaft in the coming days to give you all of the latest information on housing and dorms at Columbia. Stay tuned!</Banner>
+        {this.props.fixed && <NavBuffer></NavBuffer>}
       </Wrap>
     );
   }
