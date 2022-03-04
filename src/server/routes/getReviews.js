@@ -3,6 +3,7 @@
 var express = require('express');
 var router = express.Router();
 var mysql = require('mysql');
+var pool = require('../database');
 
 
 function getReviews(con, dorm, callback) {
@@ -53,16 +54,15 @@ function getReviews(con, dorm, callback) {
 
 router.get('/:dorm', function(req, res) {
 	var con = mysql.createConnection({
-	    host: process.env.SHAFTHOST,
-  		user: process.env.SHAFTUSER,
-  		password: process.env.SHAFTPASSWORD,
-  		database: process.env.SHAFTDATABASE
+		host: process.env.SHAFTHOST,
+		user: process.env.SHAFTUSER,
+		password: process.env.SHAFTPASSWORD,
+		database: process.env.SHAFTDATABASE
 	});
 
 	getReviews(con, req.params.dorm, (revInfo) => {
 		res.json(revInfo)
 	})
-
 })
 
 module.exports = router;

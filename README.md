@@ -37,6 +37,39 @@ https://www.digitalocean.com/community/tutorials/how-to-install-mysql-on-ubuntu-
 For any small tweaks to the production database I would suggest
 using mysql workbench to connect to the server.
 
+## Deployment (by erin)
+
+The Shaft is deployed on a digital ocean server with [these instructions](https://www.digitalocean.com/community/tutorials/how-to-set-up-a-node-js-application-for-production-on-ubuntu-20-04).
+
+This is how I redeploy the application:
+
+Because the shaft tends to have so many setup issues/weird production bugs, I like to get everything working on my personal computer, then just use `rsync` to move that exact setup to the production server. This saves some headaches. 
+
+Steps:
+
+1. Take a backup snapshot of the server in digital ocean (just in case)
+2. Connect to the droplet console through the digital ocean site.
+3. All of the pm2 processes and relevant folders are in the `erin` account, not the `root` account. Switch to that account: `su erin`
+4. Make sure that when you run `pm2 list`, you see:
+<img width="1235" alt="Screen Shot 2022-01-09 at 3 39 19 PM" src="https://user-images.githubusercontent.com/16248113/148699912-1079821a-adfb-4ac0-813b-a1e2c7850d2c.png">
+
+6. Make sure that you are in `/home/erin/`: `cd ~`
+7. Here, we have `NewShaft/NewShaft` (sorry about the nesting) and `NewShaft1`-- I like to move the files from my personal laptop to `NewShaft1`, poke around in that directory to make sure everything looks about right, and then copy those files into `NewShaft/NewShaft`, just as an added security measure. When checking that everything is good on your personal laptop, check on `localhost:8080`-- if stuff there looks off, you forgot to run `npm build`.
+8. Sync your personal Shaft to the server's Shaft: `rsync -a ~/programming/NewShaft/ erin@104.131.121.94:NewShaft1`, where `~/programming/NewShaft/` is the path to your Shaft directory. The password it is asking for is the droplet password on the admin doc.
+9. This will hang for a bit-- it just means it is working
+10. When that is done, `cd NewShaft1` and poke around to make sure that your changes are there, and that everything looks how you expected it to.
+11. Now copy the `NewShaft1` stuff into the actual, deployed directory: `sudo cp -a /home/erin/NewShaft1/. /home/erin/NewShaft/NewShaft/`
+12. The site should automatically update, but if it doesn't, run `pm2 restart Shaft`
+13. Check the live site! Everything should be good to go 🎉
+
+## The React + Express Application
+
+This is the most obvious part. Typically we run our application by using yarn dev on
+localhost, but this doesn't work for production environments. It will need to be more involved.
+
+
+# Old Stuff
+
 ## Live Updater
 
 The live updater updates the sql database from the google spreadsheet found at:
@@ -85,13 +118,3 @@ https://medium.com/@gavinwiener/how-to-schedule-a-python-script-cron-job-dea6cbf
 and this stackoverflow post for more info:
 
 https://stackoverflow.com/questions/1034243/how-to-get-a-unix-script-to-run-every-15-seconds
-
-
-
-## The React + Express Application
-
-This is the most obvious part. Typically we run our application by using yarn dev on
-localhost, but this doesn't work for production environments. It will need to be more involved.
-
-
-
