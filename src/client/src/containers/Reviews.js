@@ -94,7 +94,7 @@ const ReviewsContainer = styled.div`
     width: 100%;
     height: 100%;
     padding: 0 auto;
-    //padding-top: 4rem;
+    padding-top: 4rem;
     overflow: hidden;
     flex-direction: row;
 `
@@ -104,7 +104,7 @@ const ReviewsContainerMobile = styled.div`
     display: flex;
     flex-direction: column;
     align-items: center;
-    //padding-top: 3rem;
+    padding-top: 3rem;
 `
 
 const BlueHeader = styled.div`

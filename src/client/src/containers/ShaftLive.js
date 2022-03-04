@@ -190,13 +190,6 @@ let About = styled.div`
    font-size: 1.25rem;
 `;
 
-const ComingSoonPlaceHolder = styled.div`
-    color: black;
-    display: flex;
-    margin: auto auto;
-    font-size: 5rem;
-`;
-
 
 export default class ShaftLive extends Component {
   constructor(props) {
@@ -377,11 +370,7 @@ export default class ShaftLive extends Component {
       </LegendItem>
     </FloorPlanLegend>);
 
-    return (
-      <ComingSoonPlaceHolder>New Lottery Predictor Coming Soon</ComingSoonPlaceHolder>
-    )
-
-    /* if (isMobile) {
+    if (isMobile) {
       return (
         <div>
 
@@ -474,7 +463,7 @@ export default class ShaftLive extends Component {
             </ColThree>
           </ShaftLiveContainer>
         </div>
-      ) 
-    }*/
+      )
+    }
   }
 }
