@@ -39,16 +39,21 @@ let FloorNumber = styled.h2`
 `
 
 let FloorButton = styled.button`
-    border: none;
+    border: 1px solid black;
+    /* border: none; */
     margin-top: -0.5rem;
     background: none;
     padding: 0 0.5rem;
+    
+    position: relative;
+    width: 50%;
     @media only screen and (min-width: 768px){
         margin-top: 0;
-        border: none;
+        /* border: none; */
         background: none;
         padding: 1px 4px 2px 4px;
     }
+    
     &>h4 {
         @media only screen and (min-width: 768px){
             color: ${props => props.active ? props.theme.darkGray : props.theme.columbiaBlue};
@@ -272,7 +277,7 @@ export default class FloorPlan extends React.PureComponent {
                             { 
                                   this.props.planArray.map((floor, i) =>
                                     (<FloorButton key = {i} active = {this.state.currentFloor === i+1} onClick = {() => this.selectFloor(i)}> 
-                                    <FloorButtonNumber>{this.props.planNames[i + this.state.floorOffset -1]}</FloorButtonNumber>
+                                        <FloorButtonNumber>{ ((this.props.planNames[i + this.state.floorOffset -1]).split(" "))[1] }</FloorButtonNumber>
                                      </FloorButton>)
                                 )
                             }
