@@ -442,7 +442,10 @@ export default class Dorm extends React.PureComponent {
               <SectionTitle>AMENITIES</SectionTitle>
             </InfoSection>
             <InfoSection>
-              <SectionTitle>PROS & CONS</SectionTitle>
+              <ProCon
+                  pros={this.state.dormInfo.PROS}
+                  cons={this.state.dormInfo.CONS}
+              />
             </InfoSection>
             <InfoSection>
               <SectionTitle>FLOOR PLANS</SectionTitle>
