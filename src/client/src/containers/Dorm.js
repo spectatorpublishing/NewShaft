@@ -1,4 +1,4 @@
-import styled from "styled-components";
+import styled from "styled-components/macro";
 import React, { Component } from "react";
 import PhotoBanner from "../components/PhotoBanner";
 import Amenities from "../components/Amenities";
@@ -146,6 +146,7 @@ let InfoSection = styled.div`
     line-height: 1rem;
     padding: 0 0 1.5rem 0;
     margin: 1rem 3rem 1rem 2rem;
+    background-color: light-blue;
 	}
 `
 
@@ -503,6 +504,42 @@ export default class Dorm extends React.PureComponent {
             <SectionTitle>Description</SectionTitle>
             <MarginWrapper>{fullDescription}</MarginWrapper>
           </InfoSection>
+
+          <InfoSection>
+            <SectionTitle>At a glance</SectionTitle>
+          </InfoSection>
+
+          <InfoSection>
+            <SectionTitle>Quick review</SectionTitle>
+          </InfoSection>
+
+          <InfoSection>
+            <SectionTitle>Amenities</SectionTitle>
+          </InfoSection>
+
+          <InfoSection>
+            <SectionTitle>Pros</SectionTitle>
+            <SectionTitle>Cons</SectionTitle>
+          </InfoSection>
+
+          <InfoSection>
+            <SectionTitle>Floor Plans</SectionTitle>
+          </InfoSection>
+
+          <InfoSection>
+            <SectionTitle>Location</SectionTitle>
+          </InfoSection>
+
+          <InfoSection>
+            <SectionTitle>Photo gallery</SectionTitle>
+          </InfoSection>
+
+          {(this.state.relatedArticles.length == 0)? null :
+            <InfoSection>
+              <SectionTitle>Spectrum on Housing</SectionTitle>
+              <SpectrumSidebar spectrumSidebarData = {this.state.relatedArticles}/>
+            </InfoSection>
+          }
 
         </Page>
       );
