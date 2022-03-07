@@ -9,11 +9,22 @@ let ProConTitle = styled.h2`
   font-weight: 48;
   margin-bottom: 2rem;
   color: #707070;
+
+  @media only screen and (max-width: 767px) {
+    font-size: 20px;
+    font-weight: 500;
+    font-style: normal;
+    margin-bottom: 1rem;
+	}
 `;
 
 const Section = styled.div`
     display: flex;
     margin-top: 1rem;
+
+    @media only screen and (max-width: 767px) {
+      margin: 0;
+	}
 `
 
 const SectionMobile = styled(Section)`
@@ -24,11 +35,22 @@ const SectionMobile = styled(Section)`
 `
 const ListBox = styled.div`
     flex: 1;
+
+    @media only screen and (max-width: 767px) {
+      margin-bottom: 1.5rem;
+	  }
 `
 
 const ListPoints = styled.ul`
   padding-inline-start: 1.2rem;
   margin-left: 1rem;
+
+  @media only screen and (max-width: 767px) {
+    font-size: 16px;
+    font-weight: 400;
+    font-style: normal;
+    margin: 0;
+	}
 `
 
 const AmenityIcon = styled.img`

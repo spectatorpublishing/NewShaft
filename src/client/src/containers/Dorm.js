@@ -518,8 +518,10 @@ export default class Dorm extends React.PureComponent {
           </InfoSection>
 
           <InfoSection>
-            <SectionTitle>Pros</SectionTitle>
-            <SectionTitle>Cons</SectionTitle>
+            <ProCon
+              pros={this.state.dormInfo.PROS}
+              cons={this.state.dormInfo.CONS}
+            />
           </InfoSection>
 
           <InfoSection>
@@ -528,6 +530,18 @@ export default class Dorm extends React.PureComponent {
 
           <InfoSection>
             <SectionTitle>Location</SectionTitle>
+            <MarginWrapper>
+              <Maps
+                  latitudes={[this.state.dormInfo.LATITUDE]}
+                  longitudes={[this.state.dormInfo.LONGITUDE]}
+                  popupInfo={[this.state.dormInfo.DORM]}
+                  popupId={[this.state.dormInfo.DORM]}
+                  centerLatitude={this.state.dormInfo.LATITUDE}
+                  centerLongitude={this.state.dormInfo.LONGITUDE}
+                  width={"100%"}
+                  height={"225px"}
+                />
+            </MarginWrapper>
           </InfoSection>
 
           <InfoSection>
