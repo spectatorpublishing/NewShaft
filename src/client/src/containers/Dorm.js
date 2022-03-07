@@ -112,6 +112,10 @@ let SectionTitle = styled.h2`
 let StickyTitle = styled.h3`
 `
 
+let MarginWrapper = styled.div`
+  margin-left: 1rem;
+`;
+
 let relatedDorms = [
   {
     DORM: "McBain Hall",
@@ -436,7 +440,7 @@ export default class Dorm extends React.PureComponent {
           <ColumnLeft> 
             <InfoSection>
               <SectionTitle>Description</SectionTitle>
-              {fullDescription}
+              <MarginWrapper>{fullDescription}</MarginWrapper>
             </InfoSection>
             <InfoSection>
               <SectionTitle>AMENITIES</SectionTitle>
@@ -452,16 +456,18 @@ export default class Dorm extends React.PureComponent {
             </InfoSection>
             <InfoSection>
               <SectionTitle>Location</SectionTitle>
-              <Maps
-                  latitudes={[this.state.dormInfo.LATITUDE]}
-                  longitudes={[this.state.dormInfo.LONGITUDE]}
-                  popupInfo={[this.state.dormInfo.DORM]}
-                  popupId={[this.state.dormInfo.DORM]}
-                  centerLatitude={this.state.dormInfo.LATITUDE}
-                  centerLongitude={this.state.dormInfo.LONGITUDE}
-                  width={"100%"}
-                  height={"300px"}
-                />
+              <MarginWrapper>
+                <Maps
+                    latitudes={[this.state.dormInfo.LATITUDE]}
+                    longitudes={[this.state.dormInfo.LONGITUDE]}
+                    popupInfo={[this.state.dormInfo.DORM]}
+                    popupId={[this.state.dormInfo.DORM]}
+                    centerLatitude={this.state.dormInfo.LATITUDE}
+                    centerLongitude={this.state.dormInfo.LONGITUDE}
+                    width={"100%"}
+                    height={"300px"}
+                  />
+              </MarginWrapper>
             </InfoSection>
             <InfoSection>
               <SectionTitle>PHOTO GALLERY</SectionTitle>

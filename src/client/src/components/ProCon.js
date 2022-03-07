@@ -28,6 +28,7 @@ const ListBox = styled.div`
 
 const ListPoints = styled.ul`
   padding-inline-start: 1.2rem;
+  margin-left: 1rem;
 `
 
 const AmenityIcon = styled.img`
