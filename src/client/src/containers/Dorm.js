@@ -23,6 +23,11 @@ let DormHeader = styled.div`
   flex-direction: column;
   padding: 1.5rem 0 1.5rem 0;
   margin: 4rem 0 0 0;
+
+  @media only screen and (max-width: 767px) {
+		padding: 1.5rem 0 0 0;
+    margin: 0;
+	}
 `
 
 let DormName = styled.h1`
@@ -32,6 +37,12 @@ let DormName = styled.h1`
   display: flex;
   color: #404040;
   align-self: center;
+
+  @media only screen and (max-width: 767px) {
+    font-style: normal;
+		font-weight: normal;
+    font-size: 40px;
+	}
 `;
 
 let UnderlineWrapper = styled.div`
@@ -40,6 +51,10 @@ let UnderlineWrapper = styled.div`
   flex-direction: row;
   align-self: center;
   margin-top: -.5rem;
+
+  @media only screen and (max-width: 767px) {
+		width: 60%;
+	}
 `
 
 let Underline = styled.hr`
@@ -55,11 +70,29 @@ let Dot = styled.span`
   border-radius: 50%;
   align-self: center;
   margin: .5rem;
+
+
+  @media only screen and (max-width: 767px) {
+		margin: .8rem;
+	}
 `
 
 let DormImage = styled.div`
   display: flex;
   align-self: center;
+  width: 100vw;
+  
+  @media only screen and (max-width: 767px) {
+		height: 40vh;
+    width: auto;
+	}
+`;
+
+let Img = styled.img`
+  @media only screen and (max-width: 767px) {
+    height: 40vh;
+		object-fit: scale-down;
+	}
 `;
 
 let Page = styled.div`
@@ -67,6 +100,11 @@ let Page = styled.div`
   flex-direction: column;
   color: ${props => props.theme.darkGray};
   padding: 2rem;
+
+  @media only screen and (max-width: 767px) {
+    padding: .5rem;
+		overflow: hidden;
+	}
 `
 
 let Info = styled.div`
@@ -100,6 +138,15 @@ let InfoSection = styled.div`
   flex-direction: column;
   padding: 2rem;
   border-bottom: 1px solid ${props => props.theme.lightGray};
+
+  @media only screen and (max-width: 767px) {
+    font-size: 20px;
+    font-weight: 500;
+    font-style: normal;
+    line-height: 1rem;
+    padding: 0 0 1.5rem 0;
+    margin: 1rem 3rem 1rem 2rem;
+	}
 `
 
 let SectionTitle = styled.h2`
@@ -107,6 +154,13 @@ let SectionTitle = styled.h2`
   font-weight: 48;
   margin-bottom: 2rem;
   color: #707070;
+
+  @media only screen and (max-width: 767px) {
+    font-size: 20px;
+    font-weight: 500;
+    font-style: normal;
+    margin-bottom: 1rem;
+	}
 `;
 
 let StickyTitle = styled.h3`
@@ -114,6 +168,13 @@ let StickyTitle = styled.h3`
 
 let MarginWrapper = styled.div`
   margin-left: 1rem;
+
+  @media only screen and (max-width: 767px) {
+    margin: 0;
+    font-size: 12px;
+    font-weight: 400;
+    font-style: normal;
+	}
 `;
 
 let relatedDorms = [
@@ -422,75 +483,102 @@ export default class Dorm extends React.PureComponent {
       this.setState({ isOpen: false})
     }
 
-    return (
-      <Page>
-        <DormHeader>
-          <DormName> {this.state.dormInfo.DORM} </DormName>
-          <UnderlineWrapper>
-            <Underline></Underline>
-            <Dot></Dot>
-            <Underline></Underline>
-          </UnderlineWrapper>
-        </DormHeader>
-        
-        <DormImage>
-          <img src="https://housing.columbia.edu/sites/default/files/content/img/Buildings/Furnald/FurnaldHall.jpg"></img>
-        </DormImage>
-        <Info>
-          <ColumnLeft> 
-            <InfoSection>
-              <SectionTitle>Description</SectionTitle>
-              <MarginWrapper>{fullDescription}</MarginWrapper>
-            </InfoSection>
-            <InfoSection>
-              <SectionTitle>AMENITIES</SectionTitle>
-            </InfoSection>
-            <InfoSection>
-              <ProCon
-                  pros={this.state.dormInfo.PROS}
-                  cons={this.state.dormInfo.CONS}
-              />
-            </InfoSection>
-            <InfoSection>
-              <SectionTitle>FLOOR PLANS</SectionTitle>
-            </InfoSection>
-            <InfoSection>
-              <SectionTitle>Location</SectionTitle>
-              <MarginWrapper>
-                <Maps
-                    latitudes={[this.state.dormInfo.LATITUDE]}
-                    longitudes={[this.state.dormInfo.LONGITUDE]}
-                    popupInfo={[this.state.dormInfo.DORM]}
-                    popupId={[this.state.dormInfo.DORM]}
-                    centerLatitude={this.state.dormInfo.LATITUDE}
-                    centerLongitude={this.state.dormInfo.LONGITUDE}
-                    width={"100%"}
-                    height={"300px"}
-                  />
-              </MarginWrapper>
-            </InfoSection>
-            <InfoSection>
-              <SectionTitle>PHOTO GALLERY</SectionTitle>
-            </InfoSection>
+    if (isMobile) {
+      return (
+        <Page>
+          <DormImage>
+            <img src="https://housing.columbia.edu/sites/default/files/content/img/Buildings/Furnald/FurnaldHall.jpg"></img>
+          </DormImage>
 
-            {(this.state.relatedArticles.length == 0)? null :
+          <DormHeader>
+            <DormName> {this.state.dormInfo.DORM} </DormName>
+            <UnderlineWrapper>
+              <Underline></Underline>
+              <Dot></Dot>
+              <Underline></Underline>
+            </UnderlineWrapper>
+          </DormHeader>
+
+          <InfoSection>
+            <SectionTitle>Description</SectionTitle>
+            <MarginWrapper>{fullDescription}</MarginWrapper>
+          </InfoSection>
+
+        </Page>
+      );
+    }
+
+    else {
+      return (
+        <Page>
+          <DormHeader>
+            <DormName> {this.state.dormInfo.DORM} </DormName>
+            <UnderlineWrapper>
+              <Underline></Underline>
+              <Dot></Dot>
+              <Underline></Underline>
+            </UnderlineWrapper>
+          </DormHeader>
+          
+          <DormImage>
+            <Img src="https://housing.columbia.edu/sites/default/files/content/img/Buildings/Furnald/FurnaldHall.jpg"></Img>
+          </DormImage>
+          <Info>
+            <ColumnLeft> 
               <InfoSection>
-                <SectionTitle>Spectrum on Housing</SectionTitle>
-                <SpectrumSidebar spectrumSidebarData = {this.state.relatedArticles}/>
+                <SectionTitle>Description</SectionTitle>
+                <MarginWrapper>{fullDescription}</MarginWrapper>
               </InfoSection>
-            }
-
-          </ColumnLeft>
-          <ColumnRight> 
-            <Sticky>
-              <StickyTitle>AT-A-GLANCE</StickyTitle>
-            </Sticky>
-            <Sticky>
-              <StickyTitle>QUICK REVIEW</StickyTitle>
-            </Sticky>
-          </ColumnRight>
-        </Info>
-      </Page>
-    );
+              <InfoSection>
+                <SectionTitle>AMENITIES</SectionTitle>
+              </InfoSection>
+              <InfoSection>
+                <ProCon
+                    pros={this.state.dormInfo.PROS}
+                    cons={this.state.dormInfo.CONS}
+                />
+              </InfoSection>
+              <InfoSection>
+                <SectionTitle>FLOOR PLANS</SectionTitle>
+              </InfoSection>
+              <InfoSection>
+                <SectionTitle>Location</SectionTitle>
+                <MarginWrapper>
+                  <Maps
+                      latitudes={[this.state.dormInfo.LATITUDE]}
+                      longitudes={[this.state.dormInfo.LONGITUDE]}
+                      popupInfo={[this.state.dormInfo.DORM]}
+                      popupId={[this.state.dormInfo.DORM]}
+                      centerLatitude={this.state.dormInfo.LATITUDE}
+                      centerLongitude={this.state.dormInfo.LONGITUDE}
+                      width={"100%"}
+                      height={"300px"}
+                    />
+                </MarginWrapper>
+              </InfoSection>
+              <InfoSection>
+                <SectionTitle>PHOTO GALLERY</SectionTitle>
+              </InfoSection>
+  
+              {(this.state.relatedArticles.length == 0)? null :
+                <InfoSection>
+                  <SectionTitle>Spectrum on Housing</SectionTitle>
+                  <SpectrumSidebar spectrumSidebarData = {this.state.relatedArticles}/>
+                </InfoSection>
+              }
+  
+            </ColumnLeft>
+            <ColumnRight> 
+              <Sticky>
+                <StickyTitle>AT-A-GLANCE</StickyTitle>
+              </Sticky>
+              <Sticky>
+                <StickyTitle>QUICK REVIEW</StickyTitle>
+              </Sticky>
+            </ColumnRight>
+          </Info>
+        </Page>
+      );
+    }
   }
 }
