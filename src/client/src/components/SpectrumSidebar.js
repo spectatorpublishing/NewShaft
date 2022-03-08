@@ -54,7 +54,8 @@ const Title = styled.h3`
 `
 const AuthorLine = styled.p`
 	color: #707070;
-	margin: 1rem;
+	margin: 0;
+	line-height: 1.2rem;
 
 	@media only screen and (max-width: 767px) {
 		font-weight: 400;

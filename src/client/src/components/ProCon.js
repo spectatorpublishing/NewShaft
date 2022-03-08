@@ -7,7 +7,7 @@ import icon from "../assets/marker.svg"; // to-do: import all actual icons
 let ProConTitle = styled.h2`
   font-size: 2rem;
   font-weight: 48;
-  margin-bottom: 2rem;
+  margin-bottom: 1rem;
   color: #707070;
 
   @media only screen and (max-width: 767px) {
@@ -70,8 +70,6 @@ export default class ProCon extends Component {
         super(props);
     
         this.state = {
-          pros: this.props.pros,
-          cons: this.props.cons,
           width: window.innerWidth,
         };
       }
@@ -134,14 +132,14 @@ export default class ProCon extends Component {
               <></>
               <ProConTitle>Pros</ProConTitle>
               <ListPoints>
-                {this.state.pros.map(pro => (
+                {this.props.pros.map(pro => (
                   <li key={k++}>{pro}</li>))}
               </ListPoints>
             </ListBox>
             <ListBox>
               <ProConTitle>Cons</ProConTitle>
               <ListPoints>
-                {this.state.cons.map(con => (
+                {this.props.cons.map(con => (
                   <li key={k++}>{con}</li>))}
               </ListPoints>
             </ListBox>

@@ -22,7 +22,6 @@ let DormHeader = styled.div`
   display: flex;
   flex-direction: column;
   padding: 1.5rem 0 1.5rem 0;
-  margin: 4rem 0 0 0;
 
   @media only screen and (max-width: 767px) {
 		padding: 1.5rem 0 0 0;
@@ -80,7 +79,7 @@ let Dot = styled.span`
 let DormImage = styled.div`
   display: flex;
   align-self: center;
-  width: 100vw;
+  width: fit-content;
   
   @media only screen and (max-width: 767px) {
 		height: 40vh;
@@ -89,6 +88,7 @@ let DormImage = styled.div`
 `;
 
 let Img = styled.img`
+  width: 100%;
   @media only screen and (max-width: 767px) {
     height: 40vh;
 		object-fit: scale-down;
@@ -337,6 +337,7 @@ export default class Dorm extends React.PureComponent {
         dormInfo.LOTTERY_NUMS = tempLot;
         document.title = this.state.dormInfo.DORM;
         this.setState({dormInfo: dormInfo});
+        console.log(dormInfo);
       });
   }
 
