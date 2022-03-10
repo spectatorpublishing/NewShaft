@@ -17,6 +17,7 @@
     "react-bootstrap": "^1.0.0"
   },
   "devDependencies": {
+    "babel-plugin-styled-components": "^2.0.6",
     "cheerio": "^1.0.0-rc.2",
     "concurrently": "^5.0.2",
     "fs": "^0.0.1-security",

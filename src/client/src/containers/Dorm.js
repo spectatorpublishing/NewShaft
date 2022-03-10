@@ -1,4 +1,4 @@
-import styled from "styled-components";
+import styled from "styled-components/macro";
 import React, { Component } from "react";
 import PhotoBanner from "../components/PhotoBanner";
 import Amenities from "../components/Amenities";
@@ -18,16 +18,81 @@ import {NavLink} from "react-router-dom";
 import ReviewPageReview from "../components/ReviewPageReview"
 import PhotoGallery from "../components/PhotoGallery";
 
-let DormName = styled.h1`
+let DormHeader = styled.div`
   display: flex;
-  color: ${props => props.theme.darkGray};
-  margin: 4rem 0 2rem 0;
+  flex-direction: column;
+  padding: 1.5rem 0 1.5rem 0;
+
+  @media only screen and (max-width: 767px) {
+		padding: 1.5rem 0 0 0;
+    margin: 0;
+	}
+`
+
+let DormName = styled.h1`
+  font-family: 'Georgia', sans-serif;
+  font-style: regular;
+  font-weight: 42;
+  display: flex;
+  color: #404040;
   align-self: center;
+
+  @media only screen and (max-width: 767px) {
+    font-style: normal;
+		font-weight: normal;
+    font-size: 40px;
+	}
 `;
+
+let UnderlineWrapper = styled.div`
+  width: 20%;
+  display: flex;
+  flex-direction: row;
+  align-self: center;
+  margin-top: -.5rem;
+
+  @media only screen and (max-width: 767px) {
+		width: 60%;
+	}
+`
+
+let Underline = styled.hr`
+  width: 45%;
+  border: .01rem solid #404040;
+  align-self: center;
+`
+
+let Dot = styled.span`
+  height: 6px;
+  width: 6px;
+  background-color: #404040;
+  border-radius: 50%;
+  align-self: center;
+  margin: .5rem;
+
+
+  @media only screen and (max-width: 767px) {
+		margin: .8rem;
+	}
+`
 
 let DormImage = styled.div`
   display: flex;
   align-self: center;
+  width: fit-content;
+  
+  @media only screen and (max-width: 767px) {
+		height: 40vh;
+    width: auto;
+	}
+`;
+
+let Img = styled.img`
+  width: 100%;
+  @media only screen and (max-width: 767px) {
+    height: 40vh;
+		object-fit: scale-down;
+	}
 `;
 
 let Page = styled.div`
@@ -35,6 +100,11 @@ let Page = styled.div`
   flex-direction: column;
   color: ${props => props.theme.darkGray};
   padding: 2rem;
+
+  @media only screen and (max-width: 767px) {
+    padding: .5rem;
+		overflow: hidden;
+	}
 `
 
 let Info = styled.div`
@@ -68,11 +138,44 @@ let InfoSection = styled.div`
   flex-direction: column;
   padding: 2rem;
   border-bottom: 1px solid ${props => props.theme.lightGray};
+
+  @media only screen and (max-width: 767px) {
+    font-size: 20px;
+    font-weight: 500;
+    font-style: normal;
+    line-height: 1rem;
+    padding: 0 0 1.5rem 0;
+    margin: 1rem 3rem 1rem 2rem;
+    background-color: light-blue;
+	}
 `
 
 let SectionTitle = styled.h2`
   font-size: 2rem;
+  font-weight: 48;
   margin-bottom: 2rem;
+  color: #707070;
+
+  @media only screen and (max-width: 767px) {
+    font-size: 20px;
+    font-weight: 500;
+    font-style: normal;
+    margin-bottom: 1rem;
+	}
+`;
+
+let StickyTitle = styled.h3`
+`
+
+let MarginWrapper = styled.div`
+  margin-left: 1rem;
+
+  @media only screen and (max-width: 767px) {
+    margin: 0;
+    font-size: 12px;
+    font-weight: 400;
+    font-style: normal;
+	}
 `;
 
 let relatedDorms = [
@@ -214,7 +317,6 @@ export default class Dorm extends React.PureComponent {
       .then(dormPhotos => {
         this.setState({dorm_photos: Object.values(dormPhotos)})
       });
-
   }
 
   fetchDormInfo(name) {
@@ -235,8 +337,8 @@ export default class Dorm extends React.PureComponent {
         dormInfo.LOTTERY_NUMS = tempLot;
         document.title = this.state.dormInfo.DORM;
         this.setState({dormInfo: dormInfo});
+        console.log(dormInfo);
       });
-      
   }
 
   fetchAmenities(name) {
@@ -262,7 +364,6 @@ export default class Dorm extends React.PureComponent {
         this.setState({reviews: reviewsInfo.reviews, avg_rating: reviewsInfo.avg_rating, reccomend: reviewsInfo.reccomended, ranking: reviewsInfo.ranking})
       });
   }
-
 
   fetchRelatedArticles(name){
     const dormName = dorm_name_map[name]
@@ -384,28 +485,53 @@ export default class Dorm extends React.PureComponent {
       this.setState({ isOpen: false})
     }
 
-    return (
-      <Page>
-        <DormName> {this.state.dormInfo.DORM} </DormName>
-        <DormImage>
-          <img src="https://housing.columbia.edu/sites/default/files/content/img/Buildings/Furnald/FurnaldHall.jpg"></img>
-        </DormImage>
-        <Info>
-          <ColumnLeft> 
-            <InfoSection>
-              <SectionTitle>INTRO</SectionTitle>
-            </InfoSection>
-            <InfoSection>
-              <SectionTitle>AMENITIES</SectionTitle>
-            </InfoSection>
-            <InfoSection>
-              <SectionTitle>PROS & CONS</SectionTitle>
-            </InfoSection>
-            <InfoSection>
-              <SectionTitle>FLOOR PLANS</SectionTitle>
-            </InfoSection>
-            <InfoSection>
-              <SectionTitle>Location</SectionTitle>
+    if (isMobile) {
+      return (
+        <Page>
+          <DormImage>
+            <img src="https://housing.columbia.edu/sites/default/files/content/img/Buildings/Furnald/FurnaldHall.jpg"></img>
+          </DormImage>
+
+          <DormHeader>
+            <DormName> {this.state.dormInfo.DORM} </DormName>
+            <UnderlineWrapper>
+              <Underline></Underline>
+              <Dot></Dot>
+              <Underline></Underline>
+            </UnderlineWrapper>
+          </DormHeader>
+
+          <InfoSection>
+            <SectionTitle>Description</SectionTitle>
+            <MarginWrapper>{fullDescription}</MarginWrapper>
+          </InfoSection>
+
+          <InfoSection>
+            <SectionTitle>At a glance</SectionTitle>
+          </InfoSection>
+
+          <InfoSection>
+            <SectionTitle>Quick review</SectionTitle>
+          </InfoSection>
+
+          <InfoSection>
+            <SectionTitle>Amenities</SectionTitle>
+          </InfoSection>
+
+          <InfoSection>
+            <ProCon
+              pros={this.state.dormInfo.PROS}
+              cons={this.state.dormInfo.CONS}
+            />
+          </InfoSection>
+
+          <InfoSection>
+            <SectionTitle>Floor Plans</SectionTitle>
+          </InfoSection>
+
+          <InfoSection>
+            <SectionTitle>Location</SectionTitle>
+            <MarginWrapper>
               <Maps
                   latitudes={[this.state.dormInfo.LATITUDE]}
                   longitudes={[this.state.dormInfo.LONGITUDE]}
@@ -414,26 +540,97 @@ export default class Dorm extends React.PureComponent {
                   centerLatitude={this.state.dormInfo.LATITUDE}
                   centerLongitude={this.state.dormInfo.LONGITUDE}
                   width={"100%"}
-                  height={"300px"}
+                  height={"225px"}
                 />
-            </InfoSection>
+            </MarginWrapper>
+          </InfoSection>
+
+          <InfoSection>
+            <SectionTitle>Photo gallery</SectionTitle>
+          </InfoSection>
+
+          {(this.state.relatedArticles.length == 0)? null :
             <InfoSection>
-              <SectionTitle>PHOTO GALLERY</SectionTitle>
+              <SectionTitle>Spectrum on Housing</SectionTitle>
+              <SpectrumSidebar spectrumSidebarData = {this.state.relatedArticles}/>
             </InfoSection>
-            <InfoSection>
-              <SectionTitle>SPECTRUM ON HOUSING</SectionTitle>
-            </InfoSection>
-          </ColumnLeft>
-          <ColumnRight> 
-            <Sticky>
-              AT-A-GLANCE
-            </Sticky>
-            <Sticky>
-              QUICK REVIEW
-            </Sticky>
-          </ColumnRight>
-        </Info>
-      </Page>
-    );
+          }
+
+        </Page>
+      );
+    }
+
+    else {
+      return (
+        <Page>
+          <DormHeader>
+            <DormName> {this.state.dormInfo.DORM} </DormName>
+            <UnderlineWrapper>
+              <Underline></Underline>
+              <Dot></Dot>
+              <Underline></Underline>
+            </UnderlineWrapper>
+          </DormHeader>
+          
+          <DormImage>
+            <Img src="https://housing.columbia.edu/sites/default/files/content/img/Buildings/Furnald/FurnaldHall.jpg"></Img>
+          </DormImage>
+          <Info>
+            <ColumnLeft> 
+              <InfoSection>
+                <SectionTitle>Description</SectionTitle>
+                <MarginWrapper>{fullDescription}</MarginWrapper>
+              </InfoSection>
+              <InfoSection>
+                <SectionTitle>AMENITIES</SectionTitle>
+              </InfoSection>
+              <InfoSection>
+                <ProCon
+                    pros={this.state.dormInfo.PROS}
+                    cons={this.state.dormInfo.CONS}
+                />
+              </InfoSection>
+              <InfoSection>
+                <SectionTitle>FLOOR PLANS</SectionTitle>
+              </InfoSection>
+              <InfoSection>
+                <SectionTitle>Location</SectionTitle>
+                <MarginWrapper>
+                  <Maps
+                      latitudes={[this.state.dormInfo.LATITUDE]}
+                      longitudes={[this.state.dormInfo.LONGITUDE]}
+                      popupInfo={[this.state.dormInfo.DORM]}
+                      popupId={[this.state.dormInfo.DORM]}
+                      centerLatitude={this.state.dormInfo.LATITUDE}
+                      centerLongitude={this.state.dormInfo.LONGITUDE}
+                      width={"100%"}
+                      height={"300px"}
+                    />
+                </MarginWrapper>
+              </InfoSection>
+              <InfoSection>
+                <SectionTitle>PHOTO GALLERY</SectionTitle>
+              </InfoSection>
+  
+              {(this.state.relatedArticles.length == 0)? null :
+                <InfoSection>
+                  <SectionTitle>Spectrum on Housing</SectionTitle>
+                  <SpectrumSidebar spectrumSidebarData = {this.state.relatedArticles}/>
+                </InfoSection>
+              }
+  
+            </ColumnLeft>
+            <ColumnRight> 
+              <Sticky>
+                <StickyTitle>AT-A-GLANCE</StickyTitle>
+              </Sticky>
+              <Sticky>
+                <StickyTitle>QUICK REVIEW</StickyTitle>
+              </Sticky>
+            </ColumnRight>
+          </Info>
+        </Page>
+      );
+    }
   }
 }

@@ -4,69 +4,54 @@ import sad from "../assets/Icons/sad.svg";
 import happy from "../assets/Icons/happy.svg";
 import icon from "../assets/marker.svg"; // to-do: import all actual icons
 
+let ProConTitle = styled.h2`
+  font-size: 2rem;
+  font-weight: 48;
+  margin-bottom: 1rem;
+  color: #707070;
 
-const ProConTitle = styled.h2`
-  margin-top: 2vw;
-  margin-bottom: 1vw;
-  font-weight: 900;
-  width: 100%;
-`
+  @media only screen and (max-width: 767px) {
+    font-size: 20px;
+    font-weight: 500;
+    font-style: normal;
+    margin-bottom: 1rem;
+	}
+`;
+
 const Section = styled.div`
     display: flex;
-    padding: 3vw;
     margin-top: 1rem;
-    box-shadow: 5px 5px 10px ${props => props.theme.lightGray};
-    border: 1px solid ${props => props.theme.lightGray};
+
+    @media only screen and (max-width: 767px) {
+      margin: 0;
+	}
 `
 
 const SectionMobile = styled(Section)`
     flex-direction: column;
     margin-top: 1rem;
-    box-shadow: 3px -4px 7px 2px rgba(0,0,0,0.1);
     padding-right: 1rem;
     
 `
-
 const ListBox = styled.div`
     flex: 1;
-    
+
+    @media only screen and (max-width: 767px) {
+      margin-bottom: 1.5rem;
+	  }
 `
 
 const ListPoints = styled.ul`
   padding-inline-start: 1.2rem;
+  margin-left: 1rem;
+
+  @media only screen and (max-width: 767px) {
+    font-size: 16px;
+    font-weight: 400;
+    font-style: normal;
+    margin: 0;
+	}
 `
-
-const Divider = styled.div`
-    width: 1px;
-    margin: 0 2vw;
-    background-color: ${props => props.theme.lightGray};
-`
-
-const DivideMobile = styled.div`
-    height: 1px;
-    border-bottom: 1px ${props => props.theme.lightGray} solid;
-    margin-bottom: 1rem;
-`
-
-const Head = styled.div`
-    text-align: center;
-`
-
-
-const ProConIcon = styled.img`
-  height: 50px;
-  width: 50px;
-  object-fit: cover;
-`
-
-const HappyIcon = styled(ProConIcon)`
-  object-position: 0 100%;
-`
-
-const SadIcon = styled(ProConIcon)`
-  object-position: 100% 0;
-`
-
 
 const AmenityIcon = styled.img`
   opacity: 0.5;
@@ -85,8 +70,6 @@ export default class ProCon extends Component {
         super(props);
     
         this.state = {
-          pros: this.props.pros,
-          cons: this.props.cons,
           width: window.innerWidth,
         };
       }
@@ -120,22 +103,16 @@ export default class ProCon extends Component {
         let k = 0;
         return (
           <div>
-            <ProConTitle>Pros and Cons</ProConTitle>
             <SectionMobile>
             <ListBox>
-              <Head>
-                <HappyIcon src={happy} alt="Pros"/>
-              </Head>
+                <ProConTitle>Pros</ProConTitle>
                 <ListPoints>
                   {this.state.pros.map(pro => (
                     <li key={k++}>{pro}</li>))}
                 </ListPoints>
             </ListBox>
-            <DivideMobile></DivideMobile>
             <ListBox>
-              <Head>
-                <SadIcon src={sad} alt="Cons"/>
-              </Head>
+                <ProConTitle>Cons</ProConTitle>
                 <ListPoints>
                   {this.state.cons.map(con => (
                     <li key={k++}>{con}</li>))}
@@ -150,24 +127,19 @@ export default class ProCon extends Component {
       let k = 0;
         return (
         <div>
-          <ProConTitle>Pros and Cons</ProConTitle>
           <Section>
             <ListBox>
-              <Head>
-                <HappyIcon src={happy} alt="Pros"/>
-              </Head>
+              <></>
+              <ProConTitle>Pros</ProConTitle>
               <ListPoints>
-                {this.state.pros.map(pro => (
+                {this.props.pros.map(pro => (
                   <li key={k++}>{pro}</li>))}
               </ListPoints>
             </ListBox>
-            <Divider/>
             <ListBox>
-              <Head>
-                <SadIcon src={sad} alt="Cons"/>
-              </Head>
+              <ProConTitle>Cons</ProConTitle>
               <ListPoints>
-                {this.state.cons.map(con => (
+                {this.props.cons.map(con => (
                   <li key={k++}>{con}</li>))}
               </ListPoints>
             </ListBox>
