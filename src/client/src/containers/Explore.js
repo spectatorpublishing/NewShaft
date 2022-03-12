@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import styled from "styled-components";
+import styled from "styled-components/macro";
 import ExploreSidebar from "../components/ExploreSidebar";
 import Filters2020 from '../components/exploreFilters'
 import Maps from "../components/Maps";
@@ -36,7 +36,7 @@ width: 0%;
 @media only screen and (min-width: 768px) {
   display: inline;
   position: fixed;
-  padding-left: 1em;
+  //padding-left: 1em;
   float: right;
   width: 40%;
   right: 0;
@@ -46,23 +46,16 @@ width: 0%;
 `
 
 const FilterSearchBG = styled.div`
-  background-color: ${props => props.theme.columbiaBlue};
-  @media only screen and (min-width: 768px) {
-    // display: inline;
-    // position: fixed;
-    padding-left: 1em;
-    // float: right;
-    // width: 40%;
-    // right: 0;
-    // top: 0;
-    // z-index:1;
+  //background-color: ${props => props.theme.columbiaBlue};
+  margin: 2rem;
+  border-bottom: 1px solid #C4C4C4;
+  @media only screen and (max-width: 768px) {
   }
-  margin-top: 0px;
-  padding-top: 1%;
 `
 
 const ColOne = styled.div`
   display: flex;
+  flex-direction: column;
   width: 100%;
 `
 
