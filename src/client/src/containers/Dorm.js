@@ -137,7 +137,9 @@ let Sticky = styled.div`
 let InfoSection = styled.div`
   display: flex;
   flex-direction: column;
-  padding: 2rem;
+  margin: 2rem;
+  margin-bottom: 0;
+  padding-bottom: 2rem;
   border-bottom: 1px solid ${props => props.theme.lightGray};
 
   @media only screen and (max-width: 767px) {
@@ -582,8 +584,10 @@ export default class Dorm extends React.PureComponent {
                 <MarginWrapper>{fullDescription}</MarginWrapper>
               </InfoSection>
               <InfoSection>
-                <SectionTitle>AMENITIES</SectionTitle>
-                <NewAmenities amenities={this.state.amenities}/>
+                <SectionTitle>Amenities</SectionTitle>
+                <MarginWrapper>
+                  <NewAmenities amenities={this.state.amenities}/>
+                </MarginWrapper>
               </InfoSection>
               <InfoSection>
                 <ProCon
