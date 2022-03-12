@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from "react";
 import styled from 'styled-components';
-import ExploreCheckbox from '../components/ExploreCheckbox';
 
 let FilterRow = styled.div`
     //background-color: rgb(98, 168, 229);
@@ -502,7 +501,6 @@ export default class FilterBar extends React.Component{
                     ))}
                 </SelectedWrapper> */}
                 <FilterRow>
-                    <ExploreCheckbox/>
                     <Textbox>
                         Filters:
                     </Textbox>
