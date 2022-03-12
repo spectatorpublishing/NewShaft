@@ -2,6 +2,7 @@ import styled from "styled-components/macro";
 import React, { Component } from "react";
 import PhotoBanner from "../components/PhotoBanner";
 import Amenities from "../components/Amenities";
+import NewAmenities from "../components/NewAmenities";
 import AtAGlance from "../components/AtAGlance";
 import Maps from "../components/Maps";
 import ProCon from "../components/ProCon";
@@ -136,7 +137,9 @@ let Sticky = styled.div`
 let InfoSection = styled.div`
   display: flex;
   flex-direction: column;
-  padding: 2rem;
+  margin: 2rem;
+  margin-bottom: 0;
+  padding-bottom: 2rem;
   border-bottom: 1px solid ${props => props.theme.lightGray};
 
   @media only screen and (max-width: 767px) {
@@ -337,7 +340,6 @@ export default class Dorm extends React.PureComponent {
         dormInfo.LOTTERY_NUMS = tempLot;
         document.title = this.state.dormInfo.DORM;
         this.setState({dormInfo: dormInfo});
-        console.log(dormInfo);
       });
   }
 
@@ -582,7 +584,10 @@ export default class Dorm extends React.PureComponent {
                 <MarginWrapper>{fullDescription}</MarginWrapper>
               </InfoSection>
               <InfoSection>
-                <SectionTitle>AMENITIES</SectionTitle>
+                <SectionTitle>Amenities</SectionTitle>
+                <MarginWrapper>
+                  <NewAmenities amenities={this.state.amenities}/>
+                </MarginWrapper>
               </InfoSection>
               <InfoSection>
                 <ProCon
