@@ -2,6 +2,7 @@ import styled from "styled-components/macro";
 import React, { Component } from "react";
 import PhotoBanner from "../components/PhotoBanner";
 import Amenities from "../components/Amenities";
+import NewAmenities from "../components/NewAmenities";
 import AtAGlance from "../components/AtAGlance";
 import Maps from "../components/Maps";
 import ProCon from "../components/ProCon";
@@ -337,7 +338,6 @@ export default class Dorm extends React.PureComponent {
         dormInfo.LOTTERY_NUMS = tempLot;
         document.title = this.state.dormInfo.DORM;
         this.setState({dormInfo: dormInfo});
-        console.log(dormInfo);
       });
   }
 
@@ -583,6 +583,7 @@ export default class Dorm extends React.PureComponent {
               </InfoSection>
               <InfoSection>
                 <SectionTitle>AMENITIES</SectionTitle>
+                <NewAmenities amenities={this.state.amenities}/>
               </InfoSection>
               <InfoSection>
                 <ProCon
