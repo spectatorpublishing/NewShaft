@@ -91,7 +91,7 @@ const DormButton = props => {
   const classMakeupFormat = props.class_makeup.split(",").map((el, i) => el.charAt(0).toUpperCase() + el.slice(1)).join(", ");
     
     var roomtype = "";
-    if (props.SUITE.length != 0) {
+    if (props.SUITE) {
       roomtype += "Suite-style";
       if (props.SINGLE_ && props.DOUBLE_)
         roomtype += " singles and doubles";
