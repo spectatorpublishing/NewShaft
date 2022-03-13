@@ -16,6 +16,9 @@ const Dorms = styled.div`
     grid-template-columns: 47.5% 47.5%;
 `
 
+const DormLink = styled(Link)`
+    text-align: left;
+`
 
 export default class ExploreSidebar extends Component {
     constructor(props) {
@@ -35,7 +38,7 @@ export default class ExploreSidebar extends Component {
         return (
             <div>
                 <Dorms>
-{/*                     <DormButton key={1}
+{/*                      <DormButton key={1}
                         school={"Columbia"}
                         name={"East Campus"}
                         image={"https://arc-anglerfish-arc2-prod-spectator.s3.amazonaws.com/public/EFNLDXHRUZGLXLXVPDGKLELKGU.jpg"}
@@ -59,6 +62,7 @@ export default class ExploreSidebar extends Component {
                         SUITE="" 
                         dormStyle="Corridor Styled" 
                     />
+                    <DormLink key={1}  to={{pathname : "/explore/EastCampus"}} style={{textDecoration: 'none'}}>
                     <DormButton key={1}
                         school={"Columbia"}
                         name={"East Campus"}
@@ -69,10 +73,11 @@ export default class ExploreSidebar extends Component {
                         WALKTHROUGH={false}
                         TRIPLE={false}
                         SUITE="" 
-                        dormStyle="Corridor Style" 
-                    /> */}
+                        dormStyle="Corridor Styled" 
+                    /> 
+                    </DormLink>*/}
                     {this.state.dorms.map((dorm, index) => 
-                        <Link key={index}  to={{pathname : "/explore/" + dorm.DORM.replace(/\s+/g, ''), dorm : dorm.DORM}} style={{textDecoration: 'none'}}>
+                        <DormLink key={index}  to={{pathname : "/explore/" + dorm.DORM.replace(/\s+/g, ''), dorm : dorm.DORM}} style={{textDecoration: 'none'}}>
                             <DormButton key={index}
                                 school={dorm.COLLEGE}
                                 name={dorm.DORM}
@@ -85,7 +90,7 @@ export default class ExploreSidebar extends Component {
                                 SUITE={dorm.SUITE}    
                                 //dormStyle="Corridor Style" // where could this come from?
                             />
-                        </Link>
+                        </DormLink>
                     )}
                 </Dorms>
             </div>
