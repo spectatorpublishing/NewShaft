@@ -36,7 +36,7 @@ width: 0%;
 @media only screen and (min-width: 768px) {
   display: inline;
   position: fixed;
-  padding-left: 1em;
+  padding-left: 0em;
   float: right;
   width: 40%;
   right: 0;
