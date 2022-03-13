@@ -35,14 +35,55 @@ export default class ExploreSidebar extends Component {
         return (
             <div>
                 <Dorms>
+{/*                     <DormButton key={1}
+                        school={"Columbia"}
+                        name={"East Campus"}
+                        image={"https://arc-anglerfish-arc2-prod-spectator.s3.amazonaws.com/public/EFNLDXHRUZGLXLXVPDGKLELKGU.jpg"}
+                        class_makeup={"Sophomores, Juniors, Seniors"}
+                        SINGLE_={true}
+                        DOUBLE_={true}
+                        WALKTHROUGH={false}
+                        TRIPLE={false}
+                        SUITE="" 
+                        dormStyle="Corridor Styled" 
+                    />
+                    <DormButton key={1}
+                        school={"Columbia"}
+                        name={"East Campus"}
+                        image={"https://arc-anglerfish-arc2-prod-spectator.s3.amazonaws.com/public/EFNLDXHRUZGLXLXVPDGKLELKGU.jpg"}
+                        class_makeup={"Sophomores, Juniors, Seniors"}
+                        SINGLE_={true}
+                        DOUBLE_={true}
+                        WALKTHROUGH={false}
+                        TRIPLE={false}
+                        SUITE="" 
+                        dormStyle="Corridor Styled" 
+                    />
+                    <DormButton key={1}
+                        school={"Columbia"}
+                        name={"East Campus"}
+                        image={"https://arc-anglerfish-arc2-prod-spectator.s3.amazonaws.com/public/EFNLDXHRUZGLXLXVPDGKLELKGU.jpg"}
+                        class_makeup={"Sophomores, Juniors, Seniors"}
+                        SINGLE_={true}
+                        DOUBLE_={true}
+                        WALKTHROUGH={false}
+                        TRIPLE={false}
+                        SUITE="" 
+                        dormStyle="Corridor Style" 
+                    /> */}
                     {this.state.dorms.map((dorm, index) => 
                         <Link key={index}  to={{pathname : "/explore/" + dorm.DORM.replace(/\s+/g, ''), dorm : dorm.DORM}} style={{textDecoration: 'none'}}>
                             <DormButton key={index}
                                 school={dorm.COLLEGE}
                                 name={dorm.DORM}
                                 image={dorm.THUMBNAIL_IMAGE}
-                                description={dorm.DESCRIPTION}
-                                amenities={dorm.AMENITIES}
+                                class_makeup={dorm.CLASS_MAKEUP}
+                                SINGLE_={dorm.SINGLE_}
+                                DOUBLE_={dorm.DOUBLE_}
+                                WALKTHROUGH={dorm.WALKTHROUGH}
+                                TRIPLE={dorm.TRIPLE_}
+                                SUITE={dorm.SUITE}    
+                                //dormStyle="Corridor Style" // where could this come from?
                             />
                         </Link>
                     )}
