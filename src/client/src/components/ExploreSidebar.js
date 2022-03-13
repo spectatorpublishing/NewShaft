@@ -38,44 +38,6 @@ export default class ExploreSidebar extends Component {
         return (
             <div>
                 <Dorms>
-{/*                      <DormButton key={1}
-                        school={"Columbia"}
-                        name={"East Campus"}
-                        image={"https://arc-anglerfish-arc2-prod-spectator.s3.amazonaws.com/public/EFNLDXHRUZGLXLXVPDGKLELKGU.jpg"}
-                        class_makeup={"Sophomores, Juniors, Seniors"}
-                        SINGLE_={true}
-                        DOUBLE_={true}
-                        WALKTHROUGH={false}
-                        TRIPLE={false}
-                        SUITE="" 
-                        dormStyle="Corridor Styled" 
-                    />
-                    <DormButton key={1}
-                        school={"Columbia"}
-                        name={"East Campus"}
-                        image={"https://arc-anglerfish-arc2-prod-spectator.s3.amazonaws.com/public/EFNLDXHRUZGLXLXVPDGKLELKGU.jpg"}
-                        class_makeup={"Sophomores, Juniors, Seniors"}
-                        SINGLE_={true}
-                        DOUBLE_={true}
-                        WALKTHROUGH={false}
-                        TRIPLE={false}
-                        SUITE="" 
-                        dormStyle="Corridor Styled" 
-                    />
-                    <DormLink key={1}  to={{pathname : "/explore/EastCampus"}} style={{textDecoration: 'none'}}>
-                    <DormButton key={1}
-                        school={"Columbia"}
-                        name={"East Campus"}
-                        image={"https://arc-anglerfish-arc2-prod-spectator.s3.amazonaws.com/public/EFNLDXHRUZGLXLXVPDGKLELKGU.jpg"}
-                        class_makeup={"Sophomores, Juniors, Seniors"}
-                        SINGLE_={true}
-                        DOUBLE_={true}
-                        WALKTHROUGH={false}
-                        TRIPLE={false}
-                        SUITE="" 
-                        dormStyle="Corridor Styled" 
-                    /> 
-                    </DormLink>*/}
                     {this.state.dorms.map((dorm, index) => 
                         <DormLink key={index}  to={{pathname : "/explore/" + dorm.DORM.replace(/\s+/g, ''), dorm : dorm.DORM}} style={{textDecoration: 'none'}}>
                             <DormButton key={index}
