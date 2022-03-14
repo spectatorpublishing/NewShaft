@@ -236,7 +236,7 @@ const Dorm = ({ }) => {
   const [reviews, setReviews] = useState([]);
   const [dorm_photos, setDormPhotos] = useState([]);
   const [relatedArticles, setrelatedArticles] = useState([]);
-  const [floorPlan, setFloorPlans] = useState([]);
+  const [floorPlans, setFloorPlans] = useState([]);
   const [floorNames, setFloorNames] = useState([]);
   const [relatedDorms, setRelatedDorms] = useState([]);
   const [scrollMenuFixed, setScrollMenuFixed] = useState(false);
@@ -254,7 +254,7 @@ const Dorm = ({ }) => {
     getDormAmenities(dormName);
     //fetchReviews(dormName);
     //fetchRelatedArticles(dormName);
-    //fetchFloorPlans(dormName);
+    fetchFloorPlans(dormName);
     //fetchRelatedDorms(dormName);
     //fetchDormPhotos(dormName);
   }, []);
@@ -398,10 +398,8 @@ const Dorm = ({ }) => {
         return [floor_state, floor_name];
       }).then(floor_vals => {
         console.log(floor_vals);
-        setFloorPlans({
-          floorPlans: floor_vals[0],
-          floorNames: floor_vals[1]
-        });
+        setFloorPlans(floor_vals[0]);
+        setFloorNames(floor_vals[1]);
       }).catch(error => {
         console.log(error);
       });
@@ -488,7 +486,14 @@ const Dorm = ({ }) => {
           </InfoSection>
 
           <InfoSection>
-            <SectionTitle>Floor Plans</SectionTitle>
+          <SectionTitle>Floor Plans</SectionTitle>
+                <MarginWrapper>
+                  <FloorPlan
+                    floorOffset={0}
+                    planArray={floorPlans}
+                    planNames={floorNames}
+                  />
+                </MarginWrapper>
           </InfoSection>
 
           {(dormInfo.LATITUDE && dormInfo.LONGITUDE) ?
@@ -554,7 +559,14 @@ const Dorm = ({ }) => {
                 />
               </InfoSection>
               <InfoSection>
-                <SectionTitle>FLOOR PLANS</SectionTitle>
+                <SectionTitle>Floor Plans</SectionTitle>
+                <MarginWrapper>
+                  <FloorPlan
+                    floorOffset={0}
+                    planArray={floorPlans}
+                    planNames={floorNames}
+                  />
+                </MarginWrapper>
               </InfoSection>
               {(dormInfo.LATITUDE && dormInfo.LONGITUDE) ?
                 <InfoSection>

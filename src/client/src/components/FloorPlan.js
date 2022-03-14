@@ -4,25 +4,11 @@ import styled from 'styled-components';
 import 'react-image-lightbox/style.css'; 
 import Lightbox from 'react-image-lightbox';
 
-let FloorPlanTitle = styled.h2`
-    margin-top: 0.5vw;
-    margin-bottom: 1vw;
-    font-weight: 900;
-    width: 100%;
-`
-
-let FloorPlanTitleMobile = styled.h2`
-    margin-top: 3vh;
-    margin-bottom: 0;
-    padding-left: 0.5vw;
-`
-
 let FloorPlanBox = styled.div` 
     display: flex;
     flex-direction: row;
     overflow: hidden;
     padding: 3vw;
-    margin-top: 1rem;
     box-shadow: 5px 5px 10px ${props => props.theme.lightGray};
     border: 1px solid ${props => props.theme.lightGray};
 `
@@ -167,7 +153,6 @@ export default class FloorPlan extends React.PureComponent {
             currentFloor: floorNumber + this.state.floorOffset,
             currentPlan: this.props.planArray[floorNumber]
         })
-
     }
 
     floorUp() {
@@ -211,10 +196,10 @@ export default class FloorPlan extends React.PureComponent {
         let isOpen = this.state.isOpen;
         let photoIndex = this.state.photoIndex;
         const isMobile = width <= 700;
+        this.selectFloor(0);
         if(isMobile) {
             return (
                 <div>
-                    <FloorPlanTitleMobile> Floor Plans </FloorPlanTitleMobile>
                     <FloorPlanBoxMobile>
                         <PlanDisplayMobile>
                             <CurrentPlanMobile src={this.state.currentPlan} />
@@ -232,7 +217,6 @@ export default class FloorPlan extends React.PureComponent {
         } else { 
             return (
                 <div>
-                    <FloorPlanTitle> Floor Plans </FloorPlanTitle>
                     <FloorPlanBox>
                         <PlanDisplay>
                             {/* <FloorNumber> Floor {this.state.currentFloor} </FloorNumber> */}
