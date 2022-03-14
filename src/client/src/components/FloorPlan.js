@@ -196,7 +196,6 @@ export default class FloorPlan extends React.PureComponent {
         let isOpen = this.state.isOpen;
         let photoIndex = this.state.photoIndex;
         const isMobile = width <= 700;
-        this.selectFloor(0);
         if(isMobile) {
             return (
                 <div>
