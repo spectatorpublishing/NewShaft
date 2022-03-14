@@ -248,7 +248,8 @@ const Dorm = ({ }) => {
   const [dormStyle, setDormStyle] = useState("");
 
   useEffect(() => {
-    const dormName = dorm.replace("-", " ");
+    const dormName = dorm.replaceAll("-", " ");
+    console.log(dormName)
     fetchDormInfo(dormName);
     getDormAmenities(dormName);
     //fetchReviews(dormName);
@@ -490,21 +491,21 @@ const Dorm = ({ }) => {
             <SectionTitle>Floor Plans</SectionTitle>
           </InfoSection>
 
-          <InfoSection>
-            <SectionTitle>Location</SectionTitle>
-            <MarginWrapper>
-              {/* <Maps
-                  latitudes={[dormInfo.LATITUDE]}
-                  longitudes={[dormInfo.LONGITUDE]}
-                  popupInfo={[dormInfo.DORM]}
-                  popupId={[dormInfo.DORM]}
-                  centerLatitude={dormInfo.LATITUDE}
-                  centerLongitude={dormInfo.LONGITUDE}
-                  width={"100%"}
-                  height={"225px"}
-                /> */}
-            </MarginWrapper>
-          </InfoSection>
+          {(dormInfo.LATITUDE && dormInfo.LONGITUDE) ?
+                <InfoSection>
+                  <SectionTitle>Location</SectionTitle>
+                  <MarginWrapper>
+                  <Maps
+                        latitudes={[dormInfo.LATITUDE]}
+                        longitudes={[dormInfo.LONGITUDE]}
+                        popupInfo={[dormInfo.DORM]}
+                        popupId={[dormInfo.DORM]}
+                        centerLatitude={dormInfo.LATITUDE}
+                        centerLongitude={dormInfo.LONGITUDE}
+                        width={"100%"}
+                        height={"225px"}
+                      /></MarginWrapper>
+                </InfoSection> : null}
 
           <InfoSection>
             <SectionTitle>Photo gallery</SectionTitle>
@@ -555,21 +556,21 @@ const Dorm = ({ }) => {
               <InfoSection>
                 <SectionTitle>FLOOR PLANS</SectionTitle>
               </InfoSection>
-              <InfoSection>
-                <SectionTitle>Location</SectionTitle>
-                <MarginWrapper>
-                 {/* <Maps
-                      latitudes={[dormInfo.LATITUDE]}
-                      longitudes={[dormInfo.LONGITUDE]}
-                      popupInfo={[dormInfo.DORM]}
-                      popupId={[dormInfo.DORM]}
-                      centerLatitude={dormInfo.LATITUDE}
-                      centerLongitude={dormInfo.LONGITUDE}
-                      width={"100%"}
-                      height={"300px"}
-                    /> */}
-                </MarginWrapper>
-              </InfoSection>
+              {(dormInfo.LATITUDE && dormInfo.LONGITUDE) ?
+                <InfoSection>
+                  <SectionTitle>Location</SectionTitle>
+                  <MarginWrapper>
+                  <Maps
+                        latitudes={[dormInfo.LATITUDE]}
+                        longitudes={[dormInfo.LONGITUDE]}
+                        popupInfo={[dormInfo.DORM]}
+                        popupId={[dormInfo.DORM]}
+                        centerLatitude={dormInfo.LATITUDE}
+                        centerLongitude={dormInfo.LONGITUDE}
+                        width={"100%"}
+                        height={"300px"}
+                      /></MarginWrapper>
+                </InfoSection> : null}
               <InfoSection>
                 <SectionTitle>PHOTO GALLERY</SectionTitle>
               </InfoSection>
