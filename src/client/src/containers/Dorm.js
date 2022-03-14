@@ -82,7 +82,8 @@ let Dot = styled.span`
 let DormImage = styled.div`
   display: flex;
   align-self: center;
-  width: fit-content;
+  width: 90vw;
+  height: 70vh;
   
   @media only screen and (max-width: 767px) {
 		height: 40vh;
@@ -92,9 +93,10 @@ let DormImage = styled.div`
 
 let Img = styled.img`
   width: 100%;
+  object-fit: cover;
   @media only screen and (max-width: 767px) {
     height: 40vh;
-		object-fit: scale-down;
+		object-fit: cover;
 	}
 `;
 
@@ -246,6 +248,7 @@ const Dorm = ({ }) => {
   const [roomtype, setRoomType] = useState("");
   const [classMakeupFormat, setClassMakeup] = useState("");
   const [dormStyle, setDormStyle] = useState("");
+  const [mainImage, setMainImage] = useState("");
 
   useEffect(() => {
     const dormName = dorm.replaceAll("-", " ");
@@ -256,18 +259,22 @@ const Dorm = ({ }) => {
     fetchRelatedArticles(dormName);
     fetchFloorPlans(dormName);
     //fetchRelatedDorms(dormName);
-    //fetchDormPhotos(dormName);
+    fetchDormPhotos(dormName);
   }, []);
 
-  async function fetchDormPhotos(dormName){
+  function fetchDormPhotos(dormName){
     fetch(`/api/getDormPhotos/${dormName}`, {
       method: "GET",
       headers: { "Content-Type": "application/json" },
     })
       .then(res => res.json())
       .then(dormPhotos => {
-        console.log(Object.values(dormPhotos));
-        setDormPhotos(Object.values(dormPhotos));
+        console.log(dorm_photos);
+        setMainImage(Object.values(dormPhotos)[0]);
+        /* for (const [key, value] of Object.entries(dormPhotos)) {
+          console.log(`${key}: ${value}`);
+          setDormPhotos(dorm_photos => [...dorm_photos, value])
+        } */
       }).catch(error => {
         console.log(error);
       });
@@ -449,7 +456,7 @@ const Dorm = ({ }) => {
     return (
       <Page>
           <DormImage>
-            <img src="https://housing.columbia.edu/sites/default/files/content/img/Buildings/Furnald/FurnaldHall.jpg"></img>
+            <img src={mainImage}></img>
           </DormImage>
 
           <DormHeader>
@@ -513,7 +520,7 @@ const Dorm = ({ }) => {
                 </InfoSection> : null}
 
           <InfoSection>
-            <SectionTitle>Photo gallery</SectionTitle>
+            <SectionTitle>Photo Gallery</SectionTitle>
           </InfoSection>
 
           {(relatedArticles.length == 0)? null :
@@ -538,7 +545,7 @@ const Dorm = ({ }) => {
           </DormHeader>
           
           <DormImage>
-            <Img src="https://housing.columbia.edu/sites/default/files/content/img/Buildings/Furnald/FurnaldHall.jpg"></Img>
+            <Img src={mainImage}></Img>
           </DormImage>
           <Info>
             <ColumnLeft> 
@@ -583,9 +590,16 @@ const Dorm = ({ }) => {
                         height={"300px"}
                       /></MarginWrapper>
                 </InfoSection> : null}
+              
+              {(dorm_photos.length == 0) ? null :
               <InfoSection>
-                <SectionTitle>PHOTO GALLERY</SectionTitle>
-              </InfoSection>
+                <SectionTitle>Photo Gallery</SectionTitle>
+                <PhotoGallery 
+                      updateModal={setIsOpen(false)} 
+                      images={dorm_photos} 
+                      path={dormInfo.DORM}
+                />
+              </InfoSection>}
   
               {(relatedArticles.length == 0)? null :
                 <InfoSection>
@@ -597,10 +611,10 @@ const Dorm = ({ }) => {
             </ColumnLeft>
             <ColumnRight> 
               <Sticky>
-                <StickyTitle>AT-A-GLANCE</StickyTitle>
+                <StickyTitle>At a glance</StickyTitle>
               </Sticky>
               <Sticky>
-                <StickyTitle>QUICK REVIEW</StickyTitle>
+                <StickyTitle>Quick review</StickyTitle>
               </Sticky>
             </ColumnRight>
           </Info>
