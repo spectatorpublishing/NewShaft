@@ -134,7 +134,9 @@ export default class FloorPlan extends React.PureComponent {
 
     componentWillReceiveProps(props) {
         this.setState({
-            planArray: props.planArray
+            planArray: props.planArray,
+            currentFloor: 0 + this.state.floorOffset,
+            currentPlan: this.props.planArray[0]
         })
     } 
 
@@ -196,6 +198,10 @@ export default class FloorPlan extends React.PureComponent {
         let isOpen = this.state.isOpen;
         let photoIndex = this.state.photoIndex;
         const isMobile = width <= 700;
+
+        console.log("arr: ", this.props.planArray);
+        console.log("names: ", this.props.planNames);
+
         if(isMobile) {
             return (
                 <div>
