@@ -86,28 +86,39 @@ const SeeMore = styled.h6`
 `
 
 const DormButton = props => {
-  const [width, setWidth] = useState(window.innerWidth);
+  const [roomtype, setRoomType] = useState("");
+  const [classMakeupFormat, setClassMakeup] = useState("");
+  const [dormStyle, setDormStyle] = useState("");
+  const schoolName = props.school.toLowerCase();
 
-  const classMakeupFormat = props.class_makeup.split(",").map((el, i) => el.charAt(0).toUpperCase() + el.slice(1)).join(", ");
+  useEffect(() => {
+    if (props.class_makeup) 
+      setClassMakeup(props.class_makeup.split(",").map((el, i) => el.charAt(0).toUpperCase() + el.slice(1)).join(", "));
     
-    var roomtype = "";
-    if (props.SUITE) {
-      roomtype += "Suite-style";
-      if (props.SINGLE_ && props.DOUBLE_)
-        roomtype += " singles and doubles";
-      else if (props.SINGLE_) roomtype += " singles";
-      else if (props.DOUBLE_) roomtype += " doubles";
-    } else if (props.WALKTHROUGH)
-      roomtype += "Doubles and walkthrough doubles";
-    else {
-      if (props.SINGLE_ && props.DOUBLE_)
-        roomtype += "Singles and doubles";
-      else if (props.SINGLE_) roomtype += "Singles";
-      else if (props.DOUBLE_) roomtype += "Doubles";
-    }
-    if (props.TRIPLE_) roomtype += " and triples";
+    setDormStyle((props.SUITE_ === 1) ? "Suite-Style" : "Corridor-Style");
 
-    let schoolName = props.school.toLowerCase();
+    setRoomTypeString()
+  }, []);
+
+  const setRoomTypeString = () => {
+    var roomtype = "";
+    
+    if (props.WALKTHROUGH){
+      roomtype += "Doubles and walkthrough doubles";
+    } else {
+      if (props.SINGLE_ && props.DOUBLE_ && props.TRIPLE_){
+        roomtype += " Singles, doubles, and triples";
+      } else if (props.SINGLE_ && props.DOUBLE_){
+        roomtype += " Singles and doubles";
+      } else {
+        if (props.SINGLE_) roomtype += "Singles";
+        if (props.DOUBLE_) roomtype += "Doubles";
+        if (props.TRIPLE_) roomtype += " and triples";
+      }
+    }
+
+    setRoomType(roomtype);
+  }
     return (
       <DormButtonWrapper>
         <img className="dormimage" src={props.image} />
@@ -122,7 +133,7 @@ const DormButton = props => {
               )
             }
             <Amenities> 
-              {props.dormStyle ? <Amenity>- {props.dormStyle}</Amenity>: null}  
+              <Amenity>- {dormStyle}</Amenity>
               <Amenity>- {roomtype}</Amenity>
               <Amenity>- {classMakeupFormat}</Amenity>
             </Amenities>
