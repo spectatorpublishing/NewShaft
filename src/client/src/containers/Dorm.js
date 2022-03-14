@@ -253,7 +253,7 @@ const Dorm = ({ }) => {
     fetchDormInfo(dormName);
     getDormAmenities(dormName);
     //fetchReviews(dormName);
-    //fetchRelatedArticles(dormName);
+    fetchRelatedArticles(dormName);
     fetchFloorPlans(dormName);
     //fetchRelatedDorms(dormName);
     //fetchDormPhotos(dormName);
