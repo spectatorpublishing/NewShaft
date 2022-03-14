@@ -3,7 +3,7 @@ var router = express.Router();
 var pool = require('../database');
 
 router.post('/', async (req, res) => {
-    var query = `SELECT DORM, DESCRIPTION, COLLEGE, THUMBNAIL_IMAGE, LATITUDE, LONGITUDE FROM dorm_static_info `
+    var query = `SELECT DORM, DESCRIPTION, COLLEGE, THUMBNAIL_IMAGE, LATITUDE, LONGITUDE, SINGLE_, DOUBLE_, TRIPLE_, CLASS_MAKEUP, SUITE_ FROM dorm_static_info `
     var collegeQ = ``
     var groupQ = ``
     var roomQ = ``

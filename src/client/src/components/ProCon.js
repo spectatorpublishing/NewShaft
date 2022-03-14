@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React, { Component, useState, useEffect } from 'react';
 import styled from 'styled-components';
 import sad from "../assets/Icons/sad.svg";
 import happy from "../assets/Icons/happy.svg";
@@ -24,14 +24,10 @@ const Section = styled.div`
 
     @media only screen and (max-width: 767px) {
       margin: 0;
-	}
-`
-
-const SectionMobile = styled(Section)`
-    flex-direction: column;
-    margin-top: 1rem;
-    padding-right: 1rem;
-    
+      flex-direction: column;
+      margin-top: 1rem;
+      padding-right: 1rem;
+	  }
 `
 const ListBox = styled.div`
     flex: 1;
@@ -65,87 +61,47 @@ const Amenity = styled.div`
 `
 
 
-export default class ProCon extends Component {
-    constructor(props) {
-        super(props);
-    
-        this.state = {
-          width: window.innerWidth,
-        };
-      }
+const ProCon = (props) => {
+  const [width, setWindowWidth] = useState(window.innerWidth);
+  
+  function handleResize() {
+    setWindowWidth(window.innerWidth);
+  }
 
-      componentWillMount() {
-        window.addEventListener("resize", this.handleWindowSizeChange);
-      }
-    
-      componentWillUnmount() {
-        window.removeEventListener("resize", this.handleWindowSizeChange);
-      }
-    
-      handleWindowSizeChange = () => {
-        this.setState({ width: window.innerWidth });
-      };
-    
-      showAllAmenities() {
-        let index = 0
-        return this.state.amenities.map((amenity) => {
-          return <Amenity key={index++}>
-            <AmenityIcon src={icon} alt={amenity[0]}/>
-            <div> {amenity[1]} </div>
-          </Amenity>
-          });
-      }
-    
-      render() {
-      const { width } = this.state;
-      const isMobile = width <= 768;
-      if (isMobile) {
-        let k = 0;
+  useEffect(() => {
+    function watchResize() {
+      window.addEventListener("resize", handleResize);
+    }
+    watchResize();
+    return () => {
+      window.removeEventListener("resize", handleResize);
+    };
+  });
+
         return (
           <div>
-            <SectionMobile>
+            <Section>
             <ListBox>
                 <ProConTitle>Pros</ProConTitle>
                 <ListPoints>
-                  {this.state.pros.map(pro => (
-                    <li key={k++}>{pro}</li>))}
+                  {props.pros? 
+                    props.pros.map(pro => (
+                      <li>{pro}</li>))
+                    : null}
                 </ListPoints>
             </ListBox>
             <ListBox>
                 <ProConTitle>Cons</ProConTitle>
                 <ListPoints>
-                  {this.state.cons.map(con => (
-                    <li key={k++}>{con}</li>))}
+                {props.cons? 
+                    props.cons.map(con => (
+                      <li>{con}</li>))
+                    : null}
                 </ListPoints>
-            </ListBox>
-          </SectionMobile>
-          </div>
-        );
-      }
-      
-      else {
-      let k = 0;
-        return (
-        <div>
-          <Section>
-            <ListBox>
-              <></>
-              <ProConTitle>Pros</ProConTitle>
-              <ListPoints>
-                {this.props.pros.map(pro => (
-                  <li key={k++}>{pro}</li>))}
-              </ListPoints>
-            </ListBox>
-            <ListBox>
-              <ProConTitle>Cons</ProConTitle>
-              <ListPoints>
-                {this.props.cons.map(con => (
-                  <li key={k++}>{con}</li>))}
-              </ListPoints>
             </ListBox>
           </Section>
           </div>
         );
-      }
-    }
 }
+
+export default ProCon;

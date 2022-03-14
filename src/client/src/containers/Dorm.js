@@ -1,5 +1,7 @@
 import styled from "styled-components/macro";
 import React, { Component } from "react";
+import { useEffect, useState } from "react";
+import { useParams } from 'react-router-dom';
 import PhotoBanner from "../components/PhotoBanner";
 import Amenities from "../components/Amenities";
 import NewAmenities from "../components/NewAmenities";
@@ -15,7 +17,7 @@ import ScrollToTop from "../components/ScrollToTop";
 import AdManager from "../components/AdManager";
 import BlurbExpander from "../components/BlurbExpander";
 import { theme } from "../util/GlobalStyles";
-import {NavLink} from "react-router-dom";
+import { NavLink } from "react-router-dom";
 import ReviewPageReview from "../components/ReviewPageReview"
 import PhotoGallery from "../components/PhotoGallery";
 
@@ -80,7 +82,8 @@ let Dot = styled.span`
 let DormImage = styled.div`
   display: flex;
   align-self: center;
-  width: fit-content;
+  width: 90vw;
+  height: 70vh;
   
   @media only screen and (max-width: 767px) {
 		height: 40vh;
@@ -90,9 +93,10 @@ let DormImage = styled.div`
 
 let Img = styled.img`
   width: 100%;
+  object-fit: cover;
   @media only screen and (max-width: 767px) {
     height: 40vh;
-		object-fit: scale-down;
+		object-fit: cover;
 	}
 `;
 
@@ -223,110 +227,63 @@ const dorm_name_map = {
   "WattHall": "Watt Hall",
   "WienHall": "Wien Hall",
   "WoodbridgeHall": "Woodbridge Hall",
-  "PlimptonHall" : "Plimpton Hall"
+  "PlimptonHall": "Plimpton Hall"
 }
 
-export default class Dorm extends React.PureComponent {
+const Dorm = ({ }) => {
+  const { dorm } = useParams();
+  const [width, setScreenWidth] = useState(window.innerWidth);
+  const [dormInfo, setDormInfo] = useState({});
+  const [amenities, setAmenities] = useState({});
+  const [reviews, setReviews] = useState([]);
+  const [dorm_photos, setDormPhotos] = useState([]);
+  const [relatedArticles, setrelatedArticles] = useState([]);
+  const [floorPlans, setFloorPlans] = useState([]);
+  const [floorNames, setFloorNames] = useState([]);
+  const [relatedDorms, setRelatedDorms] = useState([]);
+  const [scrollMenuFixed, setScrollMenuFixed] = useState(false);
+  const [scrollMenuOffset, setScrollMenuOffset] = useState(null);
+  const [isOpen, setIsOpen] = useState(false);
+  const [fullDescription, setFullDescription] = useState("");
+  const [roomtype, setRoomType] = useState("");
+  const [classMakeupFormat, setClassMakeup] = useState("");
+  const [dormStyle, setDormStyle] = useState("");
+  const [mainImage, setMainImage] = useState("");
 
-  constructor(props) {
-    super(props);
-    let screen_width = window.innerWidth;
-    this.amenitiesRef = React.createRef();
-    this.proconRef = React.createRef();
-    this.floorplansRef = React.createRef();
-    this.reviewsRef = React.createRef();
-    this.locationRef = React.createRef();
-    this.spectrumRef = React.createRef();
-    this.suggestionsRef = React.createRef();
-    this.scrollMenuRef = React.createRef();
-    this.state = {
-      dormInfo: {
-        DORM: "",
-        ADDRESS: "",
-        DESCRIPTION: "",
-        COLLEGE: "",
-        THUMBNAIL_IMAGE: "",
-        SUITE: "",
-        WALKTHROUGH: "",
-        SINGLE_: "",
-        DOUBLE_: "",
-        TRIPLE_: "",
-        CLASS_MAKEUP: "",
-        PROS: ["pro1", "pro2", "pro3"],
-        CONS: ["con1", "con2", "con3"],
-        LATITUDE: 0,
-        LONGITUDE: 0,
-        LOTTERY_NUMS: [],
-        RELATEDDORMS: relatedDorms
-      },
-      amenities: {
-        P_BATHROOM: 0,
-        LAUNDRY: 0,
-        CARPET: 0,
-        F_KITCHEN: 0,
-        P_KITCHEN: 0,
-        LOUNGE: 0,
-        GYM: 0,
-        BIKE: 0,
-        COMPUTER: 0,
-        PRINT:0,
-        AC: 0,
-        MUSIC: 0
-      },
-      reviews: [],
-      dorm_photos: [],
-      relatedArticles: [],
-      floorPlans: [],
-      floorNames: [],
-      relatedDorms : [],
-      scrollMenuFixed: false,
-      scrollMenuOffset: null,
-      width: screen_width,
-      isOpen: false
-    };
-    
-  }
+  useEffect(() => {
+    const dormName = dorm.replaceAll("-", " ");
+    console.log(dormName)
+    fetchDormInfo(dormName);
+    getDormAmenities(dormName);
+    //fetchReviews(dormName);
+    fetchRelatedArticles(dormName);
+    fetchFloorPlans(dormName);
+    //fetchRelatedDorms(dormName);
+    fetchDormPhotos(dormName);
+  }, []);
 
-  componentDidMount() {
-    // This will not fetch the right data for all dorms need to pass the data correctly into the dorm
-    var dormName = this.props.match.params.dorm;
-    this.fetchDormInfo(dormName);
-    this.fetchAmenities(dormName);
-    this.fetchReviews(dormName);
-    this.fetchRelatedArticles(dormName);
-    this.fetchFloorPlans(dormName);
-    this.fetchRelatedDorms(dormName);
-    this.fetchDormPhotos(dormName);
-  }
-
-  componentWillReceiveProps(newProps){
-    //map spaceless dorm names to spacy names
-    this.fetchDormInfo(newProps.match.params.dorm);
-    this.fetchAmenities(newProps.match.params.dorm);
-    this.fetchReviews(newProps.match.params.dorm);
-    this.fetchRelatedArticles(newProps.match.params.dorm);
-    this.fetchFloorPlans(newProps.match.params.dorm);
-    this.fetchRelatedDorms(newProps.match.params.dorm);
-    this.fetchDormPhotos(newProps.match.params.dorm);
-  }
-
-  fetchDormPhotos(name){
-    const dormName = dorm_name_map[name]
+  function fetchDormPhotos(dormName){
     fetch(`/api/getDormPhotos/${dormName}`, {
       method: "GET",
-      headers: { "Content-Type": "application/json"},
+      headers: { "Content-Type": "application/json" },
     })
       .then(res => res.json())
       .then(dormPhotos => {
-        this.setState({dorm_photos: Object.values(dormPhotos)})
+        console.log(dorm_photos);
+        setMainImage(Object.values(dormPhotos)[0]);
+        /* for (const [key, value] of Object.entries(dormPhotos)) {
+          console.log(`${key}: ${value}`);
+          setDormPhotos(dorm_photos => [...dorm_photos, value])
+        } */
+      }).catch(error => {
+        console.log(error);
       });
   }
 
-  fetchDormInfo(name) {
-    const dormName = dorm_name_map[name]
+  async function fetchDormInfo(dormName) {
     fetch(`/api/getDormInfo/${dormName}`, {
       method: "GET",
-      headers: { "Content-Type": "application/json"},
+      headers: { "Content-Type": "application/json" },
     })
       .then(res => res.json())
       .then(dormInfo => {
@@ -334,168 +291,176 @@ export default class Dorm extends React.PureComponent {
         dormInfo.CONS = dormInfo.CONS.substring(0, dormInfo.CONS.length - 1).split(',');
         let tempLot = dormInfo.LOTTERY_NUMS.split(',');
         let i = 0;
-        for(i = 0; i < tempLot.length; i++){
+        for (i = 0; i < tempLot.length; i++) {
           tempLot[i] = tempLot[i].split(':');
         }
         dormInfo.LOTTERY_NUMS = tempLot;
-        document.title = this.state.dormInfo.DORM;
-        this.setState({dormInfo: dormInfo});
+        document.title = dormInfo.DORM;
+        console.log(dormInfo);
+        setDormInfo(dormInfo);
+
+        setFullDescription(dormInfo.DESCRIPTION.substring(0, dormInfo.DESCRIPTION.length - 1));
+        setClassMakeup(dormInfo.CLASS_MAKEUP.split(",").map((el, i) => el.charAt(0).toUpperCase() + el.slice(1)).join(", "));
+        setDormStyle((dormInfo.SUITE_ === 1) ? "Suite-Style" : "Corridor-Style");
+        setRoomTypeString();
+      }).catch(error => {
+        console.log(error);
       });
   }
 
-  fetchAmenities(name) {
-    const dormName = dorm_name_map[name]
+  async function getDormAmenities(dormName) {
     fetch(`/api/getAmenities/${dormName}`, {
       method: "GET",
-      headers: { "Content-Type": "application/json"},
+      headers: { "Content-Type": "application/json" },
     })
       .then(res => res.json())
       .then(amenitiesInfo => {
-        this.setState({amenities: amenitiesInfo})
+        console.log(amenitiesInfo)
+        
+        setAmenities(amenitiesInfo);
+      }).catch(error => {
+        console.log(error);
       });
   }
 
-  fetchReviews(name){
-    const dormName = dorm_name_map[name]
+  async function fetchReviews(dormName) {
     fetch(`/api/getReviews/${dormName}`, {
       method: "GET",
-      headers: { "Content-Type": "application/json"},
+      headers: { "Content-Type": "application/json" },
     })
       .then(res => res.json())
       .then(reviewsInfo => {
-        this.setState({reviews: reviewsInfo.reviews, avg_rating: reviewsInfo.avg_rating, reccomend: reviewsInfo.reccomended, ranking: reviewsInfo.ranking})
+        console.log(reviewsInfo);
+        setReviews({ reviews: reviewsInfo.reviews, avg_rating: reviewsInfo.avg_rating, reccomend: reviewsInfo.reccomended, ranking: reviewsInfo.ranking });
+      }).catch(error => {
+        console.log(error);
       });
   }
 
-  fetchRelatedArticles(name){
-    const dormName = dorm_name_map[name]
+  function fetchRelatedArticles(dormName) {
     fetch(`/api/getRelatedArticles/${dormName}`, {
       method: "GET",
-      headers: { "Content-Type": "application/json"},
+      headers: { "Content-Type": "application/json" },
     })
       .then(res => res.json())
       .then(relatedArticles => {
         var relArticles = [];
-        for (var i = 0; i < relatedArticles.length; i++)
-        {
+        for (var i = 0; i < relatedArticles.length; i++) {
           relArticles.push({
-            title: relatedArticles[i].TITLE, 
-            img_src: relatedArticles[i].IMAGE_URL, 
+            title: relatedArticles[i].TITLE,
+            img_src: relatedArticles[i].IMAGE_URL,
             author: relatedArticles[i].AUTHOR,
             date: relatedArticles[i].DATE,
             url: relatedArticles[i].RELATED
-          })
+          });
         }
-        this.setState({relatedArticles: relArticles})
+        console.log(relArticles);
+        setrelatedArticles(relArticles);
+      }).catch(error => {
+        console.log(error);
       });
   }
 
-  fetchRelatedDorms(name){
-    const dormName = dorm_name_map[name]
+  function fetchRelatedDorms(dormName) {
     fetch(`/api/getRelatedDorms/${dormName}`, {
       method: "GET",
-      headers: { "Content-Type": "application/json"},
-    }).then((res=>res.json()))
-    .then(relatedDorms => {
-      let relDorms = []
-      for (let i = 0; i < relatedDorms.length; i++){
-        relDorms.push({
-          "DORM": relatedDorms[i].RELATED,
-          "image": relatedDorms[i].IMAGE
-          }
-        )
-      }
-      this.setState({relatedDorms : relDorms})
+      headers: { "Content-Type": "application/json" },
     })
+      .then((res => res.json()))
+      .then(relatedDorms => {
+        let relDorms = [];
+        for (let i = 0; i < relatedDorms.length; i++) {
+          relDorms.push({
+            "DORM": relatedDorms[i].RELATED,
+            "image": relatedDorms[i].IMAGE
+          }
+          );
+        }
+        console.log(relDorms);
+        setRelatedDorms(relDorms);
+      }).catch(error => {
+        console.log(error);
+      });
   }
 
-  fetchFloorPlans(name){
-    const dormName = dorm_name_map[name]
+  function fetchFloorPlans(dormName) {
     fetch(`/api/getFloorPlans/${dormName}`, {
       method: "GET",
-      headers: { "Content-Type": "application/json"},
+      headers: { "Content-Type": "application/json" },
     })
       .then(res => res.json())
       .then(floorPlans => {
         let floorPlan = floorPlans;
-        let floor_state = []
-        let floor_name  = []
+        let floor_state = [];
+        let floor_name = [];
         let keys = Object.keys(floorPlan);
-        for (var i = 0; i < keys.length; i++)
-        {
+        for (var i = 0; i < keys.length; i++) {
           var floorNum = keys[i];
           if (floorPlan[floorNum] == null || keys[i] == "DORM") {
             continue;
-          }          
-          floor_state[floorNum -1] = 'https://shaft-dorm-floorplans.s3.amazonaws.com/' + floorPlan[floorNum].replace(/ /g, '+')
-          floor_name[floorNum -1]= floorPlan[floorNum].slice(0, -4).replace("_", " ");
+          }
+          floor_state[floorNum - 1] = 'https://shaft-dorm-floorplans.s3.amazonaws.com/' + floorPlan[floorNum].replace(/ /g, '+');
+          floor_name[floorNum - 1] = floorPlan[floorNum].slice(0, -4).replace("_", " ");
         }
-        return [floor_state, floor_name]
+        return [floor_state, floor_name];
       }).then(floor_vals => {
-        this.setState({
-          floorPlans: floor_vals[0],
-          floorNames: floor_vals[1]
-        });
-      })
+        console.log(floor_vals);
+        setFloorPlans(floor_vals[0]);
+        setFloorNames(floor_vals[1]);
+      }).catch(error => {
+        console.log(error);
+      });
   }
 
-  render() {
-    // Use ref forwarding so Scroller component can directly access the DOM nodes
-    const ScrollerTarget = React.forwardRef((props, ref) => (
-      <div ref={ref}>
-        {props.children}
-      </div>
-    )); 
-    const isMobile = this.state.width <= 768;
-    const isMedium = this.state.width <= 1400;
-    const headerButtons = {
-      fontSize: 15,textAlign: "center",
-      background: "#707070BF",color: "white",
-      borderRadius: 7,paddingTop: 10, paddingBottom: 10,paddingLeft: 5,paddingRight: 5,
-      justifyContent:'center',alignItems: 'center',marginBottom: 15, minWidth: '160px', border: 'none',
-    }
-    const years_map = {
-      "first-years": "Freshman",
-      "sophomores": "Sophomore",
-      "juniors": "Junior",
-      "seniors": "Senior"
-    }
-    let useReview = this.state.reviews.slice(0,3);
-    if (isMobile){useReview = useReview.slice(0,2);}
-    let roomtype = "";
-    if (this.state.dormInfo.SUITE.length != 0) {
-      roomtype += "Suite-style";
-      if (this.state.dormInfo.SINGLE_ && this.state.dormInfo.DOUBLE_)
-        roomtype += " singles and doubles";
-      else if (this.state.dormInfo.SINGLE_) roomtype += " singles";
-      else if (this.state.dormInfo.DOUBLE_) roomtype += " doubles";
-    } else if (this.state.dormInfo.WALKTHROUGH)
+  const setRoomTypeString = () => {
+    var roomtype = "";
+
+    if (dormInfo.WALKTHROUGH) {
       roomtype += "Doubles and walkthrough doubles";
-    else {
-      if (this.state.dormInfo.SINGLE_ && this.state.dormInfo.DOUBLE_)
-        roomtype += "Singles and doubles";
-      else if (this.state.dormInfo.SINGLE_) roomtype += "Singles";
-      else if (this.state.dormInfo.DOUBLE_) roomtype += "Doubles";
-    }
-    if (this.state.dormInfo.TRIPLE_) roomtype += " and triples";
-    
-    let fullDescription = this.state.dormInfo.DESCRIPTION.substring(0, this.state.dormInfo.DESCRIPTION.length - 1);
-    let truncatedDescription = (fullDescription.length > 100) ? fullDescription.substring(0,100) + '...' : null;
-    
-    const { isOpen } = this.state;
-    const updateModal = () =>{
-      this.setState({ isOpen: false})
+    } else {
+      if (dormInfo.SINGLE_ && dormInfo.DOUBLE_ && dormInfo.TRIPLE_) {
+        roomtype += " Singles, doubles, and triples";
+      } else if (dormInfo.SINGLE_ && dormInfo.DOUBLE_) {
+        roomtype += " Singles and doubles";
+      } else {
+        if (dormInfo.SINGLE_) roomtype += "Singles";
+        if (dormInfo.DOUBLE_) roomtype += "Doubles";
+        if (dormInfo.TRIPLE_) roomtype += " and triples";
+      }
     }
 
-    if (isMobile) {
-      return (
-        <Page>
+    setRoomType(roomtype);
+  }
+  // Use ref forwarding so Scroller component can directly access the DOM nodes
+  /* const ScrollerTarget = React.forwardRef((props, ref) => (
+    <div ref={ref}>
+      {props.children}
+    </div>
+  ));  */
+  const isMobile = width <= 768;
+  const isMedium = width <= 1400;
+  const headerButtons = {
+    fontSize: 15, textAlign: "center",
+    background: "#707070BF", color: "white",
+    borderRadius: 7, paddingTop: 10, paddingBottom: 10, paddingLeft: 5, paddingRight: 5,
+    justifyContent: 'center', alignItems: 'center', marginBottom: 15, minWidth: '160px', border: 'none',
+  }
+  const years_map = {
+    "first-years": "Freshman",
+    "sophomores": "Sophomore",
+    "juniors": "Junior",
+    "seniors": "Senior"
+  }
+
+  if (isMobile) {
+    return (
+      <Page>
           <DormImage>
-            <img src="https://housing.columbia.edu/sites/default/files/content/img/Buildings/Furnald/FurnaldHall.jpg"></img>
+            <img src={mainImage}></img>
           </DormImage>
 
           <DormHeader>
-            <DormName> {this.state.dormInfo.DORM} </DormName>
+            <DormName> {dormInfo.DORM} </DormName>
             <UnderlineWrapper>
               <Underline></Underline>
               <Dot></Dot>
@@ -522,51 +487,56 @@ export default class Dorm extends React.PureComponent {
 
           <InfoSection>
             <ProCon
-              pros={this.state.dormInfo.PROS}
-              cons={this.state.dormInfo.CONS}
+              pros={dormInfo.PROS}
+              cons={dormInfo.CONS}
             />
           </InfoSection>
 
           <InfoSection>
-            <SectionTitle>Floor Plans</SectionTitle>
+          <SectionTitle>Floor Plans</SectionTitle>
+                <MarginWrapper>
+                  <FloorPlan
+                    floorOffset={0}
+                    planArray={floorPlans}
+                    planNames={floorNames}
+                  />
+                </MarginWrapper>
           </InfoSection>
+
+          {(dormInfo.LATITUDE && dormInfo.LONGITUDE) ?
+                <InfoSection>
+                  <SectionTitle>Location</SectionTitle>
+                  <MarginWrapper>
+                  <Maps
+                        latitudes={[dormInfo.LATITUDE]}
+                        longitudes={[dormInfo.LONGITUDE]}
+                        popupInfo={[dormInfo.DORM]}
+                        popupId={[dormInfo.DORM]}
+                        centerLatitude={dormInfo.LATITUDE}
+                        centerLongitude={dormInfo.LONGITUDE}
+                        width={"100%"}
+                        height={"225px"}
+                      /></MarginWrapper>
+                </InfoSection> : null}
 
           <InfoSection>
-            <SectionTitle>Location</SectionTitle>
-            <MarginWrapper>
-              <Maps
-                  latitudes={[this.state.dormInfo.LATITUDE]}
-                  longitudes={[this.state.dormInfo.LONGITUDE]}
-                  popupInfo={[this.state.dormInfo.DORM]}
-                  popupId={[this.state.dormInfo.DORM]}
-                  centerLatitude={this.state.dormInfo.LATITUDE}
-                  centerLongitude={this.state.dormInfo.LONGITUDE}
-                  width={"100%"}
-                  height={"225px"}
-                />
-            </MarginWrapper>
+            <SectionTitle>Photo Gallery</SectionTitle>
           </InfoSection>
 
-          <InfoSection>
-            <SectionTitle>Photo gallery</SectionTitle>
-          </InfoSection>
-
-          {(this.state.relatedArticles.length == 0)? null :
+          {(relatedArticles.length == 0)? null :
             <InfoSection>
               <SectionTitle>Spectrum on Housing</SectionTitle>
-              <SpectrumSidebar spectrumSidebarData = {this.state.relatedArticles}/>
+              <SpectrumSidebar spectrumSidebarData = {relatedArticles}/>
             </InfoSection>
           }
 
         </Page>
       );
-    }
-
-    else {
+    } else {
       return (
         <Page>
           <DormHeader>
-            <DormName> {this.state.dormInfo.DORM} </DormName>
+            <DormName> {dormInfo.DORM} </DormName>
             <UnderlineWrapper>
               <Underline></Underline>
               <Dot></Dot>
@@ -575,7 +545,7 @@ export default class Dorm extends React.PureComponent {
           </DormHeader>
           
           <DormImage>
-            <Img src="https://housing.columbia.edu/sites/default/files/content/img/Buildings/Furnald/FurnaldHall.jpg"></Img>
+            <Img src={mainImage}></Img>
           </DormImage>
           <Info>
             <ColumnLeft> 
@@ -586,56 +556,71 @@ export default class Dorm extends React.PureComponent {
               <InfoSection>
                 <SectionTitle>Amenities</SectionTitle>
                 <MarginWrapper>
-                  <NewAmenities amenities={this.state.amenities}/>
+                  <NewAmenities amenities={amenities}/>
                 </MarginWrapper>
               </InfoSection>
               <InfoSection>
                 <ProCon
-                    pros={this.state.dormInfo.PROS}
-                    cons={this.state.dormInfo.CONS}
+                    pros={dormInfo.PROS}
+                    cons={dormInfo.CONS}
                 />
               </InfoSection>
               <InfoSection>
-                <SectionTitle>FLOOR PLANS</SectionTitle>
-              </InfoSection>
-              <InfoSection>
-                <SectionTitle>Location</SectionTitle>
+                <SectionTitle>Floor Plans</SectionTitle>
                 <MarginWrapper>
-                  <Maps
-                      latitudes={[this.state.dormInfo.LATITUDE]}
-                      longitudes={[this.state.dormInfo.LONGITUDE]}
-                      popupInfo={[this.state.dormInfo.DORM]}
-                      popupId={[this.state.dormInfo.DORM]}
-                      centerLatitude={this.state.dormInfo.LATITUDE}
-                      centerLongitude={this.state.dormInfo.LONGITUDE}
-                      width={"100%"}
-                      height={"300px"}
-                    />
+                  <FloorPlan
+                    floorOffset={0}
+                    planArray={floorPlans}
+                    planNames={floorNames}
+                  />
                 </MarginWrapper>
               </InfoSection>
+              {(dormInfo.LATITUDE && dormInfo.LONGITUDE) ?
+                <InfoSection>
+                  <SectionTitle>Location</SectionTitle>
+                  <MarginWrapper>
+                  <Maps
+                        latitudes={[dormInfo.LATITUDE]}
+                        longitudes={[dormInfo.LONGITUDE]}
+                        popupInfo={[dormInfo.DORM]}
+                        popupId={[dormInfo.DORM]}
+                        centerLatitude={dormInfo.LATITUDE}
+                        centerLongitude={dormInfo.LONGITUDE}
+                        width={"100%"}
+                        height={"300px"}
+                      /></MarginWrapper>
+                </InfoSection> : null}
+              
+              {(dorm_photos.length == 0) ? null :
               <InfoSection>
-                <SectionTitle>PHOTO GALLERY</SectionTitle>
-              </InfoSection>
+                <SectionTitle>Photo Gallery</SectionTitle>
+                <PhotoGallery 
+                      updateModal={setIsOpen(false)} 
+                      images={dorm_photos} 
+                      path={dormInfo.DORM}
+                />
+              </InfoSection>}
   
-              {(this.state.relatedArticles.length == 0)? null :
+              {(relatedArticles.length == 0)? null :
                 <InfoSection>
                   <SectionTitle>Spectrum on Housing</SectionTitle>
-                  <SpectrumSidebar spectrumSidebarData = {this.state.relatedArticles}/>
+                  <SpectrumSidebar spectrumSidebarData = {relatedArticles}/>
                 </InfoSection>
               }
   
             </ColumnLeft>
             <ColumnRight> 
               <Sticky>
-                <StickyTitle>AT-A-GLANCE</StickyTitle>
+                <StickyTitle>At a glance</StickyTitle>
               </Sticky>
               <Sticky>
-                <StickyTitle>QUICK REVIEW</StickyTitle>
+                <StickyTitle>Quick review</StickyTitle>
               </Sticky>
             </ColumnRight>
           </Info>
-        </Page>
-      );
-    }
+      </Page>
+    );
   }
 }
+
+export default Dorm;

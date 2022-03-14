@@ -3,7 +3,7 @@ import { Route, Link, BrowserRouter as Router } from 'react-router-dom';
 
 import styled from 'styled-components'
 
-import DormButton from '../components/DormButton';
+import DormButton from './DormButton';
 
 const Dorms = styled.div`
     margin: 0 auto;
@@ -16,6 +16,9 @@ const Dorms = styled.div`
     grid-template-columns: 47.5% 47.5%;
 `
 
+const DormLink = styled(Link)`
+    text-align: left;
+`
 
 export default class ExploreSidebar extends Component {
     constructor(props) {
@@ -36,15 +39,19 @@ export default class ExploreSidebar extends Component {
             <div>
                 <Dorms>
                     {this.state.dorms.map((dorm, index) => 
-                        <Link key={index}  to={{pathname : "/explore/" + dorm.DORM.replace(/\s+/g, ''), dorm : dorm.DORM}} style={{textDecoration: 'none'}}>
+                        <DormLink key={index}  to={{pathname : "/explore/" + dorm.DORM.replace(/\s+/g, '-'), dorm : dorm.DORM}} style={{textDecoration: 'none'}}>
                             <DormButton key={index}
                                 school={dorm.COLLEGE}
                                 name={dorm.DORM}
                                 image={dorm.THUMBNAIL_IMAGE}
-                                description={dorm.DESCRIPTION}
-                                amenities={dorm.AMENITIES}
+                                class_makeup={dorm.CLASS_MAKEUP}
+                                SINGLE_={dorm.SINGLE_}
+                                DOUBLE_={dorm.DOUBLE_}
+                                WALKTHROUGH={dorm.WALKTHROUGH}
+                                TRIPLE_={dorm.TRIPLE_}
+                                SUITE_={dorm.SUITE_}    
                             />
-                        </Link>
+                        </DormLink>
                     )}
                 </Dorms>
             </div>
