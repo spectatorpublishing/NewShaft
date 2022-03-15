@@ -242,6 +242,7 @@ const Dorm = ({ }) => {
   const [relatedArticles, setrelatedArticles] = useState([]);
   const [floorPlans, setFloorPlans] = useState([]);
   const [floorNames, setFloorNames] = useState([]);
+  const [floorOffset, setFloorOffset] = useState([]);
   const [relatedDorms, setRelatedDorms] = useState([]);
   const [scrollMenuFixed, setScrollMenuFixed] = useState(false);
   const [scrollMenuOffset, setScrollMenuOffset] = useState(null);
@@ -271,13 +272,13 @@ const Dorm = ({ }) => {
     })
       .then(res => res.json())
       .then(dormPhotos => {
-        console.log(dormPhotos);
+        //console.log(dormPhotos);
         setMainImage(dormPhotos[0]["IMAGE_LINK"]);
         var dormPics = [];
         for (var i = 0; i < dormPhotos.length; i++) {
           dormPics.push(dormPhotos[i]["IMAGE_LINK"]);
         }
-        console.log(dormPics);
+        //console.log(dormPics);
         //setDormPhotos(dormPics)
       }).catch(error => {
         console.log(error);
@@ -300,7 +301,7 @@ const Dorm = ({ }) => {
         }
         dormInfo.LOTTERY_NUMS = tempLot;
         document.title = dormInfo.DORM;
-        console.log(dormInfo);
+        //console.log(dormInfo);
         setDormInfo(dormInfo);
 
         setFullDescription(dormInfo.DESCRIPTION.substring(0, dormInfo.DESCRIPTION.length - 1));
@@ -319,7 +320,7 @@ const Dorm = ({ }) => {
     })
       .then(res => res.json())
       .then(amenitiesInfo => {
-        console.log(amenitiesInfo)
+        //console.log(amenitiesInfo)
         
         setAmenities(amenitiesInfo);
       }).catch(error => {
@@ -334,7 +335,7 @@ const Dorm = ({ }) => {
     })
       .then(res => res.json())
       .then(reviewsInfo => {
-        console.log(reviewsInfo);
+        //console.log(reviewsInfo);
         setReviews({ reviews: reviewsInfo.reviews, avg_rating: reviewsInfo.avg_rating, reccomend: reviewsInfo.reccomended, ranking: reviewsInfo.ranking });
       }).catch(error => {
         console.log(error);
@@ -358,7 +359,7 @@ const Dorm = ({ }) => {
             url: relatedArticles[i].RELATED
           });
         }
-        console.log(relArticles);
+        //console.log(relArticles);
         setrelatedArticles(relArticles);
       }).catch(error => {
         console.log(error);
@@ -380,7 +381,7 @@ const Dorm = ({ }) => {
           }
           );
         }
-        console.log(relDorms);
+        //console.log(relDorms);
         setRelatedDorms(relDorms);
       }).catch(error => {
         console.log(error);
@@ -397,20 +398,30 @@ const Dorm = ({ }) => {
         let floorPlan = floorPlans;
         let floor_state = [];
         let floor_name = [];
+        let floor_offset = 1;
         let keys = Object.keys(floorPlan);
+
         for (var i = 0; i < keys.length; i++) {
           var floorNum = keys[i];
+          console.log(floorNum + ":" + floorPlan[floorNum])
           if (floorPlan[floorNum] == null || keys[i] == "DORM") {
+            if (floor_state.length == 0){
+              floor_offset++;
+            }
             continue;
           }
-          floor_state[floorNum - 1] = 'https://shaft-dorm-floorplans.s3.amazonaws.com/' + floorPlan[floorNum].replace(/ /g, '+');
-          floor_name[floorNum - 1] = floorPlan[floorNum].slice(0, -4).replace("_", " ");
+          floor_state[floorNum] = 'https://shaft-dorm-floorplans.s3.amazonaws.com/' + floorPlan[floorNum].replace(/ /g, '+');
+          floor_name[floorNum] = floorPlan[floorNum].slice(0, -4).replace("_", " ");
+          console.log(floor_state[floorNum])
+          console.log(floor_name[floorNum])
         }
-        return [floor_state, floor_name];
+
+        return [floor_state, floor_name, floor_offset];
       }).then(floor_vals => {
         console.log(floor_vals);
         setFloorPlans(floor_vals[0]);
         setFloorNames(floor_vals[1]);
+        setFloorOffset(floor_vals[2]);
       }).catch(error => {
         console.log(error);
       });
@@ -500,7 +511,7 @@ const Dorm = ({ }) => {
           <SectionTitle>Floor Plans</SectionTitle>
                 <MarginWrapper>
                   <FloorPlan
-                    floorOffset={0}
+                    floorOffset={floorOffset}
                     planArray={floorPlans}
                     planNames={floorNames}
                   />
@@ -573,7 +584,7 @@ const Dorm = ({ }) => {
                 <SectionTitle>Floor Plans</SectionTitle>
                 <MarginWrapper>
                   <FloorPlan
-                    floorOffset={0}
+                    floorOffset={floorOffset}
                     planArray={floorPlans}
                     planNames={floorNames}
                   />
