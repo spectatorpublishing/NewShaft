@@ -272,17 +272,21 @@ const Dorm = ({ }) => {
     })
       .then(res => res.json())
       .then(dormPhotos => {
-        //console.log(dormPhotos);
+        console.log(dormPhotos);
         setMainImage(dormPhotos[0]["IMAGE_LINK"]);
-        var dormPics = [];
+        
         for (var i = 0; i < dormPhotos.length; i++) {
-          dormPics.push(dormPhotos[i]["IMAGE_LINK"]);
+          dorm_photos.push(dormPhotos[i]["IMAGE_LINK"]);
         }
-        //console.log(dormPics);
-        //setDormPhotos(dormPics)
+        console.log(dorm_photos);
+        
       }).catch(error => {
         console.log(error);
       });
+  }
+
+  function setPhotoArray(photoArray){
+    setDormPhotos(photoArray);
   }
 
   async function fetchDormInfo(dormName) {
