@@ -1,12 +1,12 @@
 import React, { Component } from 'react';
 import styled from "styled-components/macro";
 import ExploreSidebar from "../components/ExploreSidebar";
-import Filters2020 from '../components/exploreFilters'
 import Maps from "../components/Maps";
 import SearchBar from "../components/SearchBar"
 import { FILTER_NAME_TO_KEY } from "../util/DormFilter.js";
+import Filters2022 from "../components/Filters2022.js";
 
-import _ from "lodash"
+import _, { initial } from "lodash"
 
 const ExploreContainer = styled.div`
   width: 100%;
@@ -85,6 +85,10 @@ const initialPayload = {
   SEVEN_SUITE: 0,
   EIGHT_SUITE: 0,
   NINE_SUITE: 0,
+  FRESHMAN: 0,
+  SOPHOMORE: 0,
+  JUNIOR: 0,
+  SENIOR: 0,
   DORM: ""
 }
   
@@ -96,6 +100,7 @@ export default class Explore extends Component {
       dorms: []
     };
     this.updatePayload = this.updatePayload.bind(this)
+    this.resetPayload = this.resetPayload.bind(this)
     }
   
   componentDidMount(){
@@ -134,6 +139,11 @@ export default class Explore extends Component {
       payload[FILTER_NAME_TO_KEY[name]] = newValue;
     }
     this.setState({payload: payload}, () => this.filterDorms());
+    console.log("updated payload: ", this.state.payload);
+  }
+
+  resetPayload(){
+    this.setState({payload: _.clone(initialPayload)}, this.filterDorms());
   }
 
   filterDorms(){
@@ -156,7 +166,7 @@ export default class Explore extends Component {
           <SideBar>
             <FilterSearchBG>
               <SearchBar handleChange={this.updatePayload}/>
-              <Filters2020 submit = {this.updatePayload} search = {this.state.payload.DORM}></Filters2020>
+              <Filters2022 handleChange={this.updatePayload} payload={this.state.payload}></Filters2022>
             </FilterSearchBG>
             <ExploreSidebar dorms={this.state.dorms}/>
           </SideBar>
