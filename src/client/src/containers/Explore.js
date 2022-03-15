@@ -143,7 +143,7 @@ export default class Explore extends Component {
   }
 
   resetPayload(){
-    this.setState({payload: _.clone(initialPayload)}, this.filterDorms());
+    this.setState({payload: _.clone(initialPayload)}, () => this.filterDorms());
   }
 
   filterDorms(){
@@ -166,7 +166,7 @@ export default class Explore extends Component {
           <SideBar>
             <FilterSearchBG>
               <SearchBar handleChange={this.updatePayload}/>
-              <Filters2022 handleChange={this.updatePayload} payload={this.state.payload}></Filters2022>
+              <Filters2022 handleChange={this.updatePayload} payload={this.state.payload} reset={this.resetPayload}></Filters2022>
             </FilterSearchBG>
             <ExploreSidebar dorms={this.state.dorms}/>
           </SideBar>
