@@ -77,7 +77,7 @@ const ListPoints = styled.ul`
 `
 
 const NewAmenities = (props) => {
-
+  
   const amenitiesMap = {
     P_BATHROOM: "Single-Use Bathroom",
     LAUNDRY: "Laundry",
@@ -114,13 +114,13 @@ const NewAmenities = (props) => {
         return (
           <Amenity> 
               <AmenityHeader><Icon src={amenitiesIcons[amenityKey]}/>{amenitiesMap[amenityKey]} </AmenityHeader>
-              {(props.amenities[amenityKey]==1) ? 
+              {(props.amenities && props.amenities[amenityKey]==1) ? 
                 <AmenityIncluded color="#73A6E0" ><FontAwesomeIcon icon={faCheck} /> <Span>Included</Span> </AmenityIncluded>
                 : <AmenityIncluded color="#9A4A4A" ><FontAwesomeIcon icon={faTimes} /> <Span>Not Included</Span> </AmenityIncluded>
               }
               <ListPoints>
-                {props.amenities[amenityKey + "_DETAILS"] ? 
-                  (props.amenities[amenityKey + "_DETAILS"]).map(detail => (
+                {props.amenities && props.amenities[amenityKey + "_DETAILS"] ? 
+                  (props.amenities[amenityKey + "_DETAILS"].replace("[", "").replace("]","").replaceAll('"', '').split(', ')).map(detail => (
                     <li>{detail}</li>)) 
                   : null}
               </ListPoints>
