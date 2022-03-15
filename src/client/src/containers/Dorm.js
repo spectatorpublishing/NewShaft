@@ -469,7 +469,7 @@ const Dorm = ({ }) => {
           </DormHeader>
 
           <InfoSection>
-            <SectionTitle>Description</SectionTitle>
+            <SectionTitle>{dormInfo.SHORT_DESCRIPTION}</SectionTitle>
             <MarginWrapper>{fullDescription}</MarginWrapper>
           </InfoSection>
 
@@ -550,7 +550,7 @@ const Dorm = ({ }) => {
           <Info>
             <ColumnLeft> 
               <InfoSection>
-                <SectionTitle>Description</SectionTitle>
+                <SectionTitle>{dormInfo.SHORT_DESCRIPTION}</SectionTitle>
                 <MarginWrapper>{fullDescription}</MarginWrapper>
               </InfoSection>
               <InfoSection>
