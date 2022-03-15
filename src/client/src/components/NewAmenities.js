@@ -1,4 +1,4 @@
-import React, {useState} from 'react'
+import React, {useState, useEffect} from 'react'
 import styled from 'styled-components/macro'
 import laundry from '../assets/laundry-icon.png'
 import bathroom from '../assets/bathroom-icon.png'
@@ -64,7 +64,20 @@ const Icon =styled.img`
   margin-right:1rem;
 `
 
+const ListPoints = styled.ul`
+  padding-inline-start: 1.2rem;
+  margin-left: 1rem;
+
+  @media only screen and (max-width: 767px) {
+    font-size: 16px;
+    font-weight: 400;
+    font-style: normal;
+    margin: 0;
+	}
+`
+
 const NewAmenities = (props) => {
+  
   const amenitiesMap = {
     P_BATHROOM: "Single-Use Bathroom",
     LAUNDRY: "Laundry",
@@ -95,18 +108,24 @@ const NewAmenities = (props) => {
     MUSIC: practiceRoom
   }
   
-  
   return (
     <AmenityWrapper>
-      {Object.keys(props.amenities).map(key =>{
-          return <Amenity> 
-            <AmenityHeader><Icon src={amenitiesIcons[key]}/>{amenitiesMap[key]} </AmenityHeader>
-            {(props.amenities[key]==1) ? 
-              <AmenityIncluded color="#73A6E0" ><FontAwesomeIcon icon={faCheck} /> <Span>Included</Span> </AmenityIncluded>
-              : <AmenityIncluded color="#9A4A4A" ><FontAwesomeIcon icon={faTimes} /> <Span>Not Included</Span> </AmenityIncluded>
-            }
-            <br/> 
+      {Object.keys(amenitiesMap).map(amenityKey => {
+        return (
+          <Amenity> 
+              <AmenityHeader><Icon src={amenitiesIcons[amenityKey]}/>{amenitiesMap[amenityKey]} </AmenityHeader>
+              {(props.amenities && props.amenities[amenityKey]==1) ? 
+                <AmenityIncluded color="#73A6E0" ><FontAwesomeIcon icon={faCheck} /> <Span>Included</Span> </AmenityIncluded>
+                : <AmenityIncluded color="#9A4A4A" ><FontAwesomeIcon icon={faTimes} /> <Span>Not Included</Span> </AmenityIncluded>
+              }
+              <ListPoints>
+                {props.amenities && props.amenities[amenityKey + "_DETAILS"] ? 
+                  (props.amenities[amenityKey + "_DETAILS"].replace("[", "").replace("]","").replaceAll('"', '').split(', ')).map(detail => (
+                    <li>{detail}</li>)) 
+                  : null}
+              </ListPoints>
             </Amenity>
+        )
       })}
     </AmenityWrapper>
   )
