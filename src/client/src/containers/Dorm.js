@@ -83,7 +83,7 @@ let DormImage = styled.div`
   display: flex;
   align-self: center;
   width: 90vw;
-  height: 70vh;
+  height: 80vh;
   
   @media only screen and (max-width: 767px) {
 		height: 40vh;
@@ -94,9 +94,11 @@ let DormImage = styled.div`
 let Img = styled.img`
   width: 100%;
   object-fit: cover;
+  object-position: center bottom;
   @media only screen and (max-width: 767px) {
     height: 40vh;
 		object-fit: cover;
+    object-position: center bottom;
 	}
 `;
 
