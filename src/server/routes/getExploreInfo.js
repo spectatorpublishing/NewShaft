@@ -4,7 +4,7 @@ var router = express.Router();
 var pool = require('../database');
 
 router.get('/', async (req, res) => {
-	let query = `SELECT DORM, DESCRIPTION, COLLEGE, THUMBNAIL_IMAGE, LATITUDE, LONGITUDE, SINGLE_, DOUBLE_, TRIPLE_, CLASS_MAKEUP, SUITE_ FROM dorm_static_info; `
+	let query = `SELECT D.DORM, D.DESCRIPTION, D.COLLEGE, D.LATITUDE, D.LONGITUDE, D.SINGLE_, D.DOUBLE_, D.TRIPLE_, D.CLASS_MAKEUP, D.SUITE_, DP.IMAGE_LINK FROM dorm_static_info D, dorm_photos DP WHERE D.DORM = DP.DORM AND IS_MAIN = 1;`
 	const result = await pool.query(query);
 	res.send(result)
 })

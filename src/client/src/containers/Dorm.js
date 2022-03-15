@@ -269,12 +269,14 @@ const Dorm = ({ }) => {
     })
       .then(res => res.json())
       .then(dormPhotos => {
-        console.log(dorm_photos);
-        setMainImage(Object.values(dormPhotos)[0]);
-        /* for (const [key, value] of Object.entries(dormPhotos)) {
-          console.log(`${key}: ${value}`);
-          setDormPhotos(dorm_photos => [...dorm_photos, value])
-        } */
+        console.log(dormPhotos);
+        setMainImage(dormPhotos[0]["IMAGE_LINK"]);
+        var dormPics = [];
+        for (var i = 0; i < dormPhotos.length; i++) {
+          dormPics.push(dormPhotos[i]["IMAGE_LINK"]);
+        }
+        console.log(dormPics);
+        //setDormPhotos(dormPics)
       }).catch(error => {
         console.log(error);
       });
