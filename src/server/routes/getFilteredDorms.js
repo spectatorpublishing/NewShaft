@@ -7,6 +7,7 @@ router.post('/', async (req, res) => {
     var collegeQ = ``
     var groupQ = ``
     var roomQ = ``
+    var resQ = ``
     var searchQ = ``
     
     let filters = req.body
@@ -53,11 +54,9 @@ router.post('/', async (req, res) => {
     //build for room type
     if(filters.SINGLE_ || filters.DOUBLE_ || filters.TRIPLE_) {
         roomQ += ``
-        for(var i = 0; i < trueFilters.length; i += 1) {
-            if(trueFilters[i].endsWith('_')) {
-                roomQ += `D.` + trueFilters[i] + ` = 1 AND `
-            }
-        }
+        if (filters.SINGLE_) roomQ += `D.SINGLE_ = 1 AND `
+        if (filters.DOUBLE_) roomQ += `D.DOUBLE_ = 1 AND `
+        if (filters.TRIPLE_) roomQ += `D.TRIPLE = 1 AND `
         if(roomQ.endsWith("AND ")) roomQ = roomQ.slice(0, -4)
     }
 
@@ -70,11 +69,24 @@ router.post('/', async (req, res) => {
     if(roomQ.endsWith("AND ")) roomQ = roomQ.slice(0, -4)
 
 
-    if(roomQ !== `` || collegeQ !== '' || groupQ !== '' || searchQ !== '') {
+    //build for typical resident
+    if(filters.FRESHMAN || filters.SOPHOMORE || filters.JUNIOR || filters.SENIOR) {
+        resQ = `(`
+        if (filters.FRESHMAN) resQ += `D.CLASS_MAKEUP LIKE '%first-years%' OR `
+        if (filters.SOPHOMORE) resQ += `D.CLASS_MAKEUP LIKE '%sophomores%' OR `
+        if (filters.JUNIOR) resQ += `D.CLASS_MAKEUP LIKE '%juniors%' OR `
+        if (filters.SENIOR) resQ += `D.CLASS_MAKEUP LIKE '%seniors%' OR `
+        if(resQ.endsWith("OR ")) resQ = resQ.slice(0, -3)
+        resQ += `)`
+    }
+
+
+    if(roomQ !== `` || collegeQ !== '' || groupQ !== '' || resQ !== '' || searchQ !== '') {
         query += ` AND `
         if(roomQ !== '') query += roomQ + `AND `
         if(collegeQ !== '') query += collegeQ + `AND `
         if(groupQ !== '') query += groupQ + `AND `
+        if(resQ !== '') query += resQ + `AND `
         if(searchQ !== '') query += searchQ + `AND `
     }
 
