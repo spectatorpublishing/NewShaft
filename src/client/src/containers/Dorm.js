@@ -84,21 +84,19 @@ let DormImage = styled.div`
   display: flex;
   align-self: center;
   width: 90vw;
-  height: 70vh;
+  height: 80vh;
   
   @media only screen and (max-width: 767px) {
-		height: 40vh;
-    width: auto;
+		width: 100vw;
+    height: 40vh;
 	}
 `;
 
 let Img = styled.img`
   width: 100%;
+  height: 100%;
   object-fit: cover;
-  @media only screen and (max-width: 767px) {
-    height: 40vh;
-		object-fit: cover;
-	}
+  object-position: center bottom;
 `;
 
 let Page = styled.div`
@@ -106,6 +104,7 @@ let Page = styled.div`
   flex-direction: column;
   color: ${props => props.theme.darkGray};
   padding: 2rem;
+  margin-top: 3.25rem;
 
   @media only screen and (max-width: 767px) {
     padding: .5rem;
@@ -281,7 +280,7 @@ const Dorm = ({ }) => {
         }
         dormInfo.LOTTERY_NUMS = tempLot;
         document.title = dormInfo.DORM;
-        console.log(dormInfo);
+        //console.log(dormInfo);
         setDormInfo(dormInfo);
 
         setFullDescription(dormInfo.DESCRIPTION.substring(0, dormInfo.DESCRIPTION.length - 1));
@@ -385,7 +384,7 @@ const Dorm = ({ }) => {
     })
       .then(res => res.json())
       .then(reviewsInfo => {
-        console.log(reviewsInfo);
+        //console.log(reviewsInfo);
         setReviews({ reviews: reviewsInfo.reviews, avg_rating: reviewsInfo.avg_rating, reccomend: reviewsInfo.reccomended, ranking: reviewsInfo.ranking });
       }).catch(error => {
         console.log(error);
@@ -407,7 +406,7 @@ const Dorm = ({ }) => {
           }
           );
         }
-        console.log(relDorms);
+        //console.log(relDorms);
         setRelatedDorms(relDorms);
       }).catch(error => {
         console.log(error);
@@ -459,7 +458,7 @@ const Dorm = ({ }) => {
       <Page>
         <ScrollToTop/>
           <DormImage>
-            <img src={mainImage}></img>
+            <Img src={mainImage}></Img>
           </DormImage>
 
           <DormHeader>
@@ -485,7 +484,10 @@ const Dorm = ({ }) => {
           </InfoSection>
 
           <InfoSection>
-            <SectionTitle>Amenities</SectionTitle>
+                <SectionTitle>Amenities</SectionTitle>
+                <MarginWrapper>
+                  <NewAmenities amenities={amenities}/>
+                </MarginWrapper>
           </InfoSection>
 
           <InfoSection>
@@ -499,7 +501,7 @@ const Dorm = ({ }) => {
           <SectionTitle>Floor Plans</SectionTitle>
                 <MarginWrapper>
                   <FloorPlan
-                    floorOffset={0}
+                    floorOffset={floorOffset}
                     planArray={floorPlans}
                     planNames={floorNames}
                   />
@@ -573,7 +575,7 @@ const Dorm = ({ }) => {
                 <SectionTitle>Floor Plans</SectionTitle>
                 <MarginWrapper>
                   <FloorPlan
-                    floorOffset={0}
+                    floorOffset={floorOffset}
                     planArray={floorPlans}
                     planNames={floorNames}
                   />

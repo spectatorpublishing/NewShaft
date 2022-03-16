@@ -8,14 +8,22 @@ const DormButtonWrapper = styled.div`
 	cursor: pointer;
   margin-bottom: 1rem;
   width: 100%;
-  & img{
+  
+  img{
     padding: 0px;
     border: 1px solid ${props => props.theme.lightGray};
-    max-height: 100vw;
-    width: 100%;
+    max-height: 10vw;
+    max-width: 50%;
+    min-width: 50%;
     margin-right: 10px;
     margin-bottom: 10px;
     object-fit: cover;
+
+    @media only screen and (max-width: 768px) {
+      max-width: 100%;
+      min-width: 100%;
+      max-height: 25vw;
+    }
   }
 
   .details {
@@ -24,10 +32,7 @@ const DormButtonWrapper = styled.div`
   }
   @media only screen and (min-width: 768px) {
 		flex-direction: row;
-    & img{
-      max-height: 10vw;
-      width: 50%;
-    }
+    margin-bottom: 0.5rem;
   }
 `
 
@@ -98,7 +103,7 @@ const DormButton = props => {
     setDormStyle((props.SUITE_ === 1) ? "Suite-Style" : "Corridor-Style");
 
     setRoomTypeString()
-  }, []);
+  }, [props.SUITE_]);
 
   const setRoomTypeString = () => {
     var roomtype = "";

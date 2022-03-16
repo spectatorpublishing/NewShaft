@@ -346,8 +346,8 @@ export default class NavBar extends Component {
           </LogoContainer>
           {isMobile ? mobileMenu : desktopMenu}
         </NavContainer>
-        <Banner fixed={this.props.fixed}>COMING SOON: We’re updating theShaft in the coming days to give you all of the latest information on housing and dorms at Columbia. Stay tuned!</Banner>
-        {this.props.fixed && <NavBuffer></NavBuffer>}
+        {/* <Banner fixed={this.props.fixed}>COMING SOON: We’re updating theShaft in the coming days to give you all of the latest information on housing and dorms at Columbia. Stay tuned!</Banner>
+        {this.props.fixed && <NavBuffer></NavBuffer>} */}
       </Wrap>
     );
   }

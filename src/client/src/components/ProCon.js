@@ -77,6 +77,8 @@ const ProCon = (props) => {
       window.removeEventListener("resize", handleResize);
     };
   });
+  
+  var k = 0;
 
         return (
           <div>
@@ -86,7 +88,7 @@ const ProCon = (props) => {
                 <ListPoints>
                   {props.pros? 
                     props.pros.map(pro => (
-                      <li>{pro}</li>))
+                      <li key={k++}>{pro}</li>))
                     : null}
                 </ListPoints>
             </ListBox>
@@ -95,7 +97,7 @@ const ProCon = (props) => {
                 <ListPoints>
                 {props.cons? 
                     props.cons.map(con => (
-                      <li>{con}</li>))
+                      <li key={k++}>{con}</li>))
                     : null}
                 </ListPoints>
             </ListBox>
