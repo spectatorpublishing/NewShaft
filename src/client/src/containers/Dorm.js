@@ -20,6 +20,7 @@ import { theme } from "../util/GlobalStyles";
 import { NavLink } from "react-router-dom";
 import ReviewPageReview from "../components/ReviewPageReview"
 import PhotoGallery from "../components/PhotoGallery";
+import { async } from "regenerator-runtime";
 
 let DormHeader = styled.div`
   display: flex;
@@ -158,7 +159,7 @@ let InfoSection = styled.div`
 
 let SectionTitle = styled.h2`
   font-size: 2rem;
-  font-weight: 48;
+  font-weight: 400;
   margin-bottom: 2rem;
   color: #707070;
 
@@ -239,7 +240,7 @@ const Dorm = ({ }) => {
   const [relatedArticles, setrelatedArticles] = useState([]);
   const [floorPlans, setFloorPlans] = useState([]);
   const [floorNames, setFloorNames] = useState([]);
-  const [floorOffset, setFloorOffset] = useState([]);
+  const [floorOffset, setFloorOffset] = useState(null);
   const [relatedDorms, setRelatedDorms] = useState([]);
   const [scrollMenuFixed, setScrollMenuFixed] = useState(false);
   const [scrollMenuOffset, setScrollMenuOffset] = useState(null);
@@ -254,39 +255,16 @@ const Dorm = ({ }) => {
     const dormName = dorm.replaceAll("-", " ");
     console.log(dormName)
     fetchDormInfo(dormName);
-    getDormAmenities(dormName);
     //fetchReviews(dormName);
-    fetchRelatedArticles(dormName);
-    fetchFloorPlans(dormName);
     //fetchRelatedDorms(dormName);
-    fetchDormPhotos(dormName);
+    setAllDormInfo(dormName);
   }, []);
 
-  async function fetchDormPhotos(dormName){
-    fetch(`/api/getDormPhotos/${dormName}`, {
-      method: "GET",
-      headers: { "Content-Type": "application/json" },
-    })
-      .then(res => res.json())
-      .then(dormPhotos => {
-        console.log(dormPhotos);
-        setMainImage(dormPhotos[0]["IMAGE_LINK"]);
-        
-        for (var i = 0; i < dormPhotos.length; i++) {
-          dorm_photos.push(dormPhotos[i]["IMAGE_LINK"]);
-        }
-        console.log(dorm_photos);
-        
-      }).catch(error => {
-        console.log(error);
-      });
-  }
+  useEffect(() => {
+    console.log(dorm_photos);
+  }, [dorm_photos]);
 
-  function setPhotoArray(photoArray){
-    setDormPhotos(photoArray);
-  }
-
-  async function fetchDormInfo(dormName) {
+  const fetchDormInfo = async (dormName) => {
     fetch(`/api/getDormInfo/${dormName}`, {
       method: "GET",
       headers: { "Content-Type": "application/json" },
@@ -314,22 +292,99 @@ const Dorm = ({ }) => {
       });
   }
 
-  async function getDormAmenities(dormName) {
-    fetch(`/api/getAmenities/${dormName}`, {
-      method: "GET",
-      headers: { "Content-Type": "application/json" },
-    })
-      .then(res => res.json())
-      .then(amenitiesInfo => {
-        //console.log(amenitiesInfo)
-        
-        setAmenities(amenitiesInfo);
-      }).catch(error => {
-        console.log(error);
-      });
+  const setAllDormInfo = (dormName) => {
+    fetchAllDormInfo(dormName)
+    .then(([amenities, photos, relArticles, floorPlans]) => {
+      setAmenities(amenities);
+      handlePhotos(photos);
+      handleRelArticles(relArticles);
+      handleFloorPlans(floorPlans);
+    }).catch(error => {
+      console.log(error);
+    });
   }
 
-  async function fetchReviews(dormName) {
+  async function fetchAllDormInfo(dormName) {
+    const [amenitiesRes, photosRes, relArticlesRes, floorPlansRes] = await Promise.all([
+      fetch(`/api/getAmenities/${dormName}`, {
+        method: "GET",
+        headers: { "Content-Type": "application/json" },
+      }),
+      fetch(`/api/getDormPhotos/${dormName}`, {
+        method: "GET",
+        headers: { "Content-Type": "application/json" },
+      }),
+      fetch(`/api/getRelatedArticles/${dormName}`, {
+        method: "GET",
+        headers: { "Content-Type": "application/json" },
+      }),
+      fetch(`/api/getFloorPlans/${dormName}`, {
+        method: "GET",
+        headers: { "Content-Type": "application/json" },
+      })
+    ]);
+    
+    const amenities = await amenitiesRes.json();
+    const photos = await photosRes.json();
+    const relArticles = await relArticlesRes.json();
+    const floorPlans = await floorPlansRes.json();
+    return [amenities, photos, relArticles, floorPlans];
+  }
+
+  const handlePhotos = (dormPhotos) => {
+    console.log(dormPhotos);
+    setMainImage(dormPhotos[0]["IMAGE_LINK"]);
+
+    var photoarr = [];
+    for (var i = 0; i < dormPhotos.length; i++) {
+      photoarr.push(dormPhotos[i]["IMAGE_LINK"]);
+    }
+    
+    setDormPhotos(photoarr);
+  }
+
+  const handleRelArticles = (relatedArticles) => {
+    var relArticles = [];
+    for (var i = 0; i < relatedArticles.length; i++) {
+      relArticles.push({
+        title: relatedArticles[i].TITLE,
+        img_src: relatedArticles[i].IMAGE_URL,
+        author: relatedArticles[i].AUTHOR,
+        date: relatedArticles[i].DATE,
+        url: relatedArticles[i].RELATED
+      });
+    }
+    console.log(relArticles);
+    setrelatedArticles(relArticles);
+  }
+
+  const handleFloorPlans = (floorPlans) => {
+    let floorPlan = floorPlans;
+    let floor_state = [];
+    let floor_name = [];
+    let keys = Object.keys(floorPlan);
+    let floor_offset = 1;
+
+    for (var i = 0; i < keys.length; i++) {
+      var floorNum = keys[i];
+      if (floorPlan[floorNum] == null || keys[i] == "DORM") {
+        if (floor_state.length == 0){
+          floor_offset++;
+        }
+        continue;
+      }
+      floor_state[floorNum] = 'https://shaft-dorm-floorplans.s3.amazonaws.com/' + floorPlan[floorNum].replace(/ /g, '+');
+      floor_name[floorNum] = floorPlan[floorNum].slice(0, -4).replace("_", " ");
+      console.log(floor_state[floorNum])
+      console.log(floor_name[floorNum])
+    }
+
+    setFloorPlans(floor_state);
+    setFloorNames(floor_name);
+    setFloorOffset(floor_offset);
+}
+
+  function fetchReviews(dormName) {
     fetch(`/api/getReviews/${dormName}`, {
       method: "GET",
       headers: { "Content-Type": "application/json" },
@@ -338,30 +393,6 @@ const Dorm = ({ }) => {
       .then(reviewsInfo => {
         //console.log(reviewsInfo);
         setReviews({ reviews: reviewsInfo.reviews, avg_rating: reviewsInfo.avg_rating, reccomend: reviewsInfo.reccomended, ranking: reviewsInfo.ranking });
-      }).catch(error => {
-        console.log(error);
-      });
-  }
-
-  async function fetchRelatedArticles(dormName) {
-    fetch(`/api/getRelatedArticles/${dormName}`, {
-      method: "GET",
-      headers: { "Content-Type": "application/json" },
-    })
-      .then(res => res.json())
-      .then(relatedArticles => {
-        var relArticles = [];
-        for (var i = 0; i < relatedArticles.length; i++) {
-          relArticles.push({
-            title: relatedArticles[i].TITLE,
-            img_src: relatedArticles[i].IMAGE_URL,
-            author: relatedArticles[i].AUTHOR,
-            date: relatedArticles[i].DATE,
-            url: relatedArticles[i].RELATED
-          });
-        }
-        //console.log(relArticles);
-        setrelatedArticles(relArticles);
       }).catch(error => {
         console.log(error);
       });
@@ -384,45 +415,6 @@ const Dorm = ({ }) => {
         }
         //console.log(relDorms);
         setRelatedDorms(relDorms);
-      }).catch(error => {
-        console.log(error);
-      });
-  }
-
-  async function fetchFloorPlans(dormName) {
-    fetch(`/api/getFloorPlans/${dormName}`, {
-      method: "GET",
-      headers: { "Content-Type": "application/json" },
-    })
-      .then(res => res.json())
-      .then(floorPlans => {
-        let floorPlan = floorPlans;
-        let floor_state = [];
-        let floor_name = [];
-        let floor_offset = 1;
-        let keys = Object.keys(floorPlan);
-
-        for (var i = 0; i < keys.length; i++) {
-          var floorNum = keys[i];
-          console.log(floorNum + ":" + floorPlan[floorNum])
-          if (floorPlan[floorNum] == null || keys[i] == "DORM") {
-            if (floor_state.length == 0){
-              floor_offset++;
-            }
-            continue;
-          }
-          floor_state[floorNum] = 'https://shaft-dorm-floorplans.s3.amazonaws.com/' + floorPlan[floorNum].replace(/ /g, '+');
-          floor_name[floorNum] = floorPlan[floorNum].slice(0, -4).replace("_", " ");
-          console.log(floor_state[floorNum])
-          console.log(floor_name[floorNum])
-        }
-
-        return [floor_state, floor_name, floor_offset];
-      }).then(floor_vals => {
-        console.log(floor_vals);
-        setFloorPlans(floor_vals[0]);
-        setFloorNames(floor_vals[1]);
-        setFloorOffset(floor_vals[2]);
       }).catch(error => {
         console.log(error);
       });
@@ -471,9 +463,11 @@ const Dorm = ({ }) => {
   if (isMobile) {
     return (
       <Page>
+        <ScrollToTop/>
+          {mainImage === "" ? null : 
           <DormImage>
             <Img src={mainImage}></Img>
-          </DormImage>
+          </DormImage>}
 
           <DormHeader>
             <DormName> {dormInfo.DORM} </DormName>
@@ -511,8 +505,8 @@ const Dorm = ({ }) => {
             />
           </InfoSection>
 
-          <InfoSection>
-          <SectionTitle>Floor Plans</SectionTitle>
+          {floorOffset ? <InfoSection>
+                <SectionTitle>Floor Plans</SectionTitle>
                 <MarginWrapper>
                   <FloorPlan
                     floorOffset={floorOffset}
@@ -520,7 +514,7 @@ const Dorm = ({ }) => {
                     planNames={floorNames}
                   />
                 </MarginWrapper>
-          </InfoSection>
+            </InfoSection> : null}
 
           {(dormInfo.LATITUDE && dormInfo.LONGITUDE) ?
                 <InfoSection>
@@ -554,6 +548,7 @@ const Dorm = ({ }) => {
     } else {
       return (
         <Page>
+          <ScrollToTop/>
           <DormHeader>
             <DormName> {dormInfo.DORM} </DormName>
             <UnderlineWrapper>
@@ -563,9 +558,10 @@ const Dorm = ({ }) => {
             </UnderlineWrapper>
           </DormHeader>
           
+          {mainImage === "" ? null : 
           <DormImage>
             <Img src={mainImage}></Img>
-          </DormImage>
+          </DormImage>}
           <Info>
             <ColumnLeft> 
               <InfoSection>
@@ -584,7 +580,7 @@ const Dorm = ({ }) => {
                     cons={dormInfo.CONS}
                 />
               </InfoSection>
-              <InfoSection>
+             {floorOffset ? <InfoSection>
                 <SectionTitle>Floor Plans</SectionTitle>
                 <MarginWrapper>
                   <FloorPlan
@@ -593,7 +589,7 @@ const Dorm = ({ }) => {
                     planNames={floorNames}
                   />
                 </MarginWrapper>
-              </InfoSection>
+              </InfoSection> : null}
               {(dormInfo.LATITUDE && dormInfo.LONGITUDE) ?
                 <InfoSection>
                   <SectionTitle>Location</SectionTitle>
@@ -613,11 +609,11 @@ const Dorm = ({ }) => {
               {(dorm_photos.length == 0) ? null :
               <InfoSection>
                 <SectionTitle>Photo Gallery</SectionTitle>
-                <PhotoGallery 
+                {/* <PhotoGallery 
                       updateModal={setIsOpen(false)} 
                       images={dorm_photos} 
                       path={dormInfo.DORM}
-                />
+                /> */}
               </InfoSection>}
   
               {(relatedArticles.length == 0)? null :

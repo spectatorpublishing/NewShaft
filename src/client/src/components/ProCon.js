@@ -6,7 +6,7 @@ import icon from "../assets/marker.svg"; // to-do: import all actual icons
 
 let ProConTitle = styled.h2`
   font-size: 2rem;
-  font-weight: 48;
+  font-weight: 400;
   margin-bottom: 1rem;
   color: #707070;
 

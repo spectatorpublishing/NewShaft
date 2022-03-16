@@ -134,7 +134,7 @@ export default class FloorPlan extends React.PureComponent {
 
     componentWillReceiveProps(props) {
         this.setState({
-            planArray: props.planArray,
+            planArray: this.props.planArray,
             currentFloor: 0 + this.props.floorOffset,
             currentPlan: this.props.planArray[this.props.floorOffset]
         })
