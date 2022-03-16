@@ -1,18 +1,18 @@
 import React, { Component } from 'react';
-import styled from "styled-components";
+import styled from "styled-components/macro";
 import ExploreSidebar from "../components/ExploreSidebar";
-import Filters2020 from '../components/exploreFilters'
 import Maps from "../components/Maps";
 import SearchBar from "../components/SearchBar"
 import { FILTER_NAME_TO_KEY } from "../util/DormFilter.js";
+import Filters from "../components/ExploreFilters/Filters.js";
 
-import _ from "lodash"
+import _, { initial } from "lodash"
 
 const ExploreContainer = styled.div`
   width: 100%;
   height: 100%;
   padding: 0 auto;
-  padding-top: 3.75rem;
+  margin-top: 60px;
   overflow: hidden;
   flex-direction: row;
 `
@@ -36,7 +36,7 @@ width: 0%;
 @media only screen and (min-width: 768px) {
   display: inline;
   position: fixed;
-  padding-left: 1em;
+  padding-left: 0em;
   float: right;
   width: 40%;
   right: 0;
@@ -46,23 +46,17 @@ width: 0%;
 `
 
 const FilterSearchBG = styled.div`
-  background-color: ${props => props.theme.columbiaBlue};
-  @media only screen and (min-width: 768px) {
-    // display: inline;
-    // position: fixed;
-    padding-left: 1em;
-    // float: right;
-    // width: 40%;
-    // right: 0;
-    // top: 0;
-    // z-index:1;
+  //background-color: ${props => props.theme.columbiaBlue};
+  margin: 2rem;
+  border-bottom: 1px solid #C4C4C4;
+  @media only screen and (max-width: 768px) {
+    margin: 1rem;
   }
-  margin-top: 0px;
-  padding-top: 1%;
 `
 
 const ColOne = styled.div`
   display: flex;
+  flex-direction: column;
   width: 100%;
 `
 
@@ -84,6 +78,7 @@ const initialPayload = {
   DOUBLE_: 0,
   TRIPLE_: 0,
   SUITE_: 0,
+  NOTSUITE_: 0,
   TWO_SUITE: 0,
   THREE_SUITE: 0,
   FOUR_SUITE: 0,
@@ -92,6 +87,11 @@ const initialPayload = {
   SEVEN_SUITE: 0,
   EIGHT_SUITE: 0,
   NINE_SUITE: 0,
+  TEN_SUITE: 0,
+  FRESHMAN: 0,
+  SOPHOMORE: 0,
+  JUNIOR: 0,
+  SENIOR: 0,
   DORM: ""
 }
   
@@ -103,6 +103,7 @@ export default class Explore extends Component {
       dorms: []
     };
     this.updatePayload = this.updatePayload.bind(this)
+    this.resetPayload = this.resetPayload.bind(this)
     }
   
   componentDidMount(){
@@ -141,6 +142,11 @@ export default class Explore extends Component {
       payload[FILTER_NAME_TO_KEY[name]] = newValue;
     }
     this.setState({payload: payload}, () => this.filterDorms());
+    console.log("updated payload: ", this.state.payload);
+  }
+
+  resetPayload(){
+    this.setState({payload: _.clone(initialPayload)}, () => this.filterDorms());
   }
 
   filterDorms(){
@@ -163,7 +169,7 @@ export default class Explore extends Component {
           <SideBar>
             <FilterSearchBG>
               <SearchBar handleChange={this.updatePayload}/>
-              <Filters2020 submit = {this.updatePayload} search = {this.state.payload.DORM}></Filters2020>
+              <Filters handleChange={this.updatePayload} payload={this.state.payload} reset={this.resetPayload}></Filters>
             </FilterSearchBG>
             <ExploreSidebar dorms={this.state.dorms}/>
           </SideBar>

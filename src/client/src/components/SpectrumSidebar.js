@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import styled from 'styled-components'
+import styled from 'styled-components/macro'
 
 const SmallWrapper = styled.div`
 	width: 80%;
@@ -7,6 +7,7 @@ const SmallWrapper = styled.div`
 	margin-bottom: 15px;
 
 	@media only screen and (max-width: 767px) {
+		width: 100%;
 		display: block;
 	}
 `
@@ -16,7 +17,7 @@ const ImageContainer = styled.div`
 	
 	@media only screen and (max-width: 767px) {
 		width: 100%;
-		margin-right: 0px;
+		margin-right: 0;
 	}
 `
 let SpectrumContainer = styled.div`
@@ -43,16 +44,34 @@ const Title = styled.h3`
 	margin-top: -3px;
 	margin-bottom: -10px;
 	color: #707070;
+
+	@media only screen and (max-width: 767px) {
+		font-weight: 500;
+		font-style: normal;
+		font-size: 15px;
+		margin: 1rem 0 .5rem 0;
+	}
 `
 const AuthorLine = styled.p`
 	color: #707070;
-	margin-top: -10px;
-	margin-bottom: 5px;
+	margin: 0;
+	line-height: 1.2rem;
+
+	@media only screen and (max-width: 767px) {
+		font-weight: 400;
+		font-style: normal;
+		font-size: 12px;
+		margin: 0;
+	}
 `
 
 const Hr = styled.hr`
 	border-color: ${props => props.theme.black};
 	border-width: 1px;
+
+	@media only screen and (max-width: 767px) {
+		display: none;
+	}
 `
 
 const Wrapper = styled.div`
@@ -60,6 +79,11 @@ const Wrapper = styled.div`
 	margin-left: 1rem;
 	//box-shadow: 5px 5px 10px ${props => props.theme.lightGray};
 	//border: 1px solid ${props => props.theme.lightGray};
+
+	@media only screen and (max-width: 767px) {
+		margin: 0;
+		width: 100%fit-content;
+	}
 `
 const TextDiv = styled.div `
 	width: 100%;
