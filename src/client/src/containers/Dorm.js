@@ -20,6 +20,8 @@ import { theme } from "../util/GlobalStyles";
 import { NavLink } from "react-router-dom";
 import ReviewPageReview from "../components/ReviewPageReview"
 import PhotoGallery from "../components/PhotoGallery";
+import DormQuickReview from "../components/DormQuickReview";
+import { findLastIndex } from "lodash";
 import { async } from "regenerator-runtime";
 
 let DormHeader = styled.div`
@@ -58,6 +60,29 @@ let UnderlineWrapper = styled.div`
   @media only screen and (max-width: 767px) {
 		width: 60%;
 	}
+`
+let Detail = styled.div`
+  font-family: sans-serif;
+  padding-top: 0.5rem;
+  padding-bottom:0.25rem;
+  border-bottom:1px solid #C4C4C4;
+  font-size:18px;
+
+  @media only screen and (max-width: 767px) {
+    border-bottom:0px solid #C4C4C4;
+  }
+
+`
+let AtAGlanceTitle = styled.div`
+  display:flex;
+  font-family: Raleway;
+  padding-bottom:0.25rem;
+  color: #73A6E0;
+
+  @media only screen and (max-width: 767px) {
+    padding-bottom: 1rem;
+  }
+
 `
 
 let Underline = styled.hr`
@@ -123,18 +148,49 @@ let ColumnLeft = styled.div`
   background-color: white;
   padding: 2rem;
   width: 75%;
-`
 
+  @media only screen and (max-width: 767px) {
+    width: 100%;
+    padding: 1rem;
+  }
+`
+const QuickReviewDisplay = styled.div`
+    width: 100%;
+    padding-top: 1rem;
+`
 let ColumnRight = styled.div`
   display: flex;
   flex-direction: column;
   padding: 2rem;
   width: 25%;
+
+  @media only screen and (max-width: 767px) {
+    display: none;
+  }
+`
+let AtAGlanceText = styled.div`
+  display:flex;
+  font-family: Raleway;
+  padding-bottom:0.25rem;
+  color: #0000008F;
+
+  @media only screen and (max-width: 767px) {
+    padding-bottom: 1rem;
+  }
+`
+let StickyContainer = styled.div`
+  position: sticky;
+  top: ${props => props.buffer};
+
+  @media only screen and (max-width: 768px) {
+    display: none;
+	}
 `
 let Sticky = styled.div`
   display: flex;
-  padding: 2rem;
-  border: 1px solid ${props => props.theme.lightGray};
+  justify-content: center;
+  flex-direction: column;
+  padding: 1rem;
   margin-bottom: 2rem;
 `
 
@@ -172,6 +228,15 @@ let SectionTitle = styled.h2`
 `;
 
 let StickyTitle = styled.h3`
+  font-family: Raleway;
+  font-weight: 500;
+  color: #707070;
+  display:flex;
+`
+const QuickReviewBox = styled.div`
+    margin-top: 1rem;
+    box-shadow: 3px -4px 7px 2px rgba(0,0,0,0.1);
+    padding-right: 1rem;
 `
 
 let MarginWrapper = styled.div`
@@ -183,6 +248,12 @@ let MarginWrapper = styled.div`
     font-weight: 400;
     font-style: normal;
 	}
+`;
+
+const Mobile = styled.div`
+  @media only screen and (min-width: 767px) {
+    display: none;
+  }
 `;
 
 let relatedDorms = [
@@ -250,6 +321,7 @@ const Dorm = ({ }) => {
   const [classMakeupFormat, setClassMakeup] = useState("");
   const [dormStyle, setDormStyle] = useState("");
   const [mainImage, setMainImage] = useState("");
+  const [quickReview, setQuickReview] = useState({});
 
   useEffect(() => {
     const dormName = dorm.replaceAll("-", " ");
@@ -261,8 +333,12 @@ const Dorm = ({ }) => {
   }, []);
 
   useEffect(() => {
-    console.log(dorm_photos);
-  }, [dorm_photos]);
+    console.log(roomtype);
+  }, [roomtype]);
+
+  useEffect(() => {
+    setScreenWidth(window.innerWidth);
+  }, [window.innerWidth]);
 
   const fetchDormInfo = async (dormName) => {
     fetch(`/api/getDormInfo/${dormName}`, {
@@ -286,7 +362,7 @@ const Dorm = ({ }) => {
         setFullDescription(dormInfo.DESCRIPTION.substring(0, dormInfo.DESCRIPTION.length - 1));
         setClassMakeup(dormInfo.CLASS_MAKEUP.split(",").map((el, i) => el.charAt(0).toUpperCase() + el.slice(1)).join(", "));
         setDormStyle((dormInfo.SUITE_ === 1) ? "Suite-Style" : "Corridor-Style");
-        setRoomTypeString();
+        setRoomTypeString(dormInfo);
       }).catch(error => {
         console.log(error);
       });
@@ -294,14 +370,26 @@ const Dorm = ({ }) => {
 
   const setAllDormInfo = (dormName) => {
     fetchAllDormInfo(dormName)
-    .then(([amenities, photos, relArticles, floorPlans]) => {
-      setAmenities(amenities);
-      handlePhotos(photos);
-      handleRelArticles(relArticles);
-      handleFloorPlans(floorPlans);
-    }).catch(error => {
-      console.log(error);
-    });
+      .then(([amenities, photos, relArticles, floorPlans]) => {
+        setAmenities(amenities);
+        handlePhotos(photos);
+        handleRelArticles(relArticles);
+        handleFloorPlans(floorPlans);
+      }).catch(error => {
+        console.log(error);
+      });
+
+    fetchQuickReview(dormName)
+      .then(quickReview => {
+        console.log(quickReview);
+        if (quickReview.dorm) {
+          setQuickReview({ cleanliness: quickReview.clean, noise: quickReview.noise, community: quickReview.community, party: quickReview.party, amenities: quickReview.amenities })
+        } else {
+          setQuickReview(null)
+        }
+      }).catch(error => {
+        console.log(error.message);
+      });
   }
 
   async function fetchAllDormInfo(dormName) {
@@ -323,12 +411,28 @@ const Dorm = ({ }) => {
         headers: { "Content-Type": "application/json" },
       })
     ]);
-    
+
     const amenities = await amenitiesRes.json();
     const photos = await photosRes.json();
     const relArticles = await relArticlesRes.json();
     const floorPlans = await floorPlansRes.json();
-    return [amenities, photos, relArticles, floorPlans];
+    return [amenities, photos, relArticles, floorPlans, quickReview];
+  }
+
+  async function fetchQuickReview(dormName) {
+    const quickReviewRes = await fetch(`/api/getQuickReview/${dormName}`, {
+      method: "GET",
+      headers: { "Content-Type": "application/json" },
+    });
+
+    if (!quickReviewRes.ok) {
+      const message = `An error has occured: ${quickReviewRes.status}`;
+      throw new Error(message);
+    }
+
+    const quickReview = await quickReviewRes.text();
+    const quickReviewJSON = quickReview ? JSON.parse(quickReview) : {}
+    return quickReviewJSON;
   }
 
   const handlePhotos = (dormPhotos) => {
@@ -339,7 +443,7 @@ const Dorm = ({ }) => {
     for (var i = 0; i < dormPhotos.length; i++) {
       photoarr.push(dormPhotos[i]["IMAGE_LINK"]);
     }
-    
+
     setDormPhotos(photoarr);
   }
 
@@ -368,21 +472,19 @@ const Dorm = ({ }) => {
     for (var i = 0; i < keys.length; i++) {
       var floorNum = keys[i];
       if (floorPlan[floorNum] == null || keys[i] == "DORM") {
-        if (floor_state.length == 0){
+        if (floor_state.length == 0) {
           floor_offset++;
         }
         continue;
       }
       floor_state[floorNum] = 'https://shaft-dorm-floorplans.s3.amazonaws.com/' + floorPlan[floorNum].replace(/ /g, '+');
       floor_name[floorNum] = floorPlan[floorNum].slice(0, -4).replace("_", " ");
-      console.log(floor_state[floorNum])
-      console.log(floor_name[floorNum])
     }
 
     setFloorPlans(floor_state);
     setFloorNames(floor_name);
     setFloorOffset(floor_offset);
-}
+  }
 
   function fetchReviews(dormName) {
     fetch(`/api/getReviews/${dormName}`, {
@@ -420,7 +522,7 @@ const Dorm = ({ }) => {
       });
   }
 
-  const setRoomTypeString = () => {
+  const setRoomTypeString = (dormInfo) => {
     var roomtype = "";
 
     if (dormInfo.WALKTHROUGH) {
@@ -445,13 +547,13 @@ const Dorm = ({ }) => {
       {props.children}
     </div>
   ));  */
-  const isMobile = width <= 768;
-  const isMedium = width <= 1400;
+
   const headerButtons = {
     fontSize: 15, textAlign: "center",
-    background: "#707070BF", color: "white",
+    background: theme.columbiaBlue, color: "white",
     borderRadius: 7, paddingTop: 10, paddingBottom: 10, paddingLeft: 5, paddingRight: 5,
-    justifyContent: 'center', alignItems: 'center', marginBottom: 15, minWidth: '160px', border: 'none',
+    justifyContent: 'center', alignItems: 'center', minWidth: '160px', border: 'none',
+    marginTop: '0.5rem'
   }
   const years_map = {
     "first-years": "Freshman",
@@ -460,182 +562,135 @@ const Dorm = ({ }) => {
     "seniors": "Senior"
   }
 
-  if (isMobile) {
-    return (
-      <Page>
-        <ScrollToTop/>
-          {mainImage === "" ? null : 
-          <DormImage>
-            <Img src={mainImage}></Img>
-          </DormImage>}
+  return (
+    <Page>
+      <ScrollToTop />
+      <DormHeader>
+        <DormName> {dormInfo.DORM} </DormName>
+        <UnderlineWrapper>
+          <Underline></Underline>
+          <Dot></Dot>
+          <Underline></Underline>
+        </UnderlineWrapper>
+      </DormHeader>
 
-          <DormHeader>
-            <DormName> {dormInfo.DORM} </DormName>
-            <UnderlineWrapper>
-              <Underline></Underline>
-              <Dot></Dot>
-              <Underline></Underline>
-            </UnderlineWrapper>
-          </DormHeader>
-
+      {mainImage === "" ? null :
+        <DormImage>
+          <Img src={mainImage}></Img>
+        </DormImage>}
+      <Info>
+        <ColumnLeft>
           <InfoSection>
             <SectionTitle>{dormInfo.SHORT_DESCRIPTION}</SectionTitle>
             <MarginWrapper>{fullDescription}</MarginWrapper>
           </InfoSection>
-
+          <Mobile>
+            <InfoSection>
+              <SectionTitle>At a glance</SectionTitle>
+              <Detail>
+                <AtAGlanceTitle>Location</AtAGlanceTitle>
+                <AtAGlanceText>{dormInfo.ADDRESS}</AtAGlanceText>
+              </Detail>
+              <Detail>
+                <AtAGlanceTitle>Room Types</AtAGlanceTitle>
+                <AtAGlanceText>{roomtype}</AtAGlanceText>
+              </Detail>
+              <Detail>
+                <AtAGlanceTitle>Class Makeup</AtAGlanceTitle>
+                <AtAGlanceText>{classMakeupFormat}</AtAGlanceText>
+              </Detail>
+            </InfoSection>
+            <InfoSection>
+              <SectionTitle>Quick review</SectionTitle>
+              {quickReview === null ? null :
+              <DormQuickReview QuickReview={quickReview}></DormQuickReview>}
+              <a href="https://docs.google.com/forms/d/e/1FAIpQLSfK1EHqqQrmpYCSviUT_W4aTOuyHiriNn_58N-zAnKoquVS0A/viewform?usp=sf_link" style={headerButtons}>Submit your ratings</a>
+            </InfoSection>
+          </Mobile>
           <InfoSection>
-            <SectionTitle>At a glance</SectionTitle>
+            <SectionTitle>Amenities</SectionTitle>
+            <MarginWrapper>
+              <NewAmenities amenities={amenities} />
+            </MarginWrapper>
           </InfoSection>
-
-          <InfoSection>
-            <SectionTitle>Quick review</SectionTitle>
-          </InfoSection>
-
-          <InfoSection>
-                <SectionTitle>Amenities</SectionTitle>
-                <MarginWrapper>
-                  <NewAmenities amenities={amenities}/>
-                </MarginWrapper>
-          </InfoSection>
-
           <InfoSection>
             <ProCon
               pros={dormInfo.PROS}
               cons={dormInfo.CONS}
             />
           </InfoSection>
-
           {floorOffset ? <InfoSection>
-                <SectionTitle>Floor Plans</SectionTitle>
-                <MarginWrapper>
-                  <FloorPlan
-                    floorOffset={floorOffset}
-                    planArray={floorPlans}
-                    planNames={floorNames}
-                  />
-                </MarginWrapper>
+            <SectionTitle>Floor Plans</SectionTitle>
+            <MarginWrapper>
+              <FloorPlan
+                floorOffset={floorOffset}
+                planArray={floorPlans}
+                planNames={floorNames}
+              />
+            </MarginWrapper>
+          </InfoSection> : null}
+          {(dormInfo.LATITUDE && dormInfo.LONGITUDE) ?
+            <InfoSection>
+              <SectionTitle>Location</SectionTitle>
+              <MarginWrapper>
+                <Maps
+                  latitudes={[dormInfo.LATITUDE]}
+                  longitudes={[dormInfo.LONGITUDE]}
+                  popupInfo={[dormInfo.DORM]}
+                  popupId={[dormInfo.DORM]}
+                  centerLatitude={dormInfo.LATITUDE}
+                  centerLongitude={dormInfo.LONGITUDE}
+                  width={"100%"}
+                  height={"300px"}
+                /></MarginWrapper>
             </InfoSection> : null}
 
-          {(dormInfo.LATITUDE && dormInfo.LONGITUDE) ?
-                <InfoSection>
-                  <SectionTitle>Location</SectionTitle>
-                  <MarginWrapper>
-                  <Maps
-                        latitudes={[dormInfo.LATITUDE]}
-                        longitudes={[dormInfo.LONGITUDE]}
-                        popupInfo={[dormInfo.DORM]}
-                        popupId={[dormInfo.DORM]}
-                        centerLatitude={dormInfo.LATITUDE}
-                        centerLongitude={dormInfo.LONGITUDE}
-                        width={"100%"}
-                        height={"225px"}
-                      /></MarginWrapper>
-                </InfoSection> : null}
-
-          <InfoSection>
-            <SectionTitle>Photo Gallery</SectionTitle>
-          </InfoSection>
-
-          {(relatedArticles.length == 0)? null :
+          {(dorm_photos.length == 0) ? null :
             <InfoSection>
-              <SectionTitle>Spectrum on Housing</SectionTitle>
-              <SpectrumSidebar spectrumSidebarData = {relatedArticles}/>
-            </InfoSection>
-          }
-
-        </Page>
-      );
-    } else {
-      return (
-        <Page>
-          <ScrollToTop/>
-          <DormHeader>
-            <DormName> {dormInfo.DORM} </DormName>
-            <UnderlineWrapper>
-              <Underline></Underline>
-              <Dot></Dot>
-              <Underline></Underline>
-            </UnderlineWrapper>
-          </DormHeader>
-          
-          {mainImage === "" ? null : 
-          <DormImage>
-            <Img src={mainImage}></Img>
-          </DormImage>}
-          <Info>
-            <ColumnLeft> 
-              <InfoSection>
-                <SectionTitle>{dormInfo.SHORT_DESCRIPTION}</SectionTitle>
-                <MarginWrapper>{fullDescription}</MarginWrapper>
-              </InfoSection>
-              <InfoSection>
-                <SectionTitle>Amenities</SectionTitle>
-                <MarginWrapper>
-                  <NewAmenities amenities={amenities}/>
-                </MarginWrapper>
-              </InfoSection>
-              <InfoSection>
-                <ProCon
-                    pros={dormInfo.PROS}
-                    cons={dormInfo.CONS}
-                />
-              </InfoSection>
-             {floorOffset ? <InfoSection>
-                <SectionTitle>Floor Plans</SectionTitle>
-                <MarginWrapper>
-                  <FloorPlan
-                    floorOffset={floorOffset}
-                    planArray={floorPlans}
-                    planNames={floorNames}
-                  />
-                </MarginWrapper>
-              </InfoSection> : null}
-              {(dormInfo.LATITUDE && dormInfo.LONGITUDE) ?
-                <InfoSection>
-                  <SectionTitle>Location</SectionTitle>
-                  <MarginWrapper>
-                  <Maps
-                        latitudes={[dormInfo.LATITUDE]}
-                        longitudes={[dormInfo.LONGITUDE]}
-                        popupInfo={[dormInfo.DORM]}
-                        popupId={[dormInfo.DORM]}
-                        centerLatitude={dormInfo.LATITUDE}
-                        centerLongitude={dormInfo.LONGITUDE}
-                        width={"100%"}
-                        height={"300px"}
-                      /></MarginWrapper>
-                </InfoSection> : null}
-              
-              {(dorm_photos.length == 0) ? null :
-              <InfoSection>
-                <SectionTitle>Photo Gallery</SectionTitle>
-                {/* <PhotoGallery 
+              <SectionTitle>Photo Gallery</SectionTitle>
+              {/* <PhotoGallery 
                       updateModal={setIsOpen(false)} 
                       images={dorm_photos} 
                       path={dormInfo.DORM}
                 /> */}
-              </InfoSection>}
-  
-              {(relatedArticles.length == 0)? null :
-                <InfoSection>
-                  <SectionTitle>Spectrum on Housing</SectionTitle>
-                  <SpectrumSidebar spectrumSidebarData = {relatedArticles}/>
-                </InfoSection>
-              }
-  
-            </ColumnLeft>
-            <ColumnRight> 
-              <Sticky>
-                <StickyTitle>At a glance</StickyTitle>
-              </Sticky>
-              <Sticky>
-                <StickyTitle>Quick review</StickyTitle>
-              </Sticky>
-            </ColumnRight>
-          </Info>
-      </Page>
-    );
-  }
+            </InfoSection>}
+
+          {(relatedArticles.length == 0) ? null :
+            <InfoSection>
+              <SectionTitle>Spectrum on Housing</SectionTitle>
+              <SpectrumSidebar spectrumSidebarData={relatedArticles} />
+            </InfoSection>
+          }
+
+        </ColumnLeft>
+        <ColumnRight>
+          <StickyContainer buffer="5rem">
+            <Sticky>
+              <StickyTitle>At a Glance</StickyTitle>
+              <Detail>
+                <AtAGlanceTitle>Location</AtAGlanceTitle>
+                <AtAGlanceText>{dormInfo.ADDRESS}</AtAGlanceText>
+              </Detail>
+              <Detail>
+                <AtAGlanceTitle>Room Types</AtAGlanceTitle>
+                <AtAGlanceText>{roomtype}</AtAGlanceText>
+              </Detail>
+              <Detail>
+                <AtAGlanceTitle>Class Makeup</AtAGlanceTitle>
+                <AtAGlanceText>{classMakeupFormat}</AtAGlanceText>
+              </Detail>
+            </Sticky>
+            <Sticky>
+              <StickyTitle>Quick Review</StickyTitle>
+              {quickReview === null ? null :
+              <DormQuickReview QuickReview={quickReview}></DormQuickReview>}
+              <a href="https://docs.google.com/forms/d/e/1FAIpQLSfK1EHqqQrmpYCSviUT_W4aTOuyHiriNn_58N-zAnKoquVS0A/viewform?usp=sf_link" style={headerButtons}>Submit your ratings</a>
+            </Sticky>
+          </StickyContainer>
+        </ColumnRight>
+      </Info>
+    </Page>
+  );
 }
 
 export default Dorm;
