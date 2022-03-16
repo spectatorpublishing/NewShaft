@@ -12,7 +12,7 @@ router.post('/', async (req, res) => {
     let filters = req.body
     var trueFilters = []
 
-    console.log(filters)
+    console.log("filters: " + filters)
 
     for(var prop in filters) {
         if(filters[prop]) {
@@ -51,7 +51,7 @@ router.post('/', async (req, res) => {
     }
 
     //build for room type
-    if(filters.SUITE_ || filters.SINGLE_ || filters.DOUBLE_ || filters.TRIPLE_) {
+    if(filters.SINGLE_ || filters.DOUBLE_ || filters.TRIPLE_) {
         roomQ += ``
         for(var i = 0; i < trueFilters.length; i += 1) {
             if(trueFilters[i].endsWith('_')) {
@@ -60,6 +60,14 @@ router.post('/', async (req, res) => {
         }
         if(roomQ.endsWith("AND ")) roomQ = roomQ.slice(0, -4)
     }
+
+    //build for corridor/suite style
+    if(filters.NOTSUITE_ && !filters.SUITE_) {
+        roomQ += `D.SUITE_ = 0 AND `
+    } else if (!filters.NOTSUITE_ && filters.SUITE_){
+        roomQ += `D.SUITE_ = 1 AND `
+    } 
+    if(roomQ.endsWith("AND ")) roomQ = roomQ.slice(0, -4)
 
 
     if(roomQ !== `` || collegeQ !== '' || groupQ !== '' || searchQ !== '') {
