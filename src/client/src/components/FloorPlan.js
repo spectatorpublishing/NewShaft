@@ -199,12 +199,6 @@ export default class FloorPlan extends React.PureComponent {
         let photoIndex = this.state.photoIndex;
         const isMobile = width <= 700;
 
-        console.log("arr: ", this.props.planArray);
-        console.log("names: ", this.props.planNames);
-        console.log("first floor: ", this.props.floorOffset);
-        console.log("current floor: ", this.state.currentFloor);
-        console.log("current floor: ", this.state.currentPlan);
-
         if(isMobile) {
             return (
                 <div>
