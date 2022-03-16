@@ -240,7 +240,7 @@ const Dorm = ({ }) => {
   const [relatedArticles, setrelatedArticles] = useState([]);
   const [floorPlans, setFloorPlans] = useState([]);
   const [floorNames, setFloorNames] = useState([]);
-  const [floor_offset, setFloorOffset] = useState([]);
+  const [floorOffset, setFloorOffset] = useState(null);
   const [relatedDorms, setRelatedDorms] = useState([]);
   const [scrollMenuFixed, setScrollMenuFixed] = useState(false);
   const [scrollMenuOffset, setScrollMenuOffset] = useState(null);
@@ -363,13 +363,20 @@ const Dorm = ({ }) => {
     let floor_state = [];
     let floor_name = [];
     let keys = Object.keys(floorPlan);
+    let floor_offset = 1;
+
     for (var i = 0; i < keys.length; i++) {
       var floorNum = keys[i];
       if (floorPlan[floorNum] == null || keys[i] == "DORM") {
+        if (floor_state.length == 0){
+          floor_offset++;
+        }
         continue;
       }
-      floor_state[floorNum - 1] = 'https://shaft-dorm-floorplans.s3.amazonaws.com/' + floorPlan[floorNum].replace(/ /g, '+');
-      floor_name[floorNum - 1] = floorPlan[floorNum].slice(0, -4).replace("_", " ");
+      floor_state[floorNum] = 'https://shaft-dorm-floorplans.s3.amazonaws.com/' + floorPlan[floorNum].replace(/ /g, '+');
+      floor_name[floorNum] = floorPlan[floorNum].slice(0, -4).replace("_", " ");
+      console.log(floor_state[floorNum])
+      console.log(floor_name[floorNum])
     }
 
     setFloorPlans(floor_state);
@@ -457,9 +464,10 @@ const Dorm = ({ }) => {
     return (
       <Page>
         <ScrollToTop/>
+          {mainImage === "" ? null : 
           <DormImage>
             <Img src={mainImage}></Img>
-          </DormImage>
+          </DormImage>}
 
           <DormHeader>
             <DormName> {dormInfo.DORM} </DormName>
@@ -497,8 +505,8 @@ const Dorm = ({ }) => {
             />
           </InfoSection>
 
-          <InfoSection>
-          <SectionTitle>Floor Plans</SectionTitle>
+          {floorOffset ? <InfoSection>
+                <SectionTitle>Floor Plans</SectionTitle>
                 <MarginWrapper>
                   <FloorPlan
                     floorOffset={floorOffset}
@@ -506,7 +514,7 @@ const Dorm = ({ }) => {
                     planNames={floorNames}
                   />
                 </MarginWrapper>
-          </InfoSection>
+            </InfoSection> : null}
 
           {(dormInfo.LATITUDE && dormInfo.LONGITUDE) ?
                 <InfoSection>
@@ -550,9 +558,10 @@ const Dorm = ({ }) => {
             </UnderlineWrapper>
           </DormHeader>
           
+          {mainImage === "" ? null : 
           <DormImage>
             <Img src={mainImage}></Img>
-          </DormImage>
+          </DormImage>}
           <Info>
             <ColumnLeft> 
               <InfoSection>
@@ -571,7 +580,7 @@ const Dorm = ({ }) => {
                     cons={dormInfo.CONS}
                 />
               </InfoSection>
-              <InfoSection>
+             {floorOffset ? <InfoSection>
                 <SectionTitle>Floor Plans</SectionTitle>
                 <MarginWrapper>
                   <FloorPlan
@@ -580,7 +589,7 @@ const Dorm = ({ }) => {
                     planNames={floorNames}
                   />
                 </MarginWrapper>
-              </InfoSection>
+              </InfoSection> : null}
               {(dormInfo.LATITUDE && dormInfo.LONGITUDE) ?
                 <InfoSection>
                   <SectionTitle>Location</SectionTitle>
