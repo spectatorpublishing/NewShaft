@@ -4,7 +4,7 @@ import ExploreSidebar from "../components/ExploreSidebar";
 import Maps from "../components/Maps";
 import SearchBar from "../components/SearchBar"
 import { FILTER_NAME_TO_KEY } from "../util/DormFilter.js";
-import Filters2022 from "../components/Filters2022.js";
+import Filters from "../components/ExploreFilters/Filters.js";
 
 import _, { initial } from "lodash"
 
@@ -168,7 +168,7 @@ export default class Explore extends Component {
           <SideBar>
             <FilterSearchBG>
               <SearchBar handleChange={this.updatePayload}/>
-              <Filters2022 handleChange={this.updatePayload} payload={this.state.payload} reset={this.resetPayload}></Filters2022>
+              <Filters handleChange={this.updatePayload} payload={this.state.payload} reset={this.resetPayload}></Filters>
             </FilterSearchBG>
             <ExploreSidebar dorms={this.state.dorms}/>
           </SideBar>

@@ -5,7 +5,7 @@ import styled from "styled-components/macro";
 import Checkbox from '@material-ui/core/Checkbox';
 import FormControlLabel from '@material-ui/core/FormControlLabel';
 import { withStyles } from '@material-ui/core/styles';
-import { theme } from "../util/GlobalStyles";
+import { theme } from "../../util/GlobalStyles";
 import { makeStyles } from '@material-ui/core/styles';
 
 const Item = styled.div`
@@ -21,7 +21,7 @@ const BlueCheckbox = withStyles({
     }
 })((props) => <Checkbox onClick={props.handleChange} checked={props.checked} color="default" {...props} />);
 
-const FilterItem2022 = (props) => {
+const FilterItem = (props) => {
     const [optionActive, setOptionActive] = useState(false);
     const classes = useStyles();
 
@@ -58,4 +58,4 @@ const useStyles = makeStyles({
     }
 });
 
-export default FilterItem2022;
+export default FilterItem;
