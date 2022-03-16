@@ -98,7 +98,7 @@ const DormButton = props => {
     setDormStyle((props.SUITE_ === 1) ? "Suite-Style" : "Corridor-Style");
 
     setRoomTypeString()
-  }, []);
+  }, [props.SUITE_]);
 
   const setRoomTypeString = () => {
     var roomtype = "";
