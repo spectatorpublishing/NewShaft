@@ -19,9 +19,19 @@ let FilterRow = styled.div`
         display: inline-block;
         vertical-align: middle;
         text-align: center;
-        margin-left: 5%;
         display: flex;
+		flex-direction: column;
+		padding: 0rem;
     }
+`;
+
+const Filters = styled.div`
+	display: flex;
+	flex-direction: row;
+	@media only screen and (max-width: 769px) {
+		display: flex;
+		flex-wrap: wrap;
+	}
 `;
 
 
@@ -30,6 +40,8 @@ let Textbox = styled.div`
     font-size: 1rem;
     color: #73A6E0;
     padding-right: 1rem;
+	height: fit-content;
+	margin: auto 0rem;
 `;
 
 let ClearButton = styled.a`
@@ -117,10 +129,12 @@ const FilterBar = (props) => {
     return(
         <FilterRow>
             <Textbox>Filters:</Textbox>
-            {getFilters()}
-            <Textbox>
-                <ClearButton onClick={() => clear()}>Clear</ClearButton>
-            </Textbox>
+			<Filters>
+				{getFilters()}
+				<Textbox>
+					<ClearButton onClick={() => clear()}>Clear</ClearButton>
+				</Textbox>
+			</Filters>
         </FilterRow>
     );
 }

@@ -265,7 +265,7 @@ const Dorm = ({ }) => {
     fetchDormPhotos(dormName);
   }, []);
 
-  function fetchDormPhotos(dormName){
+  async function fetchDormPhotos(dormName){
     fetch(`/api/getDormPhotos/${dormName}`, {
       method: "GET",
       headers: { "Content-Type": "application/json" },
@@ -346,7 +346,7 @@ const Dorm = ({ }) => {
       });
   }
 
-  function fetchRelatedArticles(dormName) {
+  async function fetchRelatedArticles(dormName) {
     fetch(`/api/getRelatedArticles/${dormName}`, {
       method: "GET",
       headers: { "Content-Type": "application/json" },
@@ -392,7 +392,7 @@ const Dorm = ({ }) => {
       });
   }
 
-  function fetchFloorPlans(dormName) {
+  async function fetchFloorPlans(dormName) {
     fetch(`/api/getFloorPlans/${dormName}`, {
       method: "GET",
       headers: { "Content-Type": "application/json" },

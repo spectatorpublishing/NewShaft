@@ -50,6 +50,7 @@ const FilterSearchBG = styled.div`
   margin: 2rem;
   border-bottom: 1px solid #C4C4C4;
   @media only screen and (max-width: 768px) {
+    margin: 1rem;
   }
 `
 

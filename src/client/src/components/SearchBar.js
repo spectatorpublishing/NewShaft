@@ -5,12 +5,12 @@ let Input = styled.input`
   border-radius: 10px;
   border: 1px solid #C4C4C4;
   display: block;
-  width: 80%;
+  width: 100%;
   font-family: inherit;
   font-size: 1rem;
   //margin: 0.75rem 10%;
   line-height: 1.5rem;
-  padding: 0.75rem 15%;
+  padding: 0.5rem 15%;
   box-sizing: border-box;
   @media only screen and (min-width: 768px) {
     border-radius: 10px;
