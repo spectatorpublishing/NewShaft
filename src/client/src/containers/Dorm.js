@@ -86,20 +86,16 @@ let DormImage = styled.div`
   height: 80vh;
   
   @media only screen and (max-width: 767px) {
-		height: 40vh;
-    width: auto;
+		width: 100vw;
+    height: 40vh;
 	}
 `;
 
 let Img = styled.img`
   width: 100%;
+  height: 100%;
   object-fit: cover;
   object-position: center bottom;
-  @media only screen and (max-width: 767px) {
-    height: 40vh;
-		object-fit: cover;
-    object-position: center bottom;
-	}
 `;
 
 let Page = styled.div`
@@ -107,6 +103,7 @@ let Page = styled.div`
   flex-direction: column;
   color: ${props => props.theme.darkGray};
   padding: 2rem;
+  margin-top: 60px;
 
   @media only screen and (max-width: 767px) {
     padding: .5rem;
@@ -475,7 +472,7 @@ const Dorm = ({ }) => {
     return (
       <Page>
           <DormImage>
-            <img src={mainImage}></img>
+            <Img src={mainImage}></Img>
           </DormImage>
 
           <DormHeader>
@@ -501,7 +498,10 @@ const Dorm = ({ }) => {
           </InfoSection>
 
           <InfoSection>
-            <SectionTitle>Amenities</SectionTitle>
+                <SectionTitle>Amenities</SectionTitle>
+                <MarginWrapper>
+                  <NewAmenities amenities={amenities}/>
+                </MarginWrapper>
           </InfoSection>
 
           <InfoSection>
