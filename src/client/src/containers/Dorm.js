@@ -17,6 +17,8 @@ import { theme } from "../util/GlobalStyles";
 import {NavLink} from "react-router-dom";
 import ReviewPageReview from "../components/ReviewPageReview"
 import PhotoGallery from "../components/PhotoGallery";
+import DormQuickReview from "../components/DormQuickReview";
+import { findLastIndex } from "lodash";
 
 let DormHeader = styled.div`
   display: flex;
@@ -40,6 +42,21 @@ let UnderlineWrapper = styled.div`
   flex-direction: row;
   align-self: center;
   margin-top: -.5rem;
+`
+let Detail = styled.div`
+  font-family: sans-serif;
+  padding-top: 0.5rem;
+  padding-bottom:0.25rem;
+  border-bottom:1px solid #C4C4C4;
+  font-size:18px;
+
+`
+let AtAGlanceTitle = styled.div`
+  display:flex;
+  font-family: Raleway;
+  padding-bottom:0.25rem;
+  color: #73A6E0;
+
 `
 
 let Underline = styled.hr`
@@ -81,17 +98,31 @@ let ColumnLeft = styled.div`
   padding: 2rem;
   width: 75%;
 `
-
+const QuickReviewDisplay = styled.div`
+    width: 100%;
+    padding-top: 1rem;
+`
 let ColumnRight = styled.div`
   display: flex;
   flex-direction: column;
   padding: 2rem;
   width: 25%;
 `
+let AtAGlanceText = styled.div`
+  display:flex;
+  font-family: Raleway;
+  padding-bottom:0.25rem;
+  color: #0000008F;
+`
+let StickyContainer =styled.div`
+  position: sticky;
+  top: ${props => props.buffer};
+`
 let Sticky = styled.div`
   display: flex;
-  padding: 2rem;
-  border: 1px solid ${props => props.theme.lightGray};
+  justify-content: center;
+  flex-direction: column;
+  padding: 1rem;
   margin-bottom: 2rem;
 `
 
@@ -110,6 +141,14 @@ let SectionTitle = styled.h2`
 `;
 
 let StickyTitle = styled.h3`
+  font-family: Raleway;
+  color: #707070;
+  display:flex;
+`
+const QuickReviewBox = styled.div`
+    margin-top: 1rem;
+    box-shadow: 3px -4px 7px 2px rgba(0,0,0,0.1);
+    padding-right: 1rem;
 `
 
 let relatedDorms = [
@@ -170,6 +209,7 @@ export default class Dorm extends React.PureComponent {
     this.spectrumRef = React.createRef();
     this.suggestionsRef = React.createRef();
     this.scrollMenuRef = React.createRef();
+    this.quickReviewRef = React.createRef();
     this.state = {
       dormInfo: {
         DORM: "",
@@ -188,7 +228,7 @@ export default class Dorm extends React.PureComponent {
         LATITUDE: 0,
         LONGITUDE: 0,
         LOTTERY_NUMS: [],
-        RELATEDDORMS: relatedDorms
+        RELATEDDORMS: relatedDorms,
       },
       amenities: {
         P_BATHROOM: 0,
@@ -204,6 +244,7 @@ export default class Dorm extends React.PureComponent {
         AC: 0,
         MUSIC: 0
       },
+      quickReview: {dorm_name: "NA", cleanliness: 0, noise: 0, community: 0, party: 0, amenities: 0},
       reviews: [],
       dorm_photos: [],
       relatedArticles: [],
@@ -228,6 +269,8 @@ export default class Dorm extends React.PureComponent {
     this.fetchFloorPlans(dormName);
     this.fetchRelatedDorms(dormName);
     this.fetchDormPhotos(dormName);
+    this.fetchQuickReview(dormName);
+
   }
 
   componentWillReceiveProps(newProps){
@@ -238,7 +281,9 @@ export default class Dorm extends React.PureComponent {
     this.fetchRelatedArticles(newProps.match.params.dorm);
     this.fetchFloorPlans(newProps.match.params.dorm);
     this.fetchRelatedDorms(newProps.match.params.dorm);
+    this.fetchQuickReview(newProps.match.params.dorm);
     this.fetchDormPhotos(newProps.match.params.dorm);
+    
   }
 
   fetchDormPhotos(name){
@@ -297,7 +342,20 @@ export default class Dorm extends React.PureComponent {
         this.setState({reviews: reviewsInfo.reviews, avg_rating: reviewsInfo.avg_rating, reccomend: reviewsInfo.reccomended, ranking: reviewsInfo.ranking})
       });
   }
+  fetchQuickReview(name){
+    const dormName = dorm_name_map[name]
+    fetch(`/api/getQuickReview/${dormName}`, {
+      method: "GET",
+      headers: { "Content-Type": "application/json"},
+    })
+      .then(res => res.json())
+      .then(reviewsInfo => {
+        this.setState({quickReview : {cleanliness: reviewsInfo.clean, noise: reviewsInfo.noise, community: reviewsInfo.community, party: reviewsInfo.party, amenities: reviewsInfo.amenities}});
+    })
+   ;
 
+  }
+  
   fetchRelatedArticles(name){
     const dormName = dorm_name_map[name]
     fetch(`/api/getRelatedArticles/${dormName}`, {
@@ -379,17 +437,18 @@ export default class Dorm extends React.PureComponent {
     )); 
     const isMobile = this.state.width <= 768;
     const isMedium = this.state.width <= 1400;
+    console.log(this.state.dormInfo);
     const headerButtons = {
       fontSize: 15,textAlign: "center",
-      background: "#707070BF",color: "white",
-      borderRadius: 7,paddingTop: 10, paddingBottom: 10,paddingLeft: 5,paddingRight: 5,
-      justifyContent:'center',alignItems: 'center',marginBottom: 15, minWidth: '160px', border: 'none',
+      background: " #73A6E0",color: "white",
+      borderRadius: '4px',paddingTop: 10, paddingBottom: 10,paddingLeft: 5,paddingRight: 5,display:"flex",
+      justifyContent:'center',alignSelf: 'center',marginBottom: 15, minWidth: '175px', border: 'none',
     }
     const years_map = {
-      "first-years": "Freshman",
-      "sophomores": "Sophomore",
-      "juniors": "Junior",
-      "seniors": "Senior"
+      "first-years": "Freshmen",
+      "sophomores": "Sophomores",
+      "juniors": "Juniors",
+      "seniors": "Seniors"
     }
     let useReview = this.state.reviews.slice(0,3);
     if (isMobile){useReview = useReview.slice(0,2);}
@@ -417,7 +476,6 @@ export default class Dorm extends React.PureComponent {
     const updateModal = () =>{
       this.setState({ isOpen: false})
     }
-
     return (
       <Page>
         <DormHeader>
@@ -468,13 +526,29 @@ export default class Dorm extends React.PureComponent {
               {(this.state.relatedArticles.length == 0)? null : <SpectrumSidebar spectrumSidebarData = {this.state.relatedArticles}/>}
             </InfoSection>
           </ColumnLeft>
-          <ColumnRight> 
-            <Sticky>
-              <StickyTitle>AT-A-GLANCE</StickyTitle>
-            </Sticky>
-            <Sticky>
-              <StickyTitle>QUICK REVIEW</StickyTitle>
-            </Sticky>
+          <ColumnRight>
+            <StickyContainer buffer = "5rem">
+              <Sticky>
+                <StickyTitle>At a Glance</StickyTitle>
+                <Detail>
+                  <AtAGlanceTitle>Location</AtAGlanceTitle>
+                  <AtAGlanceText>{this.state.dormInfo.ADDRESS}</AtAGlanceText>
+                </Detail>
+                <Detail>
+                  <AtAGlanceTitle>Room Types</AtAGlanceTitle>
+                  <AtAGlanceText>{roomtype}</AtAGlanceText>
+                </Detail>
+                <Detail>
+                  <AtAGlanceTitle>Class Makeup</AtAGlanceTitle>
+                  <AtAGlanceText>{this.state.dormInfo.CLASS_MAKEUP}</AtAGlanceText>
+                </Detail>
+              </Sticky>
+              <Sticky>
+                <StickyTitle>Quick Review</StickyTitle>
+                <DormQuickReview QuickReview={this.state.quickReview}></DormQuickReview>
+                <a href="https://docs.google.com/forms/d/e/1FAIpQLSfLfk7KE8fHSh117X4AhVKU-KJkJsvWjbvlW5mcwwbx08es0w/viewform" style={headerButtons}>Submit a Review</a>
+              </Sticky>
+            </StickyContainer>
           </ColumnRight>
         </Info>
       </Page>
