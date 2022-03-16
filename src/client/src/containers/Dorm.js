@@ -103,7 +103,7 @@ let Page = styled.div`
   flex-direction: column;
   color: ${props => props.theme.darkGray};
   padding: 2rem;
-  margin-top: 60px;
+  margin-top: 3.25rem;
 
   @media only screen and (max-width: 767px) {
     padding: .5rem;
