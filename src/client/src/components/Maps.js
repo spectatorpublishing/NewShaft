@@ -108,7 +108,7 @@ class MapItem extends Component {
           latitude={this.state.lat}
           onClose={this.clearPopUp}
           closeOnClick={true}>
-          <Link to={"/explore/" + this.state.popupInfo.replace(/\s+/g, '')} style={{margin:'0'}}>{this.state.popupInfo}</Link>
+          <Link to={"/explore/" + this.state.popupInfo.replace(/\s+/g, '-')} style={{margin:'0'}}>{this.state.popupInfo}</Link>
         </Popup>
       </PopupContainer>
   </div>
