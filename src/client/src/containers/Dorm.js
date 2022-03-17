@@ -1,30 +1,32 @@
 import styled from "styled-components/macro";
-import React, { Component } from "react";
+import React from "react";
 import { useEffect, useState } from "react";
 import { useParams } from 'react-router-dom';
-import PhotoBanner from "../components/PhotoBanner";
-import Amenities from "../components/Amenities";
+import PhotoBanner from "../components/DormPhotoBanner/PhotoBanner";
 import NewAmenities from "../components/NewAmenities";
 import AtAGlance from "../components/AtAGlance";
 import Maps from "../components/Maps";
 import ProCon from "../components/ProCon";
 import FloorPlan from "../components/FloorPlan";
-import RelatedDorms from "../components/RelatedDorms";
-import ReviewsBox from "../components/ReviewsBox";
-import Scroller from "../components/Scroller";
 import SpectrumSidebar from "../components/SpectrumSidebar";
 import ScrollToTop from "../components/ScrollToTop";
-import AdManager from "../components/AdManager";
-import BlurbExpander from "../components/BlurbExpander";
 import { theme } from "../util/GlobalStyles";
-import { NavLink } from "react-router-dom";
-import ReviewPageReview from "../components/ReviewPageReview"
-import PhotoGallery from "../components/PhotoGallery";
 import DormQuickReview from "../components/DormQuickReview";
-import { findLastIndex } from "lodash";
-import { async } from "regenerator-runtime";
 
-let DormHeader = styled.div`
+const Page = styled.div`
+  display: flex;
+  flex-direction: column;
+  color: ${props => props.theme.darkGray};
+  padding: 2rem;
+  margin-top: 3.25rem;
+
+  @media only screen and (max-width: 767px) {
+    padding: 0rem;
+		overflow: hidden;
+	}
+`
+
+const DormHeader = styled.div`
   display: flex;
   flex-direction: column;
   padding: 1.5rem 0 1.5rem 0;
@@ -35,7 +37,7 @@ let DormHeader = styled.div`
 	}
 `
 
-let DormName = styled.h1`
+const DormName = styled.h1`
   font-family: 'Georgia', sans-serif;
   font-style: regular;
   font-weight: 42;
@@ -50,7 +52,7 @@ let DormName = styled.h1`
 	}
 `;
 
-let UnderlineWrapper = styled.div`
+const UnderlineWrapper = styled.div`
   width: 20%;
   display: flex;
   flex-direction: row;
@@ -61,37 +63,14 @@ let UnderlineWrapper = styled.div`
 		width: 60%;
 	}
 `
-let Detail = styled.div`
-  font-family: sans-serif;
-  padding-top: 0.5rem;
-  padding-bottom:0.25rem;
-  border-bottom:1px solid #C4C4C4;
-  font-size:18px;
 
-  @media only screen and (max-width: 767px) {
-    border-bottom:0px solid #C4C4C4;
-  }
-
-`
-let AtAGlanceTitle = styled.div`
-  display:flex;
-  font-family: Raleway;
-  padding-bottom:0.25rem;
-  color: #73A6E0;
-
-  @media only screen and (max-width: 767px) {
-    padding-bottom: 1rem;
-  }
-
-`
-
-let Underline = styled.hr`
+const Underline = styled.hr`
   width: 45%;
   border: .01rem solid #404040;
   align-self: center;
 `
 
-let Dot = styled.span`
+const Dot = styled.span`
   height: 6px;
   width: 6px;
   background-color: #404040;
@@ -105,7 +84,7 @@ let Dot = styled.span`
 	}
 `
 
-let DormImage = styled.div`
+const DormImage = styled.div`
   display: flex;
   align-self: center;
   width: 90vw;
@@ -117,32 +96,19 @@ let DormImage = styled.div`
 	}
 `;
 
-let Img = styled.img`
+const Img = styled.img`
   width: 100%;
   height: 100%;
   object-fit: cover;
   object-position: center bottom;
 `;
 
-let Page = styled.div`
-  display: flex;
-  flex-direction: column;
-  color: ${props => props.theme.darkGray};
-  padding: 2rem;
-  margin-top: 3.25rem;
-
-  @media only screen and (max-width: 767px) {
-    padding: .5rem;
-		overflow: hidden;
-	}
-`
-
-let Info = styled.div`
+const Info = styled.div`
   display: flex;
   flex-direction: row;
 `
 
-let ColumnLeft = styled.div`
+const ColumnLeft = styled.div`
   display: flex;
   flex-direction: column;
   background-color: white;
@@ -154,11 +120,7 @@ let ColumnLeft = styled.div`
     padding: 1rem;
   }
 `
-const QuickReviewDisplay = styled.div`
-    width: 100%;
-    padding-top: 1rem;
-`
-let ColumnRight = styled.div`
+const ColumnRight = styled.div`
   display: flex;
   flex-direction: column;
   padding: 2rem;
@@ -168,17 +130,7 @@ let ColumnRight = styled.div`
     display: none;
   }
 `
-let AtAGlanceText = styled.div`
-  display:flex;
-  font-family: Raleway;
-  padding-bottom:0.25rem;
-  color: #0000008F;
-
-  @media only screen and (max-width: 767px) {
-    padding-bottom: 1rem;
-  }
-`
-let StickyContainer = styled.div`
+const StickyContainer = styled.div`
   position: sticky;
   top: ${props => props.buffer};
 
@@ -186,7 +138,7 @@ let StickyContainer = styled.div`
     display: none;
 	}
 `
-let Sticky = styled.div`
+const Sticky = styled.div`
   display: flex;
   justify-content: center;
   flex-direction: column;
@@ -194,7 +146,7 @@ let Sticky = styled.div`
   margin-bottom: 2rem;
 `
 
-let InfoSection = styled.div`
+const InfoSection = styled.div`
   display: flex;
   flex-direction: column;
   margin: 2rem;
@@ -208,12 +160,12 @@ let InfoSection = styled.div`
     font-style: normal;
     line-height: 1rem;
     padding: 0 0 1.5rem 0;
-    margin: 1rem 3rem 1rem 2rem;
+    margin: 1rem 2rem 1rem 2rem;
     background-color: light-blue;
 	}
 `
 
-let SectionTitle = styled.h2`
+const SectionTitle = styled.h2`
   font-size: 2rem;
   font-weight: 400;
   margin-bottom: 2rem;
@@ -227,19 +179,13 @@ let SectionTitle = styled.h2`
 	}
 `;
 
-let StickyTitle = styled.h3`
+const StickyTitle = styled.h3`
   font-family: Raleway;
   font-weight: 500;
   color: #707070;
   display:flex;
 `
-const QuickReviewBox = styled.div`
-    margin-top: 1rem;
-    box-shadow: 3px -4px 7px 2px rgba(0,0,0,0.1);
-    padding-right: 1rem;
-`
-
-let MarginWrapper = styled.div`
+const MarginWrapper = styled.div`
   margin-left: 1rem;
 
   @media only screen and (max-width: 767px) {
@@ -256,6 +202,12 @@ const Mobile = styled.div`
   }
 `;
 
+const Desktop = styled.div`
+  @media only screen and (max-width: 767px) {
+    display: none;
+  }
+`;
+
 let relatedDorms = [
   {
     DORM: "McBain Hall",
@@ -267,43 +219,8 @@ let relatedDorms = [
   },
 ];
 
-const dorm_name_map = {
-  "CarmanHall": "Carman Hall",
-  "McBainHall": "McBain Hall",
-  "47Claremont": "47 Claremont",
-  "600W113th": "600 W 113th",
-  "600W116thSt.": "600 W 116th St.",
-  "616W116thSt.": "616 W 116th St.",
-  "620W116thSt.": "620 W 116th St.",
-  "601W110thSt.": "601 W 110th St.",
-  "CathedralGardens": "Cathedral Gardens",
-  "HewittHall": "Hewitt Hall",
-  "ElliotHall": "Elliot Hall",
-  "SulzbergerTower": "Sulzberger Tower",
-  "BroadwayHall": "Broadway Hall",
-  "CarltonArms": "Carlton Arms",
-  "EastCampus": "East Campus",
-  "FslBrownstones": "Fsl Brownstones",
-  "FurnaldHall": "Furnald Hall",
-  "HarmonyHall": "Harmony Hall",
-  "HartleyHall": "Hartley Hall",
-  "HoganHall": "Hogan Hall",
-  "JohnJayHall": "John Jay Hall",
-  "ResidentialBrownstones": "Residential Brownstones",
-  "RiverHall": "River Hall",
-  "RugglesHall": "Ruggles Hall",
-  "SchapiroHall": "Schapiro Hall",
-  "SicResidences": "Sic Residences",
-  "WallachHall": "Wallach Hall",
-  "WattHall": "Watt Hall",
-  "WienHall": "Wien Hall",
-  "WoodbridgeHall": "Woodbridge Hall",
-  "PlimptonHall": "Plimpton Hall"
-}
-
 const Dorm = ({ }) => {
   const { dorm } = useParams();
-  const [width, setScreenWidth] = useState(window.innerWidth);
   const [dormInfo, setDormInfo] = useState({});
   const [amenities, setAmenities] = useState({});
   const [reviews, setReviews] = useState([]);
@@ -313,9 +230,6 @@ const Dorm = ({ }) => {
   const [floorNames, setFloorNames] = useState([]);
   const [floorOffset, setFloorOffset] = useState(null);
   const [relatedDorms, setRelatedDorms] = useState([]);
-  const [scrollMenuFixed, setScrollMenuFixed] = useState(false);
-  const [scrollMenuOffset, setScrollMenuOffset] = useState(null);
-  const [isOpen, setIsOpen] = useState(false);
   const [fullDescription, setFullDescription] = useState("");
   const [roomtype, setRoomType] = useState("");
   const [classMakeupFormat, setClassMakeup] = useState("");
@@ -331,14 +245,6 @@ const Dorm = ({ }) => {
     //fetchRelatedDorms(dormName);
     setAllDormInfo(dormName);
   }, []);
-
-  useEffect(() => {
-    console.log(roomtype);
-  }, [roomtype]);
-
-  useEffect(() => {
-    setScreenWidth(window.innerWidth);
-  }, [window.innerWidth]);
 
   const fetchDormInfo = async (dormName) => {
     fetch(`/api/getDormInfo/${dormName}`, {
@@ -356,7 +262,6 @@ const Dorm = ({ }) => {
         }
         dormInfo.LOTTERY_NUMS = tempLot;
         document.title = dormInfo.DORM;
-        //console.log(dormInfo);
         setDormInfo(dormInfo);
 
         setFullDescription(dormInfo.DESCRIPTION.substring(0, dormInfo.DESCRIPTION.length - 1));
@@ -515,7 +420,7 @@ const Dorm = ({ }) => {
           }
           );
         }
-        //console.log(relDorms);
+
         setRelatedDorms(relDorms);
       }).catch(error => {
         console.log(error);
@@ -541,12 +446,6 @@ const Dorm = ({ }) => {
 
     setRoomType(roomtype);
   }
-  // Use ref forwarding so Scroller component can directly access the DOM nodes
-  /* const ScrollerTarget = React.forwardRef((props, ref) => (
-    <div ref={ref}>
-      {props.children}
-    </div>
-  ));  */
 
   const headerButtons = {
     fontSize: 15, textAlign: "center",
@@ -555,16 +454,16 @@ const Dorm = ({ }) => {
     justifyContent: 'center', alignItems: 'center', minWidth: '160px', border: 'none',
     marginTop: '0.5rem'
   }
-  const years_map = {
-    "first-years": "Freshman",
-    "sophomores": "Sophomore",
-    "juniors": "Junior",
-    "seniors": "Senior"
-  }
 
   return (
     <Page>
       <ScrollToTop />
+      <Mobile>
+          {mainImage === "" ? null :
+            <DormImage>
+              <Img src={mainImage}></Img>
+            </DormImage>}
+        </Mobile>
       <DormHeader>
         <DormName> {dormInfo.DORM} </DormName>
         <UnderlineWrapper>
@@ -573,11 +472,9 @@ const Dorm = ({ }) => {
           <Underline></Underline>
         </UnderlineWrapper>
       </DormHeader>
-
-      {mainImage === "" ? null :
-        <DormImage>
-          <Img src={mainImage}></Img>
-        </DormImage>}
+      <Desktop>
+        {(dorm_photos.length === 0) ? null : <PhotoBanner bannerImages={dorm_photos} />}
+      </Desktop>
       <Info>
         <ColumnLeft>
           <InfoSection>
@@ -586,24 +483,12 @@ const Dorm = ({ }) => {
           </InfoSection>
           <Mobile>
             <InfoSection>
-              <SectionTitle>At a glance</SectionTitle>
-              <Detail>
-                <AtAGlanceTitle>Location</AtAGlanceTitle>
-                <AtAGlanceText>{dormInfo.ADDRESS}</AtAGlanceText>
-              </Detail>
-              <Detail>
-                <AtAGlanceTitle>Room Types</AtAGlanceTitle>
-                <AtAGlanceText>{roomtype}</AtAGlanceText>
-              </Detail>
-              <Detail>
-                <AtAGlanceTitle>Class Makeup</AtAGlanceTitle>
-                <AtAGlanceText>{classMakeupFormat}</AtAGlanceText>
-              </Detail>
+              <AtAGlance address={dormInfo.ADDRESS} classMakeup={classMakeupFormat} roomtype={roomtype}/>
             </InfoSection>
             <InfoSection>
               <SectionTitle>Quick review</SectionTitle>
               {quickReview === null ? null :
-              <DormQuickReview QuickReview={quickReview}></DormQuickReview>}
+                <DormQuickReview QuickReview={quickReview}></DormQuickReview>}
               <a href="https://docs.google.com/forms/d/e/1FAIpQLSfK1EHqqQrmpYCSviUT_W4aTOuyHiriNn_58N-zAnKoquVS0A/viewform?usp=sf_link" style={headerButtons}>Submit your ratings</a>
             </InfoSection>
           </Mobile>
@@ -645,15 +530,9 @@ const Dorm = ({ }) => {
                 /></MarginWrapper>
             </InfoSection> : null}
 
-          {(dorm_photos.length == 0) ? null :
             <InfoSection>
               <SectionTitle>Photo Gallery</SectionTitle>
-              {/* <PhotoGallery 
-                      updateModal={setIsOpen(false)} 
-                      images={dorm_photos} 
-                      path={dormInfo.DORM}
-                /> */}
-            </InfoSection>}
+            </InfoSection>
 
           {(relatedArticles.length == 0) ? null :
             <InfoSection>
@@ -666,24 +545,12 @@ const Dorm = ({ }) => {
         <ColumnRight>
           <StickyContainer buffer="5rem">
             <Sticky>
-              <StickyTitle>At a Glance</StickyTitle>
-              <Detail>
-                <AtAGlanceTitle>Location</AtAGlanceTitle>
-                <AtAGlanceText>{dormInfo.ADDRESS}</AtAGlanceText>
-              </Detail>
-              <Detail>
-                <AtAGlanceTitle>Room Types</AtAGlanceTitle>
-                <AtAGlanceText>{roomtype}</AtAGlanceText>
-              </Detail>
-              <Detail>
-                <AtAGlanceTitle>Class Makeup</AtAGlanceTitle>
-                <AtAGlanceText>{classMakeupFormat}</AtAGlanceText>
-              </Detail>
+              <AtAGlance address={dormInfo.ADDRESS} classMakeup={classMakeupFormat} roomtype={roomtype}/>
             </Sticky>
             <Sticky>
               <StickyTitle>Quick Review</StickyTitle>
               {quickReview === null ? null :
-              <DormQuickReview QuickReview={quickReview}></DormQuickReview>}
+                <DormQuickReview QuickReview={quickReview}></DormQuickReview>}
               <a href="https://docs.google.com/forms/d/e/1FAIpQLSfK1EHqqQrmpYCSviUT_W4aTOuyHiriNn_58N-zAnKoquVS0A/viewform?usp=sf_link" style={headerButtons}>Submit your ratings</a>
             </Sticky>
           </StickyContainer>

@@ -19,7 +19,7 @@ let NavContainer = styled.div `
     left: 0;
     position: fixed;
     top: 0;
-    z-index: 5;
+    z-index: 999;
   `}
 `
 let Banner = styled.div `

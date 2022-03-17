@@ -50,9 +50,6 @@ let ClearButton = styled.a`
     padding-left: 1rem;
 `;
 
-const white = 'white';
-const blue = 'rgb(98, 168, 229)';
-
 const filterElements = {
 	"School": [
 		"Columbia",
