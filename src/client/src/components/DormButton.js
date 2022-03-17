@@ -12,7 +12,8 @@ const DormButtonWrapper = styled.div`
   img{
     padding: 0px;
     border: 1px solid ${props => props.theme.lightGray};
-    max-height: 10vw;
+    max-height: 9vw;
+    min-height: 9vw;
     max-width: 50%;
     min-width: 50%;
     margin-right: 10px;

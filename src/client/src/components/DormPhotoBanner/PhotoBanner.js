@@ -6,7 +6,7 @@ import Buttons from './CarouselButtons'
 
 const PhotosContainer = styled.div`
   width: 90%;
-  height: 90vh;
+  height: 44rem;
   margin: 0rem auto 0rem auto;
   
   @media only screen and (max-width: 767px) {
@@ -17,6 +17,7 @@ const PhotosContainer = styled.div`
 
 const Img = styled.img`
   width: 100%;
+  height:100%;
   object-fit: cover;
   object-position: bottom; 
 `
