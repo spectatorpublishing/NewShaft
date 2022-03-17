@@ -4,7 +4,7 @@ import Carousel from 're-carousel'
 import Dots from './CarouselDots'
 import Buttons from './CarouselButtons'
 
-let PhotosContainer = styled.div`
+const PhotosContainer = styled.div`
   width: 90%;
   height: 90vh;
   margin: 0rem auto 0rem auto;
@@ -15,22 +15,13 @@ let PhotosContainer = styled.div`
 	}
 `
 
-let Img = styled.img`
+const Img = styled.img`
   width: 100%;
   object-fit: cover;
   object-position: bottom; 
 `
 
-let Button = styled.button`
-
-`
-
-let ViewButton = styled.button`
-  
-`
-
 const PhotoBanner = (props) => {
-  const [photoIndex, setPhotoIdx] = useState(0);
   const [images, setImages] = useState([]);
 
   useEffect(() => {
@@ -49,7 +40,7 @@ const PhotoBanner = (props) => {
   return (
     <PhotosContainer>
       <Carousel loop={true} auto={true} interval={3000} frames={frames} widgets={[Dots, Buttons]}>
-        <div>frames</div>
+        <div></div>
       </Carousel>
     </PhotosContainer>
   );
