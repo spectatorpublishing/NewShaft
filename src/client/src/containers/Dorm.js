@@ -2,7 +2,7 @@ import styled from "styled-components/macro";
 import React, { Component } from "react";
 import { useEffect, useState } from "react";
 import { useParams } from 'react-router-dom';
-import PhotoBanner from "../components/PhotoBanner";
+import PhotoBanner from "../components/DormPhotoBanner/PhotoBanner";
 import Amenities from "../components/Amenities";
 import NewAmenities from "../components/NewAmenities";
 import AtAGlance from "../components/AtAGlance";
@@ -565,6 +565,7 @@ const Dorm = ({ }) => {
   return (
     <Page>
       <ScrollToTop />
+      
       <DormHeader>
         <DormName> {dormInfo.DORM} </DormName>
         <UnderlineWrapper>
@@ -573,11 +574,12 @@ const Dorm = ({ }) => {
           <Underline></Underline>
         </UnderlineWrapper>
       </DormHeader>
-
-      {mainImage === "" ? null :
+      
+      {(dorm_photos.length === 0) ? null : <PhotoBanner bannerImages={dorm_photos}/>}
+      {/* {mainImage === "" ? null :
         <DormImage>
           <Img src={mainImage}></Img>
-        </DormImage>}
+        </DormImage>} */}
       <Info>
         <ColumnLeft>
           <InfoSection>
