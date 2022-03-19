@@ -530,9 +530,9 @@ const Dorm = ({ }) => {
                 /></MarginWrapper>
             </InfoSection> : null}
 
-            <InfoSection>
+            {/* <InfoSection>
               <SectionTitle>Photo Gallery</SectionTitle>
-            </InfoSection>
+            </InfoSection> */}
 
           {(relatedArticles.length == 0) ? null :
             <InfoSection>
