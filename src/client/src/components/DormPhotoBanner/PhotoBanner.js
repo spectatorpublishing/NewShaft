@@ -40,7 +40,7 @@ const PhotoBanner = (props) => {
 
   return (
     <PhotosContainer>
-      <Carousel loop={true} auto={true} interval={3000} frames={frames} widgets={[Dots, Buttons]}>
+      <Carousel loop={true} auto={true} interval={4000} frames={frames} widgets={[Dots, Buttons]}>
         <div></div>
       </Carousel>
     </PhotosContainer>
