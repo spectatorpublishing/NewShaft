@@ -29,7 +29,7 @@ const menuItems = [
     "name": "Lottery Predictor",
     "link": "/shaftlive",
     "external": false,
-    "disabled": true,
+    "disabled": false,
   },
   {
     "name": "Housing 101",

@@ -70,4 +70,7 @@ export const theme = {
   shadow: "rgba(0, 0, 0, 0.3) 0 0 10px",
   grayBorder: "border: 1px #DDDDDD solid; border-radius: 10px;",
   borderRadius: "10px",
+  green: "#74BD7E",
+  yellow: "#F8D66D",
+  red: "#FF6961"
 };

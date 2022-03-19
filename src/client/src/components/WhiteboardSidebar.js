@@ -4,7 +4,7 @@ import ChrisV from '../assets/chrisv_blue.svg';
 import {theme} from '../util/GlobalStyles.js';
 
 let Sidebar = styled.div`
-    width: 10vw;
+    width: 80%;
     height: 100vh;
     margin-top:6vh;
     margin-left:5vw;
@@ -176,7 +176,7 @@ export default class WhiteboardSidebar extends React.Component {
 
         if (isMobile) {
             return (
-                    <div>
+                <div>
                     <SidebarTitle>Dorm and Floor</SidebarTitle>
                     <DormListMobile>
                         <select 
@@ -187,14 +187,14 @@ export default class WhiteboardSidebar extends React.Component {
                         </select>
                         <V src={ChrisV}/>
                     </DormListMobile>
-                    </div>
+                </div>
             );
         }
         else {
             return (
                 <div>
                     <Sidebar>
-                    <SidebarTitle>DORMS</SidebarTitle>
+                        <SidebarTitle>DORMS</SidebarTitle>
                         <DormListDesktop selectedId={this.state.dormId}>
                             {this.getDesktopDorms()}
                             <Compare href="/compare/">Compare Dorms</Compare>
