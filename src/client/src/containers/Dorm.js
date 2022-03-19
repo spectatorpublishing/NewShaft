@@ -437,7 +437,9 @@ export default class Dorm extends React.PureComponent {
           floorPlans: floor_vals[0],
           floorNames: floor_vals[1]
         });
-      })
+      }).catch(error => {
+        console.log(error);
+      });
   }
 
   handleWindowSizeChange() {
