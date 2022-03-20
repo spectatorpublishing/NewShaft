@@ -1,80 +1,75 @@
 import React, { Component } from "react";
 import styled from "styled-components";
 
-let Wrapper = styled.div`
-  margin-top: -4vw;
+const Wrapper = styled.div`
+  
 `;
 
-let Table = styled.div`
-  display: flex;
-  justify-content: space-between;
-  border-bottom: 1px solid ${props => props.theme.lightGray};
-  padding-bottom: 0.5rem;
-  margin-bottom: 0.5rem;
-  margin-right: 1.5rem;
+const SectionTitle = styled.h3`
+  font-weight: 500;
+  margin-bottom: 0.75rem;
+  color: #707070;
+  font-family: Raleway;
+
+  @media only screen and (max-width: 767px) {
+    font-weight: 500;
+    color: #707070;
+    display:flex;
+	}
 `;
 
-let Category = styled.div``;
+const Detail = styled.div`
+  font-family: sans-serif;
+  padding-top: 0.5rem;
+  padding-bottom:0.25rem;
+  border-bottom:1px solid #C4C4C4;
+  font-size:18px;
 
-let Title = styled.h2`
-  margin-bottom: 1rem;
-`;
-
-let Content = styled.span`
-  margin-left: 1rem;
-  text-align: right;
-`;
-
-export default class AtAGlance extends Component {
-  constructor(props) {
-    super(props);
+  @media only screen and (max-width: 767px) {
+    border-bottom:0px solid #C4C4C4;
   }
 
-  componentWillMount() {
-    window.addEventListener("resize", this.handleWindowSizeChange);
+`
+const AtAGlanceTitle = styled.div`
+  display:flex;
+  font-family: Raleway;
+  padding-bottom:0.25rem;
+  color: #73A6E0;
+
+  @media only screen and (max-width: 767px) {
+    padding-bottom: 1rem;
   }
+`
 
-  componentWillUnmount() {
-    window.removeEventListener("resize", this.handleWindowSizeChange);
+const AtAGlanceText = styled.div`
+  display:flex;
+  font-family: Raleway;
+  padding-bottom:0.25rem;
+  color: #0000008F;
+
+  @media only screen and (max-width: 767px) {
+    padding-bottom: 1rem;
   }
+`
 
-  handleWindowSizeChange = () => {
-    this.setState({ width: window.innerWidth });
-  };
-
-  render() {
-    let classMakeupFormat = this.props.classmakeup
-      .split(",")
-      .map((el, i) => el.charAt(0).toUpperCase() + el.slice(1))
-      .join(", ");
-
-    let glanceMap = [
-      ["Location", this.props.location],
-      ["Room types", this.props.roomtype],
-      ["Class makeup", classMakeupFormat]
-    ];
-
-    glanceMap = glanceMap.concat(this.props.lottery);
-
-    const AtAGlanceMapped = glanceMap.map((el, i) => {
-      if (el[1] && el[1] != "" && el[1] != "0" && el[1] != " ") {
-        return (
-          <Table key={i}>
-            <Category>{el[0]}</Category>
-            <Content>
-              <b>{el[1]}</b>
-            </Content>
-          </Table>
-        );
-      } else return <div key={i} />;
-    });
-
-    return (
-      <Wrapper>
-        <Title> At a glance </Title>
-        {AtAGlanceMapped}
-        <br />
-      </Wrapper>
-    );
-  }
+const AtAGlance = (props) => {
+  return (
+    <Wrapper>
+      <SectionTitle>At a Glance</SectionTitle>
+      <Detail>
+        <AtAGlanceTitle>Location</AtAGlanceTitle>
+        <AtAGlanceText>{props.address}</AtAGlanceText>
+      </Detail>
+      <Detail>
+        <AtAGlanceTitle>Room Types</AtAGlanceTitle>
+        <AtAGlanceText>{props.roomtype}</AtAGlanceText>
+      </Detail>
+      <Detail>
+        <AtAGlanceTitle>Class Makeup</AtAGlanceTitle>
+        <AtAGlanceText>{props.classMakeup}</AtAGlanceText>
+      </Detail>
+    </Wrapper>
+  );
 }
+
+export default AtAGlance;
