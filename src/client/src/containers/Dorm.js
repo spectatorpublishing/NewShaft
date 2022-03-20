@@ -498,12 +498,13 @@ const Dorm = ({ }) => {
               <NewAmenities amenities={amenities} />
             </MarginWrapper>
           </InfoSection>
+          {dormInfo.DORM === "Carman Hall" ? null :
           <InfoSection>
             <ProCon
               pros={dormInfo.PROS}
               cons={dormInfo.CONS}
             />
-          </InfoSection>
+          </InfoSection>}
           {floorOffset ? <InfoSection>
             <SectionTitle>Floor Plans</SectionTitle>
             <MarginWrapper>
