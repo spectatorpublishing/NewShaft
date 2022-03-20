@@ -4,25 +4,11 @@ import styled from 'styled-components';
 import 'react-image-lightbox/style.css'; 
 import Lightbox from 'react-image-lightbox';
 
-let FloorPlanTitle = styled.h2`
-    margin-top: 0.5vw;
-    margin-bottom: 1vw;
-    font-weight: 900;
-    width: 100%;
-`
-
-let FloorPlanTitleMobile = styled.h2`
-    margin-top: 3vh;
-    margin-bottom: 0;
-    padding-left: 0.5vw;
-`
-
 let FloorPlanBox = styled.div` 
     display: flex;
     flex-direction: row;
     overflow: hidden;
     padding: 3vw;
-    margin-top: 1rem;
     box-shadow: 5px 5px 10px ${props => props.theme.lightGray};
     border: 1px solid ${props => props.theme.lightGray};
 `
@@ -128,10 +114,11 @@ export default class FloorPlan extends React.PureComponent {
     constructor(props){
         super(props)
         this.state = {
-            planArray: this.props.planArray,			//array of floor plan links/picture files.
-            floorOffset: this.props.floorOffset + 1,	//offset of starting floor from ground level. eg wien has rooms starting on floor 2, not floor 1, so the offset is 1. the + 1 is because arrays starting at 0 doesn't mesh with floors starting at 1. 
-            currentFloor: this.props.floorOffset + 1,
-            currentPlan: this.props.planArray[0],
+            planArray: props.planArray,
+            planNames: props.planNames,
+            floorOffset: props.floorOffset,
+            currentFloor: props.floorOffset,
+            currentPlan: props.planArray[props.floorOffset],
             width: window.innerWidth,
             isOpen: false,
             photoIndex: 0
@@ -148,7 +135,10 @@ export default class FloorPlan extends React.PureComponent {
 
     componentWillReceiveProps(props) {
         this.setState({
-            planArray: props.planArray
+            planArray: props.planArray,
+            planNames: props.planNames,
+            currentFloor: 0 + props.floorOffset,
+            currentPlan: props.planArray[props.floorOffset]
         })
     } 
 
@@ -164,26 +154,24 @@ export default class FloorPlan extends React.PureComponent {
 
     selectFloor(floorNumber) {
         this.setState({
-            currentFloor: floorNumber + this.state.floorOffset,
+            currentFloor: floorNumber,
             currentPlan: this.props.planArray[floorNumber]
         })
-
     }
 
     floorUp() {
         let tmp = this.state.currentFloor;
-        const maxFloor = this.props.planArray.length - 1 + this.state.floorOffset;
+        const maxFloor = this.props.planArray.length - 1;
         if(tmp >= maxFloor) {
             this.setState({
-                currentFloor: this.props.floorOffset + 1,
-                currentPlan: this.props.planArray[0]
+                currentFloor: this.props.floorOffset,
+                currentPlan: this.props.planArray[this.props.floorOffset]
             })
         } else {
             const floorNumber = this.state.currentFloor + 1
-            const floorIndex = floorNumber - this.state.floorOffset
             this.setState({
                 currentFloor: floorNumber,
-                currentPlan: this.props.planArray[floorIndex]
+                currentPlan: this.props.planArray[floorNumber]
             })
         }
     }
@@ -193,15 +181,14 @@ export default class FloorPlan extends React.PureComponent {
         const minFloor = this.state.floorOffset;
         if(tmp <= minFloor) {
             this.setState({
-                currentFloor: this.props.planArray.length - 1 + this.state.floorOffset,
+                currentFloor: this.props.planArray.length - 1,
                 currentPlan: this.props.planArray[this.props.planArray.length-1]
             })
         } else {
             const floorNumber = this.state.currentFloor - 1
-            const floorIndex = floorNumber - this.state.floorOffset
             this.setState({
                 currentFloor: floorNumber,
-                currentPlan: this.props.planArray[floorIndex]
+                currentPlan: this.props.planArray[floorNumber]
             })
         }
     }
@@ -211,17 +198,22 @@ export default class FloorPlan extends React.PureComponent {
         let isOpen = this.state.isOpen;
         let photoIndex = this.state.photoIndex;
         const isMobile = width <= 700;
+
+        
+        console.log("offset: " + this.state.floorOffset)
+        console.log("current floor: " + this.state.currentFloor)
+        console.log("current plan: " + this.state.currentPlan)
+
         if(isMobile) {
             return (
                 <div>
-                    <FloorPlanTitleMobile> Floor Plans </FloorPlanTitleMobile>
                     <FloorPlanBoxMobile>
                         <PlanDisplayMobile>
                             <CurrentPlanMobile src={this.state.currentPlan} />
                             <FloorPlanNavMobile>                                
                                 <FloorListMobile>
                                     <FloorButton onClick = {() => this.floorDown()}><FloorArrow>&#8249;</FloorArrow></FloorButton>
-                                    <FloorNumberMobile> {this.props.planNames[this.state.currentFloor -1]}</FloorNumberMobile>
+                                    <FloorNumberMobile> {this.props.planNames[this.state.currentFloor]}</FloorNumberMobile>
                                     <FloorButton onClick = {() => this.floorUp()} ><FloorArrow>&#8250;</FloorArrow></FloorButton>
                                 </FloorListMobile>
                             </FloorPlanNavMobile>
@@ -232,10 +224,8 @@ export default class FloorPlan extends React.PureComponent {
         } else { 
             return (
                 <div>
-                    <FloorPlanTitle> Floor Plans </FloorPlanTitle>
                     <FloorPlanBox>
                         <PlanDisplay>
-                            {/* <FloorNumber> Floor {this.state.currentFloor} </FloorNumber> */}
                             <Button 
                                 type="button" 
                                 onClick = {
@@ -244,7 +234,7 @@ export default class FloorPlan extends React.PureComponent {
                                         photoIndex: this.state.currentFloor - this.state.floorOffset}
                                     )}
                             >
-                            <CurrentPlan src={this.state.currentPlan}/>
+                            <CurrentPlan src={this.state.planArray[this.state.currentFloor]}/>
                             {isOpen && ( 
                               <Lightbox
                                    mainSrc={this.props.planArray[photoIndex]}
@@ -271,8 +261,8 @@ export default class FloorPlan extends React.PureComponent {
                         <FloorList>
                             { 
                                   this.props.planArray.map((floor, i) =>
-                                    (<FloorButton key = {i} active = {this.state.currentFloor === i+1} onClick = {() => this.selectFloor(i)}> 
-                                    <FloorButtonNumber>{this.props.planNames[i + this.state.floorOffset -1]}</FloorButtonNumber>
+                                    (<FloorButton key = {i} active = {this.state.currentFloor === i} onClick = {() => this.selectFloor(i)}> 
+                                    <FloorButtonNumber>{this.state.planNames[i]}</FloorButtonNumber>
                                      </FloorButton>)
                                 )
                             }

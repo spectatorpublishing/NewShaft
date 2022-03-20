@@ -1,22 +1,23 @@
 import React, { Component } from 'react'
-import styled from 'styled-components'
+import styled from 'styled-components/macro'
 
 const SmallWrapper = styled.div`
-	width: 100%;
+	width: 80%;
 	display: flex;
 	margin-bottom: 15px;
 
 	@media only screen and (max-width: 767px) {
+		width: 100%;
 		display: block;
 	}
 `
 const ImageContainer = styled.div`
-	width: 40%;
-	margin-right: 15px;
+	width: 37%;
+	margin-right: 2rem;
 	
 	@media only screen and (max-width: 767px) {
 		width: 100%;
-		margin-right: 0px;
+		margin-right: 0;
 	}
 `
 let SpectrumContainer = styled.div`
@@ -41,38 +42,51 @@ const Image = styled.img`
 `
 const Title = styled.h3`
 	margin-top: -3px;
-`
+	margin-bottom: -10px;
+	color: #707070;
 
+	@media only screen and (max-width: 767px) {
+		font-weight: 500;
+		font-style: normal;
+		font-size: 15px;
+		margin: 1rem 0 .5rem 0;
+	}
+`
 const AuthorLine = styled.p`
-`
+	color: #707070;
+	margin: 0;
+	line-height: 1.2rem;
 
+	@media only screen and (max-width: 767px) {
+		font-weight: 400;
+		font-style: normal;
+		font-size: 12px;
+		margin: 0;
+	}
+`
 
 const Hr = styled.hr`
-	border-color: ${props => props.theme.lightGray};
-`
+	border-color: ${props => props.theme.black};
+	border-width: 1px;
 
-// const SectionHeader = styled.div `
-//   border-radius: 3px;
-//   background: #00BFFF;
-//   text-align: center;
-//   font-size: 20px;
-//   color: white;
-//   vertical-align: middle;
-//   padding-top: 5px;
-//   padding-bottom: 5px;
-//   padding-right: 10px;
-//   padding-left: 10px;
-// `
+	@media only screen and (max-width: 767px) {
+		display: none;
+	}
+`
 
 const Wrapper = styled.div`
-	margin-bottom: 1.5rem;
-	padding: 3vw;
-	margin-top: 1rem;
-	box-shadow: 5px 5px 10px ${props => props.theme.lightGray};
-	border: 1px solid ${props => props.theme.lightGray};
+	//padding: 2rem;
+	margin-left: 1rem;
+	//box-shadow: 5px 5px 10px ${props => props.theme.lightGray};
+	//border: 1px solid ${props => props.theme.lightGray};
+
+	@media only screen and (max-width: 767px) {
+		margin: 0;
+		width: 100%fit-content;
+	}
 `
 const TextDiv = styled.div `
-	width: 70%;
+	width: 100%;
 
 	@media only screen and (max-width: 767px) {
 		width: 100%;
@@ -131,7 +145,7 @@ class SpectrumSidebar extends Component {
 				<Wrapper>
 					{this.articleMap()[0]}
 				</Wrapper>
-				<LinkButton href="https://www.columbiaspectator.com/spectrum/shaft/">Read More</LinkButton>
+				{/*<LinkButton href="https://www.columbiaspectator.com/spectrum/shaft/">Read More</LinkButton>*/}
 			</SpectrumContainer> 
 		);
 	}

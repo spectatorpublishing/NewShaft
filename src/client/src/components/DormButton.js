@@ -1,4 +1,5 @@
 import React, { Component } from "react";
+import { useEffect, useState } from "react";
 import styled from 'styled-components';
 
 const DormButtonWrapper = styled.div`
@@ -6,44 +7,71 @@ const DormButtonWrapper = styled.div`
 	flex-direction: column;
 	cursor: pointer;
   margin-bottom: 1rem;
-  & img{
+  width: 100%;
+  
+  img{
     padding: 0px;
     border: 1px solid ${props => props.theme.lightGray};
-    max-height: 100vw;
-    width: 100%;
+    max-height: 9vw;
+    min-height: 9vw;
+    max-width: 50%;
+    min-width: 50%;
     margin-right: 10px;
     margin-bottom: 10px;
     object-fit: cover;
+
+    @media only screen and (max-width: 768px) {
+      max-width: 100%;
+      min-width: 100%;
+      max-height: 25vw;
+    }
+  }
+
+  .details {
+    display: flex;
+	  flex-direction: column;
   }
   @media only screen and (min-width: 768px) {
 		flex-direction: row;
-    & img{
-      max-height: 10vw;
-      width: 50%;
-    }
+    margin-bottom: 0.5rem;
   }
 `
 
-let SchoolName = styled.h6`
-  margin-top: 5px;
-  margin-bottom: 1px;
+const SchoolName = styled.div`
+  display: flex;
+  margin-top: 0.2rem;
+  margin-bottom: 0.5rem;
+  font-size: 1rem;
+  line-height: 1rem;
   text-transform: capitalize;
 `
 
-let ColumbiaName = styled(SchoolName)`
+const ColumbiaName = styled(SchoolName)`
   color: ${props => props.theme.columbiaBlue};
 `
 
-let BarnardName = styled(SchoolName)`
+const BarnardName = styled(SchoolName)`
   color: ${props => props.theme.barnardBlue};
 `
 
-const DormName = styled.b`
-  margin-top: .1em;
-  margin-bottom: .25em;
+const DormName = styled.div`
+  margin-top: .1rem;
+  margin-bottom: .25rem;
+  font-family: Georgia;
+  font-weight: 700;
+  font-size: 1.2rem;
+  line-height: 1.2rem;
 `
 
-const Amenities = styled.p`
+const Amenity = styled.div`
+  font-size: 0.8rem;
+  @media only screen and (max-width: 768px){
+    display: none;
+  }
+`
+
+const Amenities = styled.div`
+  
 `
 
 const Description = styled.div`
@@ -63,43 +91,45 @@ const SeeMore = styled.h6`
 	text-align: right;  
 `
 
+const DormButton = props => {
+  const [roomtype, setRoomType] = useState("");
+  const [classMakeupFormat, setClassMakeup] = useState("");
+  const [dormStyle, setDormStyle] = useState("");
+  const schoolName = props.school.toLowerCase();
 
-export default class DormButton extends Component {
-  constructor(props) {
-    super(props);
+  useEffect(() => {
+    if (props.class_makeup) 
+      setClassMakeup(props.class_makeup.split(",").map((el, i) => el.charAt(0).toUpperCase() + el.slice(1)).join(", "));
+    
+    setDormStyle((props.SUITE_ === 1) ? "Suite-Style" : "Corridor-Style");
 
-    this.state = {
-      school: this.props.school,
-      name: this.props.name,
-      image: this.props.image,
-      amenities: this.props.amenities,
-      description: this.props.description
-    };
+    setRoomTypeString()
+  }, [props.SUITE_]);
+
+  const setRoomTypeString = () => {
+    var roomtype = "";
+    
+    if (props.WALKTHROUGH){
+      roomtype += "Doubles and walkthrough doubles";
+    } else {
+      if (props.SINGLE_ && props.DOUBLE_ && props.TRIPLE_){
+        roomtype += " Singles, doubles, and triples";
+      } else if (props.SINGLE_ && props.DOUBLE_){
+        roomtype += " Singles and doubles";
+      } else {
+        if (props.SINGLE_) roomtype += "Singles";
+        if (props.DOUBLE_) roomtype += "Doubles";
+        if (props.TRIPLE_) roomtype += " and triples";
+      }
+    }
+
+    setRoomType(roomtype);
   }
-
-  componentDidUpdate(oldProps){
-    if(oldProps != this.props)
-      this.setState({
-        school: this.props.school,
-        name: this.props.name,
-        image: this.props.image,
-        amenities: this.props.amenities,
-        description: this.props.description
-      });
-  }
-
-  render() {
-
-    // Truncate dorm desciption to 100 characters if exceeds
-    const truncatedDescription = this.state.description.length > 100 
-      ? this.state.description.substring(0,100) + '...'
-      : this.state.description
-
-    let schoolName = this.state.school.toLowerCase();
     return (
       <DormButtonWrapper>
-        <img className="dormimage" src={this.state.image} />
+        <img className="dormimage" src={props.image} />
         <div className="details">
+            <DormName> {props.name} </DormName>
             {schoolName == "columbia" ? 
               <ColumbiaName> { schoolName } </ColumbiaName>
             : (schoolName == "barnard" ?
@@ -108,13 +138,16 @@ export default class DormButton extends Component {
               <SchoolName> { schoolName } </SchoolName>
               )
             }
-            <DormName> {this.state.name} </DormName>
-            <Amenities> {this.state.amenities} </Amenities>
-            <Description><p>{truncatedDescription}</p></Description>
-            <SeeMore>see&nbsp;more&nbsp;></SeeMore>
+            <Amenities> 
+              <Amenity>- {dormStyle}</Amenity>
+              <Amenity>- {roomtype}</Amenity>
+              <Amenity>- {classMakeupFormat}</Amenity>
+            </Amenities>
         </div>
         <br />
       </DormButtonWrapper>
     );
-  }
+
 }
+
+export default DormButton;
