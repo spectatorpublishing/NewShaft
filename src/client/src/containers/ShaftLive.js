@@ -241,6 +241,7 @@ export default class ShaftLive extends Component {
       //update: false,
       mobileShowFloorPlan: false,
 
+	  lotteryNum: 2500, /* a default lottery num placeholder */
       convertedNumLow: null,
       convertedNumHigh: null,
       priority: null,
@@ -344,6 +345,7 @@ export default class ShaftLive extends Component {
     //console.log("range: ", low, " - ", high)
     
     this.setState({
+	  lotteryNum: num, // TODO: make sure num is valid
       convertedNumLow: low,
       convertedNumHigh: high,
       priority: priority,
@@ -436,7 +438,7 @@ export default class ShaftLive extends Component {
         </Converter>
 
         <ShaftLiveContainer>
-          <DormList></DormList>
+          <DormList lotteryNum={this.state.lotteryNum} />
         </ShaftLiveContainer>
         </div>
       );
@@ -468,7 +470,7 @@ export default class ShaftLive extends Component {
 
           <ShaftLiveContainer>
             <ColOne>
-              <DormList></DormList>
+              <DormList lotteryNum={this.state.lotteryNum} />
             </ColOne>
 
             <ColTwo>

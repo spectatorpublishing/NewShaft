@@ -104,30 +104,31 @@ const DormButton = (props) => {
     )
 }
 
-const DormList = (props) => {
+const DormList = ({ lotteryNum }) => {
     const [dorms, setDorms] = useState([]);
 
     useEffect(() => {
-        fetchDormInfo()
+			// TODO: make sure that lotteryNum is or can be converted to a number
+			// otherwise, the api call will fail and no bars will be displayed at al
+			// can use a default value if conversion fails
+      fetchDormInfo(lotteryNum)
     }, []);
 
-    // placeholder for testing
-    const fetchDormInfo = () => {
-        setDorms([
-            {
-                DORM: "Dorm One",
-                RATIO: [5, 25, 30, 20]
-            },
-            {
-                DORM: "Dorm Two",
-                RATIO: [5, 25, 30, 20]
-            },
-            {
-                DORM: "Dorm Three",
-                RATIO: [5, 25, 30, 20]
-            }
-        ]);
-    }
+    const fetchDormInfo = (lotteryNum) => {
+		fetch(`/api/getLotteryInfo/${lotteryNum}`, {
+			method: "GET",
+			headers: { "Content-Type": "application/json"},
+		})
+			.then(res => res.json())
+			.then(lotteryInfo => setDorms(
+				lotteryInfo.map(({ DORM, LIKELY, SIM, UNLIKELY }) =>
+					({
+						DORM,
+						RATIO: [LIKELY, SIM, UNLIKELY, "0"].map(x => parseInt(x))
+					})
+				)
+			))
+	}
 
     // props of DormButton tbd based on backend
     return (
