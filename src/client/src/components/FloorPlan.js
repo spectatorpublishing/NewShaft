@@ -114,10 +114,11 @@ export default class FloorPlan extends React.PureComponent {
     constructor(props){
         super(props)
         this.state = {
-            planArray: this.props.planArray,
-            floorOffset: this.props.floorOffset,
-            currentFloor: this.props.floorOffset,
-            currentPlan: this.props.planArray[this.props.floorOffset],
+            planArray: props.planArray,
+            planNames: props.planNames,
+            floorOffset: props.floorOffset,
+            currentFloor: props.floorOffset,
+            currentPlan: props.planArray[props.floorOffset],
             width: window.innerWidth,
             isOpen: false,
             photoIndex: 0
@@ -134,9 +135,10 @@ export default class FloorPlan extends React.PureComponent {
 
     componentWillReceiveProps(props) {
         this.setState({
-            planArray: this.props.planArray,
-            currentFloor: 0 + this.props.floorOffset,
-            currentPlan: this.props.planArray[this.props.floorOffset]
+            planArray: props.planArray,
+            planNames: props.planNames,
+            currentFloor: 0 + props.floorOffset,
+            currentPlan: props.planArray[props.floorOffset]
         })
     } 
 
@@ -152,7 +154,7 @@ export default class FloorPlan extends React.PureComponent {
 
     selectFloor(floorNumber) {
         this.setState({
-            currentFloor: floorNumber + this.state.floorOffset,
+            currentFloor: floorNumber,
             currentPlan: this.props.planArray[floorNumber]
         })
     }
@@ -162,15 +164,14 @@ export default class FloorPlan extends React.PureComponent {
         const maxFloor = this.props.planArray.length - 1;
         if(tmp >= maxFloor) {
             this.setState({
-                currentFloor: this.props.floorOffset + 1,
-                currentPlan: this.props.planArray[0]
+                currentFloor: this.props.floorOffset,
+                currentPlan: this.props.planArray[this.props.floorOffset]
             })
         } else {
             const floorNumber = this.state.currentFloor + 1
-            const floorIndex = floorNumber
             this.setState({
                 currentFloor: floorNumber,
-                currentPlan: this.props.planArray[floorIndex]
+                currentPlan: this.props.planArray[floorNumber]
             })
         }
     }
@@ -185,10 +186,9 @@ export default class FloorPlan extends React.PureComponent {
             })
         } else {
             const floorNumber = this.state.currentFloor - 1
-            const floorIndex = floorNumber
             this.setState({
                 currentFloor: floorNumber,
-                currentPlan: this.props.planArray[floorIndex]
+                currentPlan: this.props.planArray[floorNumber]
             })
         }
     }
@@ -198,6 +198,11 @@ export default class FloorPlan extends React.PureComponent {
         let isOpen = this.state.isOpen;
         let photoIndex = this.state.photoIndex;
         const isMobile = width <= 700;
+
+        
+        console.log("offset: " + this.state.floorOffset)
+        console.log("current floor: " + this.state.currentFloor)
+        console.log("current plan: " + this.state.currentPlan)
 
         if(isMobile) {
             return (
@@ -256,8 +261,8 @@ export default class FloorPlan extends React.PureComponent {
                         <FloorList>
                             { 
                                   this.props.planArray.map((floor, i) =>
-                                    (<FloorButton key = {i} active = {this.state.currentFloor === i+1} onClick = {() => this.selectFloor(i)}> 
-                                    <FloorButtonNumber>{this.props.planNames[i + this.state.floorOffset]}</FloorButtonNumber>
+                                    (<FloorButton key = {i} active = {this.state.currentFloor === i} onClick = {() => this.selectFloor(i)}> 
+                                    <FloorButtonNumber>{this.state.planNames[i]}</FloorButtonNumber>
                                      </FloorButton>)
                                 )
                             }

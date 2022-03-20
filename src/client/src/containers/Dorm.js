@@ -319,6 +319,7 @@ const Dorm = ({ }) => {
 
     const amenities = await amenitiesRes.json();
     const photos = await photosRes.json();
+    console.log(photos);
     const relArticles = await relArticlesRes.json();
     const floorPlans = await floorPlansRes.json();
     return [amenities, photos, relArticles, floorPlans, quickReview];
@@ -373,22 +374,30 @@ const Dorm = ({ }) => {
     let floor_name = [];
     let keys = Object.keys(floorPlan);
     let floor_offset = 1;
+    let stop_offset = 0;
 
     for (var i = 0; i < keys.length; i++) {
       var floorNum = keys[i];
-      if (floorPlan[floorNum] == null || keys[i] == "DORM") {
-        if (floor_state.length == 0) {
-          floor_offset++;
-        }
+      if (keys[i] == "DORM"){
         continue;
+      } else if (floorPlan[floorNum] === "" || floorPlan[floorNum] === null) {
+        if (stop_offset === 0){
+          floor_offset++;
+          console.log(floor_offset);
+        }
+      } else {
+        stop_offset = 1;
+        floor_state[floorNum] = 'https://shaft-dorm-floorplans.s3.amazonaws.com/' + floorPlan[floorNum].replace(/ /g, '+');
+        floor_name[floorNum] = floorPlan[floorNum].slice(0, -4).replace("_", " ");
       }
-      floor_state[floorNum] = 'https://shaft-dorm-floorplans.s3.amazonaws.com/' + floorPlan[floorNum].replace(/ /g, '+');
-      floor_name[floorNum] = floorPlan[floorNum].slice(0, -4).replace("_", " ");
     }
 
     setFloorPlans(floor_state);
     setFloorNames(floor_name);
     setFloorOffset(floor_offset);
+    console.log("floor_state: ")
+    console.log(floor_state)
+    console.log(floor_offset)
   }
 
   function fetchReviews(dormName) {

@@ -92,7 +92,7 @@ router.post('/', async (req, res) => {
 
     while(query.endsWith("AND ") || query.endsWith("AND")) query = query.slice(0, -4)
 
-    query += ");"
+    query += ") ORDER BY D.DORM ASC;"
     console.log(query)
 
 	const result = await pool.query(query);
