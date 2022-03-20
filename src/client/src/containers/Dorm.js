@@ -429,6 +429,16 @@ const Dorm = ({ }) => {
           }
           );
         }
+        return [floor_state, floor_name]
+      }).then(floor_vals => {
+        this.setState({
+          floorPlans: floor_vals[0],
+          floorNames: floor_vals[1]
+        });
+      }).catch(error => {
+        console.log(error);
+      });
+  }
 
         setRelatedDorms(relDorms);
       }).catch(error => {

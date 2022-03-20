@@ -21,7 +21,9 @@
     "fontawesome-free": "^1.0.4",
     "framer-motion": "4.1.17",
     "mysql": "^2.16.0",
-    "react-bootstrap": "^1.6.4"
+    "react-bootstrap": "^1.6.4",
+    "react-bootstrap": "^1.0.0",
+    "react-ga": "^3.3.0"
   },
   "devDependencies": {
     "babel-plugin-styled-components": "^2.0.6",
