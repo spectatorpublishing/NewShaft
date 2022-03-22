@@ -603,7 +603,8 @@ export default class ShaftLive extends Component {
                 data={this.state.floorData}
                 cutoffs={[]}
                 init={this.state.init}
-                dormRefresh={this.state.dormRefresh} >
+                dormRefresh={this.state.dormRefresh}
+                showInfo={false} >
               </FloorPlanSVG>
               </FloorPlanWrapper>
               </FloorPlansRow>
