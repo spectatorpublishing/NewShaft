@@ -24,8 +24,7 @@ let NumberBtn = styled.button`
         background-color: ${props => props.theme.lightGray};
     }
     @media only screen and (max-width: 992px){
-        text-align: left !Important;
-        padding-left: 0.8rem;
+        text-align: center !important;
     }
 
 `
@@ -43,7 +42,6 @@ let NumberSelected = styled(NumberBtn)`
         background-color: ${props => props.theme.columbiaBlue};
         color: ${props => props.theme.white};
         text-shadow: ${props => props.theme.shadow};
-        text-align: center;
     }
     &:hover {
         background-color: ${props => props.theme.lightGray};
@@ -58,10 +56,7 @@ let ButtonTopText = styled.p`
 `
 
 let FloorButtonWrapper = styled.div`
-    padding-bottom: 1rem;
-    padding-top: 1rem;
-    padding-left: 0.75rem;
-    padding-right: 0.75rem;
+    padding: 1rem 0.75rem;
     @media only screen and (min-width: 992px){
         padding: 0;
     }
@@ -74,8 +69,8 @@ let Buttons = styled.div`
     margin: 0 1rem 0 0;
     overflow: visible;
     border-radius: 0;
-    @media only screen and (max-width: 768px){
-
+    @media(max-width: 991px){
+        flex-direction: row;
     }
 `
 

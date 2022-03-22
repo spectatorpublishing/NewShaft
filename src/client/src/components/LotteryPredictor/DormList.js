@@ -18,6 +18,7 @@ const List = styled.div`
     @media only screen and (max-width: 992px){
         padding: 0;
         height: 100%;
+        width: 100%;
     }
 `;
 
@@ -30,10 +31,6 @@ const DormButtonWrapper = styled.div`
     padding: .6rem;
     margin: .1rem 0;
     background-color: ${props => props.color};
-
-    @media only screen and (max-width: 992px){
-        width: 100%;
-    }
 `;
 
 const DormName = styled.div`

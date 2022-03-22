@@ -156,13 +156,16 @@ let Converter = styled.div`
   flex-direction: column;
   border-bottom: 1px solid #C4C4C4;
   @media(max-width: 991px){
-    margin: 7rem 1.5rem 2rem 1.5rem;
-}
+    margin: 5rem 1.5rem 2rem 1.5rem;
+  }
 `
 
 const Error = styled.div`
   color: #9A4A4A;
   margin: 0rem 3rem;
+  @media(max-width: 991px){
+    margin: 0.5rem 1rem 1rem 2rem;
+  }
 `;
 
 const InputsWrapper = styled.div`
@@ -186,10 +189,15 @@ let Input = styled.form`
   flex-direction: row;
   @media(max-width: 991px){
     width: 100%;
+    margin: 0.5rem 0rem;
   }
 
   label {
     margin: auto 0rem;
+
+    @media(max-width: 991px){
+      margin: auto auto auto 0rem;
+    }
   }
 `
 let StyleInput = styled.input`
@@ -202,8 +210,6 @@ let StyleInput = styled.input`
   margin-left: 1rem;
   @media(max-width: 991px){
     width: 40%;
-    justify-self: flex-end;
-    margin-right: auto;
   }
 `
 
@@ -232,14 +238,24 @@ const DormName = styled.div`
   font-size: 1.8rem;
   color: #707070;
   padding: 0rem 0 1rem 0;
+  @media(max-width: 991px){
+    margin: 0rem auto;
+  }
 `;
 
 const FloorPlanWrapper = styled.div`
   width: 70%;
+  @media(max-width: 991px){
+    margin: 1rem auto;
+  }
 `;
 
 const FloorPlansRow = styled.div`
   display: flex;
+
+  @media(max-width: 991px){
+    flex-direction: column;
+  }
 `;
 
 const AboutLeft = styled.div`
@@ -250,6 +266,10 @@ const DisclaimerWrapper = styled.div`
   display: flex;
   flex-direction: column;
   margin: 0.5rem 1rem 1rem auto;
+
+  @media(max-width: 991px){
+    margin: 1rem 1rem 2rem auto;
+  }
 `
 
 const DisclaimerTextBox = styled.div`
@@ -257,13 +277,20 @@ const DisclaimerTextBox = styled.div`
   font-size: 0.75rem;
   color: #707070;
   margin: 0rem 0rem 0rem auto;
-  @media(max-width: 768px){
-    width: 100%;
-    padding: .5rem 0;
+
+  @media(max-width: 991px){
+    margin: 0.2rem 1.2rem;
+    width: auto;
   }
 
   &.disclaimer {
     color: #9A4A4A;
+    padding-bottom: 0.3rem;
+    
+    @media(max-width: 991px){
+      border-top: 1px solid #C4C4C4;
+      padding-top: 1rem;
+    }
   }
 `;
 
@@ -502,13 +529,31 @@ export default class ShaftLive extends Component {
 
             <AboutWrapper>
               <TextBox> Green rooms are ones that you are likely to get based off data that Spectator has collected from housing selection from previous years.</TextBox>
-              <TextBox>Learn how our lottery predictor works to make the best use of its results.</TextBox>
+              {/* <TextBox>Learn how our lottery predictor works to make the best use of its results.</TextBox> */}
               {floorplanLegend}
             </AboutWrapper>
           </Converter>
           {(this.state.errorMsg === "") ? null : <Error>{"* " + this.state.errorMsg}</Error>}
           <ShaftLiveContainer>
-            <DormList lotteryNum={this.state.lotteryNum} />
+          <DormList lotteryNum={this.state.lotteryNum} setSelectedDorm={this.handleDormChange} selectedDorm={this.state.dorm}/>
+            <DormName>{this.state.dorm}</DormName>
+              <FloorPlansRow>
+              <FloorButton floorNums={this.state.floorNums} handleChange={this.handleFloorChange}/>
+              <FloorPlanWrapper>
+                <FloorPlanSVG
+                priority={this.state.priority}
+                low={this.state.convertedNumLow}
+                high={this.state.convertedNumHigh}
+                dorm={this.state.dorm}
+                floor={this.state.floor}
+                data={this.state.floorData}
+                cutoffs={[]}
+                init={this.state.init}
+                dormRefresh={this.state.dormRefresh} >
+              </FloorPlanSVG>
+              </FloorPlanWrapper>
+              </FloorPlansRow>
+              <Disclaimer/>
           </ShaftLiveContainer>
         </div>
       );
