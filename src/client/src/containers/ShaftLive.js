@@ -235,7 +235,11 @@ const DormName = styled.div`
 `;
 
 const FloorPlanWrapper = styled.div`
-  width: 60%;
+  width: 70%;
+`;
+
+const FloorPlansRow = styled.div`
+  display: flex;
 `;
 
 const AboutLeft = styled.div`
@@ -402,6 +406,7 @@ export default class ShaftLive extends Component {
         convertedNumHigh: high,
         priority: priority,
         full: priority + " | " + low + " - " + high,
+        dorm: "47 Claremont"
       })
 
       if ( groupSize < 1 || groupSize > 10) {
@@ -541,8 +546,10 @@ export default class ShaftLive extends Component {
 
             <ColTwo>
               <DormName>{this.state.dorm}</DormName>
+              <FloorPlansRow>
+              <FloorButton floorNums={this.state.floorNums} handleChange={this.handleFloorChange}/>
               <FloorPlanWrapper>
-              <FloorPlanSVG
+                <FloorPlanSVG
                 priority={this.state.priority}
                 low={this.state.convertedNumLow}
                 high={this.state.convertedNumHigh}
@@ -554,6 +561,7 @@ export default class ShaftLive extends Component {
                 dormRefresh={this.state.dormRefresh} >
               </FloorPlanSVG>
               </FloorPlanWrapper>
+              </FloorPlansRow>
             </ColTwo>
           </ShaftLiveContainer>
         </div>
