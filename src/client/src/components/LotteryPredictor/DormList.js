@@ -57,7 +57,7 @@ const BarWrapper = styled.div`
 
 const ColorBar = styled.div`
     // placeholder for testing
-    width: 25%;
+    width: ${(props) => props.width}%;
 
     &.likely{
         background-color: ${(props) => props.theme.green};
@@ -83,19 +83,35 @@ const ArrowWrapper = styled.div`
 
 const DormButton = (props) => {
     const [selected, setSelected] = useState(false);
+    const [total, setTotal] = useState(0);
+
+    useEffect(() => {
+    
+    }, [props.lotteryNum]);
+
+    useEffect(() => {
+        setTotal(props.ratio[0] + props.ratio[1] + props.ratio[2] + props.ratio[3])
+    }, [props.ratio]);
 
     const handleClick = () => {
         setSelected(true);
+        props.setSelectedDorm(props.dormName);
+    }
+
+    const setWidth = (ratio) => {
+        console.log((ratio / total) * 100)
+        var width = (ratio / total) * 100;
+        return width.toString().substring(0,4);
     }
 
     return (
         <DormButtonWrapper onClick={() => handleClick()} color={selected ? "rgba(196, 196, 196, 0.2)" : "white"}>
             <DormName>{props.dormName}</DormName>
             <BarWrapper>
-                <ColorBar className="likely"></ColorBar>
-                <ColorBar className="possible"></ColorBar>
-                <ColorBar className="unlikely"></ColorBar>
-                <ColorBar className="unavail"></ColorBar>
+                <ColorBar width={props.ratio ? setWidth(props.ratio[0]) : "25"} className="likely"></ColorBar>
+                <ColorBar width={props.ratio ? setWidth(props.ratio[1]) : "25"} className="possible"></ColorBar>
+                <ColorBar width={props.ratio ? setWidth(props.ratio[2]) : "25"} className="unlikely"></ColorBar>
+                <ColorBar width={props.ratio ? setWidth(props.ratio[3]) : "25"} className="unavail"></ColorBar>
             </BarWrapper>
             <ArrowWrapper>
                 <FontAwesomeIcon icon={faAngleRight} />
@@ -104,7 +120,7 @@ const DormButton = (props) => {
     )
 }
 
-const DormList = ({ lotteryNum }) => {
+const DormList = ({ lotteryNum, setSelectedDorm }) => {
     const [dorms, setDorms] = useState([]);
 
     useEffect(() => {
@@ -112,7 +128,7 @@ const DormList = ({ lotteryNum }) => {
 			// otherwise, the api call will fail and no bars will be displayed at al
 			// can use a default value if conversion fails
       fetchDormInfo(lotteryNum)
-    }, []);
+    }, [lotteryNum]);
 
     const fetchDormInfo = (lotteryNum) => {
 		fetch(`/api/getLotteryInfo/${lotteryNum}`, {
@@ -124,7 +140,7 @@ const DormList = ({ lotteryNum }) => {
 				lotteryInfo.map(({ DORM, LIKELY, SIM, UNLIKELY }) =>
 					({
 						DORM,
-						RATIO: [LIKELY, SIM, UNLIKELY, "0"].map(x => parseInt(x))
+						RATIO: [UNLIKELY, SIM, LIKELY, "0"].map(x => parseInt(x))
 					})
 				)
 			))
@@ -138,7 +154,8 @@ const DormList = ({ lotteryNum }) => {
                     <DormButton
                         key={index}
                         dormName={dorm.DORM}
-                        ratio={dorm.RATIO}
+                        ratio={(lotteryNum === 0) ? [25, 25, 25, 25] : dorm.RATIO}
+                        setSelectedDorm={setSelectedDorm}
                     ></DormButton>
                 )
             })}
