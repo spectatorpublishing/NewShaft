@@ -36,6 +36,9 @@ const DormName = styled.div`
     width: 30%;
     text-align: left;
     padding-left: 1rem;
+    font-family: Georgia;
+    font-weight: bold;
+    color: ${props => props.textColor};
 
     @media only screen and (max-width: 992px){
         width: 40%;
@@ -111,7 +114,7 @@ const DormButton = (props) => {
 
     return (
         <DormButtonWrapper onClick={() => handleClick()} color={isSelected ? "rgba(196, 196, 196, 0.2)" : "white"}>
-            <DormName>{props.dormName}</DormName>
+            <DormName textColor={isSelected ? theme.columbiaBlue : "black"}>{props.dormName}</DormName>
             <BarWrapper>
                 <ColorBar width={props.ratio ? setWidth(props.ratio[0]) : "25"} className="likely"></ColorBar>
                 <ColorBar width={props.ratio ? setWidth(props.ratio[1]) : "25"} className="possible"></ColorBar>

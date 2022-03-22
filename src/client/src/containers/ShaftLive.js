@@ -160,9 +160,15 @@ let Converter = styled.div`
 }
 `
 
+const Error = styled.div`
+  color: #9A4A4A;
+  margin: 0rem 3rem;
+`;
+
 const InputsWrapper = styled.div`
   display: flex;
   flex-direction: row;
+  margin: 0.5rem 0rem;
 
   @media(max-width: 768px){
     flex-direction: column;
@@ -170,7 +176,7 @@ const InputsWrapper = styled.div`
 `;
 
 let Input = styled.form`
-  width: 20%;
+  
   color: #707070;
   font-family: Raleway;
   font-style: normal;
@@ -181,12 +187,16 @@ let Input = styled.form`
   @media(max-width: 991px){
     width: 100%;
   }
+
+  label {
+    margin: auto 0rem;
+  }
 `
 let StyleInput = styled.input`
   background: none;
   border: 1px solid #D0D0D0;
   border-radius: 5%;
-  width: 20%;
+  width: 30%;
   color: ${(props) => props.theme.darkGray};
   font-size: 1rem;
   margin-left: 1rem;
@@ -207,7 +217,6 @@ const AboutWrapper = styled.div`
 `;
 
 const TextBox = styled.div`
-  width: 50%;
   font-size: 1rem;
   color: #707070;
   @media(max-width: 768px){
@@ -223,6 +232,31 @@ const DormName = styled.div`
   font-size: 36px;
   color: #707070;
   padding: 1rem 0;
+`;
+
+const AboutLeft = styled.div`
+  margin: auto 0rem;
+`;
+
+const DisclaimerWrapper = styled.div`
+  display: flex;
+  flex-direction: column;
+  margin: 0.5rem 1rem 1rem auto;
+`
+
+const DisclaimerTextBox = styled.div`
+  width: 80%;
+  font-size: 1rem;
+  color: #707070;
+  margin: 0rem 0rem 0rem auto;
+  @media(max-width: 768px){
+    width: 100%;
+    padding: .5rem 0;
+  }
+
+  &.disclaimer {
+    color: #9A4A4A;
+  }
 `;
 
 
@@ -245,7 +279,9 @@ export default class ShaftLive extends Component {
       convertedNumLow: null,
       convertedNumHigh: null,
       priority: null,
-      full: " "
+      full: " ",
+
+      errorMsg: "",
     }
 
     this.handleFloorChange = this.handleFloorChange.bind(this)
@@ -307,12 +343,19 @@ export default class ShaftLive extends Component {
 
   convertNumber() {
     var num = document.getElementById("userNum").value;
-    console.log("in: ", num);
+    let number = parseInt(num.toString())
+    var groupSize = parseInt(document.getElementById("groupSize").value.toString());
+
     if (num.length === 0) {
-      console.log("is empty ");
       this.setState({
         lotteryNum: 0
       })
+      this.clearErrorMessage();
+    } else if ( number < 1 || number > 5000){
+      this.setState({
+        lotteryNum: 0
+      })
+      this.setErrorMessage("Enter valid lottery number")
     } else {
       var thousands = (num - (num % 1000)) / 1000
       //console.log("thousands: ", thousands);
@@ -356,6 +399,12 @@ export default class ShaftLive extends Component {
         priority: priority,
         full: priority + " | " + low + " - " + high,
       })
+
+      if ( groupSize < 1 || groupSize > 10) {
+        this.setErrorMessage("Enter valid group size")
+      } else {
+        this.clearErrorMessage();
+      } 
     }
   }
 
@@ -396,6 +445,16 @@ export default class ShaftLive extends Component {
     });
   }
 
+  setErrorMessage(message) {
+    this.setState({
+      errorMsg: message
+    })
+  }
+
+  clearErrorMessage() {
+    this.setErrorMessage("");
+  }
+
   render() {
     const { width } = this.state;
     const isMobile = width <= 700;
@@ -423,11 +482,11 @@ export default class ShaftLive extends Component {
             <InputsWrapper>
               <Input id="form">
                 <label for="userNum">Lottery Number:  </label>
-                <StyleInput type="number" id="userNum" onChange={() => this.convertNumber()} />
+                <StyleInput type="number" id="userNum" min="1" max="5000" onChange={() => this.convertNumber()} />
               </Input>
               <Input id="form">
                 <label for="groupSize">Group Size:  </label>
-                <StyleInput type="number" id="groupSize" onChange={() => this.convertNumber()} />
+                <StyleInput type="number" id="groupSize" min="1" max="10" onChange={() => this.convertNumber()} />
               </Input>
             </InputsWrapper>
 
@@ -448,6 +507,8 @@ export default class ShaftLive extends Component {
       return (
         <div>
           <Converter>
+            <AboutWrapper>
+            <AboutLeft>
             <InputsWrapper>
               <Input id="form">
                 <label for="userNum">Lottery Number</label>
@@ -459,17 +520,16 @@ export default class ShaftLive extends Component {
                 <StyleInput type="number" id="groupSize" onChange={() => this.convertNumber()} />
               </Input>
             </InputsWrapper>
-            <AboutWrapper>
               <TextBox>
                 Check out our color-coded floor plans to see which rooms you are likely to get!
                 {floorplanLegend}
               </TextBox>
-              <TextBox>
-                Learn how our lottery predictor works to make the best use of its results.
-              </TextBox>
+              </AboutLeft>
+            
+              <Disclaimer/>
             </AboutWrapper>
           </Converter>
-
+          <Error>{(this.state.errorMsg === "") ? "" : "* " + this.state.errorMsg}</Error>
           <ShaftLiveContainer>
             <ColOne>
               <DormList lotteryNum={this.state.lotteryNum} setSelectedDorm={this.handleDormChange} selectedDorm={this.state.dorm}/>
@@ -494,4 +554,15 @@ export default class ShaftLive extends Component {
       )
     }
   }
+}
+
+const Disclaimer = () => {
+  return (
+    <DisclaimerWrapper>
+      <DisclaimerTextBox className="disclaimer">Disclaimer:</DisclaimerTextBox>
+      <DisclaimerTextBox>
+        Historical Room Selection data is provided by Columbia Housing for reference only. The selection process shifts year to year and can change based on a number of variables that will impact how students pick rooms, including personal preferences, building availability, class size, external factors and more. This data should not be used a predictive tool nor does it provide any guarantee for selection options. Learn how our lottery predictor works to make the best use of its results.
+      </DisclaimerTextBox>
+    </DisclaimerWrapper>
+  )
 }
