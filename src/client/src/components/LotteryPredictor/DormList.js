@@ -81,17 +81,23 @@ const ArrowWrapper = styled.div`
     }
 `;
 
-const DormButton = (props) => {
-    const [selected, setSelected] = useState(false);
-    const [total, setTotal] = useState(0);
+const defaultDorms = ["47 Claremont","Broadway Hall","Carlton Arms","East Campus","Furnald Hall","Harmony Hall","Hogan Hall","McBain Hall","600 W 113th","River Hall","Ruggles Hall", "Schapiro Hall","Watt Hall","Wien Hall","Woodbridge Hall"]
 
-    useEffect(() => {
-    
-    }, [props.lotteryNum]);
+const DormButton = (props) => {
+    const [isSelected, setSelected] = useState(false);
+    const [total, setTotal] = useState(0);
 
     useEffect(() => {
         setTotal(props.ratio[0] + props.ratio[1] + props.ratio[2] + props.ratio[3])
     }, [props.ratio]);
+
+    useEffect(() => {
+        if (props.dormName === props.selectedDorm){
+            setSelected(true)
+        } else {
+            setSelected(false)
+        }
+    }, [props.selectedDorm]);
 
     const handleClick = () => {
         setSelected(true);
@@ -99,13 +105,12 @@ const DormButton = (props) => {
     }
 
     const setWidth = (ratio) => {
-        console.log((ratio / total) * 100)
         var width = (ratio / total) * 100;
-        return width.toString().substring(0,4);
+        return width.toString().substring(0, 4);
     }
 
     return (
-        <DormButtonWrapper onClick={() => handleClick()} color={selected ? "rgba(196, 196, 196, 0.2)" : "white"}>
+        <DormButtonWrapper onClick={() => handleClick()} color={isSelected ? "rgba(196, 196, 196, 0.2)" : "white"}>
             <DormName>{props.dormName}</DormName>
             <BarWrapper>
                 <ColorBar width={props.ratio ? setWidth(props.ratio[0]) : "25"} className="likely"></ColorBar>
@@ -120,33 +125,52 @@ const DormButton = (props) => {
     )
 }
 
-const DormList = ({ lotteryNum, setSelectedDorm }) => {
-    const [dorms, setDorms] = useState([]);
+const DormList = ({ lotteryNum, setSelectedDorm, selectedDorm }) => {
+    // controls setting of data on initial load
+    const [initialLoad, setInitial] = useState(1);
+    const [dorms, setDorms] = useState(defaultDorms.map(dorm =>
+                                    ({
+                                        DORM: dorm,
+                                        RATIO: [25, 25, 25, "0"].map(x => parseInt(x))
+                                    })
+                                    ));
 
     useEffect(() => {
-			// TODO: make sure that lotteryNum is or can be converted to a number
-			// otherwise, the api call will fail and no bars will be displayed at al
-			// can use a default value if conversion fails
-      fetchDormInfo(lotteryNum)
+        // TODO: make sure that lotteryNum is or can be converted to a number
+        // otherwise, the api call will fail and no bars will be displayed at al
+        // can use a default value if conversion fails
+        if (!initialLoad)
+            fetchDormInfo(lotteryNum)
+        else
+            setInitial(0)
     }, [lotteryNum]);
 
     const fetchDormInfo = (lotteryNum) => {
-		fetch(`/api/getLotteryInfo/${lotteryNum}`, {
-			method: "GET",
-			headers: { "Content-Type": "application/json"},
-		})
-			.then(res => res.json())
-			.then(lotteryInfo => setDorms(
-				lotteryInfo.map(({ DORM, LIKELY, SIM, UNLIKELY }) =>
-					({
-						DORM,
-						RATIO: [UNLIKELY, SIM, LIKELY, "0"].map(x => parseInt(x))
-					})
-				)
-			))
-	}
+        if (lotteryNum.toString() === "0"){
+            // if empty set to default
+            setDorms(defaultDorms.map(dorm =>
+                ({
+                    DORM: dorm,
+                    RATIO: [25, 25, 25, "0"].map(x => parseInt(x))
+                })
+            ));
+        } else {
+            fetch(`/api/getLotteryInfo/${lotteryNum}`, {
+                method: "GET",
+                headers: { "Content-Type": "application/json" },
+            })
+                .then(res => res.json())
+                .then(lotteryInfo => setDorms(
+                    lotteryInfo.map(({ DORM, LIKELY, SIM, UNLIKELY }) =>
+                    ({
+                        DORM,
+                        RATIO: [UNLIKELY, SIM, LIKELY, "0"].map(x => parseInt(x))
+                    })
+                    )
+                ))
+            }
+    }
 
-    // props of DormButton tbd based on backend
     return (
         <List>
             {dorms.map((dorm, index) => {
@@ -154,8 +178,9 @@ const DormList = ({ lotteryNum, setSelectedDorm }) => {
                     <DormButton
                         key={index}
                         dormName={dorm.DORM}
-                        ratio={(lotteryNum === 0) ? [25, 25, 25, 25] : dorm.RATIO}
+                        ratio={dorm.RATIO}
                         setSelectedDorm={setSelectedDorm}
+                        selectedDorm={selectedDorm}
                     ></DormButton>
                 )
             })}

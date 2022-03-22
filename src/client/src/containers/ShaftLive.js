@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import styled from "styled-components/macro";
 import FloorButton from "../components/FloorButton.js";
 import FloorPlanSVG from "../components/FloorPlanSVG"
-import {theme} from '../util/GlobalStyles.js';
+import { theme } from '../util/GlobalStyles.js';
 import _, { floor } from "lodash"
 import WhiteboardSidebar from '../components/WhiteboardSidebar.js';
 
@@ -241,7 +241,7 @@ export default class ShaftLive extends Component {
       //update: false,
       mobileShowFloorPlan: false,
 
-	  lotteryNum: 0, /* a default lottery num placeholder */
+      lotteryNum: 0, /* a default lottery num placeholder */
       convertedNumLow: null,
       convertedNumHigh: null,
       priority: null,
@@ -251,7 +251,7 @@ export default class ShaftLive extends Component {
     this.handleFloorChange = this.handleFloorChange.bind(this)
     this.handleDormChange = this.handleDormChange.bind(this)
   }
-  
+
 
   componentWillMount() {
     window.addEventListener("resize", this.handleWindowSizeChange);
@@ -302,55 +302,61 @@ export default class ShaftLive extends Component {
         });
       }
       );
-      //console.log(this.state.dorm, this.state.floor, this.state.floorData)
+    //console.log(this.state.dorm, this.state.floor, this.state.floorData)
   }
 
   convertNumber() {
     var num = document.getElementById("userNum").value;
+    console.log("in: ", num);
+    if (num.length === 0) {
+      console.log("is empty ");
+      this.setState({
+        lotteryNum: 0
+      })
+    } else {
+      var thousands = (num - (num % 1000)) / 1000
+      //console.log("thousands: ", thousands);
+      if (thousands == 0) {
+        var priority = 30;
+      }
+      else if (thousands == 1) {
+        var priority = 25;
+      }
+      else if (thousands == 2) {
+        var priority = 20;
+      }
+      else if (thousands == 3) {
+        var priority = 15;
+      }
+      else {
+        var priority = 10;
+      }
+      //console.log("priority: ", priority)
+      var converted = (num - (thousands * 1000)) * (3000 / 1000)
+      //console.log("converted num: ", converted)
+      var rounded = converted - (converted % 10)
+      if (rounded < 40) {
+        var low = 0;
+      }
+      else {
+        var low = rounded - 50
+      }
+      if (rounded > 2950) {
+        var high = 3000;
+      }
+      else {
+        var high = rounded + 50
+      }
+      //console.log("range: ", low, " - ", high)
 
-    //console.log("in: ", num);
-    var thousands = (num - (num%1000))/1000
-    //console.log("thousands: ", thousands);
-    if (thousands == 0) {
-      var priority = 30;
+      this.setState({
+        lotteryNum: num, // TODO: make sure num is valid
+        convertedNumLow: low,
+        convertedNumHigh: high,
+        priority: priority,
+        full: priority + " | " + low + " - " + high,
+      })
     }
-    else if (thousands == 1){
-      var priority = 25;
-    }
-    else if (thousands == 2){
-      var priority = 20;
-    }
-    else if (thousands == 3){
-      var priority = 15;
-    }
-    else {
-      var priority = 10;
-    }
-    //console.log("priority: ", priority)
-    var converted = (num - (thousands * 1000)) * (3000/1000)
-    //console.log("converted num: ", converted)
-    var rounded = converted - (converted%10)
-    if (rounded < 40) {
-      var low = 0;
-    }
-    else {
-      var low = rounded - 50
-    }
-    if (rounded > 2950) {
-      var high = 3000;
-    }
-    else {
-      var high = rounded + 50
-    }
-    //console.log("range: ", low, " - ", high)
-    
-    this.setState({
-	    lotteryNum: num, // TODO: make sure num is valid
-      convertedNumLow: low,
-      convertedNumHigh: high,
-      priority: priority,
-      full: priority + " | " + low + " - " + high,
-    })
   }
 
   handleSubmit(e) {
@@ -396,16 +402,16 @@ export default class ShaftLive extends Component {
     const floorplanLegend = (
       <FloorPlanLegend>
         <LegendItem>
-          <ColorBox color={(props) => props.theme.green}/><h6>Likely</h6>
+          <ColorBox color={(props) => props.theme.green} /><h6>Likely</h6>
         </LegendItem>
         <LegendItem>
-          <ColorBox color={(props) => props.theme.yellow}/><h6>Similar</h6>
+          <ColorBox color={(props) => props.theme.yellow} /><h6>Similar</h6>
         </LegendItem>
         <LegendItem>
-          <ColorBox color={(props) => props.theme.red}/><h6>Unlikely</h6>
+          <ColorBox color={(props) => props.theme.red} /><h6>Unlikely</h6>
         </LegendItem>
         <LegendItem>
-          <ColorBox color={(props) => props.theme.lightGray}/><h6>Unavailable</h6>
+          <ColorBox color={(props) => props.theme.lightGray} /><h6>Unavailable</h6>
         </LegendItem>
       </FloorPlanLegend>
     );
@@ -413,29 +419,29 @@ export default class ShaftLive extends Component {
     if (isMobile) {
       return (
         <div>
-        <Converter>
-          <InputsWrapper>
-            <Input id="form">
-              <label for="userNum">Lottery Number:  </label>
-              <StyleInput type="number" id="userNum" onChange={() => this.convertNumber()}/>
-            </Input>
-            <Input id="form">
-              <label for="groupSize">Group Size:  </label>
-              <StyleInput type="number" id="groupSize" onChange={() => this.convertNumber()}/>
-            </Input>
-          </InputsWrapper>
-          
+          <Converter>
+            <InputsWrapper>
+              <Input id="form">
+                <label for="userNum">Lottery Number:  </label>
+                <StyleInput type="number" id="userNum" onChange={() => this.convertNumber()} />
+              </Input>
+              <Input id="form">
+                <label for="groupSize">Group Size:  </label>
+                <StyleInput type="number" id="groupSize" onChange={() => this.convertNumber()} />
+              </Input>
+            </InputsWrapper>
 
-          <AboutWrapper>
-            <TextBox> Green rooms are ones that you are likely to get based off data that Spectator has collected from housing selection from previous years.</TextBox>
-            <TextBox>Learn how our lottery predictor works to make the best use of its results.</TextBox>
-            {floorplanLegend}
-          </AboutWrapper>
-        </Converter>
 
-        <ShaftLiveContainer>
-          <DormList lotteryNum={this.state.lotteryNum} />
-        </ShaftLiveContainer>
+            <AboutWrapper>
+              <TextBox> Green rooms are ones that you are likely to get based off data that Spectator has collected from housing selection from previous years.</TextBox>
+              <TextBox>Learn how our lottery predictor works to make the best use of its results.</TextBox>
+              {floorplanLegend}
+            </AboutWrapper>
+          </Converter>
+
+          <ShaftLiveContainer>
+            <DormList lotteryNum={this.state.lotteryNum} />
+          </ShaftLiveContainer>
         </div>
       );
     } else {
@@ -445,12 +451,12 @@ export default class ShaftLive extends Component {
             <InputsWrapper>
               <Input id="form">
                 <label for="userNum">Lottery Number</label>
-                <StyleInput type="number" id="userNum" onChange={() => this.convertNumber()}/>
+                <StyleInput type="number" id="userNum" onChange={() => this.convertNumber()} />
               </Input>
 
               <Input id="form">
                 <label for="groupSize">Group Size</label>
-                <StyleInput type="number" id="groupSize" onChange={() => this.convertNumber()}/>
+                <StyleInput type="number" id="groupSize" onChange={() => this.convertNumber()} />
               </Input>
             </InputsWrapper>
             <AboutWrapper>
@@ -466,22 +472,22 @@ export default class ShaftLive extends Component {
 
           <ShaftLiveContainer>
             <ColOne>
-              <DormList lotteryNum={this.state.lotteryNum} setSelectedDorm={this.handleDormChange} />
+              <DormList lotteryNum={this.state.lotteryNum} setSelectedDorm={this.handleDormChange} selectedDorm={this.state.dorm}/>
             </ColOne>
 
             <ColTwo>
               <DormName>{this.state.dorm}</DormName>
-                <FloorPlanSVG 
-                  priority={this.state.priority} 
-                  low={this.state.convertedNumLow} 
-                  high={this.state.convertedNumHigh} 
-                  dorm={this.state.dorm} 
-                  floor={this.state.floor} 
-                  data={this.state.floorData} 
-                  cutoffs={[]} 
-                  init={this.state.init} 
-                  dormRefresh={this.state.dormRefresh} >
-                </FloorPlanSVG>
+              <FloorPlanSVG
+                priority={this.state.priority}
+                low={this.state.convertedNumLow}
+                high={this.state.convertedNumHigh}
+                dorm={this.state.dorm}
+                floor={this.state.floor}
+                data={this.state.floorData}
+                cutoffs={[]}
+                init={this.state.init}
+                dormRefresh={this.state.dormRefresh} >
+              </FloorPlanSVG>
             </ColTwo>
           </ShaftLiveContainer>
         </div>
