@@ -5,15 +5,19 @@ import { faAngleRight } from '@fortawesome/free-solid-svg-icons'
 import { theme } from '../../util/GlobalStyles';
 
 const List = styled.div`
-    width: 100%;
-    height: 100%;
+    width: 80%;
+    height: 85vh;
     display: flex;
     flex-direction: column;
     text-align: center;
-    padding-top: 2rem;
+    padding-top: 1rem;
+    overflow: scroll;
+    padding-right: 1rem;
+    margin-bottom: 1rem;
     
     @media only screen and (max-width: 992px){
         padding: 0;
+        height: 100%;
     }
 `;
 
@@ -22,7 +26,7 @@ const DormButtonWrapper = styled.div`
     flex-direction: row;
     cursor: pointer;
     border-radius: 10px;
-    width: 80%;
+    width: 100%;
     padding: .6rem;
     margin: .1rem 0;
     background-color: ${props => props.color};

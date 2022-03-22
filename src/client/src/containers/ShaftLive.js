@@ -71,7 +71,7 @@ let ColTwo = styled.div`
     display: flex;
     flex-direction: column;
     scroll-behavior: smooth;
-    padding-top: 2rem;
+    padding-top: 1rem;
     //padding-left: 5%;
     //margin-right:2rem;
     width: ${({ mobile }) => (mobile ? `100%` : `50%`)};
@@ -229,9 +229,13 @@ const DormName = styled.div`
   font-family: Georgia;
   font-style: normal;
   font-weight: bold;
-  font-size: 36px;
+  font-size: 1.8rem;
   color: #707070;
-  padding: 1rem 0;
+  padding: 0rem 0 1rem 0;
+`;
+
+const FloorPlanWrapper = styled.div`
+  width: 60%;
 `;
 
 const AboutLeft = styled.div`
@@ -246,7 +250,7 @@ const DisclaimerWrapper = styled.div`
 
 const DisclaimerTextBox = styled.div`
   width: 80%;
-  font-size: 1rem;
+  font-size: 0.75rem;
   color: #707070;
   margin: 0rem 0rem 0rem auto;
   @media(max-width: 768px){
@@ -497,7 +501,7 @@ export default class ShaftLive extends Component {
               {floorplanLegend}
             </AboutWrapper>
           </Converter>
-
+          {(this.state.errorMsg === "") ? null : <Error>{"* " + this.state.errorMsg}</Error>}
           <ShaftLiveContainer>
             <DormList lotteryNum={this.state.lotteryNum} />
           </ShaftLiveContainer>
@@ -529,7 +533,7 @@ export default class ShaftLive extends Component {
               <Disclaimer/>
             </AboutWrapper>
           </Converter>
-          <Error>{(this.state.errorMsg === "") ? "" : "* " + this.state.errorMsg}</Error>
+          {(this.state.errorMsg === "") ? null : <Error>{"* " + this.state.errorMsg}</Error>}
           <ShaftLiveContainer>
             <ColOne>
               <DormList lotteryNum={this.state.lotteryNum} setSelectedDorm={this.handleDormChange} selectedDorm={this.state.dorm}/>
@@ -537,6 +541,7 @@ export default class ShaftLive extends Component {
 
             <ColTwo>
               <DormName>{this.state.dorm}</DormName>
+              <FloorPlanWrapper>
               <FloorPlanSVG
                 priority={this.state.priority}
                 low={this.state.convertedNumLow}
@@ -548,6 +553,7 @@ export default class ShaftLive extends Component {
                 init={this.state.init}
                 dormRefresh={this.state.dormRefresh} >
               </FloorPlanSVG>
+              </FloorPlanWrapper>
             </ColTwo>
           </ShaftLiveContainer>
         </div>
