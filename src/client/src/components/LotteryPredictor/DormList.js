@@ -14,7 +14,7 @@ const List = styled.div`
     overflow: scroll;
     padding-right: 1rem;
     margin-bottom: 1rem;
-    
+
     @media only screen and (max-width: 992px){
         padding: 0;
         height: 100%;
@@ -85,111 +85,142 @@ const ArrowWrapper = styled.div`
     }
 `;
 
-const defaultDorms = ["47 Claremont","Broadway Hall","Carlton Arms","East Campus","Furnald Hall","Harmony Hall","Hogan Hall","McBain Hall","600 W 113th","River Hall","Ruggles Hall", "Schapiro Hall","Watt Hall","Wien Hall","Woodbridge Hall"]
+const defaultDorms = [
+  "47 Claremont",
+  "Broadway Hall",
+  "East Campus",
+  "Furnald Hall",
+  "Harmony Hall",
+  "Hogan Hall",
+  "McBain Hall",
+  "600 W 113th",
+  "River Hall",
+  "Ruggles Hall",
+  "Schapiro Hall",
+  "Watt Hall",
+  "Wien Hall",
+  "Woodbridge Hall"
+]
+
+// Dorms in this List don't have floorplan and svgs
+// in our AWS S3 bucket, so will not be shown on the
+// front-end until the images are added
+const blacklist = [
+  "548 West 113",
+  "627 West 115",
+  "Carlton",
+  "Plimpton"
+]
 
 const DormButton = (props) => {
-    const [isSelected, setSelected] = useState(false);
-    const [total, setTotal] = useState(0);
+  const [isSelected, setSelected] = useState(false);
+  const [total, setTotal] = useState(0);
 
-    useEffect(() => {
-        setTotal(props.ratio[0] + props.ratio[1] + props.ratio[2] + props.ratio[3])
-    }, [props.ratio]);
+  useEffect(() => {
+    setTotal(props.ratio[0] + props.ratio[1] + props.ratio[2] + props.ratio[3])
+  }, [props.ratio]);
 
-    useEffect(() => {
-        if (props.dormName === props.selectedDorm){
-            setSelected(true)
-        } else {
-            setSelected(false)
-        }
-    }, [props.selectedDorm]);
-
-    const handleClick = () => {
-        setSelected(true);
-        props.setSelectedDorm(props.dormName);
+  useEffect(() => {
+    if (props.dormName === props.selectedDorm) {
+      setSelected(true)
+    } else {
+      setSelected(false)
     }
+  }, [props.selectedDorm]);
 
-    const setWidth = (ratio) => {
-        var width = (ratio / total) * 100;
-        return width.toString().substring(0, 4);
-    }
+  const handleClick = () => {
+    setSelected(true);
+    props.setSelectedDorm(props.dormName);
+  }
 
-    return (
-        <DormButtonWrapper onClick={() => handleClick()} color={isSelected ? "rgba(196, 196, 196, 0.2)" : "white"}>
-            <DormName textColor={isSelected ? theme.columbiaBlue : "black"}>{props.dormName}</DormName>
-            <BarWrapper>
-                <ColorBar width={props.ratio ? setWidth(props.ratio[0]) : "25"} className="likely"></ColorBar>
-                <ColorBar width={props.ratio ? setWidth(props.ratio[1]) : "25"} className="possible"></ColorBar>
-                <ColorBar width={props.ratio ? setWidth(props.ratio[2]) : "25"} className="unlikely"></ColorBar>
-                <ColorBar width={props.ratio ? setWidth(props.ratio[3]) : "25"} className="unavail"></ColorBar>
-            </BarWrapper>
-            <ArrowWrapper>
-                <FontAwesomeIcon icon={faAngleRight} />
-            </ArrowWrapper>
-        </DormButtonWrapper>
-    )
+  const setWidth = (ratio) => {
+    var width = (ratio / total) * 100;
+    return width.toString().substring(0, 4);
+  }
+
+  return (
+    <DormButtonWrapper onClick={() => handleClick()} color={isSelected ? "rgba(196, 196, 196, 0.2)" : "white"}>
+      <DormName textColor={isSelected ? theme.columbiaBlue : "black"}>{props.dormName}</DormName>
+      <BarWrapper>
+        <ColorBar width={props.ratio ? setWidth(props.ratio[0]) : "25"} className="likely"></ColorBar>
+        <ColorBar width={props.ratio ? setWidth(props.ratio[1]) : "25"} className="possible"></ColorBar>
+        <ColorBar width={props.ratio ? setWidth(props.ratio[2]) : "25"} className="unlikely"></ColorBar>
+        <ColorBar width={props.ratio ? setWidth(props.ratio[3]) : "25"} className="unavail"></ColorBar>
+      </BarWrapper>
+      <ArrowWrapper>
+        <FontAwesomeIcon icon={faAngleRight} />
+      </ArrowWrapper>
+    </DormButtonWrapper>
+  )
 }
 
 const DormList = ({ lotteryNum, setSelectedDorm, selectedDorm }) => {
-    // controls setting of data on initial load
-    const [initialLoad, setInitial] = useState(1);
-    const [dorms, setDorms] = useState(defaultDorms.map(dorm =>
-                                    ({
-                                        DORM: dorm,
-                                        RATIO: [25, 25, 25, "0"].map(x => parseInt(x))
-                                    })
-                                    ));
+  // controls setting of data on initial load
+  const [initialLoad, setInitial] = useState(1);
+  const [dorms, setDorms] = useState(defaultDorms.map(dorm =>
+  ({
+    DORM: dorm,
+    RATIO: [25, 25, 25, "0"].map(x => parseInt(x))
+  })
+  ));
 
-    useEffect(() => {
-        // TODO: make sure that lotteryNum is or can be converted to a number
-        // otherwise, the api call will fail and no bars will be displayed at al
-        // can use a default value if conversion fails
-        if (!initialLoad)
-            fetchDormInfo(lotteryNum)
-        else
-            setInitial(0)
-    }, [lotteryNum]);
+  useEffect(() => {
+    // lotteryNum assumtpions
+    // 1. guaranteed to be integer by ShaftLive.js
+    // 2. value 0 -> user hasn't input lottery number
+    // 3. value 1 - 5000 inclusive: lottery number from user input
+    if (!initialLoad)
+      fetchDormInfo(lotteryNum)
+    else
+      setInitial(0)
+  }, [lotteryNum]);
 
-    const fetchDormInfo = (lotteryNum) => {
-        if (lotteryNum.toString() === "0"){
-            // if empty set to default
-            setDorms(defaultDorms.map(dorm =>
-                ({
-                    DORM: dorm,
-                    RATIO: [25, 25, 25, "0"].map(x => parseInt(x))
-                })
-            ));
-        } else {
-            fetch(`/api/getLotteryInfo/${lotteryNum}`, {
-                method: "GET",
-                headers: { "Content-Type": "application/json" },
+  const fetchDormInfo = (lotteryNum) => {
+    if (lotteryNum.toString() === "0") {
+      // if empty set to default
+      setDorms(defaultDorms.map(dorm =>
+      ({
+        // Note: We are currently using the Unavailable feature
+        DORM: dorm,
+        RATIO: [25, 25, 25, 0]
+      })
+      ));
+    } else {
+      fetch(`/api/getLotteryInfo/${lotteryNum}`, {
+        method: "GET",
+        headers: { "Content-Type": "application/json" },
+      })
+        .then(res => res.json())
+        .then(lotteryInfo => setDorms(
+          lotteryInfo
+            // Note: Not show dorms in blacklist until we have added
+            // the relevant floorplan and svgs to AWS S3 bucket
+            .filter(({ DORM }) => !blacklist.includes(DORM))
+            .map(({ DORM, LIKELY, SIM, UNLIKELY }) =>
+            ({
+              DORM,
+              RATIO: [UNLIKELY, SIM, LIKELY, "0"].map(x => parseInt(x))
             })
-                .then(res => res.json())
-                .then(lotteryInfo => setDorms(
-                    lotteryInfo.map(({ DORM, LIKELY, SIM, UNLIKELY }) =>
-                    ({
-                        DORM,
-                        RATIO: [UNLIKELY, SIM, LIKELY, "0"].map(x => parseInt(x))
-                    })
-                    )
-                ))
-            }
+            )
+        ))
     }
+  }
 
-    return (
-        <List>
-            {dorms.map((dorm, index) => {
-                return (
-                    <DormButton
-                        key={index}
-                        dormName={dorm.DORM}
-                        ratio={dorm.RATIO}
-                        setSelectedDorm={setSelectedDorm}
-                        selectedDorm={selectedDorm}
-                    ></DormButton>
-                )
-            })}
-        </List>
-    );
+  return (
+    <List>
+      {dorms.map((dorm, index) => {
+        return (
+          <DormButton
+            key={index}
+            dormName={dorm.DORM}
+            ratio={dorm.RATIO}
+            setSelectedDorm={setSelectedDorm}
+            selectedDorm={selectedDorm}
+          ></DormButton>
+        )
+      })}
+    </List>
+  );
 }
 
 export default DormList;
