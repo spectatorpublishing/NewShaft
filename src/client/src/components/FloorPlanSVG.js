@@ -213,7 +213,6 @@ export default class FloorPlanSVG extends Component {
       }
       let roomFromSvg = this.getDataFromSvg(roomEl);
       let roomOrSuiteName = this.getRoomOrSuite(suiteFromSvg, roomFromSvg);
-      //console.log("type: ", roomFromSvg, roomOrSuiteName)
 
       if (this.props.dorm == "Watt Hall") {
         let temp = roomOrSuiteName.substring(0, 1);
@@ -221,8 +220,16 @@ export default class FloorPlanSVG extends Component {
       }
 
       if (this.props.dorm == "Woodbridge Hall") {
-        let temp = roomOrSuiteName.substring(0, 1);
-        roomOrSuiteName = temp;
+        // TODO:
+        // Temporary Hack. The SVG for Woodbridge floor 3 mis-spelled
+        // the attribute id to just d for room 3K
+        //
+        // Also need to implement the logic for Woodbridge in
+        // this.getRoomOrSuite
+        if (roomFromSvg != undefined) {
+          let temp = roomOrSuiteName.substring(0, 1);
+          roomOrSuiteName = temp;
+        }
       }
 
       // Check if the room labeled on the SVG matches the name in the db
@@ -399,14 +406,14 @@ export default class FloorPlanSVG extends Component {
       return (
         <>
           <TooltipBox>
-              <TooltipText>{label}: <TooltipBold>{room}</TooltipBold></TooltipText>
-              <TooltipText>
-                {lotteryLabel}: <TooltipBold>{lottery}</TooltipBold>
-              </TooltipText>
-              <TooltipText>
+            <TooltipText>{label}: <TooltipBold>{room}</TooltipBold></TooltipText>
+            <TooltipText>
+              {lotteryLabel}: <TooltipBold>{lottery}</TooltipBold>
+            </TooltipText>
+            <TooltipText>
               {roomTypeLabel}: <TooltipBold>{roomType}</TooltipBold>
-              </TooltipText>
-            </TooltipBox>
+            </TooltipText>
+          </TooltipBox>
         </>);
     }
   }
