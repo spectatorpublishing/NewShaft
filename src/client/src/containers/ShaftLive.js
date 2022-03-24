@@ -379,7 +379,7 @@ export default class ShaftLive extends Component {
   convertNumber() {
     var num = document.getElementById("userNum").value;
     let number = parseInt(num.toString())
-    var groupSize = parseInt(document.getElementById("groupSize").value.toString());
+    /* var groupSize = parseInt(document.getElementById("groupSize").value.toString()); */
 
     if (num.length === 0) {
       this.setState({
@@ -436,11 +436,11 @@ export default class ShaftLive extends Component {
         dorm: "47 Claremont"
       })
 
-      if ( groupSize < 1 || groupSize > 10) {
+      /* if ( groupSize < 1 || groupSize > 10) {
         this.setErrorMessage("Enter valid group size")
       } else {
         this.clearErrorMessage();
-      } 
+      }  */
     }
   }
 
@@ -520,10 +520,10 @@ export default class ShaftLive extends Component {
                 <label for="userNum">Lottery Number:  </label>
                 <StyleInput type="number" id="userNum" min="1" max="5000" onChange={() => this.convertNumber()} />
               </Input>
-              <Input id="form">
+              {{/* <Input id="form">
                 <label for="groupSize">Group Size:  </label>
                 <StyleInput type="number" id="groupSize" min="1" max="10" onChange={() => this.convertNumber()} />
-              </Input>
+              </Input> */}}
             </InputsWrapper>
 
 
@@ -569,10 +569,10 @@ export default class ShaftLive extends Component {
                 <StyleInput type="number" id="userNum" onChange={() => this.convertNumber()} />
               </Input>
 
-              <Input id="form">
+              {/* <Input id="form">
                 <label for="groupSize">Group Size</label>
                 <StyleInput type="number" id="groupSize" onChange={() => this.convertNumber()} />
-              </Input>
+              </Input> */}
             </InputsWrapper>
               <TextBox>
                 Check out our color-coded floor plans to see which rooms you are likely to get!
