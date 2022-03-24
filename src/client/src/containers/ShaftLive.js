@@ -1,25 +1,10 @@
-import React, { Component } from 'react';
+import React, { useEffect, useState } from 'react';
 import styled from "styled-components/macro";
 import FloorButton from "../components/FloorButton.js";
 import FloorPlanSVG from "../components/FloorPlanSVG"
-import { theme } from '../util/GlobalStyles.js';
-import _, { floor } from "lodash"
-import WhiteboardSidebar from '../components/WhiteboardSidebar.js';
-
 import DormList from '../components/LotteryPredictor/DormList.js';
 
-let BlueBGMobile = styled.div`
-  background-color: gray;
-  padding-left: 0.5rem;
-  padding-right: 0.8rem;
-  border-bottom: solid 0.75rem white;
-`
-
-let MobileFPWrapper = styled.div`
-  margin-top: 1rem;
-`
-
-let ShaftLiveContainer = styled.div`
+const ShaftLiveContainer = styled.div`
     display: flex;
     flex-direction: row;
     width: 100%;
@@ -31,33 +16,9 @@ let ShaftLiveContainer = styled.div`
       flex-direction: column;
       padding: 0;
     }
-`
+`;
 
-let SVGContainer = styled.div`
-    display:flex;
-    flex-direction:column;
-    height:auto;
-    margin-top:3.5rem;
-    width: 40vw;
-    height:auto;
-    object-position:cover;
-    padding-right:3vw;
-`
-let FloorPlanTitle = styled.h3`
-    margin-bottom: 0.25rem;
-    display: inline;
-  `
-let FloorPlanPrompt = styled.h5`
-  display: inline;
-`
-
-let ShaftLiveContainerMobile = styled.div`
-    overflow: hidden;
-    flex-direction: column;
-    align-items: center;
-`
-
-let ColOne = styled.div`
+const ColOne = styled.div`
   display: flex;
   flex-direction: column;
   width: 50%;
@@ -66,14 +27,13 @@ let ColOne = styled.div`
       display:flex;
       width:50vw;
   }
-`
-let ColTwo = styled.div`
+`;
+
+const ColTwo = styled.div`
     display: flex;
     flex-direction: column;
     scroll-behavior: smooth;
     padding-top: 1rem;
-    //padding-left: 5%;
-    //margin-right:2rem;
     width: ${({ mobile }) => (mobile ? `100%` : `50%`)};
     @media(max-width: 991px){
         display: flex;
@@ -84,34 +44,9 @@ let ColTwo = styled.div`
     &>h1 {
       margin-top: 2.5rem;
     }
-`
+`;
 
-let ColThree = styled.div`
-    width:0vw;
-`
-
-let ToggleMobileView = styled.div`
-    height: 50px;
-    display: flex;
-    position: relative;
-    z-index: 1;
-    align-items: center;
-    color: ${props => props.theme.black};
-    text-transform: uppercase;
-    font-weight: bold;
-    box-shadow: 0 10px 10px -10px rgba(0, 0, 0, 0.3);
-    &>div{
-      flex-grow: 1;
-      text-align: center;
-      margin: 0 10%;
-      padding: 10px 0;
-    }
-    &>div:nth-child(2n+${props => String(props.currActive)}){
-      border-bottom: 5px solid ${props => props.theme.columbiaBlue};
-    }
-`
-
-let ColorBox = styled.div`
+const ColorBox = styled.div`
   height: .6rem;
   width: 1.8rem;
   display: inline-block;
@@ -128,9 +63,9 @@ let ColorBox = styled.div`
     margin-right: .8rem;
     border-radius: 4px;
   }
-`
+`;
 
-let FloorPlanLegend = styled.div`
+const FloorPlanLegend = styled.div`
   margin: 1rem 0;
   display: flex;
   justify-content: flex-start;
@@ -139,18 +74,18 @@ let FloorPlanLegend = styled.div`
     text-align: center;
     flex-wrap: wrap;
   }
-`
+`;
 
-let LegendItem = styled.div`
+const LegendItem = styled.div`
   display: flex;
   padding-right: 2rem;
   @media only screen and (max-width: 992px){
     width: 50%;
     padding: .2rem 0;
   }
-`
+`;
 
-let Converter = styled.div`
+const Converter = styled.div`
   margin: 5rem 3rem 2rem 3rem;
   display: flex;
   flex-direction: column;
@@ -158,7 +93,7 @@ let Converter = styled.div`
   @media(max-width: 991px){
     margin: 5rem 1.5rem 2rem 1.5rem;
   }
-`
+`;
 
 const Error = styled.div`
   color: #9A4A4A;
@@ -178,7 +113,7 @@ const InputsWrapper = styled.div`
   }
 `;
 
-let Input = styled.form`
+const Input = styled.form`
   
   color: #707070;
   font-family: Raleway;
@@ -199,8 +134,8 @@ let Input = styled.form`
       margin: auto auto auto 0rem;
     }
   }
-`
-let StyleInput = styled.input`
+`;
+const StyleInput = styled.input`
   background: none;
   border: 1px solid #D0D0D0;
   border-radius: 5%;
@@ -211,7 +146,7 @@ let StyleInput = styled.input`
   @media(max-width: 991px){
     width: 40%;
   }
-`
+`;
 
 const AboutWrapper = styled.div`
   display: flex;
@@ -270,7 +205,7 @@ const DisclaimerWrapper = styled.div`
   @media(max-width: 991px){
     margin: 1rem 1rem 2rem auto;
   }
-`
+`;
 
 const DisclaimerTextBox = styled.div`
   width: 80%;
@@ -294,57 +229,38 @@ const DisclaimerTextBox = styled.div`
   }
 `;
 
-
-export default class ShaftLive extends Component {
-  constructor(props) {
-    super(props);
-
-    this.state = {
-      dorm: "47 Claremont",
-      dormRefresh: false,
-      floor: "1",
-      floorNums: null,
-      floorData: [],
-      width: window.innerWidth,
-      init: true,
-      //update: false,
-      mobileShowFloorPlan: false,
-
-      lotteryNum: 0, /* a default lottery num placeholder */
-      convertedNumLow: null,
-      convertedNumHigh: null,
-      priority: null,
-      full: " ",
-
-      errorMsg: "",
-    }
-
-    this.handleFloorChange = this.handleFloorChange.bind(this)
-    this.handleDormChange = this.handleDormChange.bind(this)
+const Mobile = styled.div`  
+  @media(min-width: 991px){
+    display: none;
   }
+`;
 
-
-  componentWillMount() {
-    window.addEventListener("resize", this.handleWindowSizeChange);
+const Desktop = styled.div`
+  @media(max-width: 991px){
+    display: none;
   }
+`;
 
-  componentWillUnmount() {
-    clearInterval(this.interval)
-    window.removeEventListener("resize", this.handleWindowSizeChange);
-  }
+const ShaftLive = () => {
+  const [dorm, setDorm] = useState("47 Claremont");
+  const [dormRefresh, setDormRefresh] = useState(false);
+  const [floor, setFloor] = useState("1");
+  const [floorNums, setFloorNums] = useState(null);
+  const [floorData, setFloorData] = useState([]);
+  const [init, setInit] = useState(true);
+  const [lotteryNum, setLotteryNum] = useState(0);
+  const [convertedNumLow, setConvertedNumLow] = useState(null);
+  const [convertedNumHigh, setConvertedNumHigh] = useState(null);
+  const [priority, setPriority] = useState(null);
+  const [full, setFull] = useState(" ");
+  const [errorMsg, setErrorMessage] = useState("");
 
-  handleWindowSizeChange = () => {
-    this.setState({ width: window.innerWidth });
-  };
+  useEffect(() => {
+    fetchFloorNums(dorm);
+    setInterval(() => fetchFloorData(dorm, floor), 15000);
+  }, []);
 
-  componentDidMount() {
-    document.title = "Shaft Live";
-    this.fetchFloorNums(this.state.dorm)
-    this.interval = setInterval(() => this.fetchFloorData(this.state.dorm, this.state.floor), 15000);
-
-  }
-
-  fetchFloorNums(dormName) {
+  const fetchFloorNums = (dormName) => {
     fetch(`/api/getUniqueFloorNumbers/${dormName}`, {
       method: 'GET',
       headers: {
@@ -353,11 +269,11 @@ export default class ShaftLive extends Component {
     })
       .then(res => res.json())
       .then(floorNums => {
-        this.setState({ floorNums: floorNums });
+        setFloorNums(floorNums);
       });
   }
 
-  fetchFloorData(dorm, floor) {
+  const fetchFloorData = (dorm, floor) => {
     fetch(`/api/getLotteryNum/${dorm}/${floor}`, {
       method: 'GET',
       headers: {
@@ -365,32 +281,24 @@ export default class ShaftLive extends Component {
       },
     }).then(res => res.json())
       .then(response => {
-        this.setState({
-          dorm: dorm,
-          dormRefresh: !this.state.dormRefresh,
-          floor: floor,
-          floorData: response
-        });
-      }
-      );
-    //console.log(this.state.dorm, this.state.floor, this.state.floorData)
+        setDorm(dorm);
+        setDormRefresh(!dormRefresh);
+        setFloor(floor);
+        setFloorData(response);
+      });
+    console.log(dorm, floor, floorData)
   }
 
-  convertNumber() {
-    var num = document.getElementById("userNum").value;
-    let number = parseInt(num.toString())
+  const convertNumber = (num) => {
+    const number = parseInt(num.toString())
     /* var groupSize = parseInt(document.getElementById("groupSize").value.toString()); */
 
     if (num.length === 0) {
-      this.setState({
-        lotteryNum: 0
-      })
-      this.clearErrorMessage();
-    } else if ( number < 1 || number > 5000){
-      this.setState({
-        lotteryNum: 0
-      })
-      this.setErrorMessage("Enter valid lottery number")
+      setLotteryNum(0);
+      clearErrorMessage();
+    } else if (number < 1 || number > 5000) {
+      setLotteryNum(0);
+      setErrorMessage("Enter valid lottery number")
     } else {
       var thousands = (num - (num % 1000)) / 1000
       //console.log("thousands: ", thousands);
@@ -427,32 +335,30 @@ export default class ShaftLive extends Component {
       }
       //console.log("range: ", low, " - ", high)
 
-      this.setState({
-        lotteryNum: num, // TODO: make sure num is valid
-        convertedNumLow: low,
-        convertedNumHigh: high,
-        priority: priority,
-        full: priority + " | " + low + " - " + high,
-        dorm: "47 Claremont"
-      })
+      setLotteryNum(num);
+      setConvertedNumLow(low);
+      setConvertedNumHigh(high);
+      setPriority(priority);
+      setFull(priority + " | " + low + " - " + high);
+      setDorm("47 Claremont");
 
       /* if ( groupSize < 1 || groupSize > 10) {
-        this.setErrorMessage("Enter valid group size")
+        setErrorMessage("Enter valid group size")
       } else {
-        this.clearErrorMessage();
+        clearErrorMessage();
       }  */
     }
   }
 
-  handleSubmit(e) {
+  const handleSubmit = (e) => {
     e.preventDefault();
   }
 
-  handleFloorChange(floor) {
-    this.fetchFloorData(this.state.dorm, floor);
+  const handleFloorChange = (floor) => {
+    fetchFloorData(dorm, floor);
   }
 
-  handleDormChange(dorm) {
+  const handleDormChange = (dorm) => {
 
     const firstFloor = {
       "47 Claremont": "1",
@@ -471,150 +377,117 @@ export default class ShaftLive extends Component {
       "Wien Hall": "2",
       "Woodbridge Hall": "1"
     }
-    this.setState({
-      dorm: dorm,
-      floor: firstFloor[dorm],
-      init: false
-    }, () => {
-      this.fetchFloorNums(this.state.dorm);
-      this.fetchFloorData(dorm, firstFloor[dorm]);
-    });
+
+    setDorm(dorm);
+    setFloor(firstFloor[dorm]);
+    setInit(false);
+
+    fetchFloorNums(dorm);
+    fetchFloorData(dorm, firstFloor[dorm]);
   }
 
-  setErrorMessage(message) {
-    this.setState({
-      errorMsg: message
-    })
+  const clearErrorMessage = () => {
+    setErrorMessage("");
   }
 
-  clearErrorMessage() {
-    this.setErrorMessage("");
-  }
-
-  render() {
-    const { width } = this.state;
-    const isMobile = width <= 700;
-    const floorplanLegend = (
-      <FloorPlanLegend>
-        <LegendItem>
-          <ColorBox color={(props) => props.theme.green} /><h6>Likely</h6>
-        </LegendItem>
-        <LegendItem>
-          <ColorBox color={(props) => props.theme.yellow} /><h6>Similar</h6>
-        </LegendItem>
-        <LegendItem>
-          <ColorBox color={(props) => props.theme.red} /><h6>Unlikely</h6>
-        </LegendItem>
-        <LegendItem>
-          <ColorBox color={(props) => props.theme.lightGray} /><h6>Unavailable</h6>
-        </LegendItem>
-      </FloorPlanLegend>
-    );
-
-    if (isMobile) {
-      return (
-        <div>
-          <Converter>
-            <InputsWrapper>
-              <Input id="form">
-                <label for="userNum">Lottery Number:  </label>
-                <StyleInput type="number" id="userNum" min="1" max="5000" onChange={() => this.convertNumber()} />
-              </Input>
-              {{/* <Input id="form">
+  return (
+    <div>
+      <Mobile>
+        <Converter>
+          <InputsWrapper>
+            <Input id="form">
+              <label for="userNum">Lottery Number:  </label>
+              <StyleInput type="number" id="userNum" min="1" max="5000" onChange={(e) => convertNumber(e.target.value)} />
+            </Input>
+            {/* <Input id="form">
                 <label for="groupSize">Group Size:  </label>
                 <StyleInput type="number" id="groupSize" min="1" max="10" onChange={() => this.convertNumber()} />
-              </Input> */}}
-            </InputsWrapper>
-
-
-            <AboutWrapper>
-              <TextBox> Green rooms are ones that you are likely to get based off data that Spectator has collected from housing selection from previous years.</TextBox>
-              {/* <TextBox>Learn how our lottery predictor works to make the best use of its results.</TextBox> */}
-              {floorplanLegend}
-            </AboutWrapper>
-          </Converter>
-          {(this.state.errorMsg === "") ? null : <Error>{"* " + this.state.errorMsg}</Error>}
-          <ShaftLiveContainer>
-          <DormList lotteryNum={this.state.lotteryNum} setSelectedDorm={this.handleDormChange} selectedDorm={this.state.dorm}/>
-            <DormName>{this.state.dorm}</DormName>
-              <FloorPlansRow>
-              <FloorButton floorNums={this.state.floorNums} handleChange={this.handleFloorChange}/>
-              <FloorPlanWrapper>
-                <FloorPlanSVG
-                priority={this.state.priority}
-                low={this.state.convertedNumLow}
-                high={this.state.convertedNumHigh}
-                dorm={this.state.dorm}
-                floor={this.state.floor}
-                data={this.state.floorData}
+              </Input> */}
+          </InputsWrapper>
+          <AboutWrapper>
+            <TextBox> Green rooms are ones that you are likely to get based off data that Spectator has collected from housing selection from previous years.</TextBox>
+            {/* <TextBox>Learn how our lottery predictor works to make the best use of its results.</TextBox> */}
+            {floorplanLegend}
+          </AboutWrapper>
+        </Converter>
+        {(errorMsg === "") ? null : <Error>{"* " + errorMsg}</Error>}
+        <ShaftLiveContainer>
+          <DormList lotteryNum={lotteryNum ? lotteryNum : 0} setSelectedDorm={handleDormChange} selectedDorm={dorm} />
+          <DormName>{dorm}</DormName>
+          <FloorPlansRow>
+            <FloorButton floorNums={floorNums} handleChange={handleFloorChange} />
+            <FloorPlanWrapper>
+              <FloorPlanSVG
+                priority={priority}
+                low={convertedNumLow}
+                high={convertedNumHigh}
+                dorm={dorm}
+                floor={floor}
+                data={floorData}
                 cutoffs={[]}
-                init={this.state.init}
-                dormRefresh={this.state.dormRefresh} >
+                init={init}
+                dormRefresh={dormRefresh} >
               </FloorPlanSVG>
-              </FloorPlanWrapper>
-              </FloorPlansRow>
-              <Disclaimer/>
-          </ShaftLiveContainer>
-        </div>
-      );
-    } else {
-      return (
-        <div>
-          <Converter>
-            <AboutWrapper>
+            </FloorPlanWrapper>
+          </FloorPlansRow>
+          <Disclaimer />
+        </ShaftLiveContainer>
+      </Mobile>
+      <Desktop>
+        <Converter>
+          <AboutWrapper>
             <AboutLeft>
-            <InputsWrapper>
-              <Input id="form">
-                <label for="userNum">Lottery Number</label>
-                <StyleInput type="number" id="userNum" onChange={() => this.convertNumber()} />
-              </Input>
-
-              {/* <Input id="form">
+              <InputsWrapper>
+                <Input id="form">
+                  <label for="userNum">Lottery Number</label>
+                  <StyleInput type="number" id="userNum" onChange={(e) => convertNumber(e.target.value)} />
+                </Input>
+                {/* <Input id="form">
                 <label for="groupSize">Group Size</label>
                 <StyleInput type="number" id="groupSize" onChange={() => this.convertNumber()} />
               </Input> */}
-            </InputsWrapper>
+              </InputsWrapper>
               <TextBox>
                 Check out our color-coded floor plans to see which rooms you are likely to get!
                 {floorplanLegend}
               </TextBox>
-              </AboutLeft>
-            
-              <Disclaimer/>
-            </AboutWrapper>
-          </Converter>
-          {(this.state.errorMsg === "") ? null : <Error>{"* " + this.state.errorMsg}</Error>}
-          <ShaftLiveContainer>
-            <ColOne>
-              <DormList lotteryNum={this.state.lotteryNum} setSelectedDorm={this.handleDormChange} selectedDorm={this.state.dorm}/>
-            </ColOne>
+            </AboutLeft>
+            <Disclaimer />
+          </AboutWrapper>
+        </Converter>
+        {(errorMsg === "") ? null : <Error>{"* " + errorMsg}</Error>}
+        <ShaftLiveContainer>
+          <ColOne>
+            <DormList lotteryNum={lotteryNum ? lotteryNum : 0} setSelectedDorm={handleDormChange} selectedDorm={dorm} />
+          </ColOne>
 
-            <ColTwo>
-              <DormName>{this.state.dorm}</DormName>
-              <FloorPlansRow>
-              <FloorButton floorNums={this.state.floorNums} handleChange={this.handleFloorChange}/>
+          <ColTwo>
+            <DormName>{dorm}</DormName>
+            <FloorPlansRow>
+              <FloorButton floorNums={floorNums} handleChange={handleFloorChange} />
               <FloorPlanWrapper>
                 <FloorPlanSVG
-                priority={this.state.priority}
-                low={this.state.convertedNumLow}
-                high={this.state.convertedNumHigh}
-                dorm={this.state.dorm}
-                floor={this.state.floor}
-                data={this.state.floorData}
-                cutoffs={[]}
-                init={this.state.init}
-                dormRefresh={this.state.dormRefresh}
-                showInfo={false} >
-              </FloorPlanSVG>
+                  priority={priority}
+                  low={convertedNumLow}
+                  high={convertedNumHigh}
+                  dorm={dorm}
+                  floor={floor}
+                  data={floorData}
+                  cutoffs={[]}
+                  init={init}
+                  dormRefresh={dormRefresh}
+                  showInfo={false} >
+                </FloorPlanSVG>
               </FloorPlanWrapper>
-              </FloorPlansRow>
-            </ColTwo>
-          </ShaftLiveContainer>
-        </div>
-      )
-    }
-  }
-}
+            </FloorPlansRow>
+          </ColTwo>
+        </ShaftLiveContainer>
+      </Desktop>
+    </div>
+  )
+};
+
+export default ShaftLive;
 
 const Disclaimer = () => {
   return (
@@ -626,3 +499,20 @@ const Disclaimer = () => {
     </DisclaimerWrapper>
   )
 }
+
+const floorplanLegend = (
+  <FloorPlanLegend>
+    <LegendItem>
+      <ColorBox color={(props) => props.theme.green} /><h6>Likely</h6>
+    </LegendItem>
+    <LegendItem>
+      <ColorBox color={(props) => props.theme.yellow} /><h6>Similar</h6>
+    </LegendItem>
+    <LegendItem>
+      <ColorBox color={(props) => props.theme.red} /><h6>Unlikely</h6>
+    </LegendItem>
+    <LegendItem>
+      <ColorBox color={(props) => props.theme.lightGray} /><h6>Unavailable</h6>
+    </LegendItem>
+  </FloorPlanLegend>
+);

@@ -89,7 +89,7 @@ class usingtheSHAFT extends React.Component {
                 <div class="textbox_phone">
                   Our staff has been collecting Columbia Housing data for years. With theShaft’s dynamic, color-coated floor plans, you can measure your chances for living in your favorite dorm next year and be ready for room selection.
                 </div>
-                <div class="button_phone"><a href="https://www.theshaft.info/shaftlive">go to Lottery Calculator</a></div>
+                <div class="button_phone"><a href="https://www.theshaft.info/lottery">go to Lottery Calculator</a></div>
               </div>
             </div>
             <div class="rowPad_phone">
@@ -182,7 +182,7 @@ class usingtheSHAFT extends React.Component {
                     <div class="textbox">
                       Our staff has been collecting Columbia Housing data for years. With theShaft’s dynamic, color-coated floor plans, you can measure your chances for living in your favorite dorm next year and be ready for room selection.
                     </div>
-                    <div class="button2"><a href="https://www.theshaft.info/shaftlive">go to Lottery Calculator</a></div>
+                    <div class="button2"><a href="https://www.theshaft.info/lottery">go to Lottery Calculator</a></div>
                   </div>
                 </div>
               </div>

@@ -27,7 +27,7 @@ const menuItems = [
   },
   {
     "name": "Lottery Predictor",
-    "link": "/shaftlive",
+    "link": "/lottery",
     "external": false,
     "disabled": false,
   },
@@ -61,7 +61,7 @@ const App = () => (
         <Route exact path="/" render={() => (<Redirect from='/' to='/explore'/>)}/>
         <Route exact path="/explore" component={Explore} />
         <Route path="/explore/:dorm" component={Dorm} />
-        <Route exact path="/shaftlive" component={ShaftLive} />
+        <Route exact path="/lottery" component={ShaftLive} />
         <Route exact path="/housing101" component={Housing101} />
 				{/* <Route exact path="/reviews" component={Reviews} /> */}
       </Switch>
