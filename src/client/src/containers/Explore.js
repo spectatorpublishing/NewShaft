@@ -7,6 +7,7 @@ import { FILTER_NAME_TO_KEY } from "../util/DormFilter.js";
 import Filters from "../components/ExploreFilters/Filters.js";
 
 import _, { initial } from "lodash"
+import ScrollToTop from '../components/ScrollToTop';
 
 const ExploreContainer = styled.div`
   width: 100%;
@@ -107,6 +108,7 @@ export default class Explore extends Component {
     }
   
   componentDidMount(){
+    window.scrollTo(0, 0)
     document.title = "The Shaft";
     this.fetchDorms();
   }
@@ -165,6 +167,7 @@ export default class Explore extends Component {
   render() {
     return (
       <ExploreContainer>
+        <ScrollToTop>
         <ColOne>
           <SideBar>
             <FilterSearchBG>
@@ -187,6 +190,7 @@ export default class Explore extends Component {
               />
           </MapView>
         </ColTwo>
+        </ScrollToTop>
       </ExploreContainer>
     );
   }

@@ -468,7 +468,7 @@ const ShaftLive = (props) => {
       <Mobile>
         <Converter>
           <InputsWrapper>
-            <Input id="form">
+            <Input id="form" onSubmit={handleSubmit}>
               <label for="userNum">Lottery Number:  </label>
               <StyleInput type="number" id="userNum" min="1" max="5000" onChange={(e) => convertNumber(e.target.value)} />
             </Input>
@@ -494,7 +494,7 @@ const ShaftLive = (props) => {
           <AboutWrapper>
             <AboutLeft>
               <InputsWrapper>
-                <Input id="form">
+                <Input id="form" onSubmit={handleSubmit}>
                   <label for="userNum">Lottery Number</label>
                   <StyleInput type="number" id="userNum" onChange={(e) => convertNumber(e.target.value)} />
                 </Input>
