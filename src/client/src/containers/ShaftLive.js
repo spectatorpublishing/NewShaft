@@ -241,9 +241,9 @@ const Desktop = styled.div`
   }
 `;
 
-const ShaftLive = () => {
+const ShaftLive = (props) => {
   const [dorm, setDorm] = useState("47 Claremont");
-  const [dormRefresh, setDormRefresh] = useState(false);
+  const [dormChange, setDormChange] = useState(false);
   const [floor, setFloor] = useState("1");
   const [floorNums, setFloorNums] = useState(null);
   const [floorData, setFloorData] = useState([]);
@@ -256,37 +256,93 @@ const ShaftLive = () => {
   const [errorMsg, setErrorMessage] = useState("");
 
   useEffect(() => {
-    fetchFloorNums(dorm);
-    setInterval(() => fetchFloorData(dorm, floor), 15000);
+    getAllDormInfo(dorm, floor);
   }, []);
 
-  const fetchFloorNums = (dormName) => {
-    fetch(`/api/getUniqueFloorNumbers/${dormName}`, {
+  useEffect(() => {
+    handleDormChange(dorm);
+  }, [props.dorm]);
+
+  useEffect(() => {
+    setFloor(props.floor);
+    handleFloorChange(floor);
+  }, [props.floor]);
+
+  async function fetchAllDormInfo(dorm, floor) {
+    const [floorNumsRes, floorDataRes] = await Promise.all([
+      fetch(`/api/getUniqueFloorNumbers/${dorm}`, {
+        method: 'GET',
+        headers: {
+          'Content-Type': 'application/json'
+        },
+      }),
+      fetch(`/api/getLotteryNum/${dorm}/${floor}`, {
+        method: 'GET',
+        headers: {
+          'Content-Type': 'application/json'
+        },
+      })
+    ]);
+
+    const floorNums = await floorNumsRes.json();
+    const floorData = await floorDataRes.json();
+    return [floorNums, floorData];
+  }
+
+  async function fetchFloorNums(dorm) {
+    const floorNumsRes = await fetch(`/api/getUniqueFloorNumbers/${dorm}`, {
+        method: 'GET',
+        headers: {
+          'Content-Type': 'application/json'
+        },
+      })
+
+    const floorNums = await floorNumsRes.json();
+    return floorNums;
+  }
+
+  async function fetchFloorData(dorm, floor) {
+    const floorDataRes = await fetch(`/api/getLotteryNum/${dorm}/${floor}`, {
       method: 'GET',
       headers: {
         'Content-Type': 'application/json'
       },
-    })
-      .then(res => res.json())
-      .then(floorNums => {
+    });
+
+    const floorData = await floorDataRes.json();
+    return floorData;
+  }
+
+  const getAllDormInfo = (dorm, floor) => {
+    fetchAllDormInfo(dorm, floor)
+      .then(([floorNums, floorData]) => {
         setFloorNums(floorNums);
+        setFloorData(floorData);
+        setDorm(dorm);
+        setFloor(floor);
+        setDormChange(!dormChange);
+      }).catch(error => {
+        console.log(error);
       });
   }
 
-  const fetchFloorData = (dorm, floor) => {
-    fetch(`/api/getLotteryNum/${dorm}/${floor}`, {
-      method: 'GET',
-      headers: {
-        'Content-Type': 'application/json'
-      },
-    }).then(res => res.json())
-      .then(response => {
-        setDorm(dorm);
-        setDormRefresh(!dormRefresh);
-        setFloor(floor);
-        setFloorData(response);
+  const getFloorNums = (dorm, floor) => {
+    fetchFloorNums(dorm, floor)
+      .then((floorNums) => {
+        setFloorNums(floorNums);
+      }).catch(error => {
+        console.log(error);
       });
-    console.log(dorm, floor, floorData)
+  }
+
+  const getFloorData = (dorm, floor) => {
+    fetchFloorData(dorm, floor)
+      .then((floorData) => {
+        setFloorData(floorData);
+        setFloor(floor);
+      }).catch(error => {
+        console.log(error);
+      });
   }
 
   const convertNumber = (num) => {
@@ -296,10 +352,11 @@ const ShaftLive = () => {
     if (num.length === 0) {
       setLotteryNum(0);
       clearErrorMessage();
-    } else if (number < 1 || number > 5000) {
+    } else if (number < 0 || number > 5000) {
       setLotteryNum(0);
       setErrorMessage("Enter valid lottery number")
     } else {
+      clearErrorMessage();
       var thousands = (num - (num % 1000)) / 1000
       //console.log("thousands: ", thousands);
       if (thousands == 0) {
@@ -340,7 +397,7 @@ const ShaftLive = () => {
       setConvertedNumHigh(high);
       setPriority(priority);
       setFull(priority + " | " + low + " - " + high);
-      setDorm("47 Claremont");
+      //setDorm("47 Claremont");
 
       /* if ( groupSize < 1 || groupSize > 10) {
         setErrorMessage("Enter valid group size")
@@ -355,11 +412,10 @@ const ShaftLive = () => {
   }
 
   const handleFloorChange = (floor) => {
-    fetchFloorData(dorm, floor);
+    getFloorData(dorm, floor);
   }
 
   const handleDormChange = (dorm) => {
-
     const firstFloor = {
       "47 Claremont": "1",
       "Broadway Hall": "3",
@@ -381,14 +437,31 @@ const ShaftLive = () => {
     setDorm(dorm);
     setFloor(firstFloor[dorm]);
     setInit(false);
-
-    fetchFloorNums(dorm);
-    fetchFloorData(dorm, firstFloor[dorm]);
+    getAllDormInfo(dorm, firstFloor[dorm]);
   }
 
   const clearErrorMessage = () => {
     setErrorMessage("");
   }
+
+  const floorPlans = (
+    <FloorPlansRow>
+      <FloorButton floorNums={floorNums} handleChange={handleFloorChange} />
+      <FloorPlanWrapper>
+        <FloorPlanSVG
+          priority={priority}
+          low={convertedNumLow}
+          high={convertedNumHigh}
+          dorm={dorm}
+          floor={floor}
+          data={floorData}
+          cutoffs={[]}
+          init={init}
+          dormChange={dormChange}>
+        </FloorPlanSVG>
+      </FloorPlanWrapper>
+    </FloorPlansRow>
+  );
 
   return (
     <div>
@@ -412,24 +485,7 @@ const ShaftLive = () => {
         </Converter>
         {(errorMsg === "") ? null : <Error>{"* " + errorMsg}</Error>}
         <ShaftLiveContainer>
-          <DormList lotteryNum={lotteryNum ? lotteryNum : 0} setSelectedDorm={handleDormChange} selectedDorm={dorm} />
-          <DormName>{dorm}</DormName>
-          <FloorPlansRow>
-            <FloorButton floorNums={floorNums} handleChange={handleFloorChange} />
-            <FloorPlanWrapper>
-              <FloorPlanSVG
-                priority={priority}
-                low={convertedNumLow}
-                high={convertedNumHigh}
-                dorm={dorm}
-                floor={floor}
-                data={floorData}
-                cutoffs={[]}
-                init={init}
-                dormRefresh={dormRefresh} >
-              </FloorPlanSVG>
-            </FloorPlanWrapper>
-          </FloorPlansRow>
+          <DormList lotteryNum={lotteryNum ? lotteryNum : 0} setSelectedDorm={handleDormChange} selectedDorm={dorm} floorPlans={floorPlans} />
           <Disclaimer />
         </ShaftLiveContainer>
       </Mobile>
@@ -458,28 +514,12 @@ const ShaftLive = () => {
         {(errorMsg === "") ? null : <Error>{"* " + errorMsg}</Error>}
         <ShaftLiveContainer>
           <ColOne>
-            <DormList lotteryNum={lotteryNum ? lotteryNum : 0} setSelectedDorm={handleDormChange} selectedDorm={dorm} />
+            <DormList lotteryNum={lotteryNum ? lotteryNum : 0} setSelectedDorm={handleDormChange} selectedDorm={dorm} floorPlans={floorPlans} />
           </ColOne>
 
           <ColTwo>
             <DormName>{dorm}</DormName>
-            <FloorPlansRow>
-              <FloorButton floorNums={floorNums} handleChange={handleFloorChange} />
-              <FloorPlanWrapper>
-                <FloorPlanSVG
-                  priority={priority}
-                  low={convertedNumLow}
-                  high={convertedNumHigh}
-                  dorm={dorm}
-                  floor={floor}
-                  data={floorData}
-                  cutoffs={[]}
-                  init={init}
-                  dormRefresh={dormRefresh}
-                  showInfo={false} >
-                </FloorPlanSVG>
-              </FloorPlanWrapper>
-            </FloorPlansRow>
+            {floorPlans}
           </ColTwo>
         </ShaftLiveContainer>
       </Desktop>

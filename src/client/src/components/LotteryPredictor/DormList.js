@@ -59,6 +59,12 @@ const BarWrapper = styled.div`
     }
 `;
 
+const Mobile = styled.div`
+  @media only screen and (min-width: 991px){
+    display: none;
+  }
+`;
+
 const ColorBar = styled.div`
     // placeholder for testing
     width: ${(props) => props.width}%;
@@ -154,7 +160,7 @@ const DormButton = (props) => {
   )
 }
 
-const DormList = ({ lotteryNum, setSelectedDorm, selectedDorm }) => {
+const DormList = ({ lotteryNum, setSelectedDorm, selectedDorm, floorPlans }) => {
   // controls setting of data on initial load
   const [initialLoad, setInitial] = useState(1);
   const [dorms, setDorms] = useState(defaultDorms.map(dorm =>
@@ -210,6 +216,7 @@ const DormList = ({ lotteryNum, setSelectedDorm, selectedDorm }) => {
     <List>
       {dorms.map((dorm, index) => {
         return (
+          <div>
           <DormButton
             key={index}
             dormName={dorm.DORM}
@@ -217,6 +224,8 @@ const DormList = ({ lotteryNum, setSelectedDorm, selectedDorm }) => {
             setSelectedDorm={setSelectedDorm}
             selectedDorm={selectedDorm}
           ></DormButton>
+          {(selectedDorm === dorm.DORM)? <Mobile>{floorPlans}</Mobile> : null}
+          </div>
         )
       })}
     </List>
