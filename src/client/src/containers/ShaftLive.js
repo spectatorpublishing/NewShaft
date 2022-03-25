@@ -180,6 +180,10 @@ const DormName = styled.div`
 
 const FloorPlanWrapper = styled.div`
   width: 70%;
+
+  img {
+    width: 100%;
+  }
   @media(max-width: 991px){
     margin: 1rem auto;
   }
