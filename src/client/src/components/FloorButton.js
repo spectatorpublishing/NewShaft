@@ -48,6 +48,12 @@ let FloorButtonWrapper = styled.div`
     @media only screen and (min-width: 992px){
         padding: 0;
     }
+
+    @media only screen and (max-width: 992px){
+        overflow: scroll;
+        padding: 0;
+        margin: 1rem 1rem 1rem 0.75rem;
+    }
 `
 
 let Buttons = styled.div`
