@@ -48,7 +48,8 @@ const AtAGlanceText = styled.div`
   color: #0000008F;
 
   @media only screen and (max-width: 767px) {
-    padding-bottom: 1rem;
+    padding-bottom: 0.5rem;
+    line-height: 1.5rem;
   }
 `
 

@@ -23,6 +23,16 @@ const Page = styled.div`
   @media only screen and (max-width: 767px) {
     padding: 0rem;
 		overflow: hidden;
+    margin: 3.25rem 0rem 0rem 0rem;
+
+    li {
+      margin: 0.5rem 0rem;
+    }
+
+    ul {
+      margin: 0.5rem 0rem;
+      line-height: 1.3rem;
+    }
 	}
 `
 
@@ -44,6 +54,7 @@ const DormName = styled.h1`
   display: flex;
   color: #404040;
   align-self: center;
+  text-align: center;
 
   @media only screen and (max-width: 767px) {
     font-style: normal;
@@ -190,7 +201,8 @@ const MarginWrapper = styled.div`
 
   @media only screen and (max-width: 767px) {
     margin: 0;
-    font-size: 12px;
+    font-size: 1rem;
+    line-height: 1.3rem;
     font-weight: 400;
     font-style: normal;
 	}
@@ -474,7 +486,7 @@ const Dorm = ({ }) => {
             </DormImage>}
         </Mobile>
         <DormHeader>
-          <DormName> {dormInfo.DORM} </DormName>
+          <DormName> {(dormInfo.DORM === "600 W 113th") ? "600 W 113th (Nuss)" : dormInfo.DORM} </DormName>
           <UnderlineWrapper>
             <Underline></Underline>
             <Dot></Dot>

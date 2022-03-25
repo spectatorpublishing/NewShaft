@@ -96,6 +96,7 @@ const DormButton = props => {
   const [classMakeupFormat, setClassMakeup] = useState("");
   const [dormStyle, setDormStyle] = useState("");
   const schoolName = props.school.toLowerCase();
+  const [dormName, setDormName] = useState("");
 
   useEffect(() => {
     if (props.class_makeup) 
@@ -103,7 +104,16 @@ const DormButton = props => {
     
     setDormStyle((props.SUITE_ === 1) ? "Suite-Style" : "Corridor-Style");
 
-    setRoomTypeString()
+    setRoomTypeString();
+
+    if (props.name === "548 W 113th"){
+      setDormName("548 W 113th (Symposium)");
+    } else if (props.name === "600 W 113th"){
+      setDormName("600 W 113th (Nuss)");
+    } else {
+      setDormName(props.name);
+    }
+
   }, [props.SUITE_]);
 
   const setRoomTypeString = () => {
@@ -129,7 +139,7 @@ const DormButton = props => {
       <DormButtonWrapper>
         <img className="dormimage" src={props.image} />
         <div className="details">
-            <DormName> {props.name} </DormName>
+            <DormName> {dormName} </DormName>
             {schoolName == "columbia" ? 
               <ColumbiaName> { schoolName } </ColumbiaName>
             : (schoolName == "barnard" ?
