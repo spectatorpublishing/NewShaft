@@ -40,7 +40,8 @@ const PhotoBanner = (props) => {
 
   return (
     <PhotosContainer>
-      <Carousel loop={true} auto={true} interval={4000} frames={frames} widgets={[Dots, Buttons]}>
+      {/*  To enable auto scroll: <Carousel loop={true} auto={true} frames={frames} widgets={[Dots, Buttons]}> */}
+      <Carousel loop={true} frames={frames} widgets={[Dots, Buttons]}>
         <div></div>
       </Carousel>
     </PhotosContainer>
