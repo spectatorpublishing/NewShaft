@@ -107,8 +107,15 @@ const wien = (room) => {
   return "1"
 }
 
+/*
+ * Woodbridge Hall has only 7 floors.
+ * The first digit of the room number is the floor number.
+*/
 const woodbridge = (room) => {
-  return "1"
+  let floor = room.slice(0,1)
+  DLog(`[ Woodbridge ] ${room} -> ${floor}`)
+
+  return floor
 }
 
 const residenceHalls = {
