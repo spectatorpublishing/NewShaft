@@ -61,8 +61,15 @@ const plimpton = (room) => {
   return "1"
 }
 
+/*
+ * River Hall has only 6 floors.
+ * The first digit of the room number is the floor number.
+*/
 const river = (room) => {
-  return "1"
+  let floor = room.slice(0,1)
+  DLog(`[ River ] ${room} -> ${floor}`)
+
+  return floor
 }
 
 const ruggles = (room) => {
