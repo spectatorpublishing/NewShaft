@@ -5,6 +5,13 @@ const fs = require('fs');
 const NLotteryPredicter2021 = "/Users/yunlan/Desktop/NLotteryPredicter2020_202203232113.json"
 const out = "/Users/yunlan/Desktop/NLotteryPredicter2020_inferred.json"
 const table = 'NLotteryPredicter2021'
+const debug = 0
+
+const DLog = (msg) => {
+  if (debug > 0) {
+    console.log(msg)
+  }
+}
 
 const claremont = (room) => {
   return "1"
@@ -62,8 +69,27 @@ const ruggles = (room) => {
   return "1"
 }
 
+/*
+ * Schapiro Room Numbers:
+ * 1. doubles are suffixed by "A/B"
+ * 2. first 1/2 digits are the floor number
+*/
 const schapiro = (room) => {
-  return "1"
+  let roomNoSuffix = room.replace("A/B", "")
+  let roomStrlen = roomNoSuffix.length
+  let floor = ""
+
+  if (roomStrlen === 3) {
+    floor = roomNoSuffix.slice(0, 1)
+  } else if (roomStrlen == 4) {
+    floor = roomNoSuffix.slice(0, 2)
+  } else {
+    console.error(`[ Schapiro ] invalid room number ${room}`)
+  }
+
+  DLog(`[ Schapiro ] ${room} -> floor: ${floor}`)
+
+  return floor
 }
 
 const watt = (room) => {
