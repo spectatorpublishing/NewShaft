@@ -538,7 +538,7 @@ const Disclaimer = () => {
     <DisclaimerWrapper>
       <DisclaimerTextBox className="disclaimer">Disclaimer:</DisclaimerTextBox>
       <DisclaimerTextBox>
-        Historical Room Selection data is provided by Columbia Housing for reference only. The selection process shifts year to year and can change based on a number of variables that will impact how students pick rooms, including personal preferences, building availability, class size, external factors and more. This data should not be used a predictive tool nor does it provide any guarantee for selection options. Learn how our lottery predictor works to make the best use of its results.
+        Historical Room Selection data is provided by Columbia Housing for reference only. The selection process shifts year to year and can change based on a number of variables that will impact how students pick rooms, including personal preferences, building availability, class size, external factors and more. This data should not be used as a predictive tool nor does it provide any guarantee for selection options. Learn how our lottery predictor works to make the best use of its results.
       </DisclaimerTextBox>
     </DisclaimerWrapper>
   )
