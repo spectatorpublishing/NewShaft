@@ -37,8 +37,80 @@ const carlton = (room) => {
   return "1"
 }
 
+/* East Campus room numbers:
+ *
+ *  Highrise:
+ *  1. first 1/2 digits are the floor number
+ *
+ *  Townhouse (Prefix with "H"):
+ *  1. lower townhouses end in 1 or 2
+ *    - all on same floor plan
+ *   
+ *  2. middle townhouses end in 3 or 4
+ *    - middle A and B = MT1
+ *    - MT2 are living rooms
+ *    - middle C and D = MT3
+ *    - middle E and F = MT4
+ *   
+ *  3. upper townhouses end in 5 or 6
+ *    - UT1 are living rooms
+ *    - upper A and B = UT2
+ *    - upper C and D = UT3
+ *    - upper E and F = UT4
+ * 
+ */
+
 const eastCampus = (room) => {
-  return "1"
+  let isTownhouse = room.slice(0,1) === "H"
+  let floor = ""
+  
+  if (isTownhouse){
+    // roomSuffix : individual room letter (i.e. for room 1002A => "A")
+    let roomSuffix = room.slice(room.length - 1, room.length)
+
+    // suiteSuffix : last digit of suite number (i.e. for room 1002A => "2")
+    let suiteSuffix = room.slice(room.length - 2, room.length - 1)
+    let isLower = suiteSuffix === "1" || suiteSuffix === "2"
+    let isMiddle = suiteSuffix === "3" || suiteSuffix === "4"
+    let isUpper = suiteSuffix === "5" || suiteSuffix === "6"
+
+    if (isLower){
+      floor = "LT"
+    } else if (isMiddle){
+      if (roomSuffix === "A" || roomSuffix === "B"){
+        floor = "MT1"
+      } else if (roomSuffix === "C" || roomSuffix === "D") {
+        floor = "MT3"
+      } else if (roomSuffix === "E" || roomSuffix === "F"){
+        floor = "MT4"
+      } else {
+        console.error(`[ East Campus ] invalid room number ${room}`)
+      }
+    } else if (isUpper){
+      if (roomSuffix === "A" || roomSuffix === "B"){
+        floor = "UT2"
+      } else if (roomSuffix === "C" || roomSuffix === "D") {
+        floor = "UT3"
+      } else if (roomSuffix === "E" || roomSuffix === "F"){
+        floor = "UT4"
+      } else {
+        console.error(`[ East Campus ] invalid room number ${room}`)
+      }
+    } else {
+      console.error(`[ East Campus ] invalid room number ${room}`)
+    }
+  } else {
+    // Highrise
+    if (room.length === 3 || room.length === 4) {
+      floor = room.slice(0, 1)
+    } else if (room.length == 5) {
+      floor = room.slice(0, 2)
+    } else {
+      console.error(`[ East Campus ] invalid room number ${room}`)
+    }
+  }
+
+  return floor
 }
 
 const furnald = (room) => {
@@ -72,8 +144,14 @@ const river = (room) => {
   return floor
 }
 
+/*
+ * Ruggles Hall has only 8 floors.
+ * The first digit of the room number is the floor number.
+*/
 const ruggles = (room) => {
-  return "1"
+  let floor = room.slice(0,1)
+
+  return floor
 }
 
 /*
@@ -99,8 +177,14 @@ const schapiro = (room) => {
   return floor
 }
 
+/*
+ * Watt Hall has only 6 floors.
+ * The first digit of the room number is the floor number.
+*/
 const watt = (room) => {
-  return "1"
+  let floor = room.slice(0,1)
+
+  return floor
 }
 
 const wien = (room) => {
