@@ -13,28 +13,77 @@ const DLog = (msg) => {
   }
 }
 
+/*
+ * 47 Claremont has 6 floors.
+ * The first digit/first two digits of the room number is the floor number.
+*/
 const claremont = (room) => {
-  return "1"
+  let floor = ""
+
+  if (room.length === 2){
+    floor = "1"
+  } else if (room.length === 3){
+    floor = room.slice(0,1)
+  } else {
+    console.error(`[ 47 Claremont ] invalid room number ${room}`)
+  }
+
+  return floor
 }
 
 const W548 = (room) => {
   return "1"
 }
 
+/*
+ * 600 W 113th has 6 floors.
+ * The first digit/first two digits of the room number is the floor number.
+*/
 const W600 = (room) => {
-  return "1"
+  let floor = ""
+
+  if (room.length === 3){
+    floor = room.slice(0,1)
+  } else if (room.length === 4){
+    floor = room.slice(0,2)
+  } else {
+    console.error(`[ 600 W 113th ] invalid room number ${room}`)
+  }
+
+  return floor
 }
 
 const W627 = (room) => {
   return "1"
 }
 
+/*
+ * Broadway Hall has 11 floors.
+ * The first digit/first two digits of the room number is the floor number.
+*/
 const broadway = (room) => {
-  return "1"
+  let floor = ""
+
+  if (room.length === 3){
+    floor = room.slice(0,1)
+  } else if (room.length === 4){
+    floor = room.slice(0,2)
+  } else {
+    console.error(`[ Broadway Hall ] invalid room number ${room}`)
+  }
+
+  return floor
 }
 
+/*
+ * Carlton Arms has only 9 floors.
+ * The floors are split into 4 different floor plans
+ * The first two digits of the room number is the floor number.
+*/
 const carlton = (room) => {
-  return "1"
+  let floor = room.slice(0,2)
+
+  return floor
 }
 
 /* East Campus room numbers:
@@ -113,24 +162,74 @@ const eastCampus = (room) => {
   return floor
 }
 
+/*
+ * Furnald Hall has only 10 floors.
+ * The first digit/first two digits of the room number is the floor number.
+*/
 const furnald = (room) => {
-  return "1"
+  let floor = ""
+
+  if (room.length === 3) {
+    floor = room.slice(0, 1)
+  } else if (room.length == 4) {
+    floor = room.slice(0, 2)
+  } else {
+    console.error(`[ Furnald ] invalid room number ${room}`)
+  }
+
+  return floor
 }
 
+/*
+ * Harmony Hall has 9 floors.
+ * 1. Rooms in the Mezzanine have the "1M suffix"
+ * 2. For other rooms, the first digit of the room number is the floor number.
+*/
 const harmony = (room) => {
-  return "1"
+  let floor = ""
+
+  if (room.length === 3) {
+    floor = room.slice(0, 1)
+  } else if (room.length == 4) {
+    floor = "M"
+  } else {
+    console.error(`[ Harmony Hall ] invalid room number ${room}`)
+  }
+
+  return floor
 }
 
+/*
+ * Hogan Hall has 6 floors.
+ * The first digit of the room number is the floor number.
+*/
 const hogan = (room) => {
-  return "1"
+  let floor = room.slice(0,1)
+
+  return floor
 }
 
 const mcbain = (room) => {
   return "1"
 }
 
+
+/*
+ * Plimpton Hall has 14 floors.
+ * The first digit/first two digits of the room number is the floor number.
+*/
 const plimpton = (room) => {
-  return "1"
+  let floor = ""
+
+  if (room.length === 3) {
+    floor = room.slice(0, 1)
+  } else if (room.length == 4) {
+    floor = room.slice(0, 2)
+  } else {
+    console.error(`[ Plimpton Hall ] invalid room number ${room}`)
+  }
+
+  return floor
 }
 
 /*
