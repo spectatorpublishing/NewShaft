@@ -286,8 +286,27 @@ const watt = (room) => {
   return floor
 }
 
+/*
+ * Wien Hall has 12 floors.
+ * Rooms with shared private bathroom are suffixed by "A/B".
+ * The first one/two digit(s) of the room number is the floor number.
+*/
 const wien = (room) => {
-  return "1"
+  let roomNoSuffix = room.replace("A/B", "")
+  let roomStrlen = roomNoSuffix.length
+  let floor = ""
+
+  if (roomStrlen === 3) {
+    floor = roomNoSuffix.slice(0, 1)
+  } else if (roomStrlen == 4) {
+    floor = roomNoSuffix.slice(0, 2)
+  } else {
+    console.error(`[ Wien ] invalid room number ${room}`)
+  }
+
+  DLog(`[ Wien ] ${room} -> floor: ${floor}`)
+
+  return floor
 }
 
 /*
