@@ -5,10 +5,12 @@ import WhiteboardSidebar from "../components/ReviewsWhiteboardSidebar"
 import ReviewsBox from "../components/ReviewsBox"
 import Review from "../components/Review"
 import ReviewPageReview from "../components/ReviewPageReview"
+import NewReviewPageReview from "../components/NewReviewPageReview"
 import carouselimg from "./carouselimg.jpg"
 import QuickReview from "../components/QuickReview";
 import "react-responsive-carousel/lib/styles/carousel.min.css";
 import { Carousel } from 'react-responsive-carousel';
+import { theme } from "../util/GlobalStyles";
 
 //import WhiteboardSidebar from "../components/ReviewsWhiteboardSidebar"
 //import Review from "../components/Review"
@@ -156,15 +158,52 @@ const ColThree = styled.div`
     padding: 4rem 0 2rem 1rem;
 `
 
-const QuickReviewDisplay = styled.div`
+const CarouselDisplay = styled.div`
     width: 100%;
-    padding-top: 1rem;
+    padding: 1rem 0;
 `
 const QuickReviewBox = styled.div`
     margin-top: 1rem;
     box-shadow: 3px -4px 7px 2px rgba(0,0,0,0.1);
     padding-right: 1rem;
 `
+
+const DormName = styled.h1`
+    font-family: Raleway;
+    font-style: normal;
+    font-weight: normal;
+    color: ${theme.columbiaBlue};
+`
+const FilterDisplay = styled.div`
+
+`;
+
+const FilterTitle = styled.div`
+  font-style: normal;
+  font-weight: 500;
+  font-size: 24px;
+  line-height: 28px;  
+
+  padding: 3rem 0 .5rem 0;
+  border-bottom: 3px solid;
+  margin-bottom: 2rem;
+`;
+
+const Filter = styled.div`
+  display: flex;
+  flex-direction: row;
+  margin-bottom: 2rem;
+`;
+
+const FilterCheckbox = styled.div``;
+
+const FilterText = styled.p`
+  font-style: normal;
+  font-weight: normal;
+  font-size: 20px;
+  line-height: 23px;
+`;
+
 
 export default class Reviews extends Component{
   constructor(props){
@@ -282,6 +321,17 @@ export default class Reviews extends Component{
 
   }
 
+  fetchLotteryNumber(dormName){
+    fetch(`/api/getLotteryNum/${dormName}`, {
+      method: "GET",
+      headers: {"Content-Type": "application/json"},
+    })
+      .then(res => res.json())
+      .then(lotteryNums => {
+        this.setState({LowerBound: lotteryNums[0], UpperBound: lotteryNums[1]})
+      });
+  }
+
   handleDormChange(dorm) {
 
     const firstFloor = {
@@ -309,6 +359,7 @@ export default class Reviews extends Component{
       this.fetchQuickReview(dorm);
       this.fetchDormPhotos(dorm);
       this.fetchMoreDormInfo(dorm)
+      this.fetchLotteryNums(dorm);
     });
   }
 
@@ -369,9 +420,8 @@ export default class Reviews extends Component{
             {/*<DesktopButton href = {"/compare-dorms"}>Compare Dorms</DesktopButton>*/}
           </ColOne>
           <ColTwo>
-            <h1>{this.state.dorm}</h1>
-            {this.state.moreDormInfo ? (<MoreDormInfoBlock dorm={this.state.dorm} dormInfo={this.state.moreDormInfo} ></MoreDormInfoBlock>) : (<div></div>)}
-            <QuickReviewDisplay>
+            <DormName>{this.state.dorm}</DormName>
+            <CarouselDisplay>
               <Carousel showThumbs={false} infiniteLoop={true}>
                 {this.state.dorm_photos.filter(function (img) {
                   if (img == 'N/A'){ return false; }
@@ -382,15 +432,25 @@ export default class Reviews extends Component{
                   </div>
                 ))}
               </Carousel>
-              <QuickReviewBox>
-                <QuickReview QuickReview={this.state.QuickReview}></QuickReview>
-              </QuickReviewBox>
-            </QuickReviewDisplay>
+            </CarouselDisplay>
+            {this.state.moreDormInfo ? (<MoreDormInfoBlock dorm={this.state.dorm} dormInfo={this.state.moreDormInfo} lottery={this.state.lotteryNums}></MoreDormInfoBlock>) : (<div></div>)}
+            <FilterDisplay>
+              <FilterTitle>Filter Reviews</FilterTitle>
+              <Filter>
+                <FilterCheckbox></FilterCheckbox><FilterText>Sort by date from latest to earliest</FilterText>
+              </Filter>
+              <Filter>
+                <FilterCheckbox></FilterCheckbox><FilterText>Sort by date from earliest to latest</FilterText>
+              </Filter>
+              <Filter>
+                <FilterCheckbox></FilterCheckbox><FilterText>Sort by agree to disagree ratio</FilterText>
+              </Filter>
+            </FilterDisplay>
           </ColTwo>
           <ColThree>
             <AllReviews>
               {this.state.reviews.map((review, j) => (
-                  <ReviewPageReview
+                  <NewReviewPageReview
                     key={""+j}
                     stars={review.NUM_STARS}
                     review={review.REVIEW_TXT}
