@@ -32,7 +32,9 @@ const claremont = (room) => {
 }
 
 const W548 = (room) => {
-  return "1"
+  let floor = room.slice(0,1)
+
+  return floor
 }
 
 /*
@@ -54,7 +56,9 @@ const W600 = (room) => {
 }
 
 const W627 = (room) => {
-  return "1"
+  let floor = room.slice(0,1)
+
+  return floor
 }
 
 /*
@@ -209,8 +213,14 @@ const hogan = (room) => {
   return floor
 }
 
+/*
+ * Hogan Hall has 8 floors.
+ * The first digit of the room number is the floor number.
+*/
 const mcbain = (room) => {
-  return "1"
+  let floor = room.slice(0,1)
+
+  return floor
 }
 
 
