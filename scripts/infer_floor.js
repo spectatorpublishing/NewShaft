@@ -98,25 +98,25 @@ const carlton = (room) => {
  *  Townhouse (Prefix with "H"):
  *  1. lower townhouses end in 1 or 2
  *    - all on same floor plan
- *   
+ *
  *  2. middle townhouses end in 3 or 4
  *    - middle A and B = MT1
  *    - MT2 are living rooms
  *    - middle C and D = MT3
  *    - middle E and F = MT4
- *   
+ *
  *  3. upper townhouses end in 5 or 6
  *    - UT1 are living rooms
  *    - upper A and B = UT2
  *    - upper C and D = UT3
  *    - upper E and F = UT4
- * 
+ *
  */
 
 const eastCampus = (room) => {
   let isTownhouse = room.slice(0,1) === "H"
   let floor = ""
-  
+
   if (isTownhouse){
     // roomSuffix : individual room letter (i.e. for room 1002A => "A")
     let roomSuffix = room.slice(room.length - 1, room.length)
@@ -300,9 +300,11 @@ const watt = (room) => {
  * Wien Hall has 12 floors.
  * Rooms with shared private bathroom are suffixed by "A/B".
  * The first one/two digit(s) of the room number is the floor number.
+ *
+ * Room 206/7 is a special case and is a walk through double on floor 2.
 */
 const wien = (room) => {
-  let roomNoSuffix = room.replace("A/B", "")
+  let roomNoSuffix = room.replace("A/B", "").replace("/7", "")
   let roomStrlen = roomNoSuffix.length
   let floor = ""
 
