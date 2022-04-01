@@ -1,9 +1,10 @@
 const fs = require('fs');
+const { parse } = require('json2csv');
 
 
 /* replace with the absolute path to the json files on your machine */
-const NLotteryPredicter2021 = "/Users/yunlan/Desktop/NLotteryPredicter2020_202203232113.json"
-const out = "/Users/yunlan/Desktop/NLotteryPredicter2020_inferred.json"
+const NLotteryPredicter2021 = "/Users/yunlan/Desktop/NLotteryPredicter2021_202203240917.json"
+const out = "/Users/yunlan/Desktop/NLotteryPredicter2021_inferred.csv"
 const table = 'NLotteryPredicter2021'
 const debug = 0
 
@@ -20,10 +21,10 @@ const DLog = (msg) => {
 const claremont = (room) => {
   let floor = ""
 
-  if (room.length === 2){
+  if (room.length === 2) {
     floor = "1"
-  } else if (room.length === 3){
-    floor = room.slice(0,1)
+  } else if (room.length === 3) {
+    floor = room.slice(0, 1)
   } else {
     console.error(`[ 47 Claremont ] invalid room number ${room}`)
   }
@@ -32,7 +33,7 @@ const claremont = (room) => {
 }
 
 const W548 = (room) => {
-  let floor = room.slice(0,1)
+  let floor = room.slice(0, 1)
 
   return floor
 }
@@ -44,10 +45,10 @@ const W548 = (room) => {
 const W600 = (room) => {
   let floor = ""
 
-  if (room.length === 3){
-    floor = room.slice(0,1)
-  } else if (room.length === 4){
-    floor = room.slice(0,2)
+  if (room.length === 3) {
+    floor = room.slice(0, 1)
+  } else if (room.length === 4) {
+    floor = room.slice(0, 2)
   } else {
     console.error(`[ 600 W 113th ] invalid room number ${room}`)
   }
@@ -56,7 +57,7 @@ const W600 = (room) => {
 }
 
 const W627 = (room) => {
-  let floor = room.slice(0,1)
+  let floor = room.slice(0, 1)
 
   return floor
 }
@@ -68,10 +69,10 @@ const W627 = (room) => {
 const broadway = (room) => {
   let floor = ""
 
-  if (room.length === 3){
-    floor = room.slice(0,1)
-  } else if (room.length === 4){
-    floor = room.slice(0,2)
+  if (room.length === 3) {
+    floor = room.slice(0, 1)
+  } else if (room.length === 4) {
+    floor = room.slice(0, 2)
   } else {
     console.error(`[ Broadway Hall ] invalid room number ${room}`)
   }
@@ -85,7 +86,7 @@ const broadway = (room) => {
  * The first two digits of the room number is the floor number.
 */
 const carlton = (room) => {
-  let floor = room.slice(0,2)
+  let floor = room.slice(0, 2)
 
   return floor
 }
@@ -114,10 +115,10 @@ const carlton = (room) => {
  */
 
 const eastCampus = (room) => {
-  let isTownhouse = room.slice(0,1) === "H"
+  let isTownhouse = room.slice(0, 1) === "H"
   let floor = ""
 
-  if (isTownhouse){
+  if (isTownhouse) {
     // roomSuffix : individual room letter (i.e. for room 1002A => "A")
     let roomSuffix = room.slice(room.length - 1, room.length)
 
@@ -127,24 +128,24 @@ const eastCampus = (room) => {
     let isMiddle = suiteSuffix === "3" || suiteSuffix === "4"
     let isUpper = suiteSuffix === "5" || suiteSuffix === "6"
 
-    if (isLower){
+    if (isLower) {
       floor = "LT"
-    } else if (isMiddle){
-      if (roomSuffix === "A" || roomSuffix === "B"){
+    } else if (isMiddle) {
+      if (roomSuffix === "A" || roomSuffix === "B") {
         floor = "MT1"
       } else if (roomSuffix === "C" || roomSuffix === "D") {
         floor = "MT3"
-      } else if (roomSuffix === "E" || roomSuffix === "F"){
+      } else if (roomSuffix === "E" || roomSuffix === "F") {
         floor = "MT4"
       } else {
         console.error(`[ East Campus ] invalid room number ${room}`)
       }
-    } else if (isUpper){
-      if (roomSuffix === "A" || roomSuffix === "B"){
+    } else if (isUpper) {
+      if (roomSuffix === "A" || roomSuffix === "B") {
         floor = "UT2"
       } else if (roomSuffix === "C" || roomSuffix === "D") {
         floor = "UT3"
-      } else if (roomSuffix === "E" || roomSuffix === "F"){
+      } else if (roomSuffix === "E" || roomSuffix === "F") {
         floor = "UT4"
       } else {
         console.error(`[ East Campus ] invalid room number ${room}`)
@@ -208,7 +209,7 @@ const harmony = (room) => {
  * The first digit of the room number is the floor number.
 */
 const hogan = (room) => {
-  let floor = room.slice(0,1)
+  let floor = room.slice(0, 1)
 
   return floor
 }
@@ -218,7 +219,7 @@ const hogan = (room) => {
  * The first digit of the room number is the floor number.
 */
 const mcbain = (room) => {
-  let floor = room.slice(0,1)
+  let floor = room.slice(0, 1)
 
   return floor
 }
@@ -247,7 +248,7 @@ const plimpton = (room) => {
  * The first digit of the room number is the floor number.
 */
 const river = (room) => {
-  let floor = room.slice(0,1)
+  let floor = room.slice(0, 1)
   DLog(`[ River ] ${room} -> ${floor}`)
 
   return floor
@@ -258,7 +259,7 @@ const river = (room) => {
  * The first digit of the room number is the floor number.
 */
 const ruggles = (room) => {
-  let floor = room.slice(0,1)
+  let floor = room.slice(0, 1)
 
   return floor
 }
@@ -291,7 +292,7 @@ const schapiro = (room) => {
  * The first digit of the room number is the floor number.
 */
 const watt = (room) => {
-  let floor = room.slice(0,1)
+  let floor = room.slice(0, 1)
 
   return floor
 }
@@ -326,7 +327,7 @@ const wien = (room) => {
  * The first digit of the room number is the floor number.
 */
 const woodbridge = (room) => {
-  let floor = room.slice(0,1)
+  let floor = room.slice(0, 1)
   DLog(`[ Woodbridge ] ${room} -> ${floor}`)
 
   return floor
@@ -353,23 +354,44 @@ const residenceHalls = {
   "Woodbridge Hall": woodbridge
 }
 
+// converts @param{data} in json format into csv
+// with fields specified by @param{fields}.
+// The resulting csv string is written to @param{out}.
+const json2csv = (data, fields, out) => {
+  const opts = { fields }
 
+  try {
+    const csv = parse(data, opts)
+
+    fs.writeFile(out, csv, function(err) {
+      if (err) throw err
+      console.log('Floor inferrence complete!')
+    })
+  } catch (err) {
+    console.error(err)
+  }
+}
+
+const fields = [
+  "DORM",
+  "NEW_PRIORITY",
+  "Classification",
+  "Category",
+  "GrpPtVal",
+  "NEW_NUM",
+  "ROOM",
+  "ROOM_SUFFIX",
+  "FLOOR"
+]
 let rawdata = fs.readFileSync(NLotteryPredicter2021);
 let data = JSON.parse(rawdata)[table];
 
 
-let inferred = JSON.parse(rawdata)[table].map( record => {
-  let {DORM: hall, ROOM: room} = record
+let inferred = data.map(record => {
+  let { DORM: hall, ROOM: room } = record
   record["FLOOR"] = residenceHalls[hall](room)
 
   return record
 })
 
-let newTable = {}
-newTable[table] = inferred
-
-fs.writeFile (out, JSON.stringify(newTable), function(err) {
-    if (err) throw err;
-    console.log('Floor inferrence complete!');
-    }
-);
+json2csv(inferred, fields, out)
