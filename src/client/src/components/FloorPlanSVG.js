@@ -62,24 +62,13 @@ const FloorPlanSVG = (props) => {
   const [suitePick, setSuitePick] = useState(false);
   const [showInfo, setShowInfo] = useState(props.showInfo);
 
-  const prevDormIdRef = useRef();
   useEffect(() => {
-    prevDormIdRef.current = props.dorm;
-  });
-
-  const prevDorm = prevDormIdRef.current;
+    setFloor(true);
+  }, [props.dorm]);
 
   useEffect(() => {
-    if (prevDorm === props.dorm) {
-      // only floor changed
-      setFloor(false);
-    }
-
-    if (prevDorm !== props.dorm) {
-      // dorm changed
-      setFloor(true);
-    }
-  }, [props.floor, props.dorm]);
+    setFloor(false);
+  }, [props.floor])
 
   const setFloor = (dorm_change) => {
     // Strip " Hall" out of the dorm name and concat with floor number
@@ -91,8 +80,7 @@ const FloorPlanSVG = (props) => {
 
     if (dorm_change == true) {
       var name = dorm + " " + firstFloor[dorm]
-    }
-    else {
+    } else {
       var name = dorm + " " + props.floor;
     }
 
