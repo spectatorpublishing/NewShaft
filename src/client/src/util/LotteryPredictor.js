@@ -91,10 +91,27 @@ function rugglesRoomFormatter(svgSuite, svgRoom, floor) {
   return converted
 }
 
+// In database, Watt Hall Room is floor followed by room.
+// so concatenate the floor and svgRoom number.
+function wattRoomFormatter(svgSuite, svgRoom, floor) {
+  let inferred = `${floor}${svgRoom}`
+
+  return inferred
+}
+
+// In database, Woodbridge Hall Room is floor followed by room.
+// so concatenate the floor and svgRoom number.
+function woodbridgeRoomFormatter(svgSuite, svgRoom, floor) {
+  let inferred = `${floor}${svgRoom}`
+
+  return inferred
+}
 
 const db2svgRoomFormat = {
   "47 Claremont": claremontRoomFormatter,
-  "Ruggles Hall": rugglesRoomFormatter
+  "Ruggles Hall": rugglesRoomFormatter,
+  "Watt Hall": wattRoomFormatter,
+  "Woodbridge Hall": woodbridgeRoomFormatter
 }
 
 
