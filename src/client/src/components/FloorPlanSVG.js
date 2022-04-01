@@ -5,7 +5,7 @@ import ReactTooltip from 'react-tooltip'
 import "../css/FloorPlanSVG.css" // Because react-tooltip
 import { CUTOFFS, SUITE_PICK } from "../util/Cutoffs"
 import { MAPPING } from "../util/Mapping"
-import { getDormColor, db2svgRoomFormat } from '../util/LotteryPredictor.js'
+import { getDormColor, db2svgRoomFormat, NO_DATA_COLOR } from '../util/LotteryPredictor.js'
 
 
 let FloorPlanWrapper = styled.div`
@@ -167,47 +167,36 @@ const FloorPlanSVG = (props) => {
     }
 
     document.querySelectorAll("rect").forEach((roomEl) => {
-      // Get the name of the room or suite that the lottery number
-      // Is stored under in the db
       let suiteEl = roomEl.parentElement;
       let suiteFromSvg = getDataFromSvg(suiteEl);
+      let roomFromSvg = getDataFromSvg(roomEl);
+
       // Nullify non-sensical suite value if not suite-style
       if (!suitePick && props.dorm != "600 W 113th") {
         suiteFromSvg = "";
       }
-      let roomFromSvg = getDataFromSvg(roomEl);
-      let roomOrSuiteName = getRoomOrSuite(suiteFromSvg, roomFromSvg);
 
-      if (props.dorm == "Watt Hall") {
-        let temp = roomOrSuiteName.substring(0, 1);
-        roomOrSuiteName = temp;
-      }
-
-      if (props.dorm == "Woodbridge Hall") {
-        // TODO:
-        // Temporary Hack. The SVG for Woodbridge floor 3 mis-spelled
-        // the attribute id to just d for room 3K
-        //
-        // Also need to implement the logic for Woodbridge in
-        // getRoomOrSuite
-        if (roomFromSvg != undefined) {
-          let temp = roomOrSuiteName.substring(0, 1);
-          roomOrSuiteName = temp;
-        }
-      }
-
+      // convert room/suite info from svg + floor to a room format used in database
+      let roomOrSuiteName
       if (db2svgRoomFormat.hasOwnProperty(props.dorm)) {
         roomOrSuiteName = db2svgRoomFormat[props.dorm](suiteFromSvg, roomFromSvg, props.floor)
       }
 
-      console.log(roomOrSuiteName)
+      // A room needs to be colored if
+      //   1. it's not part of a suite
+      //   2. a suite but the suite is not colored yet or is colored
+      //      NO_DATA_COLOR because we don't have the lottery info for a previous
+      //      room of the suite
       let fromDb = floorplanDic[roomOrSuiteName];
-      if (fromDb) {
-        let selectableEl = suitePick ? suiteEl : roomEl;
-        let roomPickedBy = fromDb["NEW_NUM"]
-        let color = getDormColor(props.lotteryNum, roomPickedBy)
+      let suiteFill = suiteEl.getAttribute("fill")
+      let needColoring = !suitePick || (suiteFill === null || suiteFill === NO_DATA_COLOR)
+      let color = NO_DATA_COLOR
 
-        console.log(fromDb, props.lotteryNum, color)
+      if (needColoring) {
+        let selectableEl = suitePick ? suiteEl : roomEl;
+        let roomPickedBy = fromDb && fromDb["NEW_NUM"]
+
+        color = getDormColor(props.lotteryNum, roomPickedBy)
 
         // Attach data attributes for react-tooltip
         selectableEl.setAttribute("fill", color)
@@ -219,45 +208,6 @@ const FloorPlanSVG = (props) => {
 
   const getDataFromSvg = (el) => {
     return el.dataset.name ? el.dataset.name : el.getAttribute("id");
-  }
-
-  const getRoomOrSuite = (suite, room) => {
-    // TODO: all the conditions stuff of turning the combination of
-    // Floor #, Suite #, and Room # into whatever is stored in the db
-    // Get dorm name and floor number through props
-    // Have fun mapping Carlton Arms and Ruggles
-    let dorm = props.dorm.replace(" Hall", "");
-    if (suite) {
-      if (dorm == "Ruggles") {
-        return props.floor + suite;
-      }
-      else if (dorm == "47 Claremont") {
-        let claremontFloor = props.floor == 1 ? "" : props.floor
-        return claremontFloor + suite;
-      }
-      else if (dorm == "Harmony") {
-        return props.floor + suite;
-      }
-      else if (dorm == "600 W 113th") {
-        return props.floor + suite + room
-      }
-      else if (dorm == "East Campus") {
-        return suite
-      }
-      return props.floor + suite;
-    }
-    else {
-      let floor = props.floor
-      if (dorm == "Harmony" && props.floor == "Mezzanine") {
-        floor = "1M"
-      }
-      else if (dorm == "East Campus") {
-        if (props.floor == "H" || props.floor == "6") {
-          return room
-        }
-      }
-      return floor + room;
-    }
   }
 
   const getTooltipContent = (room) => {

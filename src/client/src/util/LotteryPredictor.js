@@ -26,9 +26,12 @@ const RANGE = 150
 //   SIMILAR_COLOR: for dorms picked within the range of the lottery number
 //   UNAVAILABLE_COLOR: for dorms picked by a lower lottery number -> likely unavailable
 //   AVAILABLE_COLOR: for dorms picked by a higher lottery number -> likely available
+//   NO_DATA_COLOR: for dorms we don't have historical lottery data
 const SIMILAR_COLOR = "yellow"
 const UNAVAILABLE_COLOR = "gray"
 const AVAILABLE_COLOR = "green"
+const NO_DATA_COLOR = "white"
+
 
 /******************************************************************************
  *  Helper Functions
@@ -44,7 +47,9 @@ function getDormColor(userLotteryNumber, historicalLotteryNumber) {
   let similarUpperbound = Math.min(userLotteryNumber + RANGE, LOTTERY_HI)
   let color
 
-  if (historicalLotteryNumber < similarLowerbound) {
+  if (typeof historicalLotteryNumber === "undefined") {
+    color = NO_DATA_COLOR
+  } else if (historicalLotteryNumber < similarLowerbound) {
     color = UNAVAILABLE_COLOR
   } else if (historicalLotteryNumber > similarUpperbound) {
     color = AVAILABLE_COLOR
@@ -107,10 +112,48 @@ function woodbridgeRoomFormatter(svgSuite, svgRoom, floor) {
   return inferred
 }
 
+function broadwayRoomFormatter(svgSuite, svgRoom, floor) {
+  return floor + svgRoom
+}
+
+function eastCampusRoomFormatter(svgSuite, svgRoom, floor) {
+  let inferred = svgSuite + svgRoom
+
+  // Not suites
+  if (floor === "6") {
+    inferred = svgRoom
+  }
+
+  return inferred
+}
+
+function hoganRoomFormatter(svgSuite, svgRoom, floor) {
+  svgRoom = svgRoom.trim().slice(0,1)
+  return floor + svgSuite + svgRoom
+}
+
+function w600RoomFormatter(svgSuite, svgRoom, floor) {
+  return floor + svgSuite + svgRoom
+}
+
+function normalRoomFormatter(svgSuite, svgRoom, floor) {
+  return floor + svgRoom
+}
+
 const db2svgRoomFormat = {
   "47 Claremont": claremontRoomFormatter,
+  "Broadway Hall": broadwayRoomFormatter,
+  "East Campus": eastCampusRoomFormatter,
+  "Furnald Hall": normalRoomFormatter,
+  "Harmony Hall": normalRoomFormatter,
+  "Hogan Hall": hoganRoomFormatter,
+  "McBain Hall": normalRoomFormatter,
+  "600 W 113th": w600RoomFormatter,
+  "River Hall": normalRoomFormatter,
   "Ruggles Hall": rugglesRoomFormatter,
+  "Schapiro Hall": normalRoomFormatter,
   "Watt Hall": wattRoomFormatter,
+  "Wien Hall": normalRoomFormatter,
   "Woodbridge Hall": woodbridgeRoomFormatter
 }
 
@@ -121,7 +164,7 @@ const db2svgRoomFormat = {
 
 module.exports = {
   LOTTERY_LO, LOTTERY_HI, RANGE,
-  SIMILAR_COLOR, UNAVAILABLE_COLOR, AVAILABLE_COLOR,
+  SIMILAR_COLOR, UNAVAILABLE_COLOR, AVAILABLE_COLOR, NO_DATA_COLOR,
   isLotteryNumberValid,
   getDormColor,
   db2svgRoomFormat
