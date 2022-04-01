@@ -1,16 +1,12 @@
-import React, { Component, useEffect, useState, useRef } from "react";
-import styled from 'styled-components';
+import React, { Component, useEffect, useState, useRef } from "react"
+import styled from 'styled-components'
 import { ReactSVG } from 'react-svg'
-import ReactTooltip from 'react-tooltip';
-import "../css/FloorPlanSVG.css"; // Because react-tooltip
-import { CUTOFFS, SUITE_PICK } from "../util/Cutoffs";
-import { MAPPING } from "../util/Mapping";
+import ReactTooltip from 'react-tooltip'
+import "../css/FloorPlanSVG.css" // Because react-tooltip
+import { CUTOFFS, SUITE_PICK } from "../util/Cutoffs"
+import { MAPPING } from "../util/Mapping"
+import { getDormColor } from '../util/LotteryPredictor.js'
 
-
-const RANGE = 150; //range above and below lottery num that is considered "within range"
-const RANGE_COLOR = "yellow";//Color for the dorms within the range of the lottery number
-const ABOVE_COLOR = "gray";//Color for the dorms likely to be unavailable (above lottery #)
-const BELOW_COLOR = "green";//Color for dorms likely to be available but below range
 
 let FloorPlanWrapper = styled.div`
   & rect {
@@ -207,23 +203,12 @@ const FloorPlanSVG = (props) => {
       if (fromDb) {
         let selectableEl = suitePick ? suiteEl : roomEl;
         let roomPickedBy = fromDb["NEW_NUM"]
-        let similarLowerbound = Math.max(props.lotteryNum - RANGE, 0)
-        let similarUpperbound = Math.min(props.lotteryNum + RANGE, 5000)
+        let color = getDormColor(props.lotteryNum, roomPickedBy)
 
-        // recall: above_color = gray
-        // range_color = yellow
-        // below_color = green
-
-        if (roomPickedBy < similarLowerbound) {
-          selectableEl.setAttribute("fill", ABOVE_COLOR)
-        } else if (roomPickedBy > similarUpperbound) {
-          selectableEl.setAttribute("fill", BELOW_COLOR);
-        } else {
-          selectableEl.setAttribute("fill", RANGE_COLOR);
-        }
-        console.log(fromDb, roomPickedBy, similarLowerbound, similarUpperbound)
+        console.log(fromDb, props.lotteryNum, color)
 
         // Attach data attributes for react-tooltip
+        selectableEl.setAttribute("fill", color)
         selectableEl.setAttribute("data-tip", roomOrSuiteName);
         selectableEl.setAttribute("data-for", "global");
       }

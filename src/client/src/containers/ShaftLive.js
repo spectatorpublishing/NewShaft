@@ -1,8 +1,9 @@
-import React, { useEffect, useState } from 'react';
-import styled from "styled-components/macro";
-import FloorButton from "../components/FloorButton.js";
+import React, { useEffect, useState } from 'react'
+import styled from "styled-components/macro"
+import FloorButton from "../components/FloorButton.js"
 import FloorPlanSVG from "../components/FloorPlanSVG"
-import DormList from '../components/LotteryPredictor/DormList.js';
+import DormList from '../components/LotteryPredictor/DormList.js'
+import { isLotteryNumberValid } from '../util/LotteryPredictor.js'
 
 const ShaftLiveContainer = styled.div`
     display: flex;
@@ -330,7 +331,7 @@ const ShaftLive = (props) => {
     if (num.length === 0) {
       setLotteryNum(0);
       clearErrorMessage();
-    } else if (number < 0 || number > 5000) {
+    } else if (!isLotteryNumberValid(number)) {
       setLotteryNum(0);
       setErrorMessage("Enter valid lottery number")
     } else {
