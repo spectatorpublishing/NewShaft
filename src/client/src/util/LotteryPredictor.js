@@ -75,9 +75,26 @@ function claremontRoomFormatter(svgSuite, svgRoom, floor) {
   return suite
 }
 
+// In databases, lottery number is stored for each room, not by suite
+// so we use the inferred room number from svg.
+//
+// Ruggles Floor 1 & 2: svgRoom is the room number
+// Other floors: svgSuite is in the form ()-(room number)
+function rugglesRoomFormatter(svgSuite, svgRoom, floor) {
+  let converted = svgRoom
+  floor = parseInt(floor)
+
+  if (floor > 2) {
+    converted = svgSuite.split("-")[1]
+  }
+
+  return converted
+}
+
 
 const db2svgRoomFormat = {
-  "47 Claremont": claremontRoomFormatter
+  "47 Claremont": claremontRoomFormatter,
+  "Ruggles Hall": rugglesRoomFormatter
 }
 
 
