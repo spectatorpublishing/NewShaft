@@ -69,7 +69,7 @@ const FloorPlanLegend = styled.div`
   margin: 1rem 0;
   display: flex;
   justify-content: flex-start;
-  
+
   @media only screen and (max-width: 992px){
     text-align: center;
     flex-wrap: wrap;
@@ -114,7 +114,7 @@ const InputsWrapper = styled.div`
 `;
 
 const Input = styled.form`
-  
+
   color: #707070;
   font-family: Raleway;
   font-style: normal;
@@ -225,7 +225,7 @@ const DisclaimerTextBox = styled.div`
   &.disclaimer {
     color: #9A4A4A;
     padding-bottom: 0.3rem;
-    
+
     @media(max-width: 991px){
       border-top: 1px solid #C4C4C4;
       padding-top: 1rem;
@@ -233,7 +233,7 @@ const DisclaimerTextBox = styled.div`
   }
 `;
 
-const Mobile = styled.div`  
+const Mobile = styled.div`
   @media(min-width: 991px){
     display: none;
   }
@@ -253,10 +253,6 @@ const ShaftLive = (props) => {
   const [floorData, setFloorData] = useState([]);
   const [init, setInit] = useState(true);
   const [lotteryNum, setLotteryNum] = useState(0);
-  const [convertedNumLow, setConvertedNumLow] = useState(null);
-  const [convertedNumHigh, setConvertedNumHigh] = useState(null);
-  const [priority, setPriority] = useState(null);
-  const [full, setFull] = useState(" ");
   const [errorMsg, setErrorMessage] = useState("");
 
   useEffect(() => {
@@ -293,18 +289,6 @@ const ShaftLive = (props) => {
     return [floorNums, floorData];
   }
 
-  async function fetchFloorNums(dorm) {
-    const floorNumsRes = await fetch(`/api/getUniqueFloorNumbers/${dorm}`, {
-        method: 'GET',
-        headers: {
-          'Content-Type': 'application/json'
-        },
-      })
-
-    const floorNums = await floorNumsRes.json();
-    return floorNums;
-  }
-
   async function fetchFloorData(dorm, floor) {
     const floorDataRes = await fetch(`/api/getLotteryNum/${dorm}/${floor}`, {
       method: 'GET',
@@ -330,15 +314,6 @@ const ShaftLive = (props) => {
       });
   }
 
-  const getFloorNums = (dorm, floor) => {
-    fetchFloorNums(dorm, floor)
-      .then((floorNums) => {
-        setFloorNums(floorNums);
-      }).catch(error => {
-        console.log(error);
-      });
-  }
-
   const getFloorData = (dorm, floor) => {
     fetchFloorData(dorm, floor)
       .then((floorData) => {
@@ -349,9 +324,8 @@ const ShaftLive = (props) => {
       });
   }
 
-  const convertNumber = (num) => {
+  const handleLotteryNumber = (num) => {
     const number = parseInt(num.toString())
-    /* var groupSize = parseInt(document.getElementById("groupSize").value.toString()); */
 
     if (num.length === 0) {
       setLotteryNum(0);
@@ -361,54 +335,9 @@ const ShaftLive = (props) => {
       setErrorMessage("Enter valid lottery number")
     } else {
       clearErrorMessage();
-      var thousands = (num - (num % 1000)) / 1000
-      //console.log("thousands: ", thousands);
-      if (thousands == 0) {
-        var priority = 30;
-      }
-      else if (thousands == 1) {
-        var priority = 25;
-      }
-      else if (thousands == 2) {
-        var priority = 20;
-      }
-      else if (thousands == 3) {
-        var priority = 15;
-      }
-      else {
-        var priority = 10;
-      }
-      //console.log("priority: ", priority)
-      var converted = (num - (thousands * 1000)) * (3000 / 1000)
-      //console.log("converted num: ", converted)
-      var rounded = converted - (converted % 10)
-      if (rounded < 40) {
-        var low = 0;
-      }
-      else {
-        var low = rounded - 50
-      }
-      if (rounded > 2950) {
-        var high = 3000;
-      }
-      else {
-        var high = rounded + 50
-      }
-      //console.log("range: ", low, " - ", high)
-
-      setLotteryNum(num);
-      setConvertedNumLow(low);
-      setConvertedNumHigh(high);
-      setPriority(priority);
-      setFull(priority + " | " + low + " - " + high);
-      //setDorm("47 Claremont");
-
-      /* if ( groupSize < 1 || groupSize > 10) {
-        setErrorMessage("Enter valid group size")
-      } else {
-        clearErrorMessage();
-      }  */
     }
+
+    setLotteryNum(num);
   }
 
   const handleSubmit = (e) => {
@@ -453,9 +382,7 @@ const ShaftLive = (props) => {
       <FloorButton floorNums={floorNums} handleChange={handleFloorChange} />
       <FloorPlanWrapper>
         <FloorPlanSVG
-          priority={priority}
-          low={convertedNumLow}
-          high={convertedNumHigh}
+          lotteryNum={lotteryNum}
           dorm={dorm}
           floor={floor}
           data={floorData}
@@ -474,7 +401,7 @@ const ShaftLive = (props) => {
           <InputsWrapper>
             <Input id="form" onSubmit={handleSubmit}>
               <label for="userNum">Lottery Number:  </label>
-              <StyleInput type="number" id="userNum" min="1" max="5000" onChange={(e) => convertNumber(e.target.value)} />
+              <StyleInput type="number" id="userNum" min="1" max="5000" onChange={(e) => handleLotteryNumber(e.target.value)} />
             </Input>
             {/* <Input id="form">
                 <label for="groupSize">Group Size:  </label>
@@ -500,7 +427,7 @@ const ShaftLive = (props) => {
               <InputsWrapper>
                 <Input id="form" onSubmit={handleSubmit}>
                   <label for="userNum">Lottery Number</label>
-                  <StyleInput type="number" id="userNum" onChange={(e) => convertNumber(e.target.value)} />
+                  <StyleInput type="number" id="userNum" onChange={(e) => handleLotteryNumber(e.target.value)} />
                 </Input>
                 {/* <Input id="form">
                 <label for="groupSize">Group Size</label>

@@ -65,9 +65,6 @@ const FloorPlanSVG = (props) => {
   const [floorplanDic, setFloorPlanDic] = useState({});
   const [suitePick, setSuitePick] = useState(false);
   const [showInfo, setShowInfo] = useState(props.showInfo);
-  const [priority, setPriority] = useState(10);
-  const [lowNum, setLow] = useState(1);
-  const [highNum, setHigh] = useState(200);
 
   const prevDormIdRef = useRef();
   useEffect(() => {
@@ -76,12 +73,6 @@ const FloorPlanSVG = (props) => {
 
   const prevDorm = prevDormIdRef.current;
 
-  useEffect(() => {
-    setPriority(props.priority);
-    setLow(props.low);
-    setHigh(props.high);
-  }, [props.priority]);
-  
   useEffect(() => {
     if (prevDorm === props.dorm) {
       // only floor changed
@@ -211,56 +202,26 @@ const FloorPlanSVG = (props) => {
 
       // Check if the room labeled on the SVG matches the name in the db
 
+      console.log(roomOrSuiteName)
       let fromDb = floorplanDic[roomOrSuiteName];
       if (fromDb) {
-        let selectableEl = roomEl;
-        if (suitePick) {
-          selectableEl = suiteEl;
-        }
+        let selectableEl = suitePick ? suiteEl : roomEl;
+        let roomPickedBy = fromDb["NEW_NUM"]
+        let similarLowerbound = Math.max(props.lotteryNum - RANGE, 0)
+        let similarUpperbound = Math.min(props.lotteryNum + RANGE, 5000)
 
         // recall: above_color = gray
         // range_color = yellow
         // below_color = green
-        let high = highNum;
-        let low = lowNum;
-        let upperBound = (high < 2850) ? high += RANGE : 3000;
-        let lowerBound = (low > 150) ? low -= RANGE : 0;
-        let priority_co, num_co = false;
-        //console.log([priority, lowNum, highNum])
 
-        if (!fromDb["NEW_PRIORITY"]) {
-          let roomTypeMapped = getRoomTypeMapped(fromDb["ROOM_TYPE"])
-          let lottery = getCutoff(roomTypeMapped);
-          let split = lottery.indexOf("|");
-          priority_co = lottery.substring(0, split - 1);
-          num_co = lottery.substring(split + 1, lottery.length);
-          ////console.log("cutoffs", priority_co, " | ", num_co)
+        if (roomPickedBy < similarLowerbound) {
+          selectableEl.setAttribute("fill", ABOVE_COLOR)
+        } else if (roomPickedBy > similarUpperbound) {
+          selectableEl.setAttribute("fill", BELOW_COLOR);
+        } else {
+          selectableEl.setAttribute("fill", RANGE_COLOR);
         }
-
-
-        if (priority != null) {
-          if ((parseInt(fromDb["NEW_PRIORITY"]) > priority) || (priority_co && (priority_co > priority))) {
-            selectableEl.setAttribute("fill", ABOVE_COLOR);
-          }
-
-          else if ((parseInt(fromDb["NEW_PRIORITY"]) < priority) || (priority_co && (priority_co < priority))) {
-            selectableEl.setAttribute("fill", BELOW_COLOR);
-          }
-
-          else if ((parseInt(fromDb["NEW_PRIORITY"]) == priority) || priority_co == priority) {//dorm and user have same priority number
-
-            if ((parseInt(fromDb["NEW_NUM"]) < lowerBound) || (num_co && (num_co < lowerBound))) {
-              selectableEl.setAttribute("fill", ABOVE_COLOR);
-            }
-            if ((parseInt(fromDb["NEW_NUM"]) > lowerBound) || (num_co && (num_co > lowerBound))) {
-              selectableEl.setAttribute("fill", RANGE_COLOR);
-            }
-            if ((parseInt(fromDb["NEW_NUM"]) > upperBound) || (num_co && (num_co > upperBound))) {
-              selectableEl.setAttribute("fill", BELOW_COLOR);
-            }
-          }
-
-        }
+        console.log(fromDb, roomPickedBy, similarLowerbound, similarUpperbound)
 
         // Attach data attributes for react-tooltip
         selectableEl.setAttribute("data-tip", roomOrSuiteName);
