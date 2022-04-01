@@ -5,7 +5,7 @@ import ReactTooltip from 'react-tooltip'
 import "../css/FloorPlanSVG.css" // Because react-tooltip
 import { CUTOFFS, SUITE_PICK } from "../util/Cutoffs"
 import { MAPPING } from "../util/Mapping"
-import { getDormColor } from '../util/LotteryPredictor.js'
+import { getDormColor, db2svgRoomFormat } from '../util/LotteryPredictor.js'
 
 
 let FloorPlanWrapper = styled.div`
@@ -196,7 +196,9 @@ const FloorPlanSVG = (props) => {
         }
       }
 
-      // Check if the room labeled on the SVG matches the name in the db
+      if (db2svgRoomFormat.hasOwnProperty(props.dorm)) {
+        roomOrSuiteName = db2svgRoomFormat[props.dorm](suiteFromSvg, roomFromSvg, props.floor)
+      }
 
       console.log(roomOrSuiteName)
       let fromDb = floorplanDic[roomOrSuiteName];

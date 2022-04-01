@@ -58,9 +58,37 @@ function getDormColor(userLotteryNumber, historicalLotteryNumber) {
   return color
 }
 
+
+/******************************************************************************
+ *  SVG ROOM / SUITE FORMAT -> DB ROOM FORMAT
+ *****************************************************************************/
+
+function claremontRoomFormatter(svgSuite, svgRoom, floor) {
+  let suite
+
+  if (floor == "1") {
+    suite = `${svgSuite}${svgRoom}`
+  } else {
+    suite = `${floor}${svgSuite}${svgRoom}`
+  }
+
+  return suite
+}
+
+
+const db2svgRoomFormat = {
+  "47 Claremont": claremontRoomFormatter
+}
+
+
+/******************************************************************************
+ *  Exports
+ *****************************************************************************/
+
 module.exports = {
   LOTTERY_LO, LOTTERY_HI, RANGE,
   SIMILAR_COLOR, UNAVAILABLE_COLOR, AVAILABLE_COLOR,
   isLotteryNumberValid,
-  getDormColor
+  getDormColor,
+  db2svgRoomFormat
 }
