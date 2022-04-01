@@ -211,43 +211,31 @@ const FloorPlanSVG = (props) => {
   }
 
   const getTooltipContent = (room) => {
-    ////console.log("tooltip", room)
     let fromDb = floorplanDic[room];
     let label = suitePick ? "Suite" : "Room";
 
     if (!fromDb) {
       // RA Room / not a part of room selection (Gray)
       return <TooltipBox><TooltipText>Not Available</TooltipText></TooltipBox>;
-    }
-    else {
+    } else {
       // Get room type by mapping the type string as it appears in the db
       // to the descriptive string as it appears on Housing's website
       // (where we scraped the cutoff data from)
+      //
+      // TODO: 2020&2021 lottery data from housing doesn't contain room type
+      // information. This needs to be added.
       let roomTypeMapped = getRoomTypeMapped(fromDb["ROOM_TYPE"])
       let roomTypeLabel = "Room Type";
       let roomType = roomTypeMapped;
-
-      // if (props.dorm == "Woodbridge Hall") {
-      //   let roomFromSvg = getDataFromSvg(room);
-      //   if (roomFromSvg == "H" || roomFromSvg == "K" || roomFromSvg == "C") {
-      //     roomType = "High Demand (H + K + C lines)";
-      //   }
-      //   else if (roomFromSvg == "G" || roomFromSvg == "D" || roomFromSvg == "I") {
-      //     roomType = "Low Demand (G + D + I lines)";
-      //   }
-      //   else {
-      //     roomType = "Medium Demand (all others)";
-      //   }
-      // }
 
       // Not taken yet (Green)
       let lotteryLabel = "Last Year's Cutoff";
       let lottery = getCutoff(roomTypeMapped);
 
       // Taken room (Red)
-      if (fromDb["NEW_PRIORITY"]) {
+      if (fromDb["NEW_NUM"]) {
         lotteryLabel = "Taken By";
-        lottery = fromDb["NEW_PRIORITY"] + " | " + fromDb["NEW_NUM"];
+        lottery = fromDb["NEW_NUM"];
       }
 
       return (
@@ -270,6 +258,7 @@ const FloorPlanSVG = (props) => {
   }
 
   const getCutoff = (roomTypeMapped) => {
+    // TODO: These data are no longer accurate, needs to be updated.
     return CUTOFFS[floorplanDorm][roomTypeMapped];
   }
 
