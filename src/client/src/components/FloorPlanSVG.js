@@ -1,16 +1,12 @@
-import React, { Component, useEffect, useState, useRef } from "react";
-import styled from 'styled-components';
+import React, { Component, useEffect, useState, useRef } from "react"
+import styled from 'styled-components'
 import { ReactSVG } from 'react-svg'
-import ReactTooltip from 'react-tooltip';
-import "../css/FloorPlanSVG.css"; // Because react-tooltip
-import { CUTOFFS, SUITE_PICK } from "../util/Cutoffs";
-import { MAPPING } from "../util/Mapping";
+import ReactTooltip from 'react-tooltip'
+import "../css/FloorPlanSVG.css" // Because react-tooltip
+import { CUTOFFS, SUITE_PICK } from "../util/Cutoffs"
+import { MAPPING } from "../util/Mapping"
+import { getDormColor, db2svgRoomFormat, NO_DATA_COLOR } from '../util/LotteryPredictor.js'
 
-
-const RANGE = 150; //range above and below lottery num that is considered "within range"
-const RANGE_COLOR = "yellow";//Color for the dorms within the range of the lottery number
-const ABOVE_COLOR = "gray";//Color for the dorms likely to be unavailable (above lottery #)
-const BELOW_COLOR = "green";//Color for dorms likely to be available but below range
 
 let FloorPlanWrapper = styled.div`
   & rect {
@@ -65,34 +61,14 @@ const FloorPlanSVG = (props) => {
   const [floorplanDic, setFloorPlanDic] = useState({});
   const [suitePick, setSuitePick] = useState(false);
   const [showInfo, setShowInfo] = useState(props.showInfo);
-  const [priority, setPriority] = useState(10);
-  const [lowNum, setLow] = useState(1);
-  const [highNum, setHigh] = useState(200);
-
-  const prevDormIdRef = useRef();
-  useEffect(() => {
-    prevDormIdRef.current = props.dorm;
-  });
-
-  const prevDorm = prevDormIdRef.current;
 
   useEffect(() => {
-    setPriority(props.priority);
-    setLow(props.low);
-    setHigh(props.high);
-  }, [props.priority]);
-  
-  useEffect(() => {
-    if (prevDorm === props.dorm) {
-      // only floor changed
-      setFloor(false);
-    }
+    setFloor(true);
+  }, [props.dorm]);
 
-    if (prevDorm !== props.dorm) {
-      // dorm changed
-      setFloor(true);
-    }
-  }, [props.floor, props.dorm]);
+  useEffect(() => {
+    setFloor(false);
+  }, [props.floor])
 
   const setFloor = (dorm_change) => {
     // Strip " Hall" out of the dorm name and concat with floor number
@@ -104,8 +80,7 @@ const FloorPlanSVG = (props) => {
 
     if (dorm_change == true) {
       var name = dorm + " " + firstFloor[dorm]
-    }
-    else {
+    } else {
       var name = dorm + " " + props.floor;
     }
 
@@ -180,89 +155,39 @@ const FloorPlanSVG = (props) => {
     }
 
     document.querySelectorAll("rect").forEach((roomEl) => {
-      // Get the name of the room or suite that the lottery number
-      // Is stored under in the db
       let suiteEl = roomEl.parentElement;
       let suiteFromSvg = getDataFromSvg(suiteEl);
+      let roomFromSvg = getDataFromSvg(roomEl);
+
       // Nullify non-sensical suite value if not suite-style
       if (!suitePick && props.dorm != "600 W 113th") {
         suiteFromSvg = "";
       }
-      let roomFromSvg = getDataFromSvg(roomEl);
-      let roomOrSuiteName = getRoomOrSuite(suiteFromSvg, roomFromSvg);
 
-      if (props.dorm == "Watt Hall") {
-        let temp = roomOrSuiteName.substring(0, 1);
-        roomOrSuiteName = temp;
+      // convert room/suite info from svg + floor to a room format used in database
+      let roomOrSuiteName
+      if (db2svgRoomFormat.hasOwnProperty(props.dorm)) {
+        roomOrSuiteName = db2svgRoomFormat[props.dorm](suiteFromSvg, roomFromSvg, props.floor)
       }
 
-      if (props.dorm == "Woodbridge Hall") {
-        // TODO:
-        // Temporary Hack. The SVG for Woodbridge floor 3 mis-spelled
-        // the attribute id to just d for room 3K
-        //
-        // Also need to implement the logic for Woodbridge in
-        // getRoomOrSuite
-        if (roomFromSvg != undefined) {
-          let temp = roomOrSuiteName.substring(0, 1);
-          roomOrSuiteName = temp;
-        }
-      }
-
-      // Check if the room labeled on the SVG matches the name in the db
-
+      // A room needs to be colored if
+      //   1. it's not part of a suite
+      //   2. a suite but the suite is not colored yet or is colored
+      //      NO_DATA_COLOR because we don't have the lottery info for a previous
+      //      room of the suite
       let fromDb = floorplanDic[roomOrSuiteName];
-      if (fromDb) {
-        let selectableEl = roomEl;
-        if (suitePick) {
-          selectableEl = suiteEl;
-        }
+      let suiteFill = suiteEl.getAttribute("fill")
+      let needColoring = !suitePick || (suiteFill === null || suiteFill === NO_DATA_COLOR)
+      let color = NO_DATA_COLOR
 
-        // recall: above_color = gray
-        // range_color = yellow
-        // below_color = green
-        let high = highNum;
-        let low = lowNum;
-        let upperBound = (high < 2850) ? high += RANGE : 3000;
-        let lowerBound = (low > 150) ? low -= RANGE : 0;
-        let priority_co, num_co = false;
-        //console.log([priority, lowNum, highNum])
+      if (needColoring) {
+        let selectableEl = suitePick ? suiteEl : roomEl;
+        let roomPickedBy = fromDb && fromDb["NEW_NUM"]
 
-        if (!fromDb["NEW_PRIORITY"]) {
-          let roomTypeMapped = getRoomTypeMapped(fromDb["ROOM_TYPE"])
-          let lottery = getCutoff(roomTypeMapped);
-          let split = lottery.indexOf("|");
-          priority_co = lottery.substring(0, split - 1);
-          num_co = lottery.substring(split + 1, lottery.length);
-          ////console.log("cutoffs", priority_co, " | ", num_co)
-        }
-
-
-        if (priority != null) {
-          if ((parseInt(fromDb["NEW_PRIORITY"]) > priority) || (priority_co && (priority_co > priority))) {
-            selectableEl.setAttribute("fill", ABOVE_COLOR);
-          }
-
-          else if ((parseInt(fromDb["NEW_PRIORITY"]) < priority) || (priority_co && (priority_co < priority))) {
-            selectableEl.setAttribute("fill", BELOW_COLOR);
-          }
-
-          else if ((parseInt(fromDb["NEW_PRIORITY"]) == priority) || priority_co == priority) {//dorm and user have same priority number
-
-            if ((parseInt(fromDb["NEW_NUM"]) < lowerBound) || (num_co && (num_co < lowerBound))) {
-              selectableEl.setAttribute("fill", ABOVE_COLOR);
-            }
-            if ((parseInt(fromDb["NEW_NUM"]) > lowerBound) || (num_co && (num_co > lowerBound))) {
-              selectableEl.setAttribute("fill", RANGE_COLOR);
-            }
-            if ((parseInt(fromDb["NEW_NUM"]) > upperBound) || (num_co && (num_co > upperBound))) {
-              selectableEl.setAttribute("fill", BELOW_COLOR);
-            }
-          }
-
-        }
+        color = getDormColor(props.lotteryNum, roomPickedBy)
 
         // Attach data attributes for react-tooltip
+        selectableEl.setAttribute("fill", color)
         selectableEl.setAttribute("data-tip", roomOrSuiteName);
         selectableEl.setAttribute("data-for", "global");
       }
@@ -273,83 +198,32 @@ const FloorPlanSVG = (props) => {
     return el.dataset.name ? el.dataset.name : el.getAttribute("id");
   }
 
-  const getRoomOrSuite = (suite, room) => {
-    // TODO: all the conditions stuff of turning the combination of
-    // Floor #, Suite #, and Room # into whatever is stored in the db
-    // Get dorm name and floor number through props
-    // Have fun mapping Carlton Arms and Ruggles
-    let dorm = props.dorm.replace(" Hall", "");
-    if (suite) {
-      if (dorm == "Ruggles") {
-        return props.floor + suite;
-      }
-      else if (dorm == "47 Claremont") {
-        let claremontFloor = props.floor == 1 ? "" : props.floor
-        return claremontFloor + suite;
-      }
-      else if (dorm == "Harmony") {
-        return props.floor + suite;
-      }
-      else if (dorm == "600 W 113th") {
-        return props.floor + suite + room
-      }
-      else if (dorm == "East Campus") {
-        return suite
-      }
-      return props.floor + suite;
-    }
-    else {
-      let floor = props.floor
-      if (dorm == "Harmony" && props.floor == "Mezzanine") {
-        floor = "1M"
-      }
-      else if (dorm == "East Campus") {
-        if (props.floor == "H" || props.floor == "6") {
-          return room
-        }
-      }
-      return floor + room;
-    }
-  }
-
   const getTooltipContent = (room) => {
-    ////console.log("tooltip", room)
     let fromDb = floorplanDic[room];
     let label = suitePick ? "Suite" : "Room";
 
     if (!fromDb) {
       // RA Room / not a part of room selection (Gray)
       return <TooltipBox><TooltipText>Not Available</TooltipText></TooltipBox>;
-    }
-    else {
+    } else {
       // Get room type by mapping the type string as it appears in the db
       // to the descriptive string as it appears on Housing's website
       // (where we scraped the cutoff data from)
+      //
+      // TODO: 2020&2021 lottery data from housing doesn't contain room type
+      // information. This needs to be added.
       let roomTypeMapped = getRoomTypeMapped(fromDb["ROOM_TYPE"])
       let roomTypeLabel = "Room Type";
       let roomType = roomTypeMapped;
-
-      // if (props.dorm == "Woodbridge Hall") {
-      //   let roomFromSvg = getDataFromSvg(room);
-      //   if (roomFromSvg == "H" || roomFromSvg == "K" || roomFromSvg == "C") {
-      //     roomType = "High Demand (H + K + C lines)";
-      //   }
-      //   else if (roomFromSvg == "G" || roomFromSvg == "D" || roomFromSvg == "I") {
-      //     roomType = "Low Demand (G + D + I lines)";
-      //   }
-      //   else {
-      //     roomType = "Medium Demand (all others)";
-      //   }
-      // }
 
       // Not taken yet (Green)
       let lotteryLabel = "Last Year's Cutoff";
       let lottery = getCutoff(roomTypeMapped);
 
       // Taken room (Red)
-      if (fromDb["NEW_PRIORITY"]) {
+      if (fromDb["NEW_NUM"]) {
         lotteryLabel = "Taken By";
-        lottery = fromDb["NEW_PRIORITY"] + " | " + fromDb["NEW_NUM"];
+        lottery = fromDb["NEW_NUM"];
       }
 
       return (
@@ -372,6 +246,7 @@ const FloorPlanSVG = (props) => {
   }
 
   const getCutoff = (roomTypeMapped) => {
+    // TODO: These data are no longer accurate, needs to be updated.
     return CUTOFFS[floorplanDorm][roomTypeMapped];
   }
 

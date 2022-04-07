@@ -106,8 +106,8 @@ const FilterBar = (props) => {
 			let categoryPayload = categoryFilters.filter(filter => 
 				!!props.payload[FILTER_NAME_TO_KEY[filter]]
 			);
-            console.log("filters: ", categoryFilters);
-            console.log("payload: ", categoryPayload);
+            //console.log("filters: ", categoryFilters);
+            //console.log("payload: ", categoryPayload);
 
 			
 			return <SingleFilter 
