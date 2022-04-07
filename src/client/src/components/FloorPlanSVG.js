@@ -64,15 +64,18 @@ const FloorPlanSVG = (props) => {
 
   useEffect(() => {
     setFloor(true);
+    console.log("1. floorplans: change in dorm")
   }, [props.dorm]);
 
   useEffect(() => {
     setFloor(false);
+    console.log("1. floorplans: change in floor")
   }, [props.floor])
 
   const setFloor = (dorm_change) => {
     // Strip " Hall" out of the dorm name and concat with floor number
     // e.g. dorm: River Hall, floor: 6 -> River 6
+    console.log("2. floorplans: setFloor")
     let dorm = props.dorm.replace(" Hall", "");
     if (dorm == "600 W 113th") {
       dorm = "600 West 113";
@@ -131,9 +134,11 @@ const FloorPlanSVG = (props) => {
     setFloorPlanSvg(svgUrl);
     setFloorPlanDic(dic);
     setSuitePick(suitePickStyle);
+    console.log("3. svg url: " + svgUrl)
   }
 
   const styleSVG = (error, svg) => {
+    console.log("4. floorplans: style svg")
     var svgBoundingDivEl;
     if (svg) {
       svgBoundingDivEl = svg;
@@ -256,7 +261,7 @@ const FloorPlanSVG = (props) => {
 
   return (
     <FloorPlanWrapper id={floorplanId}>
-      {floorplanSvg ? <ReactSVG
+      {floorplanSvg !== "" ? <ReactSVG
         src={floorplanSvg}
         afterInjection={(error, svg) => styleSVG(error, svg)}
         fallback={getStaticFloorplan}
