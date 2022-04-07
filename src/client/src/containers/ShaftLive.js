@@ -3,6 +3,9 @@ import styled from "styled-components/macro";
 import FloorButton from "../components/FloorButton.js";
 import FloorPlanSVG from "../components/FloorPlanSVG"
 import DormList from '../components/LotteryPredictor/DormList.js';
+import { FILTER_NAME_TO_KEY } from "../util/DormFilter.js";
+import Filters from "../components/ExploreFilters/Filters.js";
+import _, { initial } from "lodash"
 
 const ShaftLiveContainer = styled.div`
     display: flex;
@@ -16,6 +19,14 @@ const ShaftLiveContainer = styled.div`
       flex-direction: column;
       padding: 0;
     }
+`;
+
+const FiltersContainer = styled.div`  
+  @media(max-width: 991px){
+    padding-left:2rem;
+    padding-bottom:1rem;
+    padding-top:0rem;
+  }
 `;
 
 const ColOne = styled.div`
@@ -245,6 +256,63 @@ const Desktop = styled.div`
   }
 `;
 
+const initialPayload = {
+  COLUMBIA: 0,
+  BARNARD: 0,
+  SINGLE_: 0,
+  DOUBLE_: 0,
+  TRIPLE_: 0,
+  SUITE_: 0,
+  NOTSUITE_: 0,
+  TWO_SUITE: 0,
+  THREE_SUITE: 0,
+  FOUR_SUITE: 0,
+  FIVE_SUITE: 0,
+  SIX_SUITE: 0,
+  SEVEN_SUITE: 0,
+  EIGHT_SUITE: 0,
+  NINE_SUITE: 0,
+  TEN_SUITE: 0,
+  FRESHMAN: 0,
+  SOPHOMORE: 0,
+  JUNIOR: 0,
+  SENIOR: 0,
+  DORM: ""
+}
+
+const filterElements = {
+	"Typical Residents": [
+		"First Year",
+		"Sophomore",
+		"Junior",
+		"Senior"
+	],
+	"Room Type": [
+    "Corridor Style",
+    "Suite Style",
+		"Single",
+		"Double",
+		"Triple",
+	]
+}
+
+const defaultDorms = [
+  "47 Claremont",
+  "Broadway Hall",
+  "East Campus",
+  "Furnald Hall",
+  "Harmony Hall",
+  "Hogan Hall",
+  "McBain Hall",
+  "600 W 113th",
+  "River Hall",
+  "Ruggles Hall",
+  "Schapiro Hall",
+  "Watt Hall",
+  "Wien Hall",
+  "Woodbridge Hall"
+]
+
 const ShaftLive = (props) => {
   const [dorm, setDorm] = useState("47 Claremont");
   const [dormChange, setDormChange] = useState(false);
@@ -259,10 +327,16 @@ const ShaftLive = (props) => {
   const [full, setFull] = useState(" ");
   const [errorMsg, setErrorMessage] = useState("");
 
+  const [payload, setPayload] = useState(_.clone(initialPayload));
+  const [dorms, setDorms] = useState(defaultDorms);
+
   useEffect(() => {
     getAllDormInfo(dorm, floor);
+    window.scrollTo(0, 0)
+    document.title = "The Shaft";
   }, []);
 
+  
   useEffect(() => {
     handleDormChange(dorm);
   }, [props.dorm]);
@@ -271,6 +345,49 @@ const ShaftLive = (props) => {
     setFloor(props.floor);
     handleFloorChange(floor);
   }, [props.floor]);
+
+  const preloadImages = (dorms) => {
+    dorms.forEach((dorm) => {
+      var i = new Image()
+      i.src = dorm.THUMBNAIL_IMAGE;
+    })
+  }
+
+  const updatePayload = (newValue, name, filters) => {
+    let p = payload;
+    if(filters != undefined) {
+      for(var prop in filters) {
+        p[prop] = filters[prop];
+      }
+    } else {
+      p[FILTER_NAME_TO_KEY[name]] = newValue;
+    }
+    filterDorms();
+    setPayload(p);
+  }
+
+  const resetPayload = () => {
+    setPayload(_.clone(initialPayload));
+  }
+
+  const filterDorms = () => {
+    fetch('/api/getFilteredDorms', {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(payload)
+    }).then(res => res.json())
+    .then(response => {
+        let updatedDorms = []
+        for(let i=0; i<response.length;i++){
+          if(defaultDorms.indexOf(response[i].DORM)>=0){
+            updatedDorms.push(response[i].DORM);
+          }
+        }
+        setDorms(updatedDorms)
+    });      
+  }
 
   async function fetchAllDormInfo(dorm, floor) {
     const [floorNumsRes, floorDataRes] = await Promise.all([
@@ -489,7 +606,10 @@ const ShaftLive = (props) => {
         </Converter>
         {(errorMsg === "") ? null : <Error>{"* " + errorMsg}</Error>}
         <ShaftLiveContainer>
-          <DormList lotteryNum={lotteryNum ? lotteryNum : 0} setSelectedDorm={handleDormChange} selectedDorm={dorm} floorPlans={floorPlans} />
+            <FiltersContainer>
+              <Filters handleChange={updatePayload} payload={payload} reset={resetPayload} filterElements={filterElements}></Filters>
+            </FiltersContainer> 
+            <DormList lotteryNum={lotteryNum ? lotteryNum : 0} setSelectedDorm={handleDormChange} selectedDorm={dorm} floorPlans={floorPlans} updatedDorms={dorms}/>
           <Disclaimer />
         </ShaftLiveContainer>
       </Mobile>
@@ -518,7 +638,8 @@ const ShaftLive = (props) => {
         {(errorMsg === "") ? null : <Error>{"* " + errorMsg}</Error>}
         <ShaftLiveContainer>
           <ColOne>
-            <DormList lotteryNum={lotteryNum ? lotteryNum : 0} setSelectedDorm={handleDormChange} selectedDorm={dorm} floorPlans={floorPlans} />
+            <Filters handleChange={updatePayload} payload={payload} reset={resetPayload} filterElements={filterElements}></Filters> 
+            <DormList lotteryNum={lotteryNum ? lotteryNum : 0} setSelectedDorm={handleDormChange} selectedDorm={dorm} floorPlans={floorPlans} updatedDorms={dorms}/>
           </ColOne>
 
           <ColTwo>

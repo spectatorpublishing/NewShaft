@@ -50,44 +50,6 @@ let ClearButton = styled.a`
     padding-left: 1rem;
 `;
 
-const filterElements = {
-	"School": [
-		"Columbia",
-		"Barnard"
-	],
-	"Group Size": [
-		"2 Person",
-		"3 Person",
-		"4 Person",
-		"5 Person",
-		"6 Person",
-		"7 Person",
-		"8 Person",
-		"9 Person",
-		"10 Person"
-	],
-	"Room Type": [
-        "Corridor Style",
-        "Suite Style",
-		"Single",
-		"Double",
-		"Triple",
-	],
-	"Typical Residents": [
-		"First Year",
-		"Sophomore",
-		"Junior",
-		"Senior"
-	],
-	// "Amenities": [
-	// 	"A/C",
-	// 	"Private Kitchen",
-	// 	"Gym",
-	// 	"Single-Use Bathroom"
-	// ]
-}
-
-
 const FilterBar = (props) => {
     const [openFilters, setOpenFilters] = useState([0, 0, 0, 0]);
     const [selectedFilters, setSelectedFilters] = useState([0, 0, 0, 0]);
@@ -100,9 +62,9 @@ const FilterBar = (props) => {
     }
 
     const getFilters = () => {
-		return Object.keys(filterElements).map((filterName, i) => {
+		return Object.keys(props.filterElements).map((filterName, i) => {
 			// Create an array of the filters within the category that are selected
-			let categoryFilters = filterElements[filterName];
+			let categoryFilters = props.filterElements[filterName];
 			let categoryPayload = categoryFilters.filter(filter => 
 				!!props.payload[FILTER_NAME_TO_KEY[filter]]
 			);
