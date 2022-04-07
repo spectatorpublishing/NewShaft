@@ -13,6 +13,8 @@ import ScrollToTop from "../components/ScrollToTop";
 import { theme } from "../util/GlobalStyles";
 import DormQuickReview from "../components/DormQuickReview";
 
+import NewPhotoGallery from "../components/NewPhotoGallery";
+
 const Page = styled.div`
   display: flex;
   flex-direction: column;
@@ -236,7 +238,6 @@ const Dorm = ({ }) => {
   const [dormStyle, setDormStyle] = useState("");
   const [mainImage, setMainImage] = useState("");
   const [quickReview, setQuickReview] = useState({});
-
   useEffect(() => {
     const dormName = dorm.replaceAll("-", " ");
     console.log(dormName)
@@ -395,9 +396,9 @@ const Dorm = ({ }) => {
     setFloorPlans(floor_state);
     setFloorNames(floor_name);
     setFloorOffset(floor_offset);
-    console.log("floor_state: ")
-    console.log(floor_state)
-    console.log(floor_offset)
+    // console.log("floor_state: ")
+    // console.log(floor_state)
+    // console.log(floor_offset)
   }
 
   function fetchReviews(dormName) {
@@ -462,7 +463,10 @@ const Dorm = ({ }) => {
     justifyContent: 'center', alignItems: 'center', minWidth: '160px', border: 'none',
     marginTop: '0.5rem'
   }
-
+  const { isOpen, setIsOpen} = useState(true);
+  const updateModal = () =>{
+    setIsOpen(false)
+  }
   return (
     <Page>
       <ScrollToTop />
@@ -539,9 +543,12 @@ const Dorm = ({ }) => {
                 /></MarginWrapper>
             </InfoSection> : null}
 
-            {/* <InfoSection>
-              <SectionTitle>Photo Gallery</SectionTitle>
-            </InfoSection> */}
+
+          <InfoSection>
+            <SectionTitle>Photo Gallery</SectionTitle>
+            <NewPhotoGallery images ={dorm_photos} updateModal={updateModal}></NewPhotoGallery>
+            <MarginWrapper>4 of {dorm_photos.length}</MarginWrapper>
+          </InfoSection>
 
           {(relatedArticles.length == 0) ? null :
             <InfoSection>
