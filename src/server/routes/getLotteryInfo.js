@@ -6,13 +6,13 @@
 var express = require('express');
 var router = express.Router();
 var pool = require('../database');
+var { RANGE } = require('../../client/src/util/LotteryPredictor')
 
 router.get('/:num', async (req, res) => {
 	let table = "NLotteryPredicter2021"
-	let margin = 50
 	let lotteryNum = parseInt(req.params.num)
-	let likelyCutoff = lotteryNum - margin
-	let unlikelyCutoff = lotteryNum + margin
+	let likelyCutoff = lotteryNum - RANGE
+	let unlikelyCutoff = lotteryNum + RANGE
 
 	let query = `select dorm_count.DORM, dorm_likely.LIKELY, dorm_similar.SIM, dorm_unlikely.UNLIKELY, dorm_count.TOTAL
 	from
