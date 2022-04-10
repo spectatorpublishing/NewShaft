@@ -13,7 +13,7 @@ import ScrollToTop from "../components/ScrollToTop";
 import { theme } from "../util/GlobalStyles";
 import DormQuickReview from "../components/DormQuickReview";
 
-import NewPhotoGallery from "../components/NewPhotoGallery";
+import PhotoGallery from "../components/PhotoGallery";
 
 const Page = styled.div`
   display: flex;
@@ -546,7 +546,7 @@ const Dorm = ({ }) => {
 
           <InfoSection>
             <SectionTitle>Photo Gallery</SectionTitle>
-            <NewPhotoGallery images ={dorm_photos} updateModal={updateModal}></NewPhotoGallery>
+            <PhotoGallery images ={dorm_photos} updateModal={updateModal}></PhotoGallery>
             <MarginWrapper>4 of {dorm_photos.length}</MarginWrapper>
           </InfoSection>
 
