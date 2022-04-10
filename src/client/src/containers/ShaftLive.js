@@ -6,6 +6,7 @@ import DormList from '../components/LotteryPredictor/DormList.js';
 import { FILTER_NAME_TO_KEY } from "../util/DormFilter.js";
 import Filters from "../components/ExploreFilters/Filters.js";
 import _, { initial } from "lodash"
+import { isLotteryNumberValid } from '../util/LotteryPredictor.js'
 
 const ShaftLiveContainer = styled.div`
     display: flex;
