@@ -3,6 +3,7 @@ import styled from 'styled-components/macro';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faAngleRight } from '@fortawesome/free-solid-svg-icons'
 import { theme } from '../../util/GlobalStyles';
+import { update } from 'lodash';
 
 const List = styled.div`
     width: 80%;
@@ -160,10 +161,10 @@ const DormButton = (props) => {
   )
 }
 
-const DormList = ({ lotteryNum, setSelectedDorm, selectedDorm, floorPlans }) => {
+const DormList = ({ lotteryNum, setSelectedDorm, selectedDorm, floorPlans, updatedDorms}) => {
   // controls setting of data on initial load
   const [initialLoad, setInitial] = useState(1);
-  const [dorms, setDorms] = useState(defaultDorms.map(dorm =>
+  const [dorms, setDorms] = useState(updatedDorms.map(dorm =>
   ({
     DORM: dorm,
     RATIO: [25, 25, 25, "0"].map(x => parseInt(x))
@@ -179,12 +180,12 @@ const DormList = ({ lotteryNum, setSelectedDorm, selectedDorm, floorPlans }) => 
       fetchDormInfo(lotteryNum)
     else
       setInitial(0)
-  }, [lotteryNum]);
+  },[lotteryNum, updatedDorms]);
 
   const fetchDormInfo = (lotteryNum) => {
     if (lotteryNum.toString() === "0") {
       // if empty set to default
-      setDorms(defaultDorms.map(dorm =>
+      setDorms(updatedDorms.map(dorm =>
       ({
         // Note: We are currently using the Unavailable feature
         DORM: dorm,
@@ -201,7 +202,7 @@ const DormList = ({ lotteryNum, setSelectedDorm, selectedDorm, floorPlans }) => 
           lotteryInfo
             // Note: Not show dorms in blacklist until we have added
             // the relevant floorplan and svgs to AWS S3 bucket
-            .filter(({ DORM }) => !blacklist.includes(DORM))
+            .filter(({ DORM }) => !blacklist.includes(DORM) && updatedDorms.includes(DORM))
             .map(({ DORM, LIKELY, SIM, UNLIKELY }) =>
             ({
               DORM,

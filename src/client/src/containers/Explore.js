@@ -95,6 +95,43 @@ const initialPayload = {
   SENIOR: 0,
   DORM: ""
 }
+
+const filterElements = {
+	"School": [
+		"Columbia",
+		"Barnard"
+	],
+	"Group Size": [
+		"2 Person",
+		"3 Person",
+		"4 Person",
+		"5 Person",
+		"6 Person",
+		"7 Person",
+		"8 Person",
+		"9 Person",
+		"10 Person"
+	],
+	"Room Type": [
+        "Corridor Style",
+        "Suite Style",
+		"Single",
+		"Double",
+		"Triple",
+	],
+	"Typical Residents": [
+		"First Year",
+		"Sophomore",
+		"Junior",
+		"Senior"
+	],
+	// "Amenities": [
+	// 	"A/C",
+	// 	"Private Kitchen",
+	// 	"Gym",
+	// 	"Single-Use Bathroom"
+	// ]
+}
   
 export default class Explore extends Component {
   constructor(props){
@@ -105,7 +142,7 @@ export default class Explore extends Component {
     };
     this.updatePayload = this.updatePayload.bind(this)
     this.resetPayload = this.resetPayload.bind(this)
-    }
+  }
   
   componentDidMount(){
     window.scrollTo(0, 0)
@@ -172,7 +209,7 @@ export default class Explore extends Component {
           <SideBar>
             <FilterSearchBG>
               <SearchBar handleChange={this.updatePayload}/>
-              <Filters handleChange={this.updatePayload} payload={this.state.payload} reset={this.resetPayload}></Filters>
+              <Filters handleChange={this.updatePayload} payload={this.state.payload} reset={this.resetPayload} filterElements={filterElements}></Filters>
             </FilterSearchBG>
             <ExploreSidebar dorms={this.state.dorms}/>
           </SideBar>
