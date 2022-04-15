@@ -5,6 +5,7 @@ import Maps from "../components/Maps";
 import SearchBar from "../components/SearchBar"
 import { FILTER_NAME_TO_KEY } from "../util/DormFilter.js";
 import Filters from "../components/ExploreFilters/Filters.js";
+import AdManager from '../components/AdManager';
 
 import _, { initial } from "lodash"
 import ScrollToTop from '../components/ScrollToTop';
@@ -207,6 +208,7 @@ export default class Explore extends Component {
         <ScrollToTop>
         <ColOne>
           <SideBar>
+            <AdManager width={728} height={90} path="shaftleader"/>
             <FilterSearchBG>
               <SearchBar handleChange={this.updatePayload}/>
               <Filters handleChange={this.updatePayload} payload={this.state.payload} reset={this.resetPayload} filterElements={filterElements}></Filters>

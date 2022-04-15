@@ -12,6 +12,7 @@ import SpectrumSidebar from "../components/SpectrumSidebar";
 import ScrollToTop from "../components/ScrollToTop";
 import { theme } from "../util/GlobalStyles";
 import DormQuickReview from "../components/DormQuickReview";
+import AdManager from "../components/AdManager";
 
 const Page = styled.div`
   display: flex;
@@ -479,6 +480,7 @@ const Dorm = ({ }) => {
   return (
     <ScrollToTop>
       <Page>
+      {/* <AdManager width={728} height={90} path="cds_leaderboard"/> */}
         <Mobile>
           {mainImage === "" ? null :
             <DormImage>
