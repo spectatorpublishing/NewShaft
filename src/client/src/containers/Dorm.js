@@ -467,6 +467,23 @@ const Dorm = ({ }) => {
   const updateModal = () =>{
     setIsOpen(false)
   }
+
+  
+  const [width, setWidth] = useState(window.innerWidth);
+
+    function handleWindowSizeChange() {
+        setWidth(window.innerWidth);
+    }
+    useEffect(() => {
+        window.addEventListener('resize', handleWindowSizeChange);
+        return () => {
+            window.removeEventListener('resize', handleWindowSizeChange);
+        }
+    }, []);
+
+  const isMobile = width <= 768;
+  const isMedium = width <= 1200;
+
   return (
     <Page>
       <ScrollToTop />
@@ -547,7 +564,12 @@ const Dorm = ({ }) => {
           <InfoSection>
             <SectionTitle>Photo Gallery</SectionTitle>
             <PhotoGallery images ={dorm_photos} updateModal={updateModal}></PhotoGallery>
-            <MarginWrapper>4 of {dorm_photos.length}</MarginWrapper>
+            <MarginWrapper>
+              {isMobile ? "1 " : isMedium ? "2 " : "4 "}
+               of {dorm_photos.length}
+            
+            </MarginWrapper>
+            {/* {isMobile ? <MarginWrapper>1 of {dorm_photos.length}</MarginWrapper>: isMedium ? <MarginWrapper>4 of {dorm_photos.length}</MarginWrapper>} */}
           </InfoSection>
 
           {(relatedArticles.length == 0) ? null :

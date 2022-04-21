@@ -1,5 +1,5 @@
 import styled from "styled-components/macro";
-import React, {useState} from "react";
+import React, {useState, useEffect} from "react";
 import PhotoBanner from "./DormPhotoBanner/PhotoBanner";
 
 
@@ -15,11 +15,19 @@ let Preview = styled.div`
     position: relative;
 `;
 let PreviewImg = styled.img`
-  /* height: 200px; */
-  width: 22%;
-  object-fit: cover;
-  padding: 2% 0;
+  height: 200px;
+  width: 23%;
+  object-fit: contain;
+  padding: 1% 0;
   cursor:pointer;
+  
+  @media only screen and (max-width: 1200px) {
+    width: 47%;
+  }
+  @media only screen and (max-width: 768px) {
+    width: 100%;
+    
+  }
 `;
 
 let ArrowContainer = styled.div`
@@ -32,7 +40,9 @@ let ArrowContainer = styled.div`
         top: 50%;
         position: absolute;
         cursor: pointer;
+        
     }
+    
 `;
 let Modal = styled.div`
     background-color: rgba(0,0,0,0.85);
@@ -73,28 +83,48 @@ const NewPhotoGallery = ({images, updateModal}) =>{
         // setShowCarousel(!showCarousel)
         // console.log(index)
     }
-    
+
+    const [width, setWidth] = useState(window.innerWidth);
+
+    function handleWindowSizeChange() {
+        setWidth(window.innerWidth);
+    }
+    useEffect(() => {
+        window.addEventListener('resize', handleWindowSizeChange);
+        return () => {
+            window.removeEventListener('resize', handleWindowSizeChange);
+        }
+    }, []);
+
+    const isMobile = width <= 768;
+    const isMedium = width <= 1200;
+
     return (
         <>
+           
             <Preview>            
-                <ArrowContainer>
-                    <LeftArrowDivider onClick={prevSlide}/>
-                </ArrowContainer>
+                <ArrowContainer><LeftArrowDivider onClick={prevSlide}/></ArrowContainer>
                 <PreviewImg key = {currentIndex} src = {images[currentIndex]} alt = {`${currentIndex}-img`} onClick={()=> setSlide(currentIndex)}/>
-                <PreviewImg key = {currentIndex+1} src = {images[(currentIndex+1)%numOfImages]} alt = {`${currentIndex+1}-img`} onClick={()=> setSlide((currentIndex+1)%numOfImages)}/>
-                <PreviewImg key = {currentIndex+2} src = {images[(currentIndex+2)%numOfImages]} alt = {`${currentIndex+2}-img`} onClick={()=> setSlide((currentIndex+2)%numOfImages)}/>
-                <PreviewImg key = {currentIndex+3} src = {images[(currentIndex+3)%numOfImages]} alt = {`${currentIndex+3}-img`} onClick={()=> setSlide((currentIndex+3)%numOfImages)}/>
-                <ArrowContainer>
-                    <RightArrowDivier onClick={nextSlide}/>
-                </ArrowContainer>
+                {isMobile ? <></>: isMedium ? 
+                    <>
+                            <PreviewImg key = {currentIndex+2} src = {images[(currentIndex+2)%numOfImages]} alt = {`${currentIndex+2}-img`} onClick={()=> setSlide((currentIndex+2)%numOfImages)}/>
+                    </>
+                    :
+                    <>
+                        <PreviewImg key = {currentIndex+1} src = {images[(currentIndex+1)%numOfImages]} alt = {`${currentIndex+1}-img`} onClick={()=> setSlide((currentIndex+1)%numOfImages)}/>
+                        <PreviewImg key = {currentIndex+2} src = {images[(currentIndex+2)%numOfImages]} alt = {`${currentIndex+2}-img`} onClick={()=> setSlide((currentIndex+2)%numOfImages)}/>
+                        <PreviewImg key = {currentIndex+3} src = {images[(currentIndex+3)%numOfImages]} alt = {`${currentIndex+3}-img`} onClick={()=> setSlide((currentIndex+3)%numOfImages)}/>
+                    </> 
+                }
+                <ArrowContainer><RightArrowDivier onClick={nextSlide}/></ArrowContainer>
             </Preview>
+                
+                {/* {showCarousel ? 
+                    <Modal>
+                        <PhotoBanner bannerImages={images} className="photoBanner"/>
+                    </Modal>
+                    :<></>} */}
             
-            {/* {showCarousel ? 
-                <Modal>
-                    <PhotoBanner bannerImages={images} className="photoBanner"/>
-                </Modal>
-                :<></>
-            } */}
             
             
         </>
