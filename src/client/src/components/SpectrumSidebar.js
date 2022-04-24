@@ -143,7 +143,7 @@ class SpectrumSidebar extends Component {
         return(
 			<SpectrumContainer>
 				<Wrapper>
-					{this.articleMap()[0]}
+					{this.articleMap()}
 				</Wrapper>
 				{/*<LinkButton href="https://www.columbiaspectator.com/spectrum/shaft/">Read More</LinkButton>*/}
 			</SpectrumContainer> 
