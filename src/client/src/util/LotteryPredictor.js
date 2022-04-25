@@ -28,9 +28,9 @@ const RANGE = 150
 //   AVAILABLE_COLOR: for dorms picked by a higher lottery number -> likely available
 //   NO_DATA_COLOR: for dorms we don't have historical lottery data
 const SIMILAR_COLOR = "yellow"
-const UNAVAILABLE_COLOR = "gray"
+const UNAVAILABLE_COLOR = "red"
 const AVAILABLE_COLOR = "green"
-const NO_DATA_COLOR = "white"
+const NO_DATA_COLOR = "gray"
 
 
 /******************************************************************************
