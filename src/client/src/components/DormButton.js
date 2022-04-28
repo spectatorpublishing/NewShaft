@@ -20,7 +20,7 @@ const DormButtonWrapper = styled.div`
     margin-bottom: 10px;
     object-fit: cover;
 
-    @media only screen and (max-width: 768px) {
+    @media only screen and (max-width: 767px) {
       max-width: 100%;
       min-width: 100%;
       max-height: 25vw;
