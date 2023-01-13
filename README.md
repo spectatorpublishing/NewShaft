@@ -37,6 +37,10 @@ https://www.digitalocean.com/community/tutorials/how-to-install-mysql-on-ubuntu-
 For any small tweaks to the production database I would suggest
 using mysql workbench to connect to the server.
 
+## Deployment (by Laura)
+<img width="756" alt="image" src="https://user-images.githubusercontent.com/61126997/212422378-6e15dd31-decc-4c56-958e-1c7372410eb0.png">
+
+
 ## Deployment (by erin)
 
 The Shaft is deployed on a digital ocean server with [these instructions](https://www.digitalocean.com/community/tutorials/how-to-set-up-a-node-js-application-for-production-on-ubuntu-20-04).
