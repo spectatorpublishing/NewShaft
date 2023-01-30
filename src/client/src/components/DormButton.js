@@ -114,7 +114,7 @@ const DormButton = props => {
       setDormName(props.name);
     }
 
-  }, [props.SUITE_]);
+  }, [props.SUITE_, props.name]);
 
   const setRoomTypeString = () => {
     var roomtype = "";
