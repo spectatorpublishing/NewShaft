@@ -3,6 +3,10 @@ import requests
 from datetime import datetime
 import mysql.connector
 import urllib.parse
+import os
+from dotenv import load_dotenv
+
+load_dotenv()
 
 """ photographers = {
     "47 Claremont": "Judy Goldstein",
@@ -29,10 +33,10 @@ import urllib.parse
 }
 
 db = mysql.connector.connect(
-    host= "192.34.62.10", 
-    user= "columbiaspectatordev",
-    password= "Columbiaspectatorspectech1877",
-    database= "dev"
+    host= os.environ['SHAFTHOST'],
+    user= os.environ['SHAFTUSER'],
+    password= os.environ['SHAFTPASSWORD'],
+    database= os.environ['SHAFTDATABASE']
 )
 
 mycursor = db.cursor()
@@ -107,10 +111,10 @@ with open("2022_dorm_photos.json", "w") as outfile:
         json.dump(dorm_photos, outfile) """
 
 db = mysql.connector.connect(
-    host= "192.34.62.10", 
-    user= "columbiaspectatordev",
-    password= "Columbiaspectatorspectech1877",
-    database= "dev"
+    host= os.environ['SHAFTHOST'],
+    user= os.environ['SHAFTUSER'],
+    password= os.environ['SHAFTPASSWORD'],
+    database= os.environ['SHAFTDATABASE']
 )
 
 mycursor = db.cursor()
