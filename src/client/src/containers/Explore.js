@@ -25,7 +25,7 @@ const SideBar = styled.div`
   overflow-y: scroll; 
   min-height: 200px;
   @media only screen and (min-width: 768px) {
-    width: 60%;
+    width: 65%;
     padding: 0 0% 0% 0%;
     min-height: 100vh;
     z-index: 1;
@@ -40,7 +40,7 @@ width: 0%;
   position: fixed;
   padding-left: 0em;
   float: right;
-  width: 40%;
+  width: 35%;
   right: 0;
   top: 0;
   z-index:1;
@@ -139,8 +139,11 @@ export default class Explore extends Component {
     super(props);
     this.state = {
       payload: _.clone(initialPayload),
-      dorms: []
+      dorms: [],
+      height: window.innerHeight,
+      width: window.innerWidth
     };
+    this.handleWindowSizeChange = this.handleWindowSizeChange.bind(this);
     this.updatePayload = this.updatePayload.bind(this)
     this.resetPayload = this.resetPayload.bind(this)
   }
@@ -149,6 +152,15 @@ export default class Explore extends Component {
     window.scrollTo(0, 0)
     document.title = "The Shaft";
     this.fetchDorms();
+    window.addEventListener("resize", this.handleWindowSizeChange);
+  }
+
+  componentWillUnmount() {
+    window.removeEventListener("resize", this.handleWindowSizeChange);
+  }
+
+  handleWindowSizeChange() {
+    this.setState({ height: window.innerHeight, width: window.innerWidth });
   }
 
   preloadImages(dorms, callback){
@@ -203,7 +215,8 @@ export default class Explore extends Component {
   }
   
   render() {
-    return (
+    const isMobile = this.state.width <= 925;
+    const desktopMenu = (
       <ExploreContainer>
         <ScrollToTop>
         <ColOne>
@@ -225,12 +238,29 @@ export default class Explore extends Component {
               centerLatitude={40.808601}
               centerLongitude={-73.966095}
               width={"100%"}
-              height={"900px"}
+              height={this.state.height}
               />
           </MapView>
         </ColTwo>
         </ScrollToTop>
-      </ExploreContainer>
+      </ExploreContainer> 
+      )
+
+      const mobileMenu = (
+        <ExploreContainer>
+        <ScrollToTop>
+            <FilterSearchBG>
+              <SearchBar handleChange={this.updatePayload}/>
+              <Filters handleChange={this.updatePayload} payload={this.state.payload} reset={this.resetPayload} filterElements={filterElements}></Filters>
+            </FilterSearchBG>
+            <ExploreSidebar dorms={this.state.dorms}/>
+        </ScrollToTop>
+      </ExploreContainer>  
+        )
+    return (
+      <div>
+      {isMobile ? mobileMenu : desktopMenu}
+      </div>
     );
   }
 }

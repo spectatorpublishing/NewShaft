@@ -145,7 +145,7 @@ let MenuBtn = styled.input`
 let MenuIcon = styled.label`
   cursor: pointer;
   margin-left: auto;
-  padding: 28px 10%;
+  padding: 28px 5vw;
   user-select: none;
 `
 
@@ -294,7 +294,7 @@ export default class NavBar extends Component {
   }
 
   render() {
-    const isMobile = this.state.width <= 700;
+    const isMobile = this.state.width <= 825;
     const desktopMenu = (
       <React.Fragment>
         <MenuContainer>
