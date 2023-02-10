@@ -23,7 +23,7 @@ router.post('/', async (req, res) => {
 
     //build search query
     if(filters.DORM !== '') {
-        searchQ = `D.DORM LIKE '%` + filters.DORM + `%' `
+        searchQ = `(D.DORM LIKE '%` + filters.DORM + `%' OR D.NICKNAME LIKE '%` + filters.DORM + `%')`
     }
 
     //build for colleges
