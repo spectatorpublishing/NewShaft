@@ -52,8 +52,16 @@ using mysql workbench to connect to the server.
 ## Deployment (by Laura)
 The Shaft is deployed on a digital ocean server with [these instructions](https://www.digitalocean.com/community/tutorials/how-to-set-up-a-node-js-application-for-production-on-ubuntu-20-04).
 
-I
+1. Connect to the droplet console through the digital ocean site.
+2. All of the pm2 processes and relevant folders are in the `erin` account, not the `root` account. Switch to that account by first running `su erin`.
+3. Put in the password if prompted. The password can be found in the HoE password document.
+4. Make sure that you are in the home directory by running `cd ~`
+5. Go into the proper directory where the githib repository is located by running `cd NewShaft/NewShaft`
+6. Once in the correct directory, run `git pull origin master` to get all the changes from GitHub (No need to commit anything or do anything else after pulling)
+12. The site should automatically update, but if it doesn't, run `pm2 restart Shaft`
+13. Check the live site! Everything should be good to go 🎉
 
+Sample terminal session!
 <img width="756" alt="image" src="https://user-images.githubusercontent.com/61126997/212422378-6e15dd31-decc-4c56-958e-1c7372410eb0.png">
 
 ## Deployment (by erin)
