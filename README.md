@@ -18,7 +18,7 @@ Make sure you have a .env in the root folder. Ask an Engineering Manager for the
 cd NewShaft
 npm install // only run this once after you clone. You don't have to run this every time
 npm start
-``
+```
 
 ## Production
 
