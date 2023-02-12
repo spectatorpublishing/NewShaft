@@ -311,7 +311,8 @@ const defaultDorms = [
   "Schapiro Hall",
   "Watt Hall",
   "Wien Hall",
-  "Woodbridge Hall"
+  "Woodbridge Hall",
+  "Carlton Arms"
 ]
 
 const ShaftLive = (props) => {
