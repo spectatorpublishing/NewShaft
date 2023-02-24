@@ -21,7 +21,7 @@ router.get('/:num', async (req, res) => {
 		(select dorm, SUM(np.lottery_number >= ${likelyCutoff} and np.lottery_number <= ${unlikelyCutoff}) as SIM from ${table} np group by np.dorm) dorm_similar,
 		(select dorm, SUM(np.lottery_number > ${unlikelyCutoff}) as UNLIKELY from ${table} np group by np.dorm) dorm_unlikely
 	WHERE dorm_count.dorm = dorm_likely.dorm and dorm_likely.dorm = dorm_similar.dorm and dorm_similar.dorm = dorm_unlikely.dorm`
-	console.log(query);
+	// console.log(query);
 	const result = await pool.query(query);
 	res.send(result)
 })

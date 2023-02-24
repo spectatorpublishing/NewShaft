@@ -402,7 +402,6 @@ const ShaftLive = (props) => {
 
     const floorNums = await floorNumsRes.json();
     const floorData = await floorDataRes.json();
-    console.log("ahhhh", [floorNums, floorData])
     return [floorNums, floorData];
   }
 
@@ -473,12 +472,14 @@ const ShaftLive = (props) => {
       "East Campus": "6",
       "Furnald Hall": "1",
       "Harmony Hall": "1",
+      "Hartley Hall": "2",
       "Hogan Hall": "2",
       "McBain Hall": "1",
       "600 W 113th": "2",
       "River Hall": "1",
       "Ruggles Hall": "1",
       "Schapiro Hall": "2",
+      "Wallach Hall": "8",
       "Watt Hall": "1",
       "Wien Hall": "2",
       "Woodbridge Hall": "1"

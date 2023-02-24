@@ -328,13 +328,13 @@ const watt = (room) => {
 
 /*
  * Wien Hall has 12 floors.
- * Rooms with shared private bathroom are suffixed by "A/B".
+ * Rooms with shared private bathroom are suffixed by "A" or "B".
  * The first one/two digit(s) of the room number is the floor number.
  *
  * Room 206/7 is a special case and is a walk through double on floor 2.
 */
 const wien = (room) => {
-  let roomNoSuffix = room.replace("A/B", "").replace("/7", "")
+  let roomNoSuffix = room.replace(/[AB]/, "").replace("/7", "")
   let roomStrlen = roomNoSuffix.length
   let floor = ""
 

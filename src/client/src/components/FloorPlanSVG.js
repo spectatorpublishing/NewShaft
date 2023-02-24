@@ -99,10 +99,10 @@ const FloorPlanSVG = (props) => {
     let dic = {};
     for (var i = 0; i < props.data.length; i++) {
       let dataFromDb = props.data[i];
-      dic[dataFromDb["ROOM"]] = {
-        "ROOM_TYPE": dataFromDb["ROOM_TYPE"],
-        "NEW_PRIORITY": dataFromDb["NEW_PRIORITY"],
-        "NEW_NUM": dataFromDb["NEW_NUM"],
+      dic[dataFromDb["room"]] = {
+        "ipv": dataFromDb["ipv"],
+        "lottery_number": dataFromDb["lottery_number"],
+        // no ROOM_TYPE in 2020 - 2022 data but just keep so code doesn't error
         "ROOM_TYPE": dataFromDb["ROOM_TYPE"]
       };
     }
@@ -187,7 +187,7 @@ const FloorPlanSVG = (props) => {
 
       if (needColoring) {
         let selectableEl = suitePick ? suiteEl : roomEl;
-        let roomPickedBy = fromDb && fromDb["NEW_NUM"]
+        let roomPickedBy = fromDb && fromDb["lottery_number"]
 
         color = getDormColor(props.lotteryNum, roomPickedBy)
 
@@ -226,9 +226,9 @@ const FloorPlanSVG = (props) => {
       let lottery = getCutoff(roomTypeMapped);
 
       // Taken room (Red)
-      if (fromDb["NEW_NUM"]) {
+      if (fromDb["lottery_number"]) {
         lotteryLabel = "Taken By";
-        lottery = fromDb["NEW_NUM"];
+        lottery = fromDb["lottery_number"];
       }
 
       return (

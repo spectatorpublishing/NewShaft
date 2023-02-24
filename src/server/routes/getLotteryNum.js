@@ -7,7 +7,7 @@ router.get('/:dorm/:floor', async (req, res) => {
   let table = "housing_data_2022"
 	let query = `SELECT * FROM ${table} WHERE dorm="${req.params.dorm}" AND floor="${req.params.floor}";`
 	const result = await pool.query(query);
-	console.log(query);
+	// console.log(query);
 	res.send(result)
 })
 
