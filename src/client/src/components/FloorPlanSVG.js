@@ -169,84 +169,49 @@ const FloorPlanSVG = (props) => {
       }
     }
 
-    document.querySelectorAll("rect").forEach((roomEl) => {
-      let suiteEl = roomEl.parentElement;
-      let suiteFromSvg = getDataFromSvg(suiteEl);
-      let roomFromSvg = getDataFromSvg(roomEl);
+    const shapes = ["rect", "path"];
 
-      // Nullify non-sensical suite value if not suite-style
-      if (!suitePick && props.dorm != "600 W 113th") {
-        suiteFromSvg = "";
-      }
-
-      // convert room/suite info from svg + floor to a room format used in database
-      let roomOrSuiteName
-      if (db2svgRoomFormat.hasOwnProperty(props.dorm)) {
-        roomOrSuiteName = db2svgRoomFormat[props.dorm](suiteFromSvg, roomFromSvg, props.floor)
-      }
-
-      // A room needs to be colored if
-      //   1. it's not part of a suite
-      //   2. a suite but the suite is not colored yet or is colored
-      //      NO_DATA_COLOR because we don't have the lottery info for a previous
-      //      room of the suite
-      let fromDb = floorplanDic[roomOrSuiteName];
-      let suiteFill = suiteEl.getAttribute("fill")
-      let needColoring = !suitePick || (suiteFill === null || suiteFill === NO_DATA_COLOR)
-      let color = NO_DATA_COLOR
-
-      if (needColoring) {
-        let selectableEl = suitePick ? suiteEl : roomEl;
-        let roomPickedBy = fromDb && fromDb["lottery_number"]
-
-        color = getDormColor(props.lotteryNum, roomPickedBy)
-
-        // Attach data attributes for react-tooltip
-        selectableEl.setAttribute("fill", color)
-        selectableEl.setAttribute("data-tip", roomOrSuiteName);
-        selectableEl.setAttribute("data-for", "global");
-      }
-    });
-
-    // test if it will work w path
-    document.querySelectorAll("path").forEach((roomEl) => {
-      let suiteEl = roomEl.parentElement;
-      let suiteFromSvg = getDataFromSvg(suiteEl);
-      let roomFromSvg = getDataFromSvg(roomEl);
-
-      // Nullify non-sensical suite value if not suite-style
-      if (!suitePick && props.dorm != "600 W 113th") {
-        suiteFromSvg = "";
-      }
-
-      // convert room/suite info from svg + floor to a room format used in database
-      let roomOrSuiteName
-      if (db2svgRoomFormat.hasOwnProperty(props.dorm)) {
-        roomOrSuiteName = db2svgRoomFormat[props.dorm](suiteFromSvg, roomFromSvg, props.floor)
-      }
-
-      // A room needs to be colored if
-      //   1. it's not part of a suite
-      //   2. a suite but the suite is not colored yet or is colored
-      //      NO_DATA_COLOR because we don't have the lottery info for a previous
-      //      room of the suite
-      let fromDb = floorplanDic[roomOrSuiteName];
-      let suiteFill = suiteEl.getAttribute("fill")
-      let needColoring = !suitePick || (suiteFill === null || suiteFill === NO_DATA_COLOR)
-      let color = NO_DATA_COLOR
-
-      if (needColoring) {
-        let selectableEl = suitePick ? suiteEl : roomEl;
-        let roomPickedBy = fromDb && fromDb["NEW_NUM"]
-
-        color = getDormColor(props.lotteryNum, roomPickedBy)
-
-        // Attach data attributes for react-tooltip
-        selectableEl.setAttribute("fill", color)
-        selectableEl.setAttribute("data-tip", roomOrSuiteName);
-        selectableEl.setAttribute("data-for", "global");
-      }
-    });
+    for (const shape of shapes) {
+      console.log("shape", shape);
+      document.querySelectorAll(shape).forEach((roomEl) => {
+        let suiteEl = roomEl.parentElement;
+        let suiteFromSvg = getDataFromSvg(suiteEl);
+        let roomFromSvg = getDataFromSvg(roomEl);
+  
+        // Nullify non-sensical suite value if not suite-style
+        if (!suitePick && props.dorm != "600 W 113th") {
+          suiteFromSvg = "";
+        }
+  
+        // convert room/suite info from svg + floor to a room format used in database
+        let roomOrSuiteName
+        if (db2svgRoomFormat.hasOwnProperty(props.dorm)) {
+          roomOrSuiteName = db2svgRoomFormat[props.dorm](suiteFromSvg, roomFromSvg, props.floor)
+        }
+  
+        // A room needs to be colored if
+        //   1. it's not part of a suite
+        //   2. a suite but the suite is not colored yet or is colored
+        //      NO_DATA_COLOR because we don't have the lottery info for a previous
+        //      room of the suite
+        let fromDb = floorplanDic[roomOrSuiteName];
+        let suiteFill = suiteEl.getAttribute("fill")
+        let needColoring = !suitePick || (suiteFill === null || suiteFill === NO_DATA_COLOR)
+        let color = NO_DATA_COLOR
+  
+        if (needColoring) {
+          let selectableEl = suitePick ? suiteEl : roomEl;
+          let roomPickedBy = fromDb && fromDb["lottery_number"]
+  
+          color = getDormColor(props.lotteryNum, roomPickedBy)
+  
+          // Attach data attributes for react-tooltip
+          selectableEl.setAttribute("fill", color)
+          selectableEl.setAttribute("data-tip", roomOrSuiteName);
+          selectableEl.setAttribute("data-for", "global");
+        }
+      });
+    }
   }
 
   const getDataFromSvg = (el) => {
