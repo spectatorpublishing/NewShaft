@@ -115,8 +115,10 @@ const defaultDorms = [
 const blacklist = [
   "548 West 113",
   "627 West 115",
-  "Carlton",
-  "Plimpton"
+  "Carlton Arms",
+  "Hartley Hall",
+  "Plimpton Hall",
+  "Wallach Hall"
 ]
 
 const DormButton = (props) => {
