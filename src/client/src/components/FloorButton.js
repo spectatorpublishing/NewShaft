@@ -100,7 +100,8 @@ export default class FloorButton extends Component {
     componentDidUpdate(prevProps) {
         if (JSON.stringify(prevProps) != JSON.stringify(this.props)) {
             if (this.props.floorNums) {
-                this.props.handleChange(this.props.floorNums[0]["FLOOR"]);
+                console.log("test",prevProps,  this.props)
+                this.props.handleChange(this.props.floorNums[0]["floor"]);
                 // console.log("test", this.props.floorNums[0]["FLOOR"])
 
             }
@@ -110,7 +111,8 @@ export default class FloorButton extends Component {
 
     getButtons() {
         return this.props.floorNums.map((floor, id) => {
-            let floorNum = floor["FLOOR"];
+            console.log("aaaaaa",floor );
+            let floorNum = floor["floor"];
             if (id == this.state.currentFloorIndex) {
                 return <NumberSelected key={id} onClick={() => {
                     this.props.handleChange(floorNum);

@@ -402,6 +402,7 @@ const ShaftLive = (props) => {
 
     const floorNums = await floorNumsRes.json();
     const floorData = await floorDataRes.json();
+    console.log("ahhhh", [floorNums, floorData])
     return [floorNums, floorData];
   }
 
