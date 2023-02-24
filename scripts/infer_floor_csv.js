@@ -5,8 +5,7 @@ let { parse } = require("csv-parse");
 
 /* replace with the absolute path to the csv files on your machine */
 const NLotteryPredicter2022 = "/Users/zhuci/Desktop/SpecTech/Shaft_stuff/Housing2022.csv"
-const out = "/Users/zhuci/Desktop/SpecTech/Shaft_stuff/Housing2022_inferred.csv"
-// const table = 'NLotteryPredicter2022'
+const out = "/Users/zhuci/Desktop/SpecTech/Shaft_stuff/Housing2022_inferred_new.csv"
 const debug = 0
 
 const DLog = (msg) => {
@@ -211,9 +210,8 @@ const harmony = (room) => {
 */
 const hartley = (room) => {
   let floor = "";
-
-  room.split(/[0-9]+/g)[0];
-
+  end = room.search(/[ABCDEFG]/);
+  floor = room.slice(0, end);
   return floor
 }
 /*
@@ -222,7 +220,6 @@ const hartley = (room) => {
 */
 const hogan = (room) => {
   let floor = room.slice(0, 1)
-
   return floor
 }
 
@@ -329,13 +326,13 @@ const watt = (room) => {
 
 /*
  * Wien Hall has 12 floors.
- * Rooms with shared private bathroom are suffixed by "A/B".
+ * Rooms with shared private bathroom are suffixed by "A" or "B".
  * The first one/two digit(s) of the room number is the floor number.
  *
  * Room 206/7 is a special case and is a walk through double on floor 2.
 */
 const wien = (room) => {
-  let roomNoSuffix = room.replace("A/B", "").replace("/7", "")
+  let roomNoSuffix = room.replace(/[AB]/, "").replace("/7", "")
   let roomStrlen = roomNoSuffix.length
   let floor = ""
 
@@ -427,15 +424,17 @@ fs.createReadStream(NLotteryPredicter2022)
     // Here log the result array
     console.log("parsed csv data:");
     let inferred = data.map(record => {
-        let {'Room Space Description': room} = record;
+        let {'raw_room_description': room} = record;
         let dorm = room?.split(' ')[0];
         let room_number = room?.split(' ')[1]?.split('-')[0];
-        record["ROOM"] = room_number;
-        record["ROOM_SUFFIX"] = room?.split(' ')[1]?.split('-')[1];
-        record["FLOOR"] = residenceHalls[dorm](room_number);
+        record["room"] = room_number;
+        record["room_suffix"] = room?.split(' ')[1]?.split('-')[1];
+        record["floor"] = residenceHalls[dorm](room_number);
         // fields = Object.keys(record)
+        // console.log(record['dorm'])
         return record;
     });
     let fields = Object.keys(inferred[0])
+    // console.log(fields)
     json2csv(inferred, fields, out)
   });

@@ -283,7 +283,6 @@ const initialPayload = {
 
 const filterElements = {
 	"Typical Residents": [
-		"First Year",
 		"Sophomore",
 		"Junior",
 		"Senior"
@@ -293,7 +292,6 @@ const filterElements = {
     "Suite Style",
 		"Single",
 		"Double",
-		"Triple",
 	]
 }
 
@@ -475,12 +473,14 @@ const ShaftLive = (props) => {
       "East Campus": "6",
       "Furnald Hall": "1",
       "Harmony Hall": "1",
+      "Hartley Hall": "2",
       "Hogan Hall": "2",
       "McBain Hall": "1",
       "600 W 113th": "2",
       "River Hall": "1",
       "Ruggles Hall": "1",
       "Schapiro Hall": "2",
+      "Wallach Hall": "8",
       "Watt Hall": "1",
       "Wien Hall": "2",
       "Woodbridge Hall": "1"
@@ -588,7 +588,7 @@ const Disclaimer = () => {
     <DisclaimerWrapper>
       <DisclaimerTextBox className="disclaimer">Disclaimer:</DisclaimerTextBox>
       <DisclaimerTextBox>
-        Historical Room Selection data is provided by Columbia Housing for reference only. The selection process shifts year to year and can change based on a number of variables that will impact how students pick rooms, including personal preferences, building availability, class size, external factors and more. This data should not be used as a predictive tool nor does it provide any guarantee for selection options. Learn how our lottery predictor works to make the best use of its results.
+        Historical Room Selection data (ranging from 2020-2022) is provided by Columbia Housing for reference only. The selection process shifts year to year and can change based on a number of variables that will impact how students pick rooms, including changes in building allocation, personal preferences, class size, external factors and more. This data should not be used as a predictive tool nor does it provide any guarantee for selection options. Learn how our lottery predictor works to make the best use of its results.
       </DisclaimerTextBox>
     </DisclaimerWrapper>
   )

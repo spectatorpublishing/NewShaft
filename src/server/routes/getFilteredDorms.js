@@ -13,7 +13,7 @@ router.post('/', async (req, res) => {
     let filters = req.body
     var trueFilters = []
 
-    console.log("filters: " + filters)
+    // console.log("filters: " + filters)
 
     for(var prop in filters) {
         if(filters[prop]) {
@@ -93,7 +93,7 @@ router.post('/', async (req, res) => {
     while(query.endsWith("AND ") || query.endsWith("AND")) query = query.slice(0, -4)
 
     query += ") ORDER BY D.DORM ASC;"
-    console.log(query)
+    // console.log(query)
 
 	const result = await pool.query(query);
 	res.send(result)

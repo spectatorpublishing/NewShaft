@@ -26,7 +26,7 @@ const menuItems = [
     "disabled": false,
   },
   {
-    "name": "Lottery Predictor",
+    "name": "Housing Odds",
     "link": "/lottery",
     "external": false,
     "disabled": false,
