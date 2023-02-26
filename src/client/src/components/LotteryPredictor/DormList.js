@@ -126,7 +126,14 @@ const defaultDorms = [
 // Dorms in this List don't have floorplan and svgs
 // in our AWS S3 bucket, so will not be shown on the
 // front-end until the images are added
-const blacklist = ["548 West 113", "627 West 115", "Carlton", "Plimpton"];
+const blacklist = [
+  "548 West 113",
+  "627 West 115",
+  "Carlton Arms",
+  "Hartley Hall",
+  "Plimpton Hall",
+  "Wallach Hall"
+]
 
 const DormButton = (props) => {
   const [isSelected, setSelected] = useState(false);

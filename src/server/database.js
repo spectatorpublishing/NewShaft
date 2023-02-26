@@ -1,6 +1,6 @@
 /** Handles all pooled connections to MySQL database */
 const util = require('util')
-const mysql = require('mysql')
+const mysql = require('mysql2')
 
 require('dotenv').config();
 
