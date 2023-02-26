@@ -92,7 +92,7 @@ const NewAmenities = (props) => {
     GYM: "Gym",
     BIKE: "Bike Storage",
     MUSIC: "Practice Rooms",
-    ACCESS: "Accessible Entrance"
+    ACCESSIBLE: "Accessible Entrance"
   }
 
   const amenitiesIcons = {
@@ -107,7 +107,7 @@ const NewAmenities = (props) => {
     GYM: gym,
     BIKE: bike,
     MUSIC: practiceRoom,
-    ACCESS: wheelchair
+    ACCESSIBLE: wheelchair
   }
 
   // for schapiro
@@ -134,6 +134,52 @@ const NewAmenities = (props) => {
     ACCESSIBLE: 1
   }
 
+  const TestStrings = {
+    S_BATHROOM: "Single-Use",
+    C_BATHROOM: "Communal bathrooms",
+    BOTH_BATHROOM: "Mixed single and communal",
+    F_KITCHEN: "One per floor",
+    S_KITCHEN: "One per suite",
+    B_KITCHEN: "One per building",
+    CARPET: "Carpeted",
+    WOOD_TILE: "Wood/Tile",
+    F_LOUNGE: "Floor lounge",
+    SUITE_LOUNGE: "In-Suite lounge",
+    L_LOUNGE: "Lobby lounge",
+    SKY_LOUNGE: "Sky Lounge",
+    LAUNDRY: "",
+    AC: "",
+    COMPUTER: "",
+    PRINT: "",
+    GYM: "",
+    BIKE: "",
+    MUSIC: "",
+    ACCESSIBLE: ""
+  }
+
+  const TestCategories = {
+    S_BATHROOM: "Bathroom",
+    C_BATHROOM: "Bathroom",
+    BOTH_BATHROOM: "Bathroom",
+    F_KITCHEN: "Kitchen",
+    S_KITCHEN: "Kitchen",
+    B_KITCHEN: "Kitchen",
+    CARPET: "Floor",
+    WOOD_TILE: "Floor",
+    F_LOUNGE: "Lounge",
+    SUITE_LOUNGE: "Lounge",
+    L_LOUNGE: "Lounge",
+    SKY_LOUNGE: "Lounge",
+    LAUNDRY: "",
+    AC: "",
+    COMPUTER: "",
+    PRINT: "",
+    GYM: "",
+    BIKE: "",
+    MUSIC: "",
+    ACCESSIBLE: ""
+  }
+
   return (
     <AmenityWrapper>
       {Object.keys(amenitiesMap).map(amenityKey => {
@@ -144,12 +190,16 @@ const NewAmenities = (props) => {
                 <AmenityIncluded color="#73A6E0" ><FontAwesomeIcon icon={faCheck} /> <Span>Included</Span> </AmenityIncluded>
                 : <AmenityIncluded color="#9A4A4A" ><FontAwesomeIcon icon={faTimes} /> <Span>Not Included</Span> </AmenityIncluded>
               }
-              <ListPoints>
-                {TestData && TestData[amenityKey + "_DETAILS"] ? 
-                  (TestData[amenityKey + "_DETAILS"].replace("[", "").replace("]","").replaceAll('"', '').split(', ')).map(detail => (
-                    <li>{detail}</li>)) 
-                  : null}
-              </ListPoints>
+              {Object.keys(TestData).map(dataKey => {
+                return (
+                  <ListPoints>
+                    {TestData[dataKey] && TestCategories[dataKey]==amenitiesMap[amenityKey] ? 
+                      (TestStrings[dataKey].replace("[", "").replace("]","").replaceAll('"', '').split(', ')).map(detail => (
+                        <li>{detail}</li>)) 
+                      : null}
+                  </ListPoints>
+                )
+              })}
             </Amenity>
         )
       })}
