@@ -488,7 +488,7 @@ const Dorm = ({ }) => {
             </DormImage>}
         </Mobile>
         <DormHeader>
-          <DormName> {(dormInfo.DORM === "600 W 113th") ? "600 W 113th (Nuss)" : dormInfo.DORM} </DormName>
+          <DormName> {(dormInfo.DORM === "600 W 113th") ? "600 W 113th (Nuss)" : dormInfo.DORM}</DormName>
           <UnderlineWrapper>
             <Underline></Underline>
             <Dot></Dot>
