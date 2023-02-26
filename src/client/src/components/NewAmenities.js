@@ -66,7 +66,7 @@ const Icon =styled.img`
   margin-right:1rem;
 `
 
-const ListPoints = styled.ul`
+const ListPoints = styled.text`
   padding-inline-start: 1.2rem;
   margin-left: 1rem;
 
@@ -186,14 +186,22 @@ const NewAmenities = (props) => {
         return (
           <Amenity> 
               <AmenityHeader><Icon src={amenitiesIcons[amenityKey]}/>{amenitiesMap[amenityKey]} </AmenityHeader>
-              {(props.amenities && props.amenities[amenityKey]==1) ? 
-                <AmenityIncluded color="#73A6E0" ><FontAwesomeIcon icon={faCheck} /> <Span>Included</Span> </AmenityIncluded>
-                : <AmenityIncluded color="#9A4A4A" ><FontAwesomeIcon icon={faTimes} /> <Span>Not Included</Span> </AmenityIncluded>
+              {(props.amenities && props.amenities[amenityKey]==1) 
+                ? <div>
+                  {(amenitiesMap[amenityKey]=="Bathroom" || amenitiesMap[amenityKey]=="Floor") 
+                  ? null
+                  : <AmenityIncluded color="#73A6E0" ><FontAwesomeIcon icon={faCheck} />  <Span>Included</Span></AmenityIncluded>}
+                  </div>
+                : <div>
+                  {(amenitiesMap[amenityKey]=="Bathroom" || amenitiesMap[amenityKey]=="Floor") 
+                  ? null
+                  : <AmenityIncluded color="#9A4A4A" ><FontAwesomeIcon icon={faTimes} /> <Span>Not Included</Span></AmenityIncluded>}
+                  </div>
               }
               {Object.keys(TestData).map(dataKey => {
                 return (
                   <ListPoints>
-                    {TestData[dataKey] && TestCategories[dataKey]==amenitiesMap[amenityKey] ? 
+                    {TestData[dataKey]==1 && TestCategories[dataKey]==amenitiesMap[amenityKey] ? 
                       (TestStrings[dataKey].replace("[", "").replace("]","").replaceAll('"', '').split(', ')).map(detail => (
                         <li>{detail}</li>)) 
                       : null}
