@@ -1,14 +1,14 @@
-import React, { Component } from 'react';
+import React, { Component } from "react";
 import styled from "styled-components/macro";
 import ExploreSidebar from "../components/ExploreSidebar";
 import Maps from "../components/Maps";
-import SearchBar from "../components/SearchBar"
+import SearchBar from "../components/SearchBar";
 import { FILTER_NAME_TO_KEY } from "../util/DormFilter.js";
 import Filters from "../components/ExploreFilters/Filters.js";
-import AdManager from '../components/AdManager';
+import AdManager from "../components/AdManager";
 
-import _, { initial } from "lodash"
-import ScrollToTop from '../components/ScrollToTop';
+import _, { initial } from "lodash";
+import ScrollToTop from "../components/ScrollToTop";
 
 const ExploreContainer = styled.div`
   width: 100%;
@@ -17,50 +17,50 @@ const ExploreContainer = styled.div`
   margin-top: 60px;
   overflow: hidden;
   flex-direction: row;
-`
+`;
 
 const SideBar = styled.div`
   width: 100%;
-  padding: 0% 0% 0% 0%;
-  overflow-y: scroll; 
+  padding: 0 0 0 0;
+  overflow-x: hidden;
   min-height: 200px;
+
   @media only screen and (min-width: 768px) {
     width: 60%;
     padding: 0 0% 0% 0%;
-    min-height: 100vh;
     z-index: 1;
   }
-`
+`;
 
 const MapView = styled.div`
-display: none;
-width: 0%;
-@media only screen and (min-width: 768px) {
-  display: inline;
-  position: fixed;
-  padding-left: 0em;
-  float: right;
-  width: 40%;
-  right: 0;
-  top: 0;
-  z-index:1;
-}
-`
+  display: none;
+  width: 0%;
+  @media only screen and (min-width: 768px) {
+    display: inline;
+    position: fixed;
+    padding-left: 0em;
+    float: right;
+    width: 40%;
+    right: 0;
+    top: 60px;
+    z-index: 1;
+  }
+`;
 
 const FilterSearchBG = styled.div`
-  //background-color: ${props => props.theme.columbiaBlue};
+  //background-color: ${(props) => props.theme.columbiaBlue};
   margin: 2rem;
-  border-bottom: 1px solid #C4C4C4;
+  border-bottom: 1px solid #c4c4c4;
   @media only screen and (max-width: 768px) {
     margin: 1rem;
   }
-`
+`;
 
 const ColOne = styled.div`
   display: flex;
   flex-direction: column;
   width: 100%;
-`
+`;
 
 const ColTwo = styled.div`
   display: inline;
@@ -71,7 +71,7 @@ const ColTwo = styled.div`
   right: 0;
   top: 0;
   flex-direction: column;
-  `
+`;
 
 const initialPayload = {
   COLUMBIA: 0,
@@ -94,141 +94,137 @@ const initialPayload = {
   SOPHOMORE: 0,
   JUNIOR: 0,
   SENIOR: 0,
-  DORM: ""
-}
+  DORM: "",
+};
 
 const filterElements = {
-	"School": [
-		"Columbia",
-		"Barnard"
-	],
-	"Group Size": [
-		"2 Person",
-		"3 Person",
-		"4 Person",
-		"5 Person",
-		"6 Person",
-		"7 Person",
-		"8 Person",
-		"9 Person",
-		"10 Person"
-	],
-	"Room Type": [
-        "Corridor Style",
-        "Suite Style",
-		"Single",
-		"Double",
-		"Triple",
-	],
-	"Typical Residents": [
-		"First Year",
-		"Sophomore",
-		"Junior",
-		"Senior"
-	],
-	// "Amenities": [
-	// 	"A/C",
-	// 	"Private Kitchen",
-	// 	"Gym",
-	// 	"Single-Use Bathroom"
-	// ]
-}
-  
+  School: ["Columbia", "Barnard"],
+  "Group Size": [
+    "2 Person",
+    "3 Person",
+    "4 Person",
+    "5 Person",
+    "6 Person",
+    "7 Person",
+    "8 Person",
+    "9 Person",
+    "10 Person",
+  ],
+  "Room Type": ["Corridor Style", "Suite Style", "Single", "Double", "Triple"],
+  "Typical Residents": ["First Year", "Sophomore", "Junior", "Senior"],
+  // "Amenities": [
+  // 	"A/C",
+  // 	"Private Kitchen",
+  // 	"Gym",
+  // 	"Single-Use Bathroom"
+  // ]
+};
+
 export default class Explore extends Component {
-  constructor(props){
+  constructor(props) {
     super(props);
     this.state = {
       payload: _.clone(initialPayload),
-      dorms: []
+      dorms: [],
     };
-    this.updatePayload = this.updatePayload.bind(this)
-    this.resetPayload = this.resetPayload.bind(this)
+    this.updatePayload = this.updatePayload.bind(this);
+    this.resetPayload = this.resetPayload.bind(this);
   }
-  
-  componentDidMount(){
-    window.scrollTo(0, 0)
+
+  componentDidMount() {
+    window.scrollTo(0, 0);
     document.title = "The Shaft";
     this.fetchDorms();
   }
 
-  preloadImages(dorms, callback){
+  preloadImages(dorms, callback) {
     dorms.forEach((dorm) => {
-      var i = new Image()
+      var i = new Image();
       i.src = dorm.THUMBNAIL_IMAGE;
-    })
+    });
 
     callback();
   }
 
-  fetchDorms(){
+  fetchDorms() {
     fetch("/api/getExploreInfo", {
       method: "GET",
-      headers: {'Content-Type': 'application/json',
-      'Accept': 'application/json'},
+      headers: {
+        "Content-Type": "application/json",
+        Accept: "application/json",
+      },
     })
-    .then(res => res.json())
-    .then(dormInfo => {
-      this.preloadImages(dormInfo, () => this.setState({dorms: dormInfo}));      
-    })
+      .then((res) => res.json())
+      .then((dormInfo) => {
+        this.preloadImages(dormInfo, () => this.setState({ dorms: dormInfo }));
+      });
   }
 
-  updatePayload(newValue, name, filters){
+  updatePayload(newValue, name, filters) {
     let payload = this.state.payload;
-    if(filters != undefined) {
-      for(var prop in filters) {
+    if (filters != undefined) {
+      for (var prop in filters) {
         payload[prop] = filters[prop];
       }
     } else {
       payload[FILTER_NAME_TO_KEY[name]] = newValue;
     }
-    this.setState({payload: payload}, () => this.filterDorms());
+    this.setState({ payload: payload }, () => this.filterDorms());
     console.log("updated payload: ", this.state.payload);
   }
 
-  resetPayload(){
-    this.setState({payload: _.clone(initialPayload)}, () => this.filterDorms());
+  resetPayload() {
+    this.setState({ payload: _.clone(initialPayload) }, () =>
+      this.filterDorms()
+    );
   }
 
-  filterDorms(){
-    fetch('/api/getFilteredDorms', {
-        method: 'POST',
-        headers: {
-            'Content-Type': 'application/json'
-        },
-        body: JSON.stringify(this.state.payload)
-    }).then(res => res.json())
-    .then(response => {
-        this.setState({dorms: response});
-    });      
+  filterDorms() {
+    fetch("/api/getFilteredDorms", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(this.state.payload),
+    })
+      .then((res) => res.json())
+      .then((response) => {
+        this.setState({ dorms: response });
+      });
   }
-  
+
   render() {
     return (
       <ExploreContainer>
         <ScrollToTop>
-        <ColOne>
-          <SideBar>
-            <AdManager width={728} height={90} path="shaftleader"/>
-            <FilterSearchBG>
-              <SearchBar handleChange={this.updatePayload}/>
-              <Filters handleChange={this.updatePayload} payload={this.state.payload} reset={this.resetPayload} filterElements={filterElements}></Filters>
-            </FilterSearchBG>
-            <ExploreSidebar dorms={this.state.dorms}/>
-          </SideBar>
-        </ColOne>
-        <ColTwo>
-          <MapView>
-            <Maps
-              latitudes={this.state.dorms.map((dorm) => dorm.LATITUDE)} 
-              longitudes={this.state.dorms.map((dorm) => dorm.LONGITUDE)} 
-              popupInfo={this.state.dorms.map((dorm) => dorm.DORM)} 
-              centerLatitude={40.808601}
-              centerLongitude={-73.966095}
-              width={"100%"}
-              height={"900px"}
+          <ColOne>
+            <SideBar>
+              <AdManager width={728} height={90} path='shaftleader' />
+              <FilterSearchBG>
+                <SearchBar handleChange={this.updatePayload} />
+                <Filters
+                  handleChange={this.updatePayload}
+                  payload={this.state.payload}
+                  reset={this.resetPayload}
+                  filterElements={filterElements}
+                ></Filters>
+              </FilterSearchBG>
+              <ExploreSidebar dorms={this.state.dorms} />
+            </SideBar>
+          </ColOne>
+          <ColTwo>
+            <MapView>
+              <Maps
+                latitudes={this.state.dorms.map((dorm) => dorm.LATITUDE)}
+                longitudes={this.state.dorms.map((dorm) => dorm.LONGITUDE)}
+                popupInfo={this.state.dorms.map((dorm) => dorm.DORM)}
+                centerLatitude={40.808601}
+                centerLongitude={-73.966095}
+                width={"100%"}
+                height={"900px"}
               />
-          </MapView>
-        </ColTwo>
+            </MapView>
+          </ColTwo>
         </ScrollToTop>
       </ExploreContainer>
     );

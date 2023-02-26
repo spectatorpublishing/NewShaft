@@ -28,6 +28,7 @@ let FilterRow = styled.div`
 const Filters = styled.div`
 	display: flex;
 	flex-direction: row;
+	overflow-x: scroll;
 	@media only screen and (max-width: 769px) {
 		display: flex;
 		flex-wrap: wrap;
