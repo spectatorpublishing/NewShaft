@@ -10,6 +10,8 @@ import computerLab from '../assets/computer-lab-icon.png'
 import bike from '../assets/bike-icon.png'
 import carpet from '../assets/carpet-icon.png'
 import lounge from '../assets/sofa-icon.png'
+import printer from '../assets/printer-icon.png'
+import wheelchair from '../assets/wheelchair-icon.png'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faCheck, faTimes} from '@fortawesome/free-solid-svg-icons'
 
@@ -73,41 +75,65 @@ const ListPoints = styled.ul`
     font-weight: 400;
     font-style: normal;
     margin: 0;
-	}
+  }
 `
 
 const NewAmenities = (props) => {
   
   const amenitiesMap = {
-    P_BATHROOM: "Single-Use Bathroom",
-    LAUNDRY: "Laundry",
-    CARPET: "Carpeted Floor",
-    F_KITCHEN: "Floor Kitchen",
-    P_KITCHEN: "Private Kitchen",
+    BATHROOM: "Bathroom",
+    FLOORING: "Floor",
+    KITCHEN: "Kitchen",
     LOUNGE: "Lounge",
+    LAUNDRY: "Laundry",
+    AC: "Air Conditioning",
+    COMPUTER: "Computer Lab",
+    PRINT: "Printer",
     GYM: "Gym",
     BIKE: "Bike Storage",
-    COMPUTER: "Computer Lab",
-    PRINT: "Print Station",
-    AC: "Air Conditioning",
-    MUSIC: "Practice Rooms"
+    MUSIC: "Practice Rooms",
+    ACCESS: "Accessible Entrance"
   }
 
   const amenitiesIcons = {
-    P_BATHROOM: bathroom,
-    LAUNDRY: laundry,
-    CARPET: carpet,
-    F_KITCHEN: kitchen,
-    P_KITCHEN: kitchen,
+    BATHROOM: bathroom,
+    FLOORING: carpet,
+    KITCHEN: kitchen,
     LOUNGE: lounge,
+    LAUNDRY: laundry,
+    AC: ac,
+    COMPUTER: computerLab,
+    PRINT: printer,
     GYM: gym,
     BIKE: bike,
-    COMPUTER: computerLab,
-    PRINT: computerLab,
-    AC: ac,
-    MUSIC: practiceRoom
+    MUSIC: practiceRoom,
+    ACCESS: wheelchair
   }
-  
+
+  // for schapiro
+  const TestData = {
+    S_BATHROOM: 0,
+    C_BATHROOM: 0,
+    BOTH_BATHROOM: 1,
+    F_KITCHEN: 1,
+    S_KITCHEN: 0,
+    B_KITCHEN: 0,
+    CARPET: 0,
+    WOOD_TILE: 1,
+    F_LOUNGE: 1,
+    SUITE_LOUNGE: 0,
+    L_LOUNGE: 1,
+    SKY_LOUNGE: 1,
+    LAUNDRY: 1,
+    AC: 1,
+    COMPUTER: 1,
+    PRINT: 1,
+    GYM: 0,
+    BIKE: 0,
+    MUSIC: 1,
+    ACCESSIBLE: 1
+  }
+
   return (
     <AmenityWrapper>
       {Object.keys(amenitiesMap).map(amenityKey => {
@@ -119,8 +145,8 @@ const NewAmenities = (props) => {
                 : <AmenityIncluded color="#9A4A4A" ><FontAwesomeIcon icon={faTimes} /> <Span>Not Included</Span> </AmenityIncluded>
               }
               <ListPoints>
-                {props.amenities && props.amenities[amenityKey + "_DETAILS"] ? 
-                  (props.amenities[amenityKey + "_DETAILS"].replace("[", "").replace("]","").replaceAll('"', '').split(', ')).map(detail => (
+                {TestData && TestData[amenityKey + "_DETAILS"] ? 
+                  (TestData[amenityKey + "_DETAILS"].replace("[", "").replace("]","").replaceAll('"', '').split(', ')).map(detail => (
                     <li>{detail}</li>)) 
                   : null}
               </ListPoints>
