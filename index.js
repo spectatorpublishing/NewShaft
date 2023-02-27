@@ -8,7 +8,7 @@ const cors = require('cors');
 
 app.use(cors())
 
-const mountRoutes = require('./routes')
+const mountRoutes = require('./server/routes')
 
 const port = process.env.PORT || 8080;
 const server = app.listen(port, () => console.log(`Connected on port ${port}`))
@@ -23,10 +23,10 @@ mountRoutes(app)
 
 const path = require('path')
 // Serve static files from the React frontend app
-app.use(express.static(path.join(__dirname, '../client/build')))
+app.use(express.static(path.join(__dirname, './client/build')))
 // Anything that doesn't match the above, send back index.html
 app.get('*', (req, res) => {
-  res.sendFile(path.join(__dirname + '/../client/build/index.html'))
+  res.sendFile(path.join(__dirname + '/./client/build/index.html'))
 })
 
 module.exports = server;
