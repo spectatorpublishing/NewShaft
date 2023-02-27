@@ -1,7 +1,7 @@
 var fs = require('fs');
 var parse = require('csv-parse');
 var async = require('async');
-var mysql = require('mysql');
+var mysql = require('mysql2');
 
 var inputFile='shaft.csv';
 var con = mysql.createConnection({

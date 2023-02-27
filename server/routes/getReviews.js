@@ -2,7 +2,7 @@
 
 var express = require('express');
 var router = express.Router();
-var mysql = require('mysql');
+var mysql = require('mysql2');
 var pool = require('../database');
 
 
