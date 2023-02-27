@@ -47,6 +47,24 @@ const AmenityWrapper = styled.div`
     flex-direction:column;
   }
 `
+const ListWrapper = styled.div`
+  display:flex;
+  flex-direction:row;
+  width:100%;
+  flex-wrap:wrap;
+  justify-content:space-between;
+  @media only screen and (max-width: 768px){
+    flex-direction:column;
+  }
+`
+const CheckListWrapper = styled.div`
+  display:flex;
+  justify-content:space-between;
+  padding: 10px;
+  @media only screen and (max-width: 768px){
+    flex-direction:column;
+  }
+`
 const Amenity = styled.div`
   display:flex;
   flex-direction:column;
@@ -186,11 +204,11 @@ const NewAmenities = (props) => {
         return (
           <Amenity> 
               <AmenityHeader><Icon src={amenitiesIcons[amenityKey]}/>{amenitiesMap[amenityKey]} </AmenityHeader>
-              {(props.amenities && props.amenities[amenityKey]==1) 
+              {(props.amenities && props.amenities[amenityKey]==1 && (amenitiesMap[amenityKey]!="Bathroom" || amenitiesMap[amenityKey]!="Floor") || amenitiesMap[amenityKey]=="Accessible Entrance") 
                 ? <div>
                   {(amenitiesMap[amenityKey]=="Bathroom" || amenitiesMap[amenityKey]=="Floor") 
                   ? null
-                  : <AmenityIncluded color="#73A6E0" ><FontAwesomeIcon icon={faCheck} />  <Span>Included</Span></AmenityIncluded>}
+                  : <AmenityIncluded color="#73A6E0" ><FontAwesomeIcon icon={faCheck} /> <Span>Included</Span></AmenityIncluded>}
                   </div>
                 : <div>
                   {(amenitiesMap[amenityKey]=="Bathroom" || amenitiesMap[amenityKey]=="Floor") 
@@ -200,12 +218,20 @@ const NewAmenities = (props) => {
               }
               {Object.keys(TestData).map(dataKey => {
                 return (
-                  <ListPoints>
-                    {TestData[dataKey]==1 && TestCategories[dataKey]==amenitiesMap[amenityKey] ? 
-                      (TestStrings[dataKey].replace("[", "").replace("]","").replaceAll('"', '').split(', ')).map(detail => (
-                        <li>{detail}</li>)) 
-                      : null}
-                  </ListPoints>
+                  <ListWrapper>
+                    {(TestData[dataKey]==1 && TestCategories[dataKey]==amenitiesMap[amenityKey] && (amenitiesMap[amenityKey]=="Bathroom" || amenitiesMap[amenityKey]=="Floor")) 
+                      ? (TestStrings[dataKey].replace("[", "").replace("]","").replaceAll('"', '').split(', ')).map(detail => (
+                        <CheckListWrapper><FontAwesomeIcon color="#73A6E0" icon={faCheck} />&nbsp;&nbsp;&nbsp;&nbsp;<li>{detail}</li></CheckListWrapper>))
+                      : null
+                    }   
+                    <ListPoints>
+                      {TestData[dataKey]==1 && TestCategories[dataKey]==amenitiesMap[amenityKey] && amenitiesMap[amenityKey]!="Bathroom" && amenitiesMap[amenityKey]!="Floor"
+                        ? (TestStrings[dataKey].replace("[", "").replace("]","").replaceAll('"', '').split(', ')).map(detail => (
+                          <li>{detail}</li>))
+                        : null}
+                    </ListPoints>
+                  </ListWrapper>
+                  
                 )
               })}
             </Amenity>
