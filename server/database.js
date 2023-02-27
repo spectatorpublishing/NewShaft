@@ -6,10 +6,10 @@ require('dotenv').config();
 
 const pool = mysql.createPool({
   connectionLimit: 10,
-  host: process.env.SHAFTHOST,
-  user: process.env.SHAFTUSER,
-  password: process.env.SHAFTPASSWORD,
-  database: process.env.SHAFTDATABASE
+  host: "192.34.62.10", //process.env.SHAFTHOST,
+  user: "columbiaspectatordev", //process.env.SHAFTUSER,
+  password: "Columbiaspectatorspectech1877!", //process.env.SHAFTPASSWORD,
+  database: "dev" //process.env.SHAFTDATABASE
 });
 
 // Ping database to check for common exception errors.
@@ -22,7 +22,7 @@ pool.getConnection((err, connection) => {
       console.error('Database has too many connections.')
     }
     if (err.code === 'ECONNREFUSED') {
-      console.error('Database connection was refused.')
+      console.error('Database connection was refused lmao.')
     }
   }
 
