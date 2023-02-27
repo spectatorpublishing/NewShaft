@@ -120,7 +120,7 @@ const NewAmenities = (props) => {
               }
               <ListPoints>
                 {props.amenities && props.amenities[amenityKey + "_DETAILS"] ? 
-                  (props.amenities[amenityKey + "_DETAILS"].replace("[", "").replace("]","").replaceAll('"', '').split(', ')).map(detail => (
+                  (toString(props.amenities[amenityKey + "_DETAILS"]).replace("[", "").replace("]","").replaceAll('"', '').split(', ')).map(detail => (
                     <li>{detail}</li>)) 
                   : null}
               </ListPoints>

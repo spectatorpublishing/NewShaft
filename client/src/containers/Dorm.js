@@ -496,7 +496,7 @@ const Dorm = ({ }) => {
           </UnderlineWrapper>
         </DormHeader>
         <Desktop>
-          {(dorm_photos.length === 0) ? null : <PhotoBanner bannerImages={dorm_photos} />}
+          {(dorm_photos.length === 0) ? <div></div> : <PhotoBanner bannerImages={dorm_photos} />}
         </Desktop>
         <Info>
           <ColumnLeft>

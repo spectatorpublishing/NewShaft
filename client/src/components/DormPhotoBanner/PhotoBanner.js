@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import styled from "styled-components";
-/* import Carousel from 're-carousel' */
+import Carousel from 're-carousel'
 import Dots from './CarouselDots'
 import Buttons from './CarouselButtons'
 
@@ -41,9 +41,9 @@ const PhotoBanner = (props) => {
   return (
     <PhotosContainer>
       {/*  To enable auto scroll: <Carousel loop={true} auto={true} frames={frames} widgets={[Dots, Buttons]}> */}
-      {/* <Carousel loop={true} frames={frames} widgets={[Dots, Buttons]}>
+      <Carousel loop={true} frames={frames} widgets={[Dots, Buttons]}>
         <div></div>
-      </Carousel> */}
+      </Carousel>
     </PhotosContainer>
   );
 };
