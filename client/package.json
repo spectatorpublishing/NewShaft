@@ -2,7 +2,7 @@
   "name": "columbia-spectator-new-shaft",
   "version": "1.0.0",
   "description": "React version of theshaft.info website",
-  "proxy": "http://localhost:8080",
+  "proxy": "http://localhost:5000",
   "private": true,
   "dependencies": {
     "@emotion/react": "^11.10.6",
