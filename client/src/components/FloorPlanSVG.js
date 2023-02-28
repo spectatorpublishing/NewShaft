@@ -137,7 +137,7 @@ const FloorPlanSVG = (props) => {
     console.log("3. svg url: " + svgUrl)
   }
 
-  const styleSVG = (error, svg) => {
+  const styleSVG = (svg) => {
     console.log("4. floorplans: style svg")
     var svgBoundingDivEl;
     if (svg) {
@@ -263,7 +263,7 @@ const FloorPlanSVG = (props) => {
     <FloorPlanWrapper id={floorplanId}>
       {floorplanSvg !== "" ? <ReactSVG
         src={floorplanSvg}
-        afterInjection={(error, svg) => styleSVG(error, svg)}
+        afterInjection={(svg) => styleSVG(svg)}
         fallback={getStaticFloorplan}
       /> : null}
 
