@@ -19,7 +19,7 @@ const MapItem = (props) => {
           onMouseEnter={() => setShowPopUp(true)}
           onMouseLeave={() => setTimeout(() => {
             setShowPopUp(false)
-          }, 750)}
+          }, 500)}
     >
       <Marker
         latitude={props.lat}
