@@ -1,6 +1,6 @@
 var fs = require('fs');
 var files = fs.readdirSync('../src/client/assets/floor_plans/');
-var mysql = require('mysql');
+var mysql = require('mysql2');
 
 var floor_dict = {}
 

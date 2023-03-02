@@ -6,7 +6,7 @@ Lottery Predictor Algorithm: https://docs.google.com/document/d/19FVE_6qPtzTbr1n
 
 # Frontend
 ```
-cd NewShaft/src/client
+cd NewShaft/client
 npm install // only run this once after you clone. You don't have to run this every time
 npm start
 ```
@@ -20,17 +20,8 @@ npm install // only run this once after you clone. You don't have to run this ev
 npm start
 ```
 
-## Production
-
-This README provides all of the information about the Shaft Production infrastructure
-
-There a few major components to the production infrastructure of the Shaft
-
-1. MySQl Database
-2. Live Updater
-3. The React + Express Application
-4. NGINX webservers
-5. Digital Ocean Loadbalancer
+## Deployment
+The Shaft is deployed on heroku like lionclubs and culpa! To deploy just log into the heroku account, go to the Deploy tab and click the "deploy branch" button. This will deploy the master branch by default but you may choose a different branch to deploy from instead. 
 
 ## MySQL Database
 
@@ -48,43 +39,3 @@ https://www.digitalocean.com/community/tutorials/how-to-install-mysql-on-ubuntu-
 
 For any small tweaks to the production database I would suggest
 using mysql workbench to connect to the server.
-
-## Deployment (by Laura)
-The Shaft is deployed on a digital ocean server with [these instructions](https://www.digitalocean.com/community/tutorials/how-to-set-up-a-node-js-application-for-production-on-ubuntu-20-04).
-
-1. Connect to the droplet console through the digital ocean site.
-2. All of the pm2 processes and relevant folders are in the `erin` account, not the `root` account. Switch to that account by first running `su erin`.
-3. Put in the password if prompted. The password can be found in the HoE password document.
-4. Make sure that you are in the home directory by running `cd ~`
-5. Go into the proper directory where the githib repository is located by running `cd NewShaft/NewShaft`
-6. Once in the correct directory, run `git pull origin master` to get all the changes from GitHub (No need to commit anything or do anything else after pulling)
-12. The site should automatically update, but if it doesn't, run `pm2 restart Shaft`
-13. Check the live site! Everything should be good to go 🎉
-
-Sample terminal session!
-<img width="756" alt="image" src="https://user-images.githubusercontent.com/61126997/212422378-6e15dd31-decc-4c56-958e-1c7372410eb0.png">
-
-## Deployment (by erin)
-
-Only do this if its really messed up. But you should be fine following the Laura instructions above.
-
-This is how I redeploy the application:
-
-Because the shaft tends to have so many setup issues/weird production bugs, I like to get everything working on my personal computer, then just use `rsync` to move that exact setup to the production server. This saves some headaches. 
-
-Steps:
-
-1. Take a backup snapshot of the server in digital ocean (just in case)
-2. Connect to the droplet console through the digital ocean site.
-3. All of the pm2 processes and relevant folders are in the `erin` account, not the `root` account. Switch to that account: `su erin`
-4. Make sure that when you run `pm2 list`, you see:
-<img width="1235" alt="Screen Shot 2022-01-09 at 3 39 19 PM" src="https://user-images.githubusercontent.com/16248113/148699912-1079821a-adfb-4ac0-813b-a1e2c7850d2c.png">
-
-6. Make sure that you are in `/home/erin/`: `cd ~`
-7. Here, we have `NewShaft/NewShaft` (sorry about the nesting) and `NewShaft1`-- I like to move the files from my personal laptop to `NewShaft1`, poke around in that directory to make sure everything looks about right, and then copy those files into `NewShaft/NewShaft`, just as an added security measure. When checking that everything is good on your personal laptop, check on `localhost:8080`-- if stuff there looks off, you forgot to run `npm build`.
-8. Sync your personal Shaft to the server's Shaft: `rsync -a ~/programming/NewShaft/ erin@104.131.121.94:NewShaft1`, where `~/programming/NewShaft/` is the path to your Shaft directory. The password it is asking for is the droplet password on the admin doc.
-9. This will hang for a bit-- it just means it is working
-10. When that is done, `cd NewShaft1` and poke around to make sure that your changes are there, and that everything looks how you expected it to.
-11. Now copy the `NewShaft1` stuff into the actual, deployed directory: `sudo cp -a /home/erin/NewShaft1/. /home/erin/NewShaft/NewShaft/`
-12. The site should automatically update, but if it doesn't, run `pm2 restart Shaft`
-13. Check the live site! Everything should be good to go 🎉
