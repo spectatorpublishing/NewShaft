@@ -29,12 +29,18 @@ const FilterItem = (props) => {
         <Item>
             <FormControlLabel 
                     value={props.option}
-                    control={<Checkbox style={{
-                        color: theme.columbiaBlue,
-                        '&$checked': {
-                          color: theme.columbiaBlue,
-                        },
-                      }} color="default" handleChange={onClick} checked={optionActive}/>}
+                    control={
+                        <Checkbox
+                            style={{
+                                color: theme.columbiaBlue,
+                                '&$checked': {
+                                color: theme.columbiaBlue,
+                                },
+                            }}
+                            color="default"
+                            onChange={onClick}
+                            checked={optionActive}
+                        />}
                     label={props.option}
                     root={
                         {fontWeight: 400,
