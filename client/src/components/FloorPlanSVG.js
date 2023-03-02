@@ -202,9 +202,9 @@ const FloorPlanSVG = (props) => {
 
   const colorGray = (dorm, lotteryNum, roomOrSuiteName) => {
     // console.log(dorm, roomOrSuiteName, lotteryNum);
-    return (dorm == "McBain Hall" && lotteryNum < 3000) 
+    return (dorm == "McBain Hall" && lotteryNum < 4000) 
           || dorm == "Furnald Hall" 
-          || (dorm == "Hartley Hall" && lotteryNum < 3000)
+          || (dorm == "Hartley Hall" && lotteryNum < 4000)
           || (
                 dorm == "Broadway Hall" 
                 && roomOrSuiteName.endsWith("39") 
