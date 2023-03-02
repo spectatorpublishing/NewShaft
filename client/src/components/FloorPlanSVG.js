@@ -64,18 +64,18 @@ const FloorPlanSVG = (props) => {
 
   useEffect(() => {
     setFloor(true);
-    console.log("1. floorplans: change in dorm")
+    // console.log("1. floorplans: change in dorm")
   }, [props.dorm]);
 
   useEffect(() => {
     setFloor(false);
-    console.log("1. floorplans: change in floor")
+    // console.log("1. floorplans: change in floor")
   }, [props.floor])
 
   const setFloor = (dorm_change) => {
     // Strip " Hall" out of the dorm name and concat with floor number
     // e.g. dorm: River Hall, floor: 6 -> River 6
-    console.log("2. floorplans: setFloor")
+    // console.log("2. floorplans: setFloor")
     let dorm = props.dorm.replace(" Hall", "");
     if (dorm == "600 W 113th") {
       dorm = "600 West 113";
@@ -134,11 +134,11 @@ const FloorPlanSVG = (props) => {
     setFloorPlanSvg(svgUrl);
     setFloorPlanDic(dic);
     setSuitePick(suitePickStyle);
-    console.log("3. svg url: " + svgUrl)
+    // console.log("3. svg url: " + svgUrl)
   }
 
   const styleSVG = (svg) => {
-    console.log("4. floorplans: style svg")
+    // console.log("4. floorplans: style svg")
     var svgBoundingDivEl;
     if (svg) {
       svgBoundingDivEl = svg;
@@ -189,14 +189,27 @@ const FloorPlanSVG = (props) => {
         let selectableEl = suitePick ? suiteEl : roomEl;
         let roomPickedBy = fromDb && fromDb["lottery_number"]
 
-        color = getDormColor(props.lotteryNum, roomPickedBy)
+        color = colorGray(props.dorm, props.lotteryNum, roomOrSuiteName) ? "gray" : getDormColor(props.lotteryNum, roomPickedBy)
 
         // Attach data attributes for react-tooltip
+        console.log(colorGray(props.dorm, props.lotteryNum, roomOrSuiteName));
         selectableEl.setAttribute("fill", color)
         selectableEl.setAttribute("data-tip", roomOrSuiteName);
         selectableEl.setAttribute("data-for", "global");
       }
     });
+  }
+
+  const colorGray = (dorm, lotteryNum, roomOrSuiteName) => {
+    // console.log(dorm, roomOrSuiteName, lotteryNum);
+    return (dorm == "McBain Hall" && lotteryNum < 3000) 
+          || dorm == "Furnald Hall" 
+          || (dorm == "Hartley Hall" && lotteryNum < 3000)
+          || (
+                dorm == "Broadway Hall" 
+                && roomOrSuiteName.endsWith("39") 
+                || roomOrSuiteName.endsWith("40") 
+              );
   }
 
   const getDataFromSvg = (el) => {
