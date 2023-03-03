@@ -201,27 +201,39 @@ const NewAmenities = (props) => {
   return (
     <AmenityWrapper>
       {Object.keys(amenitiesMap).map(amenityKey => {
+        const showKitchen = TestData["F_KITCHEN"]==1 || TestData["S_KITCHEN"]==1 || TestData["B_KITCHEN"]==1;
+        const showLounge = TestData["F_LOUNGE"]==1 || TestData["SUITE_LOUNGE"]==1 || TestData["L_LOUNGE"]==1 || TestData["SKY_LOUNGE"]==1;
+        
+        let amenityIncluded
+        if (amenitiesMap[amenityKey]=="Kitchen" || amenitiesMap[amenityKey]=="Lounge") {
+          if (showKitchen && amenitiesMap[amenityKey]=="Kitchen" || showLounge && amenitiesMap[amenityKey]=="Lounge") {
+            amenityIncluded = <AmenityIncluded color="#73A6E0" ><FontAwesomeIcon icon={faCheck} /> <Span>Included</Span></AmenityIncluded>;
+          }
+          else {
+            amenityIncluded = <AmenityIncluded color="#9A4A4A" ><FontAwesomeIcon icon={faTimes} /> <Span>Not Included</Span></AmenityIncluded>;
+          }
+        }
+        else if (amenitiesMap[amenityKey]=="Bathroom" || amenitiesMap[amenityKey]=="Floor") {
+          amenityIncluded = null
+        }
+        else {
+          amenityIncluded = (TestData && TestData[amenityKey]==1) 
+          ?
+            <AmenityIncluded color="#73A6E0" ><FontAwesomeIcon icon={faCheck} /> <Span>Included</Span></AmenityIncluded>
+          :
+            <AmenityIncluded color="#9A4A4A" ><FontAwesomeIcon icon={faTimes} /> <Span>Not Included</Span></AmenityIncluded>
+        }
+
         return (
           <Amenity> 
               <AmenityHeader><Icon src={amenitiesIcons[amenityKey]}/>{amenitiesMap[amenityKey]} </AmenityHeader>
-              {(props.amenities && props.amenities[amenityKey]==1 && (amenitiesMap[amenityKey]!="Bathroom" || amenitiesMap[amenityKey]!="Floor") || amenitiesMap[amenityKey]=="Accessible Entrance") 
-                ? <div>
-                  {(amenitiesMap[amenityKey]=="Bathroom" || amenitiesMap[amenityKey]=="Floor") 
-                  ? null
-                  : <AmenityIncluded color="#73A6E0" ><FontAwesomeIcon icon={faCheck} /> <Span>Included</Span></AmenityIncluded>}
-                  </div>
-                : <div>
-                  {(amenitiesMap[amenityKey]=="Bathroom" || amenitiesMap[amenityKey]=="Floor") 
-                  ? null
-                  : <AmenityIncluded color="#9A4A4A" ><FontAwesomeIcon icon={faTimes} /> <Span>Not Included</Span></AmenityIncluded>}
-                  </div>
-              }
+              {amenityIncluded}
               {Object.keys(TestData).map(dataKey => {
                 return (
                   <ListWrapper>
                     {(TestData[dataKey]==1 && TestCategories[dataKey]==amenitiesMap[amenityKey] && (amenitiesMap[amenityKey]=="Bathroom" || amenitiesMap[amenityKey]=="Floor")) 
                       ? (TestStrings[dataKey].replace("[", "").replace("]","").replaceAll('"', '').split(', ')).map(detail => (
-                        <CheckListWrapper><FontAwesomeIcon color="#73A6E0" icon={faCheck} />&nbsp;&nbsp;&nbsp;&nbsp;<li>{detail}</li></CheckListWrapper>))
+                        <CheckListWrapper><FontAwesomeIcon color="#73A6E0" icon={faCheck} /><li>{detail}</li></CheckListWrapper>))
                       : null
                     }   
                     <ListPoints>
