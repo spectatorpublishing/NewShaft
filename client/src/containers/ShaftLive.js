@@ -313,6 +313,7 @@ const defaultDorms = [
   "East Campus",
   "Furnald Hall",
   "Harmony Hall",
+  "Hartley Hall",
   "Hogan Hall",
   "McBain Hall",
   "600 W 113th",

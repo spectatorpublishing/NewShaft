@@ -127,6 +127,10 @@ function eastCampusRoomFormatter(svgSuite, svgRoom, floor) {
   return inferred
 }
 
+function hartleyRoomFormatter(svgSuite, svgRoom, floor) {
+  return svgSuite + svgRoom
+}
+
 function hoganRoomFormatter(svgSuite, svgRoom, floor) {
   svgRoom = svgRoom.trim().slice(0,1)
   return floor + svgSuite + svgRoom
@@ -145,6 +149,7 @@ const db2svgRoomFormat = {
   "Broadway Hall": broadwayRoomFormatter,
   "East Campus": eastCampusRoomFormatter,
   "Furnald Hall": normalRoomFormatter,
+  "Hartley Hall": hartleyRoomFormatter,
   "Harmony Hall": normalRoomFormatter,
   "Hogan Hall": hoganRoomFormatter,
   "McBain Hall": normalRoomFormatter,
