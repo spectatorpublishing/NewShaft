@@ -27,7 +27,6 @@ const SideBar = styled.div`
   @media only screen and (min-width: 768px) {
     width: 60%;
     padding: 0 0% 0% 0%;
-    min-height: 100vh;
     z-index: 1;
   }
 `
@@ -42,7 +41,7 @@ width: 0%;
   float: right;
   width: 40%;
   right: 0;
-  top: 0;
+  top: 60px;
   z-index:1;
 }
 `
