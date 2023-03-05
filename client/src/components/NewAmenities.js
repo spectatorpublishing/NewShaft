@@ -110,7 +110,7 @@ const NewAmenities = (props) => {
     COMPUTER: "Computer Lab",
     PRINT: "Print Station",
     MUSIC: "Practice Rooms",
-    A_ENTRANCE: "Accesible Entrance"
+    A_ENTRANCE: "Accessible Entrance"
   }
 
   const amenitiesIcons = {
