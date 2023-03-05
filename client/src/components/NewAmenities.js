@@ -100,17 +100,17 @@ const NewAmenities = (props) => {
   
   const amenitiesMap = {
     BATHROOM: "Bathroom",
-    FLOORING: "Floor",
-    KITCHEN: "Kitchen",
+    FLOORING: "Flooring",
+    KITCHEN: "Floor Kitchen",
     LOUNGE: "Lounge",
     LAUNDRY: "Laundry",
     AC: "Air Conditioning",
-    COMPUTER: "Computer Lab",
-    PRINT: "Printer",
     GYM: "Gym",
     BIKE: "Bike Storage",
+    COMPUTER: "Computer Lab",
+    PRINT: "Print Station",
     MUSIC: "Practice Rooms",
-    ACCESSIBLE: "Accessible Entrance"
+    A_ENTRANCE: "Accesible Entrance"
   }
 
   const amenitiesIcons = {
@@ -125,127 +125,32 @@ const NewAmenities = (props) => {
     GYM: gym,
     BIKE: bike,
     MUSIC: practiceRoom,
-    ACCESSIBLE: wheelchair
-  }
-
-  // for schapiro
-  const TestData = {
-    S_BATHROOM: 0,
-    C_BATHROOM: 0,
-    BOTH_BATHROOM: 1,
-    F_KITCHEN: 1,
-    S_KITCHEN: 0,
-    B_KITCHEN: 0,
-    CARPET: 0,
-    WOOD_TILE: 1,
-    F_LOUNGE: 1,
-    SUITE_LOUNGE: 0,
-    L_LOUNGE: 1,
-    SKY_LOUNGE: 1,
-    LAUNDRY: 1,
-    AC: 1,
-    COMPUTER: 1,
-    PRINT: 1,
-    GYM: 0,
-    BIKE: 0,
-    MUSIC: 1,
-    ACCESSIBLE: 1
-  }
-
-  const TestStrings = {
-    S_BATHROOM: "Single-Use",
-    C_BATHROOM: "Communal bathrooms",
-    BOTH_BATHROOM: "Mixed single and communal",
-    F_KITCHEN: "One per floor",
-    S_KITCHEN: "One per suite",
-    B_KITCHEN: "One per building",
-    CARPET: "Carpeted",
-    WOOD_TILE: "Wood/Tile",
-    F_LOUNGE: "Floor lounge",
-    SUITE_LOUNGE: "In-Suite lounge",
-    L_LOUNGE: "Lobby lounge",
-    SKY_LOUNGE: "Sky Lounge",
-    LAUNDRY: "",
-    AC: "",
-    COMPUTER: "",
-    PRINT: "",
-    GYM: "",
-    BIKE: "",
-    MUSIC: "",
-    ACCESSIBLE: ""
-  }
-
-  const TestCategories = {
-    S_BATHROOM: "Bathroom",
-    C_BATHROOM: "Bathroom",
-    BOTH_BATHROOM: "Bathroom",
-    F_KITCHEN: "Kitchen",
-    S_KITCHEN: "Kitchen",
-    B_KITCHEN: "Kitchen",
-    CARPET: "Floor",
-    WOOD_TILE: "Floor",
-    F_LOUNGE: "Lounge",
-    SUITE_LOUNGE: "Lounge",
-    L_LOUNGE: "Lounge",
-    SKY_LOUNGE: "Lounge",
-    LAUNDRY: "",
-    AC: "",
-    COMPUTER: "",
-    PRINT: "",
-    GYM: "",
-    BIKE: "",
-    MUSIC: "",
-    ACCESSIBLE: ""
+    A_ENTRANCE: wheelchair
   }
 
   return (
     <AmenityWrapper>
       {Object.keys(amenitiesMap).map(amenityKey => {
-        const showKitchen = TestData["F_KITCHEN"]==1 || TestData["S_KITCHEN"]==1 || TestData["B_KITCHEN"]==1;
-        const showLounge = TestData["F_LOUNGE"]==1 || TestData["SUITE_LOUNGE"]==1 || TestData["L_LOUNGE"]==1 || TestData["SKY_LOUNGE"]==1;
-        
-        let amenityIncluded
-        if (amenitiesMap[amenityKey]=="Kitchen" || amenitiesMap[amenityKey]=="Lounge") {
-          if (showKitchen && amenitiesMap[amenityKey]=="Kitchen" || showLounge && amenitiesMap[amenityKey]=="Lounge") {
-            amenityIncluded = <AmenityIncluded color="#73A6E0" ><FontAwesomeIcon icon={faCheck} /> <Span>Included</Span></AmenityIncluded>;
-          }
-          else {
-            amenityIncluded = <AmenityIncluded color="#9A4A4A" ><FontAwesomeIcon icon={faTimes} /> <Span>Not Included</Span></AmenityIncluded>;
-          }
-        }
-        else if (amenitiesMap[amenityKey]=="Bathroom" || amenitiesMap[amenityKey]=="Floor") {
-          amenityIncluded = null
+        const showIncluded = (amenitiesMap[amenityKey]!=="Bathroom") && (amenitiesMap[amenityKey]!=="Flooring")
+        let amenityIncluded;
+        if (showIncluded) {
+          amenityIncluded = (props.amenities && props.amenities[amenityKey]===1) ? 
+          <AmenityIncluded color="#73A6E0" ><FontAwesomeIcon icon={faCheck} /> <Span>Included</Span> </AmenityIncluded>
+          : <AmenityIncluded color="#9A4A4A" ><FontAwesomeIcon icon={faTimes} /> <Span>Not Included</Span> </AmenityIncluded>
         }
         else {
-          amenityIncluded = (TestData && TestData[amenityKey]==1) 
-          ?
-            <AmenityIncluded color="#73A6E0" ><FontAwesomeIcon icon={faCheck} /> <Span>Included</Span></AmenityIncluded>
-          :
-            <AmenityIncluded color="#9A4A4A" ><FontAwesomeIcon icon={faTimes} /> <Span>Not Included</Span></AmenityIncluded>
+          amenityIncluded = null
         }
 
         return (
           <Amenity> 
               <AmenityHeader><Icon src={amenitiesIcons[amenityKey]}/>{amenitiesMap[amenityKey]} </AmenityHeader>
               {amenityIncluded}
-              {Object.keys(TestData).map(dataKey => {
-                return (
-                  <ListWrapper>
-                    {(TestData[dataKey]==1 && TestCategories[dataKey]==amenitiesMap[amenityKey] && (amenitiesMap[amenityKey]=="Bathroom" || amenitiesMap[amenityKey]=="Floor")) 
-                      ? (TestStrings[dataKey].replace("[", "").replace("]","").replaceAll('"', '').split(', ')).map(detail => (
-                        <CheckListWrapper><FontAwesomeIcon color="#73A6E0" icon={faCheck} /><li>{detail}</li></CheckListWrapper>))
-                      : null
-                    }   
-                    <ListPoints>
-                      {TestData[dataKey]==1 && TestCategories[dataKey]==amenitiesMap[amenityKey] && amenitiesMap[amenityKey]!="Bathroom" && amenitiesMap[amenityKey]!="Floor"
-                        ? (TestStrings[dataKey].replace("[", "").replace("]","").replaceAll('"', '').split(', ')).map(detail => (
-                          <li>{detail}</li>))
-                        : null}
-                    </ListPoints>
-                  </ListWrapper>
-                  
-                )
-              })}
+              <ListPoints>
+                {props.amenities && props.amenities[amenityKey + "_DETAILS"] ? 
+                  props.amenities[amenityKey + "_DETAILS"].split(/\r?\n/).map(detail => (<li>{detail}</li>))
+                  : null}
+              </ListPoints>
             </Amenity>
         )
       })}
