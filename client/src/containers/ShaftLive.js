@@ -347,7 +347,7 @@ const firstFloor = {
 const ShaftLive = (props) => {
   const [dorm, setDorm] = useState("47 Claremont");
   const [dormChange, setDormChange] = useState(false);
-  const [floor, setFloor] = useState(firstFloor[dorm]);
+  const [floor, setFloor] = useState("1");
   const [floorNums, setFloorNums] = useState(null);
   const [floorData, setFloorData] = useState([]);
   const [init, setInit] = useState(true);
@@ -368,16 +368,7 @@ const ShaftLive = (props) => {
     if (floorNums) {
       setOrderedFloorNumsArr(getOrderedFloorsArr(floorNums));
     }
-  }, [floorNums]);
-
-  // useEffect(() => {
-  //   handleDormChange(dorm);
-  // }, [props.dorm]);
-
-  // useEffect(() => {
-  //   setFloor(props.floor);
-  //   handleFloorChange(floor);
-  // }, [props.floor]);
+  }, floorNums);
 
   const updatePayload = (newValue, name, filters) => {
     let p = payload;
@@ -500,7 +491,6 @@ const ShaftLive = (props) => {
 
   const handleDormChange = (dorm) => {
     setDorm(dorm);
-    setFloor(firstFloor[dorm]);
     setInit(false);
     getAllDormInfo(dorm, firstFloor[dorm]);
   };
@@ -526,7 +516,7 @@ const ShaftLive = (props) => {
 
   const floorPlans = (
     <FloorPlansRow>
-      <FloorButton dorm={dorm} floorNums={orderedFloorNumsArr} handleChange={handleFloorChange} />
+      <FloorButton dorm={dorm} curFloor={floor} floorNums={orderedFloorNumsArr} handleChange={handleFloorChange} />
       <FloorPlanWrapper>
         <FloorPlanSVG
           lotteryNum={lotteryNum}
