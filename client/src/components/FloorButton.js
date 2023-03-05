@@ -73,7 +73,7 @@ export default class FloorButton extends Component {
         super(props)
 
         if (this.props.floorNums) {
-            this.props.handleChange(this.props.floorNums[0]["FLOOR"]);
+            this.props.handleChange(this.props.floorNums[0]);
         }
 
         this.state = {
@@ -100,7 +100,7 @@ export default class FloorButton extends Component {
     componentDidUpdate(prevProps) {
         if (JSON.stringify(prevProps) != JSON.stringify(this.props)) {
             if (this.props.floorNums) {
-                this.props.handleChange(this.props.floorNums[0]["floor"]);
+                this.props.handleChange(this.props.floorNums[0]);
                 // console.log("test", this.props.floorNums[0]["FLOOR"])
 
             }
@@ -108,23 +108,38 @@ export default class FloorButton extends Component {
         }
     }
 
+    reorderFloorNums( floorNums ) {
+        let floorNumsArr = []
+        floorNums.map((floor) => {
+            floorNumsArr.push(floor["floor"]);
+        })
+
+        floorNumsArr = floorNumsArr.sort(function(a, b) {
+            return a.localeCompare(b, undefined, {
+                numeric: true,
+                sensitivity: 'base'
+            });
+        });
+        return floorNumsArr;
+    }
+
     getButtons() {
+        //console.log("floor nums:", this.props.floorNums);
+        //console.log("reordered floor nums:", this.reorderFloorNums(this.props.floorNums));
+
         return this.props.floorNums.map((floor, id) => {
-            let floorNum = floor["floor"];
             if (id == this.state.currentFloorIndex) {
                 return <NumberSelected key={id} onClick={() => {
-                    this.props.handleChange(floorNum);
-                }}>{floorNum}</NumberSelected>
-            }
-            else {
+                    this.props.handleChange(floor);
+                }}>{floor}</NumberSelected>
+            } else {
                 return <NumberBtn key={id} onClick={() => {
                     this.setState({ currentFloorIndex: id });
-                    this.props.handleChange(floorNum);
-                }}>{floorNum}</NumberBtn>
+                    this.props.handleChange(floor);
+                }}>{floor}</NumberBtn>
             }
         });
     }
-
 
     render() {
         const { width } = this.state;

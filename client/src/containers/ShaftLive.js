@@ -324,15 +324,36 @@ const defaultDorms = [
   "Woodbridge Hall",
 ];
 
+const firstFloor = {
+  "47 Claremont": "1",
+  "Broadway Hall": "3",
+  "Carlton Arms": "1A",
+  "East Campus": "6",
+  "Furnald Hall": "1",
+  "Harmony Hall": "1",
+  "Hartley Hall": "2",
+  "Hogan Hall": "2",
+  "McBain Hall": "1",
+  "600 W 113th": "2",
+  "River Hall": "1",
+  "Ruggles Hall": "1",
+  "Schapiro Hall": "2",
+  "Wallach Hall": "8",
+  "Watt Hall": "1",
+  "Wien Hall": "2",
+  "Woodbridge Hall": "1",
+};
+
 const ShaftLive = (props) => {
   const [dorm, setDorm] = useState("47 Claremont");
   const [dormChange, setDormChange] = useState(false);
-  const [floor, setFloor] = useState("1");
+  const [floor, setFloor] = useState(firstFloor[dorm]);
   const [floorNums, setFloorNums] = useState(null);
   const [floorData, setFloorData] = useState([]);
   const [init, setInit] = useState(true);
   const [lotteryNum, setLotteryNum] = useState(0);
   const [errorMsg, setErrorMessage] = useState("");
+  const [orderedFloorNumsArr, setOrderedFloorNumsArr] = useState([]);
 
   const [payload, setPayload] = useState(_.clone(initialPayload));
   const [dorms, setDorms] = useState(defaultDorms);
@@ -344,20 +365,19 @@ const ShaftLive = (props) => {
   }, []);
 
   useEffect(() => {
-    handleDormChange(dorm);
-  }, [props.dorm]);
+    if (floorNums) {
+      setOrderedFloorNumsArr(getOrderedFloorsArr(floorNums));
+    }
+  }, [floorNums]);
 
-  useEffect(() => {
-    setFloor(props.floor);
-    handleFloorChange(floor);
-  }, [props.floor]);
+  // useEffect(() => {
+  //   handleDormChange(dorm);
+  // }, [props.dorm]);
 
-  const preloadImages = (dorms) => {
-    dorms.forEach((dorm) => {
-      var i = new Image();
-      i.src = dorm.THUMBNAIL_IMAGE;
-    });
-  };
+  // useEffect(() => {
+  //   setFloor(props.floor);
+  //   handleFloorChange(floor);
+  // }, [props.floor]);
 
   const updatePayload = (newValue, name, filters) => {
     let p = payload;
@@ -479,26 +499,6 @@ const ShaftLive = (props) => {
   };
 
   const handleDormChange = (dorm) => {
-    const firstFloor = {
-      "47 Claremont": "1",
-      "Broadway Hall": "3",
-      "Carlton Arms": "1A",
-      "East Campus": "6",
-      "Furnald Hall": "1",
-      "Harmony Hall": "1",
-      "Hartley Hall": "2",
-      "Hogan Hall": "2",
-      "McBain Hall": "1",
-      "600 W 113th": "2",
-      "River Hall": "1",
-      "Ruggles Hall": "1",
-      "Schapiro Hall": "2",
-      "Wallach Hall": "8",
-      "Watt Hall": "1",
-      "Wien Hall": "2",
-      "Woodbridge Hall": "1",
-    };
-
     setDorm(dorm);
     setFloor(firstFloor[dorm]);
     setInit(false);
@@ -509,9 +509,24 @@ const ShaftLive = (props) => {
     setErrorMessage("");
   };
 
+  const getOrderedFloorsArr = (floorNums) => {
+    let floorNumsArr = []
+    floorNums.map((floor) => {
+        floorNumsArr.push(floor["floor"]);
+    })
+
+    floorNumsArr = floorNumsArr.sort(function(a, b) {
+        return a.localeCompare(b, undefined, {
+            numeric: true,
+            sensitivity: 'base'
+        });
+    });
+    return floorNumsArr;
+}
+
   const floorPlans = (
     <FloorPlansRow>
-      <FloorButton floorNums={floorNums} handleChange={handleFloorChange} />
+      <FloorButton dorm={dorm} floorNums={orderedFloorNumsArr} handleChange={handleFloorChange} />
       <FloorPlanWrapper>
         <FloorPlanSVG
           lotteryNum={lotteryNum}
