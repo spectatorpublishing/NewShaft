@@ -106,23 +106,6 @@ const Alert = styled.div`
   font-weight: bold;
 `;
 
-const defaultDorms = [
-  "47 Claremont",
-  "Broadway Hall",
-  "East Campus",
-  "Furnald Hall",
-  "Harmony Hall",
-  "Hogan Hall",
-  "McBain Hall",
-  "600 W 113th",
-  "River Hall",
-  "Ruggles Hall",
-  "Schapiro Hall",
-  "Watt Hall",
-  "Wien Hall",
-  "Woodbridge Hall",
-];
-
 // Dorms in this List don't have floorplan and svgs
 // in our AWS S3 bucket, so will not be shown on the
 // front-end until the images are added

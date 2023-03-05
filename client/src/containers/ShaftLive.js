@@ -264,6 +264,11 @@ const AlertMessage = styled.div`
   border-radius: 1rem;
   color: black;
   margin: 0 0 0.5rem auto;
+
+  @media (max-width: 991px) {
+    margin: 1rem;
+  }
+
 `;
 const AlertCircle = styled.div`
   height: 1.6rem;
@@ -276,6 +281,10 @@ const AlertCircle = styled.div`
   border-radius: 20rem;
   text-align: center;
   transform: translate(-22px, -18px);
+
+  @media (max-width: 991px) {
+    display: none;
+  }
 `;
 
 const initialPayload = {
@@ -515,20 +524,28 @@ const ShaftLive = (props) => {
 }
 
   const floorPlans = (
-    <FloorPlansRow>
-      <FloorButton dorm={dorm} curFloor={floor} floorNums={orderedFloorNumsArr} handleChange={handleFloorChange} />
-      <FloorPlanWrapper>
-        <FloorPlanSVG
-          lotteryNum={lotteryNum}
-          dorm={dorm}
-          floor={floor}
-          data={floorData}
-          cutoffs={[]}
-          init={init}
-          dormChange={dormChange}
-        ></FloorPlanSVG>
-      </FloorPlanWrapper>
-    </FloorPlansRow>
+    <>
+      {dorm in alerts && (
+        <AlertMessage>
+          <AlertCircle>!</AlertCircle>
+          {alerts[dorm]}
+        </AlertMessage>
+      )}
+      <FloorPlansRow>
+        <FloorButton dorm={dorm} curFloor={floor} floorNums={orderedFloorNumsArr} handleChange={handleFloorChange} />
+        <FloorPlanWrapper>
+          <FloorPlanSVG
+            lotteryNum={lotteryNum}
+            dorm={dorm}
+            floor={floor}
+            data={floorData}
+            cutoffs={[]}
+            init={init}
+            dormChange={dormChange}
+          ></FloorPlanSVG>
+        </FloorPlanWrapper>
+      </FloorPlansRow>
+    </>
   );
 
   return (
@@ -628,12 +645,6 @@ const ShaftLive = (props) => {
           </ColOne>
 
           <ColTwo>
-            {dorm in alerts && (
-              <AlertMessage>
-                <AlertCircle>!</AlertCircle>
-                {alerts[dorm]}
-              </AlertMessage>
-            )}
             <DormName>{dorm} </DormName>
             {floorPlans}
           </ColTwo>
