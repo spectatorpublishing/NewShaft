@@ -10,6 +10,8 @@ import computerLab from '../assets/computer-lab-icon.png'
 import bike from '../assets/bike-icon.png'
 import carpet from '../assets/carpet-icon.png'
 import lounge from '../assets/sofa-icon.png'
+import printer from '../assets/printer-icon.png'
+import wheelchair from '../assets/wheelchair-icon.png'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faCheck, faTimes} from '@fortawesome/free-solid-svg-icons'
 
@@ -45,6 +47,24 @@ const AmenityWrapper = styled.div`
     flex-direction:column;
   }
 `
+const ListWrapper = styled.div`
+  display:flex;
+  flex-direction:row;
+  width:100%;
+  flex-wrap:wrap;
+  justify-content:space-between;
+  @media only screen and (max-width: 768px){
+    flex-direction:column;
+  }
+`
+const CheckListWrapper = styled.div`
+  display:flex;
+  justify-content:space-between;
+  padding: 10px;
+  @media only screen and (max-width: 768px){
+    flex-direction:column;
+  }
+`
 const Amenity = styled.div`
   display:flex;
   flex-direction:column;
@@ -64,7 +84,7 @@ const Icon =styled.img`
   margin-right:1rem;
 `
 
-const ListPoints = styled.ul`
+const ListPoints = styled.text`
   padding-inline-start: 1.2rem;
   margin-left: 1rem;
 
@@ -73,55 +93,62 @@ const ListPoints = styled.ul`
     font-weight: 400;
     font-style: normal;
     margin: 0;
-	}
+  }
 `
 
 const NewAmenities = (props) => {
   
   const amenitiesMap = {
-    P_BATHROOM: "Single-Use Bathroom",
-    LAUNDRY: "Laundry",
-    CARPET: "Carpeted Floor",
-    F_KITCHEN: "Floor Kitchen",
-    P_KITCHEN: "Private Kitchen",
+    BATHROOM: "Bathroom",
+    FLOORING: "Flooring",
+    KITCHEN: "Floor Kitchen",
     LOUNGE: "Lounge",
+    LAUNDRY: "Laundry",
+    AC: "Air Conditioning",
     GYM: "Gym",
     BIKE: "Bike Storage",
     COMPUTER: "Computer Lab",
     PRINT: "Print Station",
-    AC: "Air Conditioning",
-    MUSIC: "Practice Rooms"
+    MUSIC: "Practice Rooms",
+    A_ENTRANCE: "Accesible Entrance"
   }
 
   const amenitiesIcons = {
-    P_BATHROOM: bathroom,
-    LAUNDRY: laundry,
-    CARPET: carpet,
-    F_KITCHEN: kitchen,
-    P_KITCHEN: kitchen,
+    BATHROOM: bathroom,
+    FLOORING: carpet,
+    KITCHEN: kitchen,
     LOUNGE: lounge,
+    LAUNDRY: laundry,
+    AC: ac,
+    COMPUTER: computerLab,
+    PRINT: printer,
     GYM: gym,
     BIKE: bike,
-    COMPUTER: computerLab,
-    PRINT: computerLab,
-    AC: ac,
-    MUSIC: practiceRoom
+    MUSIC: practiceRoom,
+    A_ENTRANCE: wheelchair
   }
-  
+
   return (
     <AmenityWrapper>
       {Object.keys(amenitiesMap).map(amenityKey => {
+        const showIncluded = (amenitiesMap[amenityKey]!=="Bathroom") && (amenitiesMap[amenityKey]!=="Flooring")
+        let amenityIncluded;
+        if (showIncluded) {
+          amenityIncluded = (props.amenities && props.amenities[amenityKey]===1) ? 
+          <AmenityIncluded color="#73A6E0" ><FontAwesomeIcon icon={faCheck} /> <Span>Included</Span> </AmenityIncluded>
+          : <AmenityIncluded color="#9A4A4A" ><FontAwesomeIcon icon={faTimes} /> <Span>Not Included</Span> </AmenityIncluded>
+        }
+        else {
+          amenityIncluded = null
+        }
+
         return (
           <Amenity> 
               <AmenityHeader><Icon src={amenitiesIcons[amenityKey]}/>{amenitiesMap[amenityKey]} </AmenityHeader>
-              {(props.amenities && props.amenities[amenityKey]==1) ? 
-                <AmenityIncluded color="#73A6E0" ><FontAwesomeIcon icon={faCheck} /> <Span>Included</Span> </AmenityIncluded>
-                : <AmenityIncluded color="#9A4A4A" ><FontAwesomeIcon icon={faTimes} /> <Span>Not Included</Span> </AmenityIncluded>
-              }
+              {amenityIncluded}
               <ListPoints>
                 {props.amenities && props.amenities[amenityKey + "_DETAILS"] ? 
-                  (toString(props.amenities[amenityKey + "_DETAILS"]).replace("[", "").replace("]","").replaceAll('"', '').split(', ')).map(detail => (
-                    <li>{detail}</li>)) 
+                  props.amenities[amenityKey + "_DETAILS"].split(/\r?\n/).map(detail => (<li>{detail}</li>))
                   : null}
               </ListPoints>
             </Amenity>
