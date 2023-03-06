@@ -50,6 +50,7 @@ function getDormColor(userLotteryNumber, historicalLotteryNumber) {
   if (typeof historicalLotteryNumber === "undefined") {
     color = NO_DATA_COLOR
   } else if (historicalLotteryNumber < similarLowerbound) {
+    console.log("red", userLotteryNumber, historicalLotteryNumber)
     color = UNAVAILABLE_COLOR
   } else if (historicalLotteryNumber > similarUpperbound) {
     color = AVAILABLE_COLOR
@@ -67,6 +68,11 @@ function getDormColor(userLotteryNumber, historicalLotteryNumber) {
 /******************************************************************************
  *  SVG ROOM / SUITE FORMAT -> DB ROOM FORMAT
  *****************************************************************************/
+
+function carltonRoomFormatter(svgSuite, svgRoom, floor) {
+  let room = svgRoom ? svgRoom.split("-")[0] : svgRoom
+  return floor + room
+}
 
 function claremontRoomFormatter(svgSuite, svgRoom, floor) {
   let suite
@@ -128,6 +134,7 @@ function eastCampusRoomFormatter(svgSuite, svgRoom, floor) {
 }
 
 function hartleyRoomFormatter(svgSuite, svgRoom, floor) {
+  console.log("hartleyRoomFormatter", svgSuite + svgRoom)
   return svgSuite + svgRoom
 }
 
@@ -147,6 +154,7 @@ function normalRoomFormatter(svgSuite, svgRoom, floor) {
 const db2svgRoomFormat = {
   "47 Claremont": claremontRoomFormatter,
   "Broadway Hall": broadwayRoomFormatter,
+  "Carlton Arms": carltonRoomFormatter,
   "East Campus": eastCampusRoomFormatter,
   "Furnald Hall": normalRoomFormatter,
   "Hartley Hall": hartleyRoomFormatter,

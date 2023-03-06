@@ -1,15 +1,20 @@
 import csv
 import mysql.connector
 import sys
+import os
+from dotenv import load_dotenv
+
+load_dotenv()
 
 # USAGE: python3 insert_db.py [name of CSV file] [name of table]
 
 db = mysql.connector.connect(
-  host="192.34.62.10",
-  user="USERNAME",
-  passwd="PASSWORD",
-  database="dorms"
+    host= os.environ['SHAFTHOST'],
+    user= os.environ['SHAFTUSER'],
+    password= os.environ['SHAFTPASSWORD'],
+    database= os.environ['SHAFTDATABASE']
 )
+
 
 cursor = db.cursor()
 
@@ -45,6 +50,6 @@ with open(sys.argv[1], "r") as f:
       i += 1
       
 print(i)
-# db.commit()
+db.commit()
 cursor.close()
 db.close()

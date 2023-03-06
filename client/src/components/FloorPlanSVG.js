@@ -212,11 +212,8 @@ const FloorPlanSVG = (props) => {
             selectableEl = suitePick ? suiteEl : roomEl;
           }
           let roomPickedBy = fromDb && fromDb["lottery_number"]
-
-          // color = colorGray(props.dorm, props.lotteryNum, roomOrSuiteName) ? "gray" : getDormColor(props.lotteryNum, roomPickedBy)
-          color = getDormColor(props.lotteryNum, roomPickedBy)
+          color = colorGray(props.dorm, props.lotteryNum, roomOrSuiteName) ? "gray" : getDormColor(props.lotteryNum, roomPickedBy)
           // Attach data attributes for react-tooltip
-          // console.log(roomOrSuiteName, color);
           selectableEl.setAttribute("fill", color)
           selectableEl.setAttribute("data-tip", roomOrSuiteName);
           selectableEl.setAttribute("data-for", "global");
@@ -225,15 +222,21 @@ const FloorPlanSVG = (props) => {
     }
   }
 
+  // returns true if room should be colored gray based on hosuing 2023 policies
   const colorGray = (dorm, lotteryNum, roomOrSuiteName) => {
-    return (dorm == "McBain Hall" && lotteryNum < 4000) 
-          || dorm == "Furnald Hall" 
-          || (dorm == "Hartley Hall" && lotteryNum < 4000)
-          || (
-                dorm == "Broadway Hall" 
-                && roomOrSuiteName.endsWith("39") 
-                || roomOrSuiteName.endsWith("40") 
-              );
+    if (dorm && lotteryNum && roomOrSuiteName) {
+      return (dorm == "McBain Hall" && lotteryNum < 4000) 
+            || dorm == "Furnald Hall" 
+            || (dorm == "Hartley Hall" && lotteryNum < 4000)
+            || (
+                  dorm == "Broadway Hall" 
+                  && roomOrSuiteName.endsWith("39") 
+                  || roomOrSuiteName.endsWith("40") 
+                );
+    }
+    else {
+      return false
+    }
   }
 
   const getDataFromSvg = (el) => {
@@ -293,7 +296,7 @@ const FloorPlanSVG = (props) => {
   }
 
   const getStaticFloorplan = () => {
-    console.log("getStaticFloorplan")
+    // console.log("getStaticFloorplan")
     return <img alt={floorplanName} src={floorplanJpg} />;
   }
 
@@ -302,11 +305,11 @@ const FloorPlanSVG = (props) => {
       {floorplanSvg !== "" ? <ReactSVG
         src={floorplanSvg}
         afterInjection={(svg) => styleSVG(svg)}
-        // fallback={getStaticFloorplan}
-        fallback={() => <span>Error!</span>}
-        onError={(error) => {
-          console.error(error)
-        }}
+        fallback={getStaticFloorplan}
+        // fallback={() => <span>Error!</span>}
+        // onError={(error) => {
+        //   console.error("svg error",error)
+        // }}
       /> : null}
 
       {showInfo ? <ReactTooltip

@@ -310,6 +310,7 @@ const filterElements = {
 const defaultDorms = [
   "47 Claremont",
   "Broadway Hall",
+  "Carlton Arms",
   "East Campus",
   "Furnald Hall",
   "Harmony Hall",
