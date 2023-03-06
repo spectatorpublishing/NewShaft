@@ -129,8 +129,8 @@ const defaultDorms = [
 const blacklist = [
   "548 West 113",
   "627 West 115",
-  "Carlton Arms",
-  "Hartley Hall",
+  // "Carlton Arms",
+  // "Hartley Hall",
   "Plimpton Hall",
   "Wallach Hall"
 ]

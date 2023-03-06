@@ -82,13 +82,18 @@ const broadway = (room) => {
 }
 
 /*
- * Carlton Arms has only 9 floors.
+ * Carlton Arms has 10 floors.
  * The floors are split into 4 different floor plans
  * The first two digits of the room number is the floor number.
 */
 const carlton = (room) => {
-  let floor = room.slice(0, 2)
-
+  let floor
+  if (room.slice(0, 2) ==="10") {
+    floor = room.slice(0, 3)
+  }
+  else {
+    floor = room.slice(0, 2)
+  }
   return floor
 }
 
