@@ -296,7 +296,6 @@ const FloorPlanSVG = (props) => {
   }
 
   const getStaticFloorplan = () => {
-    // console.log("getStaticFloorplan")
     return <img alt={floorplanName} src={floorplanJpg} />;
   }
 
