@@ -401,7 +401,8 @@ const Dorm = ({ }) => {
         }
       } else {
         stop_offset = 1;
-        floor_state[floorNum] = 'https://shaft-dorm-floorplans.s3.amazonaws.com/' + floorPlan[floorNum].replace("Carlton", "Carlton Arms").replace(/ /g, '+');
+        console.log("TBAPPENDED:", floorPlan[floorNum]);
+        floor_state[floorNum] = 'https://shaft-dorm-floorplans.s3.amazonaws.com/' + floorPlan[floorNum].replace("Carlton", "Carlton Arms").replace("Lower Townhouses", "LT").replace("Middle Townhouses ", "MT").replace("Upper Townhouses ", "UT").replace(/ /g, '+');
         floor_name[floorNum] = floorPlan[floorNum].slice(0, -4).replace("_", " ");
       }
     }
