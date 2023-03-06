@@ -21,9 +21,9 @@ const Housing101 = (props) => {
     return (
         <div>
             <div class="header">
-                <div className="li"><div onClick={() => setPage("/")} className={(currentPage === "/" ? "active" : "")}>using the<strong>SHAFT</strong></div></div>
-                <div className="li"><div onClick={() => setPage("newProcess")} className={(currentPage === "newProcess" ? "active" : "")}>the new process</div></div>
-                <div className="li"><div onClick={() => setPage("specialHousing")} className={(currentPage === "specialHousing" ? "active" : "")}>special housing</div></div>
+                <div className="li"><div onClick={() => setPage("/")} className={(currentPage === "/" ? "active" : "btntext")}>using the<strong>SHAFT</strong></div></div>
+                <div className="li"><div onClick={() => setPage("newProcess")} className={(currentPage === "newProcess" ? "active" : "btntext")}>the new process</div></div>
+                <div className="li"><div onClick={() => setPage("specialHousing")} className={(currentPage === "specialHousing" ? "active" : "btntext")}>special housing</div></div>
             </div>
             <div className="content">
             <CurrentPage />

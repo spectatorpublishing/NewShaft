@@ -1,7 +1,9 @@
 import React, { useEffect, useState } from "react";
 import arrow from '../assets/Housing101_images/arrow.png';
-import newFilters from '../assets/Housing101_images/newFilters.png';
 import '../css/Housing101.css';
+
+const newExplore = "https://theshaft.s3.amazonaws.com/dorms/housing101/newExplore.png";
+const newOdds = "https://theshaft.s3.amazonaws.com/dorms/housing101/newOdds.png";
 
 const UsingtheSHAFT = (props) => {
     const [isMobile, setMobile] = useState(false);
@@ -39,7 +41,7 @@ const UsingtheSHAFT = (props) => {
                 </div>
               </div>
               <div class="row_phone">            
-                <img src={newFilters} class="img_style_phone" alt="Filters from explore page displayed"></img>
+                <img src={newExplore} class="img_style_phone" alt="Filters from explore page displayed"></img>
               </div>
               <div class="row_phone">
                 <div class="textbox_phone">
@@ -58,7 +60,7 @@ const UsingtheSHAFT = (props) => {
                 </div>
               </div>
               <div class="row_phone">            
-                <img src="https://arc-anglerfish-arc2-prod-spectator.s3.amazonaws.com/public/FTG222DCMZB6DI5SKTMGMTRGCQ.png" class="img_style_phone" alt="Lottery Calculator Graphic"></img>
+                <img src={newOdds} class="img_style_phone" alt="Lottery Calculator Graphic"></img>
               </div>
               <div class="row_phone">
                 <div class="textbox_phone">
@@ -119,12 +121,12 @@ const UsingtheSHAFT = (props) => {
                 </div>
               </div>
               <div class="column_image2">
-                <img src={newFilters} class="img_style7" alt="Filters from explore page displayed"></img>
+                <img src={newExplore} class="img_style7" alt="Filters from explore page displayed"></img>
               </div>
             </div>
             <div class="row_phoneA">
               <div class="column_image">
-                <img src="https://arc-anglerfish-arc2-prod-spectator.s3.amazonaws.com/public/FTG222DCMZB6DI5SKTMGMTRGCQ.png" class="img_style8" alt="Lottery Calculator Graphic"></img>
+                <img src={newOdds} class="img_style8" alt="Lottery Calculator Graphic"></img>
               </div>
               <div class="column">
                 <div class="row2">
