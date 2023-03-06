@@ -52,7 +52,7 @@ const Maps = (props) => {
   const [viewState, setViewState] = useState({
     latitude: props.centerLatitude,
     longitude: props.centerLongitude,
-    zoom: 16
+    zoom: props.zoom
   });
 
   const [popup, setPopup] = useState({

@@ -549,6 +549,7 @@ const Dorm = ({ }) => {
                     popupId={[dormInfo.DORM]}
                     centerLatitude={dormInfo.LATITUDE}
                     centerLongitude={dormInfo.LONGITUDE}
+                    zoom={16}
                     width={"100%"}
                     height={"300px"}
                   /></MarginWrapper>

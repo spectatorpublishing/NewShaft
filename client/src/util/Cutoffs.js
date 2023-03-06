@@ -126,4 +126,4 @@ export const CUTOFFS = {
   }
 };
 
-export const SUITE_PICK = new Set(['47 CLAREMONT', 'CARLTON ARMS', 'EAST CAMPUS', 'HARMONY', 'HOGAN', 'RUGGLES']);
+export const SUITE_PICK = new Set(['47 CLAREMONT', 'CARLTON ARMS', 'EAST CAMPUS', 'HARMONY', 'HARTLEY', 'HOGAN', 'RUGGLES']);

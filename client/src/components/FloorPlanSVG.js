@@ -17,6 +17,15 @@ let FloorPlanWrapper = styled.div`
   & rect:hover {
     opacity: 0.5;
   }
+
+  & path {
+    opacity: 0.3;
+    pointer-events: all;
+  }
+
+  & path:hover {
+    opacity: 0.5;
+  }
 `
 
 let TooltipBox = styled.div`
@@ -148,10 +157,14 @@ const FloorPlanSVG = (props) => {
       let xlinkHref = baseImage.getAttributeNode("xlink:href");
       // Override the xlink:href attribute (which is deprecated)
       // with an href that links to the corresponding floorplan JPG
-      if (xlinkHref) {
+      if (baseImage.hasAttribute("xlink:href")) {
         baseImage.setAttribute("xlink:href", floorplanJpg);
         baseImage.setAttribute("href", floorplanJpg);
       }
+      else {
+        baseImage.setAttribute("href", floorplanJpg);
+      }
+
 
       // Remove any SVG styling within the file
       if (svgBoundingDivEl.querySelector("style")) {
@@ -159,57 +172,71 @@ const FloorPlanSVG = (props) => {
       }
     }
 
-    document.querySelectorAll("rect").forEach((roomEl) => {
-      let suiteEl = roomEl.parentElement;
-      let suiteFromSvg = getDataFromSvg(suiteEl);
-      let roomFromSvg = getDataFromSvg(roomEl);
+    const shapes = ["rect", "path"];
 
-      // Nullify non-sensical suite value if not suite-style
-      if (!suitePick && props.dorm != "600 W 113th") {
-        suiteFromSvg = "";
-      }
+    for (const shape of shapes) {
+      document.querySelectorAll(shape).forEach((roomEl) => {
 
-      // convert room/suite info from svg + floor to a room format used in database
-      let roomOrSuiteName
-      if (db2svgRoomFormat.hasOwnProperty(props.dorm)) {
-        roomOrSuiteName = db2svgRoomFormat[props.dorm](suiteFromSvg, roomFromSvg, props.floor)
-      }
+        let suiteEl = roomEl.parentElement;
+        let suiteFromSvg = getDataFromSvg(suiteEl);
+        let roomFromSvg = getDataFromSvg(roomEl);
 
-      // A room needs to be colored if
-      //   1. it's not part of a suite
-      //   2. a suite but the suite is not colored yet or is colored
-      //      NO_DATA_COLOR because we don't have the lottery info for a previous
-      //      room of the suite
-      let fromDb = floorplanDic[roomOrSuiteName];
-      let suiteFill = suiteEl.getAttribute("fill")
-      let needColoring = !suitePick || (suiteFill === null || suiteFill === NO_DATA_COLOR)
-      let color = NO_DATA_COLOR
+        // Nullify non-sensical suite value if not suite-style
+        if (!suitePick && props.dorm != "600 W 113th") {
+          suiteFromSvg = "";
+        }
 
-      if (needColoring) {
-        let selectableEl = suitePick ? suiteEl : roomEl;
-        let roomPickedBy = fromDb && fromDb["lottery_number"]
+        // convert room/suite info from svg + floor to a room format used in database
+        let roomOrSuiteName
+        if (db2svgRoomFormat.hasOwnProperty(props.dorm)) {
+          roomOrSuiteName = db2svgRoomFormat[props.dorm](suiteFromSvg, roomFromSvg, props.floor)
+        }
 
-        color = colorGray(props.dorm, props.lotteryNum, roomOrSuiteName) ? "gray" : getDormColor(props.lotteryNum, roomPickedBy)
+        // A room needs to be colored if
+        //   1. it's not part of a suite
+        //   2. a suite but the suite is not colored yet or is colored
+        //      NO_DATA_COLOR because we don't have the lottery info for a previous
+        //      room of the suite
+        let fromDb = floorplanDic[roomOrSuiteName];
+        let suiteFill = suiteEl.getAttribute("fill")
+        let needColoring = !suitePick || (suiteFill === null || suiteFill === NO_DATA_COLOR)
+        let color = NO_DATA_COLOR
 
-        // Attach data attributes for react-tooltip
-        console.log(colorGray(props.dorm, props.lotteryNum, roomOrSuiteName));
-        selectableEl.setAttribute("fill", color)
-        selectableEl.setAttribute("data-tip", roomOrSuiteName);
-        selectableEl.setAttribute("data-for", "global");
-      }
-    });
+        if (needColoring) {
+          let selectableEl;
+          // Hartley and Carlton Arms have suites but should be colored by room
+          if (props.dorm == "Hartley Hall" || props.dorm == "Carlton Arms") {
+            selectableEl = roomEl
+          }
+          else {
+            selectableEl = suitePick ? suiteEl : roomEl;
+          }
+          let roomPickedBy = fromDb && fromDb["lottery_number"]
+          color = colorGray(props.dorm, props.lotteryNum, roomOrSuiteName) ? "gray" : getDormColor(props.lotteryNum, roomPickedBy)
+          // Attach data attributes for react-tooltip
+          selectableEl.setAttribute("fill", color)
+          selectableEl.setAttribute("data-tip", roomOrSuiteName);
+          selectableEl.setAttribute("data-for", "global");
+        }
+      });
+    }
   }
 
+  // returns true if room should be colored gray based on hosuing 2023 policies
   const colorGray = (dorm, lotteryNum, roomOrSuiteName) => {
-    // console.log(dorm, roomOrSuiteName, lotteryNum);
-    return (dorm == "McBain Hall" && lotteryNum < 4000) 
-          || dorm == "Furnald Hall" 
-          || (dorm == "Hartley Hall" && lotteryNum < 4000)
-          || (
-                dorm == "Broadway Hall" 
-                && roomOrSuiteName.endsWith("39") 
-                || roomOrSuiteName.endsWith("40") 
-              );
+    if (dorm && lotteryNum && roomOrSuiteName) {
+      return (dorm == "McBain Hall" && lotteryNum < 4000) 
+            || dorm == "Furnald Hall" 
+            || (dorm == "Hartley Hall" && lotteryNum < 4000)
+            || (
+                  dorm == "Broadway Hall" 
+                  && roomOrSuiteName.endsWith("39") 
+                  || roomOrSuiteName.endsWith("40") 
+                );
+    }
+    else {
+      return false
+    }
   }
 
   const getDataFromSvg = (el) => {
@@ -278,6 +305,10 @@ const FloorPlanSVG = (props) => {
         src={floorplanSvg}
         afterInjection={(svg) => styleSVG(svg)}
         fallback={getStaticFloorplan}
+        // fallback={() => <span>Error!</span>}
+        // onError={(error) => {
+        //   console.error("svg error",error)
+        // }}
       /> : null}
 
       {showInfo ? <ReactTooltip
