@@ -139,7 +139,7 @@ function hartleyRoomFormatter(svgSuite, svgRoom, floor) {
 }
 
 function hoganRoomFormatter(svgSuite, svgRoom, floor) {
-  svgRoom = svgRoom.trim().slice(0,1)
+  // svgRoom = svgRoom.trim().slice(0,1)
   return floor + svgSuite + svgRoom
 }
 
