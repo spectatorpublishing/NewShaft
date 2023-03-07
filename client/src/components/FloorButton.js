@@ -1,4 +1,4 @@
-import React, { Component } from "react";
+import React, { Component, useEffect } from "react";
 import styled from 'styled-components';
 import Dropdown from 'react-bootstrap/Dropdown';
 
@@ -68,76 +68,33 @@ let Buttons = styled.div`
     }
 `
 
-export default class FloorButton extends Component {
-    constructor(props) {
-        super(props)
-
-        if (this.props.floorNums) {
-            this.props.handleChange(this.props.floorNums[0]["FLOOR"]);
-        }
-
-        this.state = {
-            currentFloorIndex: 0,
-            width: window.innerWidth,
-        }
-        this.handleWindowSizeChange = this.handleWindowSizeChange.bind(this);
-
-    }
-
-    componentWillMount() {
-        window.addEventListener("resize", this.handleWindowSizeChange);
-    }
-
-    componentWillUnmount() {
-        window.removeEventListener("resize", this.handleWindowSizeChange);
-    }
-
-    handleWindowSizeChange() {
-        this.setState({ width: window.innerWidth });
-    }
-
-
-    componentDidUpdate(prevProps) {
-        if (JSON.stringify(prevProps) != JSON.stringify(this.props)) {
-            if (this.props.floorNums) {
-                this.props.handleChange(this.props.floorNums[0]["floor"]);
-                // console.log("test", this.props.floorNums[0]["FLOOR"])
-
+const FloorButton = (props) => {
+    return (
+        <>
+            {props.floorNums &&
+                <FloorButtonWrapper>
+                    <Buttons>
+                        {props.floorNums.map((floor, id) => {
+                            if (floor === props.curFloor) {
+                                return (
+                                    <NumberSelected key={id} onClick={() => {
+                                        props.handleChange(floor);
+                                    }}>{floor}</NumberSelected>
+                                );     
+                            } else {
+                                return (
+                                    <NumberBtn key={id} onClick={() => {
+                                        props.handleChange(floor);
+                                    }}>{floor}</NumberBtn>
+                                );
+                            }
+                        })}
+                    </Buttons>
+                </FloorButtonWrapper>
             }
-            this.setState({ currentFloorIndex: 0 });
-        }
-    }
+        </>
+    )
 
-    getButtons() {
-        return this.props.floorNums.map((floor, id) => {
-            let floorNum = floor["floor"];
-            if (id == this.state.currentFloorIndex) {
-                return <NumberSelected key={id} onClick={() => {
-                    this.props.handleChange(floorNum);
-                }}>{floorNum}</NumberSelected>
-            }
-            else {
-                return <NumberBtn key={id} onClick={() => {
-                    this.setState({ currentFloorIndex: id });
-                    this.props.handleChange(floorNum);
-                }}>{floorNum}</NumberBtn>
-            }
-        });
-    }
+};
 
-
-    render() {
-        const { width } = this.state;
-        const isMobile = width <= 700;
-
-        return (
-            <div>
-                {this.props.floorNums &&
-                    (<FloorButtonWrapper>
-                        <Buttons>{this.getButtons()}</Buttons>
-                    </FloorButtonWrapper>
-                    )}
-            </div>
-        );
-    }
-}
+export default FloorButton;

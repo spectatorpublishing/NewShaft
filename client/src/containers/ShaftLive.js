@@ -264,6 +264,11 @@ const AlertMessage = styled.div`
   border-radius: 1rem;
   color: black;
   margin: 0 0 0.5rem auto;
+
+  @media (max-width: 991px) {
+    margin: 1rem;
+  }
+
 `;
 const AlertCircle = styled.div`
   height: 1.6rem;
@@ -276,6 +281,10 @@ const AlertCircle = styled.div`
   border-radius: 20rem;
   text-align: center;
   transform: translate(-22px, -18px);
+
+  @media (max-width: 991px) {
+    display: none;
+  }
 `;
 
 const initialPayload = {
@@ -326,6 +335,26 @@ const defaultDorms = [
   "Woodbridge Hall",
 ];
 
+const firstFloor = {
+  "47 Claremont": "1",
+  "Broadway Hall": "3",
+  "Carlton Arms": "1A",
+  "East Campus": "6",
+  "Furnald Hall": "1",
+  "Harmony Hall": "1",
+  "Hartley Hall": "2",
+  "Hogan Hall": "2",
+  "McBain Hall": "1",
+  "600 W 113th": "2",
+  "River Hall": "1",
+  "Ruggles Hall": "1",
+  "Schapiro Hall": "2",
+  "Wallach Hall": "8",
+  "Watt Hall": "1",
+  "Wien Hall": "2",
+  "Woodbridge Hall": "1",
+};
+
 const ShaftLive = (props) => {
   const [dorm, setDorm] = useState("47 Claremont");
   const [dormChange, setDormChange] = useState(false);
@@ -335,6 +364,7 @@ const ShaftLive = (props) => {
   const [init, setInit] = useState(true);
   const [lotteryNum, setLotteryNum] = useState(0);
   const [errorMsg, setErrorMessage] = useState("");
+  const [orderedFloorNumsArr, setOrderedFloorNumsArr] = useState([]);
 
   const [payload, setPayload] = useState(_.clone(initialPayload));
   const [dorms, setDorms] = useState(defaultDorms);
@@ -346,20 +376,10 @@ const ShaftLive = (props) => {
   }, []);
 
   useEffect(() => {
-    handleDormChange(dorm);
-  }, [props.dorm]);
-
-  useEffect(() => {
-    setFloor(props.floor);
-    handleFloorChange(floor);
-  }, [props.floor]);
-
-  const preloadImages = (dorms) => {
-    dorms.forEach((dorm) => {
-      var i = new Image();
-      i.src = dorm.THUMBNAIL_IMAGE;
-    });
-  };
+    if (floorNums) {
+      setOrderedFloorNumsArr(getOrderedFloorsArr(floorNums));
+    }
+  }, floorNums);
 
   const updatePayload = (newValue, name, filters) => {
     let p = payload;
@@ -481,28 +501,7 @@ const ShaftLive = (props) => {
   };
 
   const handleDormChange = (dorm) => {
-    const firstFloor = {
-      "47 Claremont": "1",
-      "Broadway Hall": "3",
-      "Carlton Arms": "1A",
-      "East Campus": "6",
-      "Furnald Hall": "1",
-      "Harmony Hall": "1",
-      "Hartley Hall": "2",
-      "Hogan Hall": "2",
-      "McBain Hall": "1",
-      "600 W 113th": "2",
-      "River Hall": "1",
-      "Ruggles Hall": "1",
-      "Schapiro Hall": "2",
-      "Wallach Hall": "8",
-      "Watt Hall": "1",
-      "Wien Hall": "2",
-      "Woodbridge Hall": "1",
-    };
-
     setDorm(dorm);
-    setFloor(firstFloor[dorm]);
     setInit(false);
     getAllDormInfo(dorm, firstFloor[dorm]);
   };
@@ -511,21 +510,44 @@ const ShaftLive = (props) => {
     setErrorMessage("");
   };
 
+  const getOrderedFloorsArr = (floorNums) => {
+    let floorNumsArr = []
+    floorNums.map((floor) => {
+        floorNumsArr.push(floor["floor"]);
+    })
+
+    floorNumsArr = floorNumsArr.sort(function(a, b) {
+        return a.localeCompare(b, undefined, {
+            numeric: true,
+            sensitivity: 'base'
+        });
+    });
+    return floorNumsArr;
+}
+
   const floorPlans = (
-    <FloorPlansRow>
-      <FloorButton floorNums={floorNums} handleChange={handleFloorChange} />
-      <FloorPlanWrapper>
-        <FloorPlanSVG
-          lotteryNum={lotteryNum}
-          dorm={dorm}
-          floor={floor}
-          data={floorData}
-          cutoffs={[]}
-          init={init}
-          dormChange={dormChange}
-        ></FloorPlanSVG>
-      </FloorPlanWrapper>
-    </FloorPlansRow>
+    <>
+      {dorm in alerts && (
+        <AlertMessage>
+          <AlertCircle>!</AlertCircle>
+          {alerts[dorm]}
+        </AlertMessage>
+      )}
+      <FloorPlansRow>
+        <FloorButton dorm={dorm} curFloor={floor} floorNums={orderedFloorNumsArr} handleChange={handleFloorChange} />
+        <FloorPlanWrapper>
+          <FloorPlanSVG
+            lotteryNum={lotteryNum}
+            dorm={dorm}
+            floor={floor}
+            data={floorData}
+            cutoffs={[]}
+            init={init}
+            dormChange={dormChange}
+          ></FloorPlanSVG>
+        </FloorPlanWrapper>
+      </FloorPlansRow>
+    </>
   );
 
   return (
@@ -625,12 +647,6 @@ const ShaftLive = (props) => {
           </ColOne>
 
           <ColTwo>
-            {dorm in alerts && (
-              <AlertMessage>
-                <AlertCircle>!</AlertCircle>
-                {alerts[dorm]}
-              </AlertMessage>
-            )}
             <DormName>{dorm} </DormName>
             {floorPlans}
           </ColTwo>

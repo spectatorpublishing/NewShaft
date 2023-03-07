@@ -1,45 +1,22 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import arrow from '../assets/Housing101_images/arrow.png';
-import newFilters from '../assets/Housing101_images/newFilters.png';
 import '../css/Housing101.css';
-import { NavLink } from "react-router-dom";
 
-class UsingtheSHAFT extends React.Component {
-    constructor(props) {
-      super(props);
-  
-      this.state = {
-        isMobile: false,
-      }
-    }
-  
-    componentDidMount() {
+const newExplore = "https://theshaft.s3.amazonaws.com/dorms/housing101/newExplore.png";
+const newOdds = "https://theshaft.s3.amazonaws.com/dorms/housing101/newOdds.png";
+
+const UsingtheSHAFT = (props) => {
+    const [isMobile, setMobile] = useState(false);
+
+    useEffect(() => {
       if (window.innerWidth <= 768) {
-        this.setState({
-          isMobile: true
-        })
+        setMobile(true);
       } else {
-        this.setState({
-          isMobile: false
-        })
+        setMobile(false);
       }
-      window.addEventListener("resize", this.handleResize);
-    }
+    }, []);
   
-    handleResize = () => {
-      if (window.innerWidth <= 768) {
-        this.setState({
-          isMobile: true
-        })
-      } else {
-        this.setState({
-          isMobile: false
-        })
-      }
-    }
-  
-    render() {
-      if (this.state.isMobile) {
+      if (isMobile) {
         return (
           <div class="page-wrapper_phone">
             <div class="row_phoneB rowPadTitleA">
@@ -64,7 +41,7 @@ class UsingtheSHAFT extends React.Component {
                 </div>
               </div>
               <div class="row_phone">            
-                <img src={newFilters} class="img_style_phone" alt="Filters from explore page displayed"></img>
+                <img src={newExplore} class="img_style_phone" alt="Filters from explore page displayed"></img>
               </div>
               <div class="row_phone">
                 <div class="textbox_phone">
@@ -83,7 +60,7 @@ class UsingtheSHAFT extends React.Component {
                 </div>
               </div>
               <div class="row_phone">            
-                <img src="https://arc-anglerfish-arc2-prod-spectator.s3.amazonaws.com/public/FTG222DCMZB6DI5SKTMGMTRGCQ.png" class="img_style_phone" alt="Lottery Calculator Graphic"></img>
+                <img src={newOdds} class="img_style_phone" alt="Lottery Calculator Graphic"></img>
               </div>
               <div class="row_phone">
                 <div class="textbox_phone">
@@ -98,25 +75,6 @@ class UsingtheSHAFT extends React.Component {
                   3
                 </div>
                 <div class="item_title_phone">
-                Be an insider: <br></br><strong><span class="no_line_break">Read Reviews</span></strong>
-                </div>
-              </div>
-              <div class="row_phone">            
-                <img src="https://arc-anglerfish-arc2-prod-spectator.s3.amazonaws.com/public/WDHCGRLWDVCX5HUHUAQZPWYCJA.png" class="img_style_phone" alt="Compare Dorms"></img>
-              </div>
-              <div class="row_phone">
-                <div class="textbox_phone">
-                With theShaft’s reviews page, read actual housing experiences of Columbia students before you. With up- and down-vote functionality, you can gauge how much other students resonate with their experiences.
-                </div>
-                <div class="button_phone"><a href="https://www.theshaft.info/reviews">go to Reviews</a></div>               
-              </div>
-            </div>
-            <div class="rowPad_phone">
-              <div class="row_phone2">
-                <div class="number_phone">
-                  4
-                </div>
-                <div class="item_title_phone">
                   Cheat sheet: <br></br><strong><span class="no_line_break">Housing 101</span></strong>
                 </div>
                 {/* <img src="https://arc-anglerfish-arc2-prod-spectator.s3.amazonaws.com/public/TYTGAIHE75DEFG4BIPLZBPTPMM.png" class="img_style3_phone" alt="Cat on windowsill in front of snowy scene"></img> */}
@@ -125,7 +83,7 @@ class UsingtheSHAFT extends React.Component {
                 <div class="textbox2_phone">
                   With a <i>new</i> housing system, the game has changed. Know how to play and shoot your best shot.
                 </div>
-                <div class="button_phone"><NavLink to="/newProcess">learn more here</NavLink></div>
+                {/* <div class="button_phone" onClick={() => {}}>learn more here</div> */}
               </div>
             </div>
           </div>
@@ -163,12 +121,12 @@ class UsingtheSHAFT extends React.Component {
                 </div>
               </div>
               <div class="column_image2">
-                <img src={newFilters} class="img_style7" alt="Filters from explore page displayed"></img>
+                <img src={newExplore} class="img_style7" alt="Filters from explore page displayed"></img>
               </div>
             </div>
             <div class="row_phoneA">
               <div class="column_image">
-                <img src="https://arc-anglerfish-arc2-prod-spectator.s3.amazonaws.com/public/FTG222DCMZB6DI5SKTMGMTRGCQ.png" class="img_style8" alt="Lottery Calculator Graphic"></img>
+                <img src={newOdds} class="img_style8" alt="Lottery Calculator Graphic"></img>
               </div>
               <div class="column">
                 <div class="row2">
@@ -195,46 +153,20 @@ class UsingtheSHAFT extends React.Component {
                   </div>
                   <div class="column3">
                     <div class="item_title">
-                    Be an insider: <br></br>Read <strong>Reviews</strong>
+                    Cheat sheet: <strong>Housing 101</strong>
                     </div>              
-                    <div class="textbox3">
-                    With theShaft’s reviews page, read actual housing experiences of Columbia students before you. With up- and down-vote functionality, you can gauge how much other students resonate with their experiences.
+                    <div class="textbox2">
+                    With a <i>new</i> housing system, the game has changed. <br></br>Know how to play and shoot your best shot.
                     </div>
-                    <div class="button2"><a href="https://www.theshaft.info/reviews">go to Reviews</a></div>
+                    {/* <div class="button3" onClick={() => {props.choosePage("newprocess")}}>learn more here</div> */}
                   </div>
                 </div>
               </div>
-              <div class="column_image2">
-              <img src="https://arc-anglerfish-arc2-prod-spectator.s3.amazonaws.com/public/BKUPQ4FO5NE6HJRSTYFB52FYT4.png" class="img_style7" alt="Reviews Function Example"></img>
-              </div>
-            </div>
-            <div class="row_phoneA">
-            
-                <div class="row">
-                  <img src="https://arc-anglerfish-arc2-prod-spectator.s3.amazonaws.com/public/TYTGAIHE75DEFG4BIPLZBPTPMM.png" class="img_style81" alt="trophy"></img>
-                  <div class="column81">
-                  <div class="textbox81">
-                    With a <i>new</i> housing system, the game has changed. Know how to play and shoot your best shot.
-                  </div>
-                  <div class="button3"><NavLink to="/newProcess">learn more here</NavLink></div>
-                </div>    
-                  <div class="number6">
-                    4
-                  </div>
-                  <div class="column6">
-                    <div class="item_title2">
-                      Cheat sheet:<br></br><strong>Housing 101</strong>
-                    </div>
-                  </div>
-                 
-                </div>
-              </div>
-                
-             
           </div>
+        </div>
         );
       }
     }
-  }
+  
   
   export default UsingtheSHAFT;
