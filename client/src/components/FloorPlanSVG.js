@@ -204,7 +204,7 @@ const FloorPlanSVG = (props) => {
         if (needColoring) {
           let selectableEl;
           // Hartley and Carlton Arms have suites but should be colored by room
-          if (props.dorm == "Hartley Hall" || props.dorm == "Carlton Arms" || props.dorm == "Ruggles Hall") {
+          if (props.dorm == "Hartley Hall" || props.dorm == "Carlton Arms" || props.dorm == "Ruggles Hall"|| props.dorm == "47 Claremont") {
             selectableEl = roomEl
           }
           else {

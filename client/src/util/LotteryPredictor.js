@@ -74,40 +74,12 @@ function carltonRoomFormatter(svgSuite, svgRoom, floor) {
 }
 
 function claremontRoomFormatter(svgSuite, svgRoom, floor) {
-  let suite
-
+  let room = svgRoom ? svgRoom.split("-")[0] : svgRoom
   if (floor == "1") {
-    suite = `${svgSuite}${svgRoom}`
+    return svgSuite + room
   } else {
-    suite = `${floor}${svgSuite}${svgRoom}`
+    return floor + svgSuite + room
   }
-
-  return suite
-}
-
-// In databases, lottery number is stored for each room, not by suite
-// so we use the inferred room number from svg.
-//
-// Ruggles Floor 1 & 2: svgRoom is the room number
-// Other floors: svgSuite is in the form ()-(room number)
-function rugglesRoomFormatter(svgSuite, svgRoom, floor) {
-  return svgRoom ? svgRoom.split("-")[0] : svgRoom
-  }
-
-// In database, Watt Hall Room is floor followed by room.
-// so concatenate the floor and svgRoom number.
-function wattRoomFormatter(svgSuite, svgRoom, floor) {
-  let inferred = `${floor}${svgRoom}`
-
-  return inferred
-}
-
-// In database, Woodbridge Hall Room is floor followed by room.
-// so concatenate the floor and svgRoom number.
-function woodbridgeRoomFormatter(svgSuite, svgRoom, floor) {
-  let inferred = `${floor}${svgRoom}`
-
-  return inferred
 }
 
 function broadwayRoomFormatter(svgSuite, svgRoom, floor) {
@@ -125,14 +97,81 @@ function eastCampusRoomFormatter(svgSuite, svgRoom, floor) {
   return inferred
 }
 
+// M floor rooms are in form 1M03 etc
+function harmonyRoomFormatter(svgSuite, svgRoom, floor) {
+  if (floor == "M") { 
+    return "1M" + svgRoom
+  }
+  return floor + svgRoom
+}
+
 function hartleyRoomFormatter(svgSuite, svgRoom, floor) {
   console.log("hartleyRoomFormatter", svgSuite + svgRoom)
   return svgSuite + svgRoom
 }
 
 function hoganRoomFormatter(svgSuite, svgRoom, floor) {
-  // svgRoom = svgRoom.trim().slice(0,1)
-  return floor + svgSuite + svgRoom
+  let room = svgRoom ? svgRoom.split("-")[0].trim() : svgRoom
+  return floor + svgSuite + room
+}
+
+// In databases, lottery number is stored for each room, not by suite
+// so we use the inferred room number from svg.
+function rugglesRoomFormatter(svgSuite, svgRoom, floor) {
+  return svgRoom ? svgRoom.split("-")[0] : svgRoom
+  }
+
+// A/B rooms are in DB with A/B ending but in SVG as just number
+function schapiroRoomFormatter(svgSuite, svgRoom, floor) {
+  let room = svgRoom
+  if (svgRoom == "05" || svgRoom == "07") {
+    room = svgRoom + "A/B"
+  }
+  return floor + room
+} 
+
+// In database, Watt Hall Room is floor followed by room.
+// so concatenate the floor and svgRoom number.
+// For L and F (except 1L), room in DB is 2L1 or 2L2 
+function wattRoomFormatter(svgSuite, svgRoom, floor) {
+  if ((svgRoom === "L" && floor !== 1) || svgRoom === "F") {
+    return floor + svgRoom + "1"
+  }
+  return floor + svgRoom
+}
+
+function wienRoomFormatter(svgSuite, svgRoom, floor) {
+  // rooms 04, 42, and 45 in DB with A or B at end
+  console.log(svgRoom, floor)
+  let room = svgRoom
+  if (svgRoom && svgRoom.includes("04/")) {
+    room = "04A"
+  }
+  else if (svgRoom && svgRoom.includes("42/")) {
+    room = "42A"
+  }
+  else if (svgRoom && svgRoom.includes("45")) {
+    room = "45A"
+  }
+  // walk through doubles
+  else if (svgRoom && svgRoom.includes("06/")) {
+    room ="06/7"
+  }
+  else if (svgRoom && svgRoom.includes("01/")) {
+    room = "01"
+  }
+  return floor + room
+}
+
+// In database, Woodbridge Hall Room is floor followed by room.
+// so concatenate the floor and svgRoom number.
+function woodbridgeRoomFormatter(svgSuite, svgRoom, floor) {
+  let room = svgRoom
+  // rooms 7H, 7I, 7J have 1 or 2 at end in DB
+  if (floor === "7" && ((svgRoom == "H") || (svgRoom == "I") || (svgRoom == "J"))) {
+    room = room + "1"
+  }
+  return floor + room
 }
 
 function w600RoomFormatter(svgSuite, svgRoom, floor) {
@@ -140,6 +179,7 @@ function w600RoomFormatter(svgSuite, svgRoom, floor) {
 }
 
 function normalRoomFormatter(svgSuite, svgRoom, floor) {
+  console.log(svgSuite, svgRoom, floor)
   return floor + svgRoom
 }
 
@@ -150,15 +190,15 @@ const db2svgRoomFormat = {
   "East Campus": eastCampusRoomFormatter,
   "Furnald Hall": normalRoomFormatter,
   "Hartley Hall": hartleyRoomFormatter,
-  "Harmony Hall": normalRoomFormatter,
+  "Harmony Hall": harmonyRoomFormatter,
   "Hogan Hall": hoganRoomFormatter,
   "McBain Hall": normalRoomFormatter,
   "600 W 113th": w600RoomFormatter,
   "River Hall": normalRoomFormatter,
   "Ruggles Hall": rugglesRoomFormatter,
-  "Schapiro Hall": normalRoomFormatter,
+  "Schapiro Hall": schapiroRoomFormatter,
   "Watt Hall": wattRoomFormatter,
-  "Wien Hall": normalRoomFormatter,
+  "Wien Hall": wienRoomFormatter,
   "Woodbridge Hall": woodbridgeRoomFormatter
 }
 
