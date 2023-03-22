@@ -50,7 +50,6 @@ function getDormColor(userLotteryNumber, historicalLotteryNumber) {
   if (typeof historicalLotteryNumber === "undefined") {
     color = NO_DATA_COLOR
   } else if (historicalLotteryNumber < similarLowerbound) {
-    console.log("red", userLotteryNumber, historicalLotteryNumber)
     color = UNAVAILABLE_COLOR
   } else if (historicalLotteryNumber > similarUpperbound) {
     color = AVAILABLE_COLOR
@@ -92,15 +91,8 @@ function claremontRoomFormatter(svgSuite, svgRoom, floor) {
 // Ruggles Floor 1 & 2: svgRoom is the room number
 // Other floors: svgSuite is in the form ()-(room number)
 function rugglesRoomFormatter(svgSuite, svgRoom, floor) {
-  let converted = svgRoom
-  floor = parseInt(floor)
-
-  if (floor > 2) {
-    converted = svgSuite.split("-")[1]
+  return svgRoom ? svgRoom.split("-")[0] : svgRoom
   }
-
-  return converted
-}
 
 // In database, Watt Hall Room is floor followed by room.
 // so concatenate the floor and svgRoom number.

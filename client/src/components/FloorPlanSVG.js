@@ -154,7 +154,6 @@ const FloorPlanSVG = (props) => {
 
       let imageElements = svgBoundingDivEl.querySelectorAll("image");
       let baseImage = imageElements[0];
-      let xlinkHref = baseImage.getAttributeNode("xlink:href");
       // Override the xlink:href attribute (which is deprecated)
       // with an href that links to the corresponding floorplan JPG
       if (baseImage.hasAttribute("xlink:href")) {
@@ -205,7 +204,7 @@ const FloorPlanSVG = (props) => {
         if (needColoring) {
           let selectableEl;
           // Hartley and Carlton Arms have suites but should be colored by room
-          if (props.dorm == "Hartley Hall" || props.dorm == "Carlton Arms") {
+          if (props.dorm == "Hartley Hall" || props.dorm == "Carlton Arms" || props.dorm == "Ruggles Hall") {
             selectableEl = roomEl
           }
           else {
