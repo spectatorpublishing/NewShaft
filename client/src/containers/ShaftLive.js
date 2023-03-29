@@ -8,6 +8,7 @@ import Filters from "../components/ExploreFilters/Filters.js";
 import _, { initial } from "lodash";
 import { isLotteryNumberValid } from "../util/LotteryPredictor.js";
 import alerts from "../components/LotteryPredictor/alerts.json";
+import AdManager from "../components/AdManager";
 
 const ShaftLiveContainer = styled.div`
   display: flex;
@@ -554,6 +555,7 @@ const ShaftLive = (props) => {
     <div>
       <Mobile>
         <Converter>
+          <AdManager width={728} height={90} path="shaftleader"/>
           <InputsWrapper>
             <Input id='form' onSubmit={handleSubmit}>
               <label for='userNum'>Lottery Number: </label>
@@ -603,6 +605,7 @@ const ShaftLive = (props) => {
       </Mobile>
       <Desktop>
         <Converter>
+          <AdManager width={728} height={90} path="shaftleader"/>
           <AboutWrapper>
             <AboutLeft>
               <InputsWrapper>

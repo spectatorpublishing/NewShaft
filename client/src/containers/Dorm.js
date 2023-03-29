@@ -249,15 +249,23 @@ const Dorm = ({ }) => {
   const [dormStyle, setDormStyle] = useState("");
   const [mainImage, setMainImage] = useState("");
   const [quickReview, setQuickReview] = useState({});
+  const [width, setWidth] = useState(window.innerWidth);
+  const [height, setHeight] = useState(window.innerHeight);
+  const [isMobile, setIsMobile] = useState(false);
 
+  const updateDimensions = () => {
+    setWidth(window.innerWidth);
+    setHeight(window.innerHeight);
+    setIsMobile(window.innerWidth <= 768);
+  }
   useEffect(() => {
     window.scrollTo(0, 0)
     const dormName = dorm.replaceAll("-", " ");
-    console.log(dormName)
     fetchDormInfo(dormName);
     //fetchReviews(dormName);
     //fetchRelatedDorms(dormName);
     setAllDormInfo(dormName);
+    window.addEventListener("resize", updateDimensions);
   }, []);
 
   const fetchDormInfo = async (dormName) => {
@@ -481,7 +489,7 @@ const Dorm = ({ }) => {
   return (
     <ScrollToTop>
       <Page>
-      {/* <AdManager width={728} height={90} path="cds_leaderboard"/> */}
+      <AdManager width={728} height={90} path="shaftleader"/>
         <Mobile>
           {mainImage === "" ? null :
             <DormImage>
