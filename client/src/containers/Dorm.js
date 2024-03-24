@@ -275,8 +275,8 @@ const Dorm = ({ }) => {
     })
       .then(res => res.json())
       .then(dormInfo => {
-        dormInfo.PROS = dormInfo.PROS.substring(0, dormInfo.PROS.length - 1).split(',');
-        dormInfo.CONS = dormInfo.CONS.substring(0, dormInfo.CONS.length - 1).split(',');
+        dormInfo.PROS = dormInfo.PROS.substring(0, dormInfo.PROS.length - 1).split('#');
+        dormInfo.CONS = dormInfo.CONS.substring(0, dormInfo.CONS.length - 1).split('#');
         let tempLot = dormInfo.LOTTERY_NUMS.split(',');
         let i = 0;
         for (i = 0; i < tempLot.length; i++) {
