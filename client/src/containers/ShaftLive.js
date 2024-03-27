@@ -322,7 +322,7 @@ const defaultDorms = [
   "Broadway Hall",
   "Carlton Arms",
   "East Campus",
-  "Furnald Hall",
+  // "Furnald Hall", comment bc Furnald is Freshmen dorm
   "Harmony Hall",
   "Hartley Hall",
   "Hogan Hall",
