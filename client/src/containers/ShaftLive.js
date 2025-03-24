@@ -225,8 +225,8 @@ const DisclaimerWrapper = styled.div`
 `;
 
 const DisclaimerTextBox = styled.div`
-  width: 80%;
-  font-size: 0.75rem;
+  width: 70%;
+  font-size: 13px;
   color: #707070;
   margin: 0rem 0rem 0rem auto;
 
@@ -245,6 +245,11 @@ const DisclaimerTextBox = styled.div`
     }
   }
 `;
+
+const ItalicizeText = styled.div`
+  font-style: italic;
+  color: #707070;
+`
 
 const Mobile = styled.div`
   @media (min-width: 991px) {
@@ -324,7 +329,7 @@ const defaultDorms = [
   "East Campus",
   // "Furnald Hall", comment bc Furnald is Freshmen dorm
   "Harmony Hall",
-  "Hartley Hall",
+  // "Hartley Hall", comment bc Hartley is under construction (see disclaimer)
   "Hogan Hall",
   "McBain Hall",
   "600 W 113th",
@@ -666,14 +671,26 @@ const Disclaimer = () => {
     <DisclaimerWrapper>
       <DisclaimerTextBox className='disclaimer'>Disclaimer:</DisclaimerTextBox>
       <DisclaimerTextBox>
-        Historical Room Selection data (ranging from 2020-2022) is provided by
-        Columbia Housing for reference only. The selection process shifts year
-        to year and can change based on a number of variables that will impact
-        how students pick rooms, including changes in building allocation,
-        personal preferences, class size, external factors and more. This data
-        should not be used as a predictive tool nor does it provide any
-        guarantee for selection options. Learn how our lottery predictor works
-        to make the best use of its results.
+          Historical Room Selection data (ranging from 2023-2024) is provided by 
+          Columbia Housing for reference only. The selection process shifts year 
+          to year and can change based on a number of variables that will impact 
+          how students pick rooms, including changes in building allocation, 
+          personal preferences, class size, external factors and more. This data 
+          should not be used as a predictive tool nor does it provide any 
+          guarantee for selection options. Learn how our lottery predictor works 
+          to make the best use of its results.
+
+        <br />
+        <br />
+
+        <ItalicizeText>
+        <u>Please note:</u> Hartley Hall will be closed for renovations so it has been removed 
+        from the lottery predictor. The new dorm at 611 W. 112th St will be available for 
+        selection but will not be included in the lottery predictor due to a lack of prior 
+        data. Similarly, the dorms at 548 W. 113th St and 627 W. 115th St can be selected 
+        but will be excluded from the lottery predictor, as they were not previously in our 
+        database.
+        </ItalicizeText>
       </DisclaimerTextBox>
     </DisclaimerWrapper>
   );

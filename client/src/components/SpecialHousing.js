@@ -2,6 +2,14 @@ import React from "react";
 import arrow from '../assets/Housing101_images/arrow.png';
 import '../css/Housing101.css';
 
+const DashedLine = () => {
+  return (
+    <svg xmlns="http://www.w3.org/2000/svg" width="816" height="3" viewBox="0 0 816 3" fill="none">
+      <path d="M0 1.5H815.12" stroke="#62A8E5" strokeWidth="2" strokeDasharray="4 4" />
+    </svg>
+  );
+};
+
 class SpecialHousing extends React.Component {
   constructor(props) {
     super(props);
@@ -189,49 +197,34 @@ class SpecialHousing extends React.Component {
     } else {
       return (
         <div class="page-wrapper">
-            <div class="row_phoneB rowPadTitleA">
-                <div class="title2">
-                Special Housing
-                </div>
-                <div class="line">
-                    __________________________________
-                </div>
-                <div class="subtitle">
-                    Take the road less traveled?
-                </div>               
-                <img src={arrow} class="arrow_style" alt="arrow down"></img>                
-            </div>
+          <div class="item_title">
+            Barnard<wbr></wbr>/Columbia <strong>Housing Swap</strong>
+          </div>
             <div class="row_phoneA">
-                <div class="column_image2">
-                    <img src="https://arc-anglerfish-arc2-prod-spectator.s3.amazonaws.com/public/A52GXZNKARCNTPOFZFWM2QOEPI.jpg" class="img_style9" alt="East Campus Front View Courtyard"></img>
-                </div>
-                <div class="column4">
+                <div class="column">
                     <div class="row2">
-                        <div class="number5">
-                            1
-                        </div>
                         <div class="column3">
-                            <div class="item_title">
-                                Barnard<wbr></wbr>/Columbia<br></br>Housing Swap
-                            </div>
                             <div class="textbox3">
-                                Is this possible? Yes! Are there risks? Yes. Know that only 30-40 students every year manage to live with their cross-college counterparts every year.
+                            Is this possible? Yes! Is it guaranteed? No. Know that the number of students who live with their cross-college counterparts every year varies based first on the sorority and SIC exchange, then by the number of students who express interest in participating in the exchange. This may change year to year. For the most up to date information, please visit Columbia Housing.
                             </div>
                             <div class="button2"><a href="https://www.columbiaspectator.com/spectrum/2019/03/05/what-is-the-bccu-housing-exchange/">read more here</a></div>
                         </div>
                     </div>
                 </div>
+                <div class="column_image">
+                    <img src="https://arc-anglerfish-arc2-prod-spectator.s3.amazonaws.com/public/A52GXZNKARCNTPOFZFWM2QOEPI.jpg" class="img_style9" alt="East Campus Front View Courtyard"></img>
+                </div>
+            </div>
+            <div class="line">
+                <DashedLine />
+            </div>
+            <div class="item_title">
+              Special Interest Communities
             </div>
             <div class="row_phoneA">
                 <div class="column">
                     <div class="row2">
-                        <div class="number4">
-                            2
-                        </div>
                         <div class="column3">
-                            <div class="item_title">
-                                Special Interest<br></br>Communities
-                            </div>
                             <div class="textbox">
                                 Interested in living in a community with a shared-interest? Prefer to live in a brownstone over a traditional dormitory? Special Interest Communities (SICs) might be the move for you!
                             </div>
@@ -242,6 +235,9 @@ class SpecialHousing extends React.Component {
                 <div class="column_image">
                     <img src="https://arc-anglerfish-arc2-prod-spectator.s3.amazonaws.com/public/UZE2LRR3NNHDVONKASVKFVYHFA.jpg" class="img_style1" alt="Front view of SIC building"></img>
                 </div>
+            </div>
+            <div class="line">
+                <DashedLine />
             </div>
             {/* <div class="row_phoneA">
                 <div class="column4">
@@ -264,19 +260,13 @@ class SpecialHousing extends React.Component {
                     <img src="https://arc-anglerfish-arc2-prod-spectator.s3.amazonaws.com/public/EDTWETP7TRHHPFY6NC3ZX22A5I.jpg" class="img_style9" alt="Wallach Building Front"></img>
                 </div>
             </div> */}
+          <div class="item_title">
+                            Become a Resident Advisor
+                        </div>   
           <div class="row_phoneA">
-            <div class="column_image">
-              <img src="https://arc-anglerfish-arc2-prod-spectator.s3.amazonaws.com/public/73F4GONETRCNHP3HBMI6IRFPGQ.jpg" class="img_style1" alt="Group of RAs"></img>
-            </div>
             <div class="column">
                 <div class="row2">
-                    <div class="number4">
-                        3
-                    </div>
-                    <div class="column3">
-                        <div class="item_title">
-                            Become a<br></br>Resident Advisor
-                        </div>        
+                    <div class="column3">       
                         <div class="textbox">
                             Interested in making your residential community a warm, safe home for others? Attracted to free housing, a guaranteed single, and wonderful lively residential life staff? Consider being an RA.
                         </div>
@@ -284,17 +274,21 @@ class SpecialHousing extends React.Component {
                     </div>
                 </div>
             </div>
+            <div class="column_image">
+              <img src="https://arc-anglerfish-arc2-prod-spectator.s3.amazonaws.com/public/73F4GONETRCNHP3HBMI6IRFPGQ.jpg" class="img_style1" alt="Group of RAs"></img>
+            </div>
           </div>
-          <div class="row_phoneA">
-                <div class="column4">
-                    <div class="row2">
-                        <div class="number5">
-                            4
-                        </div>
-                        <div class="column3">
-                            <div class="item_title">
-                                Disability Services<br></br>and Housing
+          <div class="line">
+                <DashedLine />
+            </div>
+            <div class="item_title">
+                                Disability Services and Housing
                             </div>
+          <div class="row_phoneA">
+                <div class="column">
+                    <div class="row2">
+                        <div class="column3">
+                            
                             <div class="textbox3">
                                 Columbia now offers fantastic housing benefits for students with disabilities, including the ability to choose a friend to live with (in a suite) or next door to (in a hall) you! Find out more below.
                             </div>
@@ -303,23 +297,20 @@ class SpecialHousing extends React.Component {
                         </div>
                     </div>
                 </div>
-                <div class="column_image2">
+                <div class="column_image">
                     <img src="https://arc-anglerfish-arc2-prod-spectator.s3.amazonaws.com/public/DT7CPFKRK5ASFERKEGIMYK5TVM.jpg" class="img_style9" alt="Wien Hall Front of Building"></img>
                 </div>
             </div>
-          <div class="row_phoneA">
-            <div class="column_image">
-              <img src="https://arc-anglerfish-arc2-prod-spectator.s3.amazonaws.com/public/KXP4LGCJFJFHTBR3I5EUMA4GP4.jpg" class="img_style1" alt="Flags in front of Low Library"></img>
+            <div class="line">
+                <DashedLine />
             </div>
-            <div class="column">
-                <div class="row2">
-                    <div class="number4">
-                        5
-                    </div>
-                    <div class="column3">
-                        <div class="item_title">
+            <div class="item_title">
                             Studying Abroad
                         </div>
+          <div class="row_phoneA">
+            <div class="column">
+                <div class="row2">
+                    <div class="column3">
                         <div class="textbox">
                             Yes, you can study abroad and return with guaranteed housing! Make sure to take the right steps to ensure you do not lose your guaranteed-housing status.
                         </div>
@@ -327,28 +318,24 @@ class SpecialHousing extends React.Component {
                     </div>
                 </div>
             </div>
-          </div>
-          <div class="row_phoneA">
-            <div class="column4">
-                <div class="row3">
-                <div class="number6">
-                    6
-                </div>
-                <div class="column6">
-                <div class="item_title2">
-                    Explore Housing <br></br>On the<strong>SHAFT</strong>
-                </div>
-                </div>
-                </div>
+            <div class="column_image">
+              <img src="https://arc-anglerfish-arc2-prod-spectator.s3.amazonaws.com/public/KXP4LGCJFJFHTBR3I5EUMA4GP4.jpg" class="img_style1" alt="Flags in front of Low Library"></img>
             </div>
+          </div>
+          <div class="line">
+                <DashedLine />
+            </div>
+            <div class="item_title">
+                    Explore Housing On the<strong>SHAFT</strong>
+                </div>
+          <div class="row_phoneA">
             <div class="column5">
               <div class="column">
-              <div class="textbox2">
+              <div class="textbox4">
                Ready to use theShaft’s suite of new features to transform your housing experience?
               </div>
               <div class="button3"><a href="http://www.theshaft.info">learn more here</a></div>
               </div>
-              <img src="https://arc-anglerfish-arc2-prod-spectator.s3.amazonaws.com/public/TYTGAIHE75DEFG4BIPLZBPTPMM.png" class="img_style4" alt="trophy"></img>
             </div>
           </div>  
         </div>

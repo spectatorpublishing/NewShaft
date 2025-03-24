@@ -14,17 +14,59 @@ const Housing101 = (props) => {
         } else if (currentPage === "newProcess") {
             return <NewProcess />
         } else {
-            return <UsingtheSHAFT />
+            return <UsingtheSHAFT/>
+        }
+    }
+
+    const PageHeader = () => {
+        if (currentPage === "specialHousing") {
+            return (
+                <div className="header-container">
+                    <div className="title2">
+                        Special Housing
+                    </div>
+                    <div className="subtitle">
+                        Take the road less traveled?
+                    </div>
+                </div>
+            )
+        } else if (currentPage === "newProcess") {
+            return (
+                <div className="header-container">
+                    <div className="title2">
+                        The New Process
+                    </div>
+                    <div className="subtitle">
+                        What do these changes mean for <i>you?</i>
+                    </div>
+                </div>
+            )
+        } else {
+            return (
+                <div className="header-container">
+                    <div className="title2">
+                        Using the<strong>SHAFT</strong>
+                    </div>
+                    <div className="subtitle">
+                        tools and features that make housing <i>easy</i>.
+                    </div>
+                </div>
+            )
         }
     }
 
     return (
         <div>
             <div class="header">
+                {PageHeader()}
+            </div>
+            <div class="header2">
+                <div className = "tab-navigation">
                 <div className="li"><div onClick={() => setPage("/")} className={(currentPage === "/" ? "active" : "btntext")}>using the<strong>SHAFT</strong></div></div>
                 <div className="li"><div onClick={() => setPage("newProcess")} className={(currentPage === "newProcess" ? "active" : "btntext")}>the new process</div></div>
                 <div className="li"><div onClick={() => setPage("specialHousing")} className={(currentPage === "specialHousing" ? "active" : "btntext")}>special housing</div></div>
-            </div>
+                </div>
+            </div> 
             <div className="content">
             <CurrentPage />
             </div>

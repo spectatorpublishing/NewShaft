@@ -36,7 +36,7 @@ h1, h2, p, ul, li {
 }
 
 .header{
-  background-image: linear-gradient(to bottom, black, rgb(88, 88, 88));
+  background-color: white;
   justify-content: center;
   width:100vw;
   margin-left:auto;
@@ -46,7 +46,80 @@ h1, h2, p, ul, li {
   padding-top:5rem;
 }
 
+.header2{
+  background-color: white;
+  justify-content: center;
+  width:100vw;
+  margin-left:auto;
+  margin-right:auto;
+  display: flex;
+  flex-direction: row;
+}
+
+.tab-header {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background: #f5f5f5; 
+  padding: 5px;
+  border-radius: 25px; 
+  width: fit-content; 
+  margin: 20px auto; 
+}
+
+/* Container for the tab buttons */
+.tab-navigation {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background: #f5f5f5; /* Light gray background */
+  padding: 10px 25px;
+  border-radius: 25px; /* Rounded container */
+  width: fit-content; /* Keeps it compact */
+  margin: 20px auto; /* Centers the nav */
+}
+
+/* Individual tab buttons */
 .li {
+  text-decoration: none;
+  border-radius: 25px; /* Fully rounded buttons */
+  border: none; /* No border */
+  padding: 10px 20px;
+  margin: 5px;
+  font-size: 1.6rem;
+  font-family: 'Raleway', sans-serif;
+  color: #62A8E5;
+  background-color: transparent;
+  cursor: pointer;
+  transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+/* Active tab styling */
+.active {
+  background-color: #62A8E5;
+  color: white;
+  font-weight: bold;
+  padding: 10px 20px;
+  border-radius: 25px;
+}
+
+/* Ensure text stays centered */
+.btntext {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+}
+
+/* Media query for responsiveness */
+@media (max-width: 768px) {
+  .li {
+    font-size: 4vw;
+    padding: 8px 15px;
+  }
+}
+
+/*.li {
   text-decoration: none;
   border-radius: 7px;
   border: 1.5px solid #62A8E5; 
@@ -82,7 +155,7 @@ h1, h2, p, ul, li {
   .li:last-child{
     margin-right:1rem;
   }
-}
+}*/
 
 a {
   color: #62A8E5;
@@ -101,11 +174,11 @@ a {
   background-color: #FFF;
 }
 
-.active{
+/*.active{
   color: #fff;
   background-color:#62A8E5;
   border-radius: 4px;
-}
+}*/
 
 .button {
   border-radius: 7px;
@@ -125,17 +198,16 @@ a {
   border-radius: 7px;
   border: 1.5px solid #62A8E5;
   margin-top: 1rem;
-  padding-top: 0.3rem;
-  padding-bottom: 0.3rem;
+  padding-top: 0.7rem;
+  padding-bottom: 0.7rem;
   padding-left:1.2rem;
   padding-right:1.2rem;
   height: fit-content;
-  width: fit-content;
+  width: 528px;
   color:#62A8E5;
   font-family: 'Raleway';
-  font-size: 1.6rem;
+  font-size: 30px;
   text-align: center;
-  margin-left:1%;
 }
 
 @media (max-width:980px) {
@@ -172,6 +244,8 @@ a {
   font-size: 2vw;
   text-align: center;
   justify-content: center;
+  vertical-align: middle;
+  align-items: center;
 }
 
 .button_phone {
@@ -218,7 +292,7 @@ title{
 }
 
 .title2 {
-  color: #62A8E5;
+  color: black;
   font-size: 3rem;
   font-weight: 400; 
   font-family: 'Raleway';
@@ -228,32 +302,38 @@ title{
 }
 
 .subtitle {
-  color: white;
+  color: black;
   font-size: 1.7rem;
   font-family: 'Raleway';
   text-align: center;
   padding: 1.2rem;
   margin: auto;
+  margin-top: -1.2rem;
 }
 
-.btntext {
-  color: white;
+/*.btntext {
+  color: black;
+}*/
+
+.bluetxt {
+  color:#62A8E5
 }
 
 .line {
   color: #62A8E5;
-  font-size: 2rem;
-  font-weight: 400;
-  font-family: 'Times New Roman';
+  text-align: center;
+  vertical-align: middle;
+  stroke-width: 2;
 }
 
 .item_title{
-  padding-top: 3.3rem;
-  font-size: 2.8rem;
+  padding-top: 5rem;
+  font-size: 50px;
   font-family: 'Raleway';
   color: #62A8E5;
-  text-align: left;
+  text-align: center;
   font-weight: 500;
+  padding-bottom: 3.3rem;
 }
 
 @media (max-width:1000px) {
@@ -283,29 +363,42 @@ title{
 }
 
 .textbox{
-  width:100%;
-  font-size: 1.4rem;
+  width:90%;
+  font-size: 30px;
   font-family: 'Raleway';
   text-align: left;
   padding-top: 1.2rem;
-  color: rgb(114, 113, 113);
+  color: black;
 }
 
 .textbox2{
   font-size: 1.8rem;
   font-family: 'Raleway';
-  text-align: left;
+  text-align: center;
   vertical-align: middle;
   width:100%;
-  color: rgb(114, 113, 113);
+  color: black;
+  padding-bottom: 2rem;
 }
 
 .textbox3{
-  width:100%;
-  font-size: 1.4rem;
+  width:95%;
+  font-size: 30px;
+  font-family: 'Raleway';
   text-align: left;
-  padding-top: 1.2rem;
-  color: rgb(114, 113, 113);
+  vertical-align: top;
+  color: black;
+}
+
+.textbox4{
+  font-size: 1.8rem;
+  font-family: 'Raleway';
+  text-align: center;
+  vertical-align: middle;
+  align-items: center;
+  width:100%;
+  color: black;
+  padding-bottom: 2rem;
 }
 
 .textbox81{
@@ -386,13 +479,14 @@ title{
 .img_style7{
   max-width:45vw;
   padding-left: 5%;
-  width: 95%;
+  width: 85%;
 }
 
 .img_style8{
-  max-width:45vw;
-  width: 95%;
+  max-width:35vw;
+  width: 85%;
   padding-right: 5%;
+  margin-left:2%;
 }
 
 .img_style9{
@@ -423,7 +517,6 @@ title{
   flex-direction: row;
   position: relative;
   align-items: center;
-  background-image: linear-gradient(to bottom, rgb(90, 90, 90), white);
 }
 
 .row_phoneC{
@@ -481,6 +574,7 @@ title{
 }
 
 .page-wrapper{
+  background-color: #FFF;
   width: auto;
   background-size: contain;
 }
@@ -493,7 +587,7 @@ title{
   height: auto;
   position: relative;
   flex: 1;
-  align-items: left;
+  align-items: center;
 }
 
 .column81 {
@@ -552,6 +646,7 @@ title{
   position: relative;
   flex: 1;
   align-items: flex-end;
+  padding-right: 17%;
 }
 
 .column_image3 {
@@ -588,7 +683,7 @@ title{
   position: relative;
   flex: 1;
   align-items: left;
-  padding-left:2%;
+  padding-left:12%;
 }
 
 .column2 {
@@ -630,7 +725,6 @@ title{
   flex: 1;
   align-items: top;
   position: relative;
-
 }
 
 .row3 {

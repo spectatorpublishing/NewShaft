@@ -23,7 +23,8 @@ with open(sys.argv[1], "r") as f:
     i = 0
     for line in reader:
       # so we don't insert column names into db as data
-      if i != 0:
+      print("here", line)
+      if i > 1: #skip the header
         query = "INSERT INTO " + sys.argv[2] + " VALUES ("
         vals = []
         for col in line:
@@ -34,10 +35,11 @@ with open(sys.argv[1], "r") as f:
             vals.append("\'"+col+"\'")
         try:
           query += ','.join(vals) + ');'
-          print(query)
-          cursor.execute(query)
+          print("QUERY", query, "\n")
+          print("HERE", cursor.execute(query))
         except:
           # handling Null cases
+          print("test")
           for val in vals:
             if val != None:
               query = query + val + ','
@@ -45,11 +47,11 @@ with open(sys.argv[1], "r") as f:
               query = query + '%s' + ','
               
           query = query[:-1] + ');'
-          print(query)
+          print("SECOND QUERY", query, "\n")
           cursor.execute(query, (None,))
       i += 1
       
-print(i)
+print("TEST", i, "\n")
 db.commit()
 cursor.close()
 db.close()

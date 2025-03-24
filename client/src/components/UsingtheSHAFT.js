@@ -5,6 +5,14 @@ import '../css/Housing101.css';
 const newExplore = "https://theshaft.s3.amazonaws.com/dorms/housing101/newExplore.png";
 const newOdds = "https://theshaft.s3.amazonaws.com/dorms/housing101/newOdds.png";
 
+const DashedLine = () => {
+  return (
+    <svg xmlns="http://www.w3.org/2000/svg" width="816" height="3" viewBox="0 0 816 3" fill="none">
+      <path d="M0 1.5H815.12" stroke="#62A8E5" strokeWidth="2" strokeDasharray="4 4" />
+    </svg>
+  );
+};
+
 const UsingtheSHAFT = (props) => {
     const [isMobile, setMobile] = useState(false);
 
@@ -91,77 +99,56 @@ const UsingtheSHAFT = (props) => {
       } else {
         return (
           <div class="page-wrapper">
-            <div class="row_phoneB rowPadTitleA">
-              <div class="title2">
-                Using the<strong>SHAFT</strong>
-              </div>
-              <div class="line">
-                __________________________________
-              </div>
-              <div class="subtitle">
-                tools and features that make housing <i>easy</i>.
-              </div>    
-              <img src={arrow} class="arrow_style" alt="arrow down"></img>
-            </div>
+            <div class="item_title">
+                      Toggle filters: <strong>Explore Page</strong>
+                    </div> 
             <div class="row_phoneA">
-              <div class="column4">
+              <div class="column">
                 <div class="row2">
-                  <div class="number5">
-                    1
-                  </div>
-                  <div class="column3">
-                    <div class="item_title">
-                      Toggle filters: <br></br><strong>Explore Page</strong>
-                    </div>                  
-                    <div class="textbox3">
+                  <div class="column3">                    
+                    <div class="textbox">
                       With theShaft’s filters, it is easy to find and explore housing options that fit you or your group’s housing preferences. With our map, it is easy to see where you can or will be living in Morningside Heights!
                     </div>
-                    <div class="button2"><a href="https://www.theshaft.info/explore">go to Explore Page</a></div>  
+                    <div class="button2"><a href="https://www.theshaft.info/explore">go to <strong>Explore Page</strong></a></div>  
                   </div>
                 </div>
               </div>
-              <div class="column_image2">
-                <img src={newExplore} class="img_style7" alt="Filters from explore page displayed"></img>
+              <div class="column_image">
+                <img src={newExplore} class="img_style8" alt="Filters from explore page displayed"></img>
               </div>
             </div>
+            <div class="line">
+                <DashedLine />
+            </div>
+            <div class="item_title">
+              Measure your luck: <strong>Lottery Calculator</strong>
+            </div>   
             <div class="row_phoneA">
+              <div class="column">
+                <div class="row2">
+                  <div class="column3">  
+                    <div class="textbox">
+                      Our staff has been collecting Columbia Housing data for years. With theShaft’s dynamic, color-coated floor plans, you can easily <u>measure your chances</u> for living in your favorite dorm next year and be ready for room selection.
+                    </div>
+                    <div class="button2"><a href="https://www.theshaft.info/lottery">go to <strong>Lottery Calculator</strong></a></div>
+                  </div>
+                </div>
+              </div>
               <div class="column_image">
                 <img src={newOdds} class="img_style8" alt="Lottery Calculator Graphic"></img>
               </div>
-              <div class="column">
-                <div class="row2">
-                  <div class="number4">
-                    2
-                  </div>
-                  <div class="column3">
-                    <div class="item_title">
-                      Measure your luck: <br></br><strong>Lottery Calculator</strong>
-                    </div>    
-                    <div class="textbox">
-                      Our staff has been collecting Columbia Housing data for years. With theShaft’s dynamic, color-coated floor plans, you can measure your chances for living in your favorite dorm next year and be ready for room selection.
-                    </div>
-                    <div class="button2"><a href="https://www.theshaft.info/lottery">go to Lottery Calculator</a></div>
-                  </div>
-                </div>
-              </div>
             </div>
-            <div class="row_phoneA">
-              <div class="column4">
-                <div class="row2">
-                  <div class="number5">
-                    3
-                  </div>
-                  <div class="column3">
-                    <div class="item_title">
+            <div class="line">
+                <DashedLine />
+            </div>
+            <div class="item_title">
                     Cheat sheet: <strong>Housing 101</strong>
-                    </div>              
+                    </div> 
+            <div class="row_phoneA">           
                     <div class="textbox2">
-                    With a <i>new</i> housing system, the game has changed. <br></br>Know how to play and shoot your best shot.
+                      Know how to play and shoot your best shot.
                     </div>
                     {/* <div class="button3" onClick={() => {props.choosePage("newprocess")}}>learn more here</div> */}
-                  </div>
-                </div>
-              </div>
           </div>
         </div>
         );

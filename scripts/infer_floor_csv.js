@@ -5,8 +5,8 @@ const { Console } = require('console');
 // infer floor from housing data (2022) in csv form
 
 /* replace with the absolute path to the csv files on your machine */
-const NLotteryPredicter2022 = "/Users/zhuci/Desktop/SpecTech/Shaft_stuff/Housing2022.csv"
-const out = "/Users/zhuci/Desktop/SpecTech/Shaft_stuff/Housing2022_inferred_new.csv"
+const NLotteryPredicter2022 = "/Users/violetlaing/Desktop/Spectator/housing_data_2024.csv"
+const out = "/Users/violetlaing/Desktop/Spectator/housing_data_2024_inferred_new.csv"
 const debug = 0
 
 const DLog = (msg) => {
@@ -413,32 +413,45 @@ const json2csv = (data, fields, out) => {
 const data = [];
 
 fs.createReadStream(NLotteryPredicter2022)
+  //.on("data", function(chunk) {
+  //  console.log(chunk.toString().split("\n").slice(0, 5).join("\n"));
+  //this.destroy();
+  //})
   .pipe(
     parse({
       delimiter: ",",
       columns: true,
       ltrim: true,
+      skip_empty_lines: true,
+      from_line: 2,
     })
   )
   .on("data", function (row) {
     // This will push the object row into the array
     data.push(row);
+    console.log("row: ",row);
   })
   .on("error", function (error) {
     console.log(error.message);
   })
   .on("end", function () {
     // Here log the result array
-    console.log("parsed csv data:");
+    console.log("parsed csv data:", data);
     let inferred = data.map(record => {
+      console.log("record:", record);
+        //if(record['Room Selection 2024 Data'] == 'Room Location Description') {
+        //  return;
+        //}
         let {'raw_room_description': room} = record;
         let dorm = room?.split(' ')[0];
         let room_number = room?.split(' ')[1]?.split('-')[0];
         record["room"] = room_number;
         record["room_suffix"] = room?.split(' ')[1]?.split('-')[1];
+        console.log("record:", record);
+        console.log("reshalls:", residenceHalls);
         record["floor"] = residenceHalls[dorm](room_number);
         // fields = Object.keys(record)
-        // console.log(record['dorm'])
+        // console.log(record['dorm']) 
         return record;
     });
     let fields = Object.keys(inferred[0])
