@@ -248,7 +248,7 @@ class NewProcess extends React.Component {
               <div class="textbox4">
               Learn how to use theShaft’s suite of new features to transform your housing experience.
               </div>
-              <div class="button3"><NavLink exact to="/">learn more here</NavLink></div>
+              <div class="button3"><NavLink exact to="/">Return Home</NavLink></div>
               </div>
             </div>
           </div>  

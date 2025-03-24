@@ -203,7 +203,7 @@ a {
   padding-left:1.2rem;
   padding-right:1.2rem;
   height: fit-content;
-  width: 528px;
+  width: 535px;
   color:#62A8E5;
   font-family: 'Raleway';
   font-size: 30px;
@@ -238,7 +238,7 @@ a {
   padding-left:1.2rem;
   padding-right:1.2rem;
   height: fit-content;
-  width: fit-content;
+  width: 535px;
   color:#62A8E5;
   font-family: 'Raleway';
   font-size: 2vw;
@@ -396,7 +396,7 @@ title{
   text-align: center;
   vertical-align: middle;
   align-items: center;
-  width:100%;
+  width:45%;
   color: black;
   padding-bottom: 2rem;
 }
@@ -702,7 +702,6 @@ title{
   flex: 1;
   position: relative;
   justify-content: left;
-  padding-left: 5%;
   align-items: center;
 }
 
