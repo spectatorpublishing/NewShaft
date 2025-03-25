@@ -9,7 +9,7 @@ var pool = require('../database');
 var { RANGE } = require('../../client/src/util/LotteryPredictor')
 
 router.get('/:num', async (req, res) => {
-	let table = "housing_data_2023"
+	let table = "housing_data_2024"
 	let lotteryNum = parseInt(req.params.num)
 	let likelyCutoff = lotteryNum - RANGE
 	let unlikelyCutoff = lotteryNum + RANGE
