@@ -73,8 +73,8 @@ h1, h2, p, ul, li {
   justify-content: center;
   align-items: center;
   background: #f5f5f5; /* Light gray background */
-  padding: 10px 25px;
-  border-radius: 25px; /* Rounded container */
+  /*padding: 10px 25px;*/
+  border-radius: 55px; /* Rounded container */
   width: fit-content; /* Keeps it compact */
   margin: 20px auto; /* Centers the nav */
 }
@@ -82,26 +82,33 @@ h1, h2, p, ul, li {
 /* Individual tab buttons */
 .li {
   text-decoration: none;
-  border-radius: 25px; /* Fully rounded buttons */
+  border-radius: 55px; /* Fully rounded buttons */
   border: none; /* No border */
-  padding: 10px 20px;
-  margin: 5px;
-  font-size: 1.6rem;
+  padding: 20px 44px;
+  font-size: 23px;
   font-family: 'Raleway', sans-serif;
-  color: #62A8E5;
+  color: black;
   background-color: transparent;
   cursor: pointer;
   transition: background-color 0.3s ease, color 0.3s ease;
 }
 
+.li.active {
+  background-color: #62A8E5;
+  color: white;
+  padding: 20px 44px;
+  border-radius: 55px;
+}
+
+
 /* Active tab styling */
-.active {
+/* .active {
   background-color: #62A8E5;
   color: white;
   font-weight: bold;
   padding: 10px 20px;
-  border-radius: 25px;
-}
+  border-radius: 30px;
+} */
 
 /* Ensure text stays centered */
 .btntext {

@@ -55,23 +55,46 @@ const Housing101 = (props) => {
         }
     }
 
+    // return (
+    //     <div>
+    //         <div class="header">
+    //             {PageHeader()}
+    //         </div>
+    //         <div class="header2">
+    //             <div className = "tab-navigation">
+    //             <div className="li"><div onClick={() => setPage("/")} className={(currentPage === "/" ? "active" : "btntext")}>Using the<strong>SHAFT</strong></div></div>
+    //             <div className="li"><div onClick={() => setPage("newProcess")} className={(currentPage === "newProcess" ? "active" : "btntext")}>The New Process</div></div>
+    //             <div className="li"><div onClick={() => setPage("specialHousing")} className={(currentPage === "specialHousing" ? "active" : "btntext")}>Special Housing</div></div>
+    //             </div>
+    //         </div> 
+    //         <div className="content">
+    //         <CurrentPage />
+    //         </div>
+    //     </div>
+    // )
     return (
         <div>
-            <div class="header">
-                {PageHeader()}
+          <div className="header">
+            {PageHeader()}
+          </div>
+          <div className="header2">
+            <div className="tab-navigation">
+              <div className={`li ${currentPage === "/" ? "active" : ""}`} onClick={() => setPage("/")}>
+                Using the<strong>SHAFT</strong>
+              </div>
+              <div className={`li ${currentPage === "newProcess" ? "active" : ""}`} onClick={() => setPage("newProcess")}>
+                The New Process
+              </div>
+              <div className={`li ${currentPage === "specialHousing" ? "active" : ""}`} onClick={() => setPage("specialHousing")}>
+                Special Housing
+              </div>
             </div>
-            <div class="header2">
-                <div className = "tab-navigation">
-                <div className="li"><div onClick={() => setPage("/")} className={(currentPage === "/" ? "active" : "btntext")}>Using the<strong>SHAFT</strong></div></div>
-                <div className="li"><div onClick={() => setPage("newProcess")} className={(currentPage === "newProcess" ? "active" : "btntext")}>The New Process</div></div>
-                <div className="li"><div onClick={() => setPage("specialHousing")} className={(currentPage === "specialHousing" ? "active" : "btntext")}>Special Housing</div></div>
-                </div>
-            </div> 
-            <div className="content">
+          </div>
+          <div className="content">
             <CurrentPage />
-            </div>
+          </div>
         </div>
-    )
+      )
 }
 
 export default Housing101;
