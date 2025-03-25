@@ -378,6 +378,15 @@ title{
   color: black;
 }
 
+.textboxSmall{
+  width:90%;
+  font-size: 24px;
+  font-family: 'Raleway';
+  text-align: left;
+  padding-top: 1.2rem;
+  color: black;
+}
+
 .textbox2{
   font-size: 1.8rem;
   font-family: 'Raleway';

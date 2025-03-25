@@ -131,6 +131,9 @@ class NewProcess extends React.Component {
             <div class="textbox_phone">
               Avoid disappointment the day of your housing selection appointment. Use theShaft’s Lottery Predictor feature to determine a list of satisfying safe, target, and dream housing choices before your appointment. 
             </div>
+            <div class="textbox_phone">
+               Keep in mind that the Lottery Predictor <span style={{ color: '#62A8E5' }}>does not provide any guarantee</span> for selection options.
+            </div>
             <div class="button_phone"><a href="http://www.theshaft.info/lottery">go to Lottery Calculator</a></div>
           </div>
           </div>
@@ -227,6 +230,9 @@ class NewProcess extends React.Component {
                     <div class="column3">                   
                         <div class="textbox">
                             Avoid disappointment the day of your housing selection appointment. Use theShaft’s Lottery Predictor feature to determine a list of satisfying safe, target, and dream housing choices before your appointment.
+                        </div>
+                        <div class="textboxSmall">
+                          Keep in mind that the Lottery Predictor <span style={{ color: '#62A8E5' }}>does not provide any guarantee</span> for selection options.
                         </div>
                         <div class="button2"><a href="http://www.theshaft.info/lottery">go to <strong>Lottery Calculator</strong></a></div>
                     </div>
