@@ -207,7 +207,7 @@ class SpecialHousing extends React.Component {
                             <div class="textbox3">
                             Is this possible? Yes! Is it guaranteed? No. Know that the number of students who live with their cross-college counterparts every year varies based first on the sorority and SIC exchange, then by the number of students who express interest in participating in the exchange. This may change year to year. For the most up to date information, please visit Columbia Housing.
                             </div>
-                            <div class="button2"><a href="https://www.columbiaspectator.com/spectrum/2019/03/05/what-is-the-bccu-housing-exchange/">Read more here</a></div>
+                            <div class="button2"><a href="https://www.housing.columbia.edu/content/living-barnard-students">Read more here</a></div>
                         </div>
                     </div>
                 </div>
@@ -228,7 +228,7 @@ class SpecialHousing extends React.Component {
                             <div class="textbox">
                                 Interested in living in a community with a shared-interest? Prefer to live in a brownstone over a traditional dormitory? Special Interest Communities (SICs) might be the move for you!
                             </div>
-                            <div class="button2"><a href="https://www.columbiaspectator.com/spectrum/2019/01/28/hack-housing-what-are-special-interest-communities/">Read more on SICs</a></div>
+                            <div class="button2"><a href="https://www.cc-seas.columbia.edu/reslife/sic">Read more on SICs</a></div>
                         </div>
                     </div>
                 </div>
@@ -292,7 +292,7 @@ class SpecialHousing extends React.Component {
                             <div class="textbox3">
                                 Columbia now offers fantastic housing benefits for students with disabilities, including the ability to choose a friend to live with (in a suite) or next door to (in a hall) you! Find out more below.
                             </div>
-                            <div class="button2"><a href="https://roomselection.housing.columbia.edu/content/disability-housing-accommodations">ODS Housing accommodations</a></div>
+                            <div class="button2"><a href="https://www.housing.columbia.edu/content/disability-housing-accommodations">ODS Housing accommodations</a></div>
                             <div class="button2"><a href="https://barnard.edu/disabilityservices/housing-accommodations">CARDS Housing accommodations</a></div>
                         </div>
                     </div>
@@ -314,7 +314,7 @@ class SpecialHousing extends React.Component {
                         <div class="textbox">
                             Yes, you can study abroad and return with guaranteed housing! Make sure to take the right steps to ensure you do not lose your guaranteed-housing status.
                         </div>
-                         <div class="button2"><a href="https://roomselection.housing.columbia.edu/content/study-abroad">Learn more</a></div>
+                         <div class="button2"><a href="https://www.housing.columbia.edu/content/study-abroad">Learn more</a></div>
                     </div>
                 </div>
             </div>
