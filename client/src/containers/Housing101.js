@@ -34,10 +34,10 @@ const Housing101 = (props) => {
             return (
                 <div className="header-container">
                     <div className="title2">
-                        The New Process
+                        The Process
                     </div>
                     <div className="subtitle">
-                        What do these changes mean for <i>you?</i>
+                
                     </div>
                 </div>
             )
@@ -83,7 +83,7 @@ const Housing101 = (props) => {
                 Using the<strong>SHAFT</strong>
               </div>
               <div className={`li ${currentPage === "newProcess" ? "active" : ""}`} onClick={() => setPage("newProcess")}>
-                The New Process
+                The Process
               </div>
               <div className={`li ${currentPage === "specialHousing" ? "active" : ""}`} onClick={() => setPage("specialHousing")}>
                 Special Housing

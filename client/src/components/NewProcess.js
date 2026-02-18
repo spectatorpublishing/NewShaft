@@ -51,13 +51,13 @@ class NewProcess extends React.Component {
         <div class="page-wrapper_phone">
           <div class="row_phoneB rowPadTitleA">
             <div class="title2_phone">
-              New Process
+              Process
             </div>
             <div class="line_phone">
-              __________________________________________________
+              
             </div>
             <div class="subtitle_phone">
-              What do these changes mean for <i>you</i>?
+      
             </div>
             <img src={arrow} class="arrow_style" alt="arrow down"></img>    
           </div>
@@ -67,15 +67,15 @@ class NewProcess extends React.Component {
               1
             </div>
             <div class="item_title_phone">
-              No more <br></br><span class="no_line_break">Re-Group</span>
+            <strong>Pro Tip: </strong> <br></br><span class="no_line_break">Join an Even-Numbered Group</span>
             </div>
           </div>
           <div class="row_phone">            
-            <img src="https://arc-anglerfish-arc2-prod-spectator.s3.amazonaws.com/public/BIFS2E7ESRDOPIKL7P4WZ3RRZQ.png" class="img_style_phone2" alt="No more x Person on Suites? No Problem! Just split your group and choose other options"></img>
+            <img src="https://arc-anglerfish-arc2-prod-spectator.s3.amazonaws.com/public/BIFS2E7ESRDOPIKL7P4WZ3RRZQ.png" class="img_style_phone2" alt="Choose an even group! Remember singles are very limited. Have a plan if there are no singles available!"></img>
           </div>
           <div class="row_phone">
             <div class="textbox_phone">
-              Without re-group, there is no longer risk of having a group that’s too big for the remaining available suites. This impacts <i>everyone</i>, since more desirable dorms and suites will be selected more quickly than before.
+            Students may participate in Room Selection in groups of 2–10. <u>Single rooms are extremely limited and should not be expected by sophomores.</u> Availability for juniors is also limited, and singles are not guaranteed for any class year. Students who select as individuals or in odd-numbered groups risk being placed in the <u>guaranteed housing list</u>, which will assign them to any available space. <u>Forming even-numbered groups is strongly recommended for all students.</u>
             </div>
           </div>
           </div>
@@ -85,7 +85,7 @@ class NewProcess extends React.Component {
               2
             </div>
             <div class="item_title_phone">
-              Responsibility of Group Leader
+              Responsibility of <strong>Group Leader</strong>
             </div>
           </div>
           <div class="row_phone">            
@@ -93,7 +93,7 @@ class NewProcess extends React.Component {
           </div>
           <div class="row_phone">
             <div class="textbox_phone">
-              For housing groups with more than one individual, one group member will be designated the group leader. This person is responsible for making the groups official housing selection during their appointment. Be sure your group leader knows everybody’s preferences and has a list of options ready to go.
+              For housing groups with more than one individual, one group member will be designated the <u>group leader</u>. This person is responsible for making the groups official housing selection during their appointment. Be sure your group leader knows everybody’s preferences and has a list of options ready to go.
             </div>
           </div>
           </div>
@@ -103,7 +103,7 @@ class NewProcess extends React.Component {
               3
             </div>
             <div class="item_title_phone">
-              Avoid Chaos: <br></br>Communicate!
+              <strong>Avoid Chaos: </strong> <br></br> Communicate!
             </div>
           </div>
           <div class="row_phone">            
@@ -111,7 +111,7 @@ class NewProcess extends React.Component {
           </div>
           <div class="row_phone">
             <div class="textbox_phone">
-              For groups that may be split up due to all suites their size being taken, members should communicate what their living preferences are to each other and their group leader. Members should also settle on back-up plans, since housing selection can be unpredictable and ideal outcomes are not guaranteed. 
+              For groups that may be split up due to all suites their size being taken, members should <u>communicate</u> what their living preferences are to each other and their group leader. Members should also settle on back-up plans, since housing selection can be unpredictable and ideal outcomes are not guaranteed. 
             </div>
           </div>
           </div>
@@ -160,7 +160,7 @@ class NewProcess extends React.Component {
       return (
         <div class="page-wrapper">
           <div class="item_title">
-            No more <strong>Re-Group</strong>
+          <strong>Pro Tip: </strong> Join an Even-Numbered Group
           </div>
             <div class="row_phoneA">
                 <div class="column">
@@ -168,13 +168,13 @@ class NewProcess extends React.Component {
                         <div class="column3">
                             
                             <div class="textbox3">
-                                Without re-group, there is no longer a risk of having a group that’s <u>too big</u> for the remaining available suites. This impacts everyone, since more desirable dorms and suites will be <u>selected quicker</u> than before.
+                            Students may participate in Room Selection in groups of 2–10. <u>Single rooms are extremely limited and should not be expected by sophomores.</u> Availability for juniors is also limited, and singles are not guaranteed for any class year. Students who select as individuals or in odd-numbered groups risk being placed in the <u>guaranteed housing list</u>, which will assign them to any available space. <u>Forming even-numbered groups is strongly recommended for all students.</u>
                             </div> 
                         </div>
                     </div>
                 </div>
                 <div class="column_image">
-                    <img src="https://arc-anglerfish-arc2-prod-spectator.s3.amazonaws.com/public/BIFS2E7ESRDOPIKL7P4WZ3RRZQ.png" class="img_style8" alt="No more x Person on Suites? No Problem! Just split your group and choose other options"></img>
+                    <img src="https://arc-anglerfish-arc2-prod-spectator.s3.amazonaws.com/public/BIFS2E7ESRDOPIKL7P4WZ3RRZQ.png" class="img_style8"  alt="Choose an even group! Remember singles are very limited. Have a plan if there are no singles available!"></img>
                 </div>
             </div>
             <div class="line">
@@ -188,7 +188,7 @@ class NewProcess extends React.Component {
                     <div class="row2">
                         <div class="column3">   
                             <div class="textbox3">
-                              For housing groups with more than one individual, one group member will be designated the <span class="bluetxt">group leader</span>. This person is responsible for making the group’s official housing selection during their appointment. Be sure your group leader knows everybody’s preferences and has a list of options ready to go. Do not make the mistake of underestimating the importance of a group leader’s role.
+                              For housing groups with more than one individual, one group member will be designated the <u>group leader</u>. This person is responsible for making the group’s official housing selection during their appointment. Be sure your group leader knows everybody’s preferences and has a list of options ready to go. Do not make the mistake of underestimating the importance of a group leader’s role.
                             </div>
                         </div>
                     </div>
@@ -202,14 +202,14 @@ class NewProcess extends React.Component {
                 <DashedLine />
             </div>
             <div class="item_title">
-             Avoid Chaos: <strong>Communicate!</strong>
+            <strong>Avoid Chaos:</strong> Communicate!
             </div>
             <div class="row_phoneA">
                 <div class="column">
                     <div class="row2">
                         <div class="column3">
                             <div class="textbox3">
-                                For groups that may be split up due to all suites their size being taken, members should <span class="bluetxt">communicate</span> what their living preferences are to each other and their group leader. Members should also settle on <span class="bluetxt">back-up plans</span>, since housing selection can be unpredictable and ideal outcomes are not guaranteed.
+                                For groups that may be split up due to all suites their size being taken, members should <u>communicate</u> what their living preferences are to each other and their group leader. Members should also settle on <u>back-up plans</u>, since housing selection can be unpredictable and ideal outcomes are not guaranteed.
                             </div>
                         </div>
                     </div>
