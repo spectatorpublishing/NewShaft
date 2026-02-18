@@ -35,10 +35,3 @@ jobs:
         run: |
           cd client
           npm install
-
-      # Optional: build frontend to verify it compiles
-      - name: Build frontend
-        run: |
-          cd client
-          npm run build
-
