@@ -2,7 +2,7 @@ import React from "react";
 import arrow from '../assets/Housing101_images/arrow.png';
 import '../css/Housing101.css';
 import { NavLink } from "react-router-dom";
-
+import even from '../assets/even-group.png';
 const DashedLine = () => {
   return (
     <svg xmlns="http://www.w3.org/2000/svg" width="816" height="3" viewBox="0 0 816 3" fill="none">
@@ -71,7 +71,7 @@ class NewProcess extends React.Component {
             </div>
           </div>
           <div class="row_phone">            
-            <img src="https://arc-anglerfish-arc2-prod-spectator.s3.amazonaws.com/public/BIFS2E7ESRDOPIKL7P4WZ3RRZQ.png" class="img_style_phone2" alt="Choose an even group! Remember singles are very limited. Have a plan if there are no singles available!"></img>
+            <img src={even} class="img_style_phone2" alt="Choose an even group! Remember singles are very limited. Have a plan if there are no singles available!"></img>
           </div>
           <div class="row_phone">
             <div class="textbox_phone">
@@ -174,7 +174,7 @@ class NewProcess extends React.Component {
                     </div>
                 </div>
                 <div class="column_image">
-                    <img src="https://arc-anglerfish-arc2-prod-spectator.s3.amazonaws.com/public/BIFS2E7ESRDOPIKL7P4WZ3RRZQ.png" class="img_style8"  alt="Choose an even group! Remember singles are very limited. Have a plan if there are no singles available!"></img>
+                    <img src={even} class="img_style8"  alt="Choose an even group! Remember singles are very limited. Have a plan if there are no singles available!"></img>
                 </div>
             </div>
             <div class="line">
@@ -242,10 +242,13 @@ class NewProcess extends React.Component {
               <img src="https://arc-anglerfish-arc2-prod-spectator.s3.amazonaws.com/public/QMQCH2L25JCEZPWKJCR6UZVO6M.png" class="img_style8" alt="Be informed and minimize regret: Use theShaft's tools and consult friends to set realistic but satisfactory expectations!"></img>
             </div>
           </div>
+
+         
           <div class="line">
             <DashedLine />
           </div>
           <div class="item_title">
+            
             Be Informed: Use the<strong>SHAFT</strong>
           </div>
           <div class="row_phoneA">
