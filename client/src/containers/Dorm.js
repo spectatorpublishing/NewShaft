@@ -19,7 +19,7 @@ const Page = styled.div`
   flex-direction: column;
   color: ${props => props.theme.darkGray};
   padding: 2rem;
-  margin: 3.25rem 2rem 0rem 2rem;
+  margin: 1rem 2rem 0rem 2rem; // changed top to 1rem from 3.25rem
 
   @media only screen and (max-width: 767px) {
     padding: 0rem;
@@ -40,10 +40,10 @@ const Page = styled.div`
 const DormHeader = styled.div`
   display: flex;
   flex-direction: column;
-  padding: 1.5rem 0 1.5rem 0;
+  padding: 1rem 0 1rem 0;
 
   @media only screen and (max-width: 767px) {
-		padding: 1.5rem 0 0 0;
+		padding: 1rem 0 0 0;
     margin: 0;
 	}
 `
@@ -125,7 +125,7 @@ const ColumnLeft = styled.div`
   flex-direction: column;
   background-color: white;
   padding: 2rem;
-  width: 75%;
+  width: 65%;
 
   @media only screen and (max-width: 767px) {
     width: 100%;
@@ -136,7 +136,7 @@ const ColumnRight = styled.div`
   display: flex;
   flex-direction: column;
   padding: 2rem;
-  width: 25%;
+  width: 35%;
 
   @media only screen and (max-width: 767px) {
     display: none;
@@ -161,7 +161,7 @@ const Sticky = styled.div`
 const InfoSection = styled.div`
   display: flex;
   flex-direction: column;
-  margin: 2rem;
+  // margin: 1rem;
   margin-bottom: 0;
   padding-bottom: 2rem;
   border-bottom: 1px solid ${props => props.theme.lightGray};
@@ -217,7 +217,7 @@ const Mobile = styled.div`
 
 const Desktop = styled.div`
   @media only screen and (max-width: 767px) {
-    display: none;
+    display: flex;
   }
 `;
 
@@ -504,11 +504,14 @@ const Dorm = ({ }) => {
             <Underline></Underline>
           </UnderlineWrapper>
         </DormHeader>
-        <Desktop>
+        {/* <Desktop>
           {(dorm_photos.length === 0) ? <div></div> : <PhotoBanner bannerImages={dorm_photos} />}
-        </Desktop>
+        </Desktop> */}
         <Info>
           <ColumnLeft>
+            <Desktop>
+              {(dorm_photos.length === 0) ? <div></div> : <PhotoBanner bannerImages={dorm_photos} />}
+            </Desktop>
             <InfoSection>
               <SectionTitle>{dormInfo.SHORT_DESCRIPTION}</SectionTitle>
               <MarginWrapper>{fullDescription}</MarginWrapper>
@@ -547,7 +550,7 @@ const Dorm = ({ }) => {
                 />
               </MarginWrapper>
             </InfoSection> : null}
-            {(dormInfo.LATITUDE && dormInfo.LONGITUDE) ?
+            {/* {(dormInfo.LATITUDE && dormInfo.LONGITUDE) ?
               <InfoSection>
                 <SectionTitle>Location</SectionTitle>
                 <MarginWrapper>
@@ -562,7 +565,7 @@ const Dorm = ({ }) => {
                     width={"100%"}
                     height={"300px"}
                   /></MarginWrapper>
-              </InfoSection> : null}
+              </InfoSection> : null} */}
 
             {/* <InfoSection>
               <SectionTitle>Photo Gallery</SectionTitle>
@@ -574,10 +577,24 @@ const Dorm = ({ }) => {
                 <SpectrumSidebar spectrumSidebarData={relatedArticles} />
               </InfoSection>
             }
-
           </ColumnLeft>
           <ColumnRight>
             <StickyContainer buffer="5rem">
+              {(dormInfo.LATITUDE && dormInfo.LONGITUDE) ?
+              <InfoSection>
+                <MarginWrapper>
+                  <Maps
+                    latitudes={[dormInfo.LATITUDE]}
+                    longitudes={[dormInfo.LONGITUDE]}
+                    popupInfo={[dormInfo.DORM]}
+                    popupId={[dormInfo.DORM]}
+                    centerLatitude={dormInfo.LATITUDE}
+                    centerLongitude={dormInfo.LONGITUDE}
+                    zoom={16}
+                    width={"100%"}
+                    height={"430px"}
+                  /></MarginWrapper>
+              </InfoSection> : null}
               <Sticky>
                 <AtAGlance address={dormInfo.ADDRESS} classMakeup={classMakeupFormat} roomtype={roomtype} />
               </Sticky>
