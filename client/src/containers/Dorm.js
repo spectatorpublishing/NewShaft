@@ -161,9 +161,9 @@ const Sticky = styled.div`
 const InfoSection = styled.div`
   display: flex;
   flex-direction: column;
-  // margin: 1rem;
+  margin: 1.5rem;
   margin-bottom: 0;
-  padding-bottom: 2rem;
+  padding: 2rem 0;
   border-bottom: 1px solid ${props => props.theme.lightGray};
 
   @media only screen and (max-width: 767px) {
@@ -506,7 +506,7 @@ const Dorm = ({ }) => {
             <Desktop>
               {(dorm_photos.length === 0) ? <div></div> : <PhotoBanner bannerImages={dorm_photos} />}
             </Desktop>
-            <InfoSection>
+            <InfoSection style={{ borderTop: "1px solid #e0e0e0" }}>
               <SectionTitle>{dormInfo.SHORT_DESCRIPTION}</SectionTitle>
               <MarginWrapper>{fullDescription}</MarginWrapper>
             </InfoSection>
@@ -575,7 +575,6 @@ const Dorm = ({ }) => {
           <ColumnRight>
             <StickyContainer buffer="5rem">
               {(dormInfo.LATITUDE && dormInfo.LONGITUDE) ?
-              <InfoSection>
                 <MarginWrapper>
                   <Maps
                     latitudes={[dormInfo.LATITUDE]}
@@ -586,9 +585,8 @@ const Dorm = ({ }) => {
                     centerLongitude={dormInfo.LONGITUDE}
                     zoom={16}
                     width={"100%"}
-                    height={"430px"}
-                  /></MarginWrapper>
-              </InfoSection> : null}
+                    height={"450px"}
+                  /></MarginWrapper>: null}
               <Sticky>
                 <AtAGlance address={dormInfo.ADDRESS} classMakeup={classMakeupFormat} roomtype={roomtype} />
               </Sticky>

@@ -5,7 +5,6 @@ import "react-responsive-carousel/lib/styles/carousel.min.css";
 
 const PhotosContainer = styled.div`
   width: 90%;
-  height: 28rem;
   margin: 0 auto;
   
   @media only screen and (max-width: 767px) {
