@@ -13,8 +13,13 @@ const PhotosContainer = styled.div`
   }
 
   .carousel .slide {
-    max-height: 45rem; 
+    height: 30rem; 
     overflow: hidden; 
+  }
+
+  .carousel .slide > div {
+    height: 100%;
+    background: black;
   }
 
   @media only screen and (max-width: 767px) {
@@ -49,7 +54,7 @@ const PhotosContainer = styled.div`
 const Img = styled.img`
   width: 100%;
   height: 100%;
-  object-fit: cover;
+  object-fit: contain;
   object-position: center;
 `;
 

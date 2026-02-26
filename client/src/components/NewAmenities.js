@@ -21,6 +21,9 @@ const AmenityHeader = styled.h1`
   font-size:1.2rem;
   font-weight:400;
   padding-bottom:0.7rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
   @media only screen and (max-width: 768px){
     font-size:1rem;
   }
@@ -38,11 +41,14 @@ const AmenityIncluded = styled.h2`
 `
 
 const AmenityWrapper = styled.div`
-  display:flex;
-  flex-direction:row;
-  width:100%;
-  flex-wrap:wrap;
-  justify-content:space-between;
+  // display: flex;
+  // flex-direction:row;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 10px;
+  width:90%;
+  // flex-wrap:wrap;
+  // justify-content:space-between;
   @media only screen and (max-width: 768px){
     flex-direction:column;
   }
@@ -68,8 +74,10 @@ const CheckListWrapper = styled.div`
 const Amenity = styled.div`
   display:flex;
   flex-direction:column;
-  width:45%;
-  flex-wrap:wrap;
+  // width:45%;
+  // flex-wrap:wrap;
+  justify-content: start;
+  align-items: start;
   padding:1rem 0rem;
   @media only screen and (max-width: 768px){
     width:100%;
@@ -82,6 +90,7 @@ const Span = styled.span`
 const Icon =styled.img`
   width:1.2rem;
   margin-right:1rem;
+  object-fit: contain;
 `
 
 const ListPoints = styled.text`
