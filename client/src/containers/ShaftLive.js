@@ -684,12 +684,12 @@ const Disclaimer = () => {
         <br />
 
         <ItalicizeText>
-        <u>Please note:</u> Hartley Hall will be closed for renovations so it has been removed 
-        from the lottery predictor. The new dorm at 611 W. 112th St will be available for 
-        selection but will not be included in the lottery predictor due to a lack of prior 
-        data. Similarly, the dorms at 548 W. 113th St and 627 W. 115th St can be selected 
-        but will be excluded from the lottery predictor, as they were not previously in our 
-        database.
+        <u>Please note:</u> Hartley Hall has been closed for renovations, so it has been removed 
+        from the lottery predictor. Similarly, the following dorm buildings will be available for 
+        selection in Room Selection 2026-2027, but will not be included in the lottery predictor 
+        due to a lack of prior data in our database: Wien, 611 W. 112th St, 542 W. 112th St, 
+        548 W. 114th St, five new floors in 600 W 113th St, and the 6th floor of Broadway Hall
+        designated female-only.
         </ItalicizeText>
       </DisclaimerTextBox>
     </DisclaimerWrapper>
