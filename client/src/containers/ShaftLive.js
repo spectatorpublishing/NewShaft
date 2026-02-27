@@ -688,7 +688,7 @@ const Disclaimer = () => {
         from the lottery predictor. Similarly, the following dorm buildings will be available for 
         selection in Room Selection 2026-2027, but will not be included in the lottery predictor 
         due to a lack of prior data in our database: Wien, 611 W. 112th St, 542 W. 112th St, 
-        548 W. 114th St, five new floors in 600 W 113th St, and the 6th floor of Broadway 
+        548 W. 114th St, five new floors in 600 W 113th St, and the 6th floor of Broadway Hall
         designated female-only.
         </ItalicizeText>
       </DisclaimerTextBox>
