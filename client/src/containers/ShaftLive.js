@@ -327,7 +327,7 @@ const defaultDorms = [
   "Broadway Hall",
   "Carlton Arms",
   "East Campus",
-  // "Furnald Hall", comment bc Furnald is Freshmen dorm
+  // "Furnald Hall", comment bc Furnald is Freshman dorm
   "Harmony Hall",
   // "Hartley Hall", comment bc Hartley is under construction (see disclaimer)
   "Hogan Hall",
@@ -337,7 +337,7 @@ const defaultDorms = [
   "Ruggles Hall",
   "Schapiro Hall",
   "Watt Hall",
-  "Wien Hall",
+  // "Wien Hall", comment bc Wien is a Freshman dorm
   "Woodbridge Hall",
 ];
 
@@ -522,6 +522,11 @@ const ShaftLive = (props) => {
         floorNumsArr.push(floor["floor"]);
     })
 
+    // Remove Broadway Hall 6th floor
+    if (dorm === "Broadway Hall") {
+      floorNumsArr = floorNumsArr.filter(f => f !== "6");
+    }
+
     floorNumsArr = floorNumsArr.sort(function(a, b) {
         return a.localeCompare(b, undefined, {
             numeric: true,
@@ -671,7 +676,7 @@ const Disclaimer = () => {
     <DisclaimerWrapper>
       <DisclaimerTextBox className='disclaimer'>Disclaimer:</DisclaimerTextBox>
       <DisclaimerTextBox>
-          Historical Room Selection data (ranging from 2023-2024) is provided by 
+          Historical Room Selection data (ranging from 2023-2025) is provided by 
           Columbia Housing for reference only. The selection process shifts year 
           to year and can change based on a number of variables that will impact 
           how students pick rooms, including changes in building allocation, 
@@ -684,12 +689,13 @@ const Disclaimer = () => {
         <br />
 
         <ItalicizeText>
-        <u>Please note:</u> Hartley Hall will be closed for renovations so it has been removed 
-        from the lottery predictor. The new dorm at 611 W. 112th St will be available for 
-        selection but will not be included in the lottery predictor due to a lack of prior 
-        data. Similarly, the dorms at 548 W. 113th St and 627 W. 115th St can be selected 
-        but will be excluded from the lottery predictor, as they were not previously in our 
-        database.
+        <u>Please note:</u> Hartley Hall will be closed for renovations, so it has been removed 
+        from the lottery predictor. Wien Hall is now a first-year dorm building, so it has also
+        been removed from the lottery predictor. The following dorm buildings will be available 
+        for selection during the Room Selection process, but will not be included in the lottery 
+        predictor due to a lack of prior  data in our database:  611 W. 112th St, 542 W. 112th St, 
+        548 W. 114th St, five new  floors in 600 W. 113th St, and the 6th floor of Broadway Hall 
+        designated female-only.
         </ItalicizeText>
       </DisclaimerTextBox>
     </DisclaimerWrapper>
