@@ -574,22 +574,22 @@ const Dorm = ({ }) => {
               </MarginWrapper>
             </InfoSection> : null}
             <Mobile>
-            {(dormInfo.LATITUDE && dormInfo.LONGITUDE) ?
-              <InfoSection>
-                <SectionTitle>Location</SectionTitle>
-                <MarginWrapper>
-                  <Maps
-                    latitudes={[dormInfo.LATITUDE]}
-                    longitudes={[dormInfo.LONGITUDE]}
-                    popupInfo={[dormInfo.DORM]}
-                    popupId={[dormInfo.DORM]}
-                    centerLatitude={dormInfo.LATITUDE}
-                    centerLongitude={dormInfo.LONGITUDE}
-                    zoom={16}
-                    width={"100%"}
-                    height={"300px"}
-                  /></MarginWrapper>
-              </InfoSection> : null}
+              {(dormInfo.LATITUDE && dormInfo.LONGITUDE) ?
+                <InfoSection>
+                  <SectionTitle>Location</SectionTitle>
+                  <MarginWrapper>
+                    <Maps
+                      latitudes={[dormInfo.LATITUDE]}
+                      longitudes={[dormInfo.LONGITUDE]}
+                      popupInfo={[dormInfo.DORM]}
+                      popupId={[dormInfo.DORM]}
+                      centerLatitude={dormInfo.LATITUDE}
+                      centerLongitude={dormInfo.LONGITUDE}
+                      zoom={16}
+                      width={"100%"}
+                      height={"300px"}
+                    /></MarginWrapper>
+                </InfoSection> : null}
               </Mobile>
 
             {/* <InfoSection>
