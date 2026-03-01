@@ -13,6 +13,7 @@ import ScrollToTop from "../components/ScrollToTop";
 import { theme } from "../util/GlobalStyles";
 import DormQuickReview from "../components/DormQuickReview";
 import AdManager from "../components/AdManager";
+import Modal from "../components/Modal";
 
 const Page = styled.div`
   display: flex;
@@ -221,6 +222,15 @@ const Desktop = styled.div`
   }
 `;
 
+const ModalButton = styled.button`
+  border: none;
+  background: none;
+
+  &:focus {
+    outline: none;
+  }
+`;
+
 let relatedDorms = [
   {
     DORM: "McBain Hall",
@@ -253,7 +263,7 @@ const Dorm = ({ }) => {
   const [height, setHeight] = useState(window.innerHeight);
   const [isMobile, setIsMobile] = useState(false);
 
-  const [carouselOpen, setCarouselOpen] = useState(false);
+  const [modalOpen, setModalOpen] = useState(false);
 
   const updateDimensions = () => {
     setWidth(window.innerWidth);
@@ -503,107 +513,123 @@ const Dorm = ({ }) => {
         {/* <Desktop>
           {(dorm_photos.length === 0) ? <div></div> : <PhotoBanner bannerImages={dorm_photos} />}
         </Desktop> */}
-        {carouselOpen ? <div></div> : (
-          <Info>
-            <ColumnLeft>
-              <Desktop>
-                {(dorm_photos.length === 0) ? <div></div> : <PhotoBanner bannerImages={dorm_photos} />}
-              </Desktop>
-              <InfoSection style={{ borderTop: "1px solid #e0e0e0" }}>
-                <SectionTitle>{dormInfo.SHORT_DESCRIPTION}</SectionTitle>
-                <MarginWrapper>{fullDescription}</MarginWrapper>
-              </InfoSection>
-              <Mobile>
-                <InfoSection>
-                  <AtAGlance address={dormInfo.ADDRESS} classMakeup={classMakeupFormat} roomtype={roomtype} />
-                </InfoSection>
-                <InfoSection>
-                  <SectionTitle>Quick review</SectionTitle>
-                  {quickReview === null ? null :
-                    <DormQuickReview QuickReview={quickReview}></DormQuickReview>}
-                  <a href="https://docs.google.com/forms/d/e/1FAIpQLSfK1EHqqQrmpYCSviUT_W4aTOuyHiriNn_58N-zAnKoquVS0A/viewform?usp=sf_link" style={headerButtons}>Submit your ratings</a>
-                </InfoSection>
-              </Mobile>
-              <InfoSection>
-                <SectionTitle>Amenities</SectionTitle>
-                <MarginWrapper>
-                  <NewAmenities amenities={amenities} />
-                </MarginWrapper>
-              </InfoSection>
-              {dormInfo.DORM === "Carman Hall" ? null :
-                <InfoSection>
-                  <ProCon
-                    pros={dormInfo.PROS}
-                    cons={dormInfo.CONS}
-                  />
-                </InfoSection>}
-              {floorOffset ? <InfoSection>
-                <SectionTitle>Floor Plans</SectionTitle>
-                <MarginWrapper>
-                  <FloorPlan
-                    floorOffset={floorOffset}
-                    planArray={floorPlans}
-                    planNames={floorNames}
-                  />
-                </MarginWrapper>
-              </InfoSection> : null}
-              {/* {(dormInfo.LATITUDE && dormInfo.LONGITUDE) ?
-                <InfoSection>
-                  <SectionTitle>Location</SectionTitle>
-                  <MarginWrapper>
-                    <Maps
-                      latitudes={[dormInfo.LATITUDE]}
-                      longitudes={[dormInfo.LONGITUDE]}
-                      popupInfo={[dormInfo.DORM]}
-                      popupId={[dormInfo.DORM]}
-                      centerLatitude={dormInfo.LATITUDE}
-                      centerLongitude={dormInfo.LONGITUDE}
-                      zoom={16}
-                      width={"100%"}
-                      height={"300px"}
-                    /></MarginWrapper>
-                </InfoSection> : null} */}
-
-              {/* <InfoSection>
-                <SectionTitle>Photo Gallery</SectionTitle>
-              </InfoSection> */}
-
-              {(relatedArticles.length == 0) ? null :
-                <InfoSection>
-                  <SectionTitle>Spectrum on Housing</SectionTitle>
-                  <SpectrumSidebar spectrumSidebarData={relatedArticles} />
-                </InfoSection>
+        <Info>
+          <ColumnLeft>
+            <Desktop>
+              {(dorm_photos.length === 0) ? 
+                <div></div> 
+                  : 
+                <>
+                  <ModalButton onClick={(e) => {
+                    if (!e.target.closest('.control-arrow')) {
+                      setModalOpen(true)
+                    }
+                  }}>
+                    <PhotoBanner bannerImages={dorm_photos} isModal={false} />
+                  </ModalButton>
+                </>
               }
-            </ColumnLeft>
-            <ColumnRight>
-              <StickyContainer buffer="5rem">
-                {(dormInfo.LATITUDE && dormInfo.LONGITUDE) ?
-                  <MarginWrapper>
-                    <Maps
-                      latitudes={[dormInfo.LATITUDE]}
-                      longitudes={[dormInfo.LONGITUDE]}
-                      popupInfo={[dormInfo.DORM]}
-                      popupId={[dormInfo.DORM]}
-                      centerLatitude={dormInfo.LATITUDE}
-                      centerLongitude={dormInfo.LONGITUDE}
-                      zoom={16}
-                      width={"100%"}
-                      height={"480px"}
-                    /></MarginWrapper>: null}
-                <Sticky>
-                  <AtAGlance address={dormInfo.ADDRESS} classMakeup={classMakeupFormat} roomtype={roomtype} />
-                </Sticky>
-                <Sticky>
-                  <StickyTitle>Quick Review</StickyTitle>
-                  {quickReview === null ? null :
-                    <DormQuickReview QuickReview={quickReview}></DormQuickReview>}
-                  <a href="https://docs.google.com/forms/d/e/1FAIpQLSfK1EHqqQrmpYCSviUT_W4aTOuyHiriNn_58N-zAnKoquVS0A/viewform?usp=sf_link" style={headerButtons}>Submit your ratings</a>
-                </Sticky>
-              </StickyContainer>
-            </ColumnRight>
-          </Info>
-          )
-        }
+              <Modal 
+                open={modalOpen}
+                dorm_photos={dorm_photos}
+                onClose={() => setModalOpen(false)}
+              ></Modal>
+            </Desktop>
+            <InfoSection style={{ borderTop: "1px solid #e0e0e0" }}>
+              <SectionTitle>{dormInfo.SHORT_DESCRIPTION}</SectionTitle>
+              <MarginWrapper>{fullDescription}</MarginWrapper>
+            </InfoSection>
+            <Mobile>
+              <InfoSection>
+                <AtAGlance address={dormInfo.ADDRESS} classMakeup={classMakeupFormat} roomtype={roomtype} />
+              </InfoSection>
+              <InfoSection>
+                <SectionTitle>Quick review</SectionTitle>
+                {quickReview === null ? null :
+                  <DormQuickReview QuickReview={quickReview}></DormQuickReview>}
+                <a href="https://docs.google.com/forms/d/e/1FAIpQLSfK1EHqqQrmpYCSviUT_W4aTOuyHiriNn_58N-zAnKoquVS0A/viewform?usp=sf_link" style={headerButtons}>Submit your ratings</a>
+              </InfoSection>
+            </Mobile>
+            <InfoSection>
+              <SectionTitle>Amenities</SectionTitle>
+              <MarginWrapper>
+                <NewAmenities amenities={amenities} />
+              </MarginWrapper>
+            </InfoSection>
+            {dormInfo.DORM === "Carman Hall" ? null :
+              <InfoSection>
+                <ProCon
+                  pros={dormInfo.PROS}
+                  cons={dormInfo.CONS}
+                />
+              </InfoSection>}
+            {floorOffset ? <InfoSection>
+              <SectionTitle>Floor Plans</SectionTitle>
+              <MarginWrapper>
+                <FloorPlan
+                  floorOffset={floorOffset}
+                  planArray={floorPlans}
+                  planNames={floorNames}
+                />
+              </MarginWrapper>
+            </InfoSection> : null}
+            <Mobile>
+            {(dormInfo.LATITUDE && dormInfo.LONGITUDE) ?
+              <InfoSection>
+                <SectionTitle>Location</SectionTitle>
+                <MarginWrapper>
+                  <Maps
+                    latitudes={[dormInfo.LATITUDE]}
+                    longitudes={[dormInfo.LONGITUDE]}
+                    popupInfo={[dormInfo.DORM]}
+                    popupId={[dormInfo.DORM]}
+                    centerLatitude={dormInfo.LATITUDE}
+                    centerLongitude={dormInfo.LONGITUDE}
+                    zoom={16}
+                    width={"100%"}
+                    height={"300px"}
+                  /></MarginWrapper>
+              </InfoSection> : null}
+              </Mobile>
+
+            {/* <InfoSection>
+              <SectionTitle>Photo Gallery</SectionTitle>
+            </InfoSection> */}
+
+            {(relatedArticles.length == 0) ? null :
+              <InfoSection>
+                <SectionTitle>Spectrum on Housing</SectionTitle>
+                <SpectrumSidebar spectrumSidebarData={relatedArticles} />
+              </InfoSection>
+            }
+          </ColumnLeft>
+          <ColumnRight>
+            <StickyContainer buffer="5rem">
+              {(dormInfo.LATITUDE && dormInfo.LONGITUDE) ?
+                <MarginWrapper>
+                  <Maps
+                    latitudes={[dormInfo.LATITUDE]}
+                    longitudes={[dormInfo.LONGITUDE]}
+                    popupInfo={[dormInfo.DORM]}
+                    popupId={[dormInfo.DORM]}
+                    centerLatitude={dormInfo.LATITUDE}
+                    centerLongitude={dormInfo.LONGITUDE}
+                    zoom={16}
+                    width={"100%"}
+                    height={"480px"}
+                  /></MarginWrapper>: null}
+              <Sticky>
+                <AtAGlance address={dormInfo.ADDRESS} classMakeup={classMakeupFormat} roomtype={roomtype} />
+              </Sticky>
+              <Sticky>
+                <StickyTitle>Quick Review</StickyTitle>
+                {quickReview === null ? null :
+                  <DormQuickReview QuickReview={quickReview}></DormQuickReview>}
+                <a href="https://docs.google.com/forms/d/e/1FAIpQLSfK1EHqqQrmpYCSviUT_W4aTOuyHiriNn_58N-zAnKoquVS0A/viewform?usp=sf_link" style={headerButtons}>Submit your ratings</a>
+              </Sticky>
+            </StickyContainer>
+          </ColumnRight>
+        </Info>
       </Page>
     </ScrollToTop>
   );

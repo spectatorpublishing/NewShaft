@@ -6,7 +6,7 @@ import "react-responsive-carousel/lib/styles/carousel.min.css";
 const PhotosContainer = styled.div`
   width: 90%;
   margin: 0 auto;
-  
+
   @media only screen and (max-width: 767px) {
     width: 100%;
     height: auto;
@@ -49,6 +49,14 @@ const PhotosContainer = styled.div`
     font-size: 2rem !important;
     color: white !important;
   }
+
+  ${props => props.isModal && css`
+      width: 100%;
+      .carousel .slide {
+      height: 40rem; 
+      overflow: hidden; 
+    }
+  `}
 `;
 
 const Img = styled.img`
@@ -58,7 +66,7 @@ const Img = styled.img`
   object-position: center;
 `;
 
-const PhotoBanner = ({ bannerImages = [] }) => {
+const PhotoBanner = ({ bannerImages = [], isModal }) => {
   const [images, setImages] = useState([]);
 
   useEffect(() => {
@@ -66,7 +74,7 @@ const PhotoBanner = ({ bannerImages = [] }) => {
   }, [bannerImages]);
 
   return (
-    <PhotosContainer>
+    <PhotosContainer isModal={isModal}>
       <Carousel
         infiniteLoop
         showThumbs={false}
