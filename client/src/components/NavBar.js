@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import speclogo from "../assets/updated-spec-logo.png";
+import speclogo from "../assets/updated_spec_logo.png";
 import shaftlogo from "../assets/updated-shaft-logo.png"
 import { Link, NavLink } from 'react-router-dom';
 import styled from 'styled-components';
