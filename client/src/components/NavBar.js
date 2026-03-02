@@ -1,6 +1,6 @@
 import React, { Component } from "react";
-import speclogo from "../assets/spectator-logo.png";
-import shaftlogo from "../assets/shaft-logo-text.png"
+import speclogo from "../assets/updated_spec_logo.png";
+import shaftlogo from "../assets/updated-shaft-logo.png"
 import { Link, NavLink } from 'react-router-dom';
 import styled from 'styled-components';
 
@@ -9,7 +9,7 @@ let Wrap = styled.div`
 `;
 
 let NavContainer = styled.div `
-  background-color: ${props => props.theme.black};
+  background-color: #F2F2F2;
   display: flex;
   flex-direction: row;
   height: 60px;
@@ -52,7 +52,7 @@ let Banner = styled.div `
 `
 
 let LogoContainer = styled.div`
-  margin: 0 5vw;
+  margin: 0 1vw;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -76,31 +76,32 @@ let MenuContainer = styled.div`
   display: flex;
   justify-content: center;
   margin-right: vw;
-  width: 65%;
+  flex-grow: 1;
 `
 
 let MenuRow = styled.div`
-  border-bottom: solid 1px ${props => props.theme.white};
+  // border-bottom: solid 1px ${props => props.theme.white};
   display: flex;
   flex-direction: row;
   flex-grow: 1;
-  justify-content: space-between;
+  justify-content: flex-start;
+  gap: 20px;
 `
 
 let MenuLink = styled(NavLink)`
   border-bottom: none;
-  color: ${props => props.theme.white};
+  color: ${props => props.theme.black};
   padding-bottom: 0.5rem;
   text-align: center;
   text-decoration: none;
   text-transform: uppercase;
 
     :hover {
-      color: ${props => props.theme.lightGray};
+      color: ${props => props.theme.black};
     }
 
     :focus {
-      color: ${props => props.theme.lightGray};
+      color: ${props => props.theme.black};
     }
 
     &.navLinkActive {
