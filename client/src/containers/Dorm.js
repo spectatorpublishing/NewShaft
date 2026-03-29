@@ -548,7 +548,7 @@ const Dorm = ({ }) => {
                 <SectionTitle>Quick review</SectionTitle>
                 {quickReview === null ? null :
                   <DormQuickReview QuickReview={quickReview}></DormQuickReview>}
-                <a href="https://docs.google.com/forms/d/e/1FAIpQLSfK1EHqqQrmpYCSviUT_W4aTOuyHiriNn_58N-zAnKoquVS0A/viewform?usp=sf_link" style={headerButtons}>Submit your ratings</a>
+                <a href="https://forms.gle/VaYeYx2PQf29MLos6" style={headerButtons}>Submit your ratings</a>
               </InfoSection>
             </Mobile>
             <InfoSection>
@@ -626,7 +626,7 @@ const Dorm = ({ }) => {
                 <StickyTitle>Quick Review</StickyTitle>
                 {quickReview === null ? null :
                   <DormQuickReview QuickReview={quickReview}></DormQuickReview>}
-                <a href="https://docs.google.com/forms/d/e/1FAIpQLSfK1EHqqQrmpYCSviUT_W4aTOuyHiriNn_58N-zAnKoquVS0A/viewform?usp=sf_link" style={headerButtons}>Submit your ratings</a>
+                <a href="https://forms.gle/VaYeYx2PQf29MLos6" style={headerButtons}>Submit your ratings</a>
               </Sticky>
             </StickyContainer>
           </ColumnRight>
