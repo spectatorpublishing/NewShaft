@@ -255,7 +255,7 @@ const Dorm = ({ }) => {
   const [relatedDorms, setRelatedDorms] = useState([]);
   const [fullDescription, setFullDescription] = useState("");
   const [roomtype, setRoomType] = useState("");
-  const [classMakeupFormat, setClassMakeup] = useState("");
+  const [classMakeupDefault, setClassMakeupDefault] = useState("");
   const [dormStyle, setDormStyle] = useState("");
   const [mainImage, setMainImage] = useState("");
   const [quickReview, setQuickReview] = useState({});
@@ -263,6 +263,7 @@ const Dorm = ({ }) => {
   const [height, setHeight] = useState(window.innerHeight);
   const [isMobile, setIsMobile] = useState(false);
 
+  const [classMakeupDetail, setClassMakeupDetail] = useState(null);
   const [modalOpen, setModalOpen] = useState(false);
 
   const updateDimensions = () => {
@@ -299,7 +300,7 @@ const Dorm = ({ }) => {
         setDormInfo(dormInfo);
 
         setFullDescription(dormInfo.DESCRIPTION.substring(0, dormInfo.DESCRIPTION.length - 1));
-        setClassMakeup(dormInfo.CLASS_MAKEUP.split(",").map((el, i) => el.charAt(0).toUpperCase() + el.slice(1)).join(", "));
+        setClassMakeupDefault(dormInfo.CLASS_MAKEUP.split(",").map((el, i) => el.charAt(0).toUpperCase() + el.slice(1)).join(", "));
         setDormStyle((dormInfo.SUITE_ === 1) ? "Suite-Style" : "Corridor-Style");
         setRoomTypeString(dormInfo);
       }).catch(error => {
@@ -348,7 +349,7 @@ const Dorm = ({ }) => {
       fetch(`/api/getFloorPlans/${dormName}`, {
         method: "GET",
         headers: { "Content-Type": "application/json" },
-      })
+      }),
     ]);
 
     const amenities = await amenitiesRes.json();
@@ -541,7 +542,7 @@ const Dorm = ({ }) => {
             </InfoSection>
             <Mobile>
               <InfoSection>
-                <AtAGlance address={dormInfo.ADDRESS} classMakeup={classMakeupFormat} roomtype={roomtype} />
+                <AtAGlance address={dormInfo.ADDRESS} classMakeup={classMakeupDefault} roomtype={roomtype} />
               </InfoSection>
               <InfoSection>
                 <SectionTitle>Quick review</SectionTitle>
@@ -619,7 +620,7 @@ const Dorm = ({ }) => {
                     height={"480px"}
                   /></MarginWrapper>: null}
               <Sticky>
-                <AtAGlance address={dormInfo.ADDRESS} classMakeup={classMakeupFormat} roomtype={roomtype} />
+                <AtAGlance address={dormInfo.ADDRESS} classMakeup={classMakeupDefault} roomtype={roomtype} />
               </Sticky>
               <Sticky>
                 <StickyTitle>Quick Review</StickyTitle>
