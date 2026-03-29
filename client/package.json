@@ -31,6 +31,7 @@
     "react-slick": "^0.29.0",
     "react-svg": "^16.1.4",
     "react-tooltip": "^5.8.3",
+    "recharts": "^3.8.1",
     "styled-components": "^5.3.6",
     "web-vitals": "^2.1.4"
   },

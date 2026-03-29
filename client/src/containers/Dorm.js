@@ -310,11 +310,12 @@ const Dorm = ({ }) => {
 
   const setAllDormInfo = (dormName) => {
     fetchAllDormInfo(dormName)
-      .then(([amenities, photos, relArticles, floorPlans]) => {
+      .then(([amenities, photos, relArticles, floorPlans, classMakeup]) => {
         setAmenities(amenities);
         handlePhotos(photos);
         handleRelArticles(relArticles);
         handleFloorPlans(floorPlans);
+        setClassMakeupDetail(classMakeup);
       }).catch(error => {
         console.log(error);
       });
@@ -333,7 +334,7 @@ const Dorm = ({ }) => {
   }
 
   async function fetchAllDormInfo(dormName) {
-    const [amenitiesRes, photosRes, relArticlesRes, floorPlansRes] = await Promise.all([
+    const [amenitiesRes, photosRes, relArticlesRes, floorPlansRes, classMakeupRes] = await Promise.all([
       fetch(`/api/getAmenities/${dormName}`, {
         method: "GET",
         headers: { "Content-Type": "application/json" },
@@ -350,14 +351,22 @@ const Dorm = ({ }) => {
         method: "GET",
         headers: { "Content-Type": "application/json" },
       }),
+      fetch(`/api/getClassMakeupInfo/${dormName}`, {
+        method: "GET",
+        headers: { "Content-Type": "application/json" },
+      }),
     ]);
 
     const amenities = await amenitiesRes.json();
     const photos = await photosRes.json();
-    console.log(photos);
+
+    //debug image issue
+    console.log("Photos", photos);
+
     const relArticles = await relArticlesRes.json();
     const floorPlans = await floorPlansRes.json();
-    return [amenities, photos, relArticles, floorPlans, quickReview];
+    const classMakeup = await classMakeupRes.json();
+    return [amenities, photos, relArticles, floorPlans, classMakeup];
   }
 
   async function fetchQuickReview(dormName) {
@@ -517,19 +526,13 @@ const Dorm = ({ }) => {
         <Info>
           <ColumnLeft>
             <Desktop>
-              {(dorm_photos.length === 0) ? 
-                <div></div> 
-                  : 
-                <>
-                  <ModalButton onClick={(e) => {
-                    if (!e.target.closest('.control-arrow')) {
-                      setModalOpen(true)
-                    }
-                  }}>
-                    <PhotoBanner bannerImages={dorm_photos} isModal={false} />
-                  </ModalButton>
-                </>
-              }
+              <ModalButton onClick={(e) => {
+                if (!e.target.closest('.control-arrow')) {
+                  setModalOpen(true)
+                }
+              }}>
+                <PhotoBanner bannerImages={dorm_photos} isModal={false} />
+              </ModalButton>
               <Modal 
                 open={modalOpen}
                 dorm_photos={dorm_photos}
@@ -620,7 +623,7 @@ const Dorm = ({ }) => {
                     height={"480px"}
                   /></MarginWrapper>: null}
               <Sticky>
-                <AtAGlance address={dormInfo.ADDRESS} classMakeup={classMakeupDefault} roomtype={roomtype} />
+                <AtAGlance address={dormInfo.ADDRESS} classMakeupDefault={classMakeupDefault} classMakeupDetail={classMakeupDetail} roomtype={roomtype} />
               </Sticky>
               <Sticky>
                 <StickyTitle>Quick Review</StickyTitle>

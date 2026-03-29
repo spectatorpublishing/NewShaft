@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import styled from "styled-components";
+import ClassMakeupPieChart from "./ClassMakeupPieChart";
 
 const Wrapper = styled.div`
   
@@ -54,6 +55,7 @@ const AtAGlanceText = styled.div`
 `
 
 const AtAGlance = (props) => {
+  console.log(props.classMakeupDetail)
   return (
     <Wrapper>
       <SectionTitle>At a Glance</SectionTitle>
@@ -67,7 +69,13 @@ const AtAGlance = (props) => {
       </Detail>
       <Detail>
         <AtAGlanceTitle>Class Makeup</AtAGlanceTitle>
-        <AtAGlanceText>{props.classMakeup}</AtAGlanceText>
+        {props.classMakeupDetail ? 
+          <ClassMakeupPieChart data={props.classMakeupDetail}></ClassMakeupPieChart>
+          :
+          <AtAGlanceText>
+            {props.classMakeupDefault}
+          </AtAGlanceText>
+        }
       </Detail>
     </Wrapper>
   );
