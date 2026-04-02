@@ -66,12 +66,9 @@ const Img = styled.img`
   object-position: center;
 `;
 
-const PhotoBanner = ({ bannerImages = [], isModal }) => {
-  const [images, setImages] = useState([]);
-
-  useEffect(() => {
-    setImages(bannerImages);
-  }, [bannerImages]);
+const PhotoBanner = ({ bannerImages, isModal }) => {
+  // debug
+  console.log("Banner images", bannerImages)
 
   return (
     <PhotosContainer isModal={isModal}>
@@ -80,7 +77,7 @@ const PhotoBanner = ({ bannerImages = [], isModal }) => {
         showThumbs={false}
         showStatus={false}
       >
-        {images.map((image, index) => (
+        {bannerImages.map((image, index) => (
           <div key={index}>
             <Img src={image} alt={`banner-${index}`} />
           </div>

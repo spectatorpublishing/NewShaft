@@ -8,7 +8,8 @@ router.get('/:dorm', async (req, res) => {
     let query = `SELECT * FROM class_makeup_2 WHERE DORM = "${req.params.dorm}";`
     
     const result = await pool.query(query);
-    res.send(result[0])
+    // handle case of dorm not being found in database by sending an empty JSON object 
+    res.send(result[0] || {})
 })
 
 module.exports = router;

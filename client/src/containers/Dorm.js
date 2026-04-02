@@ -271,6 +271,7 @@ const Dorm = ({ }) => {
     setHeight(window.innerHeight);
     setIsMobile(window.innerWidth <= 768);
   }
+
   useEffect(() => {
     window.scrollTo(0, 0)
     const dormName = dorm.replaceAll("-", " ");
@@ -360,11 +361,12 @@ const Dorm = ({ }) => {
     const amenities = await amenitiesRes.json();
     const photos = await photosRes.json();
 
-    //debug image issue
-    console.log("Photos", photos);
+    // debug image issue
+    // console.log("Photos right after API call", photos);
 
     const relArticles = await relArticlesRes.json();
     const floorPlans = await floorPlansRes.json();
+    console.log("classMakeupRes ok", classMakeupRes.ok)
     const classMakeup = await classMakeupRes.json();
     return [amenities, photos, relArticles, floorPlans, classMakeup];
   }
@@ -386,14 +388,17 @@ const Dorm = ({ }) => {
   }
 
   const handlePhotos = (dormPhotos) => {
-    console.log(dormPhotos);
+    // console.log("dormPhotos", dormPhotos);
     setMainImage(dormPhotos[0]["IMAGE_LINK"]);
 
-    var photoarr = [];
-    for (var i = 0; i < dormPhotos.length; i++) {
-      photoarr.push(dormPhotos[i]["IMAGE_LINK"]);
-    }
+    // var photoarr = [];
+    // for (var i = 0; i < dormPhotos.length; i++) {
+    //   photoarr.push(dormPhotos[i]["IMAGE_LINK"]);
+    // }
 
+    const photoarr = dormPhotos.map(photo => photo["IMAGE_LINK"]);
+
+    // console.log("photoarr", photoarr)
     setDormPhotos(photoarr);
   }
 
