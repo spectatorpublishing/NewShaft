@@ -20,12 +20,13 @@ const ExploreContainer = styled.div`
 `
 
 const SideBar = styled.div`
-  width: 100%;
+  width: 60%;
   padding: 0% 0% 0% 0%;
   overflow-y: scroll; 
   min-height: 200px;
+  background-color: #F2F2F2;
   @media only screen and (min-width: 768px) {
-    width: 60%;
+    width: ${props => props.mapOpen ? '60%': '100%'};
     padding: 0 0% 0% 0%;
     z-index: 1;
   }
@@ -33,6 +34,7 @@ const SideBar = styled.div`
 
 const MapView = styled.div`
 display: none;
+position: relative;
 width: 0%;
 @media only screen and (min-width: 768px) {
   display: inline;
@@ -48,6 +50,7 @@ width: 0%;
 
 const FilterSearchBG = styled.div`
   //background-color: ${props => props.theme.columbiaBlue};
+  background-color: #F2F2F2;
   margin: 2rem;
   border-bottom: 1px solid #C4C4C4;
   @media only screen and (max-width: 768px) {
@@ -70,7 +73,24 @@ const ColTwo = styled.div`
   right: 0;
   top: 0;
   flex-direction: column;
-  `
+`;
+
+const MapCloseButton = styled.div`
+  position: absolute;
+  z-index: 99;
+  top: 10px;
+  right: 10px;
+  cursor: pointer;
+  padding: 0.5rem;
+  color: black;
+  background-color: lightgray;
+  border-radius: 20px;
+  height: 30px;
+  width: 30px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+`;
 
 const initialPayload = {
   COLUMBIA: 0,
@@ -138,7 +158,8 @@ export default class Explore extends Component {
     super(props);
     this.state = {
       payload: _.clone(initialPayload),
-      dorms: []
+      dorms: [],
+      mapOpen: false,
     };
     this.updatePayload = this.updatePayload.bind(this)
     this.resetPayload = this.resetPayload.bind(this)
@@ -206,29 +227,43 @@ export default class Explore extends Component {
       <ExploreContainer>
         <ScrollToTop>
         <ColOne>
-          <SideBar>
+          <SideBar mapOpen={this.state.mapOpen}>
             <AdManager width={728} height={90} path="shaftleader"/>
             <FilterSearchBG>
               <SearchBar handleChange={this.updatePayload}/>
-              <Filters handleChange={this.updatePayload} payload={this.state.payload} reset={this.resetPayload} filterElements={filterElements}></Filters>
+              <Filters 
+                handleChange={this.updatePayload} 
+                payload={this.state.payload} 
+                reset={this.resetPayload} 
+                filterElements={filterElements}
+                toggleMap={() => this.setState(prev => ({ mapOpen: !prev.mapOpen }))}
+                mapOpen={this.state.mapOpen}
+              ></Filters>
             </FilterSearchBG>
-            <ExploreSidebar dorms={this.state.dorms}/>
+            <ExploreSidebar dorms={this.state.dorms} mapOpen={this.state.mapOpen}/>
           </SideBar>
         </ColOne>
-        <ColTwo>
-          <MapView>
-            <Maps
-              latitudes={this.state.dorms.map((dorm) => dorm.LATITUDE)} 
-              longitudes={this.state.dorms.map((dorm) => dorm.LONGITUDE)} 
-              popupInfo={this.state.dorms.map((dorm) => dorm.DORM)} 
-              centerLatitude={40.807384}
-              centerLongitude={-73.963036}
-              zoom={15}
-              width={"100%"}
-              height={"900px"}
-              />
-          </MapView>
-        </ColTwo>
+        {this.state.mapOpen && 
+          <ColTwo>
+            <MapView>
+              {this.state.mapOpen && 
+                <MapCloseButton 
+                  onClick={() => this.setState(prev => ({ mapOpen: !prev.mapOpen }))}
+                >X</MapCloseButton>
+              }
+              <Maps
+                latitudes={this.state.dorms.map((dorm) => dorm.LATITUDE)} 
+                longitudes={this.state.dorms.map((dorm) => dorm.LONGITUDE)} 
+                popupInfo={this.state.dorms.map((dorm) => dorm.DORM)} 
+                centerLatitude={40.807384}
+                centerLongitude={-73.963036}
+                zoom={15}
+                width={"100%"}
+                height={"900px"}
+                />
+            </MapView>
+          </ColTwo>
+        }
         </ScrollToTop>
       </ExploreContainer>
     );

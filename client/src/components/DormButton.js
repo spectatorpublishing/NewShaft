@@ -5,19 +5,20 @@ import styled from 'styled-components';
 const DormButtonWrapper = styled.div`
 	display: flex;
 	flex-direction: column;
+  gap: 5px;
 	cursor: pointer;
   margin-bottom: 1rem;
   width: 100%;
+  padding: 1rem;
+  background-color: white;
+  border-radius: 10px;
   
   img{
     padding: 0px;
     border: 1px solid ${props => props.theme.lightGray};
-    max-height: 9vw;
-    min-height: 9vw;
-    max-width: 50%;
-    min-width: 50%;
-    margin-right: 10px;
-    margin-bottom: 10px;
+    height: 14vw;
+    width: 100%;
+    border-radius: 10px;
     object-fit: cover;
 
     @media only screen and (max-width: 768px) {
@@ -32,15 +33,13 @@ const DormButtonWrapper = styled.div`
 	  flex-direction: column;
   }
   @media only screen and (min-width: 768px) {
-		flex-direction: row;
-    margin-bottom: 0.5rem;
+		// flex-direction: row;
+    // margin-bottom: 0.5rem;
   }
 `
 
 const SchoolName = styled.div`
   display: flex;
-  margin-top: 0.2rem;
-  margin-bottom: 0.5rem;
   font-size: 1rem;
   line-height: 1rem;
   text-transform: capitalize;
@@ -55,8 +54,6 @@ const BarnardName = styled(SchoolName)`
 `
 
 const DormName = styled.div`
-  margin-top: .1rem;
-  margin-bottom: .25rem;
   font-family: Georgia;
   font-weight: 700;
   font-size: 1.2rem;
@@ -135,28 +132,27 @@ const DormButton = props => {
 
     setRoomType(roomtype);
   }
-    return (
-      <DormButtonWrapper>
-        <img className="dormimage" src={props.image} />
-        <div className="details">
-            <DormName> {dormName} </DormName>
-            {schoolName == "columbia" ? 
-              <ColumbiaName> { schoolName } </ColumbiaName>
-            : (schoolName == "barnard" ?
-              <BarnardName> { schoolName } </BarnardName>
-            :
-              <SchoolName> { schoolName } </SchoolName>
-              )
-            }
-            <Amenities> 
-              <Amenity>- {dormStyle}</Amenity>
-              <Amenity>- {roomtype}</Amenity>
-              <Amenity>- {classMakeupFormat}</Amenity>
-            </Amenities>
-        </div>
-        <br />
-      </DormButtonWrapper>
-    );
+    
+  return (
+    <DormButtonWrapper>
+      {schoolName == "columbia" ? 
+        <ColumbiaName> { schoolName } </ColumbiaName>
+      : (schoolName == "barnard" ?
+        <BarnardName> { schoolName } </BarnardName>
+      :
+        <SchoolName> { schoolName } </SchoolName>
+        )
+      }
+      <DormName> {dormName} </DormName>
+      <div className="details">
+        <Amenities> 
+          <Amenity>- {dormStyle} | {roomtype}</Amenity>
+          <Amenity>- {classMakeupFormat}</Amenity>
+        </Amenities>
+      </div>
+      <img className="dormimage" src={props.image} />
+    </DormButtonWrapper>
+  );
 
 }
 

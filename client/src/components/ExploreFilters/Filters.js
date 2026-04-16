@@ -6,9 +6,7 @@ import { FILTER_NAME_TO_KEY } from "../../util/DormFilter.js";
 let FilterRow = styled.div`
   display: flex;
   flex-direction: row;
-  align-items: center;
-  display: flex;
-  flex-direction: row;
+  justify-content: space-between;
   align-items: center;
   margin-top: 0.5rem;
   padding: 0rem 1.2rem 0.6rem 0rem;
@@ -28,13 +26,34 @@ let FilterRow = styled.div`
 const Filters = styled.div`
   display: flex;
   flex-direction: row;
-  justify-content: flex-start;
   flex-wrap: wrap;
   @media only screen and (max-width: 769px) {
     display: flex;
     flex-wrap: wrap;
     justify-content: center;
   }
+`;
+
+const FiltersWrapper = styled.div`
+  display: flex;
+  color: #73a6e0;
+`;
+
+const MapButtonsWrapper = styled.div`
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  padding: 0.5rem;
+`;
+
+const MapButton = styled.a`
+  cursor: pointer;
+  text-decoration: underline;
+  padding: 0.5rem;
+  color: #73a6e0 !important;
+  background-color: white;
+  border-radius: 10px;
+  border: 1px solid #73a6e0;
 `;
 
 let Textbox = styled.div`
@@ -89,14 +108,23 @@ const FilterBar = (props) => {
 
   return (
     <FilterRow>
-      <Textbox>Filters:</Textbox>
-
       <Filters>
-        {getFilters()}
-        <Textbox>
-          <ClearButton onClick={() => clear()}>Clear</ClearButton>
-        </Textbox>
+        <Textbox>Filters:</Textbox>
+
+        <FiltersWrapper>
+          {getFilters()}
+          <Textbox>
+            <ClearButton onClick={() => clear()}>Clear</ClearButton>
+          </Textbox>
+        </FiltersWrapper>
       </Filters>
+      <MapButtonsWrapper>
+        {!props.mapOpen && 
+          <MapButton
+            onClick={props.toggleMap}
+          >See Map</MapButton>}
+        <MapButton>Sort</MapButton>
+      </MapButtonsWrapper>
     </FilterRow>
   );
 };
