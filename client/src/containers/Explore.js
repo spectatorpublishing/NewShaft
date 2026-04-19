@@ -17,10 +17,10 @@ const ExploreContainer = styled.div`
   margin-top: 60px;
   overflow: hidden;
   flex-direction: row;
-`
+`;
 
 const SideBar = styled.div`
-  width: 60%;
+  width: 100%;
   padding: 0% 0% 0% 0%;
   overflow-y: scroll; 
   min-height: 200px;
@@ -30,7 +30,7 @@ const SideBar = styled.div`
     padding: 0 0% 0% 0%;
     z-index: 1;
   }
-`
+`;
 
 const MapView = styled.div`
 display: none;
@@ -46,7 +46,7 @@ width: 0%;
   top: 60px;
   z-index:1;
 }
-`
+`;
 
 const FilterSearchBG = styled.div`
   //background-color: ${props => props.theme.columbiaBlue};
@@ -56,13 +56,13 @@ const FilterSearchBG = styled.div`
   @media only screen and (max-width: 768px) {
     margin: 1rem;
   }
-`
+`;
 
 const ColOne = styled.div`
   display: flex;
   flex-direction: column;
   width: 100%;
-`
+`;
 
 const ColTwo = styled.div`
   display: inline;
@@ -230,7 +230,10 @@ export default class Explore extends Component {
           <SideBar mapOpen={this.state.mapOpen}>
             <AdManager width={728} height={90} path="shaftleader"/>
             <FilterSearchBG>
-              <SearchBar handleChange={this.updatePayload}/>
+              <div>
+                <SearchBar handleChange={this.updatePayload}/>
+
+              </div>
               <Filters 
                 handleChange={this.updatePayload} 
                 payload={this.state.payload} 
@@ -240,7 +243,11 @@ export default class Explore extends Component {
                 mapOpen={this.state.mapOpen}
               ></Filters>
             </FilterSearchBG>
-            <ExploreSidebar dorms={this.state.dorms} mapOpen={this.state.mapOpen}/>
+            <ExploreSidebar 
+              dorms={this.state.dorms} 
+              mapOpen={this.state.mapOpen} 
+              toggleMap={() => this.setState(prev => ({ mapOpen: !prev.mapOpen }))}
+            />
           </SideBar>
         </ColOne>
         {this.state.mapOpen && 
@@ -258,8 +265,8 @@ export default class Explore extends Component {
                 centerLatitude={40.807384}
                 centerLongitude={-73.963036}
                 zoom={15}
-                width={"100%"}
-                height={"900px"}
+                width={"900px"}
+                height={"880px"}
                 />
             </MapView>
           </ColTwo>

@@ -25,8 +25,14 @@ let FilterRow = styled.div`
 
 const Filters = styled.div`
   display: flex;
+  gap: 10px;
   flex-direction: row;
   flex-wrap: wrap;
+`;
+
+const FiltersWrapper = styled.div`
+  display: flex;
+  color: #3B81B4;
   @media only screen and (max-width: 769px) {
     display: flex;
     flex-wrap: wrap;
@@ -34,32 +40,30 @@ const Filters = styled.div`
   }
 `;
 
-const FiltersWrapper = styled.div`
-  display: flex;
-  color: #73a6e0;
-`;
-
 const MapButtonsWrapper = styled.div`
-  display: flex;
-  align-items: center;
-  gap: 1rem;
-  padding: 0.5rem;
+  display: none;
+  @media only screen and (min-width: 768px) {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    padding: 0.5rem;
+}
 `;
 
 const MapButton = styled.a`
   cursor: pointer;
   text-decoration: underline;
   padding: 0.5rem;
-  color: #73a6e0 !important;
+  color: #3B81B4 !important;
   background-color: white;
   border-radius: 10px;
-  border: 1px solid #73a6e0;
+  border: 1px solid #3B81B4;
 `;
 
 let Textbox = styled.div`
   font-family: "Raleway";
   font-size: 1rem;
-  color: #73a6e0;
+  color: #3B81B4;
   padding-right: 1rem;
   height: fit-content;
   margin: auto 0rem;
@@ -109,7 +113,7 @@ const FilterBar = (props) => {
   return (
     <FilterRow>
       <Filters>
-        <Textbox>Filters:</Textbox>
+        <Textbox>Filters</Textbox>
 
         <FiltersWrapper>
           {getFilters()}

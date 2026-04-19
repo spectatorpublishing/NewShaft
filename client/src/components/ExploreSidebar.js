@@ -14,7 +14,10 @@ const Dorms = styled.div`
   background-color: #F2F2F2;
   display: grid;
   grid-column-gap: 5px;
-  grid-template-columns: ${props => props.mapOpen ? '1fr 1fr' : '1fr 1fr 1fr 1fr'};
+  grid-template-columns: 1fr 1fr;
+  @media only screen and (min-width: 768px) {
+    grid-template-columns: ${props => props.mapOpen ? '1fr 1fr' : '1fr 1fr 1fr 1fr'};
+  }
 `;
 
 const DormLink = styled(Link)`
@@ -47,6 +50,7 @@ export default class ExploreSidebar extends Component {
             >
               <DormButton
                 key={index}
+                toggleMap={this.props.toggleMap}
                 school={dorm.COLLEGE}
                 name={dorm.DORM}
                 image={dorm.IMAGE_LINK}

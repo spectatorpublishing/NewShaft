@@ -1,14 +1,18 @@
 import React, { Component } from "react";
 import { useEffect, useState } from "react";
 import styled from 'styled-components';
+import mapIcon from "../assets/Icons/mapIcon.png";
 
 const DormButtonWrapper = styled.div`
 	display: flex;
+  position: relative;
 	flex-direction: column;
+  justify-content: space-between;
   gap: 5px;
 	cursor: pointer;
   margin-bottom: 1rem;
   width: 100%;
+  height: 100%;
   padding: 1rem;
   background-color: white;
   border-radius: 10px;
@@ -37,6 +41,12 @@ const DormButtonWrapper = styled.div`
     // margin-bottom: 0.5rem;
   }
 `
+
+const DormInfoWrapper = styled.div`
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+`;
 
 const SchoolName = styled.div`
   display: flex;
@@ -71,6 +81,29 @@ const Amenities = styled.div`
   
 `
 
+const MapButton = styled.button`
+  padding: 0.5rem;
+  position: absolute;
+  bottom: 20px;
+  right: 20px;
+  border-radius: 50%;
+  z-index: 99;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: white;
+  border: none;
+  cursor: pointer;
+`;
+
+const MapImg = styled.img`
+  height: 30px !important;
+  width: 30px !important;
+  display: block;
+  object-fit: contain;
+  border: none;
+`;
+
 const Description = styled.div`
   display: none;
   @media only screen and (min-width: 768px){
@@ -79,14 +112,14 @@ const Description = styled.div`
   &>p {
     font-size: 0.8rem;
   }
-`
+`;
 
 const SeeMore = styled.h6`
   display: inline;
 	cursor: pointer;
 	color: ${props => props.theme.columbiaBlue};
 	text-align: right;  
-`
+`;
 
 const DormButton = props => {
   const [roomtype, setRoomType] = useState("");
@@ -135,22 +168,31 @@ const DormButton = props => {
     
   return (
     <DormButtonWrapper>
-      {schoolName == "columbia" ? 
-        <ColumbiaName> { schoolName } </ColumbiaName>
-      : (schoolName == "barnard" ?
-        <BarnardName> { schoolName } </BarnardName>
-      :
-        <SchoolName> { schoolName } </SchoolName>
-        )
-      }
-      <DormName> {dormName} </DormName>
-      <div className="details">
-        <Amenities> 
-          <Amenity>- {dormStyle} | {roomtype}</Amenity>
-          <Amenity>- {classMakeupFormat}</Amenity>
-        </Amenities>
-      </div>
+      <DormInfoWrapper>
+        {schoolName == "columbia" ? 
+          <ColumbiaName> { schoolName } </ColumbiaName>
+        : (schoolName == "barnard" ?
+          <BarnardName> { schoolName } </BarnardName>
+        :
+          <SchoolName> { schoolName } </SchoolName>
+          )
+        }
+        <DormName> {dormName} </DormName>
+        <div className="details">
+          <Amenities> 
+            <Amenity>- {dormStyle} | {roomtype}</Amenity>
+            <Amenity>- {classMakeupFormat}</Amenity>
+          </Amenities>
+        </div>
+      </DormInfoWrapper>
       <img className="dormimage" src={props.image} />
+      <MapButton onClick={(e) => {
+          e.preventDefault();
+          props.toggleMap();
+        }
+      }>
+        <MapImg src={mapIcon} />
+      </MapButton>
     </DormButtonWrapper>
   );
 
