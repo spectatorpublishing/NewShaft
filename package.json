@@ -11,10 +11,12 @@
   "license": "ISC",
   "dependencies": {
     "cors": "^2.8.5",
+    "csv-parse": "^6.1.0",
     "dotenv": "^8.2.0",
     "express": "^4.16.3",
     "framer-motion": "4.1.17",
-    "mysql2": "^3.1.2"
+    "mysql2": "^3.1.2",
+    "react-minimal-pie-chart": "^9.1.2"
   },
   "devDependencies": {
     "babel-plugin-styled-components": "^2.0.6",

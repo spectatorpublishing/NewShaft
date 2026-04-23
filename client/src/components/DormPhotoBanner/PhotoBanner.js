@@ -13,8 +13,13 @@ const PhotosContainer = styled.div`
   }
 
   .carousel .slide {
-    max-height: 45rem; 
+    height: 30rem; 
     overflow: hidden; 
+  }
+
+  .carousel .slide > div {
+    height: 100%;
+    background: black;
   }
 
   @media only screen and (max-width: 767px) {
@@ -44,30 +49,35 @@ const PhotosContainer = styled.div`
     font-size: 2rem !important;
     color: white !important;
   }
+
+  ${props => props.isModal && css`
+      width: 100%;
+      .carousel .slide {
+      height: 40rem; 
+      overflow: hidden; 
+    }
+  `}
 `;
 
 const Img = styled.img`
   width: 100%;
   height: 100%;
-  object-fit: cover;
+  object-fit: contain;
   object-position: center;
 `;
 
-const PhotoBanner = ({ bannerImages = [] }) => {
-  const [images, setImages] = useState([]);
-
-  useEffect(() => {
-    setImages(bannerImages);
-  }, [bannerImages]);
+const PhotoBanner = ({ bannerImages, isModal }) => {
+  // debug
+  console.log("Banner images", bannerImages)
 
   return (
-    <PhotosContainer>
+    <PhotosContainer isModal={isModal}>
       <Carousel
         infiniteLoop
         showThumbs={false}
         showStatus={false}
       >
-        {images.map((image, index) => (
+        {bannerImages.map((image, index) => (
           <div key={index}>
             <Img src={image} alt={`banner-${index}`} />
           </div>

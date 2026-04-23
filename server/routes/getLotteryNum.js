@@ -4,7 +4,7 @@ var router = express.Router();
 var pool = require('../database');
 
 router.get('/:dorm/:floor', async (req, res) => {
-  let table = "housing_data_2024"
+  let table = "housing_data_2025"
 	let query = `SELECT * FROM ${table} WHERE dorm="${req.params.dorm}" AND floor="${req.params.floor}";`
 	const result = await pool.query(query);
 	// console.log(query);

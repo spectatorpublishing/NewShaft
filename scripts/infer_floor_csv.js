@@ -5,8 +5,8 @@ const { Console } = require('console');
 // infer floor from housing data (2022) in csv form
 
 /* replace with the absolute path to the csv files on your machine */
-const NLotteryPredicter2022 = "/Users/violetlaing/Desktop/Spectator/housing_data_2024.csv"
-const out = "/Users/violetlaing/Desktop/Spectator/housing_data_2024_inferred_new.csv"
+const NLotteryPredicter2022 = "/Users/mishagupta/codingprojects/spec/housing_data_2025.csv"
+const out = "/Users/mishagupta/codingprojects/spec/housing_data_2025_inferred_new.csv"
 const debug = 0
 
 const DLog = (msg) => {
@@ -367,6 +367,17 @@ const woodbridge = (room) => {
   return floor
 }
 
+/*
+ * SIC 619 W. 113th Street has only 5 floors.
+ * The first digit of the room number is the floor number.
+ */
+const sic619w113 = (room) => {
+  let floor = room.slice(0, 1)
+  DLog(`[SIC - 619 W. 113th ] ${room} -> ${floor}`)
+
+  return floor
+}
+
 const residenceHalls = {
   "47C": claremont,
   "BR548": W548,
@@ -387,7 +398,8 @@ const residenceHalls = {
   "WAL": wallach,
   "WTT": watt,
   "WIN": wien,
-  "WBH": woodbridge
+  "WBH": woodbridge,
+  "BRSIC": sic619w113
 }
 
 // converts @param{data} in json format into csv
@@ -438,22 +450,51 @@ fs.createReadStream(NLotteryPredicter2022)
     // Here log the result array
     console.log("parsed csv data:", data);
     let inferred = data.map(record => {
-      console.log("record:", record);
-        //if(record['Room Selection 2024 Data'] == 'Room Location Description') {
-        //  return;
-        //}
-        let {'raw_room_description': room} = record;
-        let dorm = room?.split(' ')[0];
-        let room_number = room?.split(' ')[1]?.split('-')[0];
-        record["room"] = room_number;
-        record["room_suffix"] = room?.split(' ')[1]?.split('-')[1];
-        console.log("record:", record);
-        console.log("reshalls:", residenceHalls);
-        record["floor"] = residenceHalls[dorm](room_number);
-        // fields = Object.keys(record)
-        // console.log(record['dorm']) 
-        return record;
-    });
+      const space = (record["Room Space"] || "").trim(); // e.g. "47C 1A-1"
+      const parts = space.split(/\s+/);
+
+      // debug
+      console.log("Parts: ", parts)
+
+      const dorm = parts[0] || "";          // "47C"
+      const roomPart = parts[1] || "";      // "1A-1"
+
+      // debug
+      console.log("Parsed dorm: ", dorm)
+
+      const [room_number, room_suffix] = roomPart.split("-");
+
+      // record["dorm_code"] = dorm;
+      record["room"] = room_number || "";
+      record["room_suffix"] = room_suffix || "";
+
+      const fn = residenceHalls[dorm];
+      if (typeof fn !== "function") {
+        console.error(`[Unknown dorm code] dorm="${dorm}" space="${space}"`);
+        record["floor"] = "";
+      } else {
+        record["floor"] = fn(record["room"]);
+      }
+
+      return record;
+    });
+    // let inferred = data.map(record => {
+    //   console.log("record:", record);
+    //     //if(record['Room Selection 2024 Data'] == 'Room Location Description') {
+    //     //  return;
+    //     //}
+    //     let {'raw_room_description': room} = record;
+    //     let dorm = room?.split(' ')[0];
+    //     let room_number = room?.split(' ')[1]?.split('-')[0];
+    //     record["room"] = room_number;
+    //     record["room_suffix"] = room?.split(' ')[1]?.split('-')[1];
+    //     console.log("record:", record);
+    //     console.log("reshalls:", residenceHalls);
+    //     record["floor"] = residenceHalls[dorm](room_number);
+    //     // fields = Object.keys(record)
+    //     // console.log(record['dorm']) 
+    //     return record;
+    // });
     let fields = Object.keys(inferred[0])
     // console.log(fields)
     json2csv(inferred, fields, out)

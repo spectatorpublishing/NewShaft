@@ -1,0 +1,15 @@
+/** Route that gets class makeup info for a specific dorm */
+var express = require('express');
+var router = express.Router();
+var pool = require('../database');
+
+router.get('/:dorm', async (req, res) => {
+
+    let query = `SELECT * FROM class_makeup_2 WHERE DORM = "${req.params.dorm}";`
+    
+    const result = await pool.query(query);
+    // handle case of dorm not being found in database by sending an empty JSON object 
+    res.send(result[0] || {})
+})
+
+module.exports = router;

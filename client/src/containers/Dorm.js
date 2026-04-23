@@ -13,13 +13,14 @@ import ScrollToTop from "../components/ScrollToTop";
 import { theme } from "../util/GlobalStyles";
 import DormQuickReview from "../components/DormQuickReview";
 import AdManager from "../components/AdManager";
+import Modal from "../components/Modal";
 
 const Page = styled.div`
   display: flex;
   flex-direction: column;
   color: ${props => props.theme.darkGray};
   padding: 2rem;
-  margin: 3.25rem 2rem 0rem 2rem;
+  margin: 1rem 2rem 0rem 2rem; // changed top to 1rem from 3.25rem
 
   @media only screen and (max-width: 767px) {
     padding: 0rem;
@@ -40,10 +41,10 @@ const Page = styled.div`
 const DormHeader = styled.div`
   display: flex;
   flex-direction: column;
-  padding: 1.5rem 0 1.5rem 0;
+  padding: 0.5rem 0 0.5rem 0;
 
   @media only screen and (max-width: 767px) {
-		padding: 1.5rem 0 0 0;
+		padding: 1rem 0 0 0;
     margin: 0;
 	}
 `
@@ -124,8 +125,8 @@ const ColumnLeft = styled.div`
   display: flex;
   flex-direction: column;
   background-color: white;
-  padding: 2rem;
-  width: 75%;
+  padding: 1rem;
+  width: 65%;
 
   @media only screen and (max-width: 767px) {
     width: 100%;
@@ -135,8 +136,8 @@ const ColumnLeft = styled.div`
 const ColumnRight = styled.div`
   display: flex;
   flex-direction: column;
-  padding: 2rem;
-  width: 25%;
+  padding: 1rem;
+  width: 35%;
 
   @media only screen and (max-width: 767px) {
     display: none;
@@ -161,9 +162,9 @@ const Sticky = styled.div`
 const InfoSection = styled.div`
   display: flex;
   flex-direction: column;
-  margin: 2rem;
+  margin: 1.5rem;
   margin-bottom: 0;
-  padding-bottom: 2rem;
+  padding: 2rem 0;
   border-bottom: 1px solid ${props => props.theme.lightGray};
 
   @media only screen and (max-width: 767px) {
@@ -217,7 +218,16 @@ const Mobile = styled.div`
 
 const Desktop = styled.div`
   @media only screen and (max-width: 767px) {
-    display: none;
+    display: flex;
+  }
+`;
+
+const ModalButton = styled.button`
+  border: none;
+  background: none;
+
+  &:focus {
+    outline: none;
   }
 `;
 
@@ -245,7 +255,7 @@ const Dorm = ({ }) => {
   const [relatedDorms, setRelatedDorms] = useState([]);
   const [fullDescription, setFullDescription] = useState("");
   const [roomtype, setRoomType] = useState("");
-  const [classMakeupFormat, setClassMakeup] = useState("");
+  const [classMakeupDefault, setClassMakeupDefault] = useState("");
   const [dormStyle, setDormStyle] = useState("");
   const [mainImage, setMainImage] = useState("");
   const [quickReview, setQuickReview] = useState({});
@@ -253,11 +263,15 @@ const Dorm = ({ }) => {
   const [height, setHeight] = useState(window.innerHeight);
   const [isMobile, setIsMobile] = useState(false);
 
+  const [classMakeupDetail, setClassMakeupDetail] = useState(null);
+  const [modalOpen, setModalOpen] = useState(false);
+
   const updateDimensions = () => {
     setWidth(window.innerWidth);
     setHeight(window.innerHeight);
     setIsMobile(window.innerWidth <= 768);
   }
+
   useEffect(() => {
     window.scrollTo(0, 0)
     const dormName = dorm.replaceAll("-", " ");
@@ -287,7 +301,7 @@ const Dorm = ({ }) => {
         setDormInfo(dormInfo);
 
         setFullDescription(dormInfo.DESCRIPTION.substring(0, dormInfo.DESCRIPTION.length - 1));
-        setClassMakeup(dormInfo.CLASS_MAKEUP.split(",").map((el, i) => el.charAt(0).toUpperCase() + el.slice(1)).join(", "));
+        setClassMakeupDefault(dormInfo.CLASS_MAKEUP.split(",").map((el, i) => el.charAt(0).toUpperCase() + el.slice(1)).join(", "));
         setDormStyle((dormInfo.SUITE_ === 1) ? "Suite-Style" : "Corridor-Style");
         setRoomTypeString(dormInfo);
       }).catch(error => {
@@ -297,11 +311,12 @@ const Dorm = ({ }) => {
 
   const setAllDormInfo = (dormName) => {
     fetchAllDormInfo(dormName)
-      .then(([amenities, photos, relArticles, floorPlans]) => {
+      .then(([amenities, photos, relArticles, floorPlans, classMakeup]) => {
         setAmenities(amenities);
         handlePhotos(photos);
         handleRelArticles(relArticles);
         handleFloorPlans(floorPlans);
+        setClassMakeupDetail(classMakeup);
       }).catch(error => {
         console.log(error);
       });
@@ -320,7 +335,7 @@ const Dorm = ({ }) => {
   }
 
   async function fetchAllDormInfo(dormName) {
-    const [amenitiesRes, photosRes, relArticlesRes, floorPlansRes] = await Promise.all([
+    const [amenitiesRes, photosRes, relArticlesRes, floorPlansRes, classMakeupRes] = await Promise.all([
       fetch(`/api/getAmenities/${dormName}`, {
         method: "GET",
         headers: { "Content-Type": "application/json" },
@@ -336,15 +351,24 @@ const Dorm = ({ }) => {
       fetch(`/api/getFloorPlans/${dormName}`, {
         method: "GET",
         headers: { "Content-Type": "application/json" },
-      })
+      }),
+      fetch(`/api/getClassMakeupInfo/${dormName}`, {
+        method: "GET",
+        headers: { "Content-Type": "application/json" },
+      }),
     ]);
 
     const amenities = await amenitiesRes.json();
     const photos = await photosRes.json();
-    console.log(photos);
+
+    // debug image issue
+    // console.log("Photos right after API call", photos);
+
     const relArticles = await relArticlesRes.json();
     const floorPlans = await floorPlansRes.json();
-    return [amenities, photos, relArticles, floorPlans, quickReview];
+    console.log("classMakeupRes ok", classMakeupRes.ok)
+    const classMakeup = await classMakeupRes.json();
+    return [amenities, photos, relArticles, floorPlans, classMakeup];
   }
 
   async function fetchQuickReview(dormName) {
@@ -364,14 +388,17 @@ const Dorm = ({ }) => {
   }
 
   const handlePhotos = (dormPhotos) => {
-    console.log(dormPhotos);
+    // console.log("dormPhotos", dormPhotos);
     setMainImage(dormPhotos[0]["IMAGE_LINK"]);
 
-    var photoarr = [];
-    for (var i = 0; i < dormPhotos.length; i++) {
-      photoarr.push(dormPhotos[i]["IMAGE_LINK"]);
-    }
+    // var photoarr = [];
+    // for (var i = 0; i < dormPhotos.length; i++) {
+    //   photoarr.push(dormPhotos[i]["IMAGE_LINK"]);
+    // }
 
+    const photoarr = dormPhotos.map(photo => photo["IMAGE_LINK"]);
+
+    // console.log("photoarr", photoarr)
     setDormPhotos(photoarr);
   }
 
@@ -498,16 +525,32 @@ const Dorm = ({ }) => {
             <Underline></Underline>
           </UnderlineWrapper>
         </DormHeader>
-        {(dorm_photos.length === 0) ? <div></div> : <PhotoBanner bannerImages={dorm_photos} />}
+        {/* <Desktop>
+          {(dorm_photos.length === 0) ? <div></div> : <PhotoBanner bannerImages={dorm_photos} />}
+        </Desktop> */}
         <Info>
           <ColumnLeft>
-            <InfoSection>
+            <Desktop>
+              <ModalButton onClick={(e) => {
+                if (!e.target.closest('.control-arrow')) {
+                  setModalOpen(true)
+                }
+              }}>
+                <PhotoBanner bannerImages={dorm_photos} isModal={false} />
+              </ModalButton>
+              <Modal 
+                open={modalOpen}
+                dorm_photos={dorm_photos}
+                onClose={() => setModalOpen(false)}
+              ></Modal>
+            </Desktop>
+            <InfoSection style={{ borderTop: "1px solid #e0e0e0" }}>
               <SectionTitle>{dormInfo.SHORT_DESCRIPTION}</SectionTitle>
               <MarginWrapper>{fullDescription}</MarginWrapper>
             </InfoSection>
             <Mobile>
               <InfoSection>
-                <AtAGlance address={dormInfo.ADDRESS} classMakeup={classMakeupFormat} roomtype={roomtype} />
+                <AtAGlance address={dormInfo.ADDRESS} classMakeup={classMakeupDefault} roomtype={roomtype} />
               </InfoSection>
               <InfoSection>
                 <SectionTitle>Quick review</SectionTitle>
@@ -539,22 +582,24 @@ const Dorm = ({ }) => {
                 />
               </MarginWrapper>
             </InfoSection> : null}
-            {(dormInfo.LATITUDE && dormInfo.LONGITUDE) ?
-              <InfoSection>
-                <SectionTitle>Location</SectionTitle>
-                <MarginWrapper>
-                  <Maps
-                    latitudes={[dormInfo.LATITUDE]}
-                    longitudes={[dormInfo.LONGITUDE]}
-                    popupInfo={[dormInfo.DORM]}
-                    popupId={[dormInfo.DORM]}
-                    centerLatitude={dormInfo.LATITUDE}
-                    centerLongitude={dormInfo.LONGITUDE}
-                    zoom={16}
-                    width={"100%"}
-                    height={"300px"}
-                  /></MarginWrapper>
-              </InfoSection> : null}
+            <Mobile>
+              {(dormInfo.LATITUDE && dormInfo.LONGITUDE) ?
+                <InfoSection>
+                  <SectionTitle>Location</SectionTitle>
+                  <MarginWrapper>
+                    <Maps
+                      latitudes={[dormInfo.LATITUDE]}
+                      longitudes={[dormInfo.LONGITUDE]}
+                      popupInfo={[dormInfo.DORM]}
+                      popupId={[dormInfo.DORM]}
+                      centerLatitude={dormInfo.LATITUDE}
+                      centerLongitude={dormInfo.LONGITUDE}
+                      zoom={16}
+                      width={"100%"}
+                      height={"300px"}
+                    /></MarginWrapper>
+                </InfoSection> : null}
+              </Mobile>
 
             {/* <InfoSection>
               <SectionTitle>Photo Gallery</SectionTitle>
@@ -566,12 +611,24 @@ const Dorm = ({ }) => {
                 <SpectrumSidebar spectrumSidebarData={relatedArticles} />
               </InfoSection>
             }
-
           </ColumnLeft>
           <ColumnRight>
             <StickyContainer buffer="5rem">
+              {(dormInfo.LATITUDE && dormInfo.LONGITUDE) ?
+                <MarginWrapper>
+                  <Maps
+                    latitudes={[dormInfo.LATITUDE]}
+                    longitudes={[dormInfo.LONGITUDE]}
+                    popupInfo={[dormInfo.DORM]}
+                    popupId={[dormInfo.DORM]}
+                    centerLatitude={dormInfo.LATITUDE}
+                    centerLongitude={dormInfo.LONGITUDE}
+                    zoom={16}
+                    width={"100%"}
+                    height={"480px"}
+                  /></MarginWrapper>: null}
               <Sticky>
-                <AtAGlance address={dormInfo.ADDRESS} classMakeup={classMakeupFormat} roomtype={roomtype} />
+                <AtAGlance address={dormInfo.ADDRESS} classMakeupDefault={classMakeupDefault} classMakeupDetail={classMakeupDetail} roomtype={roomtype} />
               </Sticky>
               <Sticky>
                 <StickyTitle>Quick Review</StickyTitle>
