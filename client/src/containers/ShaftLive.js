@@ -16,7 +16,7 @@ const ShaftLiveContainer = styled.div`
   width: 100%;
   height: 100%;
   padding: 0 3rem;
-  overflow: hidden;
+  overflow: visible;
   flex-direction: row;
   @media (max-width: 991px) {
     flex-direction: column;
@@ -296,6 +296,7 @@ const AlertCircle = styled.div`
 const initialPayload = {
   COLUMBIA: 0,
   BARNARD: 0,
+  APARTMENT_: 0,
   SINGLE_: 0,
   DOUBLE_: 0,
   TRIPLE_: 0,
@@ -319,7 +320,7 @@ const initialPayload = {
 
 const filterElements = {
   "Typical Residents": ["Sophomore", "Junior", "Senior"],
-  "Room Type": ["Corridor Style", "Suite Style", "Single", "Double"],
+  "Room Type": ["Apartment Style", "Corridor Style", "Suite Style", "Triple", "Double", "Single"],
 };
 
 const defaultDorms = [

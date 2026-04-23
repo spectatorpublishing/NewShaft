@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import { useEffect, useState } from "react";
 import styled from 'styled-components';
+import { getDormStyleByName } from "../util/DormStyles";
 
 const DormButtonWrapper = styled.div`
 	display: flex;
@@ -102,7 +103,7 @@ const DormButton = props => {
     if (props.class_makeup) 
       setClassMakeup(props.class_makeup.split(",").map((el, i) => el.charAt(0).toUpperCase() + el.slice(1)).join(", "));
     
-    setDormStyle((props.SUITE_ === 1) ? "Suite-Style" : "Corridor-Style");
+    setDormStyle(getDormStyleByName(props.name, props.SUITE_));
 
     setRoomTypeString();
 

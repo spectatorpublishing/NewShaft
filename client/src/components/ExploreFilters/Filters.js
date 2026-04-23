@@ -12,6 +12,9 @@ let FilterRow = styled.div`
   align-items: center;
   margin-top: 0.5rem;
   padding: 0rem 1.2rem 0.6rem 0rem;
+  overflow: visible;
+  position: relative;
+  z-index: 10;
   //background-color: ${(props) => props.theme.columbiaBlue};
   //background-color: #999CCC;
   @media only screen and (max-width: 769px) {
@@ -30,6 +33,7 @@ const Filters = styled.div`
   flex-direction: row;
   justify-content: flex-start;
   flex-wrap: wrap;
+  overflow: visible;
   @media only screen and (max-width: 769px) {
     display: flex;
     flex-wrap: wrap;

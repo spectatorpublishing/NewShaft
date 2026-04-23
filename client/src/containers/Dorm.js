@@ -11,6 +11,7 @@ import FloorPlan from "../components/FloorPlan";
 import SpectrumSidebar from "../components/SpectrumSidebar";
 import ScrollToTop from "../components/ScrollToTop";
 import { theme } from "../util/GlobalStyles";
+import { getDormStyleByName } from "../util/DormStyles";
 import DormQuickReview from "../components/DormQuickReview";
 import AdManager from "../components/AdManager";
 import Modal from "../components/Modal";
@@ -302,7 +303,7 @@ const Dorm = ({ }) => {
 
         setFullDescription(dormInfo.DESCRIPTION.substring(0, dormInfo.DESCRIPTION.length - 1));
         setClassMakeupDefault(dormInfo.CLASS_MAKEUP.split(",").map((el, i) => el.charAt(0).toUpperCase() + el.slice(1)).join(", "));
-        setDormStyle((dormInfo.SUITE_ === 1) ? "Suite-Style" : "Corridor-Style");
+        setDormStyle(getDormStyleByName(dormInfo.DORM, dormInfo.SUITE_));
         setRoomTypeString(dormInfo);
       }).catch(error => {
         console.log(error);

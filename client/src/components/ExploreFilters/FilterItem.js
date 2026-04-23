@@ -40,10 +40,17 @@ const FilterItem = (props) => {
     const isCircularFilter =
         props.filterCategory === "School" ||
         props.filterCategory === "Group Size" ||
-        props.filterCategory === "Typical Residents";
-    const displayLabel = props.filterCategory === "Group Size"
-        ? props.option.replace(/\s*Person$/, "").trim()
-        : props.option;
+        props.filterCategory === "Typical Residents" ||
+        props.filterCategory === "Room Type";
+    const displayLabel = (() => {
+        if (props.filterCategory === "Group Size") {
+            return props.option.replace(/\s*Person$/, "").trim();
+        }
+        if (props.filterCategory === "Room Type") {
+            return props.option.replace(/\s*Style$/, "").trim();
+        }
+        return props.option;
+    })();
 
     useEffect(() => {
         setOptionActive(props.isActive)

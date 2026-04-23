@@ -7,6 +7,7 @@ export const FILTER_NAME_TO_KEY = {
     "Single":"SINGLE_",
     "Double":"DOUBLE_",
     "Triple":"TRIPLE_",
+    "Apartment Style":"APARTMENT_",
     "Suite Style":"SUITE_",
     "Corridor Style": "NOTSUITE_",
     "2 Person":"TWO_SUITE",

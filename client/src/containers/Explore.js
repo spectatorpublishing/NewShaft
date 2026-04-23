@@ -15,14 +15,14 @@ const ExploreContainer = styled.div`
   height: 100%;
   padding: 0 auto;
   margin-top: 60px;
-  overflow: hidden;
+  overflow: visible;
   flex-direction: row;
 `
 
 const SideBar = styled.div`
   width: 100%;
   padding: 0% 0% 0% 0%;
-  overflow-y: scroll; 
+  overflow: visible;
   min-height: 200px;
   @media only screen and (min-width: 768px) {
     width: 60%;
@@ -50,6 +50,9 @@ const FilterSearchBG = styled.div`
   //background-color: ${props => props.theme.columbiaBlue};
   margin: 2rem;
   border-bottom: 1px solid #C4C4C4;
+  overflow: visible;
+  position: relative;
+  z-index: 5;
   @media only screen and (max-width: 768px) {
     margin: 1rem;
   }
@@ -75,6 +78,7 @@ const ColTwo = styled.div`
 const initialPayload = {
   COLUMBIA: 0,
   BARNARD: 0,
+  APARTMENT_: 0,
   SINGLE_: 0,
   DOUBLE_: 0,
   TRIPLE_: 0,
@@ -113,11 +117,12 @@ const filterElements = {
 		"10 Person"
 	],
 	"Room Type": [
+        "Apartment Style",
         "Corridor Style",
         "Suite Style",
-		"Single",
+    "Triple",
 		"Double",
-		"Triple",
+    "Single",
 	],
 	"Typical Residents": [
 		"First Year",

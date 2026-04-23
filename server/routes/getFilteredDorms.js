@@ -2,6 +2,36 @@ var express = require('express');
 var router = express.Router();
 var pool = require('../database');
 
+const APARTMENT_STYLE_DORMS = [
+    '47 Claremont',
+    '47 Claremont Ave',
+    'East Campus',
+    'Hogan Hall',
+    'Ruggles Hall',
+    'Watt Hall',
+    'Woodbridge Hall',
+];
+
+const CORRIDOR_STYLE_DORMS = [
+    'Broadway Hall',
+    'Carman Hall',
+    'Furnald Hall',
+    'Harmony Hall',
+    'John Jay Hall',
+    'McBain Hall',
+    'River Hall',
+    'Schapiro Hall',
+    'Wallach Hall',
+    'Wien Hall',
+];
+
+const SUITE_STYLE_DORMS = [
+    'Carlton Arms',
+    'Hartley Hall',
+    '600 W 113th',
+    '600 W 113',
+];
+
 router.post('/', async (req, res) => {
     var query = `SELECT D.DORM, D.DESCRIPTION, D.COLLEGE, D.LATITUDE, D.LONGITUDE, D.SINGLE_, D.DOUBLE_, D.TRIPLE_, D.CLASS_MAKEUP, D.SUITE_, DP.IMAGE_LINK FROM dorm_static_info D, dorm_photos DP WHERE (D.DORM = DP.DORM AND IS_MAIN = 1`
     var collegeQ = ``
@@ -59,12 +89,22 @@ router.post('/', async (req, res) => {
         if (filters.TRIPLE_) roomQ += `D.TRIPLE_ = 1 AND `
     }
 
-    //build for corridor/suite style
-    if(filters.NOTSUITE_ && !filters.SUITE_) {
-        roomQ += `D.SUITE_ = 0 AND `
-    } else if (!filters.NOTSUITE_ && filters.SUITE_){
-        roomQ += `D.SUITE_ = 1 AND `
-    } 
+    // build for apartment/corridor/suite style
+    const apartmentSelected = !!filters.APARTMENT_
+    const corridorSelected = !!filters.NOTSUITE_
+    const suiteSelected = !!filters.SUITE_
+    const selectedStyleCount = Number(apartmentSelected) + Number(corridorSelected) + Number(suiteSelected)
+
+    if (selectedStyleCount > 0 && selectedStyleCount < 3) {
+        let selectedDorms = []
+        if (apartmentSelected) selectedDorms = selectedDorms.concat(APARTMENT_STYLE_DORMS)
+        if (corridorSelected) selectedDorms = selectedDorms.concat(CORRIDOR_STYLE_DORMS)
+        if (suiteSelected) selectedDorms = selectedDorms.concat(SUITE_STYLE_DORMS)
+
+        const dedupedDorms = [...new Set(selectedDorms)]
+        const escapedDorms = dedupedDorms.map((name) => `"${name.replace(/"/g, '\\"')}"`)
+        roomQ += `D.DORM IN (${escapedDorms.join(', ')}) AND `
+    }
 
     if(roomQ.endsWith("AND ")) roomQ = roomQ.slice(0, -4)
 
