@@ -1,7 +1,9 @@
 import React, { Component } from "react";
 import { useEffect, useState } from "react";
 import styled from 'styled-components';
-import mapIcon from "../assets/Icons/mapIcon.png";
+import mapIcon from "../assets/mapIcon.png";
+import houseIcon from "../assets/Icons/house.svg"
+import peopleIcon from "../assets/Icons/people.svg"
 
 const DormButtonWrapper = styled.div`
 	display: flex;
@@ -71,6 +73,9 @@ const DormName = styled.div`
 `
 
 const Amenity = styled.div`
+  display: flex;
+  align-items: center;
+  gap: 10px;
   font-size: 0.8rem;
   @media only screen and (max-width: 768px){
     display: none;
@@ -82,7 +87,7 @@ const Amenities = styled.div`
 `
 
 const MapButton = styled.button`
-  padding: 0.5rem;
+  padding: 0.25rem;
   position: absolute;
   bottom: 20px;
   right: 20px;
@@ -96,12 +101,20 @@ const MapButton = styled.button`
   cursor: pointer;
 `;
 
-const MapImg = styled.img`
-  height: 30px !important;
-  width: 30px !important;
+const MapIconImg = styled.img`
+  height: 40px !important;
+  width: 40px !important;
   display: block;
   object-fit: contain;
-  border: none;
+  border: none !important;
+`;
+
+const Icon = styled.img`
+  height: 15px !important;
+  width: 15px !important;
+  object-fit: contain !important;
+  border: none !important;
+  border-radius: 0px !important;
 `;
 
 const Description = styled.div`
@@ -180,8 +193,8 @@ const DormButton = props => {
         <DormName> {dormName} </DormName>
         <div className="details">
           <Amenities> 
-            <Amenity>- {dormStyle} | {roomtype}</Amenity>
-            <Amenity>- {classMakeupFormat}</Amenity>
+            <Amenity><Icon src={houseIcon} /> {dormStyle} | {roomtype}</Amenity>
+            <Amenity><Icon src={peopleIcon} /> {classMakeupFormat}</Amenity>
           </Amenities>
         </div>
       </DormInfoWrapper>
@@ -191,7 +204,7 @@ const DormButton = props => {
           props.toggleMap();
         }
       }>
-        <MapImg src={mapIcon} />
+        <MapIconImg src={mapIcon} />
       </MapButton>
     </DormButtonWrapper>
   );
