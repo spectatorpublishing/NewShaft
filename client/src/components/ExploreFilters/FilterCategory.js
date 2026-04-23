@@ -15,6 +15,19 @@ let ButtonWrapper = styled.div`
     }
 `;
 
+const GroupSizeHint = styled.div`
+    color: ${theme.columbiaBlue};
+    font-family: 'Raleway';
+    font-size: 0.9rem;
+    padding: 0.2rem 0.9rem 0.7rem 0.9rem;
+
+    .asterisk {
+        font-size: 1.25rem;
+        line-height: 0;
+        vertical-align: middle;
+    }
+`;
+
 const SingleFilter = (props) => {
     const [dropdownBackColor, setBackColor] = useState("white");
     const [dropdownTextColor, setTextColor] = useState(theme.columbiaBlue);
@@ -45,8 +58,17 @@ const SingleFilter = (props) => {
                 rootCloseEvent='click'
             >
                 {props.filters.map((option, idx) => (
-                    <FilterItem option={option} key={idx} handleChange={props.handleChange} isActive={isActive(option)}></FilterItem>
+                    <FilterItem
+                        option={option}
+                        key={idx}
+                        handleChange={props.handleChange}
+                        isActive={isActive(option)}
+                        filterCategory={props.headerTitle}
+                    ></FilterItem>
                 ))}
+                {props.headerTitle === "Group Size" && (
+                    <GroupSizeHint><span className="asterisk">*</span> # of Persons</GroupSizeHint>
+                )}
             </DropdownButton>
         </ButtonWrapper>
     )
