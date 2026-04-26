@@ -2,6 +2,8 @@ import React, { useState } from "react";
 import styled from "styled-components";
 import SingleFilter from "./FilterCategory";
 import { FILTER_NAME_TO_KEY } from "../../util/DormFilter.js";
+import map from "../../assets/Icons/map.svg"
+import sort from "../../assets/Icons/sort.svg"
 
 let FilterRow = styled.div`
   display: flex;
@@ -28,6 +30,7 @@ const Filters = styled.div`
   gap: 10px;
   flex-direction: row;
   flex-wrap: wrap;
+  align-items: center;
 `;
 
 const FiltersWrapper = styled.div`
@@ -58,6 +61,12 @@ const MapButton = styled.a`
   background-color: white;
   border-radius: 10px;
   border: 1px solid #3B81B4;
+  display: flex;
+  align-items: center;
+  padding: 0.3rem 1rem;
+  font-size: 1rem;
+  line-height: 1.5;
+  gap: 10px;
 `;
 
 let Textbox = styled.div`
@@ -113,9 +122,8 @@ const FilterBar = (props) => {
   return (
     <FilterRow>
       <Filters>
-        <Textbox>Filters</Textbox>
-
         <FiltersWrapper>
+          <Textbox>Filters</Textbox>
           {getFilters()}
           <Textbox>
             <ClearButton onClick={() => clear()}>Clear</ClearButton>
@@ -126,8 +134,14 @@ const FilterBar = (props) => {
         {!props.mapOpen && 
           <MapButton
             onClick={props.toggleMap}
-          >See Map</MapButton>}
-        <MapButton>Sort</MapButton>
+          >
+            <img src={map} />
+            See Map
+          </MapButton>}
+        <MapButton>
+          <img src={sort} />
+          Sort
+        </MapButton>
       </MapButtonsWrapper>
     </FilterRow>
   );
