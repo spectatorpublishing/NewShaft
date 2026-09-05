@@ -93,12 +93,16 @@ const MapButton = styled.button`
   right: 20px;
   border-radius: 50%;
   z-index: 99;
-  display: flex;
   align-items: center;
   justify-content: center;
   background-color: white;
   border: none;
   cursor: pointer;
+  display: none;
+
+  @media only screen and (min-width: 768px) {
+    display: flex;
+  }
 `;
 
 const MapIconImg = styled.img`

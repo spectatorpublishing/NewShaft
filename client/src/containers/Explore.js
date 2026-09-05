@@ -33,19 +33,19 @@ const SideBar = styled.div`
 `;
 
 const MapView = styled.div`
-display: none;
-position: relative;
-width: 0%;
-@media only screen and (min-width: 768px) {
-  display: inline;
-  position: fixed;
-  padding-left: 0em;
-  float: right;
-  width: 40%;
-  right: 0;
-  top: 60px;
-  z-index:1;
-}
+  display: none;
+  position: relative;
+  width: 0%;
+  @media only screen and (min-width: 768px) {
+    display: inline;
+    position: fixed;
+    padding-left: 0em;
+    float: right;
+    width: 40%;
+    right: 0;
+    top: 60px;
+    z-index:1;
+  }
 `;
 
 const FilterSearchBG = styled.div`

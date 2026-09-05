@@ -35,6 +35,7 @@ const Filters = styled.div`
 
 const FiltersWrapper = styled.div`
   display: flex;
+  // gap: 10px;
   color: #3B81B4;
   @media only screen and (max-width: 769px) {
     display: flex;
