@@ -76,3 +76,52 @@ To deploy:
 3. Click **Deploy Branch**.
 
 This deploys the `master` branch by default, but you may choose a different branch to deploy instead.
+
+## Contribution guidelines
+
+### Code style
+
+#### Frontend (JavaScript/React)
+
+- Use camelCase for functions and variables and PascalCase for React components.
+- Keep components focused and follow the existing component and container structure.
+- Prefer React hooks for new components. Preserve existing class components unless the change requires a larger refactor.
+- Reuse existing API and styling patterns before introducing a new dependency or abstraction.
+- Use two-space indentation and add comments only where the logic is not self-explanatory.
+
+#### Backend (Node.js/Express)
+
+- Use camelCase for functions and variables and PascalCase for classes.
+- Keep routes focused on HTTP concerns and place shared database logic in the existing server modules.
+- Use parameterized queries for database input; never build SQL statements by concatenating user-provided values.
+- Validate request input and return an appropriate HTTP status code with a clear error message.
+- Use two-space indentation and avoid logging credentials, connection strings, or other sensitive values.
+
+### Before submitting code
+
+- Run the frontend test suite from `client/`:
+
+	```sh
+	npm test
+	```
+
+- Run the backend tests in `server/routes.test.js` with the test runner configured for your environment. The root package does not currently define a backend test script.
+
+- Verify the full local flow with the backend and frontend running, including any changed API or database behavior.
+- Check the browser console and backend logs for new errors or warnings.
+- Do not commit `.env` files, database credentials, generated build output, or private user data.
+- Leverage AI (Copilot, Claude, etc.) to help review your code for security and correctness
+
+### Pull requests and commit messages
+
+Keep each change focused and describe what it changes and how it was tested. Use imperative commit titles with one of these prefixes:
+
+```text
+Add: Brief description of what was added
+Fix: Brief description of what was fixed
+Refactor: Brief description of what was reorganized
+Test: Brief description of test additions or changes
+Docs: Brief description of documentation updates
+```
+
+Before requesting review, confirm that the change follows the existing project patterns, does not expose secrets, and does not break the local frontend-to-backend flow.

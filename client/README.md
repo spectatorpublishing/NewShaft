@@ -1,70 +1,180 @@
-# Getting Started with Create React App
+# The Shaft Frontend
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+The `client` directory contains the React frontend for The Shaft, created with `create-react-app`.
 
-## Available Scripts
+## Table of contents
 
-In the project directory, you can run:
+- [Quick start](#quick-start)
+- [Project overview](#project-overview)
+- [Directory structure](#directory-structure)
+- [Application routes](#application-routes)
+- [Key patterns and architecture](#key-patterns-and-architecture)
+- [API communication](#api-communication)
+- [Styling and assets](#styling-and-assets)
 
-### `npm start`
+## Quick start
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+### Prerequisites
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+- Node.js `16.13.2` and npm
+- The backend running at `http://localhost:8080`
+- Access to the MySQL database used by the backend
 
-### `npm test`
+The backend setup and database instructions are documented in the repository root [README](../README.md).
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+### Setup and installation
 
-### `npm run build`
+From this directory:
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+```sh
+npm install
+npm start
+```
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+The app opens at [http://localhost:3000](http://localhost:3000). Changes reload automatically during development.
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+### Helpful commands
 
-### `npm run eject`
+```sh
+npm start       # Start the development server
+npm run build   # Create a production build in build/
+```
 
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
+## Project overview
 
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+The frontend is built with:
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
+- **React 18** for the user interface
+- **Create React App** for development and production builds
+- **React Router 6** for client-side routing
+- **styled-components** and **Material UI** for styling and interface components
+- **Mapbox** for map views
+- **Recharts** and `react-minimal-pie-chart` for data visualizations
+- **Photoswipe**, React Slick, and React Responsive Carousel for image galleries and carousels
+- **Fetch API** for communication with the Express backend
 
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
+### Core features
 
-## Learn More
+- Explore and filter Columbia residence halls.
+- View dorm details, amenities, photos, floor plans, and class makeup data.
+- Use the housing lottery predictor and view lottery-related data.
+- Read Housing 101 and other housing guidance.
+- Open related articles and Spectrum content.
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+## Directory structure
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+```text
+client/
+├── public/                  # HTML shell, manifest, and public static files
+├── src/
+│   ├── App.js               # Theme setup, navigation, and route definitions
+│   ├── index.js             # React entry point
+│   ├── components/          # Reusable UI components
+│   ├── containers/          # Route-level views and feature containers
+│   ├── css/                 # Global and app-level CSS
+│   ├── util/                # Data helpers, mappings, filters, and theme setup
+│   └── assets/              # Imported images and other source assets
+├── package.json             # Dependencies, scripts, and development proxy
+└── README.md               # This document
+```
 
-### Code Splitting
+### `containers/`
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
+Containers represent the main application views:
 
-### Analyzing the Bundle Size
+| File | Route | Purpose |
+| --- | --- | --- |
+| `Explore.js` | `/` and `/explore` | Browse, search, and filter dorms |
+| `Dorm.js` | `/explore/:dorm` | Show details and related information for one dorm |
+| `ShaftLive.js` | `/lottery` | Display lottery and housing availability tools |
+| `Housing101.js` | `/housing101` | Display housing guidance and educational content |
+| `Reviews.js` | Not currently routed | Reviews-focused view retained in the codebase |
+| `OldDorm.js` | Not currently routed | Legacy dorm view retained for reference |
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
+### `components/`
 
-### Making a Progressive Web App
+Components implement reusable parts of the interface, including the following (to name a few):
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
+- Navigation and layout: `NavBar`, `ExploreSidebar`, `ScrollToTop`
+- Dorm content: `Amenities`, `PhotoGallery`, `FloorPlan`, `AtAGlance`, `RoomAvailability`
+- Explore controls: `SearchBar`, `ExploreFilters`, `DormButton`
+- Reviews: `Review`, `ReviewList`, `QuickReview`, `FullReview`, `Vote`
+- Lottery tools: `LotteryPredictor`, `LotteryPredictor/DormList`
+- Supporting content: FAQ components, live blog components, related dorms, maps, etc.
 
-### Advanced Configuration
+### `util/`
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
+Utility modules contain shared data and presentation helpers:
 
-### Deployment
+- `GlobalStyles.js` defines the styled-components theme and global styles.
+- `Mapping.js` contains display and data mappings used by the frontend.
+- `DormFilter.js` and `Cutoffs.js` support dorm filtering and lottery logic.
+- `LotteryPredictor.js` contains lottery prediction helpers.
+- `Housing101.js` contains Housing 101 data.
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
+## Application routes
 
-### `npm run build` fails to minify
+Routes are defined in `src/App.js` using `BrowserRouter`, `Routes`, and `Route`.
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+| Route | Component | Description |
+| --- | --- | --- |
+| `/` | `Explore` | Default entry point for exploring dorms |
+| `/explore` | `Explore` | Dorm exploration page |
+| `/explore/:dorm` | `Dorm` | Details for a selected dorm |
+| `/lottery` | `ShaftLive` | Housing lottery and availability tools |
+| `/housing101` | `Housing101` | Housing guidance |
+
+The navigation also links to the external Columbia Spectator Spectrum page. Add new internal routes in `App.js` and add their navigation entries to the `menuItems` configuration when appropriate.
+
+## Key patterns and architecture
+
+### Application entry point
+
+`src/index.js` mounts `App` inside React `StrictMode`. `App.js` configures the global theme, global styles, navigation bar, and client-side routes.
+
+### Container and component composition
+
+Route-level containers coordinate data loading and page state. They compose smaller components for individual UI regions. For example, the dorm view combines photo, amenities, floor plan, reviews, related dorm, and map components.
+
+When adding a feature:
+
+1. Put route-level behavior in the relevant container.
+2. Extract reusable UI into `components/`.
+3. Put stable data transformations or shared helpers in `util/`.
+4. Keep styling close to the existing CSS or styled-components pattern used by the surrounding code.
+
+### State and data loading
+
+Existing containers use React state and lifecycle logic to load data, track loading/error states, and update the UI. Preserve the existing behavior and response shapes when changing an API-backed feature.
+
+## API communication
+
+The frontend calls the backend with relative URLs such as `/api/getDormInfo/...`.
+
+The backend route implementations are in [`server/routes`](../server/routes). Common frontend API calls include:
+
+| Feature | Endpoint | Method |
+| --- | --- | --- |
+| Explore data | `/api/getExploreInfo` | GET |
+| Filtered dorms | `/api/getFilteredDorms` | POST |
+| Dorm details | `/api/getDormInfo/{dorm}` | GET |
+| Amenities | `/api/getAmenities/{dorm}` | GET |
+| Dorm photos | `/api/getDormPhotos/{dorm}` | GET |
+| Floor plans | `/api/getFloorPlans/{dorm}` | GET |
+| Reviews | `/api/getReviews/{dorm}` | GET |
+| Quick review | `/api/getQuickReview/{dorm}` | GET |
+| Related dorms | `/api/getRelatedDorms/{dorm}` | GET |
+| Lottery data | `/api/getLotteryInfo/{lotteryNum}` | GET |
+| Lottery floors | `/api/getUniqueFloorNumbers/{dorm}` | GET |
+| Lottery results | `/api/getLotteryNum/{dorm}/{floor}` | GET |
+| Vote update | `/api/updateVoteCount/{dorm}/{roomNum}/{up}/{down}` | GET |
+
+Check the corresponding route file before changing a request payload or response shape. Handle loading and failed requests in the container that owns the relevant page.
+
+## Styling and assets
+
+- Global styles and theme values live in `src/util/GlobalStyles.js`.
+- App-level CSS lives in `src/css/`.
+- Images and other imported source assets live in `src/assets/`.
+- Public files that need stable URLs belong in `public/`.
+- Reuse the existing theme, responsive patterns, and component library styles before adding new global rules.
