@@ -1,4 +1,4 @@
-# The Shaft Frontend
+# theShaft Frontend
 
 The `client` directory contains the React frontend for The Shaft, created with `create-react-app`.
 
