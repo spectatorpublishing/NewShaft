@@ -149,7 +149,7 @@ Existing containers use React state and lifecycle logic to load data, track load
 
 ## API communication
 
-The frontend calls the backend with relative URLs such as `/api/getDormInfo/...`.
+The frontend calls the backend with relative URLs such as `/api/getDormInfo/...`. During local development, Create React App forwards these requests to `http://localhost:8080` using the `proxy` value in `package.json`.
 
 The backend route implementations are in [`server/routes`](../server/routes). Common frontend API calls include:
 
