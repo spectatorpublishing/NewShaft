@@ -1,4 +1,4 @@
-# culpa-v2 Project Guidelines
+# NewShaft Project Guidelines
 
 ## Read First
 
