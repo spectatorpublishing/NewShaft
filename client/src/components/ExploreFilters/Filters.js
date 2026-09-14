@@ -2,13 +2,13 @@ import React, { useState } from "react";
 import styled from "styled-components";
 import SingleFilter from "./FilterCategory";
 import { FILTER_NAME_TO_KEY } from "../../util/DormFilter.js";
+import map from "../../assets/Icons/map.svg"
+import sort from "../../assets/Icons/sort.svg"
 
 let FilterRow = styled.div`
   display: flex;
   flex-direction: row;
-  align-items: center;
-  display: flex;
-  flex-direction: row;
+  justify-content: space-between;
   align-items: center;
   margin-top: 0.5rem;
   padding: 0rem 1.2rem 0.6rem 0rem;
@@ -27,9 +27,16 @@ let FilterRow = styled.div`
 
 const Filters = styled.div`
   display: flex;
+  gap: 10px;
   flex-direction: row;
-  justify-content: flex-start;
   flex-wrap: wrap;
+  align-items: center;
+`;
+
+const FiltersWrapper = styled.div`
+  display: flex;
+  // gap: 10px;
+  color: #3B81B4;
   @media only screen and (max-width: 769px) {
     display: flex;
     flex-wrap: wrap;
@@ -37,10 +44,36 @@ const Filters = styled.div`
   }
 `;
 
+const MapButtonsWrapper = styled.div`
+  display: none;
+  @media only screen and (min-width: 768px) {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    padding: 0.5rem;
+}
+`;
+
+const MapButton = styled.a`
+  cursor: pointer;
+  text-decoration: underline;
+  padding: 0.5rem;
+  color: #3B81B4 !important;
+  background-color: white;
+  border-radius: 10px;
+  border: 1px solid #3B81B4;
+  display: flex;
+  align-items: center;
+  padding: 0.3rem 1rem;
+  font-size: 1rem;
+  line-height: 1.5;
+  gap: 10px;
+`;
+
 let Textbox = styled.div`
   font-family: "Raleway";
   font-size: 1rem;
-  color: #73a6e0;
+  color: #3B81B4;
   padding-right: 1rem;
   height: fit-content;
   margin: auto 0rem;
@@ -89,14 +122,28 @@ const FilterBar = (props) => {
 
   return (
     <FilterRow>
-      <Textbox>Filters:</Textbox>
-
       <Filters>
-        {getFilters()}
-        <Textbox>
-          <ClearButton onClick={() => clear()}>Clear</ClearButton>
-        </Textbox>
+        <FiltersWrapper>
+          <Textbox>Filters</Textbox>
+          {getFilters()}
+          <Textbox>
+            <ClearButton onClick={() => clear()}>Clear</ClearButton>
+          </Textbox>
+        </FiltersWrapper>
       </Filters>
+      <MapButtonsWrapper>
+        {!props.mapOpen && 
+          <MapButton
+            onClick={props.toggleMap}
+          >
+            <img src={map} />
+            See Map
+          </MapButton>}
+        <MapButton>
+          <img src={sort} />
+          Sort
+        </MapButton>
+      </MapButtonsWrapper>
     </FilterRow>
   );
 };

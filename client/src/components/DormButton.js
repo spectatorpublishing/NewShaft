@@ -1,23 +1,30 @@
 import React, { Component } from "react";
 import { useEffect, useState } from "react";
 import styled from 'styled-components';
+import mapIcon from "../assets/mapIcon.png";
+import houseIcon from "../assets/Icons/house.svg"
+import peopleIcon from "../assets/Icons/people.svg"
 
 const DormButtonWrapper = styled.div`
 	display: flex;
+  position: relative;
 	flex-direction: column;
+  justify-content: space-between;
+  gap: 5px;
 	cursor: pointer;
   margin-bottom: 1rem;
   width: 100%;
+  height: 100%;
+  padding: 1rem;
+  background-color: white;
+  border-radius: 10px;
   
   img{
     padding: 0px;
     border: 1px solid ${props => props.theme.lightGray};
-    max-height: 9vw;
-    min-height: 9vw;
-    max-width: 50%;
-    min-width: 50%;
-    margin-right: 10px;
-    margin-bottom: 10px;
+    height: 14vw;
+    width: 100%;
+    border-radius: 10px;
     object-fit: cover;
 
     @media only screen and (max-width: 768px) {
@@ -32,15 +39,19 @@ const DormButtonWrapper = styled.div`
 	  flex-direction: column;
   }
   @media only screen and (min-width: 768px) {
-		flex-direction: row;
-    margin-bottom: 0.5rem;
+		// flex-direction: row;
+    // margin-bottom: 0.5rem;
   }
 `
 
+const DormInfoWrapper = styled.div`
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+`;
+
 const SchoolName = styled.div`
   display: flex;
-  margin-top: 0.2rem;
-  margin-bottom: 0.5rem;
   font-size: 1rem;
   line-height: 1rem;
   text-transform: capitalize;
@@ -55,8 +66,6 @@ const BarnardName = styled(SchoolName)`
 `
 
 const DormName = styled.div`
-  margin-top: .1rem;
-  margin-bottom: .25rem;
   font-family: Georgia;
   font-weight: 700;
   font-size: 1.2rem;
@@ -64,6 +73,9 @@ const DormName = styled.div`
 `
 
 const Amenity = styled.div`
+  display: flex;
+  align-items: center;
+  gap: 10px;
   font-size: 0.8rem;
   @media only screen and (max-width: 768px){
     display: none;
@@ -74,6 +86,41 @@ const Amenities = styled.div`
   
 `
 
+const MapButton = styled.button`
+  padding: 0.25rem;
+  position: absolute;
+  bottom: 20px;
+  right: 20px;
+  border-radius: 50%;
+  z-index: 99;
+  align-items: center;
+  justify-content: center;
+  background-color: white;
+  border: none;
+  cursor: pointer;
+  display: none;
+
+  @media only screen and (min-width: 768px) {
+    display: flex;
+  }
+`;
+
+const MapIconImg = styled.img`
+  height: 40px !important;
+  width: 40px !important;
+  display: block;
+  object-fit: contain;
+  border: none !important;
+`;
+
+const Icon = styled.img`
+  height: 15px !important;
+  width: 15px !important;
+  object-fit: contain !important;
+  border: none !important;
+  border-radius: 0px !important;
+`;
+
 const Description = styled.div`
   display: none;
   @media only screen and (min-width: 768px){
@@ -82,14 +129,14 @@ const Description = styled.div`
   &>p {
     font-size: 0.8rem;
   }
-`
+`;
 
 const SeeMore = styled.h6`
   display: inline;
 	cursor: pointer;
 	color: ${props => props.theme.columbiaBlue};
 	text-align: right;  
-`
+`;
 
 const DormButton = props => {
   const [roomtype, setRoomType] = useState("");
@@ -135,28 +182,36 @@ const DormButton = props => {
 
     setRoomType(roomtype);
   }
-    return (
-      <DormButtonWrapper>
-        <img className="dormimage" src={props.image} />
+    
+  return (
+    <DormButtonWrapper>
+      <DormInfoWrapper>
+        {schoolName == "columbia" ? 
+          <ColumbiaName> { schoolName } </ColumbiaName>
+        : (schoolName == "barnard" ?
+          <BarnardName> { schoolName } </BarnardName>
+        :
+          <SchoolName> { schoolName } </SchoolName>
+          )
+        }
+        <DormName> {dormName} </DormName>
         <div className="details">
-            <DormName> {dormName} </DormName>
-            {schoolName == "columbia" ? 
-              <ColumbiaName> { schoolName } </ColumbiaName>
-            : (schoolName == "barnard" ?
-              <BarnardName> { schoolName } </BarnardName>
-            :
-              <SchoolName> { schoolName } </SchoolName>
-              )
-            }
-            <Amenities> 
-              <Amenity>- {dormStyle}</Amenity>
-              <Amenity>- {roomtype}</Amenity>
-              <Amenity>- {classMakeupFormat}</Amenity>
-            </Amenities>
+          <Amenities> 
+            <Amenity><Icon src={houseIcon} /> {dormStyle} | {roomtype}</Amenity>
+            <Amenity><Icon src={peopleIcon} /> {classMakeupFormat}</Amenity>
+          </Amenities>
         </div>
-        <br />
-      </DormButtonWrapper>
-    );
+      </DormInfoWrapper>
+      <img className="dormimage" src={props.image} />
+      <MapButton onClick={(e) => {
+          e.preventDefault();
+          props.toggleMap();
+        }
+      }>
+        <MapIconImg src={mapIcon} />
+      </MapButton>
+    </DormButtonWrapper>
+  );
 
 }
 

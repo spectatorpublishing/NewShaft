@@ -63,7 +63,7 @@ export const theme = {
   black: "#000000",
   white: "#FFFFFF",
   barnardBlue: "#00489A",
-  columbiaBlue: "#73A6E0",
+  columbiaBlue: "#3B81B4", // changed from #73A6E0
   darkGray: "#555555",
   mediumGray: "#AAAAAA",
   lightGray: "#DDDDDD",
