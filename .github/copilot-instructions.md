@@ -9,7 +9,7 @@
 ## Architecture
 
 - `server/` contains the backend Node.js routes. This subdirectory has its own `README.md` for its documentation at `server/README.md`. Follow the existing structure and patterns for all code changes.
-- `client/` is the React frontend. Components should use the existing `pages/`, `components/`, and `util/` structure. This subdirectory has its own `README.md` for its documentation at `client/README.md`. Follow the existing structure and patterns for all code changes.
+- `client/` is the React frontend. Components should use the existing `containers/`, `components/`, and `util/` structure. This subdirectory has its own `README.md` for its documentation at `client/README.md`. Follow the existing structure and patterns for all code changes.
 
 ## Security and Data
 
