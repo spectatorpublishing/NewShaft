@@ -54,7 +54,7 @@ export default class ExploreSidebar extends Component {
                 DOUBLE_={dorm.DOUBLE_}
                 WALKTHROUGH={dorm.WALKTHROUGH}
                 TRIPLE_={dorm.TRIPLE_}
-                SUITE_={dorm.SUITE_}
+                BUILDING_TYPE_={dorm.BUILDING_TYPE_}
               />
             </DormLink>
           ))}
