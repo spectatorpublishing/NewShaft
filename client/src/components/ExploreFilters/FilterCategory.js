@@ -15,6 +15,14 @@ let ButtonWrapper = styled.div`
     }
 `;
 
+const NoteText = styled.div`
+    font-family: "Raleway";
+    font-size: 0.7rem;
+    color: #888;
+    font-style: italic;
+    padding: 0 0.5rem;
+`;
+
 const SingleFilter = (props) => {
     const [dropdownBackColor, setBackColor] = useState("white");
     const [dropdownTextColor, setTextColor] = useState(theme.columbiaBlue);
@@ -48,6 +56,7 @@ const SingleFilter = (props) => {
                     <FilterItem option={option} key={idx} handleChange={props.handleChange} isActive={isActive(option)}></FilterItem>
                 ))}
             </DropdownButton>
+            {props.note && <NoteText>{props.note}</NoteText>}
         </ButtonWrapper>
     )
 }
