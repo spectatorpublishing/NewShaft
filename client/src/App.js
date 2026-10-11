@@ -7,6 +7,7 @@ import Dorm from './containers/Dorm';
 import Housing101 from './containers/Housing101';
 import Reviews from './containers/Reviews'
 import NavBar from './components/NavBar.js';
+import ReviewPopup from './components/ReviewPopup';
 import { ThemeProvider } from "styled-components";
 import { GlobalStyles, theme } from "./util/GlobalStyles";
 import './css/App.css';
@@ -49,6 +50,7 @@ const App = () => (
   <ThemeProvider theme={theme}>
     <main>
       <GlobalStyles />
+      <ReviewPopup />
       <Router>
         <NavBar menuItems={menuItems} fixed />
         <Routes>
