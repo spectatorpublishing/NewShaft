@@ -301,6 +301,7 @@ const initialPayload = {
   TRIPLE_: 0,
   SUITE_: 0,
   NOTSUITE_: 0,
+  APARTMENT_: 0,
   TWO_SUITE: 0,
   THREE_SUITE: 0,
   FOUR_SUITE: 0,
@@ -319,7 +320,11 @@ const initialPayload = {
 
 const filterElements = {
   "Typical Residents": ["Sophomore", "Junior", "Senior"],
-  "Room Type": ["Corridor Style", "Suite Style", "Single", "Double"],
+  "Room Type": ["Apartment Style", "Corridor Style", "Suite Style", "Single", "Double"],
+};
+
+const filterNotes = {
+  "Room Type": "*The Apartment category applies to Columbia's privacy-based definitions.",
 };
 
 const defaultDorms = [
@@ -601,6 +606,7 @@ const ShaftLive = (props) => {
               payload={payload}
               reset={resetPayload}
               filterElements={filterElements}
+              filterNotes={filterNotes}
             ></Filters>
           </FiltersContainer>
           <DormList
@@ -649,6 +655,7 @@ const ShaftLive = (props) => {
               payload={payload}
               reset={resetPayload}
               filterElements={filterElements}
+              filterNotes={filterNotes}
             ></Filters>
             <DormList
               lotteryNum={lotteryNum ? lotteryNum : 0}

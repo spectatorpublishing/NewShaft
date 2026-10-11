@@ -102,7 +102,9 @@ const DormButton = props => {
     if (props.class_makeup) 
       setClassMakeup(props.class_makeup.split(",").map((el, i) => el.charAt(0).toUpperCase() + el.slice(1)).join(", "));
     
-    setDormStyle((props.SUITE_ === 1) ? "Suite-Style" : "Corridor-Style");
+    if (props.BUILDING_TYPE_ === 2) setDormStyle("Apartment-Style");
+    else if (props.BUILDING_TYPE_ === 1) setDormStyle("Suite-Style");
+    else setDormStyle("Corridor-Style");
 
     setRoomTypeString();
 
@@ -114,7 +116,7 @@ const DormButton = props => {
       setDormName(props.name);
     }
 
-  }, [props.SUITE_, props.name]);
+  }, [props.BUILDING_TYPE_, props.name]);
 
   const setRoomTypeString = () => {
     var roomtype = "";

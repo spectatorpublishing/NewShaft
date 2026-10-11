@@ -80,6 +80,7 @@ const initialPayload = {
   TRIPLE_: 0,
   SUITE_: 0,
   NOTSUITE_: 0,
+  APARTMENT_: 0,
   TWO_SUITE: 0,
   THREE_SUITE: 0,
   FOUR_SUITE: 0,
@@ -113,6 +114,7 @@ const filterElements = {
 		"10 Person"
 	],
 	"Room Type": [
+        "Apartment Style",
         "Corridor Style",
         "Suite Style",
 		"Single",
@@ -131,6 +133,11 @@ const filterElements = {
 	// 	"Gym",
 	// 	"Single-Use Bathroom"
 	// ]
+}
+
+const filterNotes = {
+  "Room Type": "*The Apartment category applies to Columbia's privacy-based definitions.",
+  "Group Size": "*# of Persons",
 }
   
 export default class Explore extends Component {
@@ -210,7 +217,7 @@ export default class Explore extends Component {
             <AdManager width={728} height={90} path="shaftleader"/>
             <FilterSearchBG>
               <SearchBar handleChange={this.updatePayload}/>
-              <Filters handleChange={this.updatePayload} payload={this.state.payload} reset={this.resetPayload} filterElements={filterElements}></Filters>
+              <Filters handleChange={this.updatePayload} payload={this.state.payload} reset={this.resetPayload} filterElements={filterElements} filterNotes={filterNotes}></Filters>
             </FilterSearchBG>
             <ExploreSidebar dorms={this.state.dorms}/>
           </SideBar>

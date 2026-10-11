@@ -302,7 +302,9 @@ const Dorm = ({ }) => {
 
         setFullDescription(dormInfo.DESCRIPTION.substring(0, dormInfo.DESCRIPTION.length - 1));
         setClassMakeupDefault(dormInfo.CLASS_MAKEUP.split(",").map((el, i) => el.charAt(0).toUpperCase() + el.slice(1)).join(", "));
-        setDormStyle((dormInfo.SUITE_ === 1) ? "Suite-Style" : "Corridor-Style");
+        if (dormInfo.BUILDING_TYPE_ === 2) setDormStyle("Apartment-Style");
+        else if (dormInfo.BUILDING_TYPE_ === 1) setDormStyle("Suite-Style");
+        else setDormStyle("Corridor-Style");
         setRoomTypeString(dormInfo);
       }).catch(error => {
         console.log(error);

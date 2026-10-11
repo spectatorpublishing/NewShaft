@@ -3,7 +3,7 @@ var router = express.Router();
 var pool = require('../database');
 
 router.post('/', async (req, res) => {
-    var query = `SELECT D.DORM, D.DESCRIPTION, D.COLLEGE, D.LATITUDE, D.LONGITUDE, D.SINGLE_, D.DOUBLE_, D.TRIPLE_, D.CLASS_MAKEUP, D.SUITE_, DP.IMAGE_LINK FROM dorm_static_info D, dorm_photos DP WHERE (D.DORM = DP.DORM AND IS_MAIN = 1`
+    var query = `SELECT D.DORM, D.DESCRIPTION, D.COLLEGE, D.LATITUDE, D.LONGITUDE, D.SINGLE_, D.DOUBLE_, D.TRIPLE_, D.CLASS_MAKEUP, D.BUILDING_TYPE_, DP.IMAGE_LINK FROM dorm_static_info D, dorm_photos DP WHERE (D.DORM = DP.DORM AND IS_MAIN = 1`
     var collegeQ = ``
     var groupQ = ``
     var roomQ = ``
@@ -59,12 +59,13 @@ router.post('/', async (req, res) => {
         if (filters.TRIPLE_) roomQ += `D.TRIPLE_ = 1 AND `
     }
 
-    //build for corridor/suite style
-    if(filters.NOTSUITE_ && !filters.SUITE_) {
-        roomQ += `D.SUITE_ = 0 AND `
-    } else if (!filters.NOTSUITE_ && filters.SUITE_){
-        roomQ += `D.SUITE_ = 1 AND `
-    } 
+    //build for corridor/suite/apartment style
+    //D.BUILDING_TYPE_: 0 = corridor, 1 = suite, 2 = apartment
+    var styleValues = []
+    if(filters.NOTSUITE_) styleValues.push(0)
+    if(filters.SUITE_) styleValues.push(1)
+    if(filters.APARTMENT_) styleValues.push(2)
+    if(styleValues.length) roomQ += `D.BUILDING_TYPE_ IN (` + styleValues.join(', ') + `) AND `
 
     if(roomQ.endsWith("AND ")) roomQ = roomQ.slice(0, -4)
 
