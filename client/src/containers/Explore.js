@@ -100,6 +100,7 @@ const initialPayload = {
   TRIPLE_: 0,
   SUITE_: 0,
   NOTSUITE_: 0,
+  APARTMENT_: 0,
   TWO_SUITE: 0,
   THREE_SUITE: 0,
   FOUR_SUITE: 0,
@@ -133,6 +134,7 @@ const filterElements = {
 		"10 Person"
 	],
 	"Room Type": [
+        "Apartment Style",
         "Corridor Style",
         "Suite Style",
 		"Single",
@@ -151,6 +153,11 @@ const filterElements = {
 	// 	"Gym",
 	// 	"Single-Use Bathroom"
 	// ]
+}
+
+const filterNotes = {
+  "Room Type": "*The Apartment category applies to Columbia's privacy-based definitions.",
+  "Group Size": "*# of Persons",
 }
   
 export default class Explore extends Component {
@@ -239,6 +246,7 @@ export default class Explore extends Component {
                 payload={this.state.payload} 
                 reset={this.resetPayload} 
                 filterElements={filterElements}
+                filterNotes={filterNotes}
                 toggleMap={() => this.setState(prev => ({ mapOpen: !prev.mapOpen }))}
                 mapOpen={this.state.mapOpen}
               ></Filters>

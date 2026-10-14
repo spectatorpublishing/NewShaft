@@ -157,6 +157,21 @@ The database contains housing and review data stored in tables and views includi
 
 The repository also contains database dumps and CSV source data under `backup_data/`.
 
+### `dorm_static_info.BUILDING_TYPE_`
+
+`BUILDING_TYPE_` records the building's housing style, using Columbia Housing's
+definitions. It is distinct from the `ROOM_TYPE` used in floor plan data:
+
+| Value | Style |
+| --- | --- |
+| `0` | Corridor-style |
+| `1` | Suite-style |
+| `2` | Apartment-style |
+
+The Apartment category follows Columbia's privacy-based definitions, which is why
+some buildings previously recorded as suite-style are now apartment-style. This
+column was named `SUITE_` while it held only a corridor/suite boolean.
+
 ## Adding or changing a route
 
 1. Create or update the focused module in `server/routes/`.

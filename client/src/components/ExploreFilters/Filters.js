@@ -115,6 +115,7 @@ const FilterBar = (props) => {
           headerTitle={filterName}
           filters={categoryFilters}
           payload={categoryPayload}
+          note={props.filterNotes?.[filterName]}
         />
       );
     });
