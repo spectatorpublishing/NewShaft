@@ -205,7 +205,15 @@ const DormButton = props => {
         </div>
       </DormInfoWrapper>
       <img className="dormimage" src={props.image} />
-      <MapButton>
+      <MapButton
+        type="button"
+        onClick={event => {
+          event.preventDefault();
+          event.stopPropagation();
+          props.onMapClick();
+        }}
+        aria-label={`Show map for ${props.name}`}
+      >
         <MapIconImg src={mapIcon} />
       </MapButton>
     </DormButtonWrapper>

@@ -254,6 +254,7 @@ export default class Explore extends Component {
             <ExploreSidebar 
               dorms={this.state.dorms} 
               mapOpen={this.state.mapOpen} 
+              onMapButtonClick={() => this.setState({ mapOpen: true })}
             />
           </SideBar>
         </ColOne>

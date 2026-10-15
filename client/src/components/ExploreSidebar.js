@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { Route, Link, BrowserRouter as Router } from "react-router-dom";
+import { Link } from "react-router-dom";
 
 import styled from "styled-components";
 
@@ -59,6 +59,7 @@ export default class ExploreSidebar extends Component {
                 WALKTHROUGH={dorm.WALKTHROUGH}
                 TRIPLE_={dorm.TRIPLE_}
                 BUILDING_TYPE_={dorm.BUILDING_TYPE_}
+                onMapClick={this.props.onMapButtonClick}
               />
             </DormLink>
           ))}
