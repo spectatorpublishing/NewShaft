@@ -205,11 +205,7 @@ const DormButton = props => {
         </div>
       </DormInfoWrapper>
       <img className="dormimage" src={props.image} />
-      <MapButton onClick={(e) => {
-          e.preventDefault();
-          props.toggleMap();
-        }
-      }>
+      <MapButton>
         <MapIconImg src={mapIcon} />
       </MapButton>
     </DormButtonWrapper>

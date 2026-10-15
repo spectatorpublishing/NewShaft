@@ -254,7 +254,6 @@ export default class Explore extends Component {
             <ExploreSidebar 
               dorms={this.state.dorms} 
               mapOpen={this.state.mapOpen} 
-              toggleMap={() => this.setState(prev => ({ mapOpen: !prev.mapOpen }))}
             />
           </SideBar>
         </ColOne>

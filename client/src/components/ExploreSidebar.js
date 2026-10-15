@@ -50,7 +50,6 @@ export default class ExploreSidebar extends Component {
             >
               <DormButton
                 key={index}
-                toggleMap={this.props.toggleMap}
                 school={dorm.COLLEGE}
                 name={dorm.DORM}
                 image={dorm.IMAGE_LINK}
