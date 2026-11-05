@@ -132,19 +132,21 @@ const FilterBar = (props) => {
           </Textbox>
         </FiltersWrapper>
       </Filters>
-      <MapButtonsWrapper>
-        {!props.mapOpen && 
-          <MapButton
-            onClick={props.toggleMap}
-          >
-            <img src={map} />
-            See Map
-          </MapButton>}
-        <MapButton>
-          <img src={sort} />
-          Sort
-        </MapButton>
-      </MapButtonsWrapper>
+      {props.showMapButtons &&
+        <MapButtonsWrapper>
+          {!props.mapOpen && 
+            <MapButton
+              onClick={props.toggleMap}
+            >
+              <img src={map} />
+              See Map
+            </MapButton>}
+          <MapButton>
+            <img src={sort} />
+            Sort
+          </MapButton>
+        </MapButtonsWrapper>
+      }
     </FilterRow>
   );
 };

@@ -249,6 +249,7 @@ export default class Explore extends Component {
                 filterNotes={filterNotes}
                 toggleMap={() => this.setState(prev => ({ mapOpen: !prev.mapOpen }))}
                 mapOpen={this.state.mapOpen}
+                showMapButtons={true}
               ></Filters>
             </FilterSearchBG>
             <ExploreSidebar 
