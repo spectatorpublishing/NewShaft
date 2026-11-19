@@ -656,6 +656,7 @@ const ShaftLive = (props) => {
               reset={resetPayload}
               filterElements={filterElements}
               filterNotes={filterNotes}
+              showMapButtons={false}
             ></Filters>
             <DormList
               lotteryNum={lotteryNum ? lotteryNum : 0}
