@@ -7,6 +7,7 @@ var express = require('express');
 var router = express.Router();
 var pool = require('../database');
 var { RANGE } = require('../../client/src/util/LotteryPredictor')
+var { toUiDormName } = require('./lotteryDormNames');
 
 router.get('/:num', async (req, res) => {
 	let table = "housing_data_2025"
@@ -23,7 +24,10 @@ router.get('/:num', async (req, res) => {
 	WHERE dorm_count.dorm = dorm_likely.dorm and dorm_likely.dorm = dorm_similar.dorm and dorm_similar.dorm = dorm_unlikely.dorm`
 	// console.log(query);
 	const result = await pool.query(query);
-	res.send(result)
+	res.send(result.map((dorm) => ({
+		...dorm,
+		DORM: toUiDormName(dorm.DORM),
+	})))
 })
 
 module.exports = router;
